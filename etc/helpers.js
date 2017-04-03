@@ -63,7 +63,6 @@ function mergeAppConfig(overwrittenConfig) { /*eslint complexity: [error, 24]*/
     testPathResolved = path.resolve(basePath, testPath),
     templatesPath = appConfig.templatesPath || defaultAppConfig.templatesPath,
     distPath = appConfig.distPath || defaultAppConfig.distPath,
-    genPath = appConfig.genPath || defaultAppConfig.genPath,
     templatesResolved = path.resolve(basePath, templatesPath);
   var indexFiles = defaultAppConfig.indexFiles,
     junit;
@@ -103,9 +102,7 @@ function mergeAppConfig(overwrittenConfig) { /*eslint complexity: [error, 24]*/
     testSpecs: testPath + (appConfig.testSpecs || '/specs/**/*.js'),
     distPath: distPath,
     dist: appConfig.dist || path.resolve(distPath),
-    genPath: genPath,
     indexFiles: indexFiles,
-    gen: appConfig.gen || path.resolve(genPath),
     chunks: appConfig.chunks || defaultAppConfig.chunks,
     globals: appConfig.globals || defaultAppConfig.globals,
     entry: appConfig.entry || defaultAppConfig.entry,

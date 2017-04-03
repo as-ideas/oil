@@ -2,8 +2,9 @@
   "name": "oil",
   "version": "0.0.1",
   "description": "Module for Axel Springer Oil",
-  "main": "index.js",
   "scripts": {
+    "start": "npm install && npm run watch",
+    "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 ",
     "build": "npm run eslint",
     "watch-test": "cross-env NODE_ENV=test karma start etc/karma.conf.js",
     "test": "cross-env NODE_ENV=test karma start etc/karma.conf.ci.js",

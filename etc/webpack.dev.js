@@ -15,7 +15,6 @@ const appConfig = helpers.getAppConfig();
  * Webpack Plugins
  */
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const VisualizerPlugin = require('webpack-visualizer-plugin');
 /**

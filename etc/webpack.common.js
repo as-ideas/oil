@@ -14,7 +14,6 @@ debugLog('Using following appConfig:', appConfig);
 /*
  * Webpack Plugins
  */
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /*

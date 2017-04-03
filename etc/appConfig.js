@@ -16,12 +16,12 @@ var appConfig = {
     name: ['polyfills'].reverse()
   },
   indexFiles: [{
-    template: path.resolve(srcPath, 'index.html'),
+    template: path.resolve('src', 'index.html'),
     chunks: ['app', 'polyfills'],
     chunksSortMode: 'dependency'
   }],
   entry: {
-    app: srcPath + '/app.js'
+    app: path.resolve('src', 'oil.js')
   },
   mangle: {
   },
