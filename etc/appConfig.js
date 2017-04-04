@@ -2,7 +2,7 @@ const path = require("path");
 
 const sourcePath = 'src';
 const testPath = 'test';
-const outputPath = 'dist  ';
+const outputPath = 'dist';
 
 
 module.exports = {
