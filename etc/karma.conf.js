@@ -31,6 +31,7 @@ module.exports = function (config) {
     basePath: process.cwd(),
 
     frameworks: [
+      'jasmine-jquery',
       'jasmine'
     ],
 
@@ -84,7 +85,7 @@ module.exports = function (config) {
   });
   // TODO move to config
   config.proxies = {
-    '/scripts/': 'http://localhost:' + config.port + '/base/src/main/frontend/scripts/'
+    '/scripts/': 'http://localhost:' + config.port + '/base/src/scripts/'
   };
   for (var key in appConfig.entry) {
     if (key) {
@@ -97,3 +98,4 @@ module.exports = function (config) {
 
   debugLog('Using following karma config:', config);
 };
+
