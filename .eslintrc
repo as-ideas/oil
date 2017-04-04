@@ -1,6 +1,8 @@
 plugins: [
   "import",
-  "es6-recommended"
+  "es6-recommended",
+  "jasmine",
+  "jasmine-jquery"
 ]
 
 parserOptions: {
@@ -12,12 +14,17 @@ ecmaFeatures:
   modules: true
   jsx: true
 
+extends: [
+  "plugin:jasmine-jquery/recommended"
+]
+
 env:
   amd: true
   browser: true
   es6: true
-  jquery: false
+  jquery:  true,
   node: true
+  jasmine: true
 
 # http://eslint.org/docs/rules/
 rules:
@@ -224,3 +231,6 @@ rules:
   prefer-spread: 0
   prefer-template: 0
   require-yield: 0
+
+  # jasmine-jquery
+  jasmine-jquery/no-global-shortcuts: 0

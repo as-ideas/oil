@@ -25,7 +25,7 @@ module.exports = {
         chunksSortMode: 'dependency'
     }],
     entry: {
-        app: path.resolve(sourcePath, 'oil.js')
+        'app': path.resolve(sourcePath, 'oil.js')
     },
     mangle: {},
     proxy: {},
