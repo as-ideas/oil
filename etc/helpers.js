@@ -1,6 +1,6 @@
 const path = require('path');
 const util = require('util');
-const debugLog = util.debuglog('@holisticon/angularjs-common/helpers');
+const debugLog = util.debuglog('oil-debug');
 const defaultAppConfig = require('./appConfig');
 const providedAppConfig = require(process.env.APP_CONFIG || './appConfig');
 

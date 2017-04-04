@@ -30,80 +30,82 @@ const ENV = process.env.ENV || process.env.NODE_ENV || 'test';
 
 var config = webpackMerge(commonConfig, {
 
-  /**
-   * Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
-   *
-   * Do not change, leave as is or it wont work.
-   * See: https://github.com/webpack/karma-webpack#source-maps
-   */
-  devtool: 'inline-source-map',
-
-  /**
-   * Options affecting the normal modules.
-   *
-   * See: http://webpack.github.io/docs/configuration.html#module
-   */
-  module: {
+    /**
+     * Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
+     *
+     * Do not change, leave as is or it wont work.
+     * See: https://github.com/webpack/karma-webpack#source-maps
+     */
+    devtool: 'inline-source-map',
 
     /**
-     * An array of applied pre and post loaders.
+     * Options affecting the normal modules.
      *
-     * See: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
+     * See: http://webpack.github.io/docs/configuration.html#module
      */
-    postLoaders: [
+    module: {
 
-      /**
-       * Instruments JS files with Istanbul for subsequent code coverage reporting.
-       * Instrument only testing sources.
-       *
-       * See: https://github.com/deepsweet/istanbul-instrumenter-loader
-       */
-      {
-        test: /\.(js|ts)$/,
-        loader: 'istanbul-instrumenter-loader',
-        include: [
-          appConfig.srcPath,
-          appConfig.testPath
-        ],
-        exclude: [
-          /\.(e2e|spec)\.ts$/,
-          /node_modules/
+        /**
+         * An array of applied pre and post loaders.
+         *
+         * See: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
+         */
+
+        rules: [
+            // PRE-LOADERS
+            /**
+             * Instruments JS files with Istanbul for subsequent code coverage reporting.
+             * Instrument only testing sources.
+             *
+             * See: https://github.com/deepsweet/istanbul-instrumenter-loader
+             */
+            {
+                test: /\.(js|ts)$/,
+                loader: 'istanbul-instrumenter-loader',
+                include: [
+                    appConfig.srcPath,
+                    appConfig.testPath
+                ],
+                exclude: [
+                    /\.(e2e|spec)\.ts$/,
+                    /node_modules/
+                ],
+                enforce: 'pre'
+            }
         ]
-      }
-    ]
-  },
+    },
 
-  /**
-   * Add additional plugins to the compiler.
-   *
-   * See: http://webpack.github.io/docs/configuration.html#plugins
-   */
-  plugins: [
-    new SourceMapDevToolPlugin({
-      filename: null, // if no value is provided the sourcemap is inlined
-      test: /\.(ts|js)($|\?)/i // process .js and .ts files only
-    }),
-    new LoaderOptionsPlugin({
-      test: /\.ts/i,
-      options: {
-        tslint: {
-          enforce: 'pre',
-          emitErrors: true,
-          failOnHint: false
-        }
-      }
-    }),
-    new DefinePlugin({
-      'ENV': JSON.stringify(ENV),
-      'HMR': false,
-      'process.env': {
-        'ENV': JSON.stringify(ENV),
-        'NODE_ENV': JSON.stringify(ENV),
-        'HMR': false
-      },
-      'APP_CONFIG': JSON.stringify(appConfig)
-    })
-  ]
+    /**
+     * Add additional plugins to the compiler.
+     *
+     * See: http://webpack.github.io/docs/configuration.html#plugins
+     */
+    plugins: [
+        new SourceMapDevToolPlugin({
+            filename: null, // if no value is provided the sourcemap is inlined
+            test: /\.(ts|js)($|\?)/i // process .js and .ts files only
+        }),
+        new LoaderOptionsPlugin({
+            test: /\.ts/i,
+            options: {
+                tslint: {
+                    enforce: 'pre',
+                    emitErrors: true,
+                    failOnHint: false
+                }
+            }
+        }),
+        new DefinePlugin({
+            'ENV': JSON.stringify(ENV),
+            'HMR': false,
+            'process.env': {
+                'ENV': JSON.stringify(ENV),
+                'NODE_ENV': JSON.stringify(ENV),
+                'HMR': false
+            },
+            'APP_CONFIG': JSON.stringify(appConfig)
+        })
+    ]
 });
 
 debugLog('Using following webpack test config:', config);

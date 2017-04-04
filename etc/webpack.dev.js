@@ -23,10 +23,10 @@ const VisualizerPlugin = require('webpack-visualizer-plugin');
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = webpackMerge(commonConfig.metadata, {
-  host: 'localhost',
-  port: 3000,
-  ENV: ENV,
-  HMR: HMR
+    host: 'localhost',
+    port: 3000,
+    ENV: ENV,
+    HMR: HMR
 });
 
 /**
@@ -37,134 +37,120 @@ const METADATA = webpackMerge(commonConfig.metadata, {
 var config = webpackMerge(commonConfig, {
 
 
-  /**
-   * Merged metadata from webpack.common.js for index.html
-   *
-   * See: (custom attribute)
-   */
-  metadata: METADATA,
-
-  /**
-   * Switch loaders to debug mode.
-   *
-   * See: http://webpack.github.io/docs/configuration.html#debug
-   */
-  debug: true,
-
-  /**
-   * Developer tool to enhance debugging
-   *
-   * See: http://webpack.github.io/docs/configuration.html#devtool
-   * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
-   */
-  devtool: 'source-map',
-
-  /**
-   * Options affecting the output of the compilation.
-   *
-   * See: http://webpack.github.io/docs/configuration.html#output
-   */
-  output: {
+    /**
+     * Developer tool to enhance debugging
+     *
+     * See: http://webpack.github.io/docs/configuration.html#devtool
+     * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
+     */
+    devtool: 'source-map',
 
     /**
-     * The output directory as absolute path (required).
+     * Options affecting the output of the compilation.
      *
-     * See: http://webpack.github.io/docs/configuration.html#output-path
+     * See: http://webpack.github.io/docs/configuration.html#output
      */
-    path: appConfig.dist,
+    output: {
 
-    /**
-     * Specifies the name of each output file on disk.
-     * IMPORTANT: You must not specify an absolute path here!
-     *
-     * See: http://webpack.github.io/docs/configuration.html#output-filename
-     */
-    filename: 'bundle.[name].js',
+        /**
+         * The output directory as absolute path (required).
+         *
+         * See: http://webpack.github.io/docs/configuration.html#output-path
+         */
+        path: appConfig.dist,
 
-    /**
-     * The filename of the SourceMaps for the JavaScript files.
-     * They are inside the output.path directory.
-     *
-     * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
-     */
-    sourceMapFilename: '[name].map',
+        /**
+         * Specifies the name of each output file on disk.
+         * IMPORTANT: You must not specify an absolute path here!
+         *
+         * See: http://webpack.github.io/docs/configuration.html#output-filename
+         */
+        filename: 'bundle.[name].js',
 
-    /** The filename of non-entry chunks as relative path
-     * inside the output.path directory.
-     *
-     * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
-     */
-    chunkFilename: '[id].chunk.js',
+        /**
+         * The filename of the SourceMaps for the JavaScript files.
+         * They are inside the output.path directory.
+         *
+         * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
+         */
+        sourceMapFilename: '[name].map',
 
-    library: 'ac_[name]',
-    libraryTarget: 'var'
-  },
+        /** The filename of non-entry chunks as relative path
+         * inside the output.path directory.
+         *
+         * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
+         */
+        chunkFilename: '[id].chunk.js',
 
-  plugins: [
-
-    // see https://github.com/chrisbateman/webpack-visualizer#plugin-usage
-    new VisualizerPlugin({
-      filename: './statistics.html'
-    }),
-    /**
-     * Plugin: DefinePlugin
-     * Description: Define free variables.
-     * Useful for having development builds with debug logging or adding global constants.
-     *
-     * Environment helpers
-     *
-     * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-     */
-    // NOTE: when adding more properties, make sure you include them in custom-typings.d.ts
-    new DefinePlugin({
-      'ENV': JSON.stringify(METADATA.ENV),
-      'HMR': METADATA.HMR,
-      'process.env': {
-        'ENV': JSON.stringify(METADATA.ENV),
-        'NODE_ENV': JSON.stringify(METADATA.ENV),
-        'HMR': METADATA.HMR
-      }
-    }),
-    new OpenBrowserPlugin({url: 'http://localhost:3000/webpack-dev-server/'})
-  ],
-
-  /**
-   * Webpack Development Server configuration
-   * Description: The webpack-dev-server is a little node.js Express server.
-   * The server emits information about the compilation state to the client,
-   * which reacts to those events.
-   *
-   * See: https://webpack.github.io/docs/webpack-dev-server.html
-   */
-  devServer: {
-    headers: {
-      "Access-Control-Allow-Origin": "http://" + METADATA.host + ":" + METADATA.port,
-      "Access-Control-Allow-Credentials": "true"
+        library: 'ac_[name]',
+        libraryTarget: 'var'
     },
-    port: METADATA.port,
-    host: METADATA.host,
-    historyApiFallback: true,
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: 1000
-    },
-    outputPath: "http://" + METADATA.host + ":" + METADATA.port + appConfig.dist
-  },
 
-  /*
-   * Include polyfills or mocks for various node stuff
-   * Description: Node configuration
-   *
-   * See: https://webpack.github.io/docs/configuration.html#node
-   */
-  node: {
-    global: 'window',
-    crypto: 'empty',
-    process: true,
-    module: false,
-    clearImmediate: false,
-    setImmediate: false
-  }
+    plugins: [
+
+        // see https://github.com/chrisbateman/webpack-visualizer#plugin-usage
+        new VisualizerPlugin({
+            filename: './statistics.html'
+        }),
+        /**
+         * Plugin: DefinePlugin
+         * Description: Define free variables.
+         * Useful for having development builds with debug logging or adding global constants.
+         *
+         * Environment helpers
+         *
+         * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+         */
+        // NOTE: when adding more properties, make sure you include them in custom-typings.d.ts
+        new DefinePlugin({
+            'ENV': JSON.stringify(METADATA.ENV),
+            'HMR': METADATA.HMR,
+            'process.env': {
+                'ENV': JSON.stringify(METADATA.ENV),
+                'NODE_ENV': JSON.stringify(METADATA.ENV),
+                'HMR': METADATA.HMR
+            }
+        }),
+        new OpenBrowserPlugin({ url: 'http://localhost:3000/webpack-dev-server/' })
+    ],
+
+    /**
+     * Webpack Development Server configuration
+     * Description: The webpack-dev-server is a little node.js Express server.
+     * The server emits information about the compilation state to the client,
+     * which reacts to those events.
+     *
+     * See: https://webpack.github.io/docs/webpack-dev-server.html
+     */
+    devServer: {
+        headers: {
+            "Access-Control-Allow-Origin": "http://" + METADATA.host + ":" + METADATA.port,
+            "Access-Control-Allow-Credentials": "true"
+        },
+        port: METADATA.port,
+        host: METADATA.host,
+        historyApiFallback: true,
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: 1000
+        },
+        contentBase: appConfig.dist
+    },
+
+    /*
+     * Include polyfills or mocks for various node stuff
+     * Description: Node configuration
+     *
+     * See: https://webpack.github.io/docs/configuration.html#node
+     */
+    node: {
+        global: true,
+        crypto: 'empty',
+        process: true,
+        module: false,
+        clearImmediate: false,
+        setImmediate: false
+    }
 });
 
 debugLog('Using following webpack dev config:', config);

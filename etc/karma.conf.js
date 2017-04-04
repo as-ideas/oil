@@ -3,6 +3,7 @@ require('babel-register');
 var path = require('path');
 var util = require('util');
 const debugLog = util.debuglog('oil-debug');
+const isDebug = false;
 var webpackConfig = require('./webpack.test.js');
 
 var helpers = require('./helpers');
@@ -16,7 +17,7 @@ var templatesPath = appConfig.templatesPath;
 
 const JUNIT = appConfig.junit;
 
-webpackConfig.entry = {};
+//delete webpackConfig.entry;
 
 module.exports = function (config) {
   'use strict';
@@ -72,7 +73,28 @@ module.exports = function (config) {
     webpack: webpackConfig,
 
     webpackMiddleware: {
-      stats: {
+      stats: { // Add asset Information
+        assets: isDebug,
+        // Sort assets by a field
+        assetsSort: "field",
+        // Add information about cached (not built) modules
+        cached: isDebug,
+        // Add children information
+        children: isDebug,
+        // Add chunk information (setting this to `false` allows for a less verbose output)
+        chunks: isDebug,
+        // Add built modules information to chunk information
+        chunkModules: isDebug,
+        // Add the origins of chunks and chunk merging info
+        chunkOrigins: isDebug,
+        // Sort the chunks by a field
+        chunksSort: "field",
+        // Context directory for request shortening
+        context: "../src/",
+        // Add errors
+        errors: true,
+        // Add details to errors (like resolving log)
+        errorDetails: true,
         colors: true
       }
     },

@@ -36,13 +36,6 @@ var config = {
     bail: true,
 
     /*
-     * Static metadata for index.html
-     *
-     * See: (custom attribute)
-     */
-    metadata: METADATA,
-
-    /*
      * The entry point for the bundle
      * Our Angular.js app
      *
@@ -50,9 +43,6 @@ var config = {
      */
     entry: appConfig.entry,
 
-    resolveLoader: {
-        root: appConfig.modulesPath
-    },
     /*
      * Options affecting the resolving of modules.
      *
@@ -65,28 +55,14 @@ var config = {
          *
          * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
          */
-        extensions: ['', '.ts', '.js', '.jsx', '.json'],
+        extensions: ['.ts', '.js', '.jsx', '.json'],
 
-        // Make sure root is src
-        root: appConfig.src,
+        modules: [
+           // Make sure root is src
+          appConfig.src,
+          appConfig.modulesPath
+        ]
 
-        packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
-
-        // remove other default values
-        modulesDirectories: appConfig.modulesDirectories || [appConfig.modulesPath]
-
-    },
-
-    htmlLoader: {
-        minimize: true,
-        removeAttributeQuotes: false,
-        caseSensitive: true,
-        customAttrSurround: [
-            [/#/, /(?:)/],
-            [/\*/, /(?:)/],
-            [/\[?\(?/, /(?:)/]
-        ],
-        customAttrAssign: [/\)?\]?=/]
     },
 
     /*
@@ -96,43 +72,37 @@ var config = {
      */
     module: {
 
-        noParse: [],
-
-        /*
-         * An array of applied pre and post loaders.
-         *
-         * See: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
-         */
-        preLoaders: [
-
-            /*
-             * Source map loader support for *.js files
-             * Extracts SourceMaps for source files that as added as sourceMappingURL comment.
-             *
-             * See: https://github.com/webpack/source-map-loader
-             */
+        rules: [
+            // PRE-LOADERS
             {
+                /*
+                 * Source map loader support for *.js files
+                 * Extracts SourceMaps for source files that as added as sourceMappingURL comment.
+                 *
+                 * See: https://github.com/webpack/source-map-loader
+                 */
                 test: /\.js$/,
                 loader: 'source-map-loader',
                 exclude: [
                     /node_modules/
-                ]
-            }
-        ],
+                ],
+                enforce: 'pre'
+            },
+            // LOADERS
 
-        /*
-         * An array of automatically applied loaders.
-         *
-         * IMPORTANT: The loaders here are resolved relative to the resource which they are applied to.
-         * This means they are not resolved relative to the configuration file.
-         *
-         * See: http://webpack.github.io/docs/configuration.html#module-loaders
-         */
-        loaders: [
             /*
-             *  Babel- and ESLint-Loader
+             * An array of automatically applied loaders.
+             *
+             * IMPORTANT: The loaders here are resolved relative to the resource which they are applied to.
+             * This means they are not resolved relative to the configuration file.
+             *
+             * See: http://webpack.github.io/docs/configuration.html#module-loaders
              */
+
             {
+                /*
+                 *  Babel- and ESLint-Loader
+                 */
                 test: /\.js$/,
                 loaders: ['babel-loader', 'eslint-loader'],
                 exclude: [
@@ -176,7 +146,7 @@ var config = {
             // https://github.com/jtangelder/sass-loader#usage
             {
                 test: /\.scss$/,
-                loaders: ["style", "css", "sass"]
+                loaders: ['style-loader', 'css-loader', 'sass-loader']
             },
             /*
              * to string and css loader support for *.css files
@@ -216,7 +186,7 @@ var config = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         }),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin()
 
     ],
 
@@ -227,7 +197,7 @@ var config = {
      * See: https://webpack.github.io/docs/configuration.html#node
      */
     node: {
-        global: 'window',
+        global: true,
         fs: 'empty',
         crypto: 'empty',
         module: false,
