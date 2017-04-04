@@ -5,14 +5,13 @@
  * @function
  */
 export function readConfiguration(configuration) {
+    let parsedConfig = null;
     try {
         if (configuration.text) {
-            configuration = JSON.parse(configuration.text);
+            parsedConfig = JSON.parse(configuration.text);
         }
-        return configuration;
-    } catch (ignored) {
-        return null;
-    }
+    } catch (ignored) {}
+    return parsedConfig;
 }
 
 /**
