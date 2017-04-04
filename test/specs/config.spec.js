@@ -7,26 +7,32 @@ describe('configuration', () => {
 
     it('should work with empty config', () => {
         loadFixture('config/empty.config.html');
-        let parsedConfig = findConfiguration();
-        expect(parsedConfig).toBeDefined();
-        expect(parsedConfig).toBeNull();
+        let config = findConfiguration();
+        expect(config).toBeDefined();
+        expect(config.opt_in_event_name).toBe('oil_optin_done');
     });
 
-    it('should work with given config', () => {
+    it('should work with a given config', () => {
         loadFixture('config/given.config.html');
-        let parsedConfig = findConfiguration();
-        expect(parsedConfig).toBeDefined();
-        let config = parsedConfig.config;
+        let config = findConfiguration();
+        expect(config).toBeDefined();
         expect(config.language).toBe('de');
-        expect(config.opt_in_event_name).toBe('optinreceived');
+        expect(config.opt_in_event_name).toBe('oil_optin_done');
+    });
 
+    it('should work with overwritten default values', () => {
+        loadFixture('config/overwritten.config.html');
+        let config = findConfiguration();
+        expect(config).toBeDefined();
+        expect(config.language).toBe('de');
+        expect(config.opt_in_event_name).toBe('oil_optin_done_custom');
     });
 
     it('should work with invalid config', () => {
         loadFixture('config/invalid.config.html');
-        let parsedConfig = findConfiguration();
-        expect(parsedConfig).toBeDefined();
-        expect(parsedConfig).toBeNull();
+        let config = findConfiguration();
+        expect(config).toBeDefined();
+        expect(config.opt_in_event_name).toBe('oil_optin_done');
     });
 
 
