@@ -7,6 +7,63 @@ $text-color-dark: #000;
 $btn-primary:     rgb(30, 255, 125);
 $btn-secondary:   transparent;
 
+// Mixins
+
+/**
+ * Removes margins in stacked items,
+ * margin-top is set to 0 for first item, margin-bottom is set to 0 for last item
+ * <li>Foo</li>
+ * <li>Bar</li>
+ * <li>Baz</li>
+ */
+
+@mixin stack-items-remove-vertical-margins {
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-top: 0;
+  }
+}
+
+@mixin stack-items-remove-horizontal-margins {
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+/**
+ * Adds font-smoothing for text
+ *
+ */
+
+@mixin font-smoothing {
+  -webkit-font-smoothing:  antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/**
+ * Changes box model, default: border-box
+ *
+ */
+
+ @mixin box-model($model: border-box) {
+  &,
+  & * {
+    box-sizing: $model;
+
+    &:before,
+    &:after {
+      box-sizing: $model;
+    }
+  }
+ }
+
 // TODO Remove later because we don't touch global namespace
 
 body {
@@ -16,32 +73,22 @@ body {
 // Our OIL Overlay
 
 .oil {
-
-  // Switch box-model to border-box for all elements contained in here
-  &,
-  & * {
-    box-sizing: border-box;
-
-    &:before,
-    &:after {
-      box-sizing: border-box;
-    }
-  }
+  @include box-model;
+  @include font-smoothing;
 
   position: fixed;
   bottom: 0;
   width: 100%;
   margin:  0;
-  padding: 20px;
-  -webkit-font-smoothing: antialiased;
+  padding: 1rem;
   font-family: sans-serif;
   color: $text-color;
   background-color: rgba(40,40,40,0.95);
 }
 
 .oil__heading {
-  margin: 1em 0;
-  font-size: 1em;
+  margin: 1rem 0;
+  font-size: 1rem;
   font-weight: bold;
 
   &:first-of-type {
@@ -50,30 +97,26 @@ body {
 }
 
 .oil__intro-text {
-  margin: 1em 0;
+  margin: 1rem 0;
 }
 
 .oil__button {
+  @include stack-items-remove-horizontal-margins;
+
   min-width: 100px;
-  margin: 0.5em;
-  padding: 1em;
-  font-size: 0.8em;
+  margin: 0.5rem;
+  padding: 1rem;
+  font-size: 0.8rem;
   color: $text-color;
-  border-radius: 2px;
-  background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  outline: none;
+  background-color: transparent;
+  
   cursor: pointer;
 
   &:hover {
     background-color: rgba(40, 40, 40, 0.15);
-  }
-
-  &:first-of-type {
-    margin-left: 0;
-  }
-
-  &:first-of-type {
-    margin-right: 0;
   }
 
   &--primary {
