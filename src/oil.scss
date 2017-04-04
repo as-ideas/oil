@@ -1,0 +1,92 @@
+
+// Config
+// TODO Move config to config CSS module
+
+$text-color:      #fff;
+$text-color-dark: #000;
+$btn-primary:     rgb(30, 255, 125);
+$btn-secondary:   transparent;
+
+// TODO Remove later because we don't touch global namespace
+
+body {
+  margin: 0;
+}
+
+// Our OIL Overlay
+
+.oil {
+
+  // Switch box-model to border-box for all elements contained in here
+  &,
+  & * {
+    box-sizing: border-box;
+
+    &:before,
+    &:after {
+      box-sizing: border-box;
+    }
+  }
+
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin:  0;
+  padding: 20px;
+  -webkit-font-smoothing: antialiased;
+  font-family: sans-serif;
+  color: $text-color;
+  background-color: rgba(40,40,40,0.95);
+}
+
+.oil__heading {
+  margin: 1em 0;
+  font-size: 1em;
+  font-weight: bold;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.oil__intro-text {
+  margin: 1em 0;
+}
+
+.oil__button {
+  min-width: 100px;
+  margin: 0.5em;
+  padding: 1em;
+  font-size: 0.8em;
+  color: $text-color;
+  border-radius: 2px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(40, 40, 40, 0.15);
+  }
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:first-of-type {
+    margin-right: 0;
+  }
+
+  &--primary {
+    color: $text-color-dark;
+    background-color: rgb(30, 255, 125);
+    border-color: transparent;
+
+    &:hover {
+      background-color: darken(rgb(30, 255, 125), 10%);
+    }
+  }
+
+  &--secondary {
+    border-color: transparent;
+  }
+}

@@ -1,4 +1,5 @@
 .idea/
+.tern-project
 .awcache/
 dist/
 node_modules/
