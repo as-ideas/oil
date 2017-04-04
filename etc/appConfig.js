@@ -1,35 +1,34 @@
-var path = require("path");
+const path = require("path");
 
-var appConfig = {
-  appName: 'oil.js',
-  srcPath: 'src',
-  testPath: 'test',
-  junit: {
-    title: 'OptInLayer',
-    dir: 'dist/test-reports'
-  },
-  templatesPath: 'templates',
-  distPath: 'dist',
-  globals: {
-  },
-  chunks: {
-    name: ['polyfills'].reverse()
-  },
-  indexFiles: [{
-    template: path.resolve('src', 'index.html'),
-    chunks: ['app', 'polyfills'],
-    chunksSortMode: 'dependency'
-  }],
-  entry: {
-    app: path.resolve('src', 'oil.js')
-  },
-  mangle: {
-  },
-  proxy: {
-  },
-  title: 'OIL',
-  additionalWebpackOptions: false
+const sourcePath = 'src';
+const testPath = 'test';
+const outputPath = 'dist';
+
+
+module.exports = {
+    appName: 'OptInLayer',
+    srcPath: sourcePath,
+    testPath: testPath,
+    junit: {
+        title: 'OptInLayer',
+        dir: outputPath + '/test-reports'
+    },
+    templatesPath: 'templates',
+    distPath: outputPath,
+    globals: {},
+    chunks: {
+        name: ['polyfills'].reverse()
+    },
+    indexFiles: [{
+        template: path.resolve(sourcePath, 'index.html'),
+        chunks: ['app', 'polyfills'],
+        chunksSortMode: 'dependency'
+    }],
+    entry: {
+        app: path.resolve(sourcePath, 'oil.js')
+    },
+    mangle: {},
+    proxy: {},
+    title: 'OIL',
+    additionalWebpackOptions: false
 };
-
-// export default config
-module.exports = appConfig;
