@@ -1,4 +1,5 @@
 import "./oil.scss";
+import { findConfiguration } from "./scripts/config"
 
 /**
  * Returns html content for our OIL overlay
@@ -53,8 +54,12 @@ function addHandler() {
   btnOptLater.addEventListener('click', () => console.log("Optlater"));
 }
 
-injectOil(document.body);
-addHandler();
+// init our dummy up
+(function(){
+  injectOil(document.body);
+  addHandler();
+  findConfiguration();
+}());
 
 
 
