@@ -2,7 +2,7 @@ require('babel-register');
 
 var path = require('path');
 var util = require('util');
-var debugLog = util.debuglog('@holisticon/angularjs-common/karma.conf');
+const debugLog = util.debuglog('oil-debug');
 var webpackConfig = require('./webpack.test.js');
 
 var helpers = require('./helpers');
@@ -30,19 +30,12 @@ module.exports = function (config) {
 
     basePath: process.cwd(),
 
-    // see https://github.com/angular/angular-cli/issues/2125
-    mime: {
-      'text/x-typescript': ['ts', 'tsx']
-    },
-
     frameworks: [
       'jasmine'
     ],
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/angular/angular.js',
-      'node_modules/angular-mocks/angular-mocks.js',
       {pattern: '**/*.html', included: false}
     ],
 
@@ -73,16 +66,6 @@ module.exports = function (config) {
         {type: 'json'},
         {type: 'html'}
       ]
-    },
-
-    preprocessors: {
-      ['**/*.html']: ['ng-html2js']
-    },
-
-    ngHtml2JsPreprocessor: {
-      // strip this from the file path
-      stripPrefix: '.*/frontend/scripts/',
-      prependPrefix: 'scripts/'
     },
 
     webpack: webpackConfig,

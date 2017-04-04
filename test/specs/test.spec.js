@@ -1,12 +1,13 @@
 describe('', () => {
 
 
-  beforeEach(inject(function ($controller) {
+  beforeEach( () => {
 
 
-  }));
+  });
 
   it('', () => {
 
   });
+  
 });
