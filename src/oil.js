@@ -1,10 +1,12 @@
 import "./oil.scss";
-import { isDOMElement, addClickHandler } from './util.js';
+import { isDOMElement, addClickHandler } from './scripts/utils.js';
 import { findConfiguration } from "./scripts/config";
 
+// Dummy state variable to contain optin state
 window.oil = {
   optin: false
 };
+
 
 /**
  * Returns html content for our OIL overlay
@@ -28,6 +30,7 @@ function defineOilContent() {
   );
 }
 
+
 /**
  * Injects OIL into DOM at entry point
  */
@@ -43,6 +46,7 @@ function injectOil(entryPoint) {
   }
 }
 
+
 /**
  * Add click handler
  */
@@ -55,6 +59,7 @@ function addOilClickHandler() {
   });
   addClickHandler(btnOptLater, () => console.log("OptLater"));
 }
+
 
 /**
  * Init OIL
