@@ -1,4 +1,4 @@
-import { extend } from "./utils";
+import { extend, isProd } from "./utils";
 
 const defaultConfig = {
   opt_in_event_name: 'oil_optin_done'
@@ -16,7 +16,9 @@ const defaultConfig = {
 export function mergeOptions(options, defaults) {
     defaults = defaults || {};
     options = options || {};
-    return extend(true, {}, defaults, options);
+    let merged = extend(true, {}, defaults, options);
+    console.info('Got the following merged config', merged);
+    return merged;
 }
 
 /**
@@ -28,10 +30,17 @@ export function mergeOptions(options, defaults) {
 export function readConfiguration(configuration) {
     let parsedConfig = null;
     try {
-        if (configuration.text) {
-            parsedConfig = JSON.parse(configuration.text);
-        }
-    } catch (ignored) {}
+      if (configuration.text) {
+          parsedConfig = JSON.parse(configuration.text);
+          if (!isProd()){
+            console.info('Got the following parsed config', parsedConfig);
+          }
+      }
+    } catch (errorDetails) {
+      if (!isProd()){
+        console.error('Error during passing configuration', errorDetails);
+      }
+    }
     return mergeOptions(parsedConfig, defaultConfig);
 }
 

@@ -1,5 +1,6 @@
 import "./oil.scss";
 import { isDOMElement, addClickHandler } from './util.js';
+import { findConfiguration } from "./scripts/config";
 
 /**
  * Returns html content for our OIL overlay
@@ -51,13 +52,11 @@ function addOilClickHandler() {
 /**
  * Init OIL
  */
-function init() {
+(function(){
   injectOil(document.body);
   addOilClickHandler();
-}
-
-init();
-
+  findConfiguration();
+}());
 
 
 
