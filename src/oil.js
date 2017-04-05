@@ -1,10 +1,9 @@
 import "./oil.scss";
+import { isDOMElement, addClickHandler } from './util.js';
 
 /**
  * Returns html content for our OIL overlay
- *
  */
-
 function defineOilContent() {
   return (
     `
@@ -26,35 +25,38 @@ function defineOilContent() {
 
 /**
  * Injects OIL into DOM at entry point
- *
  */
-
 function injectOil(entryPoint) {
-  // Create overlay container
-  const oil = document.createElement('div');
-  oil.setAttribute('class', 'oil');
-  // Add overlay content
-  oil.innerHTML = defineOilContent();
-  // Add to DOM
-  entryPoint.appendChild(oil);
+  if (isDOMElement(entryPoint)) {
+    // Create overlay container
+    const oil = document.createElement('div');
+    oil.setAttribute('class', 'oil');
+    // Add overlay content
+    oil.innerHTML = defineOilContent();
+    // Add to DOM
+    entryPoint.appendChild(oil);
+  }
 }
 
 /**
- * Simple adding of event listeners to our OIL buttons
- *
+ * Add click handler
  */
-
-function addHandler() {
-  // Get elements
+function addOilClickHandler() {
   const btnOptIn = document.getElementsByClassName('js-optin')[0];
   const btnOptLater = document.getElementsByClassName('js-optlater')[0];
-  // Add event handler
-  btnOptIn.addEventListener('click', () => console.log("Optin"));
-  btnOptLater.addEventListener('click', () => console.log("Optlater"));
+  addClickHandler(btnOptIn, () => console.log("Optin"));
+  addClickHandler(btnOptLater, () => console.log("OptLater"));
 }
 
-injectOil(document.body);
-addHandler();
+/**
+ * Init OIL
+ */
+function init() {
+  injectOil(document.body);
+  addOilClickHandler();
+}
+
+init();
 
 
 
