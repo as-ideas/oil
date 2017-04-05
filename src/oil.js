@@ -2,6 +2,10 @@ import "./oil.scss";
 import { isDOMElement, addClickHandler } from './util.js';
 import { findConfiguration } from "./scripts/config";
 
+window.oil = {
+  optin: false
+};
+
 /**
  * Returns html content for our OIL overlay
  */
@@ -45,7 +49,10 @@ function injectOil(entryPoint) {
 function addOilClickHandler() {
   const btnOptIn = document.getElementsByClassName('js-optin')[0];
   const btnOptLater = document.getElementsByClassName('js-optlater')[0];
-  addClickHandler(btnOptIn, () => console.log("Optin"));
+  addClickHandler(btnOptIn, () => {
+    console.log("Optin")
+    window.oil.optin = true;
+  });
   addClickHandler(btnOptLater, () => console.log("OptLater"));
 }
 
