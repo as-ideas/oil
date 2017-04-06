@@ -69,8 +69,3 @@ function addOilClickHandler() {
   addOilClickHandler();
   findConfiguration();
 }());
-
-
-
-
-

@@ -60,7 +60,7 @@ export function isProd() {
  * Checks if given element is a DOM element
  * Source: http://stackoverflow.com/questions/384286/javascript-isdom-how-do-you-check-if-a-javascript-object-is-a-dom-object
  * @param  a DOM element or any other value 
- * @return true if DOM element, otherwise false
+ * @return {boolean} true if value is a DOM element, otherwise false
  */
 export function isDOMElement(o) {
   return (
