@@ -1,11 +1,10 @@
 module.exports = {
-  'Google\'s Search Functionality' : function (browser) {
+  'OIL Integration Online' : function (browser) {
     browser
-      .url('https://www.google.com/ncr')
+      .url('https://oil-integration.herokuapp.com/')
       .waitForElementVisible('body', 1000)
-      .setValue('input[type=text]', 'BrowserStack\n')
-      .pause(1000)
-      .assert.title('BrowserStack - Google Search')
+      // .pause(1000)
+      // .assert.title('OIL - Aktuelles')
       .end();
   }
 };
