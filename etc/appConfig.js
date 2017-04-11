@@ -11,7 +11,7 @@ module.exports = {
     testPath: testPath,
     junit: {
         title: 'OptInLayer',
-        dir: outputPath + '/test-reports'
+        dir:  'target/test-reports'
     },
     templatesPath: 'templates',
     distPath: outputPath,

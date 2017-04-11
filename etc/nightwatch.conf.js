@@ -7,6 +7,8 @@ nightwatch_config = {
     "port" : 80
   },
 
+   "output_folder": "./target/browserstack-reports",
+
   common_capabilities: {
     'browserstack.user': 'marcelbankmann1',
     'browserstack.key': 'YsD5Lq6KuGg2oxk9Sscx'
@@ -56,11 +58,19 @@ nightwatch_config = {
         'browser_version': '6.0',
       }
     },
+    safari9: {
+      desiredCapabilities: {
+        'os': 'OS X',
+        'browser': 'Safari',
+        'browser_version': '9.1'
+      }
+    },
     safariRecent: {
       desiredCapabilities: {
         'os': 'OS X',
         'browser': 'Safari',
-        'browser_version': '9.1',
+        'browser_version': '10.0',
+        'browserstack.selenium_version':'3.3.1'
       }
     },
     opera: {
