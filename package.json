@@ -9,7 +9,7 @@
     "watch-test": "cross-env NODE_ENV=test karma start etc/karma.conf.js",
     "test": "cross-env NODE_ENV=test karma start etc/karma.conf.ci.js",
     "browserstack": "./node_modules/.bin/nightwatch -c etc/nightwatch.conf.js -e chromeRecent,edge,firefoxRecent,safariRecent,opera",
-    "fullBrowserstack": "./node_modules/.bin/nightwatch -c etc/nightwatch.conf.js -e chrome14,chromeRecent,ie9,edge,firefox9,firefoxRecent,safari6,safariRecent,opera,android4,iphone5",
+    "fullBrowserstack": "./node_modules/.bin/nightwatch -c etc/nightwatch.conf.js -e chrome14,chromeRecent,ie9,edge,firefox9,firefoxRecent,safari6,safari9,safariRecent,opera,android4,iphone5",
     "e2e": "karma start etc/karma.conf.ci.js",
     "eslint": "eslint \"lib/*\" && eslint \"etc/*\"",
     "check": "npm run eslint && nsp check",
