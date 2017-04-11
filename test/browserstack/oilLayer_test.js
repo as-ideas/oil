@@ -1,5 +1,4 @@
 module.exports = {
-  '@disabled': true,
   'OIL Layer Visible' : function (browser) {
     browser
       .url('https://oil:rig@oil-integration.herokuapp.com/')
