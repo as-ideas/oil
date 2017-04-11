@@ -56,10 +56,29 @@ function addOilClickHandler() {
   addClickHandler(btnOptIn, () => {
     console.log("Optin")
     window.oil.optin = true;
+    injectTealium();
   });
   addClickHandler(btnOptLater, () => console.log("OptLater"));
 }
 
+
+/**
+ * Inject Tealium 
+ */
+function injectTealium() {
+  if (typeof(utag) === 'undefined') {
+    window.utag_data = {};
+    let a='//tags.tiqcdn.com/utag/axelspringer/lib-dip-optin/prod/utag.js';
+    let b=document;
+    let c='script';
+    let d=b.createElement(c);
+    d.src=a;
+    d.type='text/java'+c;
+    d.async=true;
+    a=b.getElementsByTagName(c)[0];
+    a.parentNode.insertBefore(d,a);
+  }
+}
 
 /**
  * Init OIL
