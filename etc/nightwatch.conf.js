@@ -33,6 +33,20 @@ nightwatch_config = {
       desiredCapabilities: {
         browser: "internet explorer"
       }
+    },
+    android4: {
+      desiredCapabilities: {
+        'browserName': 'android',
+        'platform': 'ANDROID',
+        'device': 'Samsung Galaxy S3'
+      }
+    },
+    iphone5: {
+      desiredCapabilities: {
+        'browserName': 'iPhone',
+        'platform': 'MAC',
+        'device': 'iPhone 5'
+      }
     }
   }
 };
