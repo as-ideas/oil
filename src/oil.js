@@ -39,6 +39,7 @@ function injectOil(entryPoint) {
     // Create overlay container
     const oil = document.createElement('div');
     oil.setAttribute('class', 'oil');
+    oil.setAttribute('data-qa', 'oilLayer' );
     // Add overlay content
     oil.innerHTML = defineOilContent();
     // Add to DOM
@@ -63,7 +64,7 @@ function addOilClickHandler() {
 
 
 /**
- * Inject Tealium 
+ * Inject Tealium
  */
 function injectTealium() {
   if (typeof(utag) === 'undefined') {
