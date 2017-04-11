@@ -14,24 +14,61 @@ nightwatch_config = {
 
   test_settings: {
     default: {},
-    chrome: {
+    chrome14: {
       desiredCapabilities: {
-        browser: "chrome"
+        'browser': 'Chrome',
+        'browser_version': '14.0',
       }
     },
-    firefox: {
+    chromeRecent: {
       desiredCapabilities: {
-        browser: "firefox"
+        'browser': 'Chrome',
+        'browser_version': '57.0',
       }
     },
-    safari: {
+    ie9: {
       desiredCapabilities: {
-        browser: "safari"
+        'browser': 'IE',
+        'browser_version': '9.0',
       }
     },
-    ie: {
+    edge: {
+      'os': 'Windows',
+      'browser': 'Edge',
+      'browser_version': '14.0'
+    },
+    firefox9: {
       desiredCapabilities: {
-        browser: "internet explorer"
+        'browser': 'Firefox',
+        'browser_version': '9.0',
+      }
+    },
+    firefoxRecent: {
+      desiredCapabilities: {
+        'browser': 'Firefox',
+        'browser_version': '52.0'
+      }
+    },
+    safari6: {
+      desiredCapabilities: {
+        'os': 'OS X',
+        'browser': 'Safari',
+        'browser_version': '6.0',
+      }
+    },
+    safariRecent: {
+      desiredCapabilities: {
+        'os': 'OS X',
+        'browser': 'Safari',
+        'browser_version': '9.1',
+      }
+    },
+    opera: {
+      desiredCapabilities: {
+        'os': 'Windows',
+        'os_version': '7',
+        'browser': 'Opera',
+        'browser_version': '12.16',
       }
     },
     android4: {
