@@ -8,7 +8,7 @@
     "build": "npm run eslint && cross-env NODE_ENV=production webpack --config etc/webpack.config.js",
     "watch-test": "cross-env NODE_ENV=test karma start etc/karma.conf.js",
     "test": "cross-env NODE_ENV=test karma start etc/karma.conf.ci.js",
-    "browserstack": "./node_modules/.bin/nightwatch -c etc/single.conf.js",
+    "browserstack": "./node_modules/.bin/nightwatch -c etc/nightwatch.conf.js -e chrome,firefox,safari,ie",
     "e2e": "karma start etc/karma.conf.ci.js",
     "eslint": "eslint \"lib/*\" && eslint \"etc/*\"",
     "check": "npm run eslint && nsp check",
