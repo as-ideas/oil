@@ -3,6 +3,12 @@ import Cookie from 'js-cookie';
 import { isDOMElement, addClickHandler } from './scripts/utils.js';
 import { findConfiguration } from "./scripts/config";
 
+// Our cookie settings
+const oilCookie = {
+  name: 'oil_data',
+  expires: 31  
+}
+
 /**
  * Returns html content for our OIL overlay
  */
@@ -30,7 +36,9 @@ function defineOilContent() {
  * Injects OIL into DOM at entry point
  */
 function injectOil(entryPoint) {
-  if (isDOMElement(entryPoint)) {
+  const optInCookie = Cookie.getJSON(oilCookie.name);
+
+  if (typeof(optInCookie) === 'undefined' && isDOMElement(entryPoint)) {
     // Create overlay container
     const oil = document.createElement('div');
     oil.setAttribute('class', 'oil');
@@ -48,12 +56,6 @@ function injectOil(entryPoint) {
  */
 function oilOptIn() {
   
-  // Our cookie settings
-  const oilCookie = {
-    name: 'oil_data',
-    expires: 31  
-  }
-
   // Set cookie only if it does not yet exists
   if (typeof(Cookie.get(oilCookie.name)) === 'undefined') {
     Cookie.set(oilCookie.name, {
