@@ -1,12 +1,7 @@
 import "./oil.scss";
+import Cookie from 'js-cookie';
 import { isDOMElement, addClickHandler } from './scripts/utils.js';
 import { findConfiguration } from "./scripts/config";
-
-// Dummy state variable to contain optin state
-window.oil = {
-  optin: false
-};
-
 
 /**
  * Returns html content for our OIL overlay
@@ -49,37 +44,43 @@ function injectOil(entryPoint) {
 
 
 /**
+ * Oil optIn
+ */
+function oilOptIn() {
+  
+  // Our cookie settings
+  const oilCookie = {
+    name: 'oil_data',
+    expires: 31  
+  }
+
+  // Set cookie only if it does not yet exists
+  if (typeof(Cookie.get(oilCookie.name)) === 'undefined') {
+    Cookie.set(oilCookie.name, {
+      optin: true
+    }, {
+      expires: oilCookie.expires
+    });
+    console.log("User opted in, cookie set")
+  }
+  else {
+    console.log("User opted in, cookie not set")
+  }
+}
+
+
+/**
  * Add click handler
  */
 function addOilClickHandler() {
   const btnOptIn = document.getElementsByClassName('js-optin')[0];
   const btnOptLater = document.getElementsByClassName('js-optlater')[0];
   addClickHandler(btnOptIn, () => {
-    console.log("Optin")
-    window.oil.optin = true;
-    injectTealium();
+    oilOptIn();
   });
   addClickHandler(btnOptLater, () => console.log("OptLater"));
 }
 
-
-/**
- * Inject Tealium
- */
-function injectTealium() {
-  if (typeof(utag) === 'undefined') {
-    window.utag_data = {};
-    let a='//tags.tiqcdn.com/utag/axelspringer/lib-dip-optin/prod/utag.js';
-    let b=document;
-    let c='script';
-    let d=b.createElement(c);
-    d.src=a;
-    d.type='text/java'+c;
-    d.async=true;
-    a=b.getElementsByTagName(c)[0];
-    a.parentNode.insertBefore(d,a);
-  }
-}
 
 /**
  * Init OIL
