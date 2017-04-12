@@ -14,6 +14,8 @@ switch (process.env.NODE_ENV) {
     break;
   case 'dev':
   case 'development':
-  default:
     module.exports = require('./webpack.dev'); // eslint-disable-line
+    break;
+  default:
+    module.exports = require('./webpack.debug'); // eslint-disable-line
 }
