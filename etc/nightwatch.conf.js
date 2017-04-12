@@ -69,8 +69,7 @@ nightwatch_config = {
       desiredCapabilities: {
         'os': 'OS X',
         'browser': 'Safari',
-        'browser_version': '10.0',
-        'browserstack.selenium_version':'3.3.1'
+        'browser_version': '9.1'
       }
     },
     opera: {
