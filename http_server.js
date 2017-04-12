@@ -1,25 +1,21 @@
 /* this file is being used to serve the files from /dist folder. It is being used by heroku */
-var port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
-var express = require('express');
-var serveStatic = require('serve-static');
-var compression = require('compression');
-var auth = require('http-auth');
-var basic = auth.basic({
-        realm: 'Project OIL'
-}   , (username, password, callback) => {
-        callback(username === 'oil' && password === 'rig');
-    }
-);
+const express = require('express');
+const serveStatic = require('serve-static');
+const compression = require('compression');
+const auth = require('http-auth');
+
+let basic = auth.basic({realm: 'Project OIL'}, (username, password, callback) => callback(username === 'oil' && password === 'rig'));
 
 // Application setup.
-var CACHE_DURATION = 0;
-var DOCUMENT_ROOT = __dirname + '/dist';
+let CACHE_DURATION = 0;
+let DOCUMENT_ROOT = __dirname + '/dist';
 
 /*
  * start server
  */
-var app = express();
+let app = express();
 
 // server gzip
 app.use(compression());
