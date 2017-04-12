@@ -20,3 +20,8 @@ npm install
 ### debug logging
 
 NODE_DEBUG=oil-debug npm run ...
+
+
+## Documentation
+
+see http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/

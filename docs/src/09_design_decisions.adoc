@@ -1,0 +1,26 @@
+[[section-design-decisions]]
+== Design Decisions
+
+
+****
+.Tealium integration
+Within Tealium OIL is integrated as an JavaScript Code Extension, which fits the best into the overall model.
+
+.JavaScript Code Extension
+Within an extension it's possible to handle the OptOut/OptIn logic during preload. This also allows to alter the later behaviour within Tealium.
+
+.Configuratin
+
+****
+
+
+[options="header"]
+|===
+| ID         | Decision                                             | Date / Attendees
+| OIL-DEC-1    | Tealium is responsible to not track by default.    | 12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt
+| OIL-DEC-2   | OIL is integrated as https://community.tealiumiq.com/t5/iQ-Tag-Management/JavaScript-Code-Extension/ta-p/11925[JavaScript Code Extension] in Tealium   | 12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt
+| OIL-DEC-3    | OIL is included within Tealium as Library for each business unit  | 12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt
+| OIL-DEC-4   | OIL sets one cookie which will be read by Tealium to optin tracking    | 12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt
+| OIL-DEC-5   | OIL Deployment is done manual via Tealium Web UI    | 12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt
+| <Term-2>     | <definition-2>
+|===
