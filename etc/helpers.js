@@ -93,6 +93,7 @@ function mergeAppConfig(overwrittenConfig) { /*eslint complexity: [error, 24]*/
     src: sourceResolved,
     test: testPathResolved,
     junit: junit,
+    copy: appConfig.copy,
     templates: templatesResolved || srcPath + '/' + templatesPath,
     templatesPath: templatesPath,
     srcSASS: appConfig.srcSASS || path.resolve(sourceResolved, 'scss'),

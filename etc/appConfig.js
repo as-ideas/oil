@@ -26,7 +26,11 @@ module.exports = {
     }],
     entry: {
         'app': path.resolve(sourcePath, 'oil.js')
-    },
+    }, 
+    copy: [{
+    from: path.resolve(sourcePath, 'assets'),
+    to: 'assets'
+  }],
     mangle: {},
     proxy: {},
     title: 'OIL',

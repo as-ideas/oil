@@ -44,6 +44,7 @@
     "babel-register": "6.16.3",
     "compass-mixins": "0.12.10",
     "conventional-changelog-cli": "1.2.0",
+    "copy-webpack-plugin": "4.0.1",
     "cross-env": "3.1.2",
     "css-loader": "0.25.0",
     "eslint": "3.7.1",
