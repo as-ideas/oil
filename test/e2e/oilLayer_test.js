@@ -1,8 +1,12 @@
 module.exports = {
+  beforeEach: browser => {
+    browser
+      .url(browser.launch_url)
+      .waitForElementVisible('body', 1000, false);
+  },
+
   'OIL Layer Visible' : function (browser) {
     browser
-      .url('https://oil:rig@oil-integration.herokuapp.com/')
-      .waitForElementVisible('body', 1000, false)
       .useXpath()
       .assert.visible('//*[@data-qa="oilLayer"]')
       .end();

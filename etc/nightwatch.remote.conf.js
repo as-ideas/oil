@@ -1,5 +1,9 @@
 nightwatch_config = {
-  src_folders : [ "test/browserstack" ],
+  src_folders : [
+    "test/e2e"
+  ],
+
+  "output_folder": "./target/browserstack-reports",
 
   selenium : {
     "start_process" : false,
@@ -7,15 +11,15 @@ nightwatch_config = {
     "port" : 80
   },
 
-   "output_folder": "./target/browserstack-reports",
-
   common_capabilities: {
     'browserstack.user': 'marcelbankmann1',
     'browserstack.key': 'YsD5Lq6KuGg2oxk9Sscx'
   },
 
   test_settings: {
-    default: {},
+    default: {
+      'launch_url' : 'https://oil:rig@oil-integration.herokuapp.com/'
+    },
     chrome14: {
       desiredCapabilities: {
         'browser': 'Chrome',
