@@ -20,7 +20,7 @@ module.exports = {
 
   "test_settings": {
     "default": {
-      'launch_url' : 'http://localhost:3000/webpack-dev-server/',
+      'launch_url' : 'http://oil:rig@localhost:8080/',
       "screenshots": {
         "enabled": false,
         "path": ''
