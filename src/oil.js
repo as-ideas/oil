@@ -17,10 +17,10 @@ function defineOilContent() {
       <p class="oil__intro-text">
         Hi, this is a little intro text.
       </p>
-      <button class="oil__button oil__button--primary js-optin">
+      <button class="oil__button oil__button--primary js-optin" data-qa="oil-YesButton">
         Yes, I want!
       </button>
-      <button class="oil__button oil__button--secondary js-optlater">
+      <button class="oil__button oil__button--secondary js-optlater" data-qa="oil-NotNowButton">
         Not now
       </button>
     `
@@ -47,7 +47,7 @@ function injectOil(entryPoint) {
     oil.classList.add(`expanded-${cookieData.expanded}`)
 
     // Add data attribute for testing purposes
-    oil.setAttribute('data-qa', 'oilLayer');
+    oil.setAttribute('data-qa', 'oil-Layer');
 
     // Add overlay content
     oil.innerHTML = defineOilContent();
