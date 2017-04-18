@@ -90,7 +90,6 @@ function addOilClickHandler() {
  * Init OIL
  */
 (function () {
-
   validateOilCookie();
 
   // Inject Oil overlay depending on cookie data

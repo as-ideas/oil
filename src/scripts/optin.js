@@ -11,6 +11,7 @@ const oilCookie = {
   }
 }
 
+
 export function validateOilCookie() {
   // Set Oil cookie if no cookie exists
   if (!isCookie(oilCookie.name)) {
@@ -28,9 +29,11 @@ export function getOilCookie() {
   return Cookie.getJSON(oilCookie.name);
 }
 
+
 export function setDefaultOilCookie() {
   return Cookie.set(oilCookie.name, oilCookie.config, { expires: oilCookie.expires });
 }
+
 
 /**
  * Oil optIn
@@ -38,15 +41,14 @@ export function setDefaultOilCookie() {
  */
 export function oilOptIn() {
   // Cookie should be there...
-  const cookieData = Cookie.getJSON(oilCookie.name);
-  const newCookieData = Object.assign({}, cookieData, { optin: true });
+  let cookieData = getOilCookie();
+  let newCookieData = Object.assign({}, cookieData, { optin: true });
 
   // Update Oil cookie
   Cookie.set(oilCookie.name, newCookieData, {
     expires: oilCookie.expires
   });
 
-  // Update classes on Oil overlay DOM element
   return new Promise((resolve) => {
     resolve(newCookieData);
     console.log("User opted in, cookie set");
@@ -60,15 +62,14 @@ export function oilOptIn() {
  */
 export function oilOptLater() {
   // Cookie should be there...
-  const cookieData = Cookie.getJSON(oilCookie.name)
-  const newCookieData = Object.assign({}, cookieData, { expanded: false });
+  let cookieData = getOilCookie();
+  let newCookieData = Object.assign({}, cookieData, { expanded: false });
 
   // Update Oil cookie
   Cookie.set(oilCookie.name, newCookieData, {
     expires: oilCookie.expires
   });
 
-  // Update classes on Oil overlay DOM element
   return new Promise((resolve) => {
     resolve(newCookieData);
     console.log("User opted later, cookie set");
