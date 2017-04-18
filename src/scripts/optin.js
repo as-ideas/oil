@@ -1,5 +1,5 @@
 import Cookie from 'js-cookie';
-import { isCookie, isCookieValid } from './utils.js';
+import { isCookie, isCookieValid, extend } from './utils.js';
 
 // Our cookie default settings
 const oilCookie = {
@@ -42,7 +42,7 @@ export function setDefaultOilCookie() {
 export function oilOptIn() {
   // Cookie should be there...
   let cookieData = getOilCookie();
-  let newCookieData = Object.assign({}, cookieData, { optin: true });
+  let newCookieData = extend(true, {}, cookieData, { optin: true });
 
   // Update Oil cookie
   Cookie.set(oilCookie.name, newCookieData, {
@@ -63,7 +63,7 @@ export function oilOptIn() {
 export function oilOptLater() {
   // Cookie should be there...
   let cookieData = getOilCookie();
-  let newCookieData = Object.assign({}, cookieData, { expanded: false });
+  let newCookieData = extend(true, {}, cookieData, { expanded: false });
 
   // Update Oil cookie
   Cookie.set(oilCookie.name, newCookieData, {
