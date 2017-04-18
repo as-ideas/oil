@@ -143,12 +143,12 @@ function addOilClickHandler() {
 (function(){
   // Set Oil cookie if no cookie exists
   if (!isCookie(oilCookie.name)) {
-    Cookie.set(oilCookie.name, oilCookie.config)
+    Cookie.set(oilCookie.name, oilCookie.config, {expires: oilCookie.expires})
   }
 
   // In case Oil cookie exists but is not valid, create new Oil cookie with default config 
   if (!isCookieValid(oilCookie.name, Object.keys(oilCookie.config))) {
-    Cookie.set(oilCookie.name, oilCookie.config)
+    Cookie.set(oilCookie.name, oilCookie.config, {expires: oilCookie.expires})
   }
 
   // Inject Oil overlay depending on cookie data
