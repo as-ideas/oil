@@ -38,7 +38,7 @@ export function setDefaultOilCookie() {
  */
 export function oilOptIn() {
   // Cookie should be there...
-  const cookieData = Cookie.getJSON(oilCookie.name)
+  const cookieData = Cookie.getJSON(oilCookie.name);
   const newCookieData = Object.assign({}, cookieData, {optin: true});
 
   // Update Oil cookie
