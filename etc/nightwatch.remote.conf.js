@@ -12,8 +12,8 @@ nightwatch_config = {
   },
 
   common_capabilities: {
-    'browserstack.user': 'marcelbankmann1',
-    'browserstack.key': 'YsD5Lq6KuGg2oxk9Sscx'
+    'browserstack.user': 'asideas1',
+    'browserstack.key': 'r7VdBAeqfwx3o3Drqg81'
   },
 
   test_settings: {
