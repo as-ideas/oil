@@ -1,8 +1,11 @@
 module.exports = {
+  beforeEach: browser => {
+    browser
+      .url(browser.launch_url)
+      .waitForElementVisible('body', 1000, false);
+  },
   'OIL Integration Online' : function (browser) {
     browser
-      .url('https://oil:rig@oil-integration.herokuapp.com/')
-      .waitForElementPresent('body', 1000, false)
       .assert.title('OIL - Aktuelles')
       .end();
   }

@@ -1,13 +1,18 @@
 import "./oil.scss";
 import Cookie from 'js-cookie';
-import { isDOMElement, addClickHandler } from './scripts/utils.js';
+import { isDOMElement, addClickHandler, isCookie, isCookieValid } from './scripts/utils.js';
 import { findConfiguration } from "./scripts/config";
 
-// Our cookie settings
+// Our cookie default settings
 const oilCookie = {
   name: 'oil_data',
-  expires: 31  
+  expires: 31,
+  config: {
+    optin: false,
+    expanded: true
+  }
 }
+
 
 /**
  * Returns html content for our OIL overlay
@@ -36,15 +41,26 @@ function defineOilContent() {
  * Injects OIL into DOM at entry point
  */
 function injectOil(entryPoint) {
-  const optInCookie = Cookie.getJSON(oilCookie.name);
+  // Cookie should be present...
+  const cookieData = Cookie.getJSON(oilCookie.name);
 
-  if (typeof(optInCookie) === 'undefined' && isDOMElement(entryPoint)) {
+  if (typeof(cookieData) !== 'undefined' && isDOMElement(entryPoint)) {
     // Create overlay container
     const oil = document.createElement('div');
-    oil.setAttribute('class', 'oil');
+    
+    // Add classes for styling Oil overlay 
+    // Classes are added sequentially, see here for problems in some browsers with alternative syntax oil.classList.add('foo', 'bar', 'baz')
+    // http://stackoverflow.com/questions/11115998/is-there-a-way-to-add-remove-several-classes-in-one-single-instruction-with-clas 
+    oil.classList.add(`oil`)
+    oil.classList.add(`optin-${cookieData.optin}`)
+    oil.classList.add(`expanded-${cookieData.expanded}`)
+
+    // Add data attribute for testing purposes
     oil.setAttribute('data-qa', 'oilLayer' );
+    
     // Add overlay content
     oil.innerHTML = defineOilContent();
+    
     // Add to DOM
     entryPoint.appendChild(oil);
   }
@@ -52,22 +68,57 @@ function injectOil(entryPoint) {
 
 
 /**
+ * Update Oil overlay class names
+ */
+function updateOilOverlay(dataObj) {
+  const oilOverlay = document.getElementsByClassName('oil')[0]
+  
+  // Reset classlist to Oil base class
+  oilOverlay.setAttribute('class', 'oil')
+
+  // Add classes from data object
+  oilOverlay.classList.add(`optin-${dataObj.optin}`)
+  oilOverlay.classList.add(`expanded-${dataObj.expanded}`)
+}
+
+
+/**
  * Oil optIn
  */
 function oilOptIn() {
+  // Cookie should be there...
+  const cookieData = Cookie.getJSON(oilCookie.name)
+  const newCookieData = Object.assign({}, cookieData, {optin: true});
   
-  // Set cookie only if it does not yet exists
-  if (typeof(Cookie.get(oilCookie.name)) === 'undefined') {
-    Cookie.set(oilCookie.name, {
-      optin: true
-    }, {
-      expires: oilCookie.expires
-    });
-    console.log("User opted in, cookie set")
-  }
-  else {
-    console.log("User opted in, cookie not set")
-  }
+  // Update Oil cookie
+  Cookie.set(oilCookie.name, newCookieData, {
+    expires: oilCookie.expires
+  });
+
+  // Update classes on Oil overlay DOM element
+  updateOilOverlay(newCookieData)
+  
+  console.log("User opted in, cookie set")
+}
+
+
+/**
+ * Oil optLater
+ */
+function oilOptLater() {
+  // Cookie should be there...
+  const cookieData = Cookie.getJSON(oilCookie.name)
+  const newCookieData = Object.assign({}, cookieData, {expanded: false});
+
+  // Update Oil cookie
+  Cookie.set(oilCookie.name, newCookieData, {
+    expires: oilCookie.expires
+  });
+
+  // Update classes on Oil overlay DOM element
+  updateOilOverlay(newCookieData)
+
+  console.log("User opted later, cookie set")
 }
 
 
@@ -80,7 +131,9 @@ function addOilClickHandler() {
   addClickHandler(btnOptIn, () => {
     oilOptIn();
   });
-  addClickHandler(btnOptLater, () => console.log("OptLater"));
+  addClickHandler(btnOptLater, () => {
+    oilOptLater()
+  });
 }
 
 
@@ -88,6 +141,17 @@ function addOilClickHandler() {
  * Init OIL
  */
 (function(){
+  // Set Oil cookie if no cookie exists
+  if (!isCookie(oilCookie.name)) {
+    Cookie.set(oilCookie.name, oilCookie.config)
+  }
+
+  // In case Oil cookie exists but is not valid, create new Oil cookie with default config 
+  if (!isCookieValid(oilCookie.name, Object.keys(oilCookie.config))) {
+    Cookie.set(oilCookie.name, oilCookie.config)
+  }
+
+  // Inject Oil overlay depending on cookie data
   injectOil(document.body);
   addOilClickHandler();
   findConfiguration();

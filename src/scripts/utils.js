@@ -1,3 +1,5 @@
+import Cookie from 'js-cookie';
+
 /**
  * Merge the objects,
  * For a deep extend, set the first argument to `true`.
@@ -79,4 +81,48 @@ export function addClickHandler(element, func) {
   if (isDOMElement(element) && typeof(func) === 'function') {
     element.addEventListener('click', func);
   }
+}
+
+
+/**
+ * Checks weather a cookie exists
+ * @param name {string} Name of cookie
+ * @return true or false
+ */
+export function isCookie(name) {
+  if (typeof(Cookie.get(name)) === 'undefined') {
+    return false
+  }
+  return true
+}
+
+
+/**
+ * Checks if a cookie contains a data object with given keys
+ * @param name {string} Name of cookie
+ * @param data {array}  Keys of dataobject
+ * @returns true or false
+ */
+export function cookieDataHasKeys(name, data) {
+  if (typeof(name) === 'string' && Array.isArray(data)){
+    if (isCookie(name)) {
+      const cookieData = Cookie.getJSON(name)
+      return data.every((item) => {
+        return cookieData.hasOwnProperty(item)
+      })
+    }
+    return false
+  }
+  return false
+}
+
+
+/**
+ * Checks if a cookie is valid and contains a data object with given keys
+ * @param name {string} Name of cookie
+ * @param data {array}  Keys of dataobject
+ * @returns true or false
+ */
+export function isCookieValid(name, data) {
+  return cookieDataHasKeys(name, data)
 }
