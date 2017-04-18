@@ -4,7 +4,7 @@
     // disable default JSON formatter (requires restart)
     "json.format.enable": false,
     // disable default JavaScript formatter.
-    "javascript.format.enable": false,
+    "javascript.format.enable": true,
     "search.exclude": {
         "node_modules/**/*": true
     },

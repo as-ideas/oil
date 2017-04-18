@@ -14,11 +14,11 @@ const defaultConfig = {
  * @function
  */
 export function mergeOptions(options, defaults) {
-    defaults = defaults || {};
-    options = options || {};
-    let merged = extend(true, {}, defaults, options);
-    console.info('Got the following merged config', merged);
-    return merged;
+  defaults = defaults || {};
+  options = options || {};
+  let merged = extend(true, {}, defaults, options);
+  console.info('Got the following merged config', merged);
+  return merged;
 }
 
 /**
@@ -28,20 +28,20 @@ export function mergeOptions(options, defaults) {
  * @function
  */
 export function readConfiguration(configuration) {
-    let parsedConfig = null;
-    try {
-      if (configuration.text) {
-          parsedConfig = JSON.parse(configuration.text);
-          if (!isProd()){
-            console.info('Got the following parsed config', parsedConfig);
-          }
-      }
-    } catch (errorDetails) {
-      if (!isProd()){
-        console.error('Error during passing configuration', errorDetails);
+  let parsedConfig = null;
+  try {
+    if (configuration.text) {
+      parsedConfig = JSON.parse(configuration.text);
+      if (!isProd()) {
+        console.info('Got the following parsed config', parsedConfig);
       }
     }
-    return mergeOptions(parsedConfig, defaultConfig);
+  } catch (errorDetails) {
+    if (!isProd()) {
+      console.error('Error during passing configuration', errorDetails);
+    }
+  }
+  return mergeOptions(parsedConfig, defaultConfig);
 }
 
 /**
@@ -49,10 +49,10 @@ export function readConfiguration(configuration) {
  * @returns parsed config
  */
 export function findConfiguration() {
-    let configurationElement = document.querySelector('script[type="application/configuration"]'),
-        config = null;
-    if (configurationElement) {
-        config = readConfiguration(configurationElement);
-    }
-    return config;
+  let configurationElement = document.querySelector('script[type="application/configuration"]'),
+    config = null;
+  if (configurationElement) {
+    config = readConfiguration(configurationElement);
+  }
+  return config;
 }

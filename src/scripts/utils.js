@@ -9,38 +9,38 @@ import Cookie from 'js-cookie';
  */
 export function extend() {
 
-    // Variables
-    let extended = {},
-     deep = false,
-     i = 0,
-     length = arguments.length;
+  // Variables
+  let extended = {},
+    deep = false,
+    i = 0,
+    length = arguments.length;
 
-    function merge(obj) {
-      for ( var prop in obj ) {
-          if ( Object.prototype.hasOwnProperty.call( obj, prop ) ) {
-              // If deep merge and property is an object, merge properties
-              if ( deep && Object.prototype.toString.call(obj[prop]) === '[object Object]' ) {
-                  extended[prop] = extend( true, extended[prop], obj[prop] );
-              } else {
-                  extended[prop] = obj[prop];
-              }
-          }
+  function merge(obj) {
+    for (var prop in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+        // If deep merge and property is an object, merge properties
+        if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
+          extended[prop] = extend(true, extended[prop], obj[prop]);
+        } else {
+          extended[prop] = obj[prop];
+        }
       }
     }
+  }
 
-    // Check if a deep merge
-    if ( Object.prototype.toString.call( arguments[0] ) === '[object Boolean]' ) {
-        deep = arguments[0];
-        i++;
-    }
+  // Check if a deep merge
+  if (Object.prototype.toString.call(arguments[0]) === '[object Boolean]') {
+    deep = arguments[0];
+    i++;
+  }
 
-    // Loop through each object and conduct a merge
-    for ( ; i < length; i++ ) {
-        var obj = arguments[i];
-        merge(obj);
-    }
+  // Loop through each object and conduct a merge
+  for (; i < length; i++) {
+    var obj = arguments[i];
+    merge(obj);
+  }
 
-    return extended;
+  return extended;
 }
 
 
@@ -51,9 +51,9 @@ export function extend() {
  */
 export function isProd() {
   if (String('<%= ENV %>') === 'prod' || String('<%= ENV %>') === 'production') {
-      return true;
+    return true;
   } else {
-      return false;
+    return false;
   }
 }
 
@@ -61,13 +61,13 @@ export function isProd() {
 /**
  * Checks if given element is a DOM element
  * Source: http://stackoverflow.com/questions/384286/javascript-isdom-how-do-you-check-if-a-javascript-object-is-a-dom-object
- * @param  a DOM element or any other value 
+ * @param  a DOM element or any other value
  * @return {boolean} true if value is a DOM element, otherwise false
  */
 export function isDOMElement(o) {
   return (
     typeof HTMLElement === "object" ? o instanceof HTMLElement : // DOM2
-    o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName==="string"
+      o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName === "string"
   );
 }
 
@@ -78,7 +78,7 @@ export function isDOMElement(o) {
  * @param func: callback function
  */
 export function addClickHandler(element, func) {
-  if (isDOMElement(element) && typeof(func) === 'function') {
+  if (isDOMElement(element) && typeof (func) === 'function') {
     element.addEventListener('click', func);
   }
 }
@@ -90,7 +90,7 @@ export function addClickHandler(element, func) {
  * @return true or false
  */
 export function isCookie(name) {
-  if (typeof(Cookie.get(name)) === 'undefined') {
+  if (typeof (Cookie.get(name)) === 'undefined') {
     return false
   }
   return true
@@ -104,7 +104,7 @@ export function isCookie(name) {
  * @returns true or false
  */
 export function cookieDataHasKeys(name, data) {
-  if (typeof(name) === 'string' && Array.isArray(data)){
+  if (typeof (name) === 'string' && Array.isArray(data)) {
     if (isCookie(name)) {
       const cookieData = Cookie.getJSON(name)
       return data.every((item) => {

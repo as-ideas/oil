@@ -35,7 +35,7 @@ function injectOil(entryPoint) {
   // Cookie should be present...
   let cookieData = getOilCookie();
 
-  if (typeof(cookieData) !== 'undefined' && isDOMElement(entryPoint)) {
+  if (typeof (cookieData) !== 'undefined' && isDOMElement(entryPoint)) {
     // Create overlay container
     let oil = document.createElement('div');
 
@@ -47,7 +47,7 @@ function injectOil(entryPoint) {
     oil.classList.add(`expanded-${cookieData.expanded}`)
 
     // Add data attribute for testing purposes
-    oil.setAttribute('data-qa', 'oilLayer' );
+    oil.setAttribute('data-qa', 'oilLayer');
 
     // Add overlay content
     oil.innerHTML = defineOilContent();
@@ -80,7 +80,7 @@ function updateOilOverlay(dataObj) {
  */
 function addOilClickHandler() {
   let btnOptIn = document.getElementsByClassName('js-optin')[0],
-      btnOptLater = document.getElementsByClassName('js-optlater')[0];
+    btnOptLater = document.getElementsByClassName('js-optlater')[0];
   addClickHandler(btnOptIn, () => oilOptIn().then((cookieData) => updateOilOverlay(cookieData)));
   addClickHandler(btnOptLater, () => oilOptLater().then((cookieData) => updateOilOverlay(cookieData)));
 }
@@ -89,7 +89,7 @@ function addOilClickHandler() {
 /**
  * Init OIL
  */
-(function(){
+(function () {
 
   validateOilCookie();
 

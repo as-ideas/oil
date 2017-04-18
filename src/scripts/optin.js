@@ -29,7 +29,7 @@ export function getOilCookie() {
 }
 
 export function setDefaultOilCookie() {
-  return Cookie.set(oilCookie.name, oilCookie.config, {expires: oilCookie.expires});
+  return Cookie.set(oilCookie.name, oilCookie.config, { expires: oilCookie.expires });
 }
 
 /**
@@ -39,7 +39,7 @@ export function setDefaultOilCookie() {
 export function oilOptIn() {
   // Cookie should be there...
   const cookieData = Cookie.getJSON(oilCookie.name);
-  const newCookieData = Object.assign({}, cookieData, {optin: true});
+  const newCookieData = Object.assign({}, cookieData, { optin: true });
 
   // Update Oil cookie
   Cookie.set(oilCookie.name, newCookieData, {
@@ -61,7 +61,7 @@ export function oilOptIn() {
 export function oilOptLater() {
   // Cookie should be there...
   const cookieData = Cookie.getJSON(oilCookie.name)
-  const newCookieData = Object.assign({}, cookieData, {expanded: false});
+  const newCookieData = Object.assign({}, cookieData, { expanded: false });
 
   // Update Oil cookie
   Cookie.set(oilCookie.name, newCookieData, {
