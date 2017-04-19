@@ -33,7 +33,6 @@ function defineOilContent() {
 function injectOil(entryPoint) {
   // Cookie should be present...
   let cookieData = getOilCookie();
-
   if (typeof (cookieData) !== 'undefined' && isDOMElement(entryPoint)) {
     // Create overlay container
     let oil = document.createElement('div');

@@ -49,7 +49,12 @@ module.exports = {
   copy: [{
     from: path.resolve(sourcePath, 'assets'),
     to: 'assets'
-  }],
+  },
+  {
+    from: path.resolve(sourcePath, 'demos', 'tealium.html'),
+    to: 'demos/tealium.html'
+  }
+  ],
   mangle: {},
   proxy: {},
   title: 'OIL',
