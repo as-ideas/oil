@@ -26,6 +26,6 @@ Potentially more columns in case you need translations.
 [options="header"]
 |===
 | Term         | Definition
-| <Term-1>     | <definition-1>
+| GOI    | Group Opt In
 | <Term-2>     | <definition-2>
 |===
