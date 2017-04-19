@@ -61,3 +61,5 @@ Describe (usually in a combination of diagrams, tables, and text):
 For multiple environments or alternative deployments please copy that section of arc42 for all relevant environments.
 ****
 
+=== Tealium Deployment
+TODO Füge hier ein wie wir unseren Code händisch in JS bekommen

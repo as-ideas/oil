@@ -7,8 +7,10 @@ function addFrame() {
   iframe = document.createElement('iframe');
   iframe.setAttribute('id', 'oil-frame');
   iframe.setAttribute('src', iframeUrl + '/demos/iframe-mypath-test.html');
-  iframe.style.width = '640px';
-  iframe.style.height = '480px';
+  iframe.style.width =  '0';
+  iframe.style.height = '0';
+  iframe.style.border = '0';
+  iframe.style.border = 'none';
   document.body.appendChild(iframe);
 }
 
