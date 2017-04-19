@@ -100,15 +100,6 @@ var config = webpackMerge(commonConfig, {
          * See: https://github.com/webpack/docs/wiki/optimization#minimize
          */
         new webpack.optimize.OccurrenceOrderPlugin(true),
-        /*
-         * Plugin: CommonsChunkPlugin
-         * Description: Shares common code between the pages.
-         * It identifies common modules and put them into a commons chunk.
-         *
-         * See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
-         * See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
-         */
-        new webpack.optimize.CommonsChunkPlugin(appConfig.chunks),
         /**
          * Plugin: WebpackMd5Hash
          * Description: Plugin to replace a standard webpack chunkhash with md5.
