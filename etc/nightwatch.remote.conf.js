@@ -18,7 +18,7 @@ nightwatch_config = {
 
   test_settings: {
     default: {
-      'launch_url' : 'https://oil:rig@oil-integration.herokuapp.com/'
+      'launch_url' : 'https://oil:rig@oil-integration-host1.herokuapp.com/'
     },
     chrome14: {
       desiredCapabilities: {
