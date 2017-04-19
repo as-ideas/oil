@@ -43,6 +43,7 @@ describe('optin', () => {
             oilOptIn().then((cookieData) => {
                 expect(cookieData).toBeDefined();
                 expect(cookieData.optin).toBe(true);
+                expect(cookieData.expanded).toBeDefined();
                 done();
             });
         });
@@ -53,6 +54,7 @@ describe('optin', () => {
             oilOptLater().then((cookieData) => {
                 expect(cookieData).toBeDefined();
                 expect(cookieData.expanded).toBe(false);
+                expect(cookieData.optin).toBeDefined();
                 done();
             });
         });

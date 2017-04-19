@@ -31,7 +31,7 @@ export function getOilCookie() {
 
 
 export function setDefaultOilCookie() {
-  return Cookie.set(oilCookie.name, oilCookie.config, { expires: oilCookie.expires });
+  Cookie.set(oilCookie.name, oilCookie.config, { expires: oilCookie.expires });
 }
 
 
@@ -40,7 +40,9 @@ export function setDefaultOilCookie() {
  * @return promise with updated cookie value
  */
 export function oilOptIn() {
-  // Cookie should be there...
+  // Cookies could have been deleted after page loads, therefore we check and validate our cookie here again
+  validateOilCookie();
+
   let cookieData = getOilCookie();
   let newCookieData = extend(true, {}, cookieData, { optin: true });
 
@@ -61,7 +63,9 @@ export function oilOptIn() {
  * @return promise with updated cookie value
  */
 export function oilOptLater() {
-  // Cookie should be there...
+  // Cookies could have been deleted after page loads, therefore we check and validate our cookie here again
+  validateOilCookie();
+
   let cookieData = getOilCookie();
   let newCookieData = extend(true, {}, cookieData, { expanded: false });
 
