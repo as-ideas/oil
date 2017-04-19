@@ -1,7 +1,16 @@
 import Cookie from 'js-cookie';
 
+const COOKIE_NAME = 'GOIL';
+
 window.addEventListener('message', (message) => {
   let data = message.data;
-  console.debug('Got following parent data:', data);
-  Cookie.set('GOIL', data, { expires: 31});
+  // save parent url
+  console.debug('iframe - Got following parent data:', data);
+  // only save our data
+  if (data.indexOf && data.indexOf('goi') !== -1) {
+    Cookie.set(COOKIE_NAME, data, { expires: 31 });
+  }
 }, false);
+
+// send cookie value back to parent
+setTimeout(() => parent.postMessage(Cookie.getJSON(COOKIE_NAME), 'http://localhost:3000/'), 1000);

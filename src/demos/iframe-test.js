@@ -1,7 +1,7 @@
-import { addClickHandler } from '../scripts/utils.js';
+import { eventer, messageEvent, addClickHandler } from '../scripts/utils.js';
 
 let iframe = null,
-  iframeUrl = 'http://localhost:3000';
+  iframeUrl = 'http://127.0.0.1:3000';
 
 function addFrame() {
   iframe = document.createElement('iframe');
@@ -16,8 +16,13 @@ function addFrame() {
 (function () {
   addFrame();
 
-
+  // add click handler to fake a set cookie message
   let btnGoi = document.getElementsByClassName('js-goi-activate')[0];
-  addClickHandler(btnGoi, () => iframe.contentWindow.postMessage('goi-activate', iframeUrl));
+  addClickHandler(btnGoi, () => iframe.contentWindow.postMessage('goi-activate', '*'));
+
+  // Listen to message from child window
+  eventer(messageEvent, function (e) {
+    console.debug('Parent - received message!:  ', e.data);
+  }, false);
 
 }());
