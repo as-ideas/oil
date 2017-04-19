@@ -4,7 +4,6 @@ import { findConfiguration } from "./scripts/config";
 import { getOilCookie, validateOilCookie, oilOptIn, oilOptLater } from "./scripts/optin";
 
 
-
 /**
  * Returns html content for our OIL overlay
  */
@@ -71,8 +70,6 @@ function updateOilOverlay(dataObj) {
   oilOverlay.classList.add(`optin-${dataObj.optin}`)
   oilOverlay.classList.add(`expanded-${dataObj.expanded}`)
 }
-
-
 
 
 /**
