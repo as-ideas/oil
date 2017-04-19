@@ -126,3 +126,8 @@ export function cookieDataHasKeys(name, data) {
 export function isCookieValid(name, data) {
   return cookieDataHasKeys(name, data)
 }
+
+// Create IE + others compatible event handler
+let eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+export let eventer = window[eventMethod];
+export let messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
