@@ -65,7 +65,7 @@ var config = webpackMerge(commonConfig, {
          *
          * See: http://webpack.github.io/docs/configuration.html#output-filename
          */
-        filename: 'bundle.[name].js',
+        filename: '[name].bundle.js',
 
         /**
          * The filename of the SourceMaps for the JavaScript files.
@@ -80,10 +80,7 @@ var config = webpackMerge(commonConfig, {
          *
          * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
          */
-        chunkFilename: '[id].chunk.js',
-
-        library: 'ac_[name]',
-        libraryTarget: 'var'
+        chunkFilename: '[id].chunk.js'
     },
 
     plugins: [
