@@ -79,7 +79,7 @@ export function isDOMElement(o) {
  */
 export function addClickHandler(element, func) {
   if (isDOMElement(element) && typeof (func) === 'function') {
-    element.addEventListener('click', func);
+    element.addEventListener('click', func, false);
   }
 }
 
