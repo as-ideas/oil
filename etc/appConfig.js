@@ -20,8 +20,8 @@ module.exports = {
     name: ['polyfills'].reverse()
   },
   indexFiles: [{
-    filename: 'index.html',
-    template: path.resolve(sourcePath, 'index.html'),
+    filename: 'demos/oil_direct-integration.html',
+    template: path.resolve(sourcePath, 'demos', 'oil_direct-integration.html'),
     chunks: ['app', 'polyfills'],
     chunksSortMode: 'dependency'
   }, {
@@ -49,8 +49,10 @@ module.exports = {
   copy: [{
     from: path.resolve(sourcePath, 'assets'),
     to: 'assets'
-  },
-  {
+  }, {
+    from: path.resolve(sourcePath, 'index.html'),
+    to: 'index.html'
+  }, {
     from: path.resolve(sourcePath, 'demos', 'tealium.html'),
     to: 'demos/tealium.html'
   }
