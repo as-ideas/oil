@@ -37,12 +37,9 @@ function injectOil(entryPoint) {
     // Create overlay container
     let oil = document.createElement('div');
 
-    // Add classes for styling Oil overlay
-    // Classes are added sequentially, see here for problems in some browsers with alternative syntax oil.classList.add('foo', 'bar', 'baz')
-    // http://stackoverflow.com/questions/11115998/is-there-a-way-to-add-remove-several-classes-in-one-single-instruction-with-clas
-    oil.classList.add(`oil`)
-    oil.classList.add(`optin-${cookieData.optin}`)
-    oil.classList.add(`expanded-${cookieData.expanded}`)
+    // Add classes for styling Oil overlay, use setAttribute('class', ...) instead of classList to 
+    // get IE9 compatibiity
+    oil.setAttribute('class', `oil optin-${cookieData.optin} expanded-${cookieData.expanded}`);
 
     // Add data attribute for testing purposes
     oil.setAttribute('data-qa', 'oil-Layer');
