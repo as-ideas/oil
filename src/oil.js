@@ -49,8 +49,6 @@ function injectOil(entryPoint) {
 
     // Add to DOM
     entryPoint.appendChild(oil);
-
-    // console.log('Injected overlay into page')
   }
 }
 
