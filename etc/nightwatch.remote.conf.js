@@ -62,13 +62,6 @@ nightwatch_config = {
         'browser_version': '6.0',
       }
     },
-    safari9: {
-      desiredCapabilities: {
-        'os': 'OS X',
-        'browser': 'Safari',
-        'browser_version': '9.1'
-      }
-    },
     safariRecent: {
       desiredCapabilities: {
         'os': 'OS X',
