@@ -53,7 +53,7 @@ export function oilOptIn() {
 
   return new Promise((resolve) => {
     resolve(newCookieData);
-    console.log("User opted in, cookie set");
+    // console.log("User opted in, cookie set");
   });
 }
 
@@ -76,6 +76,6 @@ export function oilOptLater() {
 
   return new Promise((resolve) => {
     resolve(newCookieData);
-    console.log("User opted later, cookie set");
+    // console.log("User opted later, cookie set");
   });
 }
