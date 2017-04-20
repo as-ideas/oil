@@ -61,12 +61,11 @@ function injectOil(entryPoint) {
 function updateOilOverlay(dataObj) {
   let oilOverlay = document.getElementsByClassName('oil')[0]
 
-  // Reset classlist to Oil base class
+  // Reset CSS class to Oil base class
   oilOverlay.setAttribute('class', 'oil')
 
   // Add classes from data object
-  oilOverlay.classList.add(`optin-${dataObj.optin}`)
-  oilOverlay.classList.add(`expanded-${dataObj.expanded}`)
+  oilOverlay.setAttribute('class', `oil optin-${dataObj.optin} expanded-${dataObj.expanded}`);
 }
 
 
