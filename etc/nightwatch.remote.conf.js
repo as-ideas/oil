@@ -81,7 +81,7 @@ nightwatch_config = {
       desiredCapabilities: {
         'browserName': 'android',
         'platform': 'ANDROID',
-        'device': 'Samsung Galaxy S5 Mini'
+        'device': 'HTC One M8'
       }
     },
     iphone5: {
