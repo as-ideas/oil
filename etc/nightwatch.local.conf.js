@@ -20,7 +20,7 @@ module.exports = {
 
   "test_settings": {
     "default": {
-      'launch_url' : 'http://localhost:8080/demos/oil_direct-integration.html',
+      'launch_url' : 'http://localhost:8080/demos/direct-integration.html',
       "screenshots": {
         "enabled": false,
         "path": ''

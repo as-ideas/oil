@@ -20,31 +20,26 @@ module.exports = {
     name: ['polyfills'].reverse()
   },
   indexFiles: [{
-    filename: 'demos/oil_direct-integration.html',
-    template: path.resolve(sourcePath, 'demos', 'oil_direct-integration.html'),
-    chunks: ['app', 'polyfills'],
+    filename: 'demos/direct-integration.html',
+    template: path.resolve(sourcePath, 'demos', 'direct-integration.html'),
+    chunks: ['demos/direct-integration'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'demo.html',
-    template: path.resolve(sourcePath, 'demo.html'),
-    chunks: ['demo', 'polyfills'],
-    chunksSortMode: 'dependency'
-  }, {
-    filename: 'demos/iframe.html',
-    template: path.resolve(sourcePath, 'demos', 'iframe.html'),
+    filename: 'demos/iframe-test.html',
+    template: path.resolve(sourcePath, 'demos', 'iframe-test.html'),
     chunks: ['demos/iframe-test'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'demos/iframe-mypath-test.html',
-    template: path.resolve(sourcePath, 'demos', 'iframe-mypath-test.html'),
-    chunks: ['demos/iframe-mypath-test'],
+    filename: 'demos/iframe-mypass-test.html',
+    template: path.resolve(sourcePath, 'demos', 'iframe-mypass-test.html'),
+    chunks: ['demos/iframe-mypass-test'],
     chunksSortMode: 'dependency'
   }],
   entry: {
-    'app': path.resolve(sourcePath, 'oil.js'),
-    'demo': path.resolve(sourcePath, 'demo.js'),
+    'oil': path.resolve(sourcePath, 'oil.js'),
+    'demos/direct-integration': path.resolve(sourcePath, 'demos/direct-integration.js'),
     'demos/iframe-test': path.resolve(sourcePath, 'demos/iframe-test.js'),
-    'demos/iframe-mypath-test': path.resolve(sourcePath, 'demos/iframe-mypath-test.js')
+    'demos/iframe-mypass-test': path.resolve(sourcePath, 'demos/iframe-mypass-test.js')
   },
   copy: [{
     from: path.resolve(sourcePath, 'assets'),
@@ -55,8 +50,7 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, 'demos', 'tealium.html'),
     to: 'demos/tealium.html'
-  }
-  ],
+  }],
   mangle: {},
   proxy: {},
   title: 'OIL',

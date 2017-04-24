@@ -2,6 +2,7 @@
   "name": "oil",
   "version": "0.0.1",
   "description": "Module for Axel Springer Oil",
+  "main": "oil",
   "scripts": {
     "start": "npm install && node http_server.js",
     "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 ",
@@ -9,8 +10,6 @@
     "build": "cross-env NODE_ENV=production webpack --config etc/webpack.config.js && cross-env NODE_ENV=debug webpack --config etc/webpack.config.js",
     "watch-test": "cross-env NODE_ENV=test karma start etc/karma.conf.js",
     "test": "cross-env NODE_ENV=test karma start etc/karma.conf.ci.js",
-    "parallelBrowserstack": "./node_modules/.bin/nightwatch -c etc/nightwatch.remote.conf.js -e chromeRecent,edge,firefoxRecent,safariRecent,opera",
-    "fullParallelBrowserstack": "./node_modules/.bin/nightwatch -c etc/nightwatch.remote.conf.js -e chrome14,chromeRecent,ie9,edge,firefox9,firefoxRecent,safari6,safariRecent,opera,android4,iphone5",
     "browserstack": "bash ./etc/runBrowserstackSeq.sh",
     "fullBrowserstack": "bash ./etc/runFullBrowserstackSeq.sh",
     "pree2e": "node etc/nightwatch.local.conf.js",
