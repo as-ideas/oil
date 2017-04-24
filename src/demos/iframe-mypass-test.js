@@ -1,11 +1,12 @@
 import Cookie from 'js-cookie';
+import { logDebug } from '../scripts/log.js';
 
 const COOKIE_NAME = 'GOIL';
 
 window.addEventListener('message', (message) => {
   let data = message.data;
   // save parent url
-  console.debug('iframe - Got following parent data:', data);
+  logDebug('iframe - Got following parent data:', data);
   // only save our data
   if (data.indexOf && data.indexOf('goi') !== -1) {
     Cookie.set(COOKIE_NAME, data, { expires: 31 });

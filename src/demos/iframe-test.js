@@ -24,8 +24,6 @@ function addFrame() {
   addClickHandler(btnGoi, () => iframe.contentWindow.postMessage('goi-activate', '*'));
 
   // Listen to message from child window
-  eventer(messageEvent, function (e) {
-    logDebug('Parent - received message!:  ', e.data);
-  }, false);
+  eventer(messageEvent, (e) => logDebug('Parent - received message!:  ', e.data), false);
 
 }());

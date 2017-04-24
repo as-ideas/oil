@@ -1,5 +1,5 @@
 import { extend, isProd } from "./utils";
-import { logInfo } from './log';
+import { logInfo, logError } from './log';
 
 const defaultConfig = {
   opt_in_event_name: 'oil_optin_done'
@@ -33,14 +33,10 @@ export function readConfiguration(configuration) {
   try {
     if (configuration.text) {
       parsedConfig = JSON.parse(configuration.text);
-      if (!isProd()) {
-        logInfo('Got the following parsed config', parsedConfig);
-      }
+      logInfo('Got the following parsed config', parsedConfig);
     }
   } catch (errorDetails) {
-    if (!isProd()) {
-      console.error('Error during passing configuration', errorDetails);
-    }
+    logError('Error during passing configuration', errorDetails);
   }
   return mergeOptions(parsedConfig, defaultConfig);
 }
