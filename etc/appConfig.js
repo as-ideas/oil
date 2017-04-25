@@ -35,9 +35,9 @@ module.exports = {
     chunks: ['demos/complete-integration-site-b'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'demos/iframe-mypass-test.html',
-    template: path.resolve(sourcePath, 'demos', 'iframe-mypass-test.html'),
-    chunks: ['demos/iframe-mypass-test'],
+    filename: 'demos/complete-integration-mypass.html',
+    template: path.resolve(sourcePath, 'demos', 'complete-integration-mypass.html'),
+    chunks: ['demos/complete-integration-mypass'],
     chunksSortMode: 'dependency'
   }],
   entry: {
@@ -45,7 +45,7 @@ module.exports = {
     'demos/direct-integration': path.resolve(sourcePath, 'demos/direct-integration.js'),
     'demos/complete-integration-site-a': path.resolve(sourcePath, 'demos/complete-integration-site-a.js'),
     'demos/complete-integration-site-b': path.resolve(sourcePath, 'demos/complete-integration-site-b.js'),
-    'demos/iframe-mypass-test': path.resolve(sourcePath, 'demos/iframe-mypass-test.js')
+    'demos/complete-integration-mypass': path.resolve(sourcePath, 'demos/complete-integration-mypass.js')
   },
   copy: [{
     from: path.resolve(sourcePath, 'assets'),
