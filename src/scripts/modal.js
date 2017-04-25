@@ -1,6 +1,6 @@
 import "../styles/modal.scss";
 import { isDOMElement, addClickHandler } from './utils.js';
-import { getOilCookie, oilOptIn, oilOptLater } from "./optin.js";
+import { getOilCookie, oilOptIn, oilGlobalOptIn,  oilOptLater } from "./optin.js";
 
 
 /**
@@ -15,6 +15,9 @@ export function defineOilContent() {
       <p class="oil__intro-text">
         Hi, this is a little intro text.
       </p>
+      <button class="oil__button oil__button--primary js-optin-goi" data-qa="oil-goi-YesButton">
+        Yes, I want GOI!
+      </button>
       <button class="oil__button oil__button--primary js-optin" data-qa="oil-YesButton">
         Yes, I want!
       </button>
@@ -71,7 +74,9 @@ export function updateOilOverlay(dataObj) {
  */
 export function addOilClickHandler() {
   let btnOptIn = document.getElementsByClassName('js-optin')[0],
+    btnGoiOptIn = document.getElementsByClassName('js-optin-goi')[0],
     btnOptLater = document.getElementsByClassName('js-optlater')[0];
   addClickHandler(btnOptIn, () => oilOptIn().then((cookieData) => updateOilOverlay(cookieData)));
+  addClickHandler(btnGoiOptIn, () => oilGlobalOptIn().then((cookieData) => updateOilOverlay(cookieData)));
   addClickHandler(btnOptLater, () => oilOptLater().then((cookieData) => updateOilOverlay(cookieData)));
 }

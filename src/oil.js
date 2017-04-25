@@ -1,16 +1,14 @@
-import { getConfiguration } from "./scripts/config.js";
 import { injectOil, addOilClickHandler } from "./scripts/modal.js";
-import { validateOilCookie } from "./scripts/optin.js";
+import { checkOptIn } from "./scripts/optin.js";
 
-
-/**
- * Init OIL
- */
-(function () {
-  validateOilCookie();
-
-  // Inject Oil overlay depending on cookie data
-  injectOil(document.body);
-  addOilClickHandler();
-  getConfiguration();
-}());
+// PUBLIC API
+export function initOilLayer() {
+  checkOptIn().then((cookie) => {
+    if (!cookie.optin) {
+      // Inject Oil overlay depending on cookie data
+      injectOil(document.body);
+      addOilClickHandler();
+    }
+  });
+}
+export { initOilFrame } from "./scripts/mypass.js";
