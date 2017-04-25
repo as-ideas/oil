@@ -2,7 +2,8 @@ import { extend } from "./utils";
 import { logInfo, logError } from './log';
 
 const defaultConfig = {
-  opt_in_event_name: 'oil_optin_done'
+  opt_in_event_name: 'oil_optin_done',
+  sso_iframe_src: null
 };
 
 /**
@@ -45,7 +46,7 @@ export function readConfiguration(configuration) {
  * Search HTML document for configuration and reads it in
  * @returns parsed config
  */
-export function findConfiguration() {
+export function getConfiguration() {
   let configurationElement = document.querySelector('script[type="application/configuration"]'),
     config = null;
   if (configurationElement) {

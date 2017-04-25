@@ -1,4 +1,4 @@
-import { findConfiguration } from "./scripts/config.js";
+import { getConfiguration } from "./scripts/config.js";
 import { injectOil, addOilClickHandler } from "./scripts/modal.js";
 import { validateOilCookie } from "./scripts/optin.js";
 
@@ -12,5 +12,5 @@ import { validateOilCookie } from "./scripts/optin.js";
   // Inject Oil overlay depending on cookie data
   injectOil(document.body);
   addOilClickHandler();
-  findConfiguration();
+  getConfiguration();
 }());
