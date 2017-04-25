@@ -6,6 +6,7 @@
     // disable default JavaScript formatter.
     "javascript.format.enable": true,
     "search.exclude": {
+        "dist/**/*": true,
         "node_modules/**/*": true
     },
     "files.exclude": {
