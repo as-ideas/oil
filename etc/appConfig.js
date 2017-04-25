@@ -25,9 +25,9 @@ module.exports = {
     chunks: ['demos/direct-integration'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'demos/iframe-test.html',
-    template: path.resolve(sourcePath, 'demos', 'iframe-test.html'),
-    chunks: ['demos/iframe-test'],
+    filename: 'demos/complete-integration.html',
+    template: path.resolve(sourcePath, 'demos', 'complete-integration.html'),
+    chunks: ['demos/complete-integration'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/iframe-mypass-test.html',
@@ -38,7 +38,7 @@ module.exports = {
   entry: {
     'oil': path.resolve(sourcePath, 'oil.js'),
     'demos/direct-integration': path.resolve(sourcePath, 'demos/direct-integration.js'),
-    'demos/iframe-test': path.resolve(sourcePath, 'demos/iframe-test.js'),
+    'demos/complete-integration': path.resolve(sourcePath, 'demos/complete-integration.js'),
     'demos/iframe-mypass-test': path.resolve(sourcePath, 'demos/iframe-mypass-test.js')
   },
   copy: [{

@@ -1,3 +1,16 @@
-export { isDOMElement, addClickHandler } from './scripts/utils.js';
-export { findConfiguration } from "./scripts/config";
-export { getOilCookie, validateOilCookie, oilOptIn, oilOptLater } from "./scripts/optin";
+import { findConfiguration } from "./scripts/config.js";
+import { injectOil, addOilClickHandler } from "./scripts/modal.js";
+import { validateOilCookie } from "./scripts/optin.js";
+
+
+/**
+ * Init OIL
+ */
+(function () {
+  validateOilCookie();
+
+  // Inject Oil overlay depending on cookie data
+  injectOil(document.body);
+  addOilClickHandler();
+  findConfiguration();
+}());

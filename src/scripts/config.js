@@ -1,4 +1,4 @@
-import { extend, isProd } from "./utils";
+import { extend } from "./utils";
 import { logInfo, logError } from './log';
 
 const defaultConfig = {
