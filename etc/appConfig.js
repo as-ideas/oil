@@ -53,9 +53,13 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, 'index.html'),
     to: 'index.html'
+
   }, {
-    from: path.resolve(sourcePath, 'demos', 'tealium.html'),
-    to: 'demos/tealium.html'
+    from: path.resolve(sourcePath, 'demos', 'tealium-integration-test.html'),
+    to: 'demos/tealium-integration-test.html'
+  }, {
+    from: path.resolve(sourcePath, 'demos', 'tealium-integration-production.html'),
+    to: 'demos/tealium-integration-production.html'
   }],
   mangle: {},
   proxy: {},
