@@ -75,7 +75,7 @@ body {
 .oil {
   @include box-model;
   @include font-smoothing;
-
+  z-index: 100;
   position: fixed;
   bottom: 0;
   width: 100%;
