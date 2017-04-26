@@ -1,5 +1,6 @@
 import { injectOil, addOilClickHandler } from "./scripts/modal.js";
 import { checkOptIn } from "./scripts/optin.js";
+import { initOilFrame } from "./scripts/iframe.listener.js";
 
 // PUBLIC API
 export function initOilLayer() {
@@ -11,4 +12,7 @@ export function initOilLayer() {
     }
   });
 }
-export { initOilFrame } from "./scripts/mypass.js";
+
+export function initOilHub() {
+  initOilFrame();
+}

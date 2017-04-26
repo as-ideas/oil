@@ -1,6 +1,6 @@
-import { initOilFrame } from '../oil.js';
+import { initOilHub } from '../oil.js';
 
 // init frame script
 (function () {
-  initOilFrame();
+  initOilHub();
 }());

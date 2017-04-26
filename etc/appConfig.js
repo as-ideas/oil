@@ -42,6 +42,8 @@ module.exports = {
   }],
   entry: {
     'oil': path.resolve(sourcePath, 'oil.js'),
+    'hub': path.resolve(sourcePath, 'hub.js'),
+    'subscriber': path.resolve(sourcePath, 'subscriber.js'),
     'demos/direct-integration': path.resolve(sourcePath, 'demos/direct-integration.js'),
     'demos/complete-integration-site-a': path.resolve(sourcePath, 'demos/complete-integration-site-a.js'),
     'demos/complete-integration-site-b': path.resolve(sourcePath, 'demos/complete-integration-site-b.js'),
