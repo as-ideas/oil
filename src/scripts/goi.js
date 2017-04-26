@@ -1,17 +1,19 @@
 import { getConfiguration } from './config.js';
 import { addFrame } from './iframe.js';
 import { eventer, messageEvent } from './utils.js';
+import { logDebug } from './log.js';
 
 // INTERNAL FUNCTIONS
 
 function init() {
   // read config data
   const config = getConfiguration();
-  if (config) {
+  if (config && config.sso_iframe_src) {
     // setup iframe
     let iframeUrl = config.sso_iframe_src;
     return addFrame(iframeUrl);
   } else {
+    logDebug('Config for sso_iframe_src isnt set. No GOI possible.');
     return null;
   }
 }
@@ -66,7 +68,8 @@ export function verifyGlobalOptIn() {
         readConfigFromFrame(location.origin).then((data) => resolve(data));
       }
     } else {
-      resolve({});
+      logDebug('Couldnt initialize GOI. Fallback to goi false.');
+      resolve(false);
     }
   });
 }

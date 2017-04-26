@@ -18,7 +18,9 @@ nightwatch_config = {
 
   test_settings: {
     default: {
-      'launch_url' : 'https://oil-integration-host1.herokuapp.com/demos/tealium-integration-test.html'
+      'launch_url_host1' : 'https://oil-integration-host1.herokuapp.com/',
+      'launch_url_host2' : 'https://oil-integration-host2.herokuapp.com/',
+      'launch_url_cdn' : 'https://oil-integration-cdn.herokuapp.com/'
     },
     chrome14: {
       desiredCapabilities: {
