@@ -38,7 +38,7 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: '**/*.html', included: false}
+      { pattern: '**/*.html', included: false }
     ],
 
     // list of files / patterns to exclude
@@ -64,9 +64,9 @@ module.exports = function (config) {
     coverageReporter: {
       dir: '../target/coverage/',
       reporters: [
-        {type: 'text-summary'},
-        {type: 'json'},
-        {type: 'html'}
+        { type: 'text-summary' },
+        { type: 'json' },
+        { type: 'html' }
       ]
     },
 
@@ -111,11 +111,13 @@ module.exports = function (config) {
   };
   for (var key in appConfig.entry) {
     if (key) {
-      config.files.push(appConfig.entry[key]);
-      config.preprocessors[appConfig.entry[key]] = ['webpack', 'sourcemap'];
+     // if (key.indexOf('demos') !== -1) {
+        config.files.push(appConfig.entry[key]);
+        config.preprocessors[appConfig.entry[key]] = ['webpack', 'sourcemap'];
+    //  }
     }
   }
-  config.files.push({pattern: testSpecs, watched: false});
+  config.files.push({ pattern: testSpecs, watched: false });
   config.preprocessors[testSpecs] = ['webpack', 'sourcemap'];
 
   debugLog('Using following karma config:', config);

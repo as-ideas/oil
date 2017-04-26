@@ -7,9 +7,13 @@ import { eventer, messageEvent } from './utils.js';
 function init() {
   // read config data
   const config = getConfiguration();
-  // setup iframe
-  let iframeUrl = config.sso_iframe_src;
-  return addFrame(iframeUrl);
+  if (config) {
+    // setup iframe
+    let iframeUrl = config.sso_iframe_src;
+    return addFrame(iframeUrl);
+  } else {
+    return null;
+  }
 }
 /**
  * Sent given event to hidden iframe
@@ -20,10 +24,7 @@ function init() {
 function sendEventToFrame(eventName, origin) {
   let iframe = init();
   if (iframe) {
-    iframe.contentWindow.postMessage({
-      event: eventName,
-      origin: origin
-    }, '*');
+    iframe.contentWindow.postMessage({ event: eventName, origin: origin }, '*');
   }
 }
 /**
@@ -34,14 +35,14 @@ function sendEventToFrame(eventName, origin) {
  */
 function readConfigFromFrame(origin) {
   let iframe = init();
-  if (iframe) {
-    iframe.contentWindow.postMessage({
-      event: 'oil-config-read',
-      origin: origin
-    }, '*');
-    // Listen to message from child window
-  }
   return new Promise((resolve) => {
+    // defer post to next tick
+    setTimeout(() => {
+      if (iframe) {
+        iframe.contentWindow.postMessage({ event: 'oil-config-read', origin: origin }, '*');
+      }
+    });
+    // Listen to message from child window
     eventer(messageEvent, (event) => resolve(event.data), false);
   });
 }
@@ -56,15 +57,32 @@ function readConfigFromFrame(origin) {
 export function verifyGlobalOptIn() {
   return new Promise((resolve) => {
     let iframe = init();
-    // Listen to message from child window
-    iframe.onload = () => readConfigFromFrame(location.origin).then((data) => resolve(data));
+    if (iframe) {
+      if (!iframe.onload) {
+        // Listen to message from child window after iFrame load
+        iframe.onload = () => readConfigFromFrame(location.origin).then((data) => resolve(data));
+      } else {
+        // if already loaded directly invoke
+        readConfigFromFrame(location.origin).then((data) => resolve(data));
+      }
+    } else {
+      resolve({});
+    }
   });
 }
 /**
  * Activate Global Opt IN
  * @function
+ * @return promise when done
  */
 export function activateGlobalOptIn() {
   init();
-  sendEventToFrame('oil-goi-activate', location.origin);
+  return new Promise((resolve) => {
+    // defer post to next tick
+    setTimeout(() => {
+      sendEventToFrame('oil-goi-activate', location.origin);
+      // defer until read works
+      readConfigFromFrame().then(resolve);
+    }, 500);
+  });
 }

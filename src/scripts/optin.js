@@ -72,9 +72,7 @@ export function oilGlobalOptIn(globalOnly = true) {
 
   if (!globalOnly) {
     // Update Oil cookie (site - SOI)
-    Cookie.set(oilCookie.name, newCookieData, {
-      expires: oilCookie.expires
-    });
+    Cookie.set(oilCookie.name, newCookieData, { expires: oilCookie.expires });
   }
 
   // Update Oil cookie (mypass - GOI)
@@ -96,9 +94,7 @@ export function oilOptIn() {
   let newCookieData = extend(true, {}, cookieData, { optin: true });
 
   // Update Oil cookie
-  Cookie.set(oilCookie.name, newCookieData, {
-    expires: oilCookie.expires
-  });
+  Cookie.set(oilCookie.name, newCookieData, { expires: oilCookie.expires });
 
   return new Promise((resolve) => {
     resolve(newCookieData);
@@ -118,9 +114,7 @@ export function oilOptLater() {
   let newCookieData = extend(true, {}, cookieData, { expanded: false });
 
   // Update Oil cookie
-  Cookie.set(oilCookie.name, newCookieData, {
-    expires: oilCookie.expires
-  });
+  Cookie.set(oilCookie.name, newCookieData, { expires: oilCookie.expires });
 
   return new Promise((resolve) => {
     resolve(newCookieData);
