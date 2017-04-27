@@ -17,28 +17,31 @@ describe('goi', () => {
 
   it('should disable GOI by default', (done) => {
     loadFixture('goi/goi.config-error.html');
-    activateGlobalOptIn();
-    verifyGlobalOptIn().then((optin) => {
-      expect(optin).toBe(false);
-      done();
-    });
+
+    activateGlobalOptIn().then(
+      verifyGlobalOptIn().then((optin) => {
+        expect(optin).toBe(false);
+        done();
+      })
+    );
   });
 
   it('should disable GOI on config error', (done) => {
     loadFixture('goi/goi.wrong-iframe.html');
-    activateGlobalOptIn();
-    verifyGlobalOptIn().then((optin) => {
-      expect(optin).toBe(false);
-      done();
-    });
+    activateGlobalOptIn().then(
+      verifyGlobalOptIn().then((optin) => {
+        expect(optin).toBe(false);
+        done();
+      })
+    );
   });
 
   it('should activate GOI', (done) => {
     loadFixture('goi/goi.default.html');
     activateGlobalOptIn().then(
       verifyGlobalOptIn().then((optin) => {
-        console.log(optin);
-        // FIXME
+        expect(optin).toBeDefined();
+        // FIXME phantomjs
         // expect(optin).toBe(true);
         done();
       })

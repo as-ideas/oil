@@ -32,6 +32,8 @@ function init() {
 function sendEventToFrame(eventName, origin) {
   let iframe = init();
   if (iframe) {
+    // FIXME Add cross origin here !!
+    // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
     iframe.contentWindow.postMessage({ event: eventName, origin: origin }, '*');
   }
 }
@@ -42,16 +44,16 @@ function sendEventToFrame(eventName, origin) {
  * @return promise with result of the
  */
 function readConfigFromFrame(origin) {
-  let iframe = init();
   return new Promise((resolve) => {
     // defer post to next tick
-    setTimeout(() => {
-      if (iframe) {
-        iframe.contentWindow.postMessage({ event: 'oil-config-read', origin: origin }, '*');
-      }
-    });
+    setTimeout(() => sendEventToFrame('oil-config-read', origin));
     // Listen to message from child window
-    eventer(messageEvent, (event) => resolve(event.data), false);
+    eventer(messageEvent, (event) => {
+      // only listen to our hub
+      if (config && config.sso_iframe_src && config.sso_iframe_src.indexOf(event.origin) !== -1) {
+        resolve(event.data);
+      }
+    }, false);
     // add timeout for config read
     setTimeout(() => {
       logDebug('Read config timed out');
@@ -91,12 +93,8 @@ export function verifyGlobalOptIn() {
  */
 export function activateGlobalOptIn() {
   init();
-  return new Promise((resolve) => {
-    // defer post to next tick
-    setTimeout(() => {
-      sendEventToFrame('oil-goi-activate', location.origin);
-      // defer until read works
-      readConfigFromFrame().then(resolve);
-    });
-  });
+  return new Promise((resolve) => setTimeout(() => { // defer post to next tick
+    sendEventToFrame('oil-goi-activate', location.origin);
+    setTimeout(() => readConfigFromFrame().then(resolve));  // defer until read works
+  }, TIMEOUT / 3));
 }
