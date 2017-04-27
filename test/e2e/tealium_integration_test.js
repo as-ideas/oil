@@ -5,25 +5,19 @@ const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
 module.exports = {
   beforeEach: browser => {
      browser
-      .url(browser.launch_url_host1 + "demos/tealium-integration-test.html")
+      .url(browser.globals.launch_url_host1 + "demos/tealium-integration-test.html")
       .deleteCookies();
 
     browser
-      .url(browser.launch_url)
+      .url(browser.globals.launch_url_host1 + "demos/tealium-integration-test.html")
       .useCss()
       .waitForElementVisible('body', 1000, false)
-      .useXpath();
-  },
-
-  'OIL Layer Visible' : function (browser) {
-    browser
-      .assert.visible(OIL_LAYER)
-      .end();
+      .useXpath()
+      .waitForElementVisible(OIL_LAYER, 2000, false);
   },
 
   'OIL Layer closed after clicking yes' : function (browser) {
     browser
-      .assert.visible(OIL_LAYER)
       .click(OIL_YES_BUTTON)
       .assert.hidden(OIL_LAYER)
       .assert.cssClassPresent(OIL_LAYER, "optin-true")
@@ -32,7 +26,6 @@ module.exports = {
 
   'OIL Layer closed after clicking no' : function (browser) {
     browser
-      .assert.visible(OIL_LAYER)
       .click(OIL_NO_BUTTON)
       .assert.cssClassPresent(OIL_LAYER, "optin-false")
       .assert.cssClassPresent(OIL_LAYER, "expanded-false")
@@ -41,7 +34,6 @@ module.exports = {
 
   'OIL Layer wont break after the user deleted cookies while having the page open and then click yes' : function (browser) {
     browser
-      .assert.visible(OIL_LAYER)
       .deleteCookies()
       .click(OIL_YES_BUTTON)
       .assert.hidden(OIL_LAYER)
@@ -51,7 +43,6 @@ module.exports = {
 
     'OIL Layer wont break after the user deleted cookies while having the page open and then click no' : function (browser) {
     browser
-      .assert.visible(OIL_LAYER)
       .deleteCookies()
       .click(OIL_NO_BUTTON)
       .assert.visible(OIL_LAYER)
