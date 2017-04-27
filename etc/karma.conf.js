@@ -105,16 +105,16 @@ module.exports = function (config) {
 
     logLevel: config.LOG_INFO
   });
-  // TODO move to config
   config.proxies = {
     '/scripts/': 'http://localhost:' + config.port + '/base/src/scripts/'
   };
   for (var key in appConfig.entry) {
     if (key) {
-     // if (key.indexOf('demos') !== -1) {
+      // skip demos
+      if (key.indexOf('demos/') === -1) {
         config.files.push(appConfig.entry[key]);
         config.preprocessors[appConfig.entry[key]] = ['webpack', 'sourcemap'];
-    //  }
+      }
     }
   }
   config.files.push({ pattern: testSpecs, watched: false });

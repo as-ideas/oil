@@ -3,11 +3,17 @@ import { addFrame } from './iframe.js';
 import { eventer, messageEvent } from './utils.js';
 import { logDebug } from './log.js';
 
+// Timeout after which promises should return
+const TIMEOUT = 500;
+let config = null;
+
 // INTERNAL FUNCTIONS
 
 function init() {
-  // read config data
-  const config = getConfiguration();
+  // read config data if not already set
+  if (!config) {
+    config = getConfiguration();
+  }
   if (config && config.sso_iframe_src) {
     // setup iframe
     let iframeUrl = config.sso_iframe_src;
@@ -46,6 +52,11 @@ function readConfigFromFrame(origin) {
     });
     // Listen to message from child window
     eventer(messageEvent, (event) => resolve(event.data), false);
+    // add timeout for config read
+    setTimeout(() => {
+      logDebug('Read config timed out');
+      resolve(false);
+    }, TIMEOUT);
   });
 }
 
@@ -86,6 +97,6 @@ export function activateGlobalOptIn() {
       sendEventToFrame('oil-goi-activate', location.origin);
       // defer until read works
       readConfigFromFrame().then(resolve);
-    }, 500);
+    });
   });
 }
