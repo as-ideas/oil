@@ -1,19 +1,20 @@
 import { isProd } from "./utils";
 
+export function initLogging() {
+  if (!window.console) window.console = {};
+  if (!window.console.log) window.console.log = function () { };
+}
+
 export function logInfo() {
-  // if (console && console.log) {
-  //   console.log(console, arguments);
-  // }
+    console.log(console, arguments);
 }
 
 export function logError() {
-  // if (console && console.log) {
-  //   console.log(console, arguments);
-  // }
+    console.log(console, arguments);
 }
 
 export function logDebug() {
-  // if (!isProd() && console && console.log) {
-  //   console.log(console, arguments);
-  // }
+  if (!isProd()) {
+    console.log(console, arguments);
+  }
 }
