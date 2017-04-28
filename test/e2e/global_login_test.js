@@ -4,14 +4,11 @@ const OIL_YES_BUTTON = '//*[@data-qa="oil-YesButton"]';
 const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
 
 module.exports = {
-  '@disabled': true,
-
   beforeEach: browser => {
   },
 
   'OIL Layer Global Opt-In is working across two domains' : function (browser) {
     browser
-
       .url(browser.globals.launch_url_host1 + "demos/complete-integration-site-a.html")
       .deleteCookies()
       .url(browser.globals.launch_url_host1 + "demos/complete-integration-site-a.html")
