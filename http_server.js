@@ -2,6 +2,7 @@
 const port = process.env.PORT || 8080;
 
 const express = require('express');
+const cors = require('cors');
 const serveStatic = require('serve-static');
 const compression = require('compression');
 // const auth = require('http-auth');
@@ -11,11 +12,19 @@ const compression = require('compression');
 // Application setup.
 let CACHE_DURATION = 0;
 let DOCUMENT_ROOT = __dirname + '/dist';
-
+let corsOptions = {
+  'origin': '*',
+  'preflightContinue': false,
+  'optionsSuccessStatus': 204,
+  'allowedHeaders': ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
+}
 /*
  * start server
  */
 let app = express();
+
+// CORS
+app.options(corsOptions, cors()) // include before other routes
 
 // server gzip
 app.use(compression());
