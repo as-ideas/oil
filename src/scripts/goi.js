@@ -5,7 +5,7 @@ import { eventer, messageEvent } from './utils.js';
 import { logDebug } from './log.js';
 
 // Timeout after which promises should return
-const TIMEOUT = 500;
+const TIMEOUT = 5000;
 let config = null;
 
 // INTERNAL FUNCTIONS

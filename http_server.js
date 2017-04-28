@@ -1,5 +1,4 @@
 /* this file is being used to serve the files from /dist folder. It is being used by heroku */
-const port = process.env.PORT || 8080;
 
 const express = require('express');
 const cors = require('cors');
@@ -10,6 +9,7 @@ const compression = require('compression');
 // let basic = auth.basic({realm: 'Project OIL'}, (username, password, callback) => callback(username === 'oil' && password === 'rig'));
 
 // Application setup.
+const port = process.argv[2] || process.env.PORT || 8080;
 let CACHE_DURATION = 0;
 let DOCUMENT_ROOT = __dirname + '/dist';
 let corsOptions = {
@@ -17,14 +17,15 @@ let corsOptions = {
   'preflightContinue': false,
   'optionsSuccessStatus': 204,
   'allowedHeaders': ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
-}
+};
+
 /*
  * start server
  */
 let app = express();
 
 // CORS
-app.options(corsOptions, cors()) // include before other routes
+app.options(corsOptions, cors()); // include before other routes
 
 // server gzip
 app.use(compression());

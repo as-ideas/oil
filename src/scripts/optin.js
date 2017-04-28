@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
 import { activateGlobalOptIn, verifyGlobalOptIn } from './goi.js';
-import { logDebug } from './log.js';
+import { logDebug, logInfo } from './log.js';
 import { isCookie, isCookieValid, extend } from './utils.js';
 
 // Our cookie default settings
@@ -55,7 +55,7 @@ export function checkOptIn() {
         }
         resolve(cookieData);
       });
-    }, 500);
+    }, 5000);
   });
 }
 
