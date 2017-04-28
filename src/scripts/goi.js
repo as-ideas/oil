@@ -95,6 +95,6 @@ export function activateGlobalOptIn() {
   init();
   return new Promise((resolve) => setTimeout(() => { // defer post to next tick
     sendEventToFrame('oil-goi-activate', location.origin);
-    setTimeout(() => readConfigFromFrame().then(resolve));  // defer until read works
+    setTimeout(() => readConfigFromFrame(location.origin).then(resolve));  // defer until read works
   }, TIMEOUT / 3));
 }
