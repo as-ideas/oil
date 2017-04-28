@@ -14,12 +14,12 @@ function init() {
   if (!config) {
     config = getConfiguration();
   }
-  if (config && config.sso_iframe_src) {
+  if (config && config.hub_src_url) {
     // setup iframe
-    let iframeUrl = config.sso_iframe_src;
+    let iframeUrl = config.hub_src_url;
     return addFrame(iframeUrl);
   } else {
-    logDebug('Config for sso_iframe_src isnt set. No GOI possible.');
+    logDebug('Config for hub_src_url isnt set. No GOI possible.');
     return null;
   }
 }
@@ -50,7 +50,7 @@ function readConfigFromFrame(origin) {
     // Listen to message from child window
     eventer(messageEvent, (event) => {
       // only listen to our hub
-      if (config && config.sso_iframe_src && config.sso_iframe_src.indexOf(event.origin) !== -1) {
+      if (config && config.hub_src_url && config.hub_src_url.indexOf(event.origin) !== -1) {
         resolve(event.data);
       }
     }, false);

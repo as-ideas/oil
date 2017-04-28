@@ -3,7 +3,7 @@ import { logInfo, logError } from './log';
 
 const defaultConfig = {
   opt_in_event_name: 'oil_optin_done',
-  sso_iframe_src: null
+  hub_src_url: null
 };
 
 /**
