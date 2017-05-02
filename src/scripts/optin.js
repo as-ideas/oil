@@ -55,7 +55,7 @@ export function checkOptIn() {
         }
         resolve(cookieData);
       });
-    }, 5000);
+    }, 500);
   });
 }
 
