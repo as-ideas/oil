@@ -6,7 +6,9 @@ export function initLogging() {
 }
 
 export function logInfo() {
+  if (!isProd()) {
     console.log(console, arguments);
+  }
 }
 
 export function logError() {
