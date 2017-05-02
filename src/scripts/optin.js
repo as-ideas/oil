@@ -49,7 +49,7 @@ export function checkOptIn() {
     // verify Global Opt In
     setTimeout(() => {
       verifyGlobalOptIn().then((optIn) => {
-        logDebug('Got following GOI value', optIn);
+        logDebug('Got following POI value', optIn);
         if (optIn) {
           cookieData.optin = optIn;
         }
