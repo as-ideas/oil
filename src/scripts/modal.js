@@ -15,7 +15,7 @@ export function defineOilContent() {
       <p class="oil__intro-text">
         Hi, this is a little intro text.
       </p>
-      <button class="oil__button oil__button--primary js-optin-goi" data-qa="oil-goi-YesButton">
+      <button class="oil__button oil__button--primary js-optin-goi" data-qa="oil-poi-YesButton">
         Yes, I want GOI!
       </button>
       <button class="oil__button oil__button--primary js-optin" data-qa="oil-YesButton">

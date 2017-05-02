@@ -1,7 +1,10 @@
 const OIL_LAYER = '//*[@data-qa="oil-Layer"]';
-const OIL_YES_GOI_BUTTON = '//*[@data-qa="oil-goi-YesButton"]';
+const OIL_YES_GOI_BUTTON = '//*[@data-qa="oil-poi-YesButton"]';
 const OIL_YES_BUTTON = '//*[@data-qa="oil-YesButton"]';
 const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
+
+const ASSERT_TIMEOUT = 2000;
+
 
 module.exports = {
   beforeEach: browser => {
@@ -13,18 +16,18 @@ module.exports = {
       .deleteCookies()
       .url(browser.globals.launch_url_host1 + "demos/complete-integration-site-a.html")
       .useCss()
-      .waitForElementVisible('body', 10000, false)
+      .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 10000, false)
+      .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
       .click(OIL_YES_GOI_BUTTON)
-      .waitForElementNotVisible(OIL_LAYER, 1000, false)
+      .waitForElementNotVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
       .assert.cssClassPresent(OIL_LAYER, "optin-true")
       .url(browser.globals.launch_url_host2 + "demos/complete-integration-site-b.html")
       .useCss()
-      .waitForElementVisible('body', 10000, false)
+      .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
-      .pause(2000)
-      .waitForElementNotPresent(OIL_LAYER, 10000)
+      .pause(ASSERT_TIMEOUT)
+      .waitForElementNotPresent(OIL_LAYER, 500)
       .end();
   },
   'OIL Layer Global local yes is working across two domains' : function (browser) {
@@ -33,17 +36,17 @@ module.exports = {
       .deleteCookies()
       .url(browser.globals.launch_url_host1 + "demos/complete-integration-site-a.html")
       .useCss()
-      .waitForElementVisible('body', 10000, false)
+      .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 10000, false)
+      .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
       .click(OIL_YES_BUTTON)
-      .waitForElementNotVisible(OIL_LAYER, 10000, false)
+      .waitForElementNotVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
       .assert.cssClassPresent(OIL_LAYER, "optin-true")
       .url(browser.globals.launch_url_host2 + "demos/complete-integration-site-b.html")
       .useCss()
-      .waitForElementVisible('body', 10000, false)
+      .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 10000, false)
+      .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
       .assert.cssClassPresent(OIL_LAYER, "optin-false")
       .assert.cssClassPresent(OIL_LAYER, "expanded-true")
       .end();
@@ -54,18 +57,18 @@ module.exports = {
       .deleteCookies()
       .url(browser.globals.launch_url_host1 + "demos/complete-integration-site-a.html")
       .useCss()
-      .waitForElementVisible('body', 10000, false)
+      .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 10000, false)
+      .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
       .click(OIL_NO_BUTTON)
-      .waitForElementVisible(OIL_LAYER, 10000, false)
+      .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
       .assert.cssClassPresent(OIL_LAYER, "optin-false")
       .assert.cssClassPresent(OIL_LAYER, "expanded-false")
       .url(browser.globals.launch_url_host2 + "demos/complete-integration-site-b.html")
       .useCss()
-      .waitForElementVisible('body', 10000, false)
+      .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 10000, false)
+      .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
       .assert.cssClassPresent(OIL_LAYER, "optin-false")
       .assert.cssClassPresent(OIL_LAYER, "expanded-true")
       .end();
