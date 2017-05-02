@@ -17,12 +17,13 @@ module.exports = {
       .useXpath()
       .waitForElementVisible(OIL_LAYER, 10000, false)
       .click(OIL_YES_GOI_BUTTON)
-      .waitForElementNotVisible(OIL_LAYER, 10000, false)
+      .waitForElementNotVisible(OIL_LAYER, 1000, false)
       .assert.cssClassPresent(OIL_LAYER, "optin-true")
       .url(browser.globals.launch_url_host2 + "demos/complete-integration-site-b.html")
       .useCss()
       .waitForElementVisible('body', 10000, false)
       .useXpath()
+      .pause(2000)
       .waitForElementNotPresent(OIL_LAYER, 10000)
       .end();
   },

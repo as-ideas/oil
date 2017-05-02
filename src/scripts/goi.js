@@ -1,7 +1,7 @@
 import { OIL_CONFIG } from './constants.js';
 import { getConfiguration } from './config.js';
 import { addFrame } from './iframe.js';
-import { eventer, messageEvent } from './utils.js';
+import { getOrigin, eventer, messageEvent } from './utils.js';
 import { logDebug } from './log.js';
 
 // Timeout after which promises should return
@@ -15,12 +15,12 @@ function init() {
   if (!config) {
     config = getConfiguration();
   }
-  if (config && config[OIL_CONFIG.ATTR_HUB_URL]) {
+  if (config && config[OIL_CONFIG.ATTR_HUB_PATH] && config[OIL_CONFIG.ATTR_HUB_ORIGIN]) {
     // setup iframe
-    let iframeUrl = config[OIL_CONFIG.ATTR_HUB_URL];
+    let iframeUrl = config[OIL_CONFIG.ATTR_HUB_ORIGIN] + config[OIL_CONFIG.ATTR_HUB_PATH];
     return addFrame(iframeUrl);
   } else {
-    logDebug(`Config for ${OIL_CONFIG.ATTR_HUB_URL} isnt set. No GOI possible.`);
+    logDebug(`Config for ${OIL_CONFIG.ATTR_HUB_ORIGIN} and ${OIL_CONFIG.ATTR_HUB_PATH} isnt set. No GOI possible.`);
     return null;
   }
 }
@@ -33,14 +33,13 @@ function init() {
 function sendEventToFrame(eventName, origin) {
   let iframe = init();
   if (iframe) {
-    // FIXME Add cross origin here !!
     // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
-    iframe.contentWindow.postMessage({ event: eventName, origin: origin }, '*');
+    iframe.contentWindow.postMessage({ event: eventName, origin: origin }, config[OIL_CONFIG.ATTR_HUB_ORIGIN]);
   }
 }
 /**
  * Read configuration from hidden iframe
- * @param origin - orgin url (aka parent)
+ * @param origin - origin url (aka parent)
  * @function
  * @return promise with result of the
  */
@@ -51,13 +50,14 @@ function readConfigFromFrame(origin) {
     // Listen to message from child window
     eventer(messageEvent, (event) => {
       // only listen to our hub
-      if (config && config[OIL_CONFIG.ATTR_HUB_URL] && config[OIL_CONFIG.ATTR_HUB_URL].indexOf(event.origin) !== -1) {
+      if (config && config[OIL_CONFIG.ATTR_HUB_ORIGIN] && config[OIL_CONFIG.ATTR_HUB_ORIGIN].indexOf(event.origin) !== -1) {
+        logDebug('Message from hub received...');
         resolve(event.data);
       }
     }, false);
     // add timeout for config read
     setTimeout(() => {
-      logDebug('Read config timed out');
+      // logDebug('Read config timed out');
       resolve(false);
     }, TIMEOUT);
   });
@@ -76,10 +76,10 @@ export function verifyGlobalOptIn() {
     if (iframe) {
       if (!iframe.onload) {
         // Listen to message from child window after iFrame load
-        iframe.onload = () => readConfigFromFrame(location.origin).then((data) => resolve(data));
+        iframe.onload = () => readConfigFromFrame(getOrigin()).then((data) => resolve(data));
       } else {
         // if already loaded directly invoke
-        readConfigFromFrame(location.origin).then((data) => resolve(data));
+        readConfigFromFrame(getOrigin()).then((data) => resolve(data));
       }
     } else {
       logDebug('Couldnt initialize GOI. Fallback to goi false.');
@@ -95,7 +95,7 @@ export function verifyGlobalOptIn() {
 export function activateGlobalOptIn() {
   init();
   return new Promise((resolve) => setTimeout(() => { // defer post to next tick
-    sendEventToFrame('oil-goi-activate', location.origin);
-    setTimeout(() => readConfigFromFrame(location.origin).then(resolve));  // defer until read works
+    sendEventToFrame('oil-goi-activate', getOrigin());
+    setTimeout(() => readConfigFromFrame(getOrigin()).then(resolve));  // defer until read works
   }, TIMEOUT / 3));
 }

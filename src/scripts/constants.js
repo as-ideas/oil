@@ -4,5 +4,6 @@ export const OIL_COOKIE = {
 }
 
 export const OIL_CONFIG = {
-  ATTR_HUB_URL: 'hub_src_url'
+  ATTR_HUB_ORIGIN: 'hub_origin',
+  ATTR_HUB_PATH: 'hub_path'
 }

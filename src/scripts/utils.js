@@ -116,6 +116,18 @@ export function cookieDataHasKeys(name, data) {
   return false
 }
 
+/**
+ * Robust util function to get the origin of the current window, even if window.location.origin is undefined
+ *
+ * @returns string origin of current window
+ */
+export function getOrigin() {
+  if (!window.location.origin) {
+    window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+  }
+
+  return window.location.origin
+}
 
 /**
  * Checks if a cookie is valid and contains a data object with given keys
