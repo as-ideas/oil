@@ -47,7 +47,7 @@ export function checkOptIn() {
 
   return new Promise((resolve) => {
     // Verify Power Opt In
-    verifyGlobalOptIn().then((optIn) => {
+    verifyPowerOptIn().then((optIn) => {
       logDebug('Got following POI value', optIn);
       if (optIn) {
         cookieData.optin = optIn;
