@@ -11,14 +11,17 @@ module.exports = {
     // wait for site hosts
     browser
       .url(browser.globals.launch_url_host1)
-      .waitForElementVisible('body', ASSERT_TIMEOUT, false);
+      .useCss()
+      .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
     browser
       .url(browser.globals.launch_url_host2)
-      .waitForElementVisible('body', ASSERT_TIMEOUT, false);
+      .useCss()
+      .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
     // wait for init of fake "CDN"
     browser
       .url(browser.globals.launch_url_cdn)
-      .waitForElementVisible('body', ASSERT_TIMEOUT, false);
+      .useCss()
+      .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
   },
 
   'OIL Layer Power Opt-In is working across two domains': function (browser) {
