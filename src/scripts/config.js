@@ -1,3 +1,4 @@
+import { OIL_CONFIG } from './constants.js';
 import { extend } from "./utils";
 import { logInfo, logError } from './log';
 
@@ -23,6 +24,18 @@ export function mergeOptions(options, defaults) {
   let merged = extend(true, {}, defaults, options);
   logInfo('Got the following merged config', merged);
   return merged;
+}
+
+/**
+ *
+ * Get the hub iFrame URL with protocol prefix for the current location
+ * @returns {string} complete iframe orgin
+ */
+export function getHubOrigin() {
+  let config = getConfiguration(),
+    hubHost = config[OIL_CONFIG.ATTR_HUB_ORIGIN].indexOf('http') !== -1 ? config[OIL_CONFIG.ATTR_HUB_ORIGIN] : location.protocol + config[OIL_CONFIG.ATTR_HUB_ORIGIN],
+    hubPath = config[OIL_CONFIG.ATTR_HUB_PATH];
+  return hubHost + hubPath;
 }
 
 /**
