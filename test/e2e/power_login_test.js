@@ -4,12 +4,24 @@ const OIL_YES_BUTTON = '//*[@data-qa="oil-YesButton"]';
 const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
 
 const ASSERT_TIMEOUT = 2000;
+const PAGE_INIT_TIMEOUT = 20000;
 
 module.exports = {
   beforeEach: browser => {
+    // wait for site hosts
+    browser
+      .url(browser.globals.launch_url_host1)
+      .waitForElementVisible('body', ASSERT_TIMEOUT, false);
+    browser
+      .url(browser.globals.launch_url_host2)
+      .waitForElementVisible('body', ASSERT_TIMEOUT, false);
+    // wait for init of fake "CDN"
+    browser
+      .url(browser.globals.launch_url_cdn)
+      .waitForElementVisible('body', ASSERT_TIMEOUT, false);
   },
 
-  'OIL Layer Power Opt-In is working across two domains' : function (browser) {
+  'OIL Layer Power Opt-In is working across two domains': function (browser) {
     browser
       .url(browser.globals.launch_url_host1 + "demos/complete-integration-site-a.html")
       .deleteCookies()
@@ -29,7 +41,7 @@ module.exports = {
       .waitForElementNotPresent(OIL_LAYER, 500)
       .end();
   },
-  'OIL Layer Power local yes is working across two domains' : function (browser) {
+  'OIL Layer Power local yes is working across two domains': function (browser) {
     browser
       .url(browser.globals.launch_url_host1 + "demos/complete-integration-site-a.html")
       .deleteCookies()
@@ -50,7 +62,7 @@ module.exports = {
       .assert.cssClassPresent(OIL_LAYER, "expanded-true")
       .end();
   },
-  'OIL Layer Power not now is working across two domains' : function (browser) {
+  'OIL Layer Power not now is working across two domains': function (browser) {
     browser
       .url(browser.globals.launch_url_host1 + "demos/complete-integration-site-a.html")
       .deleteCookies()
