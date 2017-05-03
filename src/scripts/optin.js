@@ -47,15 +47,13 @@ export function checkOptIn() {
 
   return new Promise((resolve) => {
     // verify Global Opt In
-    setTimeout(() => {
-      verifyGlobalOptIn().then((optIn) => {
-        logDebug('Got following POI value', optIn);
-        if (optIn) {
-          cookieData.optin = optIn;
-        }
-        resolve(cookieData);
-      });
-    }, 500);
+    verifyGlobalOptIn().then((optIn) => {
+      logDebug('Got following POI value', optIn);
+      if (optIn) {
+        cookieData.optin = optIn;
+      }
+      resolve(cookieData);
+    });
   });
 }
 
