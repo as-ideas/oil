@@ -49,17 +49,7 @@ when your infrastructure is more complex.
 
 === Infrastructure Level 1
 
-[role="arc42help"]
-****
-Describe (usually in a combination of diagrams, tables, and text):
-
-*  the distribution of your system to multiple locations, environments, computers, processors, .. as well as the physical connections between them
-*  important justification or motivation for this deployment structure
-* Quality and/or performance features of the infrastructure
-*  the mapping of software artifacts to elements of the infrastructure
-
-For multiple environments or alternative deployments please copy that section of arc42 for all relevant environments.
-****
+Your website which is using OIL should support CORS from the hub domain and include it via HTTPS.
 
 === Tealium Deployment
 For our PoC we decided to use Tealium to deliver our Javascript artefact to client browsers. To achieve this you have to follow some steps:
@@ -71,7 +61,7 @@ As a developer of Oil.js (see image below)
 * Some forms will show up, paste your code in the "configuration" section
 * Save and Publish your Tealium configuration changes in your desired stages (Dev, QA, Prod)
 
-Please note that once published, your code will be delivered to all Tealium clients automagically. 
+Please note that once published, your code will be delivered to all Tealium clients automagically.
 Tealium clients will be informed of your changes and need to publish/deploy their profile to activate your changes.
 
 [caption="Oil.js Tealium Deployment"]
