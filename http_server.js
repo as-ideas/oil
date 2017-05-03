@@ -14,6 +14,7 @@ let CACHE_DURATION = 0;
 let DOCUMENT_ROOT = __dirname + '/dist';
 let corsOptions = {
   'origin': '*',
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   'preflightContinue': false,
   'optionsSuccessStatus': 204,
   'allowedHeaders': ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
