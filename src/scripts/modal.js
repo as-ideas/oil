@@ -1,6 +1,6 @@
 import "../styles/modal.scss";
 import { isDOMElement, addClickHandler } from './utils.js';
-import { getOilCookie, oilOptIn, oilGlobalOptIn,  oilOptLater } from "./optin.js";
+import { getOilCookie, oilOptIn, oilPowerOptIn,  oilOptLater } from "./optin.js";
 
 
 /**
@@ -15,8 +15,8 @@ export function defineOilContent() {
       <p class="oil__intro-text">
         Hi, this is a little intro text.
       </p>
-      <button class="oil__button oil__button--primary js-optin-goi" data-qa="oil-poi-YesButton">
-        Yes, I want GOI!
+      <button class="oil__button oil__button--primary js-optin-poi" data-qa="oil-poi-YesButton">
+        Yes, I want POI!
       </button>
       <button class="oil__button oil__button--primary js-optin" data-qa="oil-YesButton">
         Yes, I want!
@@ -59,10 +59,10 @@ export function injectOil(entryPoint) {
  * Update Oil overlay class names
  */
 export function updateOilOverlay(dataObj) {
-  let oilOverlay = document.getElementsByClassName('oil')[0]
+  let oilOverlay = document.getElementsByClassName('oil')[0];
 
   // Reset CSS class to Oil base class
-  oilOverlay.setAttribute('class', 'oil')
+  oilOverlay.setAttribute('class', 'oil');
 
   // Add classes from data object
   oilOverlay.setAttribute('class', `oil optin-${dataObj.optin} expanded-${dataObj.expanded}`);
@@ -74,9 +74,9 @@ export function updateOilOverlay(dataObj) {
  */
 export function addOilClickHandler() {
   let btnOptIn = document.getElementsByClassName('js-optin')[0],
-    btnGoiOptIn = document.getElementsByClassName('js-optin-goi')[0],
+    btnPoiOptIn = document.getElementsByClassName('js-optin-poi')[0],
     btnOptLater = document.getElementsByClassName('js-optlater')[0];
   addClickHandler(btnOptIn, () => oilOptIn().then((cookieData) => updateOilOverlay(cookieData)));
-  addClickHandler(btnGoiOptIn, () => oilGlobalOptIn(false).then((cookieData) => updateOilOverlay(cookieData)));
+  addClickHandler(btnPoiOptIn, () => oilPowerOptIn(false).then((cookieData) => updateOilOverlay(cookieData)));
   addClickHandler(btnOptLater, () => oilOptLater().then((cookieData) => updateOilOverlay(cookieData)));
 }

@@ -11,7 +11,7 @@ describe('iframe.listener', () => {
   });
 
   it('should write cookie', (done) => {
-    postMessage({ event: 'oil-goi-activate' }, '*');
+    postMessage({ event: 'oil-poi-activate' }, '*');
     setTimeout(() => {
       let cookie = Cookie.getJSON(OIL_COOKIE.NAME);
       expect(cookie).toBeDefined();

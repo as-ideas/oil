@@ -1,7 +1,7 @@
-import { activateGlobalOptIn, verifyGlobalOptIn } from "../../src/scripts/goi";
+import { activatePowerOptIn, verifyPowerOptIn } from "../../src/scripts/poi";
 import { loadFixture, deleteAllCookies } from "../utils";
 
-describe('goi', () => {
+describe('poi', () => {
 
   let originalTimeout;
 
@@ -15,31 +15,31 @@ describe('goi', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
-  it('should disable GOI by default', (done) => {
-    loadFixture('goi/goi.config-error.html');
+  it('should disable POI by default', (done) => {
+    loadFixture('poi/poi.config-error.html');
 
-    activateGlobalOptIn().then(
-      verifyGlobalOptIn().then((optin) => {
+    activatePowerOptIn().then(
+      verifyPowerOptIn().then((optin) => {
         expect(optin).toBe(false);
         done();
       })
     );
   });
 
-  it('should disable GOI on config error', (done) => {
-    loadFixture('goi/goi.wrong-iframe.html');
-    activateGlobalOptIn().then(
-      verifyGlobalOptIn().then((optin) => {
+  it('should disable POI on config error', (done) => {
+    loadFixture('poi/poi.wrong-iframe.html');
+    activatePowerOptIn().then(
+      verifyPowerOptIn().then((optin) => {
         expect(optin).toBe(false);
         done();
       })
     );
   });
 
-  it('should activate GOI', (done) => {
-    loadFixture('goi/goi.default.html');
-    activateGlobalOptIn().then(
-      verifyGlobalOptIn().then((optin) => {
+  it('should activate POI', (done) => {
+    loadFixture('poi/poi.default.html');
+    activatePowerOptIn().then(
+      verifyPowerOptIn().then((optin) => {
         expect(optin).toBeDefined();
         // FIXME phantomjs
         // expect(optin).toBe(true);

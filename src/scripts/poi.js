@@ -20,7 +20,7 @@ function init() {
     let iframeUrl = config[OIL_CONFIG.ATTR_HUB_ORIGIN] + config[OIL_CONFIG.ATTR_HUB_PATH];
     return addFrame(iframeUrl);
   } else {
-    logDebug(`Config for ${OIL_CONFIG.ATTR_HUB_ORIGIN} and ${OIL_CONFIG.ATTR_HUB_PATH} isnt set. No GOI possible.`);
+    logDebug(`Config for ${OIL_CONFIG.ATTR_HUB_ORIGIN} and ${OIL_CONFIG.ATTR_HUB_PATH} isnt set. No POI possible.`);
     return null;
   }
 }
@@ -66,11 +66,11 @@ function readConfigFromFrame(origin) {
 // PUBLIC API
 
 /**
- * Read config for Global Opt IN from hidden iframe
+ * Read config for Power Opt IN from hidden iframe
  * @function
- * @return promise with result (is true if GOI ist set, otherwise false)
+ * @return promise with result (is true if POI ist set, otherwise false)
  */
-export function verifyGlobalOptIn() {
+export function verifyPowerOptIn() {
   return new Promise((resolve) => {
     let iframe = init();
     if (iframe) {
@@ -82,20 +82,20 @@ export function verifyGlobalOptIn() {
         readConfigFromFrame(getOrigin()).then((data) => resolve(data));
       }
     } else {
-      logDebug('Couldnt initialize GOI. Fallback to goi false.');
+      logDebug('Couldnt initialize POI. Fallback to POI false.');
       resolve(false);
     }
   });
 }
 /**
- * Activate Global Opt IN
+ * Activate Power Opt IN
  * @function
  * @return promise when done
  */
-export function activateGlobalOptIn() {
+export function activatePowerOptIn() {
   init();
   return new Promise((resolve) => setTimeout(() => { // defer post to next tick
-    sendEventToFrame('oil-goi-activate', getOrigin());
+    sendEventToFrame('oil-poi-activate', getOrigin());
     setTimeout(() => readConfigFromFrame(getOrigin()).then(resolve));  // defer until read works
   }, TIMEOUT / 3));
 }

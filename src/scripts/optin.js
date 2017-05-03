@@ -1,5 +1,5 @@
 import Cookie from 'js-cookie';
-import { activateGlobalOptIn, verifyGlobalOptIn } from './goi.js';
+import { activatePowerOptIn, verifyPowerOptIn } from './poi.js';
 import { logDebug } from './log.js';
 import { isCookie, isCookieValid, extend } from './utils.js';
 
@@ -46,9 +46,9 @@ export function checkOptIn() {
   let cookieData = getOilCookie();
 
   return new Promise((resolve) => {
-    // verify Global Opt In
+    // verify Power Opt In
     setTimeout(() => {
-      verifyGlobalOptIn().then((optIn) => {
+      verifyPowerOptIn().then((optIn) => {
         logDebug('Got following POI value', optIn);
         if (optIn) {
           cookieData.optin = optIn;
@@ -61,24 +61,24 @@ export function checkOptIn() {
 
 
 /**
- * Oil optIn global
- * @param globalOnly - only set Global Opt In (GOI), no local site cookie (SOI)
+ * Oil optIn power
+ * @param powerOnly - only set Power Opt In (POI), no local site cookie (SOI)
  * @return promise with updated cookie value
  */
-export function oilGlobalOptIn(globalOnly = true) {
+export function oilPowerOptIn(powerOnly = true) {
   // Cookies could have been deleted after page loads, therefore we check and validate our cookie here again
   validateOilCookie();
 
   let cookieData = getOilCookie();
   let newCookieData = extend(true, {}, cookieData, { optin: true });
 
-  if (!globalOnly) {
+  if (!powerOnly) {
     // Update Oil cookie (site - SOI)
     Cookie.set(oilCookie.name, newCookieData, { expires: oilCookie.expires });
   }
 
-  // Update Oil cookie (mypass - GOI)
-  activateGlobalOptIn();
+  // Update Oil cookie (mypass - POI)
+  activatePowerOptIn();
   return new Promise((resolve) => {
     resolve(newCookieData);
   });

@@ -1,6 +1,6 @@
 export const OIL_COOKIE = {
   NAME: 'oil_data',
-  ATTR_GOI: 'global_opt_in'
+  ATTR_POI: 'power_opt_in'
 }
 
 export const OIL_CONFIG = {
