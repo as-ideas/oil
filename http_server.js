@@ -1,7 +1,6 @@
 /* this file is being used to serve the files from /dist folder. It is being used by heroku */
 
 const express = require('express');
-const cors = require('cors');
 const serveStatic = require('serve-static');
 const compression = require('compression');
 // const auth = require('http-auth');
@@ -12,12 +11,19 @@ const compression = require('compression');
 const port = process.argv[2] || process.env.PORT || 8080;
 let CACHE_DURATION = 0;
 let DOCUMENT_ROOT = __dirname + '/dist';
-let corsOptions = {
-  'origin': '*',
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  'preflightContinue': false,
-  'optionsSuccessStatus': 204,
-  'allowedHeaders': ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
+
+let allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Accept, Origin, Content-Type, Authorization, Content-Length, X-Requested-With');
+
+  // intercept OPTIONS method
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  }
+  else {
+    next();
+  }
 };
 
 /*
@@ -26,7 +32,7 @@ let corsOptions = {
 let app = express();
 
 // CORS
-app.options(corsOptions, cors()); // include before other routes
+app.use(allowCrossDomain);
 
 // server gzip
 app.use(compression());
