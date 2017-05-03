@@ -4,6 +4,7 @@ import { logInfo, logError } from './log';
 // TODO move to config
 const defaultConfig = {
   opt_in_event_name: 'oil_optin_done',
+  subscriber_set_cookie: false,
   hub_src_url: null
 };
 

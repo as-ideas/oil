@@ -44,4 +44,4 @@ app.use(compression());
 app.use(serveStatic(DOCUMENT_ROOT, { maxAge: CACHE_DURATION, cacheControl: true }));
 
 console.log('server is now starting on port ', port);
-app.listen(port);
+app.listen(port,'0.0.0.0');

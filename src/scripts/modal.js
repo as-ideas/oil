@@ -1,4 +1,6 @@
 import "../styles/modal.scss";
+import { getConfiguration } from './config.js';
+import { OIL_CONFIG } from './constants.js';
 import { isDOMElement, addClickHandler } from './utils.js';
 import { getOilCookie, oilOptIn, oilPowerOptIn,  oilOptLater } from "./optin.js";
 
@@ -73,10 +75,11 @@ export function updateOilOverlay(dataObj) {
  * Add click handler
  */
 export function addOilClickHandler() {
-  let btnOptIn = document.getElementsByClassName('js-optin')[0],
+  let  config = getConfiguration(),
+  btnOptIn = document.getElementsByClassName('js-optin')[0],
     btnPoiOptIn = document.getElementsByClassName('js-optin-poi')[0],
     btnOptLater = document.getElementsByClassName('js-optlater')[0];
   addClickHandler(btnOptIn, () => oilOptIn().then((cookieData) => updateOilOverlay(cookieData)));
-  addClickHandler(btnPoiOptIn, () => oilPowerOptIn(false).then((cookieData) => updateOilOverlay(cookieData)));
+  addClickHandler(btnPoiOptIn, () => oilPowerOptIn(!config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then((cookieData) => updateOilOverlay(cookieData)));
   addClickHandler(btnOptLater, () => oilOptLater().then((cookieData) => updateOilOverlay(cookieData)));
 }

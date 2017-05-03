@@ -39,6 +39,26 @@ module.exports = {
     template: path.resolve(sourcePath, 'demos', 'complete-integration-mypass.html'),
     chunks: ['demos/complete-integration-mypass'],
     chunksSortMode: 'dependency'
+  }, {
+    filename: 'end2end-tests/direct-integration.html',
+    template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration.html'),
+    chunks: ['end2end-tests/direct-integration'],
+    chunksSortMode: 'dependency'
+  }, {
+    filename: 'end2end-tests/complete-integration-mypass.html',
+    template: path.resolve(sourcePath, 'end2end-tests', 'complete-integration-mypass.html'),
+    chunks: ['end2end-tests/complete-integration-mypass'],
+    chunksSortMode: 'dependency'
+  }, {
+    filename: 'end2end-tests/complete-integration-site-a.html',
+    template: path.resolve(sourcePath, 'end2end-tests', 'complete-integration-site-a.html'),
+    chunks: ['end2end-tests/complete-integration-site-a'],
+    chunksSortMode: 'dependency'
+  }, {
+    filename: 'end2end-tests/complete-integration-site-b.html',
+    template: path.resolve(sourcePath, 'end2end-tests', 'complete-integration-site-b.html'),
+    chunks: ['end2end-tests/complete-integration-site-b'],
+    chunksSortMode: 'dependency'
   }],
   entry: {
     'oil': path.resolve(sourcePath, 'oil.js'),
@@ -48,6 +68,10 @@ module.exports = {
     'demos/complete-integration-site-a': path.resolve(sourcePath, 'subscriber.js'),
     'demos/complete-integration-site-b': path.resolve(sourcePath, 'subscriber.js'),
     'demos/complete-integration-mypass': path.resolve(sourcePath, 'hub.js'),
+    'end2end-tests/direct-integration': path.resolve(sourcePath, 'subscriber.js'),
+    'end2end-tests/complete-integration-site-a': path.resolve(sourcePath, 'subscriber.js'),
+    'end2end-tests/complete-integration-site-b': path.resolve(sourcePath, 'subscriber.js'),
+    'end2end-tests/complete-integration-mypass': path.resolve(sourcePath, 'hub.js'),
   },
   copy: [{
     from: path.resolve(sourcePath, 'assets'),
