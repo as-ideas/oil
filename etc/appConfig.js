@@ -45,9 +45,9 @@ module.exports = {
     'hub': path.resolve(sourcePath, 'hub.js'),
     'subscriber': path.resolve(sourcePath, 'subscriber.js'),
     'demos/direct-integration': path.resolve(sourcePath, 'demos/direct-integration.js'),
-    'demos/complete-integration-site-a': path.resolve(sourcePath, 'demos/complete-integration-site-a.js'),
-    'demos/complete-integration-site-b': path.resolve(sourcePath, 'demos/complete-integration-site-b.js'),
-    'demos/complete-integration-mypass': path.resolve(sourcePath, 'demos/complete-integration-mypass.js')
+    'demos/complete-integration-site-a': path.resolve(sourcePath, 'subscriber.js'),
+    'demos/complete-integration-site-b': path.resolve(sourcePath, 'subscriber.js'),
+    'demos/complete-integration-mypass': path.resolve(sourcePath, 'hub.js'),
   },
   copy: [{
     from: path.resolve(sourcePath, 'assets'),
