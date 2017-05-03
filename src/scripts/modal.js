@@ -77,6 +77,6 @@ export function addOilClickHandler() {
     btnPoiOptIn = document.getElementsByClassName('js-optin-poi')[0],
     btnOptLater = document.getElementsByClassName('js-optlater')[0];
   addClickHandler(btnOptIn, () => oilOptIn().then((cookieData) => updateOilOverlay(cookieData)));
-  addClickHandler(btnGoiOptIn, () => oilGlobalOptIn(true).then((cookieData) => updateOilOverlay(cookieData)));
+  addClickHandler(btnPoiOptIn, () => oilPowerOptIn(true).then((cookieData) => updateOilOverlay(cookieData)));
   addClickHandler(btnOptLater, () => oilOptLater().then((cookieData) => updateOilOverlay(cookieData)));
 }
