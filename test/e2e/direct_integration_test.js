@@ -3,6 +3,8 @@ const OIL_YES_BUTTON = '//*[@data-qa="oil-YesButton"]';
 const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
 
 module.exports = {
+  '@disable': true,
+
   beforeEach: browser => {
      browser
       .url(browser.globals.launch_url_host1 + "demos/direct-integration.html")
