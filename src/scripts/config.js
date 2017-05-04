@@ -30,7 +30,7 @@ export function mergeOptions(options, defaults) {
 /**
  *
  * Get the hub iFrame domain with protocol prefix for the current location
- * @returns {string} domain iframe orgin
+ * @returns {string, null} domain iframe orgin
  */
 export function getHubDomain() {
   let config = getConfiguration();
