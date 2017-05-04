@@ -1,12 +1,13 @@
 import { OIL_CONFIG } from './constants.js';
 import { getConfiguration } from './config.js';
 import { addFrame } from './iframe.js';
-import { getOrigin, eventer, messageEvent } from './utils.js';
+import { getOrigin, registerMessageListener, removeMessageListener } from './utils.js';
 import { logDebug, logError } from './log.js';
 
 // Timeout after which promises should return
 const TIMEOUT = 500;
-let config = null;
+let config = null,
+  frameListenerRegistered = false;
 
 // INTERNAL FUNCTIONS
 
@@ -29,10 +30,10 @@ function init() {
         let iframe = addFrame(hubLocation);
         if (iframe && !iframe.onload) {
           // Listen to message from child window after iFrame load
-          iframe.onload = () => readConfigFromFrame(getOrigin()).then((data) => resolve({ iframe: iframe, config: data }));
+          iframe.onload = () => resolve({ iframe: iframe, config: config });
         } else {
           // if already loaded directly invoke
-          readConfigFromFrame(getOrigin()).then((data) => resolve({ iframe: iframe, config: data }));
+          resolve({ iframe: iframe, config: config });
         }
       } else {
         logError(`Config for ${OIL_CONFIG.ATTR_HUB_ORIGIN} and ${OIL_CONFIG.ATTR_HUB_PATH} isnt set. No POI possible.`);
@@ -40,6 +41,7 @@ function init() {
       }
     } else {
       logError('Empty Config');
+      resolve({});
     }
   }));
 }
@@ -68,19 +70,29 @@ function sendEventToFrame(eventName, origin) {
  */
 function readConfigFromFrame(origin) {
   return new Promise((resolve) => {
-    // defer post to next tick
-    setTimeout(() => sendEventToFrame('oil-config-read', origin));
-    // Listen to message from child window
-    eventer(messageEvent, (event) => {
+    function handler(event) {
       // only listen to our hub
       let hubOrigin = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
       if (config && hubOrigin && hubOrigin.indexOf(event.origin) !== -1) {
         logDebug('Message from hub received...');
+        removeMessageListener(handler);
+        //frameListenerRegistered = false;
         resolve(event.data);
       }
-    }, false);
+    }
+    // defer post to next tick
+    setTimeout(() => sendEventToFrame('oil-config-read', origin));
+    if (!frameListenerRegistered) {
+      // Listen to message from child window
+      registerMessageListener(handler);
+      frameListenerRegistered = true;
+    }
     // add timeout for config read
-    setTimeout(() => resolve(false), TIMEOUT);
+    setTimeout(() => {
+      removeMessageListener(handler);
+      frameListenerRegistered = false;
+      resolve(false);
+    }, TIMEOUT);
   });
 }
 
@@ -104,7 +116,7 @@ export function verifyPowerOptIn() {
           readConfigFromFrame(getOrigin()).then((data) => resolve(data));
         }
       } else {
-        logDebug('Couldnt initialize POI. Fallback to POI false.');
+        logDebug('Could not initialize POI. Fallback to POI false.');
         resolve(false);
       }
     });
@@ -116,10 +128,13 @@ export function verifyPowerOptIn() {
  * @return promise when done
  */
 export function activatePowerOptIn() {
-  return new Promise((resolve) => {
-    init().then(() => setTimeout(() => { // defer post to next tick
-      sendEventToFrame('oil-poi-activate', getOrigin());
-      setTimeout(() => readConfigFromFrame(getOrigin()).then(resolve));  // defer until read works
-    }));
-  });
+  // reset config
+  config = null;
+  // init iFrame first
+  return new Promise((resolve) => init().then(() => {
+    // then activate
+    sendEventToFrame('oil-poi-activate', getOrigin());
+    // defer answer to next tick
+    setTimeout(resolve);
+  }));
 }

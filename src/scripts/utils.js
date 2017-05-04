@@ -117,7 +117,7 @@ export function cookieDataHasKeys(name, data) {
  */
 export function getOrigin() {
   if (!window.location.origin) {
-    window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+    window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
   }
 
   return window.location.origin
@@ -135,5 +135,22 @@ export function isCookieValid(name, data) {
 
 // Create IE + others compatible event handler
 let eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
-export let eventer = window[eventMethod];
-export let messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+let eventRemoveMethod = window.removeEventListener ? 'removeEventListener' : 'removeEvent';
+let eventer = window[eventMethod];
+let eventerRemove = window[eventRemoveMethod];
+let messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+let messageRemoveEvent = eventRemoveMethod === 'removeEvent' ? 'onmessage' : 'message';
+/**
+ *
+ * @param {*} callback
+ */
+export function removeMessageListener(callback) {
+  eventerRemove(messageRemoveEvent, callback, false);
+}
+/**
+ *
+ * @param {*} callback
+ */
+export function registerMessageListener(callback) {
+  eventer(messageEvent, callback, false);
+}
