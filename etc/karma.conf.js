@@ -1,19 +1,21 @@
 require('babel-register');
 
-var path = require('path');
-var util = require('util');
+const path = require('path');
+const util = require('util');
 const debugLog = util.debuglog('oil-debug');
 const isDebug = false;
-var webpackConfig = require('./webpack.test.js');
+const webpackConfig = require('./webpack.test.js');
+// import CORS config
+const corsConfig = require('./corsConfig');
 
-var helpers = require('./helpers');
-var appConfig = helpers.getAppConfig();
+const helpers = require('./helpers');
+const appConfig = helpers.getAppConfig();
 
-var srcPath = appConfig.srcPath;
-var appPath = appConfig.appPath;
-var testPath = appConfig.testPath;
-var testSpecs = appConfig.testSpecs;
-var templatesPath = appConfig.templatesPath;
+const srcPath = appConfig.srcPath;
+const appPath = appConfig.appPath;
+const testPath = appConfig.testPath;
+const testSpecs = appConfig.testSpecs;
+const templatesPath = appConfig.templatesPath;
 
 const JUNIT = appConfig.junit;
 
@@ -116,6 +118,19 @@ module.exports = function (config) {
         config.preprocessors[appConfig.entry[key]] = ['webpack', 'sourcemap'];
       }
     }
+  }
+
+  config.customHeaders = [];
+  for (key in corsConfig.headers) {
+    // skip loop if the property is from prototype
+    if (!corsConfig.headers.hasOwnProperty(key)) continue;
+    // copy header config
+    let object = corsConfig.headers[key];
+    config.customHeaders.push({
+      match: '.*',
+      name: key,
+      value: object
+    });
   }
   config.files.push({ pattern: testSpecs, watched: false });
   config.preprocessors[testSpecs] = ['webpack', 'sourcemap'];
