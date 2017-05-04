@@ -12,6 +12,30 @@ const defaultConfig = {
 };
 
 /**
+ *
+ * Get the hub iFrame domain with protocol prefix for the current location
+ * @param config - current config
+ * @returns {string, null} domain iframe orgin
+ */
+function getHubDomain(config) {
+  if (config[OIL_CONFIG.ATTR_HUB_ORIGIN]) {
+    return config[OIL_CONFIG.ATTR_HUB_ORIGIN].indexOf('http') !== -1 ? config[OIL_CONFIG.ATTR_HUB_ORIGIN] : location.protocol + config[OIL_CONFIG.ATTR_HUB_ORIGIN];
+  }
+  return null;
+}
+/**
+ *
+ * Get the hub iFrame URL with protocol prefix for the current location
+ * @param config - current config
+ * @returns {string, null} complete iframe orgin
+ */
+function getHubLocation(config) {
+  if (config[OIL_CONFIG.ATTR_HUB_ORIGIN] && config[OIL_CONFIG.ATTR_HUB_PATH]) {
+    return getHubDomain() + config[OIL_CONFIG.ATTR_HUB_PATH];
+  }
+  return null;
+}
+/**
  * Merges options or the given element in the following order:
  * - the given defaults
  * - the given options
@@ -27,30 +51,6 @@ export function mergeOptions(options, defaults) {
   logInfo('Got the following merged config', merged);
   return merged;
 }
-/**
- *
- * Get the hub iFrame domain with protocol prefix for the current location
- * @returns {string, null} domain iframe orgin
- */
-export function getHubDomain() {
-  let config = getConfiguration();
-  if (config[OIL_CONFIG.ATTR_HUB_ORIGIN]) {
-    return config[OIL_CONFIG.ATTR_HUB_ORIGIN].indexOf('http') !== -1 ? config[OIL_CONFIG.ATTR_HUB_ORIGIN] : location.protocol + config[OIL_CONFIG.ATTR_HUB_ORIGIN];
-  }
-  return null;
-}
-/**
- *
- * Get the hub iFrame URL with protocol prefix for the current location
- * @returns {string, null} complete iframe orgin
- */
-export function getHubOrigin() {
-  let config = getConfiguration();
-  if (config[OIL_CONFIG.ATTR_HUB_ORIGIN] && config[OIL_CONFIG.ATTR_HUB_PATH]) {
-    return getHubDomain() + config[OIL_CONFIG.ATTR_HUB_PATH];
-  }
-  return null;
-}
 
 /**
  * Read configuration of component from JSON script block
@@ -63,6 +63,9 @@ export function readConfiguration(configuration) {
   try {
     if (configuration.text) {
       parsedConfig = JSON.parse(configuration.text);
+      // normalize path and origin with protocol prefix
+      parsedConfig[OIL_CONFIG.ATTR_HUB_ORIGIN]  = getHubDomain(parsedConfig);
+      parsedConfig[OIL_CONFIG.ATTR_HUB_LOCATION]  = getHubLocation(parsedConfig);
       logInfo('Got the following parsed config', parsedConfig);
     }
   } catch (errorDetails) {

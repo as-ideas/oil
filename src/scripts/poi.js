@@ -1,5 +1,5 @@
 import { OIL_CONFIG } from './constants.js';
-import { getConfiguration, getHubDomain, getHubOrigin } from './config.js';
+import { getConfiguration } from './config.js';
 import { addFrame } from './iframe.js';
 import { getOrigin, eventer, messageEvent } from './utils.js';
 import { logDebug } from './log.js';
@@ -22,11 +22,10 @@ function init() {
     if (!config) {
       config = getConfiguration();
     }
-    let hubOrigin = getHubOrigin();
-    if (config && hubOrigin) {
+    let hubLocation = config[OIL_CONFIG.getHubLocation];
+    if (config && hubLocation) {
       // setup iframe
-      let iframeUrl = hubOrigin;
-      let iframe = addFrame(iframeUrl);
+      let iframe = addFrame(hubLocation);
       if (!iframe.onload) {
         // Listen to message from child window after iFrame load
         iframe.onload = () => readConfigFromFrame(getOrigin()).then((data) => resolve({ iframe: iframe, config: data }));
@@ -47,9 +46,10 @@ function init() {
  * @function
  */
 function sendEventToFrame(eventName, origin) {
-  let hubDomain = getHubDomain();
   init().then((result) => {
-    let iframe = result.iframe;
+    let iframe = result.iframe,
+      config = result.config;
+    let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
     if (iframe && hubDomain) {
       // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
       iframe.contentWindow.postMessage({ event: eventName, origin: origin }, hubDomain);
@@ -69,7 +69,7 @@ function readConfigFromFrame(origin) {
     // Listen to message from child window
     eventer(messageEvent, (event) => {
       // only listen to our hub
-      let hubOrigin = getHubOrigin();
+      let hubOrigin = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
       if (config && hubOrigin && hubOrigin.indexOf(event.origin) !== -1) {
         logDebug('Message from hub received...');
         resolve(event.data);
@@ -114,13 +114,11 @@ export function verifyPowerOptIn() {
  * @function
  * @return promise when done
  */
-// FIXME settimeout / 3
 export function activatePowerOptIn() {
-  init().then((result) => {
-    let iframe = result.iframe;
-    return new Promise((resolve) => setTimeout(() => { // defer post to next tick
+  return new Promise((resolve) => {
+    init().then(() => setTimeout(() => { // defer post to next tick
       sendEventToFrame('oil-poi-activate', getOrigin());
       setTimeout(() => readConfigFromFrame(getOrigin()).then(resolve));  // defer until read works
-    }, TIMEOUT / 3));
+    }));
   });
 }
