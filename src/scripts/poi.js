@@ -1,5 +1,5 @@
 import { OIL_CONFIG } from './constants.js';
-import { getConfiguration, getHubOrigin } from './config.js';
+import { getConfiguration, getHubDomain, getHubOrigin } from './config.js';
 import { addFrame } from './iframe.js';
 import { getOrigin, eventer, messageEvent } from './utils.js';
 import { logDebug } from './log.js';
@@ -35,7 +35,7 @@ function sendEventToFrame(eventName, origin) {
   let iframe = init();
   if (iframe) {
     // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
-    iframe.contentWindow.postMessage({ event: eventName, origin: origin }, getHubOrigin());
+    iframe.contentWindow.postMessage({ event: eventName, origin: origin }, getHubDomain());
   }
 }
 /**
