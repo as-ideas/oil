@@ -5,11 +5,11 @@ const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
 module.exports = {
   beforeEach: browser => {
      browser
-      .url(browser.globals.launch_url_host1 + "demos/tealium-integration-test.html")
+      .url(browser.globals.launch_url_host1 + "end2end-tests/tealium-integration-test.html")
       .deleteCookies();
 
     browser
-      .url(browser.globals.launch_url_host1 + "demos/tealium-integration-test.html")
+      .url(browser.globals.launch_url_host1 + "end2end-tests/tealium-integration-test.html")
       .useCss()
       .waitForElementVisible('body', 1000, false)
       .useXpath()

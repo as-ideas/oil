@@ -82,7 +82,7 @@ module.exports = {
 
   }, {
     from: path.resolve(sourcePath, 'demos', 'tealium-integration-test.html'),
-    to: 'demos/tealium-integration-test.html'
+    to: 'end2end-tests/tealium-integration-test.html'
   }, {
     from: path.resolve(sourcePath, 'demos', 'tealium-integration-production.html'),
     to: 'demos/tealium-integration-production.html'

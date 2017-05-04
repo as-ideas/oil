@@ -28,4 +28,13 @@ NODE_DEBUG=oil-debug npm run ...
 
 ## Documentation
 
+### Install ASC
+```
+sudo gem install asciidoctor
+```
+
+see http://asciidocfx.com/#truehow-to-install-asciidocfx
+
+### Generate documentation
+
 see http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
