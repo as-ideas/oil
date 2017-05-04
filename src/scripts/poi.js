@@ -32,10 +32,11 @@ function init() {
  * @function
  */
 function sendEventToFrame(eventName, origin) {
-  let iframe = init();
-  if (iframe) {
+  let iframe = init(),
+      hubDomain = getHubDomain();
+  if (iframe && hubDomain) {
     // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
-    iframe.contentWindow.postMessage({ event: eventName, origin: origin }, getHubDomain());
+    iframe.contentWindow.postMessage({ event: eventName, origin: origin }, hubDomain);
   }
 }
 /**

@@ -43,20 +43,14 @@ export function extend() {
   return extended;
 }
 
-
 /**
  * Check if environment is set to production
  * @returns {boolean} true if environment is production, otherwise false
  * @function
  */
 export function isProd() {
-  if (String('<%= ENV %>') === 'prod' || String('<%= ENV %>') === 'production') {
-    return true;
-  } else {
-    return false;
-  }
+  return (String('<%= ENV %>') === 'prod' || String('<%= ENV %>') === 'production');
 }
-
 
 /**
  * Checks if given element is a DOM element

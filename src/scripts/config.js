@@ -33,18 +33,23 @@ export function mergeOptions(options, defaults) {
  * @returns {string} domain iframe orgin
  */
 export function getHubDomain() {
-  let config = getConfiguration(),
-    hubHost = config[OIL_CONFIG.ATTR_HUB_ORIGIN].indexOf('http') !== -1 ? config[OIL_CONFIG.ATTR_HUB_ORIGIN] : location.protocol + config[OIL_CONFIG.ATTR_HUB_ORIGIN];
-  return hubHost;
+  let config = getConfiguration();
+  if (config[OIL_CONFIG.ATTR_HUB_ORIGIN]) {
+    return config[OIL_CONFIG.ATTR_HUB_ORIGIN].indexOf('http') !== -1 ? config[OIL_CONFIG.ATTR_HUB_ORIGIN] : location.protocol + config[OIL_CONFIG.ATTR_HUB_ORIGIN];
+  }
+  return null;
 }
 /**
  *
  * Get the hub iFrame URL with protocol prefix for the current location
- * @returns {string} complete iframe orgin
+ * @returns {string, null} complete iframe orgin
  */
 export function getHubOrigin() {
   let config = getConfiguration();
-  return getHubDomain() + config[OIL_CONFIG.ATTR_HUB_PATH];
+  if (config[OIL_CONFIG.ATTR_HUB_ORIGIN] && config[OIL_CONFIG.ATTR_HUB_PATH]) {
+    return getHubDomain() + config[OIL_CONFIG.ATTR_HUB_PATH];
+  }
+  return null;
 }
 
 /**
