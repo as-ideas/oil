@@ -31,7 +31,7 @@ function getHubDomain(config) {
  */
 function getHubLocation(config) {
   if (config[OIL_CONFIG.ATTR_HUB_ORIGIN] && config[OIL_CONFIG.ATTR_HUB_PATH]) {
-    return getHubDomain() + config[OIL_CONFIG.ATTR_HUB_PATH];
+    return getHubDomain(config) + config[OIL_CONFIG.ATTR_HUB_PATH];
   }
   return null;
 }

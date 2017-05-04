@@ -2,7 +2,7 @@ import { OIL_CONFIG } from './constants.js';
 import { getConfiguration } from './config.js';
 import { addFrame } from './iframe.js';
 import { getOrigin, eventer, messageEvent } from './utils.js';
-import { logDebug } from './log.js';
+import { logDebug, logError } from './log.js';
 
 // Timeout after which promises should return
 const TIMEOUT = 500;
@@ -17,27 +17,31 @@ let config = null;
  * @return promise as object {iframe:Element,config:{}}when iFrame is loaded
  */
 function init() {
-  return new Promise((resolve) => {
+  return new Promise((resolve) => setTimeout(() => {
     // read config data if not already set
     if (!config) {
       config = getConfiguration();
     }
-    let hubLocation = config[OIL_CONFIG.getHubLocation];
-    if (config && hubLocation) {
-      // setup iframe
-      let iframe = addFrame(hubLocation);
-      if (!iframe.onload) {
-        // Listen to message from child window after iFrame load
-        iframe.onload = () => readConfigFromFrame(getOrigin()).then((data) => resolve({ iframe: iframe, config: data }));
+    if (config) {
+      let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION];
+      if (hubLocation) {
+        // setup iframe
+        let iframe = addFrame(hubLocation);
+        if (iframe && !iframe.onload) {
+          // Listen to message from child window after iFrame load
+          iframe.onload = () => readConfigFromFrame(getOrigin()).then((data) => resolve({ iframe: iframe, config: data }));
+        } else {
+          // if already loaded directly invoke
+          readConfigFromFrame(getOrigin()).then((data) => resolve({ iframe: iframe, config: data }));
+        }
       } else {
-        // if already loaded directly invoke
-        readConfigFromFrame(getOrigin()).then((data) => resolve({ iframe: iframe, config: data }));
+        logError(`Config for ${OIL_CONFIG.ATTR_HUB_ORIGIN} and ${OIL_CONFIG.ATTR_HUB_PATH} isnt set. No POI possible.`);
+        resolve({});
       }
     } else {
-      logDebug(`Config for ${OIL_CONFIG.ATTR_HUB_ORIGIN} and ${OIL_CONFIG.ATTR_HUB_PATH} isnt set. No POI possible.`);
-      resolve({});
+      logError('Empty Config');
     }
-  });
+  }));
 }
 /**
  * Sent given event to hidden iframe
@@ -76,10 +80,7 @@ function readConfigFromFrame(origin) {
       }
     }, false);
     // add timeout for config read
-    setTimeout(() => {
-      // logDebug('Read config timed out');
-      resolve(false);
-    }, TIMEOUT);
+    setTimeout(() => resolve(false), TIMEOUT);
   });
 }
 
