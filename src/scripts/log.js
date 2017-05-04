@@ -4,9 +4,13 @@ import { isProd } from "./utils";
  * Make sure the fallback can't break.
  */
 function initLogging() {
-  if (!window.console) {
-    window.console = {};
-    window.console.log = function () {};
+  // FIXME, see https://github.com/mishoo/UglifyJS2/issues/506
+  // https://webpack.js.org/plugins/uglifyjs-webpack-plugin/#components/sidebar/sidebar.jsx
+  if (process.env.NODE_ENV !== 'production' && !window.console) {
+    if (!window.console) window.console = {};
+    if (!window.console.log) window.console.log = function () { };
+    if (!window.console.info) window.console.log = function () { };
+    if (!window.console.error) window.console.log = function () { };
   }
 }
 
@@ -15,7 +19,7 @@ function initLogging() {
  * if console.error is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logError() {
-  if (!isProd()) {
+  if (process.env.NODE_ENV !== 'production' && console && console.error) {
     initLogging();
     if (window.console.error) {
       try {
@@ -32,7 +36,7 @@ export function logError() {
  * if console.info is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logInfo() {
-  if (!isProd()) {
+  if (process.env.NODE_ENV !== 'production' && console && console.info) {
     initLogging();
     if (window.console.info) {
       try {
@@ -49,7 +53,7 @@ export function logInfo() {
  * if console.debug is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logDebug() {
-  if (!isProd()) {
+  if (process.env.NODE_ENV !== 'production' && console && console.debug) {
     initLogging();
     if (window.console.debug) {
       try {

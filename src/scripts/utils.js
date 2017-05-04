@@ -49,7 +49,7 @@ export function extend() {
  * @function
  */
 export function isProd() {
-  return (String('<%= ENV %>') === 'prod' || String('<%= ENV %>') === 'production');
+  return process.env.NODE_ENV === 'production';
 }
 
 /**
