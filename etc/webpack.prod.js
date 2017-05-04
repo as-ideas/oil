@@ -17,6 +17,7 @@ const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
+const LoaderOptionsPlugin = webpack.LoaderOptionsPlugin;
 const DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
@@ -28,159 +29,184 @@ const ENV = process.env.ENV || process.env.NODE_ENV || 'production';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8080;
 const METADATA = webpackMerge(commonConfig.metadata, {
-    host: HOST,
-    port: PORT,
-    ENV: ENV,
-    HMR: false
+  host: HOST,
+  port: PORT,
+  ENV: ENV,
+  HMR: false
 });
 
 var config = webpackMerge(commonConfig, {
 
-    /**
-     * Developer tool to enhance debugging
-     *
-     * See: http://webpack.github.io/docs/configuration.html#devtool
-     * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
-     */
-    //devtool: 'source-map',
+  /**
+   * Developer tool to enhance debugging
+   *
+   * See: http://webpack.github.io/docs/configuration.html#devtool
+   * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
+   */
+  //devtool: 'source-map',
+
+  /**
+   * Options affecting the output of the compilation.
+   *
+   * See: http://webpack.github.io/docs/configuration.html#output
+   */
+  output: {
 
     /**
-     * Options affecting the output of the compilation.
+     * The output directory as absolute path (required).
      *
-     * See: http://webpack.github.io/docs/configuration.html#output
+     * See: http://webpack.github.io/docs/configuration.html#output-path
      */
-    output: {
-
-        /**
-         * The output directory as absolute path (required).
-         *
-         * See: http://webpack.github.io/docs/configuration.html#output-path
-         */
-        path: appConfig.dist,
-
-        /**
-         * Specifies the name of each output file on disk.
-         * IMPORTANT: You must not specify an absolute path here!
-         *
-         * See: http://webpack.github.io/docs/configuration.html#output-filename
-         */
-        filename: '[name].[chunkhash].bundle.js',
-
-        /**
-         * The filename of the SourceMaps for the JavaScript files.
-         * They are inside the output.path directory.
-         *
-         * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
-         */
-        sourceMapFilename: '[name].[chunkhash].bundle.map',
-
-        /**
-         * The filename of non-entry chunks as relative path
-         * inside the output.path directory.
-         *
-         * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
-         */
-        chunkFilename: '[id].[chunkhash].chunk.js'
-
-    },
+    path: appConfig.dist,
 
     /**
-     * Add additional plugins to the compiler.
+     * Specifies the name of each output file on disk.
+     * IMPORTANT: You must not specify an absolute path here!
      *
-     * See: http://webpack.github.io/docs/configuration.html#plugins
+     * See: http://webpack.github.io/docs/configuration.html#output-filename
      */
-    plugins: [
+    filename: '[name].[chunkhash].bundle.js',
 
-        /*
-         * Plugin: OccurenceOrderPlugin
-         * Description: Varies the distribution of the ids to get the smallest id length
-         * for often used ids.
-         *
-         * See: https://webpack.github.io/docs/list-of-plugins.html#occurrenceorderplugin
-         * See: https://github.com/webpack/docs/wiki/optimization#minimize
-         */
-        new webpack.optimize.OccurrenceOrderPlugin(true),
-        /**
-         * Plugin: WebpackMd5Hash
-         * Description: Plugin to replace a standard webpack chunkhash with md5.
-         *
-         * See: https://www.npmjs.com/package/webpack-md5-hash
-         */
-        new WebpackMd5Hash(),
+    /**
+     * The filename of the SourceMaps for the JavaScript files.
+     * They are inside the output.path directory.
+     *
+     * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
+     */
+    sourceMapFilename: '[name].[chunkhash].bundle.map',
 
-        /**
-         * Plugin: DedupePlugin
-         * Description: Prevents the inclusion of duplicate code into your bundle
-         * and instead applies a copy of the function at runtime.
-         *
-         * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-         * See: https://github.com/webpack/docs/wiki/optimization#deduplication
-         */
-        new DedupePlugin(),
+    /**
+     * The filename of non-entry chunks as relative path
+     * inside the output.path directory.
+     *
+     * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
+     */
+    chunkFilename: '[id].[chunkhash].chunk.js'
 
-        /**
-         * Plugin: DefinePlugin
-         * Description: Define free variables.
-         * Useful for having development builds with debug logging or adding global constants.
-         *
-         * Environment helpers
-         *
-         * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-         */
-        // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
-        new DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-        }),
+  },
 
-        /**
-         * Plugin: UglifyJsPlugin
-         * Description: Minimize all JavaScript output of chunks.
-         * Loaders are switched into minimizing mode.
-         *
-         * See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-         */
-        // NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
-        new UglifyJsPlugin({
-            // beautify: true, //debug
-            //mangle: false, //debug
-            // dead_code: false, //debug
-            // unused: false, //debug
-            // deadCode: false, //debug
-            // compress: {
-            //   screw_ie8: true,
-            //   keep_fnames: true,
-            //   drop_debugger: false,
-            //   dead_code: false,
-            //   unused: false
-            // }, // debug
-            // comments: true, //debug
-            sourceMap: false, //prod
-            beautify: false, //prod
-            mangle: {
-                except: appConfig.mangle.except || ['jQuery', 'angular'],
-                screw_ie8: true
-            }, //prod
-            compress: {
-                screw_ie8: true
-            }, //prod
-            comments: false //prod
-        })
-    ],
+  /**
+   * Add additional plugins to the compiler.
+   *
+   * See: http://webpack.github.io/docs/configuration.html#plugins
+   */
+  plugins: [
 
     /*
-     * Include polyfills or mocks for various node stuff
-     * Description: Node configuration
+     * Plugin: OccurenceOrderPlugin
+     * Description: Varies the distribution of the ids to get the smallest id length
+     * for often used ids.
      *
-     * See: https://webpack.github.io/docs/configuration.html#node
+     * See: https://webpack.github.io/docs/list-of-plugins.html#occurrenceorderplugin
+     * See: https://github.com/webpack/docs/wiki/optimization#minimize
      */
-    node: {
-        global: true,
-        crypto: 'empty',
-        process: true,
-        module: false,
-        clearImmediate: false,
-        setImmediate: false
-    }
+    new webpack.optimize.OccurrenceOrderPlugin(true),
+    /**
+     * Plugin: WebpackMd5Hash
+     * Description: Plugin to replace a standard webpack chunkhash with md5.
+     *
+     * See: https://www.npmjs.com/package/webpack-md5-hash
+     */
+    new WebpackMd5Hash(),
+
+
+    /**
+     * Plugin: DefinePlugin
+     * Description: Define free variables.
+     * Useful for having development builds with debug logging or adding global constants.
+     *
+     * Environment helpers
+     *
+     * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+     */
+    // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
+
+    /**
+     * The UglifyJsPlugin will no longer put loaders into minimize mode, and the debug option has been deprecated. These options are simply moved into a new plugin, LoaderOptionsPlugin, for separation of concerns reasons. Use it as such:
+     */
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+
+    /**
+     * Plugin: UglifyJsPlugin
+     * Description: Minimize all JavaScript output of chunks.
+     * Loaders are switched into minimizing mode.
+     *
+     * See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
+     */
+    // NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
+    new UglifyJsPlugin({
+      debug: false,
+      // beautify: true, //debug
+      //mangle: false, //debug
+      // dead_code: false, //debug
+      // unused: false, //debug
+      // deadCode: false, //debug
+      // compress: {
+      //   screw_ie8: true,
+      //   keep_fnames: true,
+      //   drop_debugger: false,
+      //   dead_code: false,
+      //   unused: false
+      // }, // debug
+      // comments: true, //debug
+      sourceMap: false, //prod
+      beautify: false, //prod
+      mangle: {
+        except: appConfig.mangle.except || ['jQuery', 'angular'],
+        screw_ie8: true,
+        dead_code: true,
+        unused: true,
+        sequences: true,  // join consecutive statemets with the “comma operator”
+        properties: true,  // optimize property access: a["foo"] → a.foo
+        dead_code: true,  // discard unreachable code
+        drop_debugger: true,  // discard “debugger” statements
+        unsafe: false, // some unsafe optimizations (see below)
+        conditionals: true,  // optimize if-s and conditional expressions
+        comparisons: true,  // optimize comparisons
+        evaluate: true,  // evaluate constant expressions
+        booleans: true,  // optimize boolean expressions
+        loops: true,  // optimize loops
+        unused: true,  // drop unused variables/functions
+        hoist_funs: true,  // hoist function declarations
+        hoist_vars: false, // hoist variable declarations
+        if_return: true,  // optimize if-s followed by return/continue
+        join_vars: true,  // join var declarations
+        cascade: true,  // try to cascade `right` into `left` in sequences
+        side_effects: true,  // drop side-effect-free statements
+        warnings: false,
+        global_defs: { // global definitions
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+          ENV: JSON.stringify(process.env.NODE_ENV)
+        }
+      }, //prod
+      compress: {
+        screw_ie8: true
+      }, //prod
+      comments: false //prod
+    })
+  ],
+
+  /*
+   * Include polyfills or mocks for various node stuff
+   * Description: Node configuration
+   *
+   * See: https://webpack.github.io/docs/configuration.html#node
+   */
+  node: {
+    global: true,
+    crypto: 'empty',
+    process: true,
+    module: false,
+    clearImmediate: false,
+    setImmediate: false
+  }
 
 });
 

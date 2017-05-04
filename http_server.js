@@ -3,7 +3,8 @@
 const express = require('express');
 const serveStatic = require('serve-static');
 const compression = require('compression');
-// const auth = require('http-auth');
+// import CORS config
+const corsConfig = require('./etc/corsConfig');
 
 // let basic = auth.basic({realm: 'Project OIL'}, (username, password, callback) => callback(username === 'oil' && password === 'rig'));
 
@@ -12,10 +13,17 @@ const port = process.argv[2] || process.env.PORT || 8080;
 let CACHE_DURATION = 0;
 let DOCUMENT_ROOT = __dirname + '/dist';
 
-let allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Accept, Origin, Content-Type, Authorization, Content-Length, X-Requested-With');
+// tag::cors-express[]
+// end::cors-express[]
+let allowCrossDomain = function (req, res, next) {
+  //res.header('Content-Security-Policy', 'script-src \'self\' *');
+  for (key in corsConfig.headers) {
+    // skip loop if the property is from prototype
+    if (!corsConfig.headers.hasOwnProperty(key)) continue;
+    // copy header config
+    let object = corsConfig.headers[key];
+    res.header(key, object);
+  }
 
   // intercept OPTIONS method
   if ('OPTIONS' == req.method) {
@@ -44,4 +52,4 @@ app.use(compression());
 app.use(serveStatic(DOCUMENT_ROOT, { maxAge: CACHE_DURATION, cacheControl: true }));
 
 console.log('server is now starting on port ', port);
-app.listen(port,'0.0.0.0');
+app.listen(port, '0.0.0.0');

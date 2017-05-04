@@ -1,3 +1,4 @@
+:project_root: ../../
 [[section-deployment-view]]
 
 
@@ -49,7 +50,12 @@ when your infrastructure is more complex.
 
 === Infrastructure Level 1
 
-Your website which is using OIL should support CORS from the hub domain and include it via HTTPS. The OIL hub origin needs to be included in the CORS-orgin!
+Your website which is using OIL should support CORS from the hub domain and include it via HTTPS. The OIL hub origin needs to be included in the CORS-origin!
+
+[source,json]
+----
+include::{project_root}/etc/corsConfig.js[tags=cors-config]
+----
 
 === Tealium Deployment
 For our PoC we decided to use Tealium to deliver our Javascript artefact to client browsers. To achieve this you have to follow some steps:

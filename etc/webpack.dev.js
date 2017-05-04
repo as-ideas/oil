@@ -10,6 +10,7 @@ const debugLog = util.debuglog('oil-debug');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
 const appConfig = helpers.getAppConfig();
+const corsConfig = require('./corsConfig');
 
 /**
  * Webpack Plugins
@@ -120,10 +121,7 @@ var config = webpackMerge(commonConfig, {
    * See: https://webpack.github.io/docs/webpack-dev-server.html
    */
   devServer: {
-    headers: {
-      "Access-Control-Allow-Origin": "http://127.0.0.1:3000",
-      "Access-Control-Allow-Credentials": "true"
-    },
+    headers: corsConfig.headers,
     port: METADATA.port,
     host: METADATA.host,
     historyApiFallback: true,
