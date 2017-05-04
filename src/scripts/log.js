@@ -19,7 +19,7 @@ function initLogging() {
  * if console.error is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logError() {
-  if (process.env.NODE_ENV !== 'production' && console && console.error) {
+  if (process.env.NODE_ENV !== 'production' && window.console && window.console.error) {
     initLogging();
     if (window.console.error) {
       try {
@@ -36,7 +36,7 @@ export function logError() {
  * if console.info is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logInfo() {
-  if (process.env.NODE_ENV !== 'production' && console && console.info) {
+  if (process.env.NODE_ENV !== 'production' && window.console && window.console.info) {
     initLogging();
     if (window.console.info) {
       try {
@@ -53,7 +53,7 @@ export function logInfo() {
  * if console.debug is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logDebug() {
-  if (process.env.NODE_ENV !== 'production' && console && console.debug) {
+  if (process.env.NODE_ENV !== 'production' && window.console && window.console.debug) {
     initLogging();
     if (window.console.debug) {
       try {
