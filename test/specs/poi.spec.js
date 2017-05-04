@@ -15,7 +15,7 @@ describe('poi', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
-  it('should disable POI by default', (done) => {
+  xit('should disable POI by default', (done) => {
     loadFixture('poi/poi.config-error.html');
 
     activatePowerOptIn().then(
