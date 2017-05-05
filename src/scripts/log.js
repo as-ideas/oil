@@ -11,15 +11,11 @@ function concatLogArguments(args) {
 }
 
 /**
- * Make sure the fallback can't break.
+ * Make sure the fallbacks can't break.
  */
-function initLogging() {
-  // FIXME, see https://github.com/mishoo/UglifyJS2/issues/506
-  // https://webpack.js.org/plugins/uglifyjs-webpack-plugin/#components/sidebar/sidebar.jsx
-  if ((process.env.NODE_ENV !== 'production' || productionDebugMode) && !window.console) {
-    if (!window.console) window.console = {};
-    if (!window.console.log) window.console.log = function () { };
-  }
+function fixLogging() {
+  if (!window.console) window.console = {};
+  if (!window.console.log) window.console.log = function () { };
 }
 
 /**
@@ -28,7 +24,7 @@ function initLogging() {
  */
 export function logError() {
   if ((process.env.NODE_ENV !== 'production' || productionDebugMode) && window.console) {
-    initLogging();
+    fixLogging();
     if (window.console.error) {
       try {
         window.console.error.apply(window.console, arguments);
@@ -49,7 +45,7 @@ export function logError() {
  */
 export function logInfo() {
   if ((process.env.NODE_ENV !== 'production' || productionDebugMode) && window.console) {
-    initLogging();
+    fixLogging();
     if (window.console.info) {
       try {
         window.console.info.apply(window.console, arguments);
@@ -70,7 +66,7 @@ export function logInfo() {
  */
 export function logDebug() {
   if ((process.env.NODE_ENV !== 'production' || productionDebugMode) && window.console) {
-    initLogging();
+    fixLogging();
     if (window.console.debug) {
       try {
         window.console.debug.apply(window.console, arguments);

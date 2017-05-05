@@ -53,6 +53,16 @@ export function isProd() {
 }
 
 /**
+ * Sent love event
+ * @param eventName - event to sent
+ * @function
+ */
+export function sendEventToSite(eventName) {
+  logInfo("Send to Site:", eventName);
+  window.postMessage(eventName, getOrigin());
+}
+
+/**
  * Checks if given element is a DOM element
  * Source: http://stackoverflow.com/questions/384286/javascript-isdom-how-do-you-check-if-a-javascript-object-is-a-dom-object
  * @param  a DOM element or any other value
