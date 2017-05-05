@@ -19,6 +19,13 @@ npm install
 * Running unit-tests: `npm run test`
 * Running end2end-tests locally: Start app in one terminal `npm start` and then in the next terminal `npm run e2e`
 
+* Before testing locally add the following dns entries into your /etc/hosts
+```
+127.0.0.1	oilsite1
+127.0.0.1	oilsite2
+127.0.0.1	oilcdn
+```
+
 ### Advanced Usage
 
 ### debug logging

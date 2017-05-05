@@ -4,7 +4,7 @@ const express = require('express');
 const serveStatic = require('serve-static');
 const compression = require('compression');
 // import CORS config
-const cors = require('cors');
+// const cors = require('cors');
 const corsConfig = require('./etc/corsConfig');
 
 // let basic = auth.basic({realm: 'Project OIL'}, (username, password, callback) => callback(username === 'oil' && password === 'rig'));
@@ -42,10 +42,12 @@ let app = express();
 
 // CORS
 app.use(allowCrossDomain);
-app.use(cors());
+// app.use(cors());
 
 // server gzip
 app.use(compression());
+
+app.all(allowCrossDomain);
 
 // simple basic auth
 // app.use(auth.connect(basic));

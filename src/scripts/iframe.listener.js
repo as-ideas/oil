@@ -23,7 +23,7 @@ function handler(message) {
         break;
       case 'oil-config-read':
         config = Cookie.getJSON(OIL_COOKIE.NAME) || {};
-        logDebug('OIL Hub - read the following config:', config);
+        logDebug('OIL Hub - read the following poi status:', config);
         parent.postMessage(config[OIL_COOKIE.ATTR_POI] || false, origin);
         break;
       default:

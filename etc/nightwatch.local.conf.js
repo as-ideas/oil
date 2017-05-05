@@ -32,7 +32,13 @@ module.exports = {
     "chrome": {
       "desiredCapabilities": {
         "browserName": "chrome",
-        "javascriptEnabled": true // turn off to test progressive enhancement
+        "javascriptEnabled": true
+      },
+    },
+    "safari": {
+      "desiredCapabilities": {
+        "browserName": "safari",
+        "javascriptEnabled": true
       }
     }
   }
