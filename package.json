@@ -14,6 +14,7 @@
     "fullBrowserstack": "bash ./etc/runFullBrowserstackSeq.sh",
     "pree2e": "node etc/nightwatch.local.conf.js",
     "e2e": "./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e chrome",
+    "e2esafari": "./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e safari",
     "eslint": "eslint \"lib/*\" && eslint \"etc/*\"",
     "check": "npm run eslint && nsp check",
     "jsdoc": "jsdoc -c ./jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md ./etc",
