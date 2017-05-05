@@ -57,8 +57,10 @@ function sendEventToFrame(eventName, origin) {
       config = result.config;
     let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
     if (iframe && hubDomain) {
+      // tag::subscriber-postMessage[]
       // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
       iframe.contentWindow.postMessage({ event: eventName, origin: origin }, hubDomain);
+      // end::subscriber-postMessage[]
     }
   });
 }
@@ -71,14 +73,16 @@ function sendEventToFrame(eventName, origin) {
 function readConfigFromFrame(origin) {
   return new Promise((resolve) => {
     function handler(event) {
+      // tag::subscriber-receiveMessage[]
       // only listen to our hub
       let hubOrigin = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
       if (config && hubOrigin && hubOrigin.indexOf(event.origin) !== -1) {
         logDebug('Message from hub received...');
         removeMessageListener(handler);
-        //frameListenerRegistered = false;
+        frameListenerRegistered = false;
         resolve(event.data);
       }
+      // end::subscriber-receiveMessage[]
     }
     // defer post to next tick
     setTimeout(() => sendEventToFrame('oil-config-read', origin));

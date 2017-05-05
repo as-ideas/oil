@@ -18,15 +18,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" id="MetaViewport"
     data-detect-viewport-is-scaled="false" />
 
+    <!-- tag::oil-config[] -->
     <script type="application/configuration">
       {
         "hub_origin": "//oil-integration-cdn.herokuapp.com",
-        "hub_origin1": "//0.0.0.0:3000",
-        "hub_origin2": "//0.0.0.0:8080",
+        "hub_origin__watch": "//0.0.0.0:3000",
+        "hub_origin__start": "//0.0.0.0:8080",
         "hub_path": "/end2end-tests/complete-integration-mypass.html",
         "subscriber_set_cookie": false
       }
     </script>
+    <!-- end::oil-config[] -->
   <script data-qa="Script.MetaViewport">
     function isTablet() {
       var tabletMinWidth = 600;

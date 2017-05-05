@@ -13,21 +13,24 @@ function handler(message) {
   logDebug('OIL Hub - Got following parent data:', data);
   // only react on our data
   // FIXME check origin !!!
+  // tag::hub-listener[]
   if (data && data.event && data.event.indexOf('oil-') !== -1) {
     let event = data.event;
     switch (event) {
       case 'oil-poi-activate':
-        // logDebug('OIL Hub - activating POI ');
+        logDebug('OIL Hub - activating POI ');
         Cookie.set(OIL_COOKIE.NAME, { [OIL_COOKIE.ATTR_POI]: true }, { expires: 31 });
         break;
       case 'oil-config-read':
         config = Cookie.getJSON(OIL_COOKIE.NAME) || {};
-        // logDebug('OIL Hub - read the following config:', config);
+        logDebug('OIL Hub - read the following config:', config);
         parent.postMessage(config[OIL_COOKIE.ATTR_POI] || false, origin);
         break;
       default:
         break;
     }
+
+    // end::hub-listener[]
     initComplete = true;
   }
 }

@@ -4,6 +4,7 @@ const express = require('express');
 const serveStatic = require('serve-static');
 const compression = require('compression');
 // import CORS config
+const cors = require('cors');
 const corsConfig = require('./etc/corsConfig');
 
 // let basic = auth.basic({realm: 'Project OIL'}, (username, password, callback) => callback(username === 'oil' && password === 'rig'));
@@ -26,12 +27,12 @@ let allowCrossDomain = function (req, res, next) {
   }
 
   // intercept OPTIONS method
-  if ('OPTIONS' == req.method) {
-    res.send(200);
-  }
-  else {
-    next();
-  }
+  /*if ('OPTIONS' == req.method) {
+    res.sendStatus(204);
+  }*/
+  //else {
+  next();
+  //}
 };
 
 /*
@@ -41,6 +42,7 @@ let app = express();
 
 // CORS
 app.use(allowCrossDomain);
+app.use(cors());
 
 // server gzip
 app.use(compression());

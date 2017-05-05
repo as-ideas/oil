@@ -1,4 +1,5 @@
 :project_root: ../../
+
 [[section-deployment-view]]
 
 
@@ -50,7 +51,12 @@ when your infrastructure is more complex.
 
 === Infrastructure Level 1
 
-Your website which is using OIL should support CORS from the hub domain and include it via HTTPS. The OIL hub origin needs to be included in the CORS-origin!
+The website which is using OIL should support Cross Origin Resource Sharing (CORS) from the hub domain and include it via HTTPS. For more details about CORS see https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Access-Control-Allow-Origin[here].
+ 
+The CORS setup allows that the OIL hub sents the cookie data back to the subscriber (the brand site).
+
+// FIXME AoD
+
 
 [source,json]
 ----
