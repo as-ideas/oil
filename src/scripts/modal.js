@@ -11,21 +11,68 @@ import { getOilCookie, oilOptIn, oilPowerOptIn,  oilOptLater } from "./optin.js"
 export function defineOilContent() {
   return (
     `
-      <h1 class="oil__heading">
-        Axel Springer Optin Layer
-      </h1>
-      <p class="oil__intro-text">
-        Hi, this is a little intro text.
-      </p>
-      <button class="oil__button oil__button--primary js-optin-poi" data-qa="oil-poi-YesButton">
-        Yes, I want POI!
-      </button>
-      <button class="oil__button oil__button--primary js-optin" data-qa="oil-YesButton">
-        Yes, I want!
-      </button>
-      <button class="oil__button oil__button--secondary js-optlater" data-qa="oil-NotNowButton">
-        Not now
-      </button>
+      <div class="oil-expanded">
+        <div class="oil-top-overlay"></div>
+        <div class="oil-content-overlay">
+          <h1 class="oil__heading">
+            Um unsere Dienste für Sie noch besser zu machen, brauchen wir ihr Einverständnis.
+          </h1>
+          <p class="oil__intro-text">
+            Nach der neuen EU Datenschutzgesetzgebung müssen Sie zustimmen, wenn wir ihre Daten erheben und weiter verarbeiteten wollen.
+            Wir nutzen ihre Daten, um für Sie maßgeschneiderte journalistische Inhalte zu erstellen, zielgenauerere Werbung auszuspielen oder 
+            unsere Services allgemein zu bewerten. <a href="#" class="oil__intro-text--secondary">Mehr erfahren</a>
+          </p>
+          <div class="oil__button-row">
+            <button class="oil__button oil__button--1st js-optin-poi" data-qa="oil-poi-YesButton">
+              Global zustimmen
+              <span class="oil__button__label-2nd">
+                Für alle Axel Springer Dienste
+              </span>
+            </button>
+            <button class="oil__button oil__button--2nd js-optin" data-qa="oil-YesButton">
+              Jetzt zustimmen
+              <span class="oil__button__label-2nd">
+                Nur für diese Seite
+              </span>
+            </button>
+            <button class="oil__button oil__button--3rd js-optlater" data-qa="oil-NotNowButton">
+              Später entscheiden
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="oil-minified">
+        <div class="oil-content-overlay">
+          <div class="oil-l-container">
+            <h1 class="oil__heading-mini">
+              Um unsere Dienste für Sie noch besser zu machen, brauchen wir ihr Einverständnis.
+            </h1>
+            <p class="oil__intro-text-mini">
+              Sie müssen zustimmen, wenn wir ihre Daten erheben und weiter verarbeiteten wollen. 
+              <a href="#" class="oil__intro-text--secondary-mini">Mehr erfahren</a>
+            </p>
+          </div>
+          <div class="oil-l-container">
+            <div class="oil-btn-group-mini">
+              <button class="oil__btn-mini oil__btn-mini--1st js-optin" data-qa="oil-YesButton">
+                Global zustimmen
+              </button>
+              <div class="oil__btn-mini-label">
+                Für alle Axel Springer Dienste
+              </div>
+            </div>
+            <div class="oil-btn-group-mini">
+              <button class="oil__btn-mini oil__btn-mini--2nd js-optin" data-qa="oil-YesButton">
+                Jetzt zustimmen
+              </button>
+              <div class="oil__btn-mini-label">
+                Nur für diese Seite
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     `
   );
 }
@@ -52,7 +99,8 @@ export function injectOil(entryPoint) {
     oil.innerHTML = defineOilContent();
 
     // Add to DOM
-    entryPoint.appendChild(oil);
+    // entryPoint.appendChild(oil);
+    entryPoint.insertBefore(oil, entryPoint.firstElementChild);
   }
 }
 

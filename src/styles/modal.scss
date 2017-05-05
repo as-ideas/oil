@@ -1,13 +1,50 @@
+/**
+ * Define media queries,
+ * this must be set before media queries are imported
+ */
 
-// Config
-// TODO Move config to config CSS module
+$breakpoints: (
+  'phone':   480px,
+  'tablet':  768px,
+  'desktop': 1024px
+) !default;
 
-$text-color:      #fff;
-$text-color-dark: #000;
-$btn-primary:     rgb(30, 255, 125);
-$btn-secondary:   transparent;
 
-// Mixins
+/**
+ * Import Media query library
+ * Nice!
+ */
+
+@import  "./node_modules/include-media/dist/_include-media.scss";
+
+
+/**
+ * Config Data
+ *
+ */
+
+$text-color-primary:    rgba(255,255,255,0.85);
+$text-color-secondary:  rgb(70,200,120);
+$text-color-dark:       rgb(43, 43, 43);
+$btn-primary:           rgb(70,200,120);
+$btn-secondary:           transparent;
+
+
+// Our Oil overlay needs to trump every other element, so we need the highest possible z-index 
+// which is the following number
+
+$z-index-max: 2147483647;
+
+
+// Font stack
+
+$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+/**
+ * Mixins
+ *
+ */
 
 /**
  * Removes margins in stacked items,
@@ -23,9 +60,10 @@ $btn-secondary:   transparent;
   }
 
   &:last-of-type {
-    margin-top: 0;
+    margin-bottom: 0;
   }
 }
+
 
 @mixin stack-items-remove-horizontal-margins {
   &:first-of-type {
@@ -37,6 +75,7 @@ $btn-secondary:   transparent;
   }
 }
 
+
 /**
  * Adds font-smoothing for text
  *
@@ -46,6 +85,7 @@ $btn-secondary:   transparent;
   -webkit-font-smoothing:  antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 /**
  * Changes box model, default: border-box
@@ -64,88 +104,389 @@ $btn-secondary:   transparent;
   }
  }
 
-// TODO Remove later because we don't touch global namespace
 
-body {
-  margin: 0;
-}
-
-// Our OIL Overlay
+/**
+ * Our OIL Overlay 
+ * Wraps all Oil content
+ *
+ */
 
 .oil {
   @include box-model;
   @include font-smoothing;
-  z-index: 100;
+  z-index: $z-index-max;
   position: fixed;
-  bottom: 0;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
   margin:  0;
-  padding: 1rem;
-  font-family: sans-serif;
-  color: $text-color;
-  background-color: rgba(40,40,40,0.95);
+  font-family: $font-stack;
+  color: $text-color-primary;
 }
 
+
+// In case of opt in don't show overlay
+
+/*oil*/.optin-true {
+  display: none;
+}
+
+
+/**
+ * Toggle expanded and minified overlay according to CSS control class  
+ * CSS class: expanded-true or expanded-false
+ */
+
+/*.oil*/.expanded-true {
+  // This contains our expanded Oil overlay content
+  .oil-expanded {
+    display: block;
+  }
+
+  // This contains our minified Oil overlay content
+  .oil-minified {
+    display: none;
+  } 
+}
+
+
+/*.oil*/.expanded-false {
+  // This contains our expanded Oil overlay content
+  .oil-expanded {
+    display: none;
+  }
+
+  // This contains our minified Oil overlay content
+  .oil-minified {
+    display: block;
+  } 
+}
+
+
+/**
+ * Our overlay is composed of 2 overlay sections, one top overlay that covers page content,  
+ * and one that contains our overlay
+ */
+
+// This covers the page
+
+.oil-top-overlay {
+  position: absolute;
+  width:  100%;
+  height: 100%;
+  top:  0; 
+  left: 0;
+  background-image: linear-gradient(rgba(255,255,255,0), rgb(0, 0, 0) 60%);
+}
+
+// This contains our overlay
+
+.oil-content-overlay {
+  position: absolute;
+  width:  100%;
+  bottom:  0; 
+  left:    0;
+  padding: 2.5rem 6rem;
+  background-color: rgba(40, 40, 40, 0.98);
+
+  @include media('<=phone') { 
+    padding: 1.25rem;
+  }
+
+  @include media('>phone', '<desktop') { 
+    padding: 1.5rem 3rem;
+  }
+}
+
+
+/**
+ * Text Styles
+ *
+ */
+
 .oil__heading {
-  margin: 1rem 0;
-  font-size: 1rem;
-  font-weight: bold;
+  max-width: 840px;
+  margin: 4rem 0;
+  font-size: 2rem;
+  font-weight: 300;
+  color: $text-color-secondary;
+  line-height: 1.1875;
 
   &:first-of-type {
     margin-top: 0;
   }
+
+  @include media('<=phone') { 
+    margin: 0.625rem 0;
+    font-size: 1.125rem;
+  }
 }
 
+
 .oil__intro-text {
-  margin: 1rem 0;
+  max-width: 840px;
+  margin: 2.75rem 0;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: $text-color-primary;
+
+  @include media('<=phone') { 
+    margin: 1.5rem 0;
+    font-size: 0.875rem;
+  }
+}
+
+
+.oil__intro-text--secondary {
+  font-size: 1rem;
+  color: $text-color-secondary;
+  border-bottom: 1px solid;
+
+  @include media('<=phone') { 
+    font-size: 0.875rem;
+  }
+}
+
+
+/**
+ * Button Styles
+ *
+ */
+
+@mixin oil__button__shared {
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.5);
+
+  @include media('<=phone') { 
+    margin: 0.5rem 0;
+    width: 100%;
+    font-size: 1rem;
+  }
+
+
+  .oil__button__label-2nd {
+    display: block;
+    margin: 2px 0;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-transform: none;
+
+    @include media('<=phone') { 
+      font-size: 0.875rem;
+    }
+  }
+
+  &:hover {
+    transform: translateY(2px);
+  }
 }
 
 .oil__button {
   @include stack-items-remove-horizontal-margins;
 
   min-width: 100px;
-  margin: 0.5rem;
-  padding: 1rem;
+  min-height: 85px;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  vertical-align: middle;
   font-size: 0.8rem;
-  color: $text-color;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: $text-color-primary;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: transform 200ms ease;
+
+  @include media('<=phone') { 
+    min-height: auto;
+    padding: 0.875rem;
+  }
+}
+
+
+.oil__button--1st {
+  @include oil__button__shared;
+
+  color: $text-color-dark;
+  background-color: $btn-primary;
+  background-image: linear-gradient($btn-primary, rgb(70, 200, 100));
+  border-color: transparent;
+
+  @include media('>=desktop') { 
+    min-width: 320px;
+  }
+
+  &:hover {
+    background-color: darken($btn-primary, 8%);
+    background-image: linear-gradient(darken($btn-primary, 8%), darken(rgb(70, 200, 100), 8%));
+  }
+
+
+  .oil__button__label-2nd {
+    color: $text-color-primary;
+  }
+}
+
+
+.oil__button--2nd {
+  @include oil__button__shared;
+  color: $text-color-secondary;
+  background-color: transparent;
+  border: 1px solid $btn-primary;
+
+  @include media('>=desktop') { 
+    min-width: 260px;
+  }
+
+  &:hover {
+    border-color: darken($btn-primary, 8%);
+  }
+
+
+  .oil__button__label-2nd {
+    color: $text-color-primary;
+  }
+}
+
+
+.oil__button--3rd {
+  float: right;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text-color-secondary;
+  background-color: transparent;
+  text-decoration: underline;
+
+  &:hover {
+    border-color: darken($btn-primary, 8%);
+    transform: translateY(2px);
+  }
+
+  @include media('<=phone') { 
+    float: none;
+    margin: 1rem 0;
+    width: 100%;
+    font-size: 0.875rem;
+  }
+}
+
+
+/**
+ * Minified Overlay 
+ *
+ */
+
+// Layout container
+
+.oil-l-container {
+  float: left;
+  width: 50%;
+
+  @include media('<=phone') { 
+    display: block;
+    float: none;
+    width: 100%;
+  }
+}
+
+
+// Text styles
+
+.oil__heading-mini {
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: 300;
+  color: $text-color-secondary;
+  line-height: 1.1875;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  @include media('<=phone') { 
+    margin: 1rem 0;
+    text-align: center;
+  }
+}
+
+
+.oil__intro-text-mini {
+  margin: 1.175rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  color: $text-color-primary;
+
+  @include media('<=phone') { 
+    display: none;
+  }
+}
+
+
+.oil__intro-text--secondary-mini {
+  font-size: 0.875rem;
+  color: $text-color-secondary;
+  border-bottom: 1px solid;
+}
+
+
+// Button Styles
+
+.oil-btn-group-mini {
+  float: right;
+  width: 220px;
+  margin: 0 0.5rem;
+  vertical-align: top;
+
+  @include media('<=phone') { 
+    display: block;
+    float: none;
+    width: 100%;
+    margin: 1rem 0;
+  }
+}
+
+.oil__btn-mini {
+  display: block;
+  width: 220px;
+  margin: 1rem auto;
+  padding: 0.5rem 2rem;
+  font-size: 0.8rem;
+  color: $text-color-primary;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
   border-radius: 2px;
   outline: none;
   background-color: transparent;
-
   cursor: pointer;
 
-  &:hover {
-    background-color: rgba(40, 40, 40, 0.15);
-  }
-
-  &--primary {
-    color: $text-color-dark;
-    background-color: rgb(30, 255, 125);
-    border-color: transparent;
-
-    &:hover {
-      background-color: darken(rgb(30, 255, 125), 10%);
-    }
-  }
-
-  &--secondary {
-    border-color: transparent;
+  @include media('<=phone') { 
+    width: 100%;
+    margin: 0.5rem auto;
   }
 }
 
-.optin-true {
-  display: none;
-}
 
-.expanded-true {
-  height: 300px;
-}
-
-.expanded-false {
-  height: auto;
+.oil__btn-mini--1st {
+  font-weight: 500;
+  color: $text-color-dark;
+  background-color: $btn-primary;
+  background-image: linear-gradient($btn-primary, rgb(70, 200, 100));
+  border: 1px solid transparent;
 }
 
 
+.oil__btn-mini--2nd {
+  border: 1px solid $btn-primary;
+}
 
 
+.oil__btn-mini-label {
+  font-size: 0.8125rem;
+  text-align: center;
+}
