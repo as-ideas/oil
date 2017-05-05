@@ -2,7 +2,7 @@ import { OIL_CONFIG } from './constants.js';
 import { getConfiguration } from './config.js';
 import { addFrame } from './iframe.js';
 import { getOrigin, registerMessageListener, removeMessageListener } from './utils.js';
-import { logDebug, logError } from './log.js';
+import { logDebug, logError, logInfo } from './log.js';
 
 // Timeout after which promises should return
 const TIMEOUT = 500;
@@ -19,15 +19,19 @@ let config = null,
  */
 function init() {
   return new Promise((resolve) => setTimeout(() => {
+    logInfo("initFrame");
     // read config data if not already set
     if (!config) {
       config = getConfiguration();
     }
     if (config) {
+      logInfo("initFrame2");
       let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION];
       if (hubLocation) {
+        logInfo("initFrame3");
         // setup iframe
         let iframe = addFrame(hubLocation);
+        logInfo("initFrame4");
         if (iframe && !iframe.onload) {
           // Listen to message from child window after iFrame load
           iframe.onload = () => resolve({ iframe: iframe, config: config });
@@ -52,10 +56,12 @@ function init() {
  * @function
  */
 function sendEventToFrame(eventName, origin) {
+  logInfo("Send to Frame:",eventName,origin);
   init().then((result) => {
     let iframe = result.iframe,
-      config = result.config;
+        config = result.config;
     let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
+    logDebug(hubDomain);
     if (iframe && hubDomain) {
       // tag::subscriber-postMessage[]
       // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
@@ -77,7 +83,7 @@ function readConfigFromFrame(origin) {
       // only listen to our hub
       let hubOrigin = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
       if (config && hubOrigin && hubOrigin.indexOf(event.origin) !== -1) {
-        logDebug('Message from hub received...');
+        logDebug('Message from hub received...', event.origin, event.data);
         removeMessageListener(handler);
         frameListenerRegistered = false;
         resolve(event.data);
@@ -132,6 +138,7 @@ export function verifyPowerOptIn() {
  * @return promise when done
  */
 export function activatePowerOptIn() {
+  logDebug('activatePowerOptIn');
   // reset config
   config = null;
   // init iFrame first

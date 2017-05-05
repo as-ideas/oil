@@ -8,6 +8,7 @@
     "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 ",
     "prebuild": "npm run check && rm -rf dist/*",
     "build": "cross-env NODE_ENV=debug webpack --config etc/webpack.config.js && cross-env NODE_ENV=production webpack --config etc/webpack.config.js",
+    "builddebug": "cross-env NODE_ENV=production webpack --config etc/webpack.config.js && cross-env NODE_ENV=debug webpack --config etc/webpack.config.js",
     "watch-test": "cross-env NODE_ENV=test karma start etc/karma.conf.js",
     "test": "cross-env NODE_ENV=test karma start etc/karma.conf.ci.js",
     "browserstack": "bash ./etc/runBrowserstackSeq.sh",
