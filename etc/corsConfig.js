@@ -4,8 +4,8 @@ let headers = {
   "Access-Control-Allow-Credentials": "true",
   "Access-Control-Allow-Headers": "Content-Type, Authorization, x-id, Content-Length, X-Requested-With, Origin",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "p3p": 'CP="NOI ADM DEV PSAi COM NAV OUR OTR STP IND DEM"'
   // end::cors-config[]
+  //   "p3p": 'CP="NOI ADM DEV PSAi COM NAV OUR OTR STP IND DEM"'
 };
 module.exports = {
   headers: headers
