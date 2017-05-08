@@ -90,7 +90,100 @@ nightwatch_config = {
         'platform': 'MAC',
         'device': 'iPhone 5'
       }
-    }
+    }, 
+    chrome14Win7: {
+    	desiredCapabilities: {
+		  'os': 'Windows',
+		  'os_version': '7',
+		  'browser': 'Chrome',
+		  'browser_version': '14.0'
+		}
+	}, 
+    chrome40Win81: {
+    	desiredCapabilities: {
+		  'os': 'Windows',
+		  'os_version': '8.1',
+		  'browser': 'Chrome',
+		  'browser_version': '40.0'
+		}
+	}, 
+    IE8Win7: {
+    	desiredCapabilities: {
+		  'os': 'Windows',
+		  'os_version': '7',
+		  'browser': 'IE',
+		  'browser_version': '8.0'
+		}
+	}, 
+    FF9Win7: {
+    	desiredCapabilities: {
+		  'os': 'Windows',
+		  'os_version': '7',
+		  'browser': 'Firefox',
+		  'browser_version': '9.0'
+		}
+	},  
+    FF35Win81: {
+    	desiredCapabilities: {
+		  'os': 'Windows',
+		  'os_version': '8.1',
+		  'browser': 'Firefox',
+		  'browser_version': '35.0'
+		}
+	}, 
+    Opera1215Win81: {
+    	desiredCapabilities: {
+		  'os': 'Windows',
+		  'os_version': '8.1',
+		  'browser': 'Opera',
+		  'browser_version': '12.15'
+		}
+	},  
+    Safari71: {
+    	desiredCapabilities: {
+		  'os': 'OS X',
+		  'os_version': 'Mavericks',
+		  'browser': 'Safari',
+		  'browser_version': '7.1'
+		}
+	},  
+    Safari8: {
+    	desiredCapabilities: {
+		  'os': 'OS X',
+		  'os_version': 'Yosemite',
+		  'browser': 'Safari',
+		  'browser_version': '8.0'
+		}
+	},  
+    Safari91: {
+    	desiredCapabilities: {
+		  'os': 'OS X',
+		  'os_version': 'Yosemite',
+		  'browser': 'Safari',
+		  'browser_version': '9.1'
+		}
+	},  
+    iphone5s_ios6: {
+    	desiredCapabilities: {
+			'browserName': 'iPhone',
+			'platform': 'MAC',
+			'device': 'iPhone 5S'
+		}
+	},  
+    ipad4_ios7: {
+    	desiredCapabilities: {
+		  'browserName': 'iPad',
+		  'platform': 'MAC',
+		  'device': 'iPad 4th'
+		}
+	},  
+    iphone6_ios83: {
+    	desiredCapabilities: {
+		  'browserName': 'iPhone',
+		  'platform': 'MAC',
+		  'device': 'iPhone 6'
+		}
+	}  
   }
 };
 
