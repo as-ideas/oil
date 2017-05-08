@@ -54,7 +54,7 @@ export function defineOilContent() {
           </div>
           <div class="oil-l-container">
             <div class="oil-btn-group-mini">
-              <button class="oil__btn-mini oil__btn-mini--1st js-optin" data-qa="oil-YesButton">
+              <button class="oil__btn-mini oil__btn-mini--1st js-optin-poi-min" data-qa="oil-YesButton">
                 Global zustimmen
               </button>
               <div class="oil__btn-mini-label">
@@ -62,7 +62,7 @@ export function defineOilContent() {
               </div>
             </div>
             <div class="oil-btn-group-mini">
-              <button class="oil__btn-mini oil__btn-mini--2nd js-optin" data-qa="oil-YesButton">
+              <button class="oil__btn-mini oil__btn-mini--2nd js-optin-min" data-qa="oil-YesButton">
                 Jetzt zustimmen
               </button>
               <div class="oil__btn-mini-label">
@@ -72,7 +72,6 @@ export function defineOilContent() {
           </div>
         </div>
       </div>
-      
     `
   );
 }
@@ -123,11 +122,19 @@ export function updateOilOverlay(dataObj) {
  * Add click handler
  */
 export function addOilClickHandler() {
-  let  config = getConfiguration(),
-  btnOptIn = document.getElementsByClassName('js-optin')[0],
-    btnPoiOptIn = document.getElementsByClassName('js-optin-poi')[0],
-    btnOptLater = document.getElementsByClassName('js-optlater')[0];
+  let config = getConfiguration();
+  // Get button DOM elements for extended Oil overlay
+  let btnOptIn = document.getElementsByClassName('js-optin')[0];
+  let btnPoiOptIn = document.getElementsByClassName('js-optin-poi')[0];
+  let btnOptLater = document.getElementsByClassName('js-optlater')[0];
+  
+  // Get button DOM elements for minified Oil overlay
+  let btnPoiOptInMin = document.getElementsByClassName('js-optin-poi-min')[0];
+  let btnOptInMin = document.getElementsByClassName('js-optin-min')[0];
+
   addClickHandler(btnOptIn, () => oilOptIn().then((cookieData) => updateOilOverlay(cookieData)));
   addClickHandler(btnPoiOptIn, () => oilPowerOptIn(!config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then((cookieData) => updateOilOverlay(cookieData)));
   addClickHandler(btnOptLater, () => oilOptLater().then((cookieData) => updateOilOverlay(cookieData)));
+  addClickHandler(btnOptInMin, () => oilOptIn().then((cookieData) => updateOilOverlay(cookieData)));
+  addClickHandler(btnPoiOptInMin, () => oilPowerOptIn(!config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then((cookieData) => updateOilOverlay(cookieData)));
 }
