@@ -123,17 +123,17 @@ export function updateOilOverlay(dataObj) {
  */
 export function addOilClickHandler() {
   let config = getConfiguration();
-  
+
   // Get button DOM elements
-  
+
   let btnListOptIn = document.querySelectorAll('.oil .js-optin');
   let btnListPoiOptIn = document.querySelectorAll('.oil .js-optin-poi');
   let btnOptLater = document.getElementsByClassName('js-optlater')[0];
-  
+
   // Define click handler
-  
+
   function handleOilOptIn() {
-   oilOptIn().then((cookieData) => updateOilOverlay(cookieData)); 
+   oilOptIn().then((cookieData) => updateOilOverlay(cookieData));
   }
 
   function handleOilPowerOptIn() {
@@ -153,5 +153,5 @@ export function addOilClickHandler() {
   addClickHandler(btnOptLater, () => oilOptLater().then((cookieData) => updateOilOverlay(cookieData)));
 }
 
-  
+
 
