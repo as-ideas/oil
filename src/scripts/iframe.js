@@ -1,10 +1,10 @@
 import { logInfo } from '../scripts/log.js';
 
 export function addFrame(iframeUrl) {
-  logInfo("addFrame");
+  logInfo('addFrame');
   let iframe = document.getElementById('oil-frame');
   if (!iframe) {
-    logInfo("Creating frame...");
+    logInfo('Creating frame...');
     iframe = document.createElement('iframe');
     iframe.setAttribute('id', 'oil-frame');
     iframe.setAttribute('src', iframeUrl);
@@ -15,7 +15,7 @@ export function addFrame(iframeUrl) {
     iframe.style.border = 'none';
     document.body.appendChild(iframe);
   } else {
-    logInfo("Found frame already!");
+    logInfo('Found frame already!');
   }
   return iframe;
 }
