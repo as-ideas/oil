@@ -42,7 +42,7 @@ function init() {
       }
     } else {
       logError('Empty Config');
-      resolve({ config: {}});
+      resolve({ config: {} });
     }
   }));
 }
@@ -53,15 +53,17 @@ function init() {
  * @function
  */
 function sendEventToFrame(eventName, origin) {
-  logInfo("Send to Frame:",eventName,origin);
+  logInfo("Send to Frame:", eventName, origin);
   init().then((result) => {
     let iframe = result.iframe,
-        config = result.config;
+      config = result.config;
     let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
     if (iframe && hubDomain) {
       // tag::subscriber-postMessage[]
       // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
-      iframe.contentWindow.postMessage({ event: eventName, origin: origin }, hubDomain);
+      // MSIE needs Strings in postMessage
+      let message = JSON.stringify({ event: eventName, origin: origin });
+      iframe.contentWindow.postMessage(message, hubDomain);
       // end::subscriber-postMessage[]
     }
   });
@@ -79,10 +81,11 @@ function readConfigFromFrame(origin) {
       // only listen to our hub
       let hubOrigin = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
       if (config && hubOrigin && hubOrigin.indexOf(event.origin) !== -1) {
-        logDebug('Message from hub received...', event.origin, event.data);
+        let message = typeof event.data !== 'object' ? JSON.parse(event.data) : event.data;
+        logDebug('Message from hub received...', event.origin, message);
         removeMessageListener(handler);
         frameListenerRegistered = false;
-        resolve(event.data);
+        resolve(message);
       }
       // end::subscriber-receiveMessage[]
     }
@@ -158,6 +161,6 @@ export function activatePowerOptInWithRedirect() {
 
   if (config) {
     let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION];
-    window.location.replace(hubLocation+'?'+POI_FALLBACK_NAME+'=1');
+    window.location.replace(hubLocation + '?' + POI_FALLBACK_NAME + '=1');
   }
 }
