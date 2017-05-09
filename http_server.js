@@ -6,6 +6,7 @@ const compression = require('compression');
 // import CORS config
 // const cors = require('cors');
 const corsConfig = require('./etc/corsConfig');
+const p3p = require('p3p');
 
 // let basic = auth.basic({realm: 'Project OIL'}, (username, password, callback) => callback(username === 'oil' && password === 'rig'));
 
@@ -42,7 +43,7 @@ let app = express();
 
 // CORS
 app.use(allowCrossDomain);
-// app.use(cors());
+app.use(p3p(p3p.recommended));
 
 // server gzip
 app.use(compression());
