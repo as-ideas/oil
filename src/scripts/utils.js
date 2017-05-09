@@ -1,4 +1,5 @@
 import Cookie from 'js-cookie';
+import { logDebug } from './log.js';
 
 /**
  * Merge the objects,
@@ -53,12 +54,12 @@ export function isProd() {
 }
 
 /**
- * Sent love event
- * @param eventName - event to sent
+ * Sent event to host site
+ * @param eventName - event payload to sent
  * @function
  */
-export function sendEventToSite(eventName) {
-  logInfo("Send to Site:", eventName);
+export function sendEventToHostSite(eventName) {
+  logDebug("Send to Site:", eventName);
   window.postMessage(eventName, getOrigin());
 }
 

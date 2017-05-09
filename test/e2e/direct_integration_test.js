@@ -4,8 +4,6 @@ const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
 const OIL_YES_SMALL_BUTTON = '//*[@data-qa="oil-small-YesButton"]';
 
 module.exports = {
-  '@disable': true,
-
   beforeEach: browser => {
      browser
       .url(browser.globals.launch_url_host1 + "end2end-tests/direct-integration.html")

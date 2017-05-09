@@ -19,19 +19,16 @@ let config = null,
  */
 function init() {
   return new Promise((resolve) => setTimeout(() => {
-    logInfo("initFrame");
+    logInfo("Initializing Frame...");
     // read config data if not already set
     if (!config) {
       config = getConfiguration();
     }
     if (config) {
-      logInfo("initFrame2");
       let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION];
       if (hubLocation) {
-        logInfo("initFrame3");
         // setup iframe
         let iframe = addFrame(hubLocation);
-        logInfo("initFrame4");
         if (iframe && !iframe.onload) {
           // Listen to message from child window after iFrame load
           iframe.onload = () => resolve({ iframe: iframe, config: config });
@@ -41,11 +38,11 @@ function init() {
         }
       } else {
         logError(`Config for ${OIL_CONFIG.ATTR_HUB_ORIGIN} and ${OIL_CONFIG.ATTR_HUB_PATH} isnt set. No POI possible.`);
-        resolve({});
+        resolve({ config: config });
       }
     } else {
       logError('Empty Config');
-      resolve({});
+      resolve({ config: {}});
     }
   }));
 }
@@ -61,7 +58,6 @@ function sendEventToFrame(eventName, origin) {
     let iframe = result.iframe,
         config = result.config;
     let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
-    logDebug(hubDomain);
     if (iframe && hubDomain) {
       // tag::subscriber-postMessage[]
       // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax

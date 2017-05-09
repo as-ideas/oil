@@ -45,6 +45,11 @@ module.exports = {
     chunks: ['end2end-tests/direct-integration'],
     chunksSortMode: 'dependency'
   }, {
+    filename: 'end2end-tests/direct-integration-event-test.html',
+    template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration-event-test.html'),
+    chunks: ['end2end-tests/direct-integration-event-test'],
+    chunksSortMode: 'dependency'
+  }, {
     filename: 'end2end-tests/complete-integration-mypass.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'complete-integration-mypass.html'),
     chunks: ['end2end-tests/complete-integration-mypass'],
@@ -69,6 +74,7 @@ module.exports = {
     'demos/complete-integration-site-b': [path.resolve(sourcePath, 'subscriber.js'), path.resolve(sourcePath, 'demos', 'complete-integration-site-b.js')],
     'demos/complete-integration-mypass': path.resolve(sourcePath, 'hub.js'),
     'end2end-tests/direct-integration': path.resolve(sourcePath, 'subscriber.js'),
+    'end2end-tests/direct-integration-event-test': path.resolve(sourcePath, 'subscriber.js'),
     'end2end-tests/complete-integration-site-a': path.resolve(sourcePath, 'subscriber.js'),
     'end2end-tests/complete-integration-site-b': path.resolve(sourcePath, 'subscriber.js'),
     'end2end-tests/complete-integration-mypass': path.resolve(sourcePath, 'hub.js'),

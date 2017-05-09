@@ -1,7 +1,11 @@
 import Cookie from 'js-cookie';
 import { activatePowerOptIn, verifyPowerOptIn } from './poi.js';
 import { logDebug } from './log.js';
-import { isCookie, isCookieValid, extend } from './utils.js';
+import { isCookie, isCookieValid, extend, sendEventToHostSite } from './utils.js';
+import { OIL_CONFIG } from './constants.js';
+import { getConfiguration } from './config.js';
+
+let config = null;
 
 // Our cookie default settings
 const oilCookie = {
@@ -77,6 +81,7 @@ export function oilPowerOptIn(powerOnly = true) {
 
   // Update Oil cookie (mypass - POI)
   activatePowerOptIn();
+  fireOptInEvent();
   return new Promise((resolve) => {
     resolve(newCookieData);
   });
@@ -96,11 +101,30 @@ export function oilOptIn() {
   // Update Oil cookie
   Cookie.set(oilCookie.name, newCookieData, { expires: oilCookie.expires });
 
+  fireOptInEvent();
   return new Promise((resolve) => {
     resolve(newCookieData);
   });
 }
 
+/**
+ * Fires the opt-in event for the host site if wanted
+ * @return
+ */
+export function fireOptInEvent() {
+  if (!config) {
+    config = getConfiguration();
+  }
+  if (config) {
+    let eventName = config[OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME];
+    if (eventName) {
+      logDebug('Fire OptIn Event ('+eventName+'), notifying host application...');
+      sendEventToHostSite(eventName);
+    } else {
+      logDebug('Fire OptIn Event not configured. No host application notification.');
+    }
+  }
+}
 
 /**
  * Oil optLater
