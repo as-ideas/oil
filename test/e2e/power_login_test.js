@@ -5,6 +5,8 @@ const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
 const OIL_YES_SMALL_BUTTON = '//*[@data-qa="oil-small-YesButton"]';
 const OIL_YES_POI_SMALL_BUTTON = '//*[@data-qa="oil-small-poi-YesButton"]';
 
+
+const REDIRECT_TIMEOUT = 5000;
 const ASSERT_TIMEOUT = 2000;
 const PAGE_INIT_TIMEOUT = 20000;
 
@@ -35,14 +37,21 @@ module.exports = {
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
       .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
-      .click(OIL_YES_POI_BUTTON)
-      .waitForElementNotVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
-      .assert.cssClassPresent(OIL_LAYER, 'optin-true')
+      .click(OIL_YES_POI_BUTTON);
+    browser.url((result) => {
+      if (result.toString().indexOf('fallback') !== -1) {
+        browser.waitForElementNotVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
+          .assert.cssClassPresent(OIL_LAYER, 'optin-true')
+      } else {
+        browser.pause(ASSERT_TIMEOUT);
+      }
+    });
+    browser
+      .pause(REDIRECT_TIMEOUT)
       .url(browser.globals.launch_url_host2 + 'end2end-tests/complete-integration-site-b.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
-      .pause(ASSERT_TIMEOUT)
       .waitForElementNotPresent(OIL_LAYER, 500)
       .end();
   },
@@ -57,14 +66,23 @@ module.exports = {
       .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
       .click(OIL_NO_BUTTON)
       .waitForElementVisible(OIL_YES_POI_SMALL_BUTTON, ASSERT_TIMEOUT, false)
-      .click(OIL_YES_POI_SMALL_BUTTON)
-      .waitForElementNotVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
-      .assert.cssClassPresent(OIL_LAYER, 'optin-true')
+      .click(OIL_YES_POI_SMALL_BUTTON);
+    browser.url((result) => {
+      if (result.toString().indexOf('fallback') !== -1) {
+        browser
+          .waitForElementNotVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
+          .assert.cssClassPresent(OIL_LAYER, 'optin-true')
+      } else {
+        browser.pause(REDIRECT_TIMEOUT)
+      }
+      // return the current url
+      console.log(result);
+    });
+    browser
       .url(browser.globals.launch_url_host2 + 'end2end-tests/complete-integration-site-b.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
-      .pause(ASSERT_TIMEOUT)
       .waitForElementNotPresent(OIL_LAYER, 500)
       .end();
   },
@@ -77,9 +95,19 @@ module.exports = {
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
       .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
-      .click(OIL_YES_BUTTON)
-      .waitForElementNotVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
-      .assert.cssClassPresent(OIL_LAYER, 'optin-true')
+      .click(OIL_YES_BUTTON);
+    browser.url((result) => {
+      if (result.toString().indexOf('fallback') !== -1) {
+        browser
+          .waitForElementNotVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
+          .assert.cssClassPresent(OIL_LAYER, 'optin-true')
+      } else {
+        browser.pause(REDIRECT_TIMEOUT)
+      }
+      // return the current url
+      console.log(result);
+    });
+    browser
       .url(browser.globals.launch_url_host2 + 'end2end-tests/complete-integration-site-b.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
@@ -98,10 +126,20 @@ module.exports = {
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
       .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
-      .click(OIL_NO_BUTTON)
-      .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
-      .assert.cssClassPresent(OIL_LAYER, 'optin-false')
-      .assert.cssClassPresent(OIL_LAYER, 'expanded-false')
+      .click(OIL_NO_BUTTON);
+    browser.url((result) => {
+      if (result.toString().indexOf('fallback') !== -1) {
+        browser
+          .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
+          .assert.cssClassPresent(OIL_LAYER, 'optin-false')
+          .assert.cssClassPresent(OIL_LAYER, 'expanded-false')
+      } else {
+        browser.pause(REDIRECT_TIMEOUT)
+      }
+      // return the current url
+      console.log(result);
+    });
+    browser
       .url(browser.globals.launch_url_host2 + 'end2end-tests/complete-integration-site-b.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
