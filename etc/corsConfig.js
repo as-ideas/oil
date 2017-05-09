@@ -4,7 +4,7 @@ let headers = {
   "Access-Control-Allow-Credentials": "true",
   "Access-Control-Allow-Headers": "Content-Type, Authorization, x-id, Content-Length, X-Requested-With, Origin",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "p3p": "CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\""
+  "p3p": "CP=\"NON DSP LAW CUR ADM DEV TAI PSA PSD HIS OUR DEL IND UNI PUR COM NAV INT DEM CNT STA POL HEA PRE LOC IVD SAM IVA OTC\""
   // end::cors-config[]
 };
 module.exports = {
