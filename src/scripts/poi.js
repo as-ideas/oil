@@ -129,11 +129,11 @@ export function verifyPowerOptIn() {
   });
 }
 /**
- * Activate Power Opt IN
+ * Activate Power Opt IN with the use of an iframe
  * @function
  * @return promise when done
  */
-export function activatePowerOptIn() {
+export function activatePowerOptInWithIFrame() {
   logDebug('activatePowerOptIn');
   // reset config
   config = null;
@@ -144,4 +144,20 @@ export function activatePowerOptIn() {
     // defer answer to next tick
     setTimeout(resolve);
   }));
+}
+
+/**
+ * Activate Power Opt IN with the use of an redirect
+ * @function
+ * @return none
+ */
+export function activatePowerOptInWithRedirect() {
+  if (!config) {
+    config = getConfiguration();
+  }
+
+  if (config) {
+    let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION];
+    window.location.replace(hubLocation+'?'+POI_FALLBACK_NAME+'=1');
+  }
 }

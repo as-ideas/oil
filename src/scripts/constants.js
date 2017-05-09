@@ -10,3 +10,5 @@ export const OIL_CONFIG = {
   ATTR_SUB_SET_COOKIE: 'subscriber_set_cookie',
   ATTR_OPT_IN_EVENT_NAME: 'opt_in_event_name'
 }
+
+export const POI_FALLBACK_NAME = 'fallback';

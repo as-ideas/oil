@@ -1,8 +1,8 @@
 import Cookie from 'js-cookie';
-import { activatePowerOptIn, verifyPowerOptIn } from './poi.js';
+import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect, verifyPowerOptIn } from './poi.js';
 import { logDebug } from './log.js';
 import { isCookie, isCookieValid, extend, sendEventToHostSite } from './utils.js';
-import { OIL_CONFIG } from './constants.js';
+import { OIL_CONFIG, POI_FALLBACK_NAME } from './constants.js';
 import { getConfiguration } from './config.js';
 
 let config = null;
@@ -80,7 +80,16 @@ export function oilPowerOptIn(powerOnly = true) {
   }
 
   // Update Oil cookie (mypass - POI)
-  activatePowerOptIn();
+  activatePowerOptInWithIFrame();
+
+  // Check if fallback is needed
+  verifyPowerOptIn().then((result) => {
+    if (result !== true) {
+      logDebug("iFrame POI didnt work. Trying fallback now.");
+      activatePowerOptInWithRedirect();
+    }
+  });
+
   fireOptInEvent();
   return new Promise((resolve) => {
     resolve(newCookieData);
