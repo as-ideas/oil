@@ -1,4 +1,4 @@
-import { OIL_CONFIG } from './constants.js';
+import { OIL_CONFIG, POI_FALLBACK_NAME } from './constants.js';
 import { getConfiguration } from './config.js';
 import { addFrame } from './iframe.js';
 import { getOrigin, registerMessageListener, removeMessageListener } from './utils.js';

@@ -1,4 +1,4 @@
-import { activatePowerOptIn, verifyPowerOptIn } from "../../src/scripts/poi";
+import { activatePowerOptInWithIFrame, verifyPowerOptIn } from "../../src/scripts/poi";
 import { loadFixture, deleteAllCookies } from "../utils";
 
 describe('poi', () => {
@@ -22,7 +22,7 @@ describe('poi', () => {
   it('should disable POI by default', (done) => {
     loadFixture('poi/poi.config-error.html');
 
-    activatePowerOptIn().then(() => verifyPowerOptIn().then((optin) => {
+    activatePowerOptInWithIFrame().then(() => verifyPowerOptIn().then((optin) => {
       expect(optin).toBe(false);
       done();
     })
@@ -31,7 +31,7 @@ describe('poi', () => {
 
   it('should disable POI on config error', (done) => {
     loadFixture('poi/poi.wrong-iframe.html');
-    activatePowerOptIn().then(() => verifyPowerOptIn().then((optin) => {
+    activatePowerOptInWithIFrame().then(() => verifyPowerOptIn().then((optin) => {
       expect(optin).toBe(false);
       done();
     })
@@ -40,7 +40,7 @@ describe('poi', () => {
 
   it('should activate POI', (done) => {
     loadFixture('poi/poi.default.html');
-    activatePowerOptIn().then(() => verifyPowerOptIn().then((optin) => {
+    activatePowerOptInWithIFrame().then(() => verifyPowerOptIn().then((optin) => {
       expect(optin).toBeDefined();
       expect(optin).toBe(true);
       done();

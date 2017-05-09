@@ -2,7 +2,7 @@ import Cookie from 'js-cookie';
 import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect, verifyPowerOptIn } from './poi.js';
 import { logDebug } from './log.js';
 import { isCookie, isCookieValid, extend, sendEventToHostSite } from './utils.js';
-import { OIL_CONFIG, POI_FALLBACK_NAME } from './constants.js';
+import { OIL_CONFIG } from './constants.js';
 import { getConfiguration } from './config.js';
 
 let config = null;
