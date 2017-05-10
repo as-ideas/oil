@@ -23,13 +23,25 @@ nightwatch_config = {
     chrome14: {
       desiredCapabilities: {
         'browser': 'Chrome',
-        'browser_version': '14.0',
+        'browser_version': '14.0'
       }
     },
-    chromeRecent: {
+    chrome40: {
+      desiredCapabilities: {
+        'browser': 'Chrome',
+        'browser_version': '40.0'
+      }
+    },
+    chrome57: {
       desiredCapabilities: {
         'browser': 'Chrome',
         'browser_version': '57.0',
+      }
+    },
+    ie8: {
+      desiredCapabilities: {
+        'browser': 'IE',
+        'browser_version': '8.0'
       }
     },
     ie9: {
@@ -38,18 +50,37 @@ nightwatch_config = {
         'browser_version': '9.0',
       }
     },
-    edge: {
-      'os': 'Windows',
-      'browser': 'Edge',
-      'browser_version': '14.0'
-    },
-    firefox9: {
+    ie10: {
       desiredCapabilities: {
-        'browser': 'Firefox',
-        'browser_version': '9.0',
+        'browser': 'IE',
+        'browser_version': '10.0',
       }
     },
-    firefoxRecent: {
+    ie11: {
+      desiredCapabilities: {
+        'browser': 'IE',
+        'browser_version': '11.0',
+      }
+    },
+    edge14: {
+      desiredCapabilities: {
+        'browser': 'Edge',
+        'browser_version': '14.0'
+      }
+    },
+    ff9: {
+      desiredCapabilities: {
+        'browser': 'Firefox',
+        'browser_version': '9.0'
+      }
+    },
+    ff35: {
+      desiredCapabilities: {
+        'browser': 'Firefox',
+        'browser_version': '35.0'
+      }
+    },
+    ff52: {
       desiredCapabilities: {
         'browser': 'Firefox',
         'browser_version': '52.0'
@@ -57,24 +88,53 @@ nightwatch_config = {
     },
     safari6: {
       desiredCapabilities: {
-        'os': 'OS X',
         'browser': 'Safari',
         'browser_version': '6.0',
       }
     },
-    safariRecent: {
+    safari71: {
       desiredCapabilities: {
-        'os': 'OS X',
+        'browser': 'Safari',
+        'browser_version': '7.1'
+      }
+    },
+    safari8: {
+      desiredCapabilities: {
+        'browser': 'Safari',
+        'browser_version': '8.0'
+      }
+    },
+    safari91: {
+      desiredCapabilities: {
         'browser': 'Safari',
         'browser_version': '9.1'
       }
     },
-    opera: {
+    opera1216: {
       desiredCapabilities: {
-        'os': 'Windows',
-        'os_version': '7',
         'browser': 'Opera',
         'browser_version': '12.16',
+      }
+    },
+    ipad4: {
+      desiredCapabilities: {
+        'browserName': 'iPad',
+        'platform': 'MAC',
+        'device': 'iPad 4th'
+      }
+    },
+    iphone5: {
+      desiredCapabilities: {
+        'browserName': 'iPhone',
+        'platform': 'MAC',
+        'device': 'iPhone 5'
+      }
+    },
+    iphone6: {
+      desiredCapabilities: {
+        'browserName': 'iPhone',
+        'platform': 'MAC',
+        'device': 'iPhone 6'
       }
     },
     android4: {
@@ -84,107 +144,14 @@ nightwatch_config = {
         'device': 'HTC One M8'
       }
     },
-    iphone5: {
+    android5: {
       desiredCapabilities: {
-        'browserName': 'iPhone',
-        'platform': 'MAC',
-        'device': 'iPhone 5'
+        'browserName': 'android',
+        'platform': 'ANDROID',
+        'device': 'Google Nexus 5'
       }
-    }, 
-    chrome14Win7: {
-    	desiredCapabilities: {
-		  'os': 'Windows',
-		  'os_version': '7',
-		  'browser': 'Chrome',
-		  'browser_version': '14.0'
-		}
-	}, 
-    chrome40Win81: {
-    	desiredCapabilities: {
-		  'os': 'Windows',
-		  'os_version': '8.1',
-		  'browser': 'Chrome',
-		  'browser_version': '40.0'
-		}
-	}, 
-    IE8Win7: {
-    	desiredCapabilities: {
-		  'os': 'Windows',
-		  'os_version': '7',
-		  'browser': 'IE',
-		  'browser_version': '8.0'
-		}
-	}, 
-    FF9Win7: {
-    	desiredCapabilities: {
-		  'os': 'Windows',
-		  'os_version': '7',
-		  'browser': 'Firefox',
-		  'browser_version': '9.0'
-		}
-	},  
-    FF35Win81: {
-    	desiredCapabilities: {
-		  'os': 'Windows',
-		  'os_version': '8.1',
-		  'browser': 'Firefox',
-		  'browser_version': '35.0'
-		}
-	}, 
-    Opera1215Win81: {
-    	desiredCapabilities: {
-		  'os': 'Windows',
-		  'os_version': '8.1',
-		  'browser': 'Opera',
-		  'browser_version': '12.15'
-		}
-	},  
-    Safari71: {
-    	desiredCapabilities: {
-		  'os': 'OS X',
-		  'os_version': 'Mavericks',
-		  'browser': 'Safari',
-		  'browser_version': '7.1'
-		}
-	},  
-    Safari8: {
-    	desiredCapabilities: {
-		  'os': 'OS X',
-		  'os_version': 'Yosemite',
-		  'browser': 'Safari',
-		  'browser_version': '8.0'
-		}
-	},  
-    Safari91: {
-    	desiredCapabilities: {
-		  'os': 'OS X',
-		  'os_version': 'Yosemite',
-		  'browser': 'Safari',
-		  'browser_version': '9.1'
-		}
-	},  
-    iphone5s_ios6: {
-    	desiredCapabilities: {
-			'browserName': 'iPhone',
-			'platform': 'MAC',
-			'device': 'iPhone 5S'
-		}
-	},  
-    ipad4_ios7: {
-    	desiredCapabilities: {
-		  'browserName': 'iPad',
-		  'platform': 'MAC',
-		  'device': 'iPad 4th'
-		}
-	},  
-    iphone6_ios83: {
-    	desiredCapabilities: {
-		  'browserName': 'iPhone',
-		  'platform': 'MAC',
-		  'device': 'iPhone 6'
-		}
-	}  
-  }
+    },
+  },
 };
 
 // Code to support common capabilites

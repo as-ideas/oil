@@ -25,20 +25,8 @@ endif::basebackend-html[]
 // configure EN settings for asciidoc
 include::src/config.adoc[]
 
-
-include::src/about-arc42.adoc[]
-
 // horizontal line
 ***
-
-[NOTE]
-====
-This version of the template contains some help and explanations.
-It is used for familiarization with arc42 and the understanding of the concepts.
-For documentation of your own system you use better the _plain_ version.
-====
-
-
 
 // numbering from here on
 :numbered:
@@ -91,4 +79,5 @@ include::src/11_technical_risks.adoc[]
 // 12. Glossary
 include::src/12_glossary.adoc[]
 
+include::src/about-arc42.adoc[]
 
