@@ -2,23 +2,23 @@
 == Solution Strategy
 
 
-[role="arc42help"]
-****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape the system's architecture. These include
+According the proposal of the Commission, the European Parliament, and the Council of Ministers, web browsers (and similar software) will be required to prompt users with a menu of privacy options when they are installed for the first time.[1] The menu options will range from an extreme ban on all cookies to acceptance of all cookies, and will include intermediate options such as "reject third-party cookies"”" or "only accept first-party cookies". This is mandatory – a user must select one option from the menu in order to continue with the installation.
 
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
+So solve this issue the ASV Opt In Layer (OIL) offers the basics to implement these requirements. Therefore the solution consists of two parts:
 
-.Motivation
-These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.
+* A **hub**, which is added as an iframe to the site which is pointing to a new 3rd-party domain, which is independent from all current sites
+* A **subscriber**, which communicates with this hub to get the the needed information from the hub
 
-.Form
-Keep the explanation of these key decisions short.
+[caption="OIL Flow"]
+image::images/oil-poi-flow.png[OIL Flow]
 
-Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
-Refer to details in the following sections.
-****
+So when a user give the Power Opt In (POI) the subscriber sends a message via postMessage to the hub to inform the activation of the 3rd party cookie. By setting the cookie in the hub the 3rd party cookie became then a 1st party cookie. For some even stricter browsers, e.g. newer Safari versions footnote:[Chrome maybe also disable it by default in the future] a fallback is implemented which redirects then the user to hub site to set the cookie and then redirects back. But this fallback is only needed for the first visit.
+
+Additionally the CORS setup needs to be correct, see link:07_deployment_view.adoc[]
+
+:ext-relative: {07_deployment_view}
+
+[IMPORTANT]
+====
+On MSIE the postMessage only accepts strings, see http://kohsuke.org/2012/09/11/internet-explorer-only-takes-string-in-html5-postmessage/[here].
+====
