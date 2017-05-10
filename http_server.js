@@ -26,14 +26,7 @@ let allowCrossDomain = function (req, res, next) {
     let object = corsConfig.headers[key];
     res.header(key, object);
   }
-
-  // intercept OPTIONS method
-  /*if ('OPTIONS' == req.method) {
-    res.sendStatus(204);
-  }*/
-  //else {
   next();
-  //}
 };
 
 /*
@@ -43,7 +36,7 @@ let app = express();
 
 // CORS
 app.use(allowCrossDomain);
-app.use(p3p(p3p.recommended));
+//app.use(p3p(p3p.recommended)); // needed?
 
 // server gzip
 app.use(compression());
