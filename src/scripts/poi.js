@@ -161,6 +161,8 @@ export function activatePowerOptInWithRedirect() {
 
   if (config) {
     let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION];
-    window.location.replace(hubLocation + '?' + POI_FALLBACK_NAME + '=1');
+    if (hubLocation) {
+      window.location.replace(hubLocation + '?' + POI_FALLBACK_NAME + '=1');
+    }
   }
 }

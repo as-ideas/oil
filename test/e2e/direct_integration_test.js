@@ -74,7 +74,7 @@ module.exports = {
       .end();
   },
 
-    'OIL Layer wont break after the user deleted cookies while having the page open and then click no' : function (browser) {
+  'OIL Layer wont break after the user deleted cookies while having the page open and then click no' : function (browser) {
     browser
       .deleteCookies()
       .click(OIL_NO_BUTTON)
