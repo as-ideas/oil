@@ -1,6 +1,3 @@
-// header file for arc42-template,
-// including all help texts
-//
 // ====================================
 
 = image:src/images/logo.png[OIL Logo] Documentation
@@ -36,48 +33,14 @@ include::src/config.adoc[]
 include::src/01_introduction_and_goals.adoc[]
 
 <<<<
-// 2. Architecture Constraints
-include::src/02_architecture_constraints.adoc[]
+// 2. Solution Strategy
+include::src/02_solution_strategy.adoc[]
 
 <<<<
-// 3. System Scope and Context
-include::src/03_system_scope_and_context.adoc[]
+// 3. Deployment
+include::src/03_deployment.adoc[]
 
 <<<<
-// 4. Solution Strategy
-include::src/04_solution_strategy.adoc[]
-
-<<<<
-// 5. Building Block View
-include::src/05_building_block_view.adoc[]
-
-<<<<
-// 6. Runtime View
-include::src/06_runtime_view.adoc[]
-
-<<<<
-// 7. Deployment View
-include::src/07_deployment_view.adoc[]
-
-<<<<
-// 8. Concepts
-include::src/08_concepts.adoc[]
-
-<<<<
-// 9. Design Decisions
-include::src/09_design_decisions.adoc[]
-
-<<<<
-// 10. Quality Scenarios
-include::src/10_quality_scenarios.adoc[]
-
-<<<<
-// 11. Technical Risks
-include::src/11_technical_risks.adoc[]
-
-<<<<
-// 12. Glossary
-include::src/12_glossary.adoc[]
-
-include::src/about-arc42.adoc[]
+// 4. Design Decisions
+include::src/04_design_decisions.adoc[]
 
