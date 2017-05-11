@@ -17,51 +17,19 @@ Only the end2end stage has an "automatic" update via a CDN.
 [caption="Deployment"]
 image::images/deployment.png[OIL Deployment]
 
-
-[role="arc42help"]
-****
-.Content
-The deployment view describes:
-
- 1. the technical infrastructure used to execute your system, with infrastructure elements like geographical locations, environments, computers, processors, channels and net topologies as well as other infrastructure elements and
-
-2. the mapping of (software) building blocks to that infrastructure elements.
-
-Often systems are executed in different environments, e.g. development environment, test environment, production environment. In such cases you should document all relevant environments.
-
-Especially document the deployment view when your software is executed as distributed system with more then one computer, processor, server or container or when you design and construct your own hardware processors and chips.
-
-From a software perspective it is sufficient to capture those elements of the infrastructure that are needed to show the deployment of your building blocks. Hardware architects can go beyond that and describe the infrastructure to any level of detail they need to capture.
-
-.Motivation
-Software does not run without hardware.
-This underlying infrastructure can and will influence your system and/or some
-cross-cutting concepts. Therefore, you need to know the infrastructure.
-
-.Form
-
-Maybe the highest level deployment diagram is already contained in section 3.2. as
-technical context with your own infrastructure as ONE black box. In this section you will
-zoom into this black box using additional deployment diagrams:
-
-* UML offers deployment diagrams to express that view. Use it, probably with nested diagrams,
-when your infrastructure is more complex.
-* When your (hardware) stakeholders prefer other kinds of diagrams rather than the deployment diagram, let them use any kind that is able to show nodes and channels of the infrastructure.
-****
-
-=== Infrastructure Level 1
-
 The website which is using OIL should support Cross Origin Resource Sharing (CORS) from the hub domain and include it via HTTPS. For more details about CORS see https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Access-Control-Allow-Origin[here].
  
 The CORS setup allows that the OIL hub sents the cookie data back to the subscriber (the brand site).
 
 // FIXME AoD
 
-
 [source,json]
 ----
 include::{project_root}/etc/corsConfig.js[tags=cors-config]
 ----
+
+=== Hub Deployment
+To deploy the hub (i.e. as a MyPass service) you need to deploy the project with an index.html loading dist/hub.123.js. In our examples this is demos/complete-integration-mypass.html
 
 === Tealium Deployment
 For our PoC we decided to use Tealium to deliver our Javascript artefact to client browsers. To achieve this you have to follow some steps:
@@ -70,7 +38,7 @@ As a developer of Oil.js (see image below)
 
 * Open your Tealium lib profile and move to extensions
 * Open the predefined Javascript extension "AS Opt-in Overlay"
-* Some forms will show up, paste your code in the "configuration" section
+* Some forms will show up, paste your code (dist/subscriber.123.js) in the "configuration" section
 * Save and Publish your Tealium configuration changes in your desired stages (Dev, QA, Prod)
 
 Please note that once published, your code will be delivered to all Tealium clients automagically.
@@ -81,7 +49,7 @@ image::images/tealium-lib-profile-extension-view.png[Tealium Library Profile]
 
 As a client of Tealium (see image below)
 
-* Open your Realium profile and move to "extensions"
+* Open your Tealium profile and move to "extensions"
 * Find the entry for "AS Opt-in Overlay", you'll be noticed of a change to this extension
 * Publish / deploy your profile to activate the changes to Oil.js
 

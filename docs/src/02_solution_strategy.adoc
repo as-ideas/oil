@@ -2,7 +2,7 @@
 == Solution Strategy
 
 
-According the proposal of the Commission, the European Parliament, and the Council of Ministers, web browsers (and similar software) will be required to prompt users with a menu of privacy options when they are installed for the first time.[1] The menu options will range from an extreme ban on all cookies to acceptance of all cookies, and will include intermediate options such as "reject third-party cookies"”" or "only accept first-party cookies". This is mandatory – a user must select one option from the menu in order to continue with the installation.
+According the proposal of the Commission, the European Parliament, and the Council of Ministers, web browsers (and similar software) will be required to prompt users with a menu of privacy options when they are installed for the first time.[1] The menu options will range from an extreme ban on all cookies to acceptance of all cookies, and will include intermediate options such as "reject third-party cookies"”" or "only accept first-party cookies".
 
 So solve this issue the ASV Opt In Layer (OIL) offers the basics to implement these requirements. Therefore the solution consists of two parts:
 
@@ -14,11 +14,11 @@ image::images/oil-poi-flow.png[OIL Flow]
 
 So when a user give the Power Opt In (POI) the subscriber sends a message via postMessage to the hub to inform the activation of the 3rd party cookie. By setting the cookie in the hub the 3rd party cookie became then a 1st party cookie. For some even stricter browsers, e.g. newer Safari versions footnote:[Chrome maybe also disable it by default in the future] a fallback is implemented which redirects then the user to hub site to set the cookie and then redirects back. But this fallback is only needed for the first visit.
 
-Additionally the CORS setup needs to be correct, see link:07_deployment_view.adoc[]
+Additionally the CORS setup needs to be correct, see link:04_deployment.adoc[]
 
-:ext-relative: {07_deployment_view}
+:ext-relative: {04_deployment}
 
 [IMPORTANT]
 ====
-On MSIE the postMessage only accepts strings, see http://kohsuke.org/2012/09/11/internet-explorer-only-takes-string-in-html5-postmessage/[here].
+On MSIE the postMessage function used only accepts strings, see http://kohsuke.org/2012/09/11/internet-explorer-only-takes-string-in-html5-postmessage/[here].
 ====

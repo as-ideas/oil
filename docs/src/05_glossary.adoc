@@ -1,0 +1,9 @@
+[[section-glossary]]
+== Glossary
+
+[options="header"]
+|===
+| Term         | Definition
+| POI    | Power Opt In
+| SOI    | Single Opt In
+|===
