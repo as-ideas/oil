@@ -4,7 +4,6 @@ const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
 const OIL_YES_SMALL_BUTTON = '//*[@data-qa="oil-small-YesButton"]';
 
 module.exports = {
-  '@disabled': true, // weirdly fails recently on some browsers, even though it works on them manually
 
   beforeEach: browser => {
      browser
