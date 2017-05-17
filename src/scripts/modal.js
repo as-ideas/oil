@@ -36,7 +36,7 @@ export function defineOilContent() {
               </span>
             </button>
             <button class="oil__button oil__button--3rd js-optlater" data-qa="oil-NotNowButton">
-              Später entscheiden
+              Nein, jetzt nicht
             </button>
           </div>
         </div>
