@@ -6,7 +6,7 @@ const debugLog = util.debuglog('oil-debug');
 const isDebug = false;
 const webpackConfig = require('./webpack.test.js');
 // import CORS config
-const corsConfig = require('./corsConfig');
+const headerConfig = require('./headerConfig');
 
 const helpers = require('./helpers');
 const appConfig = helpers.getAppConfig();
@@ -121,11 +121,11 @@ module.exports = function (config) {
   }
 
   config.customHeaders = [];
-  for (key in corsConfig.headers) {
+  for (key in headerConfig.headers) {
     // skip loop if the property is from prototype
-    if (!corsConfig.headers.hasOwnProperty(key)) continue;
+    if (!headerConfig.headers.hasOwnProperty(key)) continue;
     // copy header config
-    let object = corsConfig.headers[key];
+    let object = headerConfig.headers[key];
     config.customHeaders.push({
       match: '.*',
       name: key,

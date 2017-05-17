@@ -17,19 +17,15 @@ Only the end2end stage has an "automatic" update via a CDN.
 [caption="Deployment"]
 image::images/deployment.png[OIL Deployment]
 
-The website which is using OIL should support Cross Origin Resource Sharing (CORS) from the hub domain and include it via HTTPS. For more details about CORS see https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Access-Control-Allow-Origin[here].
- 
-The CORS setup allows that the OIL hub sents the cookie data back to the subscriber (the brand site).
+=== Hub Deployment
+To deploy the hub (i.e. as a MyPass service) you need to deploy the project with an index.html loading dist/hub.123.js. In our examples this is demos/complete-integration-mypass.html
 
-// FIXME AoD
+For compatibility with Internet Explorer 9+ you need to add the following header to the server response to allow 3rd party cookies for POI. It's needed in SOI only mode.
 
 [source,json]
 ----
-include::{project_root}/etc/corsConfig.js[tags=cors-config]
+include::{project_root}/etc/headerConfig.js[tags=p3p-config]
 ----
-
-=== Hub Deployment
-To deploy the hub (i.e. as a MyPass service) you need to deploy the project with an index.html loading dist/hub.123.js. In our examples this is demos/complete-integration-mypass.html
 
 === Tealium Deployment
 For our PoC we decided to use Tealium to deliver our Javascript artefact to client browsers. To achieve this you have to follow some steps:
@@ -41,7 +37,7 @@ As a developer of Oil.js (see image below)
 * Some forms will show up, paste your code (dist/subscriber.123.js) in the "configuration" section
 * Save and Publish your Tealium configuration changes in your desired stages (Dev, QA, Prod)
 
-Please note that once published, your code will be delivered to all Tealium clients automagically.
+Please note that once published, your code will be delivered to all Tealium clients automatically.
 Tealium clients will be informed of your changes and need to publish/deploy their profile to activate your changes.
 
 [caption="Oil.js Tealium Deployment"]
@@ -55,3 +51,18 @@ As a client of Tealium (see image below)
 
 [caption="Oil.js Tealium Deployment"]
 image::images/tealium-user-profile-extension-view.png[Tealium Client Profile]
+
+****
+.JavaScript Code Extension
+Within an extension it's possible to handle the OptOut/OptIn logic during preload. This also allows to alter the later behaviour within Tealium.
+
+****
+****
+.Configuration ddsd
+
+You need to add a OIL configuration to the html of your host site. This is an example configuration:
+
+[source,json]
+----
+include::{project_root}/src/end2end-tests/complete-integration-site-a.html[tags=oil-config]
+----

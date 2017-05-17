@@ -1,7 +1,7 @@
 let headers = {
-  // tag::cors-config[]
+  // tag::p3p-config[]
   "p3p": "CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\""
-  // end::cors-config[]
+  // end::p3p-config[]
 };
 module.exports = {
   headers: headers

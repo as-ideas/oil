@@ -5,7 +5,7 @@ const serveStatic = require('serve-static');
 const compression = require('compression');
 
 // import CORS config
-const corsConfig = require('./etc/corsConfig');
+const headerConfig = require('./etc/headerConfig');
 
 // let basic = auth.basic({realm: 'Project OIL'}, (username, password, callback) => callback(username === 'oil' && password === 'rig'));
 
@@ -18,11 +18,11 @@ let DOCUMENT_ROOT = __dirname + '/dist';
 // end::cors-express[]
 let allowCrossDomain = function (req, res, next) {
   //res.header('Content-Security-Policy', 'script-src \'self\' *');
-  for (key in corsConfig.headers) {
+  for (key in headerConfig.headers) {
     // skip loop if the property is from prototype
-    if (!corsConfig.headers.hasOwnProperty(key)) continue;
+    if (!headerConfig.headers.hasOwnProperty(key)) continue;
     // copy header config
-    let object = corsConfig.headers[key];
+    let object = headerConfig.headers[key];
     res.header(key, object);
   }
   next();

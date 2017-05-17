@@ -3,30 +3,8 @@
 [[section-design-decisions]]
 == Design Decisions
 
-
+=== Cross-Origin Messaging
 ****
-.Tealium integration
-Within Tealium OIL is integrated as an JavaScript Code Extension, which fits the best into the overall model.
-
-.JavaScript Code Extension
-Within an extension it's possible to handle the OptOut/OptIn logic during preload. This also allows to alter the later behaviour within Tealium.
-
-.Configuratin
-
-
-[source,json]
-----
-include::{project_root}/src/end2end-tests/complete-integration-site-a.html[tags=oil-config]
-----
-
-****
-The website which is using OIL should support Cross Origin Resource Sharing (CORS) from the hub domain and include it via HTTPS. The OIL hub origin needs to be included in the CORS-origin. The same-origin policy is an important security concept implemented by web browsers to prevent Javascript code from making requests against a different origin (e.g., different domain) than the one from which it was served:
-
-[caption="CORS Principle"]
-image::images/CORS_principle.png[CORS Principle, source: https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Access-Control-Allow-Origin]
-
-Although the same-origin policy is effective in preventing resources from different origins, it also prevents legitimate interactions between a server and clients of a known and trusted origin. 
-For more details about CORS see https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Access-Control-Allow-Origin[here].
 
 The ``postMessage()`` method lifts this restriction by providing a way to securely pass messages across domains. The ``postMessage()`` method accepts two parameters.
 
