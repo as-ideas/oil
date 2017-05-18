@@ -1,5 +1,6 @@
 import { injectOil, addOilClickHandler } from "./scripts/modal.js";
 import { checkOptIn, fireOptInEvent } from "./scripts/optin.js";
+import { registerOptOutListener } from "./scripts/optout.js";
 import { initOilFrame } from "./scripts/iframe.listener.js";
 import { logDebug } from './scripts/log.js';
 
@@ -7,6 +8,7 @@ import { logDebug } from './scripts/log.js';
 export function initOilLayer() {
   logDebug('Init OilLayer');
   checkOptIn().then((cookie) => {
+    registerOptOutListener();
     if (!cookie.optin) {
       // Inject Oil overlay depending on cookie data
       injectOil(document.body);
