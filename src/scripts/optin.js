@@ -8,7 +8,7 @@ import { getConfiguration } from './config.js';
 let config = null;
 
 // Our cookie default settings
-const oilCookie = {
+export const oilCookie = {
   name: 'oil_data',
   expires: 31,
   config: {
