@@ -2,13 +2,12 @@ import { OIL_CONFIG } from './constants.js';
 import { extend } from "./utils";
 import { logInfo, logError } from './log';
 
-// TODO move to config
 const defaultConfig = {
-  opt_in_event_name: 'oil_optin_done',
-  hub_origin: '',
-  hub_path: '',
-  subscriber_set_cookie: false,
-  hub_src_url: null
+  'opt_in_event_name': 'oil_optin_done',
+  'hub_origin': '',
+  'hub_path': '',
+  'subscriber_set_cookie': true,
+  'opt_out_event_name': 'oil_optout_trigger'
 };
 
 /**
