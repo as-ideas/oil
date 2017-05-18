@@ -26,7 +26,7 @@ $breakpoints: (
 $text-color-primary:    rgba(255,255,255,0.85);
 $text-color-secondary:  rgb(70,200,120);
 $text-color-dark:       rgb(43, 43, 43);
-$btn-primary:           rgb(70,200,120);
+$btn-primary:           rgb(50,170,100);
 $btn-secondary:           transparent;
 
 
@@ -267,7 +267,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
   }
 
-
   .oil__button__label-2nd {
     display: block;
     margin: 2px 0;
@@ -279,11 +278,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 0.875rem;
     }
   }
-
-  &:hover {
-    transform: translateY(2px);
-  }
 }
+
 
 .oil__button {
   @include stack-items-remove-horizontal-margins;
@@ -300,7 +296,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   outline: none;
   background-color: transparent;
   cursor: pointer;
-  transition: transform 200ms ease;
 
   @include media('<=phone') { 
     min-height: auto;
@@ -314,7 +309,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   color: $text-color-dark;
   background-color: $btn-primary;
-  background-image: linear-gradient($btn-primary, rgb(70, 200, 100));
+  background-image: linear-gradient(35deg, $btn-primary, rgb(70, 200, 100));
   border-color: transparent;
 
   @include media('>=desktop') { 
@@ -323,7 +318,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   &:hover {
     background-color: darken($btn-primary, 8%);
-    background-image: linear-gradient(darken($btn-primary, 8%), darken(rgb(70, 200, 100), 8%));
+    background-image: linear-gradient(35deg, darken($btn-primary, 8%), darken(rgb(70, 200, 100), 8%));
   }
 
 
@@ -364,7 +359,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   &:hover {
     border-color: darken($btn-primary, 8%);
-    transform: translateY(2px);
   }
 
   @include media('<=phone') { 
@@ -476,13 +470,22 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   color: $text-color-dark;
   background-color: $btn-primary;
-  background-image: linear-gradient($btn-primary, rgb(70, 200, 100));
+  background-image: linear-gradient(35deg, $btn-primary, rgb(45, 205, 110));
   border: 1px solid transparent;
+
+  &:hover {
+    background-color: darken($btn-primary, 8%);
+    background-image: linear-gradient(35deg, darken($btn-primary, 6%), darken(rgb(45, 205, 110), 6%));
+  }
 }
 
 
 .oil__btn-mini--2nd {
   border: 1px solid $btn-primary;
+
+  &:hover {
+    border-color: darken($btn-primary, 8%);
+  }
 }
 
 
