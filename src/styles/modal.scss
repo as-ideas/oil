@@ -115,6 +115,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   @include box-model;
   @include font-smoothing;
   z-index: $z-index-max;
+  pointer-events: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -123,7 +124,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin:  0;
   font-family: $font-stack;
   color: $text-color-primary;
-  pointer-events: none;
 }
 
 
@@ -173,6 +173,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 // This covers the page
 
 .oil-top-overlay {
+  pointer-events: none;
   position: absolute;
   width:  100%;
   height: 100%;
@@ -184,6 +185,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 // This contains our overlay
 
 .oil-content-overlay {
+  pointer-events: auto;
   position: absolute;
   width:  100%;
   bottom:  0;
