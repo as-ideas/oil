@@ -12,7 +12,6 @@ export function defineOilContent() {
   return (
     `
       <div class="oil-expanded">
-        <div class="oil-top-overlay"></div>
         <div class="oil-content-overlay">
           <h1 class="oil__heading">
             Um unsere Dienste für Sie noch besser zu machen, brauchen wir ihr Einverständnis.
