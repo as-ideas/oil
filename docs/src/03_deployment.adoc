@@ -15,7 +15,7 @@ Only the end2end stage has an "automatic" update via a CDN.
 ====
 
 [caption="Deployment"]
-image::images/deployment.png[OIL Deployment]
+image::src/images/deployment.png[OIL Deployment]
 
 === Hub Deployment
 To deploy the hub (i.e. as a MyPass service) you need to deploy the project with an index.html loading dist/hub.123.js. In our examples this is demos/complete-integration-mypass.html
@@ -41,7 +41,7 @@ Please note that once published, your code will be delivered to all Tealium clie
 Tealium clients will be informed of your changes and need to publish/deploy their profile to activate your changes.
 
 [caption="Oil.js Tealium Deployment"]
-image::images/tealium-lib-profile-extension-view.png[Tealium Library Profile]
+image::src/images/tealium-lib-profile-extension-view.png[Tealium Library Profile]
 
 As a client of Tealium (see image below)
 
@@ -50,7 +50,7 @@ As a client of Tealium (see image below)
 * Publish / deploy your profile to activate the changes to Oil.js
 
 [caption="Oil.js Tealium Deployment"]
-image::images/tealium-user-profile-extension-view.png[Tealium Client Profile]
+image::src/images/tealium-user-profile-extension-view.png[Tealium Client Profile]
 
 Within an extension it's possible to handle the OptOut/OptIn logic during preload. This also allows to alter the later behaviour within Tealium.
 

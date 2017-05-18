@@ -10,7 +10,7 @@ So solve this issue the ASV Opt In Layer (OIL) offers the basics to implement th
 * A **subscriber**, which communicates with this hub to get the the needed information from the hub
 
 [caption="OIL Flow"]
-image::images/oil-poi-flow.png[OIL Flow]
+image::src/images/oil-poi-flow.png[OIL Flow]
 
 So when a user give the Power Opt In (POI) the subscriber sends a message via postMessage to the hub to inform the activation of the 3rd party cookie. By setting the cookie in the hub the 3rd party cookie became then a 1st party cookie. For some even stricter browsers, e.g. newer Safari versions footnote:[Chrome maybe also disable it by default in the future] a fallback is implemented which redirects then the user to hub site to set the cookie and then redirects back. But this fallback is only needed for the first visit.
 
