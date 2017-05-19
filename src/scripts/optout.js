@@ -9,6 +9,8 @@ let config = null;
 
 /**
  * Opt-Out Handler
+ * ATTENTION: THIS WORKS FOR SOI ONLY RIGHT NOW. THERE IS NO OPT-OUT FOR POI YET, NEW STORY!
+ *
  * @param event
  * @return none
  */

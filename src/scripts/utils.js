@@ -165,3 +165,16 @@ export function removeMessageListener(callback) {
 export function registerMessageListener(callback) {
   eventer(messageEvent, callback, false);
 }
+
+/**
+ * Returns the current client timestamp
+ *
+ * @returns {number}
+ */
+export function getClientTimestamp() {
+  if (!Date.now) {
+    Date.now = function() { return new Date().getTime(); }
+  }
+
+  return Date.now();
+}

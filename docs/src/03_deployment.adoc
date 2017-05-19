@@ -56,7 +56,7 @@ Within an extension it's possible to handle the OptOut/OptIn logic during preloa
 
 .OIL Configuration
 ****
-You need to add a OIL configuration to the html of your host site. This is an example configuration:
+You need to add an OIL configuration to the html of your host and hub site. This is an example configuration:
 
 [source,json]
 ----

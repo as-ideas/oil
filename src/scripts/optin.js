@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie';
 import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect, verifyPowerOptIn } from './poi.js';
 import { logDebug } from './log.js';
-import { isCookie, isCookieValid, extend, sendEventToHostSite } from './utils.js';
+import { isCookie, isCookieValid, extend, sendEventToHostSite, getClientTimestamp } from './utils.js';
 import { OIL_CONFIG } from './constants.js';
 import { getConfiguration } from './config.js';
 
@@ -17,7 +17,8 @@ export function getOilCookieConfig() {
     expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS],
     config: {
       optin: false,
-      expanded: true
+      expanded: true,
+      timestamp: getClientTimestamp()
     }
   };
 }
@@ -74,7 +75,7 @@ export function oilPowerOptIn(powerOnly = true) {
   validateOilCookie();
 
   let cookieData = getOilCookie();
-  let newCookieData = extend(true, {}, cookieData, { optin: true });
+  let newCookieData = extend(true, {}, cookieData, { optin: true, timestamp: getClientTimestamp() });
 
   if (!powerOnly) {
     // Update Oil cookie (site - SOI)
@@ -107,7 +108,7 @@ export function oilOptIn() {
   validateOilCookie();
 
   let cookieData = getOilCookie();
-  let newCookieData = extend(true, {}, cookieData, { optin: true });
+  let newCookieData = extend(true, {}, cookieData, { optin: true, timestamp: getClientTimestamp() });
 
   // Update Oil cookie
   Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
@@ -146,7 +147,7 @@ export function oilOptLater() {
   validateOilCookie();
 
   let cookieData = getOilCookie();
-  let newCookieData = extend(true, {}, cookieData, { expanded: false });
+  let newCookieData = extend(true, {}, cookieData, { expanded: false, timestamp: getClientTimestamp() });
 
   // Update Oil cookie
   Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
