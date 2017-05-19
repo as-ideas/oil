@@ -14,8 +14,6 @@
   <script type="application/configuration">
       {
         "opt_in_event_name": "oil_optin_done_custom",
-        "opt_out_event_name": "foobar3000",
-        "developer_mode": false
       }
   </script>
 
@@ -23,18 +21,6 @@
     var utag_data = {}
   </script>
 
-  <script type="text/javascript">
-    function getMyOrigin() {
-      if (!window.location.origin) {
-        window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-      }
-
-      return window.location.origin
-    }
-  </script>
-
-
-<button data-qa="send-opt-out-button" onclick="window.postMessage('foobar3000', getMyOrigin());">Send Opt-Out-Event</button>
   </body>
 </html>
 

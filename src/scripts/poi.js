@@ -7,7 +7,7 @@ import { logDebug, logError, logInfo } from './log.js';
 // Timeout after which promises should return
 const TIMEOUT = 500;
 let config = null,
-  frameListenerRegistered = false;
+    frameListenerRegistered = false;
 
 // INTERNAL FUNCTIONS
 
@@ -52,21 +52,28 @@ function init() {
  * @param origin - orgin url (aka parent)
  * @function
  */
-function sendEventToFrame(eventName, origin) {
+function sendEventToFrame(eventName, origin, config) {
   logInfo("Send to Frame:", eventName, origin);
-  init().then((result) => {
-    let iframe = result.iframe,
-      config = result.config;
-    let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
-    if (iframe && hubDomain) {
-      // tag::subscriber-postMessage[]
-      // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
-      // MSIE needs Strings in postMessage
-      let message = JSON.stringify({ event: eventName, origin: origin });
-      iframe.contentWindow.postMessage(message, hubDomain);
-      // end::subscriber-postMessage[]
-    }
-  });
+
+  if (!config) {
+    config = getConfiguration();
+  }
+
+  if (config) {
+    init().then((result) => {
+      let iframe = result.iframe,
+        config = result.config;
+      let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
+      if (iframe && hubDomain) {
+        // tag::subscriber-postMessage[]
+        // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
+        // MSIE needs Strings in postMessage
+        let message = JSON.stringify({ event: eventName, origin: origin, hostconfig: config});
+        iframe.contentWindow.postMessage(message, hubDomain);
+        // end::subscriber-postMessage[]
+      }
+    });
+  }
 }
 /**
  * Read configuration from hidden iframe

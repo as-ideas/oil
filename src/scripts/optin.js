@@ -7,37 +7,39 @@ import { getConfiguration } from './config.js';
 
 let config = null;
 
-// Our cookie default settings
-export const oilCookie = {
-  name: 'oil_data',
-  expires: 31,
-  config: {
-    optin: false,
-    expanded: true
+export function getOilCookieConfig() {
+  if (!config) {
+    config = getConfiguration();
   }
-}
 
+  return {
+    name: 'oil_data',
+    expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS],
+    config: {
+      optin: false,
+      expanded: true
+    }
+  };
+}
 
 export function validateOilCookie() {
   // Set Oil cookie if no cookie exists
-  if (!isCookie(oilCookie.name)) {
+  if (!isCookie(getOilCookieConfig().name)) {
     setDefaultOilCookie();
   }
 
   // In case Oil cookie exists but is not valid, create new Oil cookie with default config
-  if (!isCookieValid(oilCookie.name, Object.keys(oilCookie.config))) {
+  if (!isCookieValid(getOilCookieConfig().name, Object.keys(getOilCookieConfig().config))) {
     setDefaultOilCookie();
   }
 }
 
-
 export function getOilCookie() {
-  return Cookie.getJSON(oilCookie.name);
+  return Cookie.getJSON(getOilCookieConfig().name);
 }
 
-
 export function setDefaultOilCookie() {
-  Cookie.set(oilCookie.name, oilCookie.config, { expires: oilCookie.expires });
+  Cookie.set(getOilCookieConfig().name, getOilCookieConfig().config, { expires: getOilCookieConfig().expires });
 }
 
 /**
@@ -76,7 +78,7 @@ export function oilPowerOptIn(powerOnly = true) {
 
   if (!powerOnly) {
     // Update Oil cookie (site - SOI)
-    Cookie.set(oilCookie.name, newCookieData, { expires: oilCookie.expires });
+    Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
   }
 
   // Update Oil cookie (mypass - POI)
@@ -108,7 +110,7 @@ export function oilOptIn() {
   let newCookieData = extend(true, {}, cookieData, { optin: true });
 
   // Update Oil cookie
-  Cookie.set(oilCookie.name, newCookieData, { expires: oilCookie.expires });
+  Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
 
   fireOptInEvent();
   return new Promise((resolve) => {
@@ -147,7 +149,7 @@ export function oilOptLater() {
   let newCookieData = extend(true, {}, cookieData, { expanded: false });
 
   // Update Oil cookie
-  Cookie.set(oilCookie.name, newCookieData, { expires: oilCookie.expires });
+  Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
 
   return new Promise((resolve) => {
     resolve(newCookieData);

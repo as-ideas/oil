@@ -66,7 +66,8 @@ You need to add a OIL configuration to the html of your host site. This is an ex
         "hub_path": "/some/path.html",
         "subscriber_set_cookie": true,
         "opt_in_event_name": "oil_optin_done_custom",
-        "opt_out_event_name": "oil_optout_trigger"
+        "opt_out_event_name": "oil_optout_trigger",
+        "developer_mode": "true"
       }
     </script>
 ----
@@ -80,4 +81,6 @@ subscriber_set_cookie: Whether to set the SOI cookie on POI opt-ins or not. Defa
 opt_in_event_name: The event name that will be sent to this window on opt-in. This will be fired on returning visits as well, when the user already opted in. Default: 'oil_optin_done'
 
 opt_out_event_name: The event name on this window the OIL-Library is listening to for opting out. The opt-out functionality can be implemented in the settings part of the host site. Default: 'oil_optout_trigger'
+
+developer_mode: If developer mode is activated, the overlay won't show unless a specific cookie is set. Set a cookie with the name "oil_developer" and the value "true" to activate the layer for your client. Default: true
 ****

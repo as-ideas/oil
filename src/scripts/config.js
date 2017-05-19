@@ -3,11 +3,13 @@ import { extend } from "./utils";
 import { logInfo, logError } from './log';
 
 const defaultConfig = {
-  'opt_in_event_name': 'oil_optin_done',
   'hub_origin': '',
   'hub_path': '',
   'subscriber_set_cookie': true,
-  'opt_out_event_name': 'oil_optout_trigger'
+  'opt_in_event_name': 'oil_optin_done',
+  'opt_out_event_name': 'oil_optout_trigger',
+  'developer_mode': 'true',
+  'cookie_expires_in_days' : 31
 };
 
 /**
@@ -57,11 +59,11 @@ export function mergeOptions(options, defaults) {
  * @returns {{}} extracted configuration as JSON
  * @function
  */
-export function readConfiguration(configuration) {
+export function readConfiguration(configurationElement) {
   let parsedConfig = null;
   try {
-    if (configuration.text) {
-      parsedConfig = JSON.parse(configuration.text);
+    if (configurationElement && configurationElement.text) {
+      parsedConfig = JSON.parse(configurationElement.text);
       // normalize path and origin with protocol prefix
       parsedConfig[OIL_CONFIG.ATTR_HUB_ORIGIN]  = getHubDomain(parsedConfig);
       parsedConfig[OIL_CONFIG.ATTR_HUB_LOCATION]  = getHubLocation(parsedConfig);
@@ -75,13 +77,9 @@ export function readConfiguration(configuration) {
 
 /**
  * Search HTML document for configuration and reads it in
- * @returns parsed config
+ * @returns Object parsed config
  */
 export function getConfiguration() {
-  let configurationElement = document.querySelector('script[type="application/configuration"]'),
-    config = null;
-  if (configurationElement) {
-    config = readConfiguration(configurationElement);
-  }
-  return config;
+  let configurationElement = document.querySelector('script[type="application/configuration"]');
+  return readConfiguration(configurationElement);
 }
