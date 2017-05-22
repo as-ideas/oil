@@ -8,6 +8,24 @@ import { getOilCookie, oilOptIn, oilPowerOptIn,  oilOptLater } from "./optin.js"
 /**
  * Returns html content for our OIL overlay
  */
+
+function showPOIButton(condition = false) {
+  if (condition === false) {
+    return '';
+  }
+
+  return (
+    `
+      <button class="oil__button oil__button--1st js-optin-poi" data-qa="oil-poi-YesButton">
+        Global zustimmen
+        <span class="oil__button__label-2nd">
+          Für alle Axel Springer Dienste
+        </span>
+      </button>
+    `
+  );
+}
+
 export function defineOilContent() {
   return (
     `
@@ -22,12 +40,9 @@ export function defineOilContent() {
             unsere Services allgemein zu bewerten. <a href="#" class="oil__intro-text--secondary">Mehr erfahren</a>
           </p>
           <div class="oil__button-row">
-            <button class="oil__button oil__button--1st js-optin-poi" data-qa="oil-poi-YesButton">
-              Global zustimmen
-              <span class="oil__button__label-2nd">
-                Für alle Axel Springer Dienste
-              </span>
-            </button>
+            
+            ${showPOIButton()}
+            
             <button class="oil__button oil__button--2nd js-optin" data-qa="oil-YesButton">
               Jetzt zustimmen
               <span class="oil__button__label-2nd">
@@ -97,7 +112,6 @@ export function injectOil(entryPoint) {
     oil.innerHTML = defineOilContent();
 
     // Add to DOM
-    // entryPoint.appendChild(oil);
     entryPoint.insertBefore(oil, entryPoint.firstElementChild);
   }
 }
