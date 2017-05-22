@@ -3,7 +3,7 @@ import { checkOptIn, fireOptInEvent } from "./scripts/optin.js";
 import { registerOptOutListener } from "./scripts/optout.js";
 import { initOilFrame } from "./scripts/iframe.listener.js";
 import { logDebug, logInfo } from './scripts/log.js';
-import { getConfiguration } from './scripts/config.js';
+import { getConfiguration, isDevMode } from './scripts/config.js';
 import { OIL_CONFIG } from './scripts/constants.js';
 import Cookie from 'js-cookie';
 import { isBrowserCookieEnabled } from './scripts/utils.js';
@@ -15,20 +15,25 @@ function isDeveloperCookieSet() {
 }
 
 // PUBLIC API
+/**
+ * Initialize the Oil Layer on Host Site side.
+ */
 export function initOilLayer() {
   logDebug('Init OilLayer');
-  if (!isBrowserCookieEnabled()) {
-    logInfo('This browser doesn\'t allow cookies.');
-    // TODO create layer to help users understand the need of cookies.
-    return;
-  }
 
   if (!config) {
     config = getConfiguration();
   }
 
   if (config) {
-    if (!config[OIL_CONFIG.ATTR_DEVELOPER_MODE] || isDeveloperCookieSet()) {
+    if (!isDevMode() || isDeveloperCookieSet()) {
+
+      if (!isBrowserCookieEnabled()) {
+        logInfo('This browser doesn\'t allow cookies.');
+        // TODO create layer to help users understand the need of cookies.
+        return;
+      }
+
       checkOptIn().then((cookie) => {
         registerOptOutListener();
         if (!cookie.optin) {

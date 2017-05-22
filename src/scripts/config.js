@@ -95,10 +95,17 @@ export function getConfiguration() {
  * @returns {*}
  */
 export function isPoiActive() {
-  if (!cachedConfig) {
-    cachedConfig = getConfiguration();
-  }
+  cachedConfig = getConfiguration();
   return cachedConfig[OIL_CONFIG.ATTR_ACTIVATE_POI];
+}
+
+/**
+ * Checks if devMode is activated.
+ * @returns {*}
+ */
+export function isDevMode() {
+  cachedConfig = getConfiguration();
+  return cachedConfig[OIL_CONFIG.ATTR_DEVELOPER_MODE];
 }
 
 /**
