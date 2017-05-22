@@ -1,10 +1,12 @@
 import { OIL_CONFIG } from "../../src/scripts/constants";
-import { getConfiguration, readConfiguration } from "../../src/scripts/config";
+import { getConfiguration, readConfiguration, resetConfiguration } from "../../src/scripts/config";
 import { loadFixture } from "../utils";
 
 describe('configuration', () => {
 
-  beforeEach(() => { });
+  beforeEach(() => {
+    resetConfiguration();
+  });
 
   it('should work with empty config', () => {
     loadFixture('config/empty.config.html');

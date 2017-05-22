@@ -1,11 +1,13 @@
 import { activatePowerOptInWithIFrame, verifyPowerOptIn } from "../../src/scripts/poi";
 import { loadFixture, deleteAllCookies } from "../utils";
+import { resetConfiguration } from "../../src/scripts/config";
 
 describe('poi', () => {
 
   let originalTimeout;
 
   beforeEach(() => {
+    resetConfiguration();
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
     deleteAllCookies();

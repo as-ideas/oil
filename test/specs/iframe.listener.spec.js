@@ -2,10 +2,12 @@ import Cookie from 'js-cookie';
 import { initOilFrame } from "../../src/scripts/iframe.listener";
 import { OIL_COOKIE } from '../../src/scripts/constants.js';
 import { deleteAllCookies } from "../utils";
+import { resetConfiguration } from "../../src/scripts/config";
 
 describe('iframe.listener', () => {
 
   beforeEach(() => {
+    resetConfiguration();
     initOilFrame();
     deleteAllCookies();
   });

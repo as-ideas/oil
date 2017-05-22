@@ -13,7 +13,7 @@ const defaultConfig = {
   "activate_poi": false
 };
 
-let config = null;
+let cachedConfig = null;
 
 /**
  *
@@ -83,11 +83,12 @@ export function readConfiguration(configurationElement) {
  * @returns Object parsed config
  */
 export function getConfiguration() {
-  if(!config) {
+  logInfo("sadasdasdasdSdsSALJIDSLADLKASJLK"+cachedConfig);
+  if(!cachedConfig) {
     let configurationElement = document.querySelector('script[type="application/configuration"]');
-    config = readConfiguration(configurationElement);
+    cachedConfig = readConfiguration(configurationElement);
   }
-  return config;
+  return cachedConfig;
 }
 
 /**
@@ -95,8 +96,15 @@ export function getConfiguration() {
  * @returns {*}
  */
 export function isPoiActive() {
-  if (!config) {
-    getConfiguration();
+  if (!cachedConfig) {
+    cachedConfig = getConfiguration();
   }
-  return config[OIL_CONFIG.ATTR_ACTIVATE_POI];
+  return cachedConfig[OIL_CONFIG.ATTR_ACTIVATE_POI];
+}
+
+/**
+ * Reset configuration, reread from HTML.
+ */
+export function resetConfiguration() {
+  cachedConfig = null;
 }
