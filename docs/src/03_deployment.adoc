@@ -62,6 +62,7 @@ You need to add an OIL configuration to the html of your host and hub site. This
 ----
     <script type="application/configuration">
       {
+        "activate_poi": true,
         "hub_origin": "//www.somedomain.com",
         "hub_path": "/some/path.html",
         "subscriber_set_cookie": true,
@@ -71,6 +72,8 @@ You need to add an OIL configuration to the html of your host and hub site. This
       }
     </script>
 ----
+
+activate_poi: The Power-Opt-In feature will only be activated if this switch is true. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. Default: false
 
 hub_origin: The origin of the hub.js installation, if any. Default: none.
 

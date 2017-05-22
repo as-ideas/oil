@@ -9,7 +9,8 @@ const defaultConfig = {
   'opt_in_event_name': 'oil_optin_done',
   'opt_out_event_name': 'oil_optout_trigger',
   'developer_mode': 'true',
-  'cookie_expires_in_days' : 31
+  'cookie_expires_in_days' : 31,
+  "activate_poi": false
 };
 
 /**

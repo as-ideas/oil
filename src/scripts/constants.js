@@ -5,6 +5,7 @@ export const OIL_COOKIE = {
 }
 
 export const OIL_CONFIG = {
+  ATTR_ACTIVATE_POI: 'activate_poi',
   ATTR_HUB_ORIGIN: 'hub_origin',
   ATTR_HUB_PATH: 'hub_path',
   ATTR_HUB_LOCATION: 'hub_location', // complete hub location, gets generated
