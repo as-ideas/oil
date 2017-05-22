@@ -9,8 +9,11 @@ import { getOilCookie, oilOptIn, oilPowerOptIn,  oilOptLater } from "./optin.js"
  * Returns html content for our OIL overlay
  */
 
-function showPOIButton(condition = false) {
-  if (condition === false) {
+function showPOIButton() {
+  let config = getConfiguration();
+  let activatePoi = config[OIL_CONFIG.ATTR_ACTIVATE_POI];
+
+  if (activatePoi === false) {
     return '';
   }
 
