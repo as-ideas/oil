@@ -90,6 +90,17 @@ export function addClickHandler(element, func) {
 
 
 /**
+ * Checks weather the cookie is able to store cookies
+ * @return true or false
+ */
+export function isBrowserCookieEnabled() {
+  Cookie.set('oil_cookie_exp', 'cookiedata');
+  let result = isCookie('oil_cookie_exp');
+  Cookie.remove('oil_cookie_exp');
+  return result;
+}
+
+/**
  * Checks weather a cookie exists
  * @param name {string} Name of cookie
  * @return true or false

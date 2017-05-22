@@ -83,7 +83,6 @@ export function readConfiguration(configurationElement) {
  * @returns Object parsed config
  */
 export function getConfiguration() {
-  logInfo("sadasdasdasdSdsSALJIDSLADLKASJLK"+cachedConfig);
   if(!cachedConfig) {
     let configurationElement = document.querySelector('script[type="application/configuration"]');
     cachedConfig = readConfiguration(configurationElement);
