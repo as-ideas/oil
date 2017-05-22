@@ -13,6 +13,8 @@ const defaultConfig = {
   "activate_poi": false
 };
 
+let config = null;
+
 /**
  *
  * Get the hub iFrame domain with protocol prefix for the current location
@@ -81,6 +83,20 @@ export function readConfiguration(configurationElement) {
  * @returns Object parsed config
  */
 export function getConfiguration() {
-  let configurationElement = document.querySelector('script[type="application/configuration"]');
-  return readConfiguration(configurationElement);
+  if(!config) {
+    let configurationElement = document.querySelector('script[type="application/configuration"]');
+    config = readConfiguration(configurationElement);
+  }
+  return config;
+}
+
+/**
+ * Checks if POI is activated.
+ * @returns {*}
+ */
+export function isPoiActive() {
+  if (!config) {
+    getConfiguration();
+  }
+  return config[OIL_CONFIG.ATTR_ACTIVATE_POI];
 }

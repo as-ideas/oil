@@ -1,5 +1,5 @@
 import { OIL_CONFIG, POI_FALLBACK_NAME } from './constants.js';
-import { getConfiguration } from './config.js';
+import { getConfiguration, isPoiActive } from './config.js';
 import { addFrame } from './iframe.js';
 import { getOrigin, registerMessageListener, removeMessageListener } from './utils.js';
 import { logDebug, logError, logInfo } from './log.js';
@@ -10,7 +10,6 @@ let config = null,
     frameListenerRegistered = false;
 
 // INTERNAL FUNCTIONS
-
 
 /**
  * Initializes the OIL iFrame
@@ -24,7 +23,8 @@ function init() {
     if (!config) {
       config = getConfiguration();
     }
-    if (config) {
+
+    if (isPoiActive()) {
       let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION];
       if (hubLocation) {
         // setup iframe
@@ -41,8 +41,8 @@ function init() {
         resolve({ config: config });
       }
     } else {
-      logError('Empty Config');
-      resolve({ config: {} });
+      logDebug('POI not active. Frame not initialized.');
+      resolve({ config: config });
     }
   }));
 }
@@ -54,6 +54,10 @@ function init() {
  */
 function sendEventToFrame(eventName, origin) {
   logInfo("Send to Frame:", eventName, origin);
+
+  if(!isPoiActive()) {
+    return;
+  }
 
   init().then((result) => {
     let iframe = result.iframe,
@@ -77,6 +81,11 @@ function sendEventToFrame(eventName, origin) {
  */
 function readConfigFromFrame(origin) {
   return new Promise((resolve) => {
+
+    if(!isPoiActive()) {
+      resolve(false);
+    }
+
     function handler(event) {
       // tag::subscriber-receiveMessage[]
       // only listen to our hub
@@ -115,6 +124,10 @@ function readConfigFromFrame(origin) {
  */
 export function verifyPowerOptIn() {
   return new Promise((resolve) => {
+    if(!isPoiActive()) {
+      resolve(false);
+    }
+
     init().then((result) => {
       let iframe = result.iframe;
       if (iframe) {
@@ -135,10 +148,17 @@ export function verifyPowerOptIn() {
 /**
  * Activate Power Opt IN with the use of an iframe
  * @function
- * @return promise when done
+ * @return Promise when done
  */
 export function activatePowerOptInWithIFrame() {
   logDebug('activatePowerOptIn');
+
+  if(!isPoiActive()) {
+    return new Promise((resolve) =>  {
+      resolve();
+    });
+  }
+
   // reset config
   config = null;
   // init iFrame first
@@ -153,9 +173,13 @@ export function activatePowerOptInWithIFrame() {
 /**
  * Activate Power Opt IN with the use of an redirect
  * @function
- * @return none
+ * @return
  */
 export function activatePowerOptInWithRedirect() {
+  if(!isPoiActive()) {
+    return;
+  }
+
   if (!config) {
     config = getConfiguration();
   }

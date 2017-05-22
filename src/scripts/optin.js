@@ -3,7 +3,7 @@ import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect, verifyPow
 import { logDebug } from './log.js';
 import { isCookie, isCookieValid, extend, sendEventToHostSite, getClientTimestamp } from './utils.js';
 import { OIL_CONFIG } from './constants.js';
-import { getConfiguration } from './config.js';
+import { getConfiguration, isPoiActive } from './config.js';
 
 let config = null;
 
@@ -53,7 +53,7 @@ export function checkOptIn() {
   let cookieData = getOilCookie();
 
   return new Promise((resolve) => {
-    // Verify Power Opt In
+    // Verify Power Opt In (will return immediately if not activated)
     verifyPowerOptIn().then((optIn) => {
       logDebug('Got following POI value', optIn);
       if (optIn) {
@@ -68,7 +68,7 @@ export function checkOptIn() {
 /**
  * Oil optIn power
  * @param powerOnly - only set Power Opt In (POI), no local site cookie (SOI)
- * @return promise with updated cookie value
+ * @return Promise with updated cookie value
  */
 export function oilPowerOptIn(powerOnly = true) {
   // Cookies could have been deleted after page loads, therefore we check and validate our cookie here again
@@ -82,25 +82,28 @@ export function oilPowerOptIn(powerOnly = true) {
     Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
   }
 
-  // Update Oil cookie (mypass - POI)
-  activatePowerOptInWithIFrame();
-
-  // Check if fallback is needed
-  verifyPowerOptIn().then((result) => {
-    if (result !== true) {
-      logDebug("iFrame POI didnt work. Trying fallback now.");
-      activatePowerOptInWithRedirect();
-    }
-  });
-
-  fireOptInEvent();
   return new Promise((resolve) => {
+    if(isPoiActive()) {
+      // Update Oil cookie (mypass - POI)
+      activatePowerOptInWithIFrame();
+
+      // Check if fallback is needed
+      verifyPowerOptIn().then((result) => {
+        if (result !== true) {
+          logDebug("iFrame POI didnt work. Trying fallback now.");
+          activatePowerOptInWithRedirect();
+        }
+      });
+    }
+
+    fireOptInEvent();
+
     resolve(newCookieData);
   });
 }
 
 /**
- * Oil optIn
+ * Oil SOI optIn
  * @return promise with updated cookie value
  */
 export function oilOptIn() {
