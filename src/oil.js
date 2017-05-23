@@ -4,7 +4,6 @@ import { registerOptOutListener } from "./scripts/optout.js";
 import { initOilFrame } from "./scripts/iframe.listener.js";
 import { logDebug, logInfo } from './scripts/log.js';
 import { getConfiguration, isDevMode } from './scripts/config.js';
-import { OIL_CONFIG } from './scripts/constants.js';
 import Cookie from 'js-cookie';
 import { isBrowserCookieEnabled } from './scripts/utils.js';
 
