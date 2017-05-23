@@ -17,7 +17,7 @@ export function getOilCookieConfig() {
     expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS],
     config: {
       optin: false,
-      expanded: true,
+      optLater: false,
       timestamp: getClientTimestamp()
     }
   };
@@ -150,7 +150,7 @@ export function oilOptLater() {
   validateOilCookie();
 
   let cookieData = getOilCookie();
-  let newCookieData = extend(true, {}, cookieData, { expanded: false, timestamp: getClientTimestamp() });
+  let newCookieData = extend(true, {}, cookieData, { optLater: true, timestamp: getClientTimestamp() });
 
   // Update Oil cookie
   Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });

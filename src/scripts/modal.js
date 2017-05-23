@@ -3,6 +3,9 @@ import { getConfiguration } from './config.js';
 import { OIL_CONFIG } from './constants.js';
 import { isDOMElement, addClickHandler } from './utils.js';
 import { getOilCookie, oilOptIn, oilPowerOptIn,  oilOptLater } from "./optin.js";
+import oilDefaultTemplate from './view/oil.default.js';
+import oilOptLaterTemplate from './view/oil.opt.later.js';
+import oilNoCookiesTemplate from './view/oil.no.cookies.js';
 
 
 /**
@@ -170,4 +173,53 @@ export function addOilClickHandler() {
 }
 
 
+
+export function renderOil(props) {
+  // TODO Handle Props
+
+  // Remove Oil from DOM if present
+  let oilDOMNode = document.getElementsByClassName('oil')[0];
+  if (typeof(oilDOMNode) !== 'undefined') {
+    oilDOMNode.parentElement.removeChild(oilDOMNode);
+  }
+
+  // Inject Oil in document
+  let body = document.body;
+  let oilWrapper = document.createElement('div');
+  
+  oilWrapper.setAttribute('class', 'oil');
+ 
+  if (props.noCookie) {
+    oilWrapper.innerHTML = oilNoCookiesTemplate();
+  } 
+  else if (props.optLater) {
+    oilWrapper.innerHTML = oilOptLaterTemplate();
+  }
+  else {
+    oilWrapper.innerHTML = oilDefaultTemplate();
+  }
+
+  body.insertBefore(oilWrapper, body.firstElementChild);
+
+  // Add Handler
+
+  function handleOptLater() {
+    oilOptLater().then((cookieData) => {
+      console.log(cookieData);
+      renderOil({optLater: cookieData.optLater, noCookie: false});
+    });
+  }
+
+  let btnOptIn = document.querySelector('.oil .js-optin');
+  let btnPoiOptIn = document.querySelector('.oil .js-optin-poi');
+  let btnOptLater = document.querySelector('.oil .js-optlater');
+
+  // if (btnOptIn) btnOptIn.removeEventListener('click', handleOptIn, false);
+  // if (btnPoiOptIn) btnPoiOptIn.removeEventListener('click', handler, false);
+  if (btnOptLater) btnOptLater.removeEventListener('click', handleOptLater, false);
+
+  // if (btnOptIn) btnOptIn.addEventListener('click', handleOptIn, false);
+  // if (btnPoiOptIn) btnPoiOptIn.addEventListener('click', handler, false);
+  if (btnOptLater) btnOptLater.addEventListener('click', handleOptLater, false);
+}
 

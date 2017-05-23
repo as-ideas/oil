@@ -1,4 +1,4 @@
-import { injectOil, addOilClickHandler } from "./scripts/modal.js";
+import { injectOil, addOilClickHandler, renderOil } from "./scripts/modal.js";
 import { checkOptIn, fireOptInEvent } from "./scripts/optin.js";
 import { registerOptOutListener } from "./scripts/optout.js";
 import { initOilFrame } from "./scripts/iframe.listener.js";
@@ -26,21 +26,22 @@ export function initOilLayer() {
 
   if (config) {
     if (!isDevMode() || isDeveloperCookieSet()) {
-
       if (!isBrowserCookieEnabled()) {
         logInfo('This browser doesn\'t allow cookies.');
-        // TODO create layer to help users understand the need of cookies.
+        renderOil({noCookie: true});
         return;
       }
 
       checkOptIn().then((cookie) => {
         registerOptOutListener();
-        if (!cookie.optin) {
-          // Inject Oil overlay depending on cookie data
-          injectOil(document.body);
-          addOilClickHandler();
-        } else {
+        if (cookie.optin) {
           fireOptInEvent();
+        }
+        else if (cookie.optLater) {
+          renderOil({optLater: true});
+        }
+        else if (!cookie.optLater) {
+          renderOil({optLater: false});
         }
       });
     }
