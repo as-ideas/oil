@@ -1,4 +1,4 @@
-import { injectOil, addOilClickHandler, renderOil } from "./scripts/modal.js";
+import { renderOil } from "./scripts/modal.js";
 import { checkOptIn, fireOptInEvent } from "./scripts/optin.js";
 import { registerOptOutListener } from "./scripts/optout.js";
 import { initOilFrame } from "./scripts/iframe.listener.js";

@@ -1,3 +1,32 @@
+import { getConfiguration } from './../config.js';
+import { OIL_CONFIG } from './../constants.js';
+
+/**
+ * Returns html content for our OIL overlay
+ */
+
+function showPOIButton() {
+  let config = getConfiguration();
+  let activatePoi = config[OIL_CONFIG.ATTR_ACTIVATE_POI];
+
+  if (activatePoi === false) {
+    return '';
+  }
+
+  return (
+    `
+    <div class="oil-btn-group-mini">
+        <button class="oil__btn-mini oil__btn-mini--1st js-optin-poi" data-qa="oil-small-poi-YesButton">
+            Global zustimmen
+        </button>
+        <div class="oil__btn-mini-label">
+            Für alle Axel Springer Dienste
+        </div>
+    </div>
+    `
+  );
+}
+
 export default function() {
     return `
         <div class="oil-minified">
@@ -12,14 +41,9 @@ export default function() {
                     </p>
                 </div>
                 <div class="oil-l-container">
-                    <div class="oil-btn-group-mini">
-                        <button class="oil__btn-mini oil__btn-mini--1st js-optin-poi" data-qa="oil-small-poi-YesButton">
-                            Global zustimmen
-                        </button>
-                        <div class="oil__btn-mini-label">
-                            Für alle Axel Springer Dienste
-                        </div>
-                    </div>
+                    
+                    ${showPOIButton()}
+
                     <div class="oil-btn-group-mini">
                         <button class="oil__btn-mini oil__btn-mini--2nd js-optin" data-qa="oil-small-YesButton">
                             Jetzt zustimmen
