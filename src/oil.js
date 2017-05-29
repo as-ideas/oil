@@ -40,7 +40,7 @@ export function initOilLayer() {
         else if (cookie.optLater) {
           renderOil({optLater: true});
         }
-        else if (!cookie.optLater) {
+        else {
           renderOil({optLater: false});
         }
       });

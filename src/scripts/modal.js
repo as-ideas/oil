@@ -2,25 +2,25 @@ import "../styles/modal.scss";
 import { getConfiguration } from './config.js';
 import { OIL_CONFIG } from './constants.js';
 import { oilOptIn, oilPowerOptIn,  oilOptLater } from "./optin.js";
-import oilDefaultTemplate from './view/oil.default.js';
-import oilOptLaterTemplate from './view/oil.opt.later.js';
-import oilNoCookiesTemplate from './view/oil.no.cookies.js';
+import { oilDefaultTemplate } from './view/oil.default.js';
+import { oilOptLaterTemplate } from './view/oil.opt.later.js';
+import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 
+
+// Initialize our Oil wrapper and save it ...
+
+const oilWrapper = defineOilWrapper();
 
 /**
- * Small Utility Function to retrieve our Oil Wrapper and Action Elements,
- * like Buttons ...
- * @return data object which contains various OIL DOM nodes 
+ * Oil Main Render Function
+ * 
  */
 
-function getOilDOMNodes() {
-  return {
-    oilWrapper:  document.getElementsByClassName('oil')[0],
-    btnSoiOptIn: document.querySelector('.oil .js-optin'),
-    btnPoiOptIn: document.querySelector('.oil .js-optin-poi'),
-    btnOptLater: document.querySelector('.oil .js-optlater')
-  }
+export function renderOil(props) {
+  writeOilContentToWrapper(oilWrapper, props);
+  injectOilWrapperInDOM(props);
 }
+
 
 
 /**
@@ -39,9 +39,39 @@ function defineOilWrapper() {
   return oilWrapper;
 }
 
-// Initialize our Oil wrapper and save it ...
 
-const oilWrapper = defineOilWrapper();
+function injectOilWrapperInDOM(props) {
+  let domNodes = getOilDOMNodes();
+  
+  // Remove Oil if already in DOM
+  if (domNodes.oilWrapper) {
+    removeOilWrapperAndHandlers(domNodes);
+  }
+
+  // Insert into DOM only if not opted in
+  if (!props.optIn) {
+    document.body.insertBefore(oilWrapper, document.body.firstElementChild);
+    addOilHandlers(getOilDOMNodes());
+  }
+}
+
+
+
+/**
+ * Small Utility Function to retrieve our Oil Wrapper and Action Elements,
+ * like Buttons ...
+ * @return data object which contains various OIL DOM nodes 
+ */
+
+function getOilDOMNodes() {
+  return {
+    oilWrapper:  document.querySelector('.oil'),
+    btnSoiOptIn: document.querySelector('.oil .js-optin'),
+    btnPoiOptIn: document.querySelector('.oil .js-optin-poi'),
+    btnOptLater: document.querySelector('.oil .js-optlater')
+  }
+}
+
 
 
 /**
@@ -50,17 +80,18 @@ const oilWrapper = defineOilWrapper();
  * 
  */
 
-function defineOilContent(oilWrapper, props) {
+function writeOilContentToWrapper(oilWrapper, props) {
   if (props.noCookie) {
-    oilWrapper.innerHTML = oilNoCookiesTemplate();
+    oilWrapper.innerHTML = oilNoCookiesTemplate;
   }
   else if (props.optLater) {
-    oilWrapper.innerHTML = oilOptLaterTemplate();
+    oilWrapper.innerHTML = oilOptLaterTemplate;
   }
   else {
-    oilWrapper.innerHTML = oilDefaultTemplate();
+    oilWrapper.innerHTML = oilDefaultTemplate;
   }
 }
+
 
 
 /**
@@ -72,7 +103,7 @@ let config = getConfiguration();
 
 function handleOptLater() {
   oilOptLater().then((cookieData) => {
-    renderOil({optLater: cookieData.optLater, noCookie: false});
+    renderOil({optLater: cookieData.optLater});
   });
 }
 
@@ -91,6 +122,7 @@ function handlePoiOptIn() {
 }
 
 
+
 /**
  * Add and Remove Handlers to Oil Action Elements
  * 
@@ -102,31 +134,17 @@ function addOilHandlers(nodes) {
   nodes.btnOptLater && nodes.btnOptLater.addEventListener('click', handleOptLater, false);
 }
 
-function removeOilHandlers(nodes) {
+function removeOilWrapperAndHandlers(nodes) {
   nodes.btnSoiOptIn && nodes.btnSoiOptIn.removeEventListener('click', handleSoiOptIn, false);
   nodes.btnOptLater && nodes.btnOptLater.removeEventListener('click', handleOptLater, false);
   nodes.btnPoiOptIn && nodes.btnPoiOptIn.removeEventListener('click', handlePoiOptIn, false);
-
-  if (typeof(nodes.oilWrapper) !== 'undefined') {
+  
+  if (nodes.oilWrapper) {
     nodes.oilWrapper.parentElement.removeChild(nodes.oilWrapper);
   }
 }
 
 
-/**
- * Oil Main Render Function
- * 
- */
-
-export function renderOil(props) {
-  defineOilContent(oilWrapper, props);
-  removeOilHandlers(getOilDOMNodes());
-  
-  // Inject in DOM only if not opted-in
-  (!props.optIn) && document.body.insertBefore(oilWrapper, document.body.firstElementChild);
-
-  addOilHandlers(getOilDOMNodes());
-}
 
 
 
