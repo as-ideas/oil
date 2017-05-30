@@ -1,4 +1,4 @@
-import { renderOil } from "./scripts/modal.js";
+import { renderOil, oilWrapper } from "./scripts/modal.js";
 import { checkOptIn, fireOptInEvent } from "./scripts/optin.js";
 import { registerOptOutListener } from "./scripts/optout.js";
 import { initOilFrame } from "./scripts/iframe.listener.js";
@@ -28,7 +28,7 @@ export function initOilLayer() {
     if (!isDevMode() || isDeveloperCookieSet()) {
       if (!isBrowserCookieEnabled()) {
         logInfo('This browser doesn\'t allow cookies.');
-        renderOil({noCookie: true});
+        renderOil(oilWrapper, {noCookie: true});
         return;
       }
 
@@ -38,10 +38,10 @@ export function initOilLayer() {
           fireOptInEvent();
         }
         else if (cookie.optLater) {
-          renderOil({optLater: true});
+          renderOil(oilWrapper, {optLater: true});
         }
         else {
-          renderOil({optLater: false});
+          renderOil(oilWrapper, {optLater: false});
         }
       });
     }

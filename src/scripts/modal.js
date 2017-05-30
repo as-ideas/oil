@@ -9,30 +9,30 @@ import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 
 // Initialize our Oil wrapper and save it ...
 
-const oilWrapper = defineOilWrapper();
+export const oilWrapper = defineOilWrapper();
+
 
 /**
- * Oil Main Render Function
+ * Oil Main Render Function: 
  * 
  */
 
-export function renderOil(props) {
-  writeOilContentToWrapper(oilWrapper, props);
-  injectOilWrapperInDOM(props);
+export function renderOil(wrapper, props) {
+  writeOilContentToWrapper(wrapper, props);
+  injectOilWrapperInDOM(wrapper, props);
 }
 
 
-
 /**
- * Define and Initialize our Oil Wrapper 
+ * Define Oil Wrapper DOM Node 
  * @return DOM element
  */
 
 function defineOilWrapper() {
-  // This is our Oil wrapper element
   let oilWrapper = document.createElement('div');
   
   // Set some attributes as CSS classes and attributes for testing
+  
   oilWrapper.setAttribute('class', 'oil');
   oilWrapper.setAttribute('data-qa', 'oil-Layer');
 
@@ -40,21 +40,41 @@ function defineOilWrapper() {
 }
 
 
-function injectOilWrapperInDOM(props) {
+/**
+ * Define Content of our Oil Wrapper
+ * Sets HTML based on props ...
+ * 
+ */
+
+function writeOilContentToWrapper(wrapper, props) {
+  if (props.noCookie) {
+    wrapper.innerHTML = oilNoCookiesTemplate;
+  }
+  else if (props.optLater) {
+    wrapper.innerHTML = oilOptLaterTemplate;
+  }
+  else {
+    wrapper.innerHTML = oilDefaultTemplate;
+  }
+}
+
+function injectOilWrapperInDOM(wrapper, props) {
   let domNodes = getOilDOMNodes();
   
-  // Remove Oil if already in DOM
+  // For every render cycle our OIL main DOM node gets removed, 
+  // if it already exists in DOM
+
   if (domNodes.oilWrapper) {
     removeOilWrapperAndHandlers(domNodes);
   }
 
-  // Insert into DOM only if not opted in
+  // Insert OIL into DOM only if not opted in
+
   if (!props.optIn) {
-    document.body.insertBefore(oilWrapper, document.body.firstElementChild);
+    document.body.insertBefore(wrapper, document.body.firstElementChild);
     addOilHandlers(getOilDOMNodes());
   }
 }
-
 
 
 /**
@@ -73,27 +93,6 @@ function getOilDOMNodes() {
 }
 
 
-
-/**
- * Define Content of our Oil Wrapper
- * Sets HTML based on props ...
- * 
- */
-
-function writeOilContentToWrapper(oilWrapper, props) {
-  if (props.noCookie) {
-    oilWrapper.innerHTML = oilNoCookiesTemplate;
-  }
-  else if (props.optLater) {
-    oilWrapper.innerHTML = oilOptLaterTemplate;
-  }
-  else {
-    oilWrapper.innerHTML = oilDefaultTemplate;
-  }
-}
-
-
-
 /**
  * Handler Functions for our Oil Action Elements
  * 
@@ -103,24 +102,23 @@ let config = getConfiguration();
 
 function handleOptLater() {
   oilOptLater().then((cookieData) => {
-    renderOil({optLater: cookieData.optLater});
+    renderOil(oilWrapper, {optLater: cookieData.optLater});
   });
 }
 
 function handleSoiOptIn() {
   oilOptIn().then((cookieData) => {
-    renderOil({optIn: cookieData.optin});
+    renderOil(oilWrapper, {optIn: cookieData.optin});
   });
 }
 
 function handlePoiOptIn() {
   oilOptIn().then(() => {
     oilPowerOptIn(!config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
-      renderOil({optIn: true});
+      renderOil(oilWrapper, {optIn: true});
     });
   });
 }
-
 
 
 /**
