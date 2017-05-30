@@ -29,7 +29,7 @@ function showPOIButton() {
 
 export const oilOptLaterTemplate =
     `
-    <div class="oil-minified">
+    <div class="oil-minified" data-qa="oil-optlater">
         <div class="oil-content-overlay">
             <div class="oil-l-container">
                 <h1 class="oil__heading-mini">

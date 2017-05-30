@@ -1,7 +1,4 @@
-const OIL_LAYER = '//*[@data-qa="oil-Layer"]';
-const OIL_YES_BUTTON = '//*[@data-qa="oil-YesButton"]';
-const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
-const OIL_YES_SMALL_BUTTON = '//*[@data-qa="oil-small-YesButton"]';
+import { OIL_LAYER, OIL_YES_BUTTON, OIL_NO_BUTTON, OIL_YES_SMALL_BUTTON, OIL_LAYER_OPTLATER} from "../constants.js";
 
 module.exports = {
   beforeEach: browser => {
@@ -20,8 +17,8 @@ module.exports = {
   'OIL Layer closed after clicking yes' : function (browser) {
     browser
       .click(OIL_YES_BUTTON)
-      .assert.hidden(OIL_LAYER)
-      .assert.cssClassPresent(OIL_LAYER, "optin-true")
+      .pause(200)
+      .waitForElementNotPresent(OIL_LAYER, 500)
       .refresh()
       .useCss()
       .waitForElementVisible('body', 1000, false)
@@ -34,27 +31,23 @@ module.exports = {
   'OIL Layer closed after clicking no' : function (browser) {
     browser
       .click(OIL_NO_BUTTON)
-      .assert.cssClassPresent(OIL_LAYER, "optin-false")
-      .assert.cssClassPresent(OIL_LAYER, "expanded-false")
+      .waitForElementVisible(OIL_LAYER_OPTLATER, 1000, false)
       .refresh()
       .useCss()
       .waitForElementVisible('body', 1000, false)
       .useXpath()
-      .pause(500)
-      .assert.cssClassPresent(OIL_LAYER, "optin-false")
-      .assert.cssClassPresent(OIL_LAYER, "expanded-false")
+      .waitForElementVisible(OIL_LAYER_OPTLATER, 1000, false)
       .end();
   },
 
   'OIL Layer closed after clicking no and then optin after clicking yes' : function (browser) {
     browser
       .click(OIL_NO_BUTTON)
+      .waitForElementVisible(OIL_LAYER_OPTLATER, 1000, false)
       .waitForElementVisible(OIL_YES_SMALL_BUTTON, 1000, false)
-      .assert.cssClassPresent(OIL_LAYER, "optin-false")
-      .assert.cssClassPresent(OIL_LAYER, "expanded-false")
       .click(OIL_YES_SMALL_BUTTON)
-      .assert.hidden(OIL_LAYER)
-      .assert.cssClassPresent(OIL_LAYER, "optin-true")
+      .pause(200)
+      .waitForElementNotPresent(OIL_LAYER, 500)
       .refresh()
       .useCss()
       .waitForElementVisible('body', 1000, false)
@@ -69,8 +62,8 @@ module.exports = {
       .waitForElementVisible(OIL_LAYER, 2000, false)
       .deleteCookies()
       .click(OIL_YES_BUTTON)
-      .assert.hidden(OIL_LAYER)
-      .assert.cssClassPresent(OIL_LAYER, "optin-true")
+      .pause(200)
+      .waitForElementNotPresent(OIL_LAYER, 500)
       .end();
   },
 
@@ -79,8 +72,7 @@ module.exports = {
       .deleteCookies()
       .click(OIL_NO_BUTTON)
       .assert.visible(OIL_LAYER)
-      .assert.cssClassPresent(OIL_LAYER, "optin-false")
-      .assert.cssClassPresent(OIL_LAYER, "expanded-false")
+      .waitForElementVisible(OIL_LAYER_OPTLATER, 1000, false)
       .end();
   },
 };

@@ -26,7 +26,7 @@ function showPOIButton() {
 }
 
 export const oilDefaultTemplate = `
-    <div class="oil-expanded">
+    <div class="oil-expanded" data-qa="oil-full">
         <div class="oil-content-overlay">
         <h1 class="oil__heading">
             Um unsere Dienste für Sie noch besser zu machen, brauchen wir ihr Einverständnis.

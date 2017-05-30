@@ -1,3 +1,4 @@
+require('babel-register')();
 const BINPATH = './node_modules/nightwatch/bin/';
 
 // we use a nightwatch.remote.conf.js file so we can include comments and helper functions

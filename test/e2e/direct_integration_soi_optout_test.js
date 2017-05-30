@@ -1,8 +1,4 @@
-const OIL_LAYER = '//*[@data-qa="oil-Layer"]';
-const OIL_YES_BUTTON = '//*[@data-qa="oil-YesButton"]';
-const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
-const OIL_YES_SMALL_BUTTON = '//*[@data-qa="oil-small-YesButton"]';
-const HOST_SEND_OPTOUT_BUTTON = '//*[@data-qa="send-opt-out-button"]';
+import { OIL_LAYER, OIL_YES_BUTTON, HOST_SEND_OPTOUT_BUTTON } from "../constants.js";
 
 module.exports = {
   beforeEach: browser => {
@@ -21,8 +17,8 @@ module.exports = {
   'OIL Layer Site Opt-In clicked, verify opt-in, opt-out by event' : function (browser) {
     browser
       .click(OIL_YES_BUTTON)
-      .assert.hidden(OIL_LAYER)
-      .assert.cssClassPresent(OIL_LAYER, "optin-true")
+      .pause(200)
+      .waitForElementNotPresent(OIL_LAYER, 500)
       .refresh()
       .useCss()
       .waitForElementVisible('body', 1000, false)

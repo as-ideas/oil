@@ -1,3 +1,5 @@
+require('babel-register')();
+
 nightwatch_config = {
   src_folders : [
     "test/e2e"

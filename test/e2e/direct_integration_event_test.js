@@ -1,8 +1,4 @@
-const OIL_LAYER = '//*[@data-qa="oil-Layer"]';
-const OIL_YES_BUTTON = '//*[@data-qa="oil-YesButton"]';
-const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
-const OIL_YES_SMALL_BUTTON = '//*[@data-qa="oil-small-YesButton"]';
-const EVENT_NOTIFIER_DIV = '//*[@data-qa="event-notifier-div"]';
+import { OIL_LAYER, OIL_YES_BUTTON, EVENT_NOTIFIER_DIV } from "../constants.js";
 
 module.exports = {
   beforeEach: browser => {
