@@ -14,7 +14,7 @@ module.exports = {
       .waitForElementVisible(OIL_LAYER, 2000, false);
   },
 
-  'OIL Layer event sent after clicking yes, even after refresh' : function (browser) {
+  'OIL Layer event being sent after clicking yes, even after refresh' : function (browser) {
     browser
       .assert.cssClassPresent(EVENT_NOTIFIER_DIV, "event-notifier-hidden")
       .click(OIL_YES_BUTTON)
