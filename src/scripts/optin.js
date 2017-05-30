@@ -26,7 +26,7 @@ export function getOilCookieConfig() {
 export function validateOilCookie() {
   // Set Oil cookie if no cookie exists
   if (!isCookie(getOilCookieConfig().name)) {
-    setDefaultOilCookie();
+     setDefaultOilCookie();
   }
 
   // In case Oil cookie exists but is not valid, create new Oil cookie with default config

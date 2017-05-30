@@ -13,8 +13,8 @@ export const oilWrapper = defineOilWrapper();
 
 
 /**
- * Oil Main Render Function: 
- * 
+ * Oil Main Render Function:
+ *
  */
 
 export function renderOil(wrapper, props) {
@@ -24,15 +24,15 @@ export function renderOil(wrapper, props) {
 
 
 /**
- * Define Oil Wrapper DOM Node 
- * @return DOM element
+ * Define Oil Wrapper DOM Node
+ * @return object DOM element
  */
 
 function defineOilWrapper() {
   let oilWrapper = document.createElement('div');
-  
+
   // Set some attributes as CSS classes and attributes for testing
-  
+
   oilWrapper.setAttribute('class', 'oil');
   oilWrapper.setAttribute('data-qa', 'oil-Layer');
 
@@ -43,7 +43,7 @@ function defineOilWrapper() {
 /**
  * Define Content of our Oil Wrapper
  * Sets HTML based on props ...
- * 
+ *
  */
 
 function writeOilContentToWrapper(wrapper, props) {
@@ -60,8 +60,8 @@ function writeOilContentToWrapper(wrapper, props) {
 
 function injectOilWrapperInDOM(wrapper, props) {
   let domNodes = getOilDOMNodes();
-  
-  // For every render cycle our OIL main DOM node gets removed, 
+
+  // For every render cycle our OIL main DOM node gets removed,
   // if it already exists in DOM
 
   if (domNodes.oilWrapper) {
@@ -80,7 +80,7 @@ function injectOilWrapperInDOM(wrapper, props) {
 /**
  * Small Utility Function to retrieve our Oil Wrapper and Action Elements,
  * like Buttons ...
- * @return data object which contains various OIL DOM nodes 
+ * @return data object which contains various OIL DOM nodes
  */
 
 function getOilDOMNodes() {
@@ -95,7 +95,7 @@ function getOilDOMNodes() {
 
 /**
  * Handler Functions for our Oil Action Elements
- * 
+ *
  */
 
 let config = getConfiguration();
@@ -123,7 +123,7 @@ function handlePoiOptIn() {
 
 /**
  * Add and Remove Handlers to Oil Action Elements
- * 
+ *
  */
 
 function addOilHandlers(nodes) {
@@ -136,7 +136,7 @@ function removeOilWrapperAndHandlers(nodes) {
   nodes.btnSoiOptIn && nodes.btnSoiOptIn.removeEventListener('click', handleSoiOptIn, false);
   nodes.btnOptLater && nodes.btnOptLater.removeEventListener('click', handleOptLater, false);
   nodes.btnPoiOptIn && nodes.btnPoiOptIn.removeEventListener('click', handlePoiOptIn, false);
-  
+
   if (nodes.oilWrapper) {
     nodes.oilWrapper.parentElement.removeChild(nodes.oilWrapper);
   }
