@@ -1,10 +1,6 @@
-import Cookie from 'js-cookie';
-import { OIL_COOKIE } from '../scripts/constants.js';
 import { logDebug } from '../scripts/log.js';
-import { registerMessageListener, removeMessageListener, getClientTimestamp } from './utils.js';
-import { OIL_CONFIG } from './constants.js';
-import { getConfiguration } from './config.js';
-import { setPoiOptIn, getPoiOptin } from './cookies.js';
+import { registerMessageListener, removeMessageListener } from './utils.js';
+import { setPoiOptIn, getPoiOptIn } from './cookies.js';
 let initComplete = false;
 
 function parseJson(data) {
@@ -18,8 +14,7 @@ function parseJson(data) {
 
 function handler(message) {
   let parsedMessage = parseJson(message.data),
-    status = null,
-    config = getConfiguration();
+    poiOptin = null;
 
   // save parent url
   logDebug('OIL Hub - Got following parent data:', parsedMessage);
@@ -36,9 +31,9 @@ function handler(message) {
           // Cookie.set(OIL_COOKIE.NAME, { [OIL_COOKIE.ATTR_POI]: true, [OIL_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp() }, { expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS] });
           break;
         case 'oil-status-read':
-          let poiOptin = getPoiOptin();
+          poiOptin = getPoiOptIn();
           // status = Cookie.getJSON(OIL_COOKIE.NAME) || {};
-          logDebug('OIL Hub - read the following poi status:', status);
+          logDebug('OIL Hub - read the following poi status:', poiOptin);
           parent.postMessage(JSON.stringify(poiOptin) || false, origin);
           break;
         default:

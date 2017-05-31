@@ -2,8 +2,6 @@ import { OIL_CONFIG } from './constants.js';
 import { registerMessageListener } from './utils.js';
 import { getConfiguration } from './config.js';
 import { logDebug } from './log.js';
-import { getOilCookieConfig } from './optin.js';
-import Cookie from 'js-cookie';
 import { removeSubscriberCookies } from './cookies.js';
 
 let config = null;

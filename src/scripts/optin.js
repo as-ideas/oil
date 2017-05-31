@@ -1,10 +1,9 @@
-import Cookie from 'js-cookie';
 import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect, verifyPowerOptIn } from './poi.js';
 import { logDebug } from './log.js';
-import { isCookie, isCookieValid, extend, sendEventToHostSite, getClientTimestamp } from './utils.js';
+import { sendEventToHostSite } from './utils.js';
 import { OIL_CONFIG } from './constants.js';
 import { getConfiguration, isPoiActive } from './config.js';
-import { getSoiOptin, setSoiOptIn, setOptLater } from './cookies.js';
+import { getSoiOptIn, setSoiOptIn, setOptLater } from './cookies.js';
 
 let config = null;
 
@@ -51,7 +50,7 @@ let config = null;
 export function checkOptIn() {
   // Cookies could have been deleted after page loads, therefore we check and validate our cookie here again
   // validateOilCookie();
-  let cookieOptin = getSoiOptin();
+  let cookieOptin = getSoiOptIn();
 
   return new Promise((resolve) => {
     // Verify Power Opt In (will return immediately if not activated)
@@ -60,7 +59,7 @@ export function checkOptIn() {
       if (optIn) {
         cookieOptin = optIn;
       }
-      resolve(cookieData);
+      resolve(cookieOptin);
     });
   });
 }
