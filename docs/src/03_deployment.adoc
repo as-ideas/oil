@@ -67,6 +67,7 @@ You need to add an OIL configuration to the html of your host and hub site. This
         "hub_path": "/some/path.html",
         "subscriber_set_cookie": true,
         "opt_in_event_name": "oil_optin_done_custom",
+        "opt_later_event_name": "oil_optlater_custom",
         "opt_out_event_name": "oil_optout_trigger",
         "developer_mode": "true"
       }
@@ -82,6 +83,8 @@ hub_path: The path to the hub.html installation on the origin, if any. Default: 
 subscriber_set_cookie: Whether to set the SOI cookie on POI opt-ins or not. Default: true
 
 opt_in_event_name: The event name that will be sent to this window on opt-in. This will be fired on returning visits as well, when the user already opted in. Default: 'oil_optin_done'
+
+opt_later_event_name: The event name that will be sent to this window on opt-later. This will be fired on returning visits as well, when the user delayed the optin for later. Default: 'oil_optlater_trigger'
 
 opt_out_event_name: The event name on this window the OIL-Library is listening to for opting out. The opt-out functionality can be implemented in the settings part of the host site. Default: 'oil_optout_trigger'
 

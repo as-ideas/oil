@@ -96,7 +96,8 @@ export function oilPowerOptIn(powerOnly = true) {
       });
     }
 
-    fireOptInEvent();
+    // Send event to notify host site
+    fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME);
 
     resolve(newCookieData);
   });
@@ -116,29 +117,12 @@ export function oilOptIn() {
   // Update Oil cookie
   Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
 
-  fireOptInEvent();
+  // Send event to notify host site
+  fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME);
+
   return new Promise((resolve) => {
     resolve(newCookieData);
   });
-}
-
-/**
- * Fires the opt-in event for the host site if wanted
- * @return
- */
-export function fireOptInEvent() {
-  if (!config) {
-    config = getConfiguration();
-  }
-  if (config) {
-    let eventName = config[OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME];
-    if (eventName) {
-      logDebug('Fire OptIn Event ('+eventName+'), notifying host application...');
-      sendEventToHostSite(eventName);
-    } else {
-      logDebug('Fire OptIn Event not configured. No host application notification.');
-    }
-  }
 }
 
 /**
@@ -154,8 +138,33 @@ export function oilOptLater() {
 
   // Update Oil cookie
   Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
+  
+  // Send event to notify host site
+  fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_LATER_EVENT_NAME);
 
   return new Promise((resolve) => {
     resolve(newCookieData);
   });
+}
+
+/**
+ * Fire a postmessage event to host site to notify of e.g. optin or optlater
+ * @param eventname defined in OIL config constants keys, e.g. OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME
+ */
+
+export function fireConfiguredMessageEvent(configEventName) {
+  if (!config) {
+    config = getConfiguration();
+  }
+
+  if (config) {
+    let eventName = config[configEventName];
+
+    if (eventName) {
+      logDebug(`Fire ${configEventName} Event (${eventName}), notifying host application...`);
+      sendEventToHostSite(eventName);
+    } else {
+      logDebug(`Fire ${configEventName} Event not configured. No host application notification.`);
+    }
+  }
 }

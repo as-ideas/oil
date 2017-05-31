@@ -55,6 +55,11 @@ module.exports = {
     chunks: ['end2end-tests/direct-integration-event-test'],
     chunksSortMode: 'dependency'
   }, {
+    filename: 'end2end-tests/direct-integration-opt-later-event-test.html',
+    template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration-opt-later-event-test.html'),
+    chunks: ['end2end-tests/direct-integration-opt-later-event-test'],
+    chunksSortMode: 'dependency'
+  }, {
     filename: 'end2end-tests/direct-integration-opt-out-event-test.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration-opt-out-event-test.html'),
     chunks: ['end2end-tests/direct-integration-opt-out-event-test'],
@@ -86,6 +91,7 @@ module.exports = {
     'end2end-tests/direct-integration': path.resolve(sourcePath, 'subscriber.js'),
     'end2end-tests/direct-integration-event-test': path.resolve(sourcePath, 'subscriber.js'),
     'end2end-tests/direct-integration-opt-out-event-test': path.resolve(sourcePath, 'subscriber.js'),
+    'end2end-tests/direct-integration-opt-later-event-test': path.resolve(sourcePath, 'subscriber.js'),
     'end2end-tests/complete-integration-site-a': path.resolve(sourcePath, 'subscriber.js'),
     'end2end-tests/complete-integration-site-b': path.resolve(sourcePath, 'subscriber.js'),
     'end2end-tests/complete-integration-mypass': path.resolve(sourcePath, 'hub.js'),

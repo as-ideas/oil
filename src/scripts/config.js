@@ -8,6 +8,7 @@ const defaultConfig = {
   'subscriber_set_cookie': true,
   'opt_in_event_name': 'oil_optin_done',
   'opt_out_event_name': 'oil_optout_trigger',
+  'opt_later_event_name': 'oil_optlater_trigger',
   'developer_mode': 'true',
   'cookie_expires_in_days' : 31,
   "activate_poi": false
