@@ -7,6 +7,7 @@ import { getConfiguration, isDevMode } from './scripts/config.js';
 import { OIL_CONFIG } from './scripts/constants.js';
 import Cookie from 'js-cookie';
 import { isBrowserCookieEnabled } from './scripts/utils.js';
+import { getOptLater } from './scripts/cookies.js';
 
 let config = null;
 
@@ -33,12 +34,12 @@ export function initOilLayer() {
         return;
       }
 
-      checkOptIn().then((cookie) => {
+      checkOptIn().then((optin) => {
         registerOptOutListener();
-        if (cookie.optin) {
+        if (optin) {
           fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME);
         }
-        else if (cookie.optLater) {
+        else if (getOptLater()) {
           renderOil(oilWrapper, {optLater: true});
           fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_LATER_EVENT_NAME);
         }

@@ -100,7 +100,7 @@ export function setSoiOptIn(value) {
   setDomainCookie(getOilDomainCookieConfig().name, cookie, getOilDomainCookieConfig().expires);
 }
 
-export function setExpanded(value) {
+export function setOptLater(value) {
   let cookie = getOilSessionCookie();
   cookie.expanded = value;
   setSessionCookie(getOilSessionCookieConfig().name, cookie);
@@ -118,7 +118,7 @@ export function getSoiOptin() {
   return cookie.optin;
 }
 
-export function getExpanded() {
+export function getOptLater() {
   let cookie = getOilSessionCookie();
   return cookie.expanded;
 }
@@ -126,4 +126,13 @@ export function getExpanded() {
 export function getPoiOptin() {
   let cookie = getOilHubDomainCookie();
   return cookie.power_opt_in;
+}
+
+export function removeSubscriberCookies() {
+  Cookie.remove(getOilCookieConfig().name);
+  Cookie.remove(getOilSessionCookieConfig().name);
+}
+
+export function removeHubCookies() {
+  Cookie.remove(getOilHubDomainCookie().name);
 }

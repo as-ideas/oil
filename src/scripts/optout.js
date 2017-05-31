@@ -4,6 +4,7 @@ import { getConfiguration } from './config.js';
 import { logDebug } from './log.js';
 import { getOilCookieConfig } from './optin.js';
 import Cookie from 'js-cookie';
+import { removeSubscriberCookies } from './cookies.js';
 
 let config = null;
 
@@ -26,7 +27,8 @@ function receiveOptOutMessage(event)
       if (event.data.indexOf(optOutEventName) !== -1) {
         logDebug("OptOut Received.");
         // Update Oil cookie
-        Cookie.remove(getOilCookieConfig().name);
+        removeSubscriberCookies();
+        // Cookie.remove(getOilCookieConfig().name);
       }
     }
   }

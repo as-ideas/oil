@@ -4,24 +4,25 @@ import { logDebug } from './log.js';
 import { isCookie, isCookieValid, extend, sendEventToHostSite, getClientTimestamp } from './utils.js';
 import { OIL_CONFIG } from './constants.js';
 import { getConfiguration, isPoiActive } from './config.js';
+import { getSoiOptin, setSoiOptIn, setOptLater } from './cookies.js';
 
 let config = null;
 
-export function getOilCookieConfig() {
-  if (!config) {
-    config = getConfiguration();
-  }
-
-  return {
-    name: 'oil_data',
-    expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS],
-    config: {
-      optin: false,
-      optLater: false,
-      timestamp: getClientTimestamp()
-    }
-  };
-}
+// export function getOilCookieConfig() {
+//   if (!config) {
+//     config = getConfiguration();
+//   }
+//
+//   return {
+//     name: 'oil_data',
+//     expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS],
+//     config: {
+//       optin: false,
+//       optLater: false,
+//       timestamp: getClientTimestamp()
+//     }
+//   };
+// }
 //
 // export function validateOilCookie() {
 //   // Set Oil cookie if no cookie exists
@@ -49,15 +50,15 @@ export function getOilCookieConfig() {
  */
 export function checkOptIn() {
   // Cookies could have been deleted after page loads, therefore we check and validate our cookie here again
-  validateOilCookie();
-  let cookieData = getOilCookie();
+  // validateOilCookie();
+  let cookieOptin = getSoiOptin();
 
   return new Promise((resolve) => {
     // Verify Power Opt In (will return immediately if not activated)
     verifyPowerOptIn().then((optIn) => {
       logDebug('Got following POI value', optIn);
       if (optIn) {
-        cookieData.optin = optIn;
+        cookieOptin = optIn;
       }
       resolve(cookieData);
     });
@@ -72,14 +73,15 @@ export function checkOptIn() {
  */
 export function oilPowerOptIn(powerOnly = true) {
   // Cookies could have been deleted after page loads, therefore we check and validate our cookie here again
-  validateOilCookie();
+  // validateOilCookie();
 
-  let cookieData = getOilCookie();
-  let newCookieData = extend(true, {}, cookieData, { optin: true, timestamp: getClientTimestamp() });
+  // let cookieData = getOilCookie();
+  // let newCookieData = extend(true, {}, cookieData, { optin: true, timestamp: getClientTimestamp() });
 
   if (!powerOnly) {
     // Update Oil cookie (site - SOI)
-    Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
+    setSoiOptIn(true);
+    // Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
   }
 
   return new Promise((resolve) => {
@@ -99,7 +101,7 @@ export function oilPowerOptIn(powerOnly = true) {
     // Send event to notify host site
     fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME);
 
-    resolve(newCookieData);
+    resolve(true);
   });
 }
 
@@ -109,19 +111,20 @@ export function oilPowerOptIn(powerOnly = true) {
  */
 export function oilOptIn() {
   // Cookies could have been deleted after page loads, therefore we check and validate our cookie here again
-  validateOilCookie();
+  // validateOilCookie();
 
-  let cookieData = getOilCookie();
-  let newCookieData = extend(true, {}, cookieData, { optin: true, timestamp: getClientTimestamp() });
+  // let cookieData = getOilCookie();
+  // let newCookieData = extend(true, {}, cookieData, { optin: true, timestamp: getClientTimestamp() });
 
   // Update Oil cookie
-  Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
+  setSoiOptIn(true);
+  // Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
 
   // Send event to notify host site
   fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME);
 
   return new Promise((resolve) => {
-    resolve(newCookieData);
+    resolve(true);
   });
 }
 
@@ -131,19 +134,20 @@ export function oilOptIn() {
  */
 export function oilOptLater() {
   // Cookies could have been deleted after page loads, therefore we check and validate our cookie here again
-  validateOilCookie();
-
-  let cookieData = getOilCookie();
-  let newCookieData = extend(true, {}, cookieData, { optLater: true, timestamp: getClientTimestamp() });
+  // validateOilCookie();
+  //
+  // let cookieData = getOilCookie();
+  // let newCookieData = extend(true, {}, cookieData, { optLater: true, timestamp: getClientTimestamp() });
 
   // Update Oil cookie
-  Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
-  
+  setOptLater(true);
+  // Cookie.set(getOilCookieConfig().name, newCookieData, { expires: getOilCookieConfig().expires });
+
   // Send event to notify host site
   fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_LATER_EVENT_NAME);
 
   return new Promise((resolve) => {
-    resolve(newCookieData);
+    resolve(true);
   });
 }
 

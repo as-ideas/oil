@@ -101,14 +101,14 @@ function getOilDOMNodes() {
 let config = getConfiguration();
 
 function handleOptLater() {
-  oilOptLater().then((cookieData) => {
-    renderOil(oilWrapper, {optLater: cookieData.optLater});
+  oilOptLater().then((cookieOptLater) => {
+    renderOil(oilWrapper, {optLater: cookieOptLater});
   });
 }
 
 function handleSoiOptIn() {
-  oilOptIn().then((cookieData) => {
-    renderOil(oilWrapper, {optIn: cookieData.optin});
+  oilOptIn().then((cookieOptIn) => {
+    renderOil(oilWrapper, {optIn: cookieOptIn});
   });
 }
 
