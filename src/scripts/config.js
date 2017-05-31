@@ -52,7 +52,7 @@ export function mergeOptions(options, defaults) {
   defaults = defaults || {};
   options = options || {};
   let merged = extend(true, {}, defaults, options);
-  logInfo('Got the following merged config', merged);
+  logInfo('Got the following merged config:', merged);
   return merged;
 }
 
