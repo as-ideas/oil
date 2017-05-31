@@ -79,7 +79,7 @@ export function readConfiguration(configurationElement) {
 }
 
 /**
- * Search HTML document for configuration and reads it in
+ * Search HTML document for configuration and read it in
  * @returns Object parsed config
  */
 export function getConfiguration() {
