@@ -22,26 +22,26 @@ export function getOilCookieConfig() {
     }
   };
 }
+//
+// export function validateOilCookie() {
+//   // Set Oil cookie if no cookie exists
+//   if (!isCookie(getOilCookieConfig().name)) {
+//      setDefaultOilCookie();
+//   }
+//
+//   // In case Oil cookie exists but is not valid, create new Oil cookie with default config
+//   if (!isCookieValid(getOilCookieConfig().name, Object.keys(getOilCookieConfig().config))) {
+//     setDefaultOilCookie();
+//   }
+// }
 
-export function validateOilCookie() {
-  // Set Oil cookie if no cookie exists
-  if (!isCookie(getOilCookieConfig().name)) {
-     setDefaultOilCookie();
-  }
-
-  // In case Oil cookie exists but is not valid, create new Oil cookie with default config
-  if (!isCookieValid(getOilCookieConfig().name, Object.keys(getOilCookieConfig().config))) {
-    setDefaultOilCookie();
-  }
-}
-
-export function getOilCookie() {
-  return Cookie.getJSON(getOilCookieConfig().name);
-}
-
-export function setDefaultOilCookie() {
-  Cookie.set(getOilCookieConfig().name, getOilCookieConfig().config, { expires: getOilCookieConfig().expires });
-}
+// export function getOilCookie() {
+//   return Cookie.getJSON(getOilCookieConfig().name);
+// }
+//
+// export function setDefaultOilCookie() {
+//   Cookie.set(getOilCookieConfig().name, getOilCookieConfig().config, { expires: getOilCookieConfig().expires });
+// }
 
 /**
  * Check Opt In

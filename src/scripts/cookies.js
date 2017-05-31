@@ -110,7 +110,7 @@ export function setPoiOptIn(value) {
   let cookie = getOilHubDomainCookie();
   cookie.power_opt_in = value;
   cookie.timestamp = getClientTimestamp();
-  setDomainCookie(getOilHubDomainCookieConfig().name, cookie, getOilHubDomainCookieConfig().expires));
+  setDomainCookie(getOilHubDomainCookieConfig().name, cookie, getOilHubDomainCookieConfig().expires);
 }
 
 export function getSoiOptin() {
@@ -127,4 +127,3 @@ export function getPoiOptin() {
   let cookie = getOilHubDomainCookie();
   return cookie.power_opt_in;
 }
-
