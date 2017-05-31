@@ -2,7 +2,7 @@ export const OIL_COOKIE = {
   NAME: 'oil_data',
   ATTR_POI: 'power_opt_in',
   ATTR_TIMESTAMP: 'timestamp'
-}
+};
 
 export const OIL_CONFIG = {
   ATTR_ACTIVATE_POI: 'activate_poi',
@@ -16,6 +16,6 @@ export const OIL_CONFIG = {
   ATTR_DEVELOPER_MODE: 'developer_mode',
   ATTR_COOKIE_EXPIRES_IN_DAYS: 'cookie_expires_in_days',
   ATTR_TIMESTAMP: 'timestamp'
-}
+};
 
 export const POI_FALLBACK_NAME = 'fallback';

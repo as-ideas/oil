@@ -53,13 +53,13 @@ export function mergeOptions(options, defaults) {
   defaults = defaults || {};
   options = options || {};
   let merged = extend(true, {}, defaults, options);
-  logInfo('Got the following merged config', merged);
+  logInfo('Got the following merged config:', merged);
   return merged;
 }
 
 /**
  * Read configuration of component from JSON script block
- * @param {Element} - DOM config element
+ * @param configurationElement - DOM config element
  * @returns {{}} extracted configuration as JSON
  * @function
  */
@@ -80,7 +80,7 @@ export function readConfiguration(configurationElement) {
 }
 
 /**
- * Search HTML document for configuration and reads it in
+ * Search HTML document for configuration and read it in
  * @returns Object parsed config
  */
 export function getConfiguration() {
