@@ -58,7 +58,7 @@ export function mergeOptions(options, defaults) {
 
 /**
  * Read configuration of component from JSON script block
- * @param {Element} - DOM config element
+ * @param configurationElement - DOM config element
  * @returns {{}} extracted configuration as JSON
  * @function
  */
