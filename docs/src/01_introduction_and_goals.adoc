@@ -7,6 +7,8 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 * Local opt-in as well as cross-company opt-in (PowerOptIn)
 * Integration and hosting on tealium
 
+For more detailed information see https://as-wiki.axelspringer.de/display/IDEASINNO/Opt+In+Layer[AS Wiki > Opt In Layer]
+
 === Technical Quality Goals
 
 * High compatibility with a broad range of browsers
