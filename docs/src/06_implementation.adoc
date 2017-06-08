@@ -1,0 +1,46 @@
+== How to implement OIL on your site
+
+=== Quick Overview
+1. Create Tealium configuration
+2. Create OIL configuration 
+3. Deploy, reload and you're done!
+
+=== 1. Tealium Configuration
+
+tbd.
+
+=== 2. OIL Configuration
+
+You need to add an OIL configuration to the html of your host and hub site. This is an example configuration:
+
+[source,json]
+----
+    <script type="application/configuration">
+      {
+        "activate_poi": true,
+        "hub_origin": "//www.somedomain.com",
+        "hub_path": "/some/path.html",
+        "subscriber_set_cookie": true,
+        "opt_in_event_name": "oil_optin_done_custom",
+        "opt_later_event_name": "oil_optlater_custom",
+        "opt_out_event_name": "oil_optout_trigger",
+        "developer_mode": "true"
+      }
+    </script>
+----
+
+
+.Configuration Parameter
+[width="100%",options="header"]
+|====================
+|Parameter|Description|Default value
+| activate_poi | The Power-Opt-In feature will only be activated if this switch is true. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. |  false
+| hub_origin | The origin of the hub.js installation, if any |  none
+| hub_path | The path to the hub.html installation on the origin, if any. |  none
+| subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true 
+| opt_in_event_name | The event name that will be sent to this window on opt-in. This will be fired on returning visits as well, when the user already opted in. |  oil_optin_done
+|opt_later_event_name  |  The event name that will be sent to this window on opt-later. This will be fired on returning visits as well, when the user delayed the optin for later. |  oil_optlater_trigger
+| opt_out_event_name |The event name on this window the OIL-Library is listening to for opting out. The opt-out functionality can be implemented in the settings part of the host site.  | oil_optout_trigger
+| developer_mode | If developer mode is activated, the overlay won't show unless a specific cookie is set. Set a cookie with the name "oil_developer" and the value "true" to activate the layer for your client. | true 
+|  |  |  
+|====================
