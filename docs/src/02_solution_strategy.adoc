@@ -1,7 +1,6 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
-
 According the proposal of the Commission, the European Parliament, and the Council of Ministers, web browsers (and similar software) will be required to prompt users with a menu of privacy options when they are installed for the first time.[1] The menu options will range from an extreme ban on all cookies to acceptance of all cookies, and will include intermediate options such as "reject third-party cookies"”" or "only accept first-party cookies".
 
 So solve this issue the ASV Opt In Layer (OIL) offers the basics to implement these requirements. Therefore the solution consists of two parts:
@@ -19,4 +18,3 @@ So when a user give the Power Opt In (POI) the subscriber sends a message via po
 [IMPORTANT]
 ====
 On MSIE the postMessage function used only accepts strings, see http://kohsuke.org/2012/09/11/internet-explorer-only-takes-string-in-html5-postmessage/[here].
-====

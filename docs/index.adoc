@@ -1,11 +1,17 @@
 // ====================================
 
-= image:src/images/logo.png[OIL Logo] Documentation DRAFT
+= image:src/images/logo.png[OIL Logo] Documentation 
 // toc-title definition MUST follow document title without blank line!
 :toc-title: Table of Contents
 
 // configure EN settings for asciidoc
 include::src/config.adoc[]
+
+// horizontal line
+***
+
+=== Document Release Notes
+* 8 June 2017 - 1.0 – Initial release
 
 // horizontal line
 ***
@@ -16,6 +22,10 @@ include::src/config.adoc[]
 <<<<
 // 1. Introduction and Goals
 include::src/01_introduction_and_goals.adoc[]
+
+<<<<
+// 2. How to implement OIL on your site
+include::src/06_implementation.adoc[]
 
 <<<<
 // 2. Solution Strategy
@@ -32,4 +42,3 @@ include::src/04_design_decisions.adoc[]
 <<<<
 // 5. Glossary
 include::src/05_glossary.adoc[]
-
