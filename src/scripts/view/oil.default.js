@@ -1,29 +1,5 @@
-import { getConfiguration } from './../config.js';
-import { OIL_CONFIG } from './../constants.js';
-
-/**
- * Returns html content for our OIL overlay
- */
-
-function showPOIButton() {
-  let config = getConfiguration();
-  let activatePoi = config[OIL_CONFIG.ATTR_ACTIVATE_POI];
-
-  if (activatePoi === false) {
-    return '';
-  }
-
-  return (
-    `
-      <button class="oil__button oil__button--1st js-optin-poi" data-qa="oil-poi-YesButton">
-        Global zustimmen
-        <span class="oil__button__label-2nd">
-          Für alle Axel Springer Dienste
-        </span>
-      </button>
-    `
-  );
-}
+import { privacyPageSnippet } from './components/oil.privacy.page';
+import { POIButtonSnippet } from './components/oil.poi.button';
 
 export const oilDefaultTemplate = `
     <div class="oil-expanded" data-qa="oil-full">
@@ -34,11 +10,12 @@ export const oilDefaultTemplate = `
         <p class="oil__intro-text">
             Nach der neuen EU Datenschutzgesetzgebung müssen Sie zustimmen, wenn wir ihre Daten erheben und weiter verarbeiteten wollen.
             Wir nutzen ihre Daten, um für Sie maßgeschneiderte journalistische Inhalte zu erstellen, zielgenauerere Werbung auszuspielen oder 
-            unsere Services allgemein zu bewerten. <a href="#" class="oil__intro-text--secondary">Mehr erfahren</a>
+            unsere Services allgemein zu bewerten. 
+            ${privacyPageSnippet()}
         </p>
         <div class="oil__button-row">
 
-            ${showPOIButton()}
+            ${POIButtonSnippet()}
 
             <button class="oil__button oil__button--2nd js-optin" data-qa="oil-YesButton">
                 Jetzt zustimmen

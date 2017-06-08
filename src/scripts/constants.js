@@ -15,7 +15,8 @@ export const OIL_CONFIG = {
   ATTR_OPT_LATER_EVENT_NAME: 'opt_later_event_name',
   ATTR_DEVELOPER_MODE: 'developer_mode',
   ATTR_COOKIE_EXPIRES_IN_DAYS: 'cookie_expires_in_days',
-  ATTR_TIMESTAMP: 'timestamp'
+  ATTR_TIMESTAMP: 'timestamp',
+  ATTR_PRIVACY_PAGE_URL: 'privacy_page_url'
 };
 
 export const POI_FALLBACK_NAME = 'fallback';

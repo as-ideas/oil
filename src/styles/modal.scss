@@ -283,6 +283,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1rem;
   color: $text-color-secondary;
   border-bottom: 1px solid;
+  text-decoration: none;
 
   @include media('<=phone') {
     font-size: 0.875rem;
@@ -466,6 +467,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.875rem;
   color: $text-color-secondary;
   border-bottom: 1px solid;
+  text-decoration: none;
 }
 
 

@@ -5,7 +5,7 @@ export const oilNoCookiesTemplate = `
                 Um unsere Dienste für Sie noch besser zu machen, brauchen wir Cookies.
             </h1>
             <p class="oil__intro-text">
-                Geben Sie uns ihre Cookies, jetzt! <a href="#" class="oil__intro-text--secondary">Mehr erfahren</a>
+                Geben Sie uns ihre Cookies, jetzt!
             </p>
         </div>
     </div>

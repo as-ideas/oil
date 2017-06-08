@@ -11,7 +11,8 @@ const defaultConfig = {
   'opt_later_event_name': 'oil_optlater_trigger',
   'developer_mode': 'true',
   'cookie_expires_in_days' : 31,
-  "activate_poi": false
+  'activate_poi': false,
+  'privacy_page_url': ""
 };
 
 let cachedConfig = null;
