@@ -1,7 +1,7 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
-According the proposal of the Commission, the European Parliament, and the Council of Ministers, web browsers (and similar software) will be required to prompt users with a menu of privacy options when they are installed for the first time.[1] The menu options will range from an extreme ban on all cookies to acceptance of all cookies, and will include intermediate options such as "reject third-party cookies"”" or "only accept first-party cookies".
+According the proposal of the Commission, the European Parliament, and the Council of Ministers, web browsers (and similar software) will be required to prompt users with a menu of privacy options when they are installed for the first time.[1] The menu options will range from an extreme ban on all cookies to acceptance of all cookies, and will include intermediate options such as "reject third-party cookies" or "only accept first-party cookies".
 
 So solve this issue the ASV Opt In Layer (OIL) offers the basics to implement these requirements. Therefore the solution consists of two parts:
 

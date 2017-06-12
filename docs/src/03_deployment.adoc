@@ -75,22 +75,19 @@ You need to add an OIL configuration to the html of your host and hub site. This
     </script>
 ----
 
-activate_poi: The Power-Opt-In feature will only be activated if this switch is true. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. Default: false
-
-hub_origin: The origin of the hub.js installation, if any. Default: none.
-
-hub_path: The path to the hub.html installation on the origin, if any. Default: none.
-
-subscriber_set_cookie: Whether to set the SOI cookie on POI opt-ins or not. Default: true
-
-opt_in_event_name: The event name that will be sent to this window on opt-in. This will be fired on returning visits as well, when the user already opted in. Default: 'oil_optin_done'
-
-opt_later_event_name: The event name that will be sent to this window on opt-later. This will be fired on returning visits as well, when the user delayed the optin for later. Default: 'oil_optlater_trigger'
-
-opt_out_event_name: The event name on this window the OIL-Library is listening to for opting out. The opt-out functionality can be implemented in the settings part of the host site. Default: 'oil_optout_trigger'
-
-developer_mode: If developer mode is activated, the overlay won't show unless a specific cookie is set. Set a cookie with the name "oil_developer" and the value "true" to activate the layer for your client. Default: true
-
-privacy_page_location: The OIL overlay can contain text, that refers to an external page detailing privacy ("Datenschutz"). If you add the key "privacy_page_location" and give it a value other than an empty string, a "Mehr erfahren" (show more) text link will be added to OIL. It opens a page with the value you specified in a new tab or window. Default: ""
+.Configuration Parameter
+[width="100%",options="header", cols="1,3,1"]
+|===
+| Config Parameter | Description | Default Setting
+| activate_poi | Activates or disactivates __Power Opt In__. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false
+| hub_origin | The origin of the hub.js installation, if any. | none
+| hub_path | The path to the hub.html installation on the origin, if any. | none
+| subscriber_set_cookie | Whether to set the __SOI__ cookie on __POI__ opt-ins or not. | true
+| opt_in_event_name | The event name that will be sent to the window of the host site on opt-in. This will be fired on returning visits as well, when the user already opted in. | 'oil_optin_done'
+| opt_later_event_name | The event name that will be sent to the window of the host site on opt-later. This will be fired on returning visits as well, when the user delayed the optin for later. | 'oil_optlater_trigger'
+| opt_out_event_name | The event name __OIL__ is listening to for opting out. The opt-out functionality can be implemented in the settings part of the host site. | 'oil_optout_trigger'
+| developer_mode | If developer mode is activated, the overlay won't show unless a specific cookie is set. Set a cookie with the name "oil_developer" and the value "true" to activate the layer for your client. | true
+| privacy_page_location | __OIL__ should contain text, that refers to an external page detailing privacy ("Datenschutz"). If you add the key "privacy_page_location" and give it a value other than an empty string, a "Mehr erfahren" ('show more') text link will be added to __OIL__. It opens a page with the value you specified in a new tab or window. | "" (empty string)
+|===
 
 ****

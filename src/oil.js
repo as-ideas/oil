@@ -12,7 +12,7 @@ import { getOptLater } from './scripts/cookies.js';
 let config = null;
 
 function isDeveloperCookieSet() {
-  return Cookie.get('oil_developer');
+  return Cookie.get('oil_developer') === 'true';
 }
 
 // PUBLIC API

@@ -3,17 +3,29 @@
 
 The OIL project aims for a stable cross-company solution for the challenges the new European privacy law (General Data Protection Regulation (GDPR) (Regulation (EU) 2016/679)) will pose to our business.
 
-* Data privacy opt-in overlay for all users of the Springer brand
-* Local opt-in as well as cross-company opt-in (PowerOptIn)
+* Data privacy opt-in overlay for all users of services offered by various Axel Springer brands and/or units
+* Local opt-in (also Site Opt In, SOI) as well as cross-company opt-in (also Power Opt In, POI)
 * Integration and hosting on tealium
 
 For more detailed information see https://as-wiki.axelspringer.de/display/IDEASINNO/Opt+In+Layer[AS Wiki > Opt In Layer]
 
 === Technical Quality Goals
 
-* High compatibility with a broad range of browsers
+* Compatible with a broad range of browsers (Chrome 14, 40, 57, IE 8, 9, 10, 11, Edge 14, Firefox 9, 35, 52, Safari 6, 7.1, 8, 9.1, Opera 12.16) and devices (iPad4, iPhone 5, 6, Android HTC One M8, Google Nexus 5)
 * Continously integrated and delivered
 * Modular and maintainable solution
+
+=== Overview of terms
+
+[options="header",cols="1,4"]
+|===
+| Term | Explanation
+| OIL | Opt In Overlay
+| Power Opt In (POI)  | With our __Power Opt In__ (POI), the user data is stored centrally for the Opt in for several Axel Springer services (for example, BILD, WELT) so that users only have to make an opt-in once. __POI__ is implemented via an iFrame solution. See also __Hub__
+| Site Opt In (SOI) | The __Site Opt In__ (SOI) stores information about users Opt in per site of an Axel Springer service. For users, this means that they have to provide their own opt in for each "SOI only" Axel Springer service.
+| Hub | __POI__ is implemented via an iFrame solution that points to a hub site that acts as a third party cookie storage. Technically, the hub consists of a hub.html and hub.js.
+| Subscriber | A site (for example BILD) that can subscribe to a hub to store third party cookies
+|===
 
 === Stakeholders
 
@@ -21,5 +33,5 @@ For more detailed information see https://as-wiki.axelspringer.de/display/IDEASI
 |===
 |Role/Name|Contact|
 Stake Holder | André Petzold |
-Product Owner | Michiel Slot 
+Product Owner | Michiel Slot
 |===
