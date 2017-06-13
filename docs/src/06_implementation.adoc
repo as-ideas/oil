@@ -1,12 +1,13 @@
 == How to implement OIL on your site
 
-=== Impelement OIL BUNDLE.JS
+=== Implement OIL.js
 
-TO DO:
-* What is Bundle,js?
-* How to implement BUNDLE.JS ?
+Setting up Oil on your pages is really easy. All you need to do is include our main Javascript file
+and some additional code snippets that mainly contain configuration and event listeners.
+For better clarity we put together some code snippets and an example that shows
+how to integrate Oil and listen to Oil's opt-later event.
 
-=== Set up Oil Configuration 
+=== Set up Oil Configuration
 
 You need to add an OIL configuration to the html of all pages where OIL is required. This is an example configuration:
 
@@ -27,7 +28,7 @@ You need to add an OIL configuration to the html of all pages where OIL is requi
     </script>
 ----
 
-.Configuration Parameter
+.Configuration Parameters
 [width="100%",options="header", cols="1,3,1,1"]
 |====
 |Config Parameter | Description | Default Setting|POI optional feature
@@ -44,11 +45,51 @@ You need to add an OIL configuration to the html of all pages where OIL is requi
 
 ==== Event example
 
-Below an example how to register an OIL event.
+Below you'll find a simple example that shows you how to listen to Oil's opt-later event.
+To run Oil in your page you need to include 3 scripts.
 
-TO DO: Andreas
+Put Oil's configuration object somewhere in the upper part of your page.
+
+[source,json]
+----
+  <script type="application/configuration">
+      {
+        "opt_later_event_name": "optedLater",
+        "developer_mode": false
+      }
+  </script>
+----
+
+Then register an event handler with a callback to be executed when Oil fires the opt-later event.
+[source,javascript]
+----
+  <script type="text/javascript">
+    // Cross browser event handler definition
+    var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+    var eventer = window[eventMethod];
+
+    // Callback to be executed when event is fired
+    function receiveMessage(event) {
+      if (event && event.data && event.data.indexOf('optedLater') !== -1) {
+        // Do something when event is fired...
+      }
+    }
+
+    // Register event handler
+    eventer(messageEvent, receiveMessage, false);
+  </script>
+----
+Then add our main Oil.js file somewhere in the lower part of your page.
+[source, javascript]
+----
+<script type="text/javascript" src="https://oil-integration-cdn.herokuapp.com/demos/direct-integration.b61689c4f4dab56dfa43.bundle.js"></script>
+----
+
+That's it! Reload your page to see Oil in action.
+
 
 === Tealium Configuration
 
-The Tealium integration of Oil.js has not yet been completed for company-wide use in production. 
+The Tealium integration of Oil.js has not yet been completed for company-wide use in production.
 We keep you up to date and will update the instructions here accordingly.
