@@ -11,7 +11,7 @@ const headerConfig = require('./etc/headerConfig');
 
 // Application setup.
 const port = process.argv[2] || process.env.PORT || 8080;
-let CACHE_DURATION = 0;
+let CACHE_DURATION = '10m';
 let DOCUMENT_ROOT = __dirname + '/dist';
 
 // tag::cors-express[]

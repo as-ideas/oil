@@ -1,14 +1,12 @@
 == How to implement OIL on your site
 
-=== 1. OIL Configuration
-
-==== 1.1 Impelement OIL BUNDLE.JS
+=== Impelement OIL BUNDLE.JS
 
 TO DO:
 * What is Bundle,js?
 * How to implement BUNDLE.JS ?
 
-==== 1.2 Set up Oil Configuration 
+=== Set up Oil Configuration 
 
 You need to add an OIL configuration to the html of all pages where OIL is required. This is an example configuration:
 
@@ -44,13 +42,13 @@ You need to add an OIL configuration to the html of all pages where OIL is requi
 | subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
 |====
 
-==== 1.1 Event example
+==== Event example
 
 Below an example how to register an OIL event.
 
 TO DO: Andreas
 
-=== 2. Tealium Configuration
+=== Tealium Configuration
 
 The Tealium integration of Oil.js has not yet been completed for company-wide use in production. 
 We keep you up to date and will update the instructions here accordingly.
