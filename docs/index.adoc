@@ -38,7 +38,3 @@ include::src/03_deployment.adoc[]
 <<<<
 // 4. Design Decisions
 include::src/04_design_decisions.adoc[]
-
-<<<<
-// 5. Glossary
-include::src/05_glossary.adoc[]
