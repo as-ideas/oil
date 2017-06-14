@@ -1,9 +1,8 @@
 :project_root: ../../
 
-[[section-deployment-view]]
-
-
 == Deployment View
+
+[[section-deployment-view]]
 
 [NOTE]
 ====

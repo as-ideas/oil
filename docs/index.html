@@ -1,0 +1,1863 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>OIL Documentation</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="book">
+<div id="header">
+<h1>OIL Documentation</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div style="page-break-after:always"></div>
+<div class="imageblock">
+<div class="content">
+<img src="src/images/oil-asideas.png" alt="src/images/oil-asideas.png" />
+</div>
+</div>
+<div class="paragraph"><p><strong>*</strong>
+=== Document Release Notes
+* 14 June 2017 - 1.0 – Initial release</p></div>
+<div class="paragraph"><p><strong>*</strong>
+
+:numbered:</p></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-introduction-and-goals">Introduction and Goals</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The OIL project aims for a stable cross-company solution for the challenges the new European privacy law (General Data Protection Regulation (GDPR) (Regulation (EU) 2016/679)) will pose to our business.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Data privacy opt-in overlay for all users of services offered by various Axel Springer brands and/or units
+</p>
+</li>
+<li>
+<p>
+Local opt-in (also Site Opt In, SOI) as well as cross-company opt-in (also Power Opt In, POI)
+</p>
+</li>
+<li>
+<p>
+Integration and hosting on tealium
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>For more detailed information see <a href="https://as-wiki.axelspringer.de/display/IDEASINNO/Opt+In+Layer">AS Wiki &gt; Opt In Layer</a></p></div>
+<div class="sect2">
+<h3 id="_technical_quality_goals">Technical Quality Goals</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+OIL will be held compatible with the latest official browser releases, going back to the latest version as listed below and tested on broad range of browsers using Browserstack.com:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Chrome 14, 40, 57
+</p>
+</li>
+<li>
+<p>
+IE 8, 9, 10, 11, Edge 14
+</p>
+</li>
+<li>
+<p>
+Firefox 9, 35, 52
+</p>
+</li>
+<li>
+<p>
+Safari 6, 7.1, 8, 9.1
+</p>
+</li>
+<li>
+<p>
+Opera 12.16
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Devices
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+iPad4
+</p>
+</li>
+<li>
+<p>
+iPhone 5, 6
+</p>
+</li>
+<li>
+<p>
+Android HTC One M8
+</p>
+</li>
+<li>
+<p>
+Google Nexus 5
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Continously integrated and delivered
+</p>
+</li>
+<li>
+<p>
+Modular and maintainable solution
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_glossary">Glossary</h3>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="80%" />
+<thead>
+<tr>
+<th align="left" valign="top"> Term </th>
+<th align="left" valign="top"> Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">OIL</p></td>
+<td align="left" valign="top"><p class="table">Stands for Opt In Layer and besides the fact that it stand for the name of the product it is often used to refer to the UI layer shown on the page.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"> Site Opt In (SOI)</p></td>
+<td align="left" valign="top"><p class="table">The <em>Site Opt In</em> (SOI) stores a user&#8217;s opt in permit for the current site.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"> Power Opt In (POI)</p></td>
+<td align="left" valign="top"><p class="table">The <em>Power Opt In</em> (POI) functionality stores the opt in permits centrally for multiple Axel Springer sites (for example BILD, WELT). This allows users to only give their opt in permit once, when visting another site using POI the user will not be asked again. <em>POI</em> is implemented via an iframe solution, see also <em>Hub</em> . A user can first give a SOI permit before giving a POI permit, which has priority.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"> Hub</p></td>
+<td align="left" valign="top"><p class="table"><em>POI</em> is implemented via an iframe solution that points to a hub site that acts as a third party cookie storage. Technically, the hub consists of a hub.html and hub.js.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Subscriber</p></td>
+<td align="left" valign="top"><p class="table">A site (for example WELT.de) that subscribes to a POI hub</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_team_stakeholders">Team Stakeholders</h3>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="80%" />
+<thead>
+<tr>
+<th align="left" valign="top">Role/Name</th>
+<th align="left" valign="top">Contact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Stake Holder</p></td>
+<td align="left" valign="top"><p class="table">André Petzold</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Product Owner</p></td>
+<td align="left" valign="top"><p class="table">Michiel Slot</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Developer</p></td>
+<td align="left" valign="top"><p class="table">Andreas Wagner</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Developer</p></td>
+<td align="left" valign="top"><p class="table">Marcel Bankman</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_to_implement_oil_on_your_site">How to implement OIL on your site</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Setting up OIL on your pages is really easy. All you need to do is include our main Javascript file and an additional configuration snippet. OIL uses JS events to communicate with its host site, please the table below for details.</p></div>
+<div class="paragraph"><p>For better clarity we&#8217;ve put together some code snippets and an example that shows how to integrate OIL and listen to OIL&#8217;s opt-later event.</p></div>
+<div class="sect2">
+<h3 id="_basic_setup">Basic Setup</h3>
+<div class="paragraph"><p>Below you&#8217;ll find a simple example that shows you how to listen to OIL&#8217;s opt-later event. To run OIL in your page you need to include 3 scripts.</p></div>
+<div class="paragraph"><p>#1. Put OIL&#8217;s configuration object somewhere in the upper part of your page. Please leave the developer mode false to begin with, see the parameter section below for more details.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>  &lt;script type="application/configuration"&gt;
+      <span style="color: #990000">{</span>
+        "opt_later_event_name": "<span style="color: #FF0000">optedLater</span>"<span style="color: #990000">,</span>
+        "developer_mode": <span style="font-weight: bold"><span style="color: #0000FF">false</span></span>
+      <span style="color: #990000">}</span>
+  &lt;/script&gt;</tt></pre></div></div>
+<div class="paragraph"><p>#2. Register an event handler with a callback to be executed when OIL fires the opt-later event.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>  <span style="color: #990000">&lt;</span>script type<span style="color: #990000">=</span><span style="color: #FF0000">"text/javascript"</span><span style="color: #990000">&gt;</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// Cross browser event handler definition</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> eventMethod <span style="color: #990000">=</span> window<span style="color: #990000">.</span>addEventListener <span style="color: #990000">?</span> <span style="color: #FF0000">'addEventListener'</span> <span style="color: #990000">:</span> <span style="color: #FF0000">'attachEvent'</span><span style="color: #990000">;</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> messageEvent <span style="color: #990000">=</span> eventMethod <span style="color: #990000">===</span> <span style="color: #FF0000">'attachEvent'</span> <span style="color: #990000">?</span> <span style="color: #FF0000">'onmessage'</span> <span style="color: #990000">:</span> <span style="color: #FF0000">'message'</span><span style="color: #990000">;</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> eventer <span style="color: #990000">=</span> window<span style="color: #990000">[</span>eventMethod<span style="color: #990000">];</span>
+
+    <span style="font-style: italic"><span style="color: #9A1900">// Callback to be executed when event is fired</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">receiveMessage</span></span><span style="color: #990000">(</span>event<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>event <span style="color: #990000">&amp;&amp;</span> event<span style="color: #990000">.</span>data <span style="color: #990000">&amp;&amp;</span> event<span style="color: #990000">.</span>data<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">indexOf</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'optedLater'</span><span style="color: #990000">)</span> <span style="color: #990000">!==</span> <span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-style: italic"><span style="color: #9A1900">// Do something when event is fired...</span></span>
+        console<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">log</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Do something when event is fired..."</span><span style="color: #990000">);</span>
+      <span style="color: #FF0000">}</span>
+    <span style="color: #FF0000">}</span>
+
+    <span style="font-style: italic"><span style="color: #9A1900">// Register event handler</span></span>
+    <span style="font-weight: bold"><span style="color: #000000">eventer</span></span><span style="color: #990000">(</span>messageEvent<span style="color: #990000">,</span> receiveMessage<span style="color: #990000">,</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">);</span>
+  <span style="color: #990000">&lt;/</span>script<span style="color: #990000">&gt;</span></tt></pre></div></div>
+<div class="paragraph"><p>#3. Add the main Oil.js file somewhere in the lower part of your page.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">&lt;</span>script type<span style="color: #990000">=</span><span style="color: #FF0000">"text/javascript"</span> src<span style="color: #990000">=</span><span style="color: #FF0000">"https://oil-integration-cdn.herokuapp.com/demos/direct-integration.b61689c4f4dab56dfa43.bundle.js"</span><span style="color: #990000">&gt;&lt;/</span>script<span style="color: #990000">&gt;</span></tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Updated versions of the script will be deployed using a different filename hence we&#8217;ll never alter an existing version.
+</p>
+</li>
+<li>
+<p>
+Don&#8217;t be fooled by the "demos" part in the URL, it&#8217;s for real.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>#4. That&#8217;s it! Load your page to see OIL in action.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_oil_configuration">OIL Configuration</h3>
+<div class="paragraph"><p>You need to add the configuration snippet to all pages where OIL is required. This is an example configuration:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>    &lt;script type="application/configuration"&gt;
+      <span style="color: #990000">{</span>
+        "opt_in_event_name": "<span style="color: #FF0000">oil_optin_done_custom</span>"<span style="color: #990000">,</span>
+        "opt_later_event_name": "<span style="color: #FF0000">oil_optlater_custom</span>"<span style="color: #990000">,</span>
+        "opt_out_event_name": "<span style="color: #FF0000">oil_optout_trigger</span>"<span style="color: #990000">,</span>
+        "developer_mode": "<span style="color: #FF0000">false</span>"<span style="color: #990000">,</span>
+        "privacy_page_url": "<span style="color: #FF0000">http://www.mysite.com/privacy</span>"<span style="color: #990000">,</span>
+        "activate_poi": <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">,</span>
+        "hub_origin": "<span style="color: #FF0000">//www.somedomain.com</span>"<span style="color: #990000">,</span>
+        "hub_path": "<span style="color: #FF0000">/some/path.html</span>"<span style="color: #990000">,</span>
+        "subscriber_set_cookie": <span style="font-weight: bold"><span style="color: #0000FF">true</span></span>
+      <span style="color: #990000">}</span>
+    &lt;/script&gt;</tt></pre></div></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 1. Configuration Parameters</caption>
+<col width="16%" />
+<col width="50%" />
+<col width="16%" />
+<col width="16%" />
+<thead>
+<tr>
+<th align="left" valign="top">Config Parameter </th>
+<th align="left" valign="top"> Description </th>
+<th align="left" valign="top"> Default Setting</th>
+<th align="left" valign="top">POI optional feature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">opt_in_event_name</p></td>
+<td align="left" valign="top"><p class="table">The name for the Javascript event that will be sent to the host when a users selects opt in. This event will also be fired on each page when the user has triggered this action previously.</p></td>
+<td align="left" valign="top"><p class="table"><em>oil_optin_done</em></p></td>
+<td align="left" valign="top"><p class="table">No</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">opt_later_event_name</p></td>
+<td align="left" valign="top"><p class="table">The name for the Javascript event name that will be sent to the host when a user selects opt later. This event will also be fired on each page when the user has triggered this action previously.</p></td>
+<td align="left" valign="top"><p class="table"> <em>oil_optlater_trigger</em></p></td>
+<td align="left" valign="top"><p class="table">No</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">opt_out_event_name</p></td>
+<td align="left" valign="top"><p class="table">The Javascript event name OIL is listening to for opting out. Please note: The opt-out functionality has to be implemented manually by the site owner on the host site!</p></td>
+<td align="left" valign="top"><p class="table"> <em>oil_optout_trigger</em></p></td>
+<td align="left" valign="top"><p class="table">No</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">developer_mode</p></td>
+<td align="left" valign="top"><p class="table">A boolean value to toggle a  developer mode. For security reasons the overlay <strong>will not show per default</strong> when the developer mode is enabled. Create a cookie named "oil_developer" with the value "true". This will show the OIL layer on your client.</p></td>
+<td align="left" valign="top"><p class="table">true</p></td>
+<td align="left" valign="top"><p class="table">No</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"> privacy_page_location</p></td>
+<td align="left" valign="top"><p class="table">OIL should always have a link to your privacy page ("Datenschutz"). If you add the key "privacy_page_location", the "Mehr erfahren" (<em>show more</em>, label can&#8217;t be changed) link will be added to OIL. It opens a page with the value you specified in a new tab or window. You can either use a relative or absolute URL.</p></td>
+<td align="left" valign="top"><p class="table"> "" (empty string)</p></td>
+<td align="left" valign="top"><p class="table">No</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">activate_poi</p></td>
+<td align="left" valign="top"><p class="table">Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button.</p></td>
+<td align="left" valign="top"><p class="table"> false</p></td>
+<td align="left" valign="top"><p class="table">Yes</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">hub_origin</p></td>
+<td align="left" valign="top"><p class="table">The origin of the hub.js installation, if any.</p></td>
+<td align="left" valign="top"><p class="table"> none</p></td>
+<td align="left" valign="top"><p class="table">Yes</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">hub_path</p></td>
+<td align="left" valign="top"><p class="table">The path to the hub.html installation on the origin, if any.</p></td>
+<td align="left" valign="top"><p class="table"> none</p></td>
+<td align="left" valign="top"><p class="table">Yes</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"> subscriber_set_cookie</p></td>
+<td align="left" valign="top"><p class="table">Whether to set the SOI cookie on POI opt-ins or not.</p></td>
+<td align="left" valign="top"><p class="table"> true</p></td>
+<td align="left" valign="top"><p class="table">Yes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tealium_configuration">Tealium Configuration</h3>
+<div class="paragraph"><p>The Tealium integration of Oil.js has not yet been completed for company-wide use in production.
+We keep you up to date and will update the instructions here accordingly.</p></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-solution-strategy">Solution Strategy</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>According the proposal of the Commission, the European Parliament, and the Council of Ministers, web browsers (and similar software) will be required to prompt users with a menu of privacy options when they are installed for the first time.[1] The menu options will range from an extreme ban on all cookies to acceptance of all cookies, and will include intermediate options such as "reject third-party cookies" or "only accept first-party cookies".</p></div>
+<div class="paragraph"><p>So solve this issue the ASV Opt In Layer (OIL) offers the basics to implement these requirements. Therefore the solution consists of two parts:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+A <strong>hub</strong>, which is added as an iframe to the site which is pointing to a new 3rd-party domain, which is independent from all current sites
+</p>
+</li>
+<li>
+<p>
+A <strong>subscriber</strong>, which communicates with this hub to get the the needed information from the hub
+</p>
+</li>
+</ul></div>
+<div class="imageblock">
+<div class="content">
+<img src="src/images/oil-poi-flow.png" alt="OIL Flow" />
+</div>
+</div>
+<div class="paragraph"><p>So when a user give the Power Opt In (POI) the subscriber sends a message via postMessage to the hub to inform the activation of the 3rd party cookie. By setting the cookie in the hub the 3rd party cookie became then a 1st party cookie. For some even stricter browsers, e.g. newer Safari versions <span class="footnote"><br />[Chrome maybe also disable it by default in the future]<br /></span> a fallback is implemented which redirects then the user to hub site to set the cookie and then redirects back. But this fallback is only needed for the first visit.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>On MSIE the postMessage function used only accepts strings, see <a href="http://kohsuke.org/2012/09/11/internet-explorer-only-takes-string-in-html5-postmessage/">here</a>.</p></div>
+<div style="page-break-after:always"></div>
+</td>
+</tr></table>
+</div>
+<div class="admonitionblock" id="section-deployment-view">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">For the purpose of the PoC the deployment to Tealium is done mainly manual for following stages:
+- prod
+- debug / development</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Only the end2end stage has an "automatic" update via a CDN.</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="src/images/deployment.png" alt="OIL Deployment" />
+</div>
+</div>
+<div class="paragraph"><p>To deploy the hub (i.e. as a MyPass service) you need to deploy the project with an index.html loading dist/hub.123.js. In our examples this is demos/complete-integration-mypass.html</p></div>
+<div class="paragraph"><p>For compatibility with Internet Explorer 9+ you need to add the following header to the server response to allow 3rd party cookies for POI. It&#8217;s needed in SOI only mode.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>let headers = <span style="color: #990000">{</span>
+  // tag::p3p-config<span style="color: #990000">[]</span>
+  "p3p": "<span style="color: #FF0000">CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\"</span>"
+  // end::p3p-config<span style="color: #990000">[]</span>
+<span style="color: #990000">}</span>;
+module.exports = <span style="color: #990000">{</span>
+  headers: headers
+<span style="color: #990000">}</span>;</tt></pre></div></div>
+<div class="paragraph"><p>For our PoC we decided to use Tealium to deliver our Javascript artefact to client browsers. To achieve this you have to follow some steps:</p></div>
+<div class="paragraph"><p>As a developer of Oil.js (see image below)</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Open your Tealium lib profile and move to extensions
+</p>
+</li>
+<li>
+<p>
+Open the predefined Javascript extension "AS Opt-in Overlay"
+</p>
+</li>
+<li>
+<p>
+Some forms will show up, paste your code (dist/subscriber.123.js) in the "configuration" section
+</p>
+</li>
+<li>
+<p>
+Save and Publish your Tealium configuration changes in your desired stages (Dev, QA, Prod)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Please note that once published, your code will be delivered to all Tealium clients automatically.
+Tealium clients will be informed of your changes and need to publish/deploy their profile to activate your changes.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="src/images/tealium-lib-profile-extension-view.png" alt="Tealium Library Profile" />
+</div>
+</div>
+<div class="paragraph"><p>As a client of Tealium (see image below)</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Open your Tealium profile and move to "extensions"
+</p>
+</li>
+<li>
+<p>
+Find the entry for "AS Opt-in Overlay", you&#8217;ll be noticed of a change to this extension
+</p>
+</li>
+<li>
+<p>
+Publish / deploy your profile to activate the changes to Oil.js
+</p>
+</li>
+</ul></div>
+<div class="imageblock">
+<div class="content">
+<img src="src/images/tealium-user-profile-extension-view.png" alt="Tealium Client Profile" />
+</div>
+</div>
+<div class="paragraph"><p>Within an extension it&#8217;s possible to handle the OptOut/OptIn logic during preload. This also allows to alter the later behaviour within Tealium.</p></div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">OIL Configuration</div>
+<div class="paragraph"><p>You need to add an OIL configuration to the html of your host and hub site. This is an example configuration:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>    &lt;script type="application/configuration"&gt;
+      <span style="color: #990000">{</span>
+        "activate_poi": <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">,</span>
+        "hub_origin": "<span style="color: #FF0000">//www.somedomain.com</span>"<span style="color: #990000">,</span>
+        "hub_path": "<span style="color: #FF0000">/some/path.html</span>"<span style="color: #990000">,</span>
+        "subscriber_set_cookie": <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">,</span>
+        "opt_in_event_name": "<span style="color: #FF0000">oil_optin_done_custom</span>"<span style="color: #990000">,</span>
+        "opt_later_event_name": "<span style="color: #FF0000">oil_optlater_custom</span>"<span style="color: #990000">,</span>
+        "opt_out_event_name": "<span style="color: #FF0000">oil_optout_trigger</span>"<span style="color: #990000">,</span>
+        "developer_mode": "<span style="color: #FF0000">true</span>"<span style="color: #990000">,</span>
+        "privacy_page_location": "<span style="color: #FF0000">http://www.welt.de/datenschutz</span>"
+      <span style="color: #990000">}</span>
+    &lt;/script&gt;</tt></pre></div></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 2. Configuration Parameter</caption>
+<col width="20%" />
+<col width="60%" />
+<col width="20%" />
+<thead>
+<tr>
+<th align="left" valign="top"> Config Parameter </th>
+<th align="left" valign="top"> Description </th>
+<th align="left" valign="top"> Default Setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">activate_poi</p></td>
+<td align="left" valign="top"><p class="table">Activates or disactivates <em>Power Opt In</em>. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button.</p></td>
+<td align="left" valign="top"><p class="table"> false</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">hub_origin</p></td>
+<td align="left" valign="top"><p class="table">The origin of the hub.js installation, if any.</p></td>
+<td align="left" valign="top"><p class="table"> none</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">hub_path</p></td>
+<td align="left" valign="top"><p class="table">The path to the hub.html installation on the origin, if any.</p></td>
+<td align="left" valign="top"><p class="table"> none</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"> subscriber_set_cookie</p></td>
+<td align="left" valign="top"><p class="table">Whether to set the <em>SOI</em> cookie on <em>POI</em> opt-ins or not.</p></td>
+<td align="left" valign="top"><p class="table"> true</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">opt_in_event_name</p></td>
+<td align="left" valign="top"><p class="table">The event name that will be sent to the window of the host site on opt-in. This will be fired on returning visits as well, when the user already opted in.</p></td>
+<td align="left" valign="top"><p class="table"><em>oil_optin_done</em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">opt_later_event_name</p></td>
+<td align="left" valign="top"><p class="table">The event name that will be sent to the window of the host site on opt-later. This will be fired on returning visits as well, when the user delayed the optin for later.</p></td>
+<td align="left" valign="top"><p class="table"> <em>oil_optlater_trigger</em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">opt_out_event_name</p></td>
+<td align="left" valign="top"><p class="table">The event name <em>OIL</em> is listening to for opting out. The opt-out functionality can be implemented in the settings part of the host site.</p></td>
+<td align="left" valign="top"><p class="table"> <em>oil_optout_trigger</em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">developer_mode</p></td>
+<td align="left" valign="top"><p class="table">If developer mode is activated, the overlay won&#8217;t show unless a specific cookie is set. Set a cookie with the name "oil_developer" and the value "true" to activate the layer for your client.</p></td>
+<td align="left" valign="top"><p class="table">true</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"> privacy_page_location</p></td>
+<td align="left" valign="top"><p class="table"><em>OIL</em> should contain text, that refers to an external page detailing privacy ("Datenschutz"). If you add the key "privacy_page_location" and give it a value other than an empty string, a "Mehr erfahren" (<em>show more</em>) text link will be added to <em>OIL</em>. It opens a page with the value you specified in a new tab or window.</p></td>
+<td align="left" valign="top"><p class="table"> "" (empty string)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></div>
+<div style="page-break-after:always"></div>
+<div class="paragraph" id="section-design-decisions"><p>The ``postMessage()`` method lifts this restriction by providing a way to securely pass messages across domains. The ``postMessage()`` method accepts two parameters.</p></div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist"><ul>
+<li>
+<p>
+``message`` – A string or object that will be sent to the receiving window.
+</p>
+</li>
+<li>
+<p>
+``targetOrigin`` – The URL of the window that the message is being sent to. The protocol, port and hostname of the target window must match this parameter for the message to be sent. Specifying ``"*"`` will match any URL however this is strongly discouraged for security reasons.
+This method should be called on the window that the message is being sent to. A reference to the target window can be obtained in a number of different ways:
+</p>
+</li>
+<li>
+<p>
+When using ``window.open()`` a reference to the new window will be returned by the ``open()`` method.
+</p>
+</li>
+<li>
+<p>
+For iframes you can access the ``contentWindow`` property on the desired iframe.
+</p>
+</li>
+</ul></div>
+</div></div>
+<div class="paragraph"><p>When a call to ``postMessage()`` is executed successfully a <a href="https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent">``MessageEvent``</a> will be fired on the receiving window. You can use a standard event listener to watch for this event and execute some code when it occurs.</p></div>
+<div class="paragraph"><p>The event passed into the listener callback has a property called ``data`` that can be used to access the string or object that was sent by ``postMessage()``.</p></div>
+<div class="paragraph"><p>So on the OIL hub side an event listener is added:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>window<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">addEventListener</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'message'</span><span style="color: #990000">,</span> <span style="color: #990000">(</span>e<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+  let data <span style="color: #990000">=</span> e<span style="color: #990000">.</span>data<span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> logDebug <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'../scripts/log.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> registerMessageListener<span style="color: #990000">,</span> removeMessageListener <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./utils.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> setPoiOptIn<span style="color: #990000">,</span> getPoiOptIn <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./cookies.js'</span><span style="color: #990000">;</span>
+let initComplete <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">parseJson</span></span><span style="color: #990000">(</span>data<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">try</span></span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">typeof</span></span> data <span style="color: #990000">!==</span> <span style="color: #FF0000">'object'</span> <span style="color: #990000">?</span> JSON<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parse</span></span><span style="color: #990000">(</span>data<span style="color: #990000">)</span> <span style="color: #990000">:</span> data<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">catch</span></span><span style="color: #990000">(</span>err<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - couldnt parse following data:'</span><span style="color: #990000">,</span> data<span style="color: #990000">);</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
+  <span style="color: #FF0000">}</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">handler</span></span><span style="color: #990000">(</span>message<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+  let parsedMessage <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">parseJson</span></span><span style="color: #990000">(</span>message<span style="color: #990000">.</span>data<span style="color: #990000">),</span>
+    poiOptin <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">null</span></span><span style="color: #990000">;</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">// save parent url</span></span>
+  <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - Got following parent data:'</span><span style="color: #990000">,</span> parsedMessage<span style="color: #990000">);</span>
+  <span style="font-style: italic"><span style="color: #9A1900">// only react on our data</span></span>
+  <span style="font-style: italic"><span style="color: #9A1900">// tag::hub-listener[]</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>parsedMessage<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>parsedMessage<span style="color: #990000">.</span>event <span style="color: #990000">&amp;&amp;</span> parsedMessage<span style="color: #990000">.</span>event<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">indexOf</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'oil-'</span><span style="color: #990000">)</span> <span style="color: #990000">!==</span> <span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      let event <span style="color: #990000">=</span> parsedMessage<span style="color: #990000">.</span>event<span style="color: #990000">,</span>
+          origin <span style="color: #990000">=</span> parsedMessage<span style="color: #990000">.</span>origin<span style="color: #990000">;</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">switch</span></span> <span style="color: #990000">(</span>event<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">case</span></span> <span style="color: #FF0000">'oil-poi-activate'</span><span style="color: #990000">:</span>
+          <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - activating POI '</span><span style="color: #990000">);</span>
+          <span style="font-weight: bold"><span style="color: #000000">setPoiOptIn</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">);</span>
+          <span style="font-style: italic"><span style="color: #9A1900">// Cookie.set(OIL_COOKIE.NAME, { [OIL_COOKIE.ATTR_POI]: true, [OIL_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp() }, { expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS] });</span></span>
+          <span style="font-weight: bold"><span style="color: #0000FF">break</span></span><span style="color: #990000">;</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">case</span></span> <span style="color: #FF0000">'oil-status-read'</span><span style="color: #990000">:</span>
+          poiOptin <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">getPoiOptIn</span></span><span style="color: #990000">();</span>
+          <span style="font-style: italic"><span style="color: #9A1900">// status = Cookie.getJSON(OIL_COOKIE.NAME) || {};</span></span>
+          <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - read the following poi status:'</span><span style="color: #990000">,</span> poiOptin<span style="color: #990000">);</span>
+          parent<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">postMessage</span></span><span style="color: #990000">(</span>JSON<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">stringify</span></span><span style="color: #990000">(</span>poiOptin<span style="color: #990000">)</span> <span style="color: #990000">||</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">,</span> origin<span style="color: #990000">);</span>
+          <span style="font-weight: bold"><span style="color: #0000FF">break</span></span><span style="color: #990000">;</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">default</span></span><span style="color: #990000">:</span>
+          <span style="font-weight: bold"><span style="color: #0000FF">break</span></span><span style="color: #990000">;</span>
+      <span style="color: #FF0000">}</span>
+    <span style="color: #FF0000">}</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// end::hub-listener[]</span></span>
+    initComplete <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">;</span>
+  <span style="color: #FF0000">}</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">initOilFrame</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(!</span>initComplete<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">removeMessageListener</span></span><span style="color: #990000">(</span>handler<span style="color: #990000">);</span>
+    <span style="font-weight: bold"><span style="color: #000000">registerMessageListener</span></span><span style="color: #990000">(</span>handler<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span>
+<span style="color: #FF0000">}</span>
+<span style="color: #FF0000">}</span><span style="color: #990000">);</span></tt></pre></div></div>
+<div class="paragraph"><p>At the subscriber side the ``postMessage`` happenes to trigger an action on the hub:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>import <span style="color: #FF0000">{</span> OIL_CONFIG<span style="color: #990000">,</span> POI_FALLBACK_NAME <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./constants.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> getConfiguration<span style="color: #990000">,</span> isPoiActive <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./config.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> addFrame <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./iframe.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> getOrigin<span style="color: #990000">,</span> registerMessageListener<span style="color: #990000">,</span> removeMessageListener <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./utils.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> logDebug<span style="color: #990000">,</span> logError<span style="color: #990000">,</span> logInfo <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./log.js'</span><span style="color: #990000">;</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">// Timeout after which promises should return</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">const</span></span> TIMEOUT <span style="color: #990000">=</span> <span style="color: #993399">500</span><span style="color: #990000">;</span>
+let config <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">null</span></span><span style="color: #990000">,</span>
+    frameListenerRegistered <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">// INTERNAL FUNCTIONS</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Initializes the OIL iFrame</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> promise as object {iframe:Element,config:{}}when iFrame is loaded</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">init</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(()</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Initializing Frame..."</span><span style="color: #990000">);</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// read config data if not already set</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(!</span>config<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      config <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">getConfiguration</span></span><span style="color: #990000">();</span>
+    <span style="color: #FF0000">}</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+      let hubLocation <span style="color: #990000">=</span> config<span style="color: #990000">[</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_LOCATION<span style="color: #990000">];</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>hubLocation<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-style: italic"><span style="color: #9A1900">// setup iframe</span></span>
+        let iframe <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">addFrame</span></span><span style="color: #990000">(</span>hubLocation<span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>iframe <span style="color: #990000">&amp;&amp;</span> <span style="color: #990000">!</span>iframe<span style="color: #990000">.</span>onload<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+          <span style="font-style: italic"><span style="color: #9A1900">// Listen to message from child window after iFrame load</span></span>
+          iframe<span style="color: #990000">.</span>onload <span style="color: #990000">=</span> <span style="color: #990000">()</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> iframe<span style="color: #990000">:</span> iframe<span style="color: #990000">,</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+        <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+          <span style="font-style: italic"><span style="color: #9A1900">// if already loaded directly invoke</span></span>
+          <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> iframe<span style="color: #990000">:</span> iframe<span style="color: #990000">,</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+        <span style="color: #FF0000">}</span>
+      <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #000000">logError</span></span><span style="color: #990000">(</span>`Config <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> $<span style="color: #FF0000">{</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_ORIGIN<span style="color: #FF0000">}</span> and $<span style="color: #FF0000">{</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_PATH<span style="color: #FF0000">}</span> isnt set<span style="color: #990000">.</span> No POI possible<span style="color: #990000">.</span>`<span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+      <span style="color: #FF0000">}</span>
+    <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'POI not active. Frame not initialized.'</span><span style="color: #990000">);</span>
+      <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+    <span style="color: #FF0000">}</span>
+  <span style="color: #FF0000">}</span><span style="color: #990000">));</span>
+<span style="color: #FF0000">}</span>
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Sent given event to hidden iframe</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> eventName - event to sent</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> origin - orgin url (aka parent)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">sendEventToFrame</span></span><span style="color: #990000">(</span>eventName<span style="color: #990000">,</span> origin<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Send to Frame:"</span><span style="color: #990000">,</span> eventName<span style="color: #990000">,</span> origin<span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span><span style="color: #990000">;</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">init</span></span><span style="color: #990000">().</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">((</span>result<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+    let iframe <span style="color: #990000">=</span> result<span style="color: #990000">.</span>iframe<span style="color: #990000">,</span>
+      config <span style="color: #990000">=</span> result<span style="color: #990000">.</span>config<span style="color: #990000">;</span>
+    let hubDomain <span style="color: #990000">=</span> config<span style="color: #990000">[</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_ORIGIN<span style="color: #990000">];</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>iframe <span style="color: #990000">&amp;&amp;</span> hubDomain<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      <span style="font-style: italic"><span style="color: #9A1900">// tag::subscriber-postMessage[]</span></span>
+      <span style="font-style: italic"><span style="color: #9A1900">// see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax</span></span>
+      <span style="font-style: italic"><span style="color: #9A1900">// MSIE needs Strings in postMessage</span></span>
+      let message <span style="color: #990000">=</span> JSON<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">stringify</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> event<span style="color: #990000">:</span> eventName<span style="color: #990000">,</span> origin<span style="color: #990000">:</span> origin<span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+      iframe<span style="color: #990000">.</span>contentWindow<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">postMessage</span></span><span style="color: #990000">(</span>message<span style="color: #990000">,</span> hubDomain<span style="color: #990000">);</span>
+      <span style="font-style: italic"><span style="color: #9A1900">// end::subscriber-postMessage[]</span></span>
+    <span style="color: #FF0000">}</span>
+  <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span>
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Read configuration from hidden iframe</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> origin - origin url (aka parent)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> promise with result of the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">readConfigFromFrame</span></span><span style="color: #990000">(</span>origin<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">);</span>
+    <span style="color: #FF0000">}</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">handler</span></span><span style="color: #990000">(</span>event<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      <span style="font-style: italic"><span style="color: #9A1900">// tag::subscriber-receiveMessage[]</span></span>
+      <span style="font-style: italic"><span style="color: #9A1900">// only listen to our hub</span></span>
+      let hubOrigin <span style="color: #990000">=</span> config<span style="color: #990000">[</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_ORIGIN<span style="color: #990000">];</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>config <span style="color: #990000">&amp;&amp;</span> hubOrigin <span style="color: #990000">&amp;&amp;</span> hubOrigin<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">indexOf</span></span><span style="color: #990000">(</span>event<span style="color: #990000">.</span>origin<span style="color: #990000">)</span> <span style="color: #990000">!==</span> <span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        let message <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">typeof</span></span> event<span style="color: #990000">.</span>data <span style="color: #990000">!==</span> <span style="color: #FF0000">'object'</span> <span style="color: #990000">?</span> JSON<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parse</span></span><span style="color: #990000">(</span>event<span style="color: #990000">.</span>data<span style="color: #990000">)</span> <span style="color: #990000">:</span> event<span style="color: #990000">.</span>data<span style="color: #990000">;</span>
+        <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Message from hub received...'</span><span style="color: #990000">,</span> event<span style="color: #990000">.</span>origin<span style="color: #990000">,</span> message<span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #000000">removeMessageListener</span></span><span style="color: #990000">(</span>handler<span style="color: #990000">);</span>
+        frameListenerRegistered <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
+        <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span>message<span style="color: #990000">);</span>
+      <span style="color: #FF0000">}</span>
+      <span style="font-style: italic"><span style="color: #9A1900">// end::subscriber-receiveMessage[]</span></span>
+    <span style="color: #FF0000">}</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// defer post to next tick</span></span>
+    <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(()</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">sendEventToFrame</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'oil-status-read'</span><span style="color: #990000">,</span> origin<span style="color: #990000">));</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(!</span>frameListenerRegistered<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      <span style="font-style: italic"><span style="color: #9A1900">// Listen to message from child window</span></span>
+      <span style="font-weight: bold"><span style="color: #000000">registerMessageListener</span></span><span style="color: #990000">(</span>handler<span style="color: #990000">);</span>
+      frameListenerRegistered <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">;</span>
+    <span style="color: #FF0000">}</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// add timeout for config read</span></span>
+    <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(()</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #000000">removeMessageListener</span></span><span style="color: #990000">(</span>handler<span style="color: #990000">);</span>
+      frameListenerRegistered <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
+      <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">);</span>
+    <span style="color: #FF0000">}</span><span style="color: #990000">,</span> TIMEOUT<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">// PUBLIC API</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Read config for Power Opt IN from hidden iframe</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> promise with result (is true if POI ist set, otherwise false)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">verifyPowerOptIn</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">);</span>
+    <span style="color: #FF0000">}</span>
+
+    <span style="font-weight: bold"><span style="color: #000000">init</span></span><span style="color: #990000">().</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">((</span>result<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+      let iframe <span style="color: #990000">=</span> result<span style="color: #990000">.</span>iframe<span style="color: #990000">;</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>iframe<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(!</span>iframe<span style="color: #990000">.</span>onload<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+          <span style="font-style: italic"><span style="color: #9A1900">// Listen to message from child window after iFrame load</span></span>
+          iframe<span style="color: #990000">.</span>onload <span style="color: #990000">=</span> <span style="color: #990000">()</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">readConfigFromFrame</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">getOrigin</span></span><span style="color: #990000">()).</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">((</span>data<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span>data<span style="color: #990000">));</span>
+        <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+          <span style="font-style: italic"><span style="color: #9A1900">// if already loaded directly invoke</span></span>
+          <span style="font-weight: bold"><span style="color: #000000">readConfigFromFrame</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">getOrigin</span></span><span style="color: #990000">()).</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">((</span>data<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span>data<span style="color: #990000">));</span>
+        <span style="color: #FF0000">}</span>
+      <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Could not initialize POI. Fallback to POI false.'</span><span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">);</span>
+      <span style="color: #FF0000">}</span>
+    <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span>
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Activate Power Opt IN with the use of an iframe</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> Promise when done</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">activatePowerOptInWithIFrame</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'activatePowerOptIn'</span><span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span>  <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">();</span>
+    <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">// reset config</span></span>
+  config <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">null</span></span><span style="color: #990000">;</span>
+  <span style="font-style: italic"><span style="color: #9A1900">// init iFrame first</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">init</span></span><span style="color: #990000">().</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">(()</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// then activate</span></span>
+    <span style="font-weight: bold"><span style="color: #000000">sendEventToFrame</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'oil-poi-activate'</span><span style="color: #990000">,</span> <span style="font-weight: bold"><span style="color: #000000">getOrigin</span></span><span style="color: #990000">());</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// defer answer to next tick</span></span>
+    <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(</span>resolve<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span><span style="color: #990000">));</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Activate Power Opt IN with the use of an redirect</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">activatePowerOptInWithRedirect</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span><span style="color: #990000">;</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(!</span>config<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    config <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">getConfiguration</span></span><span style="color: #990000">();</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>config<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    let hubLocation <span style="color: #990000">=</span> config<span style="color: #990000">[</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_LOCATION<span style="color: #990000">];</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>hubLocation<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      window<span style="color: #990000">.</span>location<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">replace</span></span><span style="color: #990000">(</span>hubLocation <span style="color: #990000">+</span> <span style="color: #FF0000">'?'</span> <span style="color: #990000">+</span> POI_FALLBACK_NAME <span style="color: #990000">+</span> <span style="color: #FF0000">'=1'</span><span style="color: #990000">);</span>
+    <span style="color: #FF0000">}</span>
+  <span style="color: #FF0000">}</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+<div class="paragraph"><p>Now the subscriber can listen to messages from the hub:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>window<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">addEventListener</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'message'</span><span style="color: #990000">,</span> <span style="color: #990000">(</span>event<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+import <span style="color: #FF0000">{</span> OIL_CONFIG<span style="color: #990000">,</span> POI_FALLBACK_NAME <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./constants.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> getConfiguration<span style="color: #990000">,</span> isPoiActive <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./config.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> addFrame <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./iframe.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> getOrigin<span style="color: #990000">,</span> registerMessageListener<span style="color: #990000">,</span> removeMessageListener <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./utils.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> logDebug<span style="color: #990000">,</span> logError<span style="color: #990000">,</span> logInfo <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./log.js'</span><span style="color: #990000">;</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">// Timeout after which promises should return</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">const</span></span> TIMEOUT <span style="color: #990000">=</span> <span style="color: #993399">500</span><span style="color: #990000">;</span>
+let config <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">null</span></span><span style="color: #990000">,</span>
+    frameListenerRegistered <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">// INTERNAL FUNCTIONS</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Initializes the OIL iFrame</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> promise as object {iframe:Element,config:{}}when iFrame is loaded</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">init</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(()</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Initializing Frame..."</span><span style="color: #990000">);</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// read config data if not already set</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(!</span>config<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      config <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">getConfiguration</span></span><span style="color: #990000">();</span>
+    <span style="color: #FF0000">}</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+      let hubLocation <span style="color: #990000">=</span> config<span style="color: #990000">[</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_LOCATION<span style="color: #990000">];</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>hubLocation<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-style: italic"><span style="color: #9A1900">// setup iframe</span></span>
+        let iframe <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">addFrame</span></span><span style="color: #990000">(</span>hubLocation<span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>iframe <span style="color: #990000">&amp;&amp;</span> <span style="color: #990000">!</span>iframe<span style="color: #990000">.</span>onload<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+          <span style="font-style: italic"><span style="color: #9A1900">// Listen to message from child window after iFrame load</span></span>
+          iframe<span style="color: #990000">.</span>onload <span style="color: #990000">=</span> <span style="color: #990000">()</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> iframe<span style="color: #990000">:</span> iframe<span style="color: #990000">,</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+        <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+          <span style="font-style: italic"><span style="color: #9A1900">// if already loaded directly invoke</span></span>
+          <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> iframe<span style="color: #990000">:</span> iframe<span style="color: #990000">,</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+        <span style="color: #FF0000">}</span>
+      <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #000000">logError</span></span><span style="color: #990000">(</span>`Config <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> $<span style="color: #FF0000">{</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_ORIGIN<span style="color: #FF0000">}</span> and $<span style="color: #FF0000">{</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_PATH<span style="color: #FF0000">}</span> isnt set<span style="color: #990000">.</span> No POI possible<span style="color: #990000">.</span>`<span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+      <span style="color: #FF0000">}</span>
+    <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'POI not active. Frame not initialized.'</span><span style="color: #990000">);</span>
+      <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+    <span style="color: #FF0000">}</span>
+  <span style="color: #FF0000">}</span><span style="color: #990000">));</span>
+<span style="color: #FF0000">}</span>
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Sent given event to hidden iframe</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> eventName - event to sent</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> origin - orgin url (aka parent)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">sendEventToFrame</span></span><span style="color: #990000">(</span>eventName<span style="color: #990000">,</span> origin<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Send to Frame:"</span><span style="color: #990000">,</span> eventName<span style="color: #990000">,</span> origin<span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span><span style="color: #990000">;</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">init</span></span><span style="color: #990000">().</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">((</span>result<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+    let iframe <span style="color: #990000">=</span> result<span style="color: #990000">.</span>iframe<span style="color: #990000">,</span>
+      config <span style="color: #990000">=</span> result<span style="color: #990000">.</span>config<span style="color: #990000">;</span>
+    let hubDomain <span style="color: #990000">=</span> config<span style="color: #990000">[</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_ORIGIN<span style="color: #990000">];</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>iframe <span style="color: #990000">&amp;&amp;</span> hubDomain<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      <span style="font-style: italic"><span style="color: #9A1900">// tag::subscriber-postMessage[]</span></span>
+      <span style="font-style: italic"><span style="color: #9A1900">// see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax</span></span>
+      <span style="font-style: italic"><span style="color: #9A1900">// MSIE needs Strings in postMessage</span></span>
+      let message <span style="color: #990000">=</span> JSON<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">stringify</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> event<span style="color: #990000">:</span> eventName<span style="color: #990000">,</span> origin<span style="color: #990000">:</span> origin<span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+      iframe<span style="color: #990000">.</span>contentWindow<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">postMessage</span></span><span style="color: #990000">(</span>message<span style="color: #990000">,</span> hubDomain<span style="color: #990000">);</span>
+      <span style="font-style: italic"><span style="color: #9A1900">// end::subscriber-postMessage[]</span></span>
+    <span style="color: #FF0000">}</span>
+  <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span>
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Read configuration from hidden iframe</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> origin - origin url (aka parent)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> promise with result of the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">readConfigFromFrame</span></span><span style="color: #990000">(</span>origin<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">);</span>
+    <span style="color: #FF0000">}</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">handler</span></span><span style="color: #990000">(</span>event<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      <span style="font-style: italic"><span style="color: #9A1900">// tag::subscriber-receiveMessage[]</span></span>
+      <span style="font-style: italic"><span style="color: #9A1900">// only listen to our hub</span></span>
+      let hubOrigin <span style="color: #990000">=</span> config<span style="color: #990000">[</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_ORIGIN<span style="color: #990000">];</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>config <span style="color: #990000">&amp;&amp;</span> hubOrigin <span style="color: #990000">&amp;&amp;</span> hubOrigin<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">indexOf</span></span><span style="color: #990000">(</span>event<span style="color: #990000">.</span>origin<span style="color: #990000">)</span> <span style="color: #990000">!==</span> <span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        let message <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">typeof</span></span> event<span style="color: #990000">.</span>data <span style="color: #990000">!==</span> <span style="color: #FF0000">'object'</span> <span style="color: #990000">?</span> JSON<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parse</span></span><span style="color: #990000">(</span>event<span style="color: #990000">.</span>data<span style="color: #990000">)</span> <span style="color: #990000">:</span> event<span style="color: #990000">.</span>data<span style="color: #990000">;</span>
+        <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Message from hub received...'</span><span style="color: #990000">,</span> event<span style="color: #990000">.</span>origin<span style="color: #990000">,</span> message<span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #000000">removeMessageListener</span></span><span style="color: #990000">(</span>handler<span style="color: #990000">);</span>
+        frameListenerRegistered <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
+        <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span>message<span style="color: #990000">);</span>
+      <span style="color: #FF0000">}</span>
+      <span style="font-style: italic"><span style="color: #9A1900">// end::subscriber-receiveMessage[]</span></span>
+    <span style="color: #FF0000">}</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// defer post to next tick</span></span>
+    <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(()</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">sendEventToFrame</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'oil-status-read'</span><span style="color: #990000">,</span> origin<span style="color: #990000">));</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(!</span>frameListenerRegistered<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      <span style="font-style: italic"><span style="color: #9A1900">// Listen to message from child window</span></span>
+      <span style="font-weight: bold"><span style="color: #000000">registerMessageListener</span></span><span style="color: #990000">(</span>handler<span style="color: #990000">);</span>
+      frameListenerRegistered <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">;</span>
+    <span style="color: #FF0000">}</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// add timeout for config read</span></span>
+    <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(()</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #000000">removeMessageListener</span></span><span style="color: #990000">(</span>handler<span style="color: #990000">);</span>
+      frameListenerRegistered <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
+      <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">);</span>
+    <span style="color: #FF0000">}</span><span style="color: #990000">,</span> TIMEOUT<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">// PUBLIC API</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Read config for Power Opt IN from hidden iframe</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> promise with result (is true if POI ist set, otherwise false)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">verifyPowerOptIn</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">);</span>
+    <span style="color: #FF0000">}</span>
+
+    <span style="font-weight: bold"><span style="color: #000000">init</span></span><span style="color: #990000">().</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">((</span>result<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+      let iframe <span style="color: #990000">=</span> result<span style="color: #990000">.</span>iframe<span style="color: #990000">;</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>iframe<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(!</span>iframe<span style="color: #990000">.</span>onload<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+          <span style="font-style: italic"><span style="color: #9A1900">// Listen to message from child window after iFrame load</span></span>
+          iframe<span style="color: #990000">.</span>onload <span style="color: #990000">=</span> <span style="color: #990000">()</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">readConfigFromFrame</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">getOrigin</span></span><span style="color: #990000">()).</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">((</span>data<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span>data<span style="color: #990000">));</span>
+        <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+          <span style="font-style: italic"><span style="color: #9A1900">// if already loaded directly invoke</span></span>
+          <span style="font-weight: bold"><span style="color: #000000">readConfigFromFrame</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">getOrigin</span></span><span style="color: #990000">()).</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">((</span>data<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span>data<span style="color: #990000">));</span>
+        <span style="color: #FF0000">}</span>
+      <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Could not initialize POI. Fallback to POI false.'</span><span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">);</span>
+      <span style="color: #FF0000">}</span>
+    <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span>
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Activate Power Opt IN with the use of an iframe</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> Promise when done</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">activatePowerOptInWithIFrame</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'activatePowerOptIn'</span><span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span>  <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">();</span>
+    <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">// reset config</span></span>
+  config <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">null</span></span><span style="color: #990000">;</span>
+  <span style="font-style: italic"><span style="color: #9A1900">// init iFrame first</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">init</span></span><span style="color: #990000">().</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">(()</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// then activate</span></span>
+    <span style="font-weight: bold"><span style="color: #000000">sendEventToFrame</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'oil-poi-activate'</span><span style="color: #990000">,</span> <span style="font-weight: bold"><span style="color: #000000">getOrigin</span></span><span style="color: #990000">());</span>
+    <span style="font-style: italic"><span style="color: #9A1900">// defer answer to next tick</span></span>
+    <span style="font-weight: bold"><span style="color: #000000">setTimeout</span></span><span style="color: #990000">(</span>resolve<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span><span style="color: #990000">));</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Activate Power Opt IN with the use of an redirect</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@function</span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">activatePowerOptInWithRedirect</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span><span style="color: #990000">;</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(!</span>config<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    config <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">getConfiguration</span></span><span style="color: #990000">();</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>config<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    let hubLocation <span style="color: #990000">=</span> config<span style="color: #990000">[</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_LOCATION<span style="color: #990000">];</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>hubLocation<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      window<span style="color: #990000">.</span>location<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">replace</span></span><span style="color: #990000">(</span>hubLocation <span style="color: #990000">+</span> <span style="color: #FF0000">'?'</span> <span style="color: #990000">+</span> POI_FALLBACK_NAME <span style="color: #990000">+</span> <span style="color: #FF0000">'=1'</span><span style="color: #990000">);</span>
+    <span style="color: #FF0000">}</span>
+  <span style="color: #FF0000">}</span>
+<span style="color: #FF0000">}</span>
+<span style="color: #FF0000">}</span><span style="color: #990000">);</span></tt></pre></div></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="left" valign="top"> ID         </th>
+<th align="left" valign="top"> Decision                                             </th>
+<th align="left" valign="top"> Date / Attendees</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">OIL-DEC-1</p></td>
+<td align="left" valign="top"><p class="table">Tealium is responsible to not track by default.</p></td>
+<td align="left" valign="top"><p class="table">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">OIL-DEC-2</p></td>
+<td align="left" valign="top"><p class="table">OIL is integrated as <a href="https://community.tealiumiq.com/t5/iQ-Tag-Management/JavaScript-Code-Extension/ta-p/11925">JavaScript Code Extension</a> in Tealium</p></td>
+<td align="left" valign="top"><p class="table">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">OIL-DEC-3</p></td>
+<td align="left" valign="top"><p class="table">OIL is included within Tealium as Library for each business unit</p></td>
+<td align="left" valign="top"><p class="table">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">OIL-DEC-4</p></td>
+<td align="left" valign="top"><p class="table">OIL sets one cookie which will be read by Tealium to optin tracking</p></td>
+<td align="left" valign="top"><p class="table">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">OIL-DEC-5</p></td>
+<td align="left" valign="top"><p class="table">OIL Deployment is done manual via Tealium Web UI</p></td>
+<td align="left" valign="top"><p class="table">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">OIL-DEC-6</p></td>
+<td align="left" valign="top"><p class="table">OIL uses postMessage with an iFrame to work without 3rd Party Cookies</p></td>
+<td align="left" valign="top"><p class="table">19.04.2017 /  Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-06-14 13:44:07 CEST
+</div>
+</div>
+</body>
+</html>
