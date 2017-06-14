@@ -1,18 +1,18 @@
-[[section-introduction-and-goals]]
-== Introduction and Goals
+[[section-introduction]]
+== Introduction
 
 The OIL project aims for a stable cross-company solution for the challenges the new European privacy law (General Data Protection Regulation (GDPR) (Regulation (EU) 2016/679)) will pose to our business.
 
 * Data privacy opt-in overlay for all users of services offered by various Axel Springer brands and/or units
-* Local opt-in (also Site Opt In, SOI) as well as cross-company opt-in (also Power Opt In, POI)
-* Integration and hosting on tealium
+* Local opt-in (called Site Opt In, SOI) as well as cross-company opt-in (called Power Opt In, POI)
+* Integration and hosting on Tealium
 
 For more detailed information see https://as-wiki.axelspringer.de/display/IDEASINNO/Opt+In+Layer[AS Wiki > Opt In Layer]
 
 === Technical Quality Goals
 
 * OIL will be held compatible with the latest official browser releases, going back to the latest version as listed below and tested on broad range of browsers using Browserstack.com:
-** Chrome 14, 40, 57
+** Chrome 14, 40, 59
 ** IE 8, 9, 10, 11, Edge 14
 ** Firefox 9, 35, 52
 ** Safari 6, 7.1, 8, 9.1
@@ -27,23 +27,25 @@ For more detailed information see https://as-wiki.axelspringer.de/display/IDEASI
 
 === Glossary
 
-[options="header",cols="1,4"]
+[options="header",cols="1,2"]
 |===
 | Term | Explanation
-| OIL | Stands for Opt In Layer and besides the fact that it stand for the name of the product it is often used to refer to the UI layer shown on the page. 
+| OIL | Stands for Opt In Layer and besides the fact that it stand for the name of the product it is often used to refer to the UI layer shown on the page.
 | Site Opt In (SOI) | The __Site Opt In__ (SOI) stores a user's opt in permit for the current site.
 | Power Opt In (POI)  | The __Power Opt In__ (POI) functionality stores the opt in permits centrally for multiple Axel Springer sites (for example BILD, WELT). This allows users to only give their opt in permit once, when visting another site using POI the user will not be asked again. __POI__ is implemented via an iframe solution, see also __Hub__ . A user can first give a SOI permit before giving a POI permit, which has priority.
 | Hub | __POI__ is implemented via an iframe solution that points to a hub site that acts as a third party cookie storage. Technically, the hub consists of a hub.html and hub.js.
 | Subscriber | A site (for example WELT.de) that subscribes to a POI hub
 |===
 
-=== Team Stakeholders
+=== Team & Stakeholders
 
-[options="header",cols="1,4"]
+[options="header",cols="1,2"]
 |===
 |Role/Name|Contact|
-Stake Holder | André Petzold |
-Product Owner | Michiel Slot |
-Developer | Andreas Wagner |
-Developer | Marcel Bankman |
+Business Owner | André Petzold, Konzernentwicklung |
+Legal Affairs | Susanne Stollhoff, Rechtsabteilung |
+Product Owner | Michiel Slot, AS Ideas Engineering |
+Developer | Andreas Wagner, AS Ideas Engineering |
+Developer | Marcel Bankman, AS Ideas Engineering |
+Tealium | Michael Sievers, AS Digital|
 |===

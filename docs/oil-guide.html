@@ -1,7 +1,7 @@
   <html>
     <head>
       <meta charset="utf-8">
-      <title>index.adoc</title>
+      <title>oil-guide.adoc</title>
       <style>
         #wrapper {width: 960px; margin: 0 auto;}
         /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -438,43 +438,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
     <body>
       <div id="wrapper">
         <div class="article">
-          <h1>OIL Documentation</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div style="page-break-after: always;"></div>
+          <div style="page-break-after: always;"></div>
 <div class="imageblock">
 <div class="content">
 <img src="src/images/oil-asideas.png" alt="oil asideas.png">
 </div>
 </div>
 <hr>
-</div>
-<div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel2">
-<li><a href="#_document_release_notes">Document Release Notes</a></li>
-<li><a href="#section-introduction">1. Introduction</a>
-<ul class="sectlevel2">
-<li><a href="#_technical_quality_goals">1.1. Technical Quality Goals</a></li>
-<li><a href="#_glossary">1.2. Glossary</a></li>
-<li><a href="#_team_stakeholders">1.3. Team &amp; Stakeholders</a></li>
-</ul>
-</li>
-<li><a href="#_how_to_implement_oil_on_your_site">2. How to implement OIL on your site</a>
-<ul class="sectlevel2">
-<li><a href="#_basic_setup">2.1. Basic Setup</a></li>
-<li><a href="#_oil_configuration">2.2. OIL Configuration</a></li>
-<li><a href="#_tealium_configuration">2.3. Tealium Configuration</a></li>
-</ul>
-</li>
-<li><a href="#section-solution-strategy">3. Solution Strategy</a></li>
-</ul>
-</div>
-</div>
 <div class="sect2">
 <h3 id="_document_release_notes">Document Release Notes</h3>
 <div class="ulist">
 <ul>
+<li>
+<p>14 June 2017 - 1.1 – Clean up</p>
+</li>
 <li>
 <p>14 June 2017 - 1.0 – Initial release</p>
 </li>
@@ -821,288 +798,7 @@ OIL uses JS events to communicate with its host site.</p>
 <p>The Tealium integration of Oil.js has not yet been completed for company-wide use in production.
 We keep you up to date and will update the instructions here accordingly.</p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="section-solution-strategy">3. Solution Strategy</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>According the proposal of the Commission, the European Parliament, and the Council of Ministers, web browsers (and similar software) will be required to prompt users with a menu of privacy options when they are installed for the first time.[1] The menu options will range from an extreme ban on all cookies to acceptance of all cookies, and will include intermediate options such as "reject third-party cookies" or "only accept first-party cookies".</p>
-</div>
-<div class="paragraph">
-<p>So solve this issue the ASV Opt In Layer (OIL) offers the basics to implement these requirements. Therefore the solution consists of two parts:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>A <strong>hub</strong>, which is added as an iframe to the site which is pointing to a new 3rd-party domain, which is independent from all current sites</p>
-</li>
-<li>
-<p>A <strong>subscriber</strong>, which communicates with this hub to get the the needed information from the hub</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="src/images/oil-poi-flow.png" alt="OIL Flow">
-</div>
-</div>
-<div class="paragraph">
-<p>So when a user give the Power Opt In (POI) the subscriber sends a message via postMessage to the hub to inform the activation of the 3rd party cookie. By setting the cookie in the hub the 3rd party cookie became then a 1st party cookie. For some even stricter browsers, e.g. newer Safari versions <sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup> a fallback is implemented which redirects then the user to hub site to set the cookie and then redirects back. But this fallback is only needed for the first visit.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>On MSIE the postMessage function used only accepts strings, see <a href="http://kohsuke.org/2012/09/11/internet-explorer-only-takes-string-in-html5-postmessage/">here</a>.</p>
-</div>
-<div style="page-break-after: always;"></div>
-<div class="paragraph">
-<p>== Deployment View</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>For the purpose of the PoC the deployment to Tealium is done mainly manual for following stages:
-- prod
-- debug / development</p>
-</div>
-<div class="paragraph">
-<p>Only the end2end stage has an "automatic" update via a CDN.</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="imageblock">
-<div class="content">
-<img src="src/images/deployment.png" alt="OIL Deployment">
-</div>
-</div>
-<div class="paragraph">
-<p>=== Hub Deployment
-To deploy the hub (i.e. as a MyPass service) you need to deploy the project with an index.html loading dist/hub.123.js. In our examples this is demos/complete-integration-mypass.html</p>
-</div>
-<div class="paragraph">
-<p>For compatibility with Internet Explorer 9+ you need to add the following header to the server response to allow 3rd party cookies for POI. It&#8217;s needed in SOI only mode.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json" data-lang="json">  "p3p": "CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\""</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>=== Tealium Deployment
-For our PoC we decided to use Tealium to deliver our Javascript artefact to client browsers. To achieve this you have to follow some steps:</p>
-</div>
-<div class="paragraph">
-<p>As a developer of Oil.js (see image below)</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Open your Tealium lib profile and move to extensions</p>
-</li>
-<li>
-<p>Open the predefined Javascript extension "AS Opt-in Overlay"</p>
-</li>
-<li>
-<p>Some forms will show up, paste your code (dist/subscriber.123.js) in the "configuration" section</p>
-</li>
-<li>
-<p>Save and Publish your Tealium configuration changes in your desired stages (Dev, QA, Prod)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Please note that once published, your code will be delivered to all Tealium clients automatically.
-Tealium clients will be informed of your changes and need to publish/deploy their profile to activate your changes.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="src/images/tealium-lib-profile-extension-view.png" alt="Tealium Library Profile">
-</div>
-</div>
-<div class="paragraph">
-<p>As a client of Tealium (see image below)</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Open your Tealium profile and move to "extensions"</p>
-</li>
-<li>
-<p>Find the entry for "AS Opt-in Overlay", you&#8217;ll be noticed of a change to this extension</p>
-</li>
-<li>
-<p>Publish / deploy your profile to activate the changes to Oil.js</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="src/images/tealium-user-profile-extension-view.png" alt="Tealium Client Profile">
-</div>
-</div>
-<div class="paragraph">
-<p>Within an extension it&#8217;s possible to handle the OptOut/OptIn logic during preload. This also allows to alter the later behaviour within Tealium.</p>
-</div>
-<div style="page-break-after: always;"></div>
-<div id="section-design-decisions" class="paragraph">
-<p>== Design Decisions</p>
-</div>
-<div class="paragraph">
-<p>=== Cross-Origin Messaging</p>
-</div>
-<div class="paragraph">
-<p>The <code>postMessage()</code> method lifts this restriction by providing a way to securely pass messages across domains. The <code>postMessage()</code> method accepts two parameters.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p><code>message</code> – A string or object that will be sent to the receiving window.</p>
-</li>
-<li>
-<p><code>targetOrigin</code> – The URL of the window that the message is being sent to. The protocol, port and hostname of the target window must match this parameter for the message to be sent. Specifying <code>"*"</code> will match any URL however this is strongly discouraged for security reasons.
-This method should be called on the window that the message is being sent to. A reference to the target window can be obtained in a number of different ways:</p>
-</li>
-<li>
-<p>When using <code>window.open()</code> a reference to the new window will be returned by the <code>open()</code> method.</p>
-</li>
-<li>
-<p>For iframes you can access the <code>contentWindow</code> property on the desired iframe.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>When a call to <code>postMessage()</code> is executed successfully a <a href="https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent"><code>MessageEvent</code></a> will be fired on the receiving window. You can use a standard event listener to watch for this event and execute some code when it occurs.</p>
-</div>
-<div class="paragraph">
-<p>The event passed into the listener callback has a property called <code>data</code> that can be used to access the string or object that was sent by <code>postMessage()</code>.</p>
-</div>
-<div class="paragraph">
-<p>So on the OIL hub side an event listener is added:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript" data-lang="javascript">window.addEventListener('message', (e) =&gt; {
-  let data = e.data;
-  if (parsedMessage) {
-    if (parsedMessage.event &amp;&amp; parsedMessage.event.indexOf('oil-') !== -1) {
-      let event = parsedMessage.event,
-          origin = parsedMessage.origin;
-      switch (event) {
-        case 'oil-poi-activate':
-          logDebug('OIL Hub - activating POI ');
-          setPoiOptIn(true);
-          // Cookie.set(OIL_COOKIE.NAME, { [OIL_COOKIE.ATTR_POI]: true, [OIL_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp() }, { expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS] });
-          break;
-        case 'oil-status-read':
-          poiOptin = getPoiOptIn();
-          // status = Cookie.getJSON(OIL_COOKIE.NAME) || {};
-          logDebug('OIL Hub - read the following poi status:', poiOptin);
-          parent.postMessage(JSON.stringify(poiOptin) || false, origin);
-          break;
-        default:
-          break;
-      }
-    }
-});</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>At the subscriber side the <code>postMessage</code> happenes to trigger an action on the hub:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript" data-lang="javascript">      // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
-      // MSIE needs Strings in postMessage
-      let message = JSON.stringify({ event: eventName, origin: origin});
-      iframe.contentWindow.postMessage(message, hubDomain);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now the subscriber can listen to messages from the hub:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript" data-lang="javascript">window.addEventListener('message', (event) =&gt; {
-      // only listen to our hub
-      let hubOrigin = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
-      if (config &amp;&amp; hubOrigin &amp;&amp; hubOrigin.indexOf(event.origin) !== -1) {
-        let message = typeof event.data !== 'object' ? JSON.parse(event.data) : event.data;
-        logDebug('Message from hub received...', event.origin, message);
-        removeMessageListener(handler);
-        frameListenerRegistered = false;
-        resolve(message);
-      }
-});</code></pre>
-</div>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">ID</th>
-<th class="tableblock halign-left valign-top">Decision</th>
-<th class="tableblock halign-left valign-top">Date / Attendees</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OIL-DEC-1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Tealium is responsible to not track by default.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OIL-DEC-2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OIL is integrated as <a href="https://community.tealiumiq.com/t5/iQ-Tag-Management/JavaScript-Code-Extension/ta-p/11925">JavaScript Code Extension</a> in Tealium</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OIL-DEC-3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OIL is included within Tealium as Library for each business unit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OIL-DEC-4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OIL sets one cookie which will be read by Tealium to optin tracking</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OIL-DEC-5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OIL Deployment is done manual via Tealium Web UI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OIL-DEC-6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OIL uses postMessage with an iFrame to work without 3rd Party Cookies</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">19.04.2017 /  Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div id="footnotes">
-<hr>
-<div class="footnote" id="_footnote_1">
-<a href="#_footnoteref_1">1</a>. Chrome maybe also disable it by default in the future
 </div>
 </div>
         </div>

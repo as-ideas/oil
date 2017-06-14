@@ -1,0 +1,21 @@
+<<<
+
+image::src/images/oil-asideas.png[]
+
+***
+=== Document Release Notes
+* 14 June 2017 - 1.1 – Clean up
+* 14 June 2017 - 1.0 – Initial release
+
+// horizontal line
+***
+// numbering from here on
+:numbered:
+
+<<<<
+// 1. Introduction
+include::src/01_introduction_and_goals.adoc[]
+
+<<<<
+// 2. How to implement OIL on your site
+include::src/06_implementation.adoc[]
