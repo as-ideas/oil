@@ -1,21 +1,15 @@
-// ====================================
+= OIL Documentation
 
-= image:src/images/logo.png[OIL Logo] Documentation 
-// toc-title definition MUST follow document title without blank line!
-:toc-title: Table of Contents
+<<<
 
-// configure EN settings for asciidoc
-include::src/config.adoc[]
+image::src/images/oil-asideas.png[]
 
-// horizontal line
 ***
-
 === Document Release Notes
-* 8 June 2017 - 1.0 – Initial release
+* 14 June 2017 - 1.0 – Initial release
 
 // horizontal line
 ***
-
 // numbering from here on
 :numbered:
 

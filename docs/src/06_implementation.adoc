@@ -1,15 +1,60 @@
 == How to implement OIL on your site
 
-=== Implement OIL.js
+Setting up OIL on your pages is really easy. All you need to do is include our main Javascript file and an additional configuration snippet. OIL uses JS events to communicate with its host site, please the table below for details.
 
-Setting up Oil on your pages is really easy. All you need to do is include our main Javascript file
-and some additional code snippets that mainly contain configuration and event listeners.
-For better clarity we put together some code snippets and an example that shows
-how to integrate Oil and listen to Oil's opt-later event.
+For better clarity we've put together some code snippets and an example that shows how to integrate OIL and listen to OIL's opt-later event.
 
-=== Set up Oil Configuration
+=== Basic Setup
 
-You need to add an OIL configuration to the html of all pages where OIL is required. This is an example configuration:
+Below you'll find a simple example that shows you how to listen to OIL's opt-later event. To run OIL in your page you need to include 3 scripts.
+
+#1. Put OIL's configuration object somewhere in the upper part of your page. Please leave the developer mode false to begin with, see the parameter section below for more details.
+[source,json]
+----
+  <script type="application/configuration">
+      {
+        "opt_later_event_name": "optedLater",
+        "developer_mode": false
+      }
+  </script>
+----
+
+#2. Register an event handler with a callback to be executed when OIL fires the opt-later event.
+[source,javascript]
+----
+  <script type="text/javascript">
+    // Cross browser event handler definition
+    var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+    var eventer = window[eventMethod];
+
+    // Callback to be executed when event is fired
+    function receiveMessage(event) {
+      if (event && event.data && event.data.indexOf('optedLater') !== -1) {
+        // Do something when event is fired...
+        console.log("Do something when event is fired...");
+      }
+    }
+
+    // Register event handler
+    eventer(messageEvent, receiveMessage, false);
+  </script>
+----
+
+#3. Add the main Oil.js file somewhere in the lower part of your page.
+[source, javascript]
+----
+<script type="text/javascript" src="https://oil-integration-cdn.herokuapp.com/demos/direct-integration.b61689c4f4dab56dfa43.bundle.js"></script>
+----
+* Updated versions of the script will be deployed using a different filename hence we'll never alter an existing version.
+* Don't be fooled by the "demos" part in the URL, it's for real.
+
+#4. That's it! Load your page to see OIL in action.
+
+
+=== OIL Configuration
+
+You need to add the configuration snippet to all pages where OIL is required. This is an example configuration:
 
 [source,json]
 ----
@@ -18,8 +63,8 @@ You need to add an OIL configuration to the html of all pages where OIL is requi
         "opt_in_event_name": "oil_optin_done_custom",
         "opt_later_event_name": "oil_optlater_custom",
         "opt_out_event_name": "oil_optout_trigger",
-        "developer_mode": "true",
-        "privacy_page_location": "http://www.mysite.com/privacy",
+        "developer_mode": "false",
+        "privacy_page_url": "http://www.mysite.com/privacy",
         "activate_poi": true,
         "hub_origin": "//www.somedomain.com",
         "hub_path": "/some/path.html",
@@ -35,59 +80,13 @@ You need to add an OIL configuration to the html of all pages where OIL is requi
 | opt_in_event_name | The name for the Javascript event that will be sent to the host when a users selects opt in. This event will also be fired on each page when the user has triggered this action previously. | 'oil_optin_done'|No
 | opt_later_event_name | The name for the Javascript event name that will be sent to the host when a user selects opt later. This event will also be fired on each page when the user has triggered this action previously. | 'oil_optlater_trigger'|No
 | opt_out_event_name | The Javascript event name OIL is listening to for opting out. Please note: The opt-out functionality has to be implemented manually by the site owner on the host site! | 'oil_optout_trigger'|No
-| developer_mode | If developer mode is activated, the overlay won't show unless a specific cookie is set. Set a cookie with the name "oil_developer" and the value "true" to activate the layer for your client. | true|No
+| developer_mode | A boolean value to toggle a  developer mode. For security reasons the overlay **will not show per default** when the developer mode is enabled. Create a cookie named "oil_developer" with the value "true". This will show the OIL layer on your client. | true|No
 | privacy_page_location | OIL should always have a link to your privacy page ("Datenschutz"). If you add the key "privacy_page_location", the "Mehr erfahren" ('show more', label can't be changed) link will be added to OIL. It opens a page with the value you specified in a new tab or window. You can either use a relative or absolute URL.| "" (empty string)|No
 | activate_poi | Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false|Yes
 | hub_origin | The origin of the hub.js installation, if any. | none|Yes
 | hub_path | The path to the hub.html installation on the origin, if any. | none|Yes
 | subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
 |====
-
-==== Event example
-
-Below you'll find a simple example that shows you how to listen to Oil's opt-later event.
-To run Oil in your page you need to include 3 scripts.
-
-Put Oil's configuration object somewhere in the upper part of your page.
-
-[source,json]
-----
-  <script type="application/configuration">
-      {
-        "opt_later_event_name": "optedLater",
-        "developer_mode": false
-      }
-  </script>
-----
-
-Then register an event handler with a callback to be executed when Oil fires the opt-later event.
-[source,javascript]
-----
-  <script type="text/javascript">
-    // Cross browser event handler definition
-    var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
-    var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
-    var eventer = window[eventMethod];
-
-    // Callback to be executed when event is fired
-    function receiveMessage(event) {
-      if (event && event.data && event.data.indexOf('optedLater') !== -1) {
-        // Do something when event is fired...
-      }
-    }
-
-    // Register event handler
-    eventer(messageEvent, receiveMessage, false);
-  </script>
-----
-Then add our main Oil.js file somewhere in the lower part of your page.
-[source, javascript]
-----
-<script type="text/javascript" src="https://oil-integration-cdn.herokuapp.com/demos/direct-integration.b61689c4f4dab56dfa43.bundle.js"></script>
-----
-
-That's it! Reload your page to see Oil in action.
-
 
 === Tealium Configuration
 
