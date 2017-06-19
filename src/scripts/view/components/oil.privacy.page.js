@@ -19,10 +19,7 @@ export const privacyPageSnippet = () => {
             <a href="${privacyPage}" 
                 class="oil__intro-text--secondary"
                 target="_blank"
-            >
-                Mehr erfahren
-            </a>
-        `;
+            >Mehr erfahren</a>`;
     }
     return '';
 }
