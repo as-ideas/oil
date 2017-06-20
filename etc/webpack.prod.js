@@ -35,6 +35,8 @@ const METADATA = webpackMerge(commonConfig.metadata, {
   HMR: false
 });
 
+const BUNDLE_VERSION = "1.0.0";
+
 var config = webpackMerge(commonConfig, {
 
   /**
@@ -65,7 +67,7 @@ var config = webpackMerge(commonConfig, {
      *
      * See: http://webpack.github.io/docs/configuration.html#output-filename
      */
-    filename: '[name].[chunkhash].bundle.js',
+    filename: `[name].${BUNDLE_VERSION}.min.js`,
 
     /**
      * The filename of the SourceMaps for the JavaScript files.
@@ -73,7 +75,7 @@ var config = webpackMerge(commonConfig, {
      *
      * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
      */
-    sourceMapFilename: '[name].[chunkhash].bundle.map',
+    sourceMapFilename: `[name].${BUNDLE_VERSION}.min.map`,
 
     /**
      * The filename of non-entry chunks as relative path
@@ -81,7 +83,7 @@ var config = webpackMerge(commonConfig, {
      *
      * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
      */
-    chunkFilename: '[id].[chunkhash].chunk.js'
+    chunkFilename: `[id].${BUNDLE_VERSION}.chunk.js`
 
   },
 
