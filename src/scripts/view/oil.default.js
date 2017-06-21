@@ -14,11 +14,11 @@ export const oilDefaultTemplate = `
 
             ${POIButtonSnippet()}
 
-            <button class="oil__button oil__button--2nd js-optin" data-qa="oil-YesButton">
+            <button class="oil__button oil__button--2nd js-optin" data-qa="oil-YesButton" onClick="gaTrackEvent('SOI/yes');">
                 Jetzt zustimmen
                 <span class="oil__button__label-2nd"></span>
             </button>
-            <button class="oil__button oil__button--3rd js-optlater" data-qa="oil-NotNowButton">
+            <button class="oil__button oil__button--3rd js-optlater" data-qa="oil-NotNowButton" onClick="gaTrackEvent('SOI/no');">
                 Nein, jetzt nicht
             </button>
         </div>

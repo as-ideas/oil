@@ -70,7 +70,8 @@ You need to add the configuration snippet to all pages where OIL is required. Th
         "activate_poi": true,
         "hub_origin": "//www.somedomain.com",
         "hub_path": "/some/path.html",
-        "subscriber_set_cookie": true
+        "subscriber_set_cookie": true,
+        "ga_tracking": true
       }
     </script>
 ----
@@ -87,7 +88,8 @@ You need to add the configuration snippet to all pages where OIL is required. Th
 | activate_poi | Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false|Yes
 | hub_origin | The origin of the hub.js installation, if any. | none|Yes
 | hub_path | The path to the hub.html installation on the origin, if any. | none|Yes
-| subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
+| subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
+| ga_tracking | A boolean value to enable/disable Google Anayltics event tracking for succesfully loaded OIL instances plus clicks on the Yes and No options. The core Google Analytics script has to be available on the site, OIL is not capable of doing this. The events are tracked in the GA Event Category "OIL". | false | No 
 |====
 
 === Tealium Configuration

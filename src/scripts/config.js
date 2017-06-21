@@ -12,7 +12,8 @@ const defaultConfig = {
   'developer_mode': 'true',
   'cookie_expires_in_days' : 31,
   'activate_poi': false,
-  'privacy_page_url': ""
+  'privacy_page_url': "",
+  'ga_tracking': false
 };
 
 let cachedConfig = null;
@@ -116,3 +117,30 @@ export function isDevMode() {
 export function resetConfiguration() {
   cachedConfig = null;
 }
+
+/**
+ * Checks if Google Analytics Tracking is activated.
+ * @returns {*}
+
+export function isGAActive() {
+  cachedConfig = getConfiguration();
+
+  return cachedConfig[OIL_CONFIG.ATTR_GA_TRACKING];
+}
+ */
+
+/**
+ * Track OIL event in Google Analytics if GA is loaded
+ */
+export function gaTrackEvent(eventAction) {
+  cachedConfig = getConfiguration();
+  let activateGA = cachedConfig[OIL_CONFIG.ATTR_GA_TRACKING];
+
+  if(activateGA && window.ga && (typeof ga !== "undefined" && ga.loaded)) { 
+      // the following line throws a 'ga is not defined' warning, because ga is a method provided by the Google Analytics script
+      ga('send', 'event', 'OIL', eventAction);
+  }
+}
+
+/* Making gaTrackEvent available for interace onClick calls */
+window.gaTrackEvent = gaTrackEvent;

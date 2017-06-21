@@ -19,7 +19,7 @@ export const oilOptLaterTemplate =
                 ${POIButtonSnippet()}
 
                 <div class="oil-btn-group-mini">
-                    <button class="oil__btn-mini oil__btn-mini--2nd js-optin" data-qa="oil-small-YesButton">
+                    <button class="oil__btn-mini oil__btn-mini--2nd js-optin" data-qa="oil-small-YesButton" onClick="gaTrackEvent('SOI/yes-2nd');">
                         Jetzt zustimmen
                     </button>
                     <div class="oil__btn-mini-label"></div>

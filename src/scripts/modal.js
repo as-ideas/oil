@@ -6,7 +6,6 @@ import { oilDefaultTemplate } from './view/oil.default.js';
 import { oilOptLaterTemplate } from './view/oil.opt.later.js';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 
-
 // Initialize our Oil wrapper and save it ...
 
 export const oilWrapper = defineOilWrapper();
@@ -141,9 +140,3 @@ function removeOilWrapperAndHandlers(nodes) {
     nodes.oilWrapper.parentElement.removeChild(nodes.oilWrapper);
   }
 }
-
-
-
-
-
-

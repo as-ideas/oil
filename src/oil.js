@@ -3,7 +3,7 @@ import { checkOptIn, fireConfiguredMessageEvent } from "./scripts/optin.js";
 import { registerOptOutListener } from "./scripts/optout.js";
 import { initOilFrame } from "./scripts/iframe.listener.js";
 import { logDebug, logInfo } from './scripts/log.js';
-import { getConfiguration, isDevMode } from './scripts/config.js';
+import { getConfiguration, isDevMode, gaTrackEvent } from './scripts/config.js';
 import { OIL_CONFIG } from './scripts/constants.js';
 import Cookie from 'js-cookie';
 import { isBrowserCookieEnabled } from './scripts/utils.js';
@@ -31,6 +31,10 @@ export function initOilLayer() {
       if (!isBrowserCookieEnabled()) {
         logInfo('This browser doesn\'t allow cookies.');
         renderOil(oilWrapper, {noCookie: true});
+
+
+        gaTrackEvent('Loaded/No cookies');
+
         return;
       }
 
@@ -42,9 +46,13 @@ export function initOilLayer() {
         else if (getOptLater()) {
           renderOil(oilWrapper, {optLater: true});
           fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_LATER_EVENT_NAME);
+
+          gaTrackEvent('Loaded/Opt later');
         }
         else {
           renderOil(oilWrapper, {optLater: false});
+
+          gaTrackEvent('Loaded/Opt default');
         }
       });
     }
