@@ -1,27 +1,26 @@
 import { POIButtonSnippet } from './components/oil.poi.button';
-import { oilHeading, oilIntroText} from './oil.text.constants.js';
+import { oilHeading, oilIntroText, CSSPrefix} from './oil.view.config.js';
 
 export const oilDefaultTemplate = `
-    <div class="oil-expanded" data-qa="oil-full">
-        <div class="oil-content-overlay">
-        <h1 class="oil__heading">
+    <div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient">
+        <h1 class="${CSSPrefix}oil__heading">
             ${oilHeading()}
         </h1>
-        <p class="oil__intro-text">
+        <p class="${CSSPrefix}oil__intro-txt">
             ${oilIntroText()}
         </p>
-        <div class="oil__button-row">
-
+        <div class="${CSSPrefix}oil-l-row">
             ${POIButtonSnippet()}
-
-            <button class="oil__button oil__button--2nd js-optin" data-qa="oil-YesButton" onClick="gaTrackEvent('SOI/yes');">
-                Jetzt zustimmen
-                <span class="oil__button__label-2nd"></span>
-            </button>
-            <button class="oil__button oil__button--3rd js-optlater" data-qa="oil-NotNowButton" onClick="gaTrackEvent('SOI/no');">
-                Nein, jetzt nicht
-            </button>
-        </div>
+            <div class="${CSSPrefix}oil-l-item">
+                <button class="${CSSPrefix}oil__btn ${CSSPrefix}oil__btn--1st js-optin" data-qa="oil-YesButton" onClick="gaTrackEvent('SOI/yes');">
+                    Jetzt zustimmen
+                </button>
+            </div>
+            <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
+                <button class="${CSSPrefix}oil__btn ${CSSPrefix}oil__btn--3rd js-optlater" data-qa="oil-NotNowButton" onClick="gaTrackEvent('SOI/no');">
+                    Nein, jetzt nicht
+                </button>
+            </div>
         </div>
     </div>
 `;

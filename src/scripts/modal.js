@@ -5,6 +5,7 @@ import { oilOptIn, oilPowerOptIn,  oilOptLater } from "./optin.js";
 import { oilDefaultTemplate } from './view/oil.default.js';
 import { oilOptLaterTemplate } from './view/oil.opt.later.js';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
+import { CSSPrefix } from './view/oil.view.config.js';
 
 // Initialize our Oil wrapper and save it ...
 
@@ -32,7 +33,7 @@ function defineOilWrapper() {
 
   // Set some attributes as CSS classes and attributes for testing
 
-  oilWrapper.setAttribute('class', 'oil');
+  oilWrapper.setAttribute('class', `${CSSPrefix}oil`);
   oilWrapper.setAttribute('data-qa', 'oil-Layer');
 
   return oilWrapper;
@@ -84,10 +85,10 @@ function injectOilWrapperInDOM(wrapper, props) {
 
 function getOilDOMNodes() {
   return {
-    oilWrapper:  document.querySelector('.oil'),
-    btnSoiOptIn: document.querySelector('.oil .js-optin'),
-    btnPoiOptIn: document.querySelector('.oil .js-optin-poi'),
-    btnOptLater: document.querySelector('.oil .js-optlater')
+    oilWrapper:  document.querySelector(`.${CSSPrefix}oil`),
+    btnSoiOptIn: document.querySelector(`.${CSSPrefix}oil .js-optin`),
+    btnPoiOptIn: document.querySelector(`.${CSSPrefix}oil .js-optin-poi`),
+    btnOptLater: document.querySelector(`.${CSSPrefix}oil .js-optlater`)
   }
 }
 
