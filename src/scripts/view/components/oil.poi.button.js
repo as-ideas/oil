@@ -12,12 +12,11 @@ export const POIButtonSnippet = () => {
   if (activatePoi) {
     return (
         `
-        <button class="oil__button oil__button--1st js-optin-poi" data-qa="oil-poi-YesButton">
-            Global zustimmen
-            <span class="oil__button__label-2nd">
-            Für alle Axel Springer Dienste
-            </span>
-        </button>
+        <div class="oil-l-item">
+          <button class="oil__btn oil__btn--1st js-optin-poi" data-qa="oil-poi-YesButton">
+              Global zustimmen
+          </button>
+        </div>
         `
     );
   }

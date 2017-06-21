@@ -1,10 +1,36 @@
 /**
+ * Oil Prefix
+ *
+ * Define a prefix that will be used on all oil CSS classes to avoid naming conflicts
+ * with external CSS libraries or declarations
+ */
+
+// Generate the right prefix for empty and non empty strings
+// So for an empty prefix our CSS classes are .oil, otherwise our CSS classes will look
+// like .prefix-oil  
+
+@function CSSPrefix($str) {
+  @if $str == "" {
+    @return #{$str};
+  } 
+  @else {
+    @return #{$str}-;
+  }
+} 
+
+// Set Oil CSS prefix here, the prefix has to be in sync with Javascript, 
+// see modal.js
+
+$prefix: CSSPrefix("asId");
+
+
+/**
  * Define media queries,
  * this must be set before media queries are imported
  */
 
 $breakpoints: (
-  'phone':   480px,
+  'phone':   580px,
   'tablet':  768px,
   'desktop': 1024px
 ) !default;
@@ -12,7 +38,7 @@ $breakpoints: (
 
 /**
  * Import Media query library
- * Nice!
+ * Pretty Nice!
  */
 
 @import  "./node_modules/include-media/dist/_include-media.scss";
@@ -28,6 +54,8 @@ $text-color-secondary:  rgb(70,200,120);
 $text-color-dark:       rgb(43, 43, 43);
 $btn-primary:           rgb(50,170,100);
 $btn-secondary:           transparent;
+
+$layout-max-width:  1280px; 
 
 
 // Our Oil overlay needs to trump every other element, so we need the highest possible z-index
@@ -102,7 +130,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 
 /**
- * Changes box model, default: border-box
+ * Changes box model, defaults to border-box
  *
  */
 
@@ -125,65 +153,15 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  *
  */
 
-.oil {
+.#{$prefix}oil {
   @include box-model;
   @include font-smoothing;
+  position: fixed;
+  z-index: $z-index-max;
+  bottom: 0;
+  width: 100%;
   font-family: $font-stack;
   color: $text-color-primary;
-}
-
-
-// In case of opt in don't show overlay
-
-/*oil*/.optin-true {
-  display: none;
-}
-
-
-/**
- * Toggle expanded and minified overlay according to CSS control class
- * CSS class: expanded-true or expanded-false
- */
-
-/*.oil*/.expanded-true {
-  // This contains our expanded Oil overlay content
-  .oil-expanded {
-    display: block;
-  }
-
-  // This contains our minified Oil overlay content
-  .oil-minified {
-    display: none;
-  }
-}
-
-
-/*.oil*/.expanded-false {
-  // This contains our expanded Oil overlay content
-  .oil-expanded {
-    display: none;
-  }
-
-  // This contains our minified Oil overlay content
-  .oil-minified {
-    display: block;
-  }
-}
-
-
-.oil-expanded {
-  position: fixed;
-  z-index: $z-index-max;
-  bottom: 0;
-  width: 100%;
-}
-
-
-.oil-minified {
-  position: fixed;
-  z-index: $z-index-max;
-  bottom: 0;
-  width: 100%;
 }
 
 
@@ -192,13 +170,13 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  * that contains our content, eg. text and buttons
  */
 
-.oil-content-overlay {
+.#{$prefix}oil-content-overlay {
   @include clearfix;
   position: absolute;
-  width:  100%;
+  width:   100%;
   bottom:  0;
   left:    0;
-  padding: 2.5rem 6rem;
+  padding: 2rem 5rem;
   background-color: rgba(40, 40, 40, 0.98);
 
   @include media('<=phone') {
@@ -216,27 +194,25 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  *
  */
 
-.oil-expanded {
-  .oil-content-overlay {
-    &:before {
-      content: "";
-      position: absolute;
-      pointer-events: none;
-      width:  100%;
-      height: 100%;
-      top:   -100%;
-      left:   0;
-      background-image: linear-gradient(rgba(255,255,255,0), rgb(0, 0, 0));
+.#{$prefix}oil-has-gradient {
+  &:before {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    width:  100%;
+    height: 100%;
+    top:   -100%;
+    left:   0;
+    background-image: linear-gradient(rgba(255,255,255,0), rgb(0, 0, 0));
 
-      @include media('<=phone') {
-        height: 50px;
-        top:   -50px;
-      }
+    @include media('<=phone') {
+      height: 50px;
+      top:   -50px;
+    }
 
-      @include media('>phone', '<desktop') {
-        height: 50%;
-        top:   -50%;
-      }
+    @include media('>phone', '<desktop') {
+      height: 50%;
+      top:   -50%;
     }
   }
 }
@@ -246,9 +222,9 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  *
  */
 
-.oil__heading {
+.#{$prefix}oil__heading {
   max-width: 840px;
-  margin: 4rem 0;
+  margin: 2rem 0;
   font-size: 2rem;
   font-weight: 300;
   color: $text-color-secondary;
@@ -265,11 +241,12 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 
-.oil__intro-text {
-  max-width: 840px;
-  margin: 2.75rem 0;
-  font-size: 1.25rem;
-  line-height: 1.25;
+.#{$prefix}oil__intro-txt {
+  max-width: 980px;
+  margin: 1rem 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.4;
   color: $text-color-primary;
 
   @include media('<=phone') {
@@ -279,7 +256,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 
-.oil__intro-text--secondary {
+.#{$prefix}oil__intro-txt--2nd {
+  padding: 4px; 
   color: $text-color-secondary;
   border-bottom: 1px solid;
   text-decoration: none;
@@ -291,108 +269,90 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  *
  */
 
-@mixin oil__button__shared {
-  font-size: 1.125rem;
+.#{$prefix}oil__btn {
+  @include stack-items-remove-horizontal-margins;
+
+  min-width: 100px;
+  min-height: 50px;
+  margin:  1rem;
+  padding: 0.5rem 1rem;
+  vertical-align: middle;
+  font-size: 0.875rem; // 14px
+  color: $text-color-primary;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+
+@mixin oil__btn__shared {
+  min-width: 280px;
+  font-size: 0.9375rem; // 15px
   font-weight: 500;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.5);
 
   @include media('<=phone') {
-    margin: 0.5rem 0;
     width: 100%;
-    font-size: 1rem;
-  }
-
-  .oil__button__label-2nd {
-    display: block;
-    margin: 2px 0;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    text-transform: none;
-
-    @include media('<=phone') {
-      font-size: 0.875rem;
-    }
-  }
-}
-
-
-.oil__button {
-  @include stack-items-remove-horizontal-margins;
-
-  min-width: 100px;
-  min-height: 85px;
-  margin: 1rem;
-  padding: 0.5rem 1rem;
-  vertical-align: middle;
-  font-size: 0.8rem;
-  color: $text-color-primary;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-  background-color: transparent;
-  cursor: pointer;
-
-  @include media('<=phone') {
     min-height: auto;
+    margin:  0.5rem 0;
     padding: 0.875rem;
+    font-size: 0.875rem;
   }
 }
 
 
-.oil__button--1st {
-  @include oil__button__shared;
-
+.#{$prefix}oil__btn--1st {
+  @include oil__btn__shared;
   color: $text-color-dark;
   background-color: $btn-primary;
   background-image: linear-gradient(35deg, $btn-primary, rgb(70, 200, 100));
   border-color: transparent;
-
-  @include media('>=desktop') {
-    min-width: 320px;
-  }
 
   &:hover {
     background-color: darken($btn-primary, 8%);
     background-image: linear-gradient(35deg, darken($btn-primary, 8%), darken(rgb(70, 200, 100), 8%));
   }
 
+  @include media('>phone', '<desktop') {
+    min-width: 220px;
+    min-height: 40px;
+  }
 
-  .oil__button__label-2nd {
-    color: $text-color-primary;
+  @include media('<=phone') {
+    min-height: 40px;
+    padding: 0;
   }
 }
 
 
-.oil__button--2nd {
-  @include oil__button__shared;
+.#{$prefix}oil__btn--2nd {
+  @include oil__btn__shared;
   color: $text-color-secondary;
   background-color: transparent;
   border: 1px solid $btn-primary;
 
-  @include media('>=desktop') {
-    min-width: 260px;
-  }
-
   &:hover {
     border-color: darken($btn-primary, 8%);
-  }
-
-
-  .oil__button__label-2nd {
-    color: $text-color-primary;
   }
 }
 
 
-.oil__button--3rd {
+.#{$prefix}oil__btn--3rd {
   float: right;
+  min-height: auto;
+  margin: 1.5rem 0;
+  padding: 4px;
   font-size: 1rem;
   font-weight: 500;
   color: $text-color-secondary;
+  text-decoration: none;
   background-color: transparent;
-  text-decoration: underline;
+  border-bottom: 1px solid;
+  border-radius: 0;
 
   &:hover {
     border-color: darken($btn-primary, 8%);
@@ -400,9 +360,10 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   @include media('<=phone') {
     float: none;
-    margin: 1rem 0;
     width: 100%;
+    margin: 1rem 0;
     font-size: 0.875rem;
+    border-bottom: none;
   }
 }
 
@@ -412,23 +373,9 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  *
  */
 
-// Layout container
-
-.oil-l-container {
-  float: left;
-  width: 50%;
-
-  @include media('<=phone') {
-    display: block;
-    float: none;
-    width: 100%;
-  }
-}
-
-
 // Text styles
 
-.oil__heading-mini {
+.#{$prefix}oil__heading-mini {
   margin: 0;
   font-size: 1.375rem;
   font-weight: 300;
@@ -447,47 +394,10 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 
-.oil__intro-text-mini {
-  margin: 1.175rem 0 0;
-  font-size: 0.875rem;
-  line-height: 1.25;
-  color: $text-color-primary;
-
-  @include media('<=phone') {
-    margin: 1rem 0;
-    font-size: 0.75rem; // 12px
-  }
-}
-
-
-.oil__intro-text--secondary-mini {
-  font-size: 0.875rem;
-  color: $text-color-secondary;
-  border-bottom: 1px solid;
-  text-decoration: none;
-}
-
-
-// Button Styles
-
-.oil-btn-group-mini {
+.#{$prefix}oil__btn-mini {
   float: right;
-  width: 220px;
-  margin: 0 0.5rem;
-  vertical-align: top;
-
-  @include media('<=phone') {
-    display: block;
-    float: none;
-    width: 100%;
-    margin: 1rem 0 0;
-  }
-}
-
-.oil__btn-mini {
-  display: block;
-  width: 220px;
-  margin: 1rem auto;
+  width: 300px;
+  margin: 1rem 0;
   padding: 0.5rem 2rem;
   font-size: 0.8rem;
   color: $text-color-primary;
@@ -499,15 +409,21 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: transparent;
   cursor: pointer;
 
+  &:first-of-type {
+    margin-top: 0.125rem;
+  }
+
   @include media('<=phone') {
+    display: block;
+    float: none;
     width: 100%;
     margin: 1rem auto;
   }
 }
 
 
-.oil__btn-mini--1st {
-  font-weight: 500;
+.#{$prefix}oil__btn-mini--1st {
+  font-weight: 600;
   color: $text-color-dark;
   background-color: $btn-primary;
   background-image: linear-gradient(35deg, $btn-primary, rgb(45, 205, 110));
@@ -517,10 +433,14 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: darken($btn-primary, 8%);
     background-image: linear-gradient(35deg, darken($btn-primary, 6%), darken(rgb(45, 205, 110), 6%));
   }
+
+  @include media('>phone', '<desktop') {
+    width: 200px;
+  }
 }
 
 
-.oil__btn-mini--2nd {
+.#{$prefix}oil__btn-mini--2nd {
   border: 1px solid $btn-primary;
 
   &:hover {
@@ -529,7 +449,51 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 
-.oil__btn-mini-label {
-  font-size: 0.8125rem;
-  text-align: center;
+/**
+ * Layout Stuff
+ *
+ */
+
+
+.#{$prefix}oil-l-row {
+  @supports (display: flex) {
+    display: flex;
+    align-content: center;
+  }
+
+  @include media('<=phone') {
+    display: block;
+    width: 100%;
+  }
+}
+
+
+.#{$prefix}oil-l-row--fixed-width {
+  max-width: $layout-max-width;
+  margin: 0 auto; 
+}
+
+
+.#{$prefix}oil-l-item {
+  float: left; // Fallback for non flexbox capable browsers
+  margin-right: 2rem;
+  
+  @supports (display: flex) {
+    float: none;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  @include media('<=phone') {
+    width: 100%;
+  }
+}
+
+
+.#{$prefix}oil-l-item--stretch {
+  @supports (display: flex) {
+    flex: 1;
+  }
 }

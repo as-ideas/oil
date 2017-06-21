@@ -1,7 +1,4 @@
 export const OIL_LAYER = '//*[@data-qa="oil-Layer"]';
-export const OIL_LAYER_FULL = '//*[@data-qa="oil-full"]';
-export const OIL_LAYER_NOCOOKIES_ = '//*[@data-qa="oil-nocookies"]';
-export const OIL_LAYER_OPTLATER = '//*[@data-qa="oil-optlater"]';
 export const OIL_YES_BUTTON = '//*[@data-qa="oil-YesButton"]';
 export const OIL_NO_BUTTON = '//*[@data-qa="oil-NotNowButton"]';
 export const OIL_YES_SMALL_BUTTON = '//*[@data-qa="oil-small-YesButton"]';

@@ -1,29 +1,21 @@
-import { privacyPageSnippet } from './components/oil.privacy.page.opt.later';
-import { POIButtonSnippet } from './components/oil.poi.button.opt.later';
-import { oilHeading, oilIntroText} from './oil.text.constants.js';
+import { oilHeading, oilIntroText, CSSPrefix} from './oil.view.config.js';
 
 export const oilOptLaterTemplate =
     `
-    <div class="oil-minified" data-qa="oil-optlater">
-        <div class="oil-content-overlay">
-            <div class="oil-l-container">
-                <h1 class="oil__heading-mini">
+    <div class="${CSSPrefix}oil-content-overlay">
+        <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-row--fixed-width">
+            <div class="${CSSPrefix}oil-l-item">
+                <h1 class="${CSSPrefix}oil__heading-mini">
                     ${oilHeading()}
                 </h1>
-                <p class="oil__intro-text-mini">
+                <p class="${CSSPrefix}oil__intro-text-mini">
                     ${oilIntroText()}
                 </p>
             </div>
-            <div class="oil-l-container">
-                
-                ${POIButtonSnippet()}
-
-                <div class="oil-btn-group-mini">
-                    <button class="oil__btn-mini oil__btn-mini--2nd js-optin" data-qa="oil-small-YesButton">
-                        Jetzt zustimmen
-                    </button>
-                    <div class="oil__btn-mini-label"></div>
-                </div>
+            <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
+                <button class="${CSSPrefix}oil__btn-mini ${CSSPrefix}oil__btn-mini--1st js-optin" data-qa="oil-small-YesButton">
+                    Jetzt zustimmen
+                </button>
             </div>
         </div>
     </div>
