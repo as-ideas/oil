@@ -1,4 +1,5 @@
 import { oilHeading, oilIntroText, CSSPrefix} from './oil.view.config.js';
+import { POIButtonSnippet } from './components/oil.poi.button.opt.later';
 
 export const oilOptLaterTemplate =
     `
@@ -13,6 +14,7 @@ export const oilOptLaterTemplate =
                 </p>
             </div>
             <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
+                ${POIButtonSnippet()}
                 <button class="${CSSPrefix}oil__btn-mini ${CSSPrefix}oil__btn-mini--1st js-optin" data-qa="oil-small-YesButton" onClick="gaTrackEvent('SOI/yes-2nd');">
                     Jetzt zustimmen
                 </button>
