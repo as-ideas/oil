@@ -2,7 +2,7 @@ import { oilHeading, oilIntroText, CSSPrefix} from './oil.view.config.js';
 
 export const oilOptLaterTemplate =
     `
-    <div class="${CSSPrefix}oil-content-overlay">
+    <div class="${CSSPrefix}oil-content-overlay" data-qa="oil-optlater">
         <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-row--fixed-width">
             <div class="${CSSPrefix}oil-l-item">
                 <h1 class="${CSSPrefix}oil__heading-mini">
