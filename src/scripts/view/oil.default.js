@@ -2,7 +2,7 @@ import { POIButtonSnippet } from './components/oil.poi.button';
 import { oilHeading, oilIntroText, CSSPrefix} from './oil.view.config.js';
 
 export const oilDefaultTemplate = `
-    <div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient">
+    <div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient" data-qa="oil-full">
         <h1 class="${CSSPrefix}oil__heading">
             ${oilHeading()}
         </h1>
