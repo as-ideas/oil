@@ -25,11 +25,6 @@ module.exports = {
     chunks: ['demos/direct-integration'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'demos/ga-integration-site-a.html',
-    template: path.resolve(sourcePath, 'demos', 'ga-integration-site-a.html'),
-    chunks: ['demos/ga-integration-site-a'],
-    chunksSortMode: 'dependency'
-  }, {
     filename: 'demos/complete-integration-site-a.html',
     template: path.resolve(sourcePath, 'demos', 'complete-integration-site-a.html'),
     chunks: ['demos/complete-integration-site-a'],
@@ -91,7 +86,6 @@ module.exports = {
     'subscriber': path.resolve(sourcePath, 'subscriber.js'),
     'demos/direct-integration': path.resolve(sourcePath, 'demos/direct-integration.js'),
     'demos/complete-integration-site-a': path.resolve(sourcePath, 'subscriber.js'),
-    'demos/ga-integration-site-a': path.resolve(sourcePath, 'subscriber.js'),
     'demos/complete-integration-site-b': [path.resolve(sourcePath, 'subscriber.js'), path.resolve(sourcePath, 'demos', 'complete-integration-site-b.js')],
     'demos/complete-integration-mypass': path.resolve(sourcePath, 'hub.js'),
     'end2end-tests/direct-integration': path.resolve(sourcePath, 'subscriber.js'),

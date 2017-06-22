@@ -136,9 +136,9 @@ export function gaTrackEvent(eventAction) {
   cachedConfig = getConfiguration();
   let activateGA = cachedConfig[OIL_CONFIG.ATTR_GA_TRACKING];
 
-  if(activateGA && window.ga && (typeof ga !== "undefined" && ga.loaded)) { 
+  if(activateGA && window.ga && (typeof window.ga !== "undefined" && window.ga.loaded)) { 
       // the following line throws a 'ga is not defined' warning, because ga is a method provided by the Google Analytics script
-      ga('send', 'event', 'OIL', eventAction);
+      window.ga('send', 'event', 'OIL', eventAction);
   }
 }
 

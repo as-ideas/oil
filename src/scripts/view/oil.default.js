@@ -17,7 +17,7 @@ export const oilDefaultTemplate = `
                 </button>
             </div>
             <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
-                <button class="${CSSPrefix}oil__btn ${CSSPrefix}oil__btn--3rd js-optlater" data-qa="oil-NotNowButton" onClick="gaTrackEvent('SOI/no');">
+                <button class="${CSSPrefix}oil__btn ${CSSPrefix}oil__btn--3rd js-optlater" data-qa="oil-NotNowButton">
                     Nein, jetzt nicht
                 </button>
             </div>
