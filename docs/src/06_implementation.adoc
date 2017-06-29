@@ -65,7 +65,7 @@ You need to add the configuration snippet to all pages where OIL is required. Th
         "opt_in_event_name": "oil_optin_done_custom",
         "opt_later_event_name": "oil_optlater_custom",
         "opt_out_event_name": "oil_optout_trigger",
-        "developer_mode": "false",
+        "developer_mode": false,
         "privacy_page_url": "http://www.mysite.com/privacy",
         "activate_poi": true,
         "hub_origin": "//www.somedomain.com",
