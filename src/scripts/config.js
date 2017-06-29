@@ -12,7 +12,7 @@ const defaultConfig = {
   'developer_mode': 'true',
   'cookie_expires_in_days' : 31,
   'activate_poi': false,
-  'privacy_page_url': "",
+  'privacy_page_url': undefined,
   'ga_tracking': false
 };
 
