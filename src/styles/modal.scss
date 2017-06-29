@@ -18,10 +18,11 @@
   }
 } 
 
-// Set Oil CSS prefix here, the prefix has to be in sync with Javascript, 
-// see modal.js
+// Set Oil CSS prefix here, the prefix has to be in sync with a Javascript file, 
+// see modal.js                                  ------------------------------
+// ------------
 
-$prefix: CSSPrefix("asId");
+$prefix: CSSPrefix("as");
 
 
 /**
@@ -84,22 +85,22 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 @mixin stack-items-remove-vertical-margins {
   &:first-of-type {
-    margin-top: 0;
+    margin-left: 0;
   }
 
   &:last-of-type {
-    margin-bottom: 0;
+    margin-right: 0;
   }
 }
 
 
 @mixin stack-items-remove-horizontal-margins {
   &:first-of-type {
-    margin-left: 0;
+    margin-top: 0;
   }
 
   &:last-of-type {
-    margin-right: 0;
+    margin-bottom: 0;
   }
 }
 
@@ -159,15 +160,14 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   position: fixed;
   z-index: $z-index-max;
   bottom: 0;
-  width: 100%;
+  width:  100%;
   font-family: $font-stack;
   color: $text-color-primary;
 }
 
 
 /**
- * Our overlay is composed of 1 refactured section,
- * that contains our content, eg. text and buttons
+ * Wraps all our Oil content, eg. text and buttons
  */
 
 .#{$prefix}oil-content-overlay {
@@ -217,6 +217,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
+
 /**
  * Text Styles
  *
@@ -245,22 +246,22 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   max-width: 980px;
   margin: 1rem 0;
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.4;
   color: $text-color-primary;
 
   @include media('<=phone') {
     margin: 1.5rem 0;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
 }
 
 
-.#{$prefix}oil__intro-txt--2nd {
+.#{$prefix}oil__intro-txt--link {
   padding: 4px; 
   color: $text-color-secondary;
-  border-bottom: 1px solid;
   text-decoration: none;
+  border-bottom: 1px solid;
 }
 
 
@@ -269,44 +270,35 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  *
  */
 
-.#{$prefix}oil__btn {
-  @include stack-items-remove-horizontal-margins;
+// Mixins
 
-  min-width: 100px;
+@mixin btn-poi-soi-shared {
+  min-width:  280px;
   min-height: 50px;
-  margin:  1rem;
+  margin:  0;
   padding: 0.5rem 1rem;
-  vertical-align: middle;
   font-size: 0.875rem; // 14px
-  color: $text-color-primary;
+  font-weight: 400;
   border: none;
   border-radius: 3px;
   outline: none;
-  background-color: transparent;
   cursor: pointer;
-}
-
-
-@mixin oil__btn__shared {
-  min-width: 280px;
-  font-size: 0.9375rem; // 15px
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.5);
 
   @include media('<=phone') {
     width: 100%;
-    min-height: auto;
-    margin:  0.5rem 0;
-    padding: 0.875rem;
-    font-size: 0.875rem;
+    min-width:  auto;
+    min-height: 40px;
+    padding: 0;
+  }
+
+  @include media('>phone', '<desktop') {
+    min-width: 160px;
+    min-height: 40px;
   }
 }
 
 
-.#{$prefix}oil__btn--1st {
-  @include oil__btn__shared;
+@mixin btn-poi {
   color: $text-color-dark;
   background-color: $btn-primary;
   background-image: linear-gradient(35deg, $btn-primary, rgb(70, 200, 100));
@@ -316,24 +308,14 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: darken($btn-primary, 8%);
     background-image: linear-gradient(35deg, darken($btn-primary, 8%), darken(rgb(70, 200, 100), 8%));
   }
-
-  @include media('>phone', '<desktop') {
-    min-width: 220px;
-    min-height: 40px;
-  }
-
-  @include media('<=phone') {
-    min-height: 40px;
-    padding: 0;
-  }
 }
 
 
-.#{$prefix}oil__btn--2nd {
-  @include oil__btn__shared;
-  color: $text-color-secondary;
+@mixin btn-soi {
+  color: $text-color-primary;
+  border: 2px solid $btn-primary;
   background-color: transparent;
-  border: 1px solid $btn-primary;
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.5);
 
   &:hover {
     border-color: darken($btn-primary, 8%);
@@ -341,18 +323,38 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 
-.#{$prefix}oil__btn--3rd {
+// Power Optin Button Declaration 
+
+.#{$prefix}oil__btn-poi {
+  @include btn-poi-soi-shared;
+  @include btn-poi;
+}
+
+
+// Site Optin Button Declaration
+
+.#{$prefix}oil__btn-soi {
+  @include btn-poi-soi-shared;
+  @include btn-soi;
+}
+
+
+// Later Optin Button Declaration
+
+.#{$prefix}oil__btn-loi {
   float: right;
   min-height: auto;
-  margin: 1.5rem 0;
+  margin: 0.75rem 0;
   padding: 4px;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
   color: $text-color-secondary;
   text-decoration: none;
   background-color: transparent;
+  border: none;
   border-bottom: 1px solid;
   border-radius: 0;
+  cursor: pointer;
 
   &:hover {
     border-color: darken($btn-primary, 8%);
@@ -361,23 +363,28 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   @include media('<=phone') {
     float: none;
     width: 100%;
-    margin: 1rem 0;
-    font-size: 0.875rem;
+    margin: 1rem 0;  // We are vertically aligning this btn by using margins, which is a bit dirty 
+    font-size: 0.75rem;
     border-bottom: none;
+  }
+
+  @include media('>phone', '<desktop') {
+    // We are vertically aligning this btn by using margins, which is a bit dirty 
+    margin: 0.25rem 0;
   }
 }
 
 
 /**
- * Minified Overlay
- *
+ * Later Optin Overlay LOI
+ * 
  */
 
 // Text styles
 
-.#{$prefix}oil__heading-mini {
-  margin: 0;
-  font-size: 1.375rem;
+.#{$prefix}oil-loi__heading {
+  margin: 1rem 0;
+  font-size: 1.25rem;
   font-weight: 300;
   color: $text-color-secondary;
   line-height: 1.1875;
@@ -387,65 +394,68 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   @include media('<=phone') {
-    margin: 1rem 0;
-    font-size: 1rem;
-    text-align: center;
+    margin: 0.625rem 0;
+    font-size: 1.125rem;
   }
 }
 
 
-.#{$prefix}oil__btn-mini {
-  float: right;
-  width: 300px;
+.#{$prefix}oil-loi__intro-txt {
   margin: 1rem 0;
-  padding: 0.5rem 2rem;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.4;
   color: $text-color-primary;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border: none;
-  border-radius: 2px;
-  outline: none;
-  background-color: transparent;
-  cursor: pointer;
 
   &:first-of-type {
-    margin-top: 0.125rem;
+    margin-top: 0;
   }
 
   @include media('<=phone') {
-    display: block;
-    float: none;
-    width: 100%;
-    margin: 1rem auto;
+    margin: 1.5rem 0;
+    font-size: 0.75rem;
   }
 }
 
 
-.#{$prefix}oil__btn-mini--1st {
-  font-weight: 600;
-  color: $text-color-dark;
-  background-color: $btn-primary;
-  background-image: linear-gradient(35deg, $btn-primary, rgb(45, 205, 110));
-  border: 1px solid transparent;
+/**
+ * Button Styles
+ *
+ */
 
-  &:hover {
-    background-color: darken($btn-primary, 8%);
-    background-image: linear-gradient(35deg, darken($btn-primary, 6%), darken(rgb(45, 205, 110), 6%));
-  }
+// Mixins
 
-  @include media('>phone', '<desktop') {
-    width: 200px;
-  }
+@mixin oil-loi-btn-poi-soi-shared {
+  @include stack-items-remove-horizontal-margins;
+  @include btn-poi-soi-shared;
+  min-height: 40px;
+  margin: 0.5rem 0;
 }
 
 
-.#{$prefix}oil__btn-mini--2nd {
-  border: 1px solid $btn-primary;
+@mixin oil-loi-btn-poi {
+  @include btn-poi;
+}
 
-  &:hover {
-    border-color: darken($btn-primary, 8%);
-  }
+
+@mixin oil-loi-btn-soi {
+  @include btn-soi;
+}
+
+
+// Loi Power Optin Button Declaration 
+
+.#{$prefix}oil-loi__btn-poi {
+  @include oil-loi-btn-poi-soi-shared;
+  @include btn-poi;
+}
+
+
+// Loi Site Optin Button Declaration
+
+.#{$prefix}oil-loi__btn-soi {
+  @include oil-loi-btn-poi-soi-shared;
+  @include btn-soi;
 }
 
 
@@ -456,6 +466,12 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 
 .#{$prefix}oil-l-row {
+  margin: 2rem 0;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
   @supports (display: flex) {
     display: flex;
     align-content: center;
@@ -476,10 +492,14 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .#{$prefix}oil-l-item {
   float: left; // Fallback for non flexbox capable browsers
-  margin-right: 2rem;
+  margin: 0 1rem;
   
   @supports (display: flex) {
     float: none;
+  }
+
+  &:first-of-type {
+    margin-left: 0;
   }
 
   &:last-of-type {
@@ -487,7 +507,13 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   @include media('<=phone') {
+    @include stack-items-remove-horizontal-margins;
     width: 100%;
+    margin: 1rem 0;
+  }
+
+  @include media('>phone', '<desktop') {
+    margin-right: 1rem;
   }
 }
 

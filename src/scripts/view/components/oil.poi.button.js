@@ -13,8 +13,8 @@ export const POIButtonSnippet = () => {
   if (activatePoi) {
     return (
         `
-        <div class="oil-l-item">
-          <button class="${CSSPrefix}oil__btn ${CSSPrefix}oil__btn--1st js-optin-poi" data-qa="oil-poi-YesButton" onClick="ga('send', 'event', 'OIL', 'POI/yes');">
+        <div class="${CSSPrefix}oil-l-item">
+          <button class="${CSSPrefix}oil__btn-poi js-optin-poi" data-qa="oil-poi-YesButton" onClick="ga('send', 'event', 'OIL', 'POI/yes');">
               Global zustimmen
           </button>
         </div>

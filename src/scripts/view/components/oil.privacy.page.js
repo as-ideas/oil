@@ -18,7 +18,7 @@ export const privacyPageSnippet = () => {
     if (privacyPage) {
         return `
             <a href="${privacyPage}" 
-                class="${CSSPrefix}oil__intro-txt--2nd"
+                class="${CSSPrefix}oil__intro-txt--link"
                 target="_blank"
             >Mehr erfahren</a>`;
     }
