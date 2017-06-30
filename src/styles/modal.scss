@@ -484,7 +484,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 
-.#{$prefix}oil-l-row--fixed-width {
+.#{$prefix}oil-l-row--fixed-width,
+.#{$prefix}oil-l-wrapper-layout-max-width {
   max-width: $layout-max-width;
   margin: 0 auto; 
 }
