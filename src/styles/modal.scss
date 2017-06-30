@@ -262,6 +262,10 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: $text-color-secondary;
   text-decoration: none;
   border-bottom: 1px solid;
+
+  &:hover {
+    color: darken($text-color-secondary, 10%);
+  }
 }
 
 
@@ -318,7 +322,9 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.5);
 
   &:hover {
+    color: $text-color-primary;
     border-color: darken($btn-primary, 8%);
+    background-color: transparent;
   }
 }
 
@@ -357,7 +363,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   cursor: pointer;
 
   &:hover {
-    border-color: darken($btn-primary, 8%);
+    color: darken($text-color-secondary, 10%);
+    background-color: transparent;
   }
 
   @include media('<=phone') {
