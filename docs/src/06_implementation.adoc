@@ -65,13 +65,14 @@ You need to add the configuration snippet to all pages where OIL is required. Th
         "opt_in_event_name": "oil_optin_done_custom",
         "opt_later_event_name": "oil_optlater_custom",
         "opt_out_event_name": "oil_optout_trigger",
-        "developer_mode": "false",
+        "developer_mode": false,
         "privacy_page_url": "http://www.mysite.com/privacy",
         "activate_poi": true,
         "hub_origin": "//www.somedomain.com",
         "hub_path": "/some/path.html",
         "subscriber_set_cookie": true,
-        "ga_tracking": true
+        "ga_tracking": true,
+        "ga_tracking_all": true
       }
     </script>
 ----
@@ -89,7 +90,13 @@ You need to add the configuration snippet to all pages where OIL is required. Th
 | hub_origin | The origin of the hub.js installation, if any. | none|Yes
 | hub_path | The path to the hub.html installation on the origin, if any. | none|Yes
 | subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
-| ga_tracking | A boolean value to enable/disable Google Anayltics event tracking for succesfully loaded OIL instances plus clicks on the Yes and No options. The core Google Analytics script has to be available on the site, OIL is not capable of doing this. The events are tracked in the GA Event Category "OIL". | false | No 
+| ga_tracking | A boolean value to enable/disable Google Anayltics event tracking for succesfully loaded OIL instances plus clicks on the Yes and No options. The core Google Analytics script has to be available on the site, OIL is not capable of doing this. The events are tracked in the GA Event Category "OIL". 
+
+*Important!* Please note that GA tracking should of course only be enabled for testing purposes. 
+| false | No | ga_tracking | A boolean value to enable/disable Google Anayltics event tracking for succesfully loaded OIL instances plus clicks on the Yes and No options. The core Google Analytics script has to be available on the site, OIL is not capable of doing this. The events are tracked in the GA Event Category "OIL". | false | No 
+| ga_tracking_all | A boolean value to enable/disable Google Anayltics event tracking for succesfully loaded OIL
+*Important!* Please note that GA tracking should of course only be enabled for testing purposes. 
+| false | No 
 |====
 
 === Tealium Configuration
