@@ -1,6 +1,6 @@
 import "../styles/modal.scss";
-import { getConfiguration } from './config.js';
-import { OIL_CONFIG } from './constants.js';
+import { getConfiguration, gaTrackEvent } from './config.js';
+import { OIL_CONFIG, DATAQA_BUTTON_YES } from './constants.js';
 import { oilOptIn, oilPowerOptIn,  oilOptLater } from "./optin.js";
 import { oilDefaultTemplate } from './view/oil.default.js';
 import { oilOptLaterTemplate } from './view/oil.opt.later.js';
@@ -103,12 +103,22 @@ let config = getConfiguration();
 function handleOptLater() {
   oilOptLater().then((cookieOptLater) => {
     renderOil(oilWrapper, {optLater: cookieOptLater});
+
+    if(config[OIL_CONFIG.ATTR_GA_TRACKING]===2) {
+      gaTrackEvent('Later');
+    }
   });
 }
 
 function handleSoiOptIn() {
   oilOptIn().then((cookieOptIn) => {
     renderOil(oilWrapper, {optIn: cookieOptIn});
+
+    if(this.getAttribute("data-qa") === DATAQA_BUTTON_YES){
+      gaTrackEvent('SOI/yes-1');
+    } else {
+      gaTrackEvent('SOI/yes-2');
+    }
   });
 }
 
@@ -116,6 +126,8 @@ function handlePoiOptIn() {
   oilOptIn().then(() => {
     oilPowerOptIn(!config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
       renderOil(oilWrapper, {optIn: true});
+
+      gaTrackEvent('POI/yes');
     });
   });
 }

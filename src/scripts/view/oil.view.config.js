@@ -18,9 +18,7 @@ const oilPrefix = (str) => {
 }
 
 // And export our prefix
-
 export const CSSPrefix = oilPrefix(Prefix);
-
 
 /**
  * Definition of various text snippets for our Oil Layer

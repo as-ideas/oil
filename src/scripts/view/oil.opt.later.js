@@ -1,4 +1,4 @@
-import { oilHeading, oilIntroText, CSSPrefix} from './oil.view.config.js';
+import { oilHeading, oilIntroText, CSSPrefix } from './oil.view.config.js';
 
 export const oilOptLaterTemplate =
     `
@@ -13,7 +13,7 @@ export const oilOptLaterTemplate =
                 </p>
             </div>
             <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
-                <button class="${CSSPrefix}oil__btn-mini ${CSSPrefix}oil__btn-mini--1st js-optin" data-qa="oil-small-YesButton" onClick="gaTrackEvent('SOI/yes-2nd');">
+                <button class="${CSSPrefix}oil__btn-mini ${CSSPrefix}oil__btn-mini--1st js-optin" data-qa="oil-small-YesButton">
                     Jetzt zustimmen
                 </button>
             </div>

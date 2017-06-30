@@ -25,11 +25,6 @@ module.exports = {
     chunks: ['demos/direct-integration'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'demos/ga-integration-site-a.html',
-    template: path.resolve(sourcePath, 'demos', 'ga-integration-site-a.html'),
-    chunks: ['demos/ga-integration-site-a'],
-    chunksSortMode: 'dependency'
-  }, {
     filename: 'demos/complete-integration-site-a.html',
     template: path.resolve(sourcePath, 'demos', 'complete-integration-site-a.html'),
     chunks: ['demos/complete-integration-site-a'],
