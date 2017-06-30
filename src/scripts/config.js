@@ -119,17 +119,6 @@ export function resetConfiguration() {
 }
 
 /**
- * Checks if Google Analytics Tracking is activated.
- * @returns {*}
-
-export function isGAActive() {
-  cachedConfig = getConfiguration();
-
-  return cachedConfig[OIL_CONFIG.ATTR_GA_TRACKING];
-}
- */
-
-/**
  * Track OIL event in Google Analytics if GA is loaded
  */
 export function gaTrackEvent(eventAction) {
@@ -138,7 +127,7 @@ export function gaTrackEvent(eventAction) {
 
   logDebug("OIL gaTrackEvent config="+ gaTracking +" eventAction="+ eventAction);
 
-  if(gaTracking && window.ga && (typeof ga !== "undefined" && window.ga.loaded)) { 
+  if(gaTracking && window.ga && (typeof window.ga !== "undefined" && window.ga.loaded)) { 
       // the following line throws a 'ga is not defined' warning, because ga is a method provided by the Google Analytics script
       window.ga('send', 'event', 'OIL', eventAction);
   }

@@ -7,7 +7,7 @@ import { privacyPageSnippet } from './components/oil.privacy.page';
 
 // This is the prefix you have to set
 
-const Prefix = 'asId';
+const Prefix = 'as';
 
 // Generate the right prefix for empty and non empty strings
 // So for an empty prefix our CSS classes are .oil, otherwise our CSS classes will look

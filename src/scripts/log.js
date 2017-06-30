@@ -1,6 +1,6 @@
 // import { isProd } from "./utils";
 
-const productionDebugMode = true;
+const productionDebugMode = false;
 
 function concatLogArguments(args) {
   let concatedString = '';
