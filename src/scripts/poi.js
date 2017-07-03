@@ -2,7 +2,7 @@ import { OIL_CONFIG, POI_FALLBACK_NAME } from './constants.js';
 import { getConfiguration, isPoiActive } from './config.js';
 import { addFrame } from './iframe.js';
 import { getOrigin, registerMessageListener, removeMessageListener } from './utils.js';
-import { logDebug, logError, logInfo } from './log.js';
+import { logError, logInfo } from './log.js';
 
 // Timeout after which promises should return
 const TIMEOUT = 500;
@@ -41,7 +41,7 @@ function init() {
         resolve({ config: config });
       }
     } else {
-      logDebug('POI not active. Frame not initialized.');
+      logInfo('POI not active. Frame not initialized.');
       resolve({ config: config });
     }
   }));
@@ -92,7 +92,7 @@ function readConfigFromFrame(origin) {
       let hubOrigin = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
       if (config && hubOrigin && hubOrigin.indexOf(event.origin) !== -1) {
         let message = typeof event.data !== 'object' ? JSON.parse(event.data) : event.data;
-        logDebug('Message from hub received...', event.origin, message);
+        logInfo('Message from hub received...', event.origin, message);
         removeMessageListener(handler);
         frameListenerRegistered = false;
         resolve(message);
@@ -139,7 +139,7 @@ export function verifyPowerOptIn() {
           readConfigFromFrame(getOrigin()).then((data) => resolve(data));
         }
       } else {
-        logDebug('Could not initialize POI. Fallback to POI false.');
+        logInfo('Could not initialize POI. Fallback to POI false.');
         resolve(false);
       }
     });
@@ -151,7 +151,7 @@ export function verifyPowerOptIn() {
  * @return Promise when done
  */
 export function activatePowerOptInWithIFrame() {
-  logDebug('activatePowerOptIn');
+  logInfo('activatePowerOptIn');
 
   if(!isPoiActive()) {
     return new Promise((resolve) =>  {

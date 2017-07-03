@@ -1,5 +1,5 @@
 import Cookie from 'js-cookie';
-import { logDebug } from './log.js';
+import { logInfo } from './log.js';
 
 /**
  * Merge the objects,
@@ -44,14 +44,38 @@ export function extend() {
   return extended;
 }
 
+
 /**
  * Check if environment is set to production
  * @returns {boolean} true if environment is production, otherwise false
  * @function
  */
 export function isProd() {
-  return process.env.NODE_ENV === 'production';
+  switch (process.env.NODE_ENV) {
+    case "production":
+    case "prod":
+      return true;
+    default: 
+      return false;
+  }
 }
+
+
+/**
+ * Check if environment is set to development
+ * @returns {boolean} true if environment is development, otherwise false
+ * @function
+ */
+export function isDev() {
+  switch (process.env.NODE_ENV) {
+    case "development":
+    case "dev":
+      return true;
+    default: 
+      return false;
+  }
+}
+
 
 /**
  * Sent event to host site
@@ -59,9 +83,10 @@ export function isProd() {
  * @function
  */
 export function sendEventToHostSite(eventName) {
-  logDebug("Send to Site:", eventName);
   window.postMessage(eventName, getOrigin());
+  logInfo(`Sent postmessage event: ${eventName}`);
 }
+
 
 /**
  * Checks if given element is a DOM element
@@ -100,6 +125,7 @@ export function isBrowserCookieEnabled() {
   return result;
 }
 
+
 /**
  * Checks weather a cookie exists
  * @param name {string} Name of cookie
@@ -132,6 +158,7 @@ export function cookieDataHasKeys(name, data) {
   return false
 }
 
+
 /**
  * Robust util function to get the origin of the current window, even if window.location.origin is undefined
  *
@@ -145,6 +172,7 @@ export function getOrigin() {
   return window.location.origin
 }
 
+
 /**
  * Checks if a cookie is valid and contains a data object with given keys
  * @param name {string} Name of cookie
@@ -155,6 +183,7 @@ export function isCookieValid(name, data) {
   return cookieDataHasKeys(name, data)
 }
 
+
 // Create IE + others compatible event handler
 let eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
 let eventRemoveMethod = window.removeEventListener ? 'removeEventListener' : 'removeEvent';
@@ -162,6 +191,8 @@ let eventer = window[eventMethod];
 let eventerRemove = window[eventRemoveMethod];
 let messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
 let messageRemoveEvent = eventRemoveMethod === 'removeEvent' ? 'onmessage' : 'message';
+
+
 /**
  *
  * @param {*} callback
@@ -169,6 +200,8 @@ let messageRemoveEvent = eventRemoveMethod === 'removeEvent' ? 'onmessage' : 'me
 export function removeMessageListener(callback) {
   eventerRemove(messageRemoveEvent, callback, false);
 }
+
+
 /**
  *
  * @param {*} callback
@@ -176,6 +209,7 @@ export function removeMessageListener(callback) {
 export function registerMessageListener(callback) {
   eventer(messageEvent, callback, false);
 }
+
 
 /**
  * Returns the current client timestamp

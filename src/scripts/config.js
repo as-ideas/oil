@@ -9,14 +9,18 @@ const defaultConfig = {
   'opt_in_event_name': 'oil_optin_done',
   'opt_out_event_name': 'oil_optout_trigger',
   'opt_later_event_name': 'oil_optlater_trigger',
+  'has_opted_in_event_name': 'oil_has_optedin',
+  'has_opted_later_event_name': 'oil_has_optedlater',
   'developer_mode': 'true',
   'cookie_expires_in_days' : 31,
   'activate_poi': false,
   'privacy_page_url': undefined,
-  'ga_tracking': false
+  'ga_tracking': false,
+  'productionDebugMode': true
 };
 
 let cachedConfig = null;
+
 
 /**
  *
@@ -30,8 +34,9 @@ function getHubDomain(config) {
   }
   return null;
 }
+
+
 /**
- *
  * Get the hub iFrame URL with protocol prefix for the current location
  * @param config - current config
  * @returns {string, null} complete iframe orgin
@@ -42,6 +47,8 @@ function getHubLocation(config) {
   }
   return null;
 }
+
+
 /**
  * Merges options or the given element in the following order:
  * - the given defaults
@@ -58,6 +65,7 @@ export function mergeOptions(options, defaults) {
   logInfo('Got the following merged config:', merged);
   return merged;
 }
+
 
 /**
  * Read configuration of component from JSON script block
@@ -81,6 +89,7 @@ export function readConfiguration(configurationElement) {
   return mergeOptions(parsedConfig, defaultConfig);
 }
 
+
 /**
  * Search HTML document for configuration and read it in
  * @returns Object parsed config
@@ -93,6 +102,7 @@ export function getConfiguration() {
   return cachedConfig;
 }
 
+
 /**
  * Checks if POI is activated.
  * @returns {*}
@@ -101,6 +111,7 @@ export function isPoiActive() {
   cachedConfig = getConfiguration();
   return cachedConfig[OIL_CONFIG.ATTR_ACTIVATE_POI];
 }
+
 
 /**
  * Checks if devMode is activated.
@@ -111,6 +122,7 @@ export function isDevMode() {
   return cachedConfig[OIL_CONFIG.ATTR_DEVELOPER_MODE];
 }
 
+
 /**
  * Reset configuration, reread from HTML.
  */
@@ -118,19 +130,10 @@ export function resetConfiguration() {
   cachedConfig = null;
 }
 
-/**
- * Checks if Google Analytics Tracking is activated.
- * @returns {*}
-
-export function isGAActive() {
-  cachedConfig = getConfiguration();
-
-  return cachedConfig[OIL_CONFIG.ATTR_GA_TRACKING];
-}
- */
 
 /**
- * Track OIL event in Google Analytics if GA is loaded
+ * Track OIL Events in Google Analytics
+ * 
  */
 export function gaTrackEvent(eventAction) {
   cachedConfig = getConfiguration();
@@ -142,5 +145,14 @@ export function gaTrackEvent(eventAction) {
   }
 }
 
-/* Making gaTrackEvent available for interace onClick calls */
+// Make gaTrackEvents globally available, ie. for onClick events in HTML
 window.gaTrackEvent = gaTrackEvent;
+
+
+/**
+ * Allow Console Logging Output in Production Environments
+ * @return boolean
+ */
+export const allowProductionDebugMode = () => {
+  return defaultConfig.productionDebugMode;
+}

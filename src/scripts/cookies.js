@@ -2,7 +2,7 @@ import Cookie from 'js-cookie';
 import { isCookie, isCookieValid, getClientTimestamp } from './utils.js';
 import { OIL_CONFIG } from './constants.js';
 import { getConfiguration } from './config.js';
-import { logDebug } from './log.js';
+import { logInfo } from './log.js';
 
 
 // internal
@@ -133,22 +133,22 @@ export function setPoiOptIn(value) {
 
 export function getSoiOptIn() {
   let cookie = getOilDomainCookie();
-  logDebug(cookie);
-  logDebug(cookie.opt_in);
+  logInfo(cookie);
+  logInfo(cookie.opt_in);
   return cookie.opt_in;
 }
 
 export function getOptLater() {
   let cookie = getOilSessionCookie();
-  logDebug(cookie);
-  logDebug(cookie.opt_later);
+  logInfo(cookie);
+  logInfo(cookie.opt_later);
   return cookie.opt_later;
 }
 
 export function getPoiOptIn() {
   let cookie = getOilHubDomainCookie();
-  logDebug(cookie);
-  logDebug(cookie.power_opt_in);
+  logInfo(cookie);
+  logInfo(cookie.power_opt_in);
   return cookie.power_opt_in;
 }
 

@@ -1,7 +1,7 @@
 import { OIL_CONFIG } from './constants.js';
 import { registerMessageListener } from './utils.js';
 import { getConfiguration } from './config.js';
-import { logDebug } from './log.js';
+import { logInfo } from './log.js';
 import { removeSubscriberCookies } from './cookies.js';
 
 let config = null;
@@ -13,8 +13,7 @@ let config = null;
  * @param event
  * @return none
  */
-function receiveOptOutMessage(event)
-{
+function receiveOptOutMessage(event) {
   if (!config) {
     config = getConfiguration();
   }
@@ -23,7 +22,7 @@ function receiveOptOutMessage(event)
     let optOutEventName = config[OIL_CONFIG.ATTR_OPT_OUT_EVENT_NAME];
     if (event && event.data && typeof(event.data.indexOf) !== "undefined") {
       if (event.data.indexOf(optOutEventName) !== -1) {
-        logDebug("OptOut Received.");
+        logInfo("OptOut Received.");
         // Update Oil cookie
         removeSubscriberCookies();
         // Cookie.remove(getOilCookieConfig().name);
@@ -38,6 +37,6 @@ function receiveOptOutMessage(event)
  * @return
  */
 export function registerOptOutListener() {
-  logDebug('registerOptOutListener');
+  logInfo('registerOptOutListener');
   registerMessageListener(receiveOptOutMessage);
 }
