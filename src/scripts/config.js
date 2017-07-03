@@ -1,6 +1,6 @@
 import { OIL_CONFIG } from './constants.js';
 import { extend } from "./utils";
-import { logInfo, logError, logDebug } from './log';
+import { logInfo, logError } from './log';
 
 const defaultConfig = {
   'hub_origin': '',
@@ -139,7 +139,7 @@ export function gaTrackEvent(eventAction) {
   cachedConfig = getConfiguration();
   let gaTracking = cachedConfig[OIL_CONFIG.ATTR_GA_TRACKING];
 
-  logDebug("OIL gaTrackEvent config="+ gaTracking +" eventAction="+ eventAction);
+  logInfo("OIL gaTrackEvent config="+ gaTracking +" eventAction="+ eventAction);
 
   if(gaTracking && window.ga && (typeof window.ga !== "undefined" && window.ga.loaded)) { 
       // the following line throws a 'ga is not defined' warning, because ga is a method provided by the Google Analytics script
