@@ -43,11 +43,11 @@ export function initOilLayer() {
         else if (getOptLater()) {
           renderOil(oilWrapper, {optLater: true});
           fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_LATER_EVENT_NAME);
-          gaTrackEvent('Loaded/Opt later');
+          gaTrackEvent('Loaded/Later');
         }
         else {
           renderOil(oilWrapper, {optLater: false});
-          gaTrackEvent('Loaded/Opt default');
+          gaTrackEvent('Loaded/Initial');
         }
       });
     }

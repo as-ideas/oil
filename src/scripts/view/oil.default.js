@@ -1,5 +1,6 @@
 import { POIButtonSnippet } from './components/oil.poi.button';
-import { oilHeading, oilIntroText, CSSPrefix} from './oil.view.config.js';
+import { oilHeading, oilIntroText, CSSPrefix } from './oil.view.config.js';
+import { DATAQA_BUTTON_YES } from './../constants.js';
 
 export const oilDefaultTemplate = `
     <div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient" data-qa="oil-full">
@@ -13,7 +14,7 @@ export const oilDefaultTemplate = `
             <div class="${CSSPrefix}oil-l-row">
                 ${POIButtonSnippet()}
                 <div class="${CSSPrefix}oil-l-item">
-                    <button class="${CSSPrefix}oil__btn-soi js-optin" data-qa="oil-YesButton" onClick="gaTrackEvent('SOI/yes');">
+                    <button class="${CSSPrefix}oil__btn-soi js-optin" data-qa="${DATAQA_BUTTON_YES}">
                         Jetzt zustimmen
                     </button>
                 </div>

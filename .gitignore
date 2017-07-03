@@ -13,3 +13,5 @@ target/
 *.log
 *.tgz
 *.iml
+oil-michiel.sublime-project
+oil-michiel.sublime-workspace

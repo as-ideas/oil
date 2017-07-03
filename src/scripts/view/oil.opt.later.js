@@ -15,7 +15,7 @@ export const oilOptLaterTemplate =
             </div>
             <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
                 ${POIButtonSnippet()}
-                <button class="${CSSPrefix}oil-loi__btn-soi js-optin" data-qa="oil-small-YesButton" onClick="gaTrackEvent('SOI/yes-2nd');">
+                <button class="${CSSPrefix}oil-loi__btn-soi js-optin" data-qa="oil-small-YesButton">
                     Jetzt zustimmen
                 </button>
             </div>
