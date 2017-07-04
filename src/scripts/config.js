@@ -91,12 +91,15 @@ export function readConfiguration(configurationElement) {
 
 
 /**
- * Search HTML document for configuration and read it in
+ * Get OIL configuration from HTML document
  * @returns Object parsed config
  */
 export function getConfiguration() {
   if(!cachedConfig) {
-    let configurationElement = document.querySelector('script[type="application/configuration"]');
+    let configurationElement = document.querySelector('script[type="application/configuration"]#oil-configuration');
+    if (configurationElement === null) {
+      logInfo('No configuration script found, using default values');
+    }
     cachedConfig = readConfiguration(configurationElement);
   }
   return cachedConfig;

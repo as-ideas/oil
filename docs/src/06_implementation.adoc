@@ -13,7 +13,7 @@ Below you'll find a simple example that shows you how to listen to OIL's opt-lat
 #1. Put OIL's configuration object somewhere in the upper part of your page. Please leave the developer mode false to begin with, see the parameter section below for more details.
 [source,json]
 ----
-  <script type="application/configuration">
+  <script id="oil-configuration" type="application/configuration">
       {
         "opt_later_event_name": "optedLater",
         "has_opted_later_event_name": "hasOptedLater",
@@ -64,7 +64,7 @@ You need to add the configuration snippet to all pages where OIL is required. Th
 
 [source,json]
 ----
-    <script type="application/configuration">
+    <script id="oil-configuration" type="application/configuration">
       {
         "opt_in_event_name": "oil_optin_done_custom",
         "opt_later_event_name": "oil_optlater_custom",

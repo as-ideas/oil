@@ -642,7 +642,7 @@ OIL uses JS events to communicate with its host site.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-json" data-lang="json">  &lt;script type="application/configuration"&gt;
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">  &lt;script id="oil-configuration" type="application/configuration"&gt;
       {
         "opt_later_event_name": "optedLater",
         "developer_mode": false
@@ -655,7 +655,7 @@ OIL uses JS events to communicate with its host site.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript" data-lang="javascript">  &lt;script type="text/javascript"&gt;
+<pre class="highlightjs highlight"><code class="language-javascript" data-lang="javascript">  &lt;script id="oil-configuration" type="text/javascript"&gt;
     // Cross browser event handler definition
     var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
     var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
@@ -703,7 +703,7 @@ OIL uses JS events to communicate with its host site.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-json" data-lang="json">    &lt;script type="application/configuration"&gt;
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">    &lt;script id="oil-configuration" type="application/configuration"&gt;
       {
         "opt_in_event_name": "oil_optin_done_custom",
         "opt_later_event_name": "oil_optlater_custom",
