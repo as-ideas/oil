@@ -33,7 +33,8 @@
 <body class="has-big-bad-background">
   <script type="application/configuration">
       {
-        "opt_later_event_name": "yo3000",
+        "opt_later_event_name": "optLater",
+        "has_opted_later_event_name": "hasOptedLater",
         "developer_mode": false
       }
   </script>
@@ -61,9 +62,12 @@
     var eventer = window[eventMethod];
 
     function receiveMessage(event) {
-      if (event && event.data && event.data.indexOf('yo3000') !== -1) {
-        var element = document.getElementById('optical-event-notifier');
-        element.className = 'event-notifier';
+      function eventDataContains(str) {
+        return JSON.stringify(event.data).indexOf(str) !== -1;
+      }
+      if (event && event.data && (eventDataContains('optLater') || eventDataContains('hasOptedLater'))) {
+          var element = document.getElementById('optical-event-notifier');
+          element.className = 'event-notifier';
       }
     }
     eventer(messageEvent, receiveMessage, false);

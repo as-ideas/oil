@@ -52,7 +52,10 @@
     var eventer = window[eventMethod];
 
     function receiveMessage(event) {
-      if (event && event.data && (JSON.stringify(event.data).indexOf('oil_optin_done_custom') !== -1 || JSON.stringify(event.data).indexOf('oil_has_optedin') !== -1)) {
+      function eventDataContains(str) {
+        return JSON.stringify(event.data).indexOf(str) !== -1;
+      }
+      if (event && event.data && (eventDataContains('oil_optin_done_custom') || eventDataContains('oil_has_optedin'))) {
           var element = document.getElementById('optical-event-notifier');
           element.className = 'event-notifier';
       }

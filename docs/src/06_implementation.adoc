@@ -16,6 +16,7 @@ Below you'll find a simple example that shows you how to listen to OIL's opt-lat
   <script type="application/configuration">
       {
         "opt_later_event_name": "optedLater",
+        "has_opted_later_event_name": "hasOptedLater",
         "developer_mode": false /* yes, that's right: start your 1st test with false */
       }
   </script>
@@ -32,7 +33,10 @@ Below you'll find a simple example that shows you how to listen to OIL's opt-lat
 
     // Callback to be executed when event is fired
     function receiveMessage(event) {
-      if (event && event.data && event.data.indexOf('optedLater') !== -1) {
+      function eventDataContains(str) {
+        return JSON.stringify(event.data).indexOf(str) !== -1;
+      }
+      if (event && event.data && (eventDataContains('optedLater') || eventDataContains('hasOptedLater'))) {
         // Do something when event is fired...
         console.log("Do something when event is fired...");
       }
