@@ -35,7 +35,7 @@ const METADATA = webpackMerge(commonConfig.metadata, {
   HMR: false
 });
 
-const BUNDLE_VERSION = "1.0.0";
+const BUNDLE_VERSION = "1.0.1";
 
 var config = webpackMerge(commonConfig, {
 
