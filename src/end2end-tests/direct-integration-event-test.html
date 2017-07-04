@@ -37,6 +37,7 @@
   <script type="application/configuration">
       {
         "opt_in_event_name": "oil_optin_done_custom",
+        "has_opted_in_event_name": "oil_has_optedin",
         "developer_mode": false
       }
   </script>
@@ -50,17 +51,14 @@
     var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
     var eventer = window[eventMethod];
 
-    function receiveMessage(event)
-    {
-        if (event && event.data && event.data.indexOf('oil_optin_done_custom') !== -1) {
-            var element = document.getElementById('optical-event-notifier');
-            element.className = 'event-notifier';
-        }
+    function receiveMessage(event) {
+      if (event && event.data && (JSON.stringify(event.data).indexOf('oil_optin_done_custom') !== -1 || JSON.stringify(event.data).indexOf('oil_has_optedin') !== -1)) {
+          var element = document.getElementById('optical-event-notifier');
+          element.className = 'event-notifier';
+      }
     }
     eventer(messageEvent, receiveMessage, false);
   </script>
-
-
   </body>
 </html>
 

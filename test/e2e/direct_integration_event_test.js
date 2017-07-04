@@ -27,5 +27,5 @@ module.exports = {
       .waitForElementNotPresent(OIL_LAYER, 500)
       .assert.cssClassNotPresent(EVENT_NOTIFIER_DIV, "event-notifier-hidden")
       .end();
-  },
+  }
 };
