@@ -5,8 +5,9 @@
 image::src/images/oil-asideas.png[]
 
 ***
-=== Document Release Notes
-* 14 June 2017 - 1.0 – Initial release
+=== Release Notes
+* 4 July 2017 - v1.0.1 Added tracking for Google Analytics, new events for page load, bug fixing and updated wording
+* 14 June 2017 - v.1.0 Initial release
 
 // horizontal line
 ***
