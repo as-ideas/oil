@@ -1,0 +1,54 @@
+:project_root: ../../
+
+== Deployment View
+
+[[section-deployment-view]]
+
+[NOTE]
+====
+For the purpose of the PoC the deployment to Tealium is done mainly manual for following stages:
+- prod
+- debug / development
+
+Only the end2end stage has an "automatic" update via a CDN.
+====
+
+[caption="Deployment"]
+image::src/images/deployment.png[OIL Deployment]
+
+=== Hub Deployment
+To deploy the hub (i.e. as a MyPass service) you need to deploy the project with an index.html loading dist/hub.123.js. In our examples this is demos/complete-integration-mypass.html
+
+For compatibility with Internet Explorer 9+ you need to add the following header to the server response to allow 3rd party cookies for POI. It's needed in SOI only mode.
+
+[source,json]
+----
+include::{project_root}/etc/headerConfig.js[tags=p3p-config]
+----
+
+=== Tealium Deployment
+For our PoC we decided to use Tealium to deliver our Javascript artefact to client browsers. To achieve this you have to follow some steps:
+
+As a developer of Oil.js (see image below)
+
+* Open your Tealium lib profile and move to extensions
+* Open the predefined Javascript extension "AS Opt-in Overlay"
+* Some forms will show up, paste your code (dist/subscriber.123.js) in the "configuration" section
+* Save and Publish your Tealium configuration changes in your desired stages (Dev, QA, Prod)
+
+Please note that once published, your code will be delivered to all Tealium clients automatically.
+Tealium clients will be informed of your changes and need to publish/deploy their profile to activate your changes.
+
+[caption="Oil.js Tealium Deployment"]
+image::src/images/tealium-lib-profile-extension-view.png[Tealium Library Profile]
+
+As a client of Tealium (see image below)
+
+* Open your Tealium profile and move to "extensions"
+* Find the entry for "AS Opt-in Overlay", you'll be noticed of a change to this extension
+* Publish / deploy your profile to activate the changes to Oil.js
+
+[caption="Oil.js Tealium Deployment"]
+image::src/images/tealium-user-profile-extension-view.png[Tealium Client Profile]
+
+Within an extension it's possible to handle the OptOut/OptIn logic during preload. This also allows to alter the later behaviour within Tealium.

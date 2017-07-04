@@ -1,9 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.9" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="AsciiDoc 8.6.9">
 <title>OIL Documentation</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -731,7 +730,7 @@ asciidoc.install();
 /*]]>*/
 </script>
 </head>
-<body class="book">
+<body class="article">
 <div id="header">
 <h1>OIL Documentation</h1>
 </div>
@@ -741,12 +740,13 @@ asciidoc.install();
 <div style="page-break-after:always"></div>
 <div class="imageblock">
 <div class="content">
-<img src="src/images/oil-asideas.png" alt="src/images/oil-asideas.png" />
+<img src="src/images/oil-asideas.png" alt="src/images/oil-asideas.png">
 </div>
 </div>
 <div class="paragraph"><p><strong>*</strong>
-=== Document Release Notes
-* 14 June 2017 - 1.0 – Initial release</p></div>
+=== Release Notes
+* 4 July 2017 - v1.0.1 Added tracking for Google Analytics, new events for page load, bug fixing and updated wording
+* 14 June 2017 - v.1.0 Initial release</p></div>
 <div class="paragraph"><p><strong>*</strong>
 
 :numbered:</p></div>
@@ -754,7 +754,7 @@ asciidoc.install();
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-introduction-and-goals">Introduction and Goals</h2>
+<h2 id="section-introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The OIL project aims for a stable cross-company solution for the challenges the new European privacy law (General Data Protection Regulation (GDPR) (Regulation (EU) 2016/679)) will pose to our business.</p></div>
 <div class="ulist"><ul>
@@ -765,12 +765,12 @@ Data privacy opt-in overlay for all users of services offered by various Axel Sp
 </li>
 <li>
 <p>
-Local opt-in (also Site Opt In, SOI) as well as cross-company opt-in (also Power Opt In, POI)
+Local opt-in (called Site Opt In, SOI) as well as cross-company opt-in (called Power Opt In, POI)
 </p>
 </li>
 <li>
 <p>
-Integration and hosting on tealium
+Integration and hosting on Tealium
 </p>
 </li>
 </ul></div>
@@ -785,7 +785,7 @@ OIL will be held compatible with the latest official browser releases, going bac
 <div class="ulist"><ul>
 <li>
 <p>
-Chrome 14, 40, 57
+Chrome 14, 40, 59
 </p>
 </li>
 <li>
@@ -851,79 +851,83 @@ Modular and maintainable solution
 </div>
 <div class="sect2">
 <h3 id="_glossary">Glossary</h3>
-<div class="tableblock">
-<table rules="all"
-width="100%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<col width="20%" />
-<col width="80%" />
+<table class="tableblock frame-all grid-all"
+style="
+width:100%;
+">
+<col style="width:33%;">
+<col style="width:66%;">
 <thead>
 <tr>
-<th align="left" valign="top"> Term </th>
-<th align="left" valign="top"> Explanation</th>
+<th class="tableblock halign-left valign-top" > Term </th>
+<th class="tableblock halign-left valign-top" > Explanation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left" valign="top"><p class="table">OIL</p></td>
-<td align="left" valign="top"><p class="table">Stands for Opt In Layer and besides the fact that it stand for the name of the product it is often used to refer to the UI layer shown on the page.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Stands for Opt In Layer and besides the fact that it stand for the name of the product it is often used to refer to the UI layer shown on the page.</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table"> Site Opt In (SOI)</p></td>
-<td align="left" valign="top"><p class="table">The <em>Site Opt In</em> (SOI) stores a user&#8217;s opt in permit for the current site.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"> Site Opt In (SOI)</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The <em>Site Opt In</em> (SOI) stores a user&#8217;s opt in permit for the current site.</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table"> Power Opt In (POI)</p></td>
-<td align="left" valign="top"><p class="table">The <em>Power Opt In</em> (POI) functionality stores the opt in permits centrally for multiple Axel Springer sites (for example BILD, WELT). This allows users to only give their opt in permit once, when visting another site using POI the user will not be asked again. <em>POI</em> is implemented via an iframe solution, see also <em>Hub</em> . A user can first give a SOI permit before giving a POI permit, which has priority.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"> Power Opt In (POI)</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The <em>Power Opt In</em> (POI) functionality stores the opt in permits centrally for multiple Axel Springer sites (for example BILD, WELT). This allows users to only give their opt in permit once, when visting another site using POI the user will not be asked again. <em>POI</em> is implemented via an iframe solution, see also <em>Hub</em> . A user can first give a SOI permit before giving a POI permit, which has priority.</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table"> Hub</p></td>
-<td align="left" valign="top"><p class="table"><em>POI</em> is implemented via an iframe solution that points to a hub site that acts as a third party cookie storage. Technically, the hub consists of a hub.html and hub.js.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"> Hub</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><em>POI</em> is implemented via an iframe solution that points to a hub site that acts as a third party cookie storage. Technically, the hub consists of a hub.html and hub.js.</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Subscriber</p></td>
-<td align="left" valign="top"><p class="table">A site (for example WELT.de) that subscribes to a POI hub</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Subscriber</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">A site (for example WELT.de) that subscribes to a POI hub</p></td>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_team_stakeholders">Team Stakeholders</h3>
-<div class="tableblock">
-<table rules="all"
-width="100%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<col width="20%" />
-<col width="80%" />
+<h3 id="_team_amp_stakeholders">Team &amp; Stakeholders</h3>
+<table class="tableblock frame-all grid-all"
+style="
+width:100%;
+">
+<col style="width:33%;">
+<col style="width:66%;">
 <thead>
 <tr>
-<th align="left" valign="top">Role/Name</th>
-<th align="left" valign="top">Contact</th>
+<th class="tableblock halign-left valign-top" >Role/Name</th>
+<th class="tableblock halign-left valign-top" >Contact</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left" valign="top"><p class="table">Stake Holder</p></td>
-<td align="left" valign="top"><p class="table">André Petzold</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Business Owner</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">André Petzold, Konzernentwicklung</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Product Owner</p></td>
-<td align="left" valign="top"><p class="table">Michiel Slot</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Legal Affairs</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Susanne Stollhoff, Rechtsabteilung</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Developer</p></td>
-<td align="left" valign="top"><p class="table">Andreas Wagner</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Product Owner</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Michiel Slot, AS Ideas Engineering</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Developer</p></td>
-<td align="left" valign="top"><p class="table">Marcel Bankman</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Developer</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Andreas Wagner, AS Ideas Engineering</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Developer</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Marcel Bankman, AS Ideas Engineering</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Tealium</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Michael Sievers, AS Digital</p></td>
 </tr>
 </tbody>
 </table>
-</div>
 <div style="page-break-after:always"></div>
 </div>
 </div>
@@ -931,8 +935,20 @@ cellspacing="0" cellpadding="4">
 <div class="sect1">
 <h2 id="_how_to_implement_oil_on_your_site">How to implement OIL on your site</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Setting up OIL on your pages is really easy. All you need to do is include our main Javascript file and an additional configuration snippet. OIL uses JS events to communicate with its host site, please the table below for details.</p></div>
-<div class="paragraph"><p>For better clarity we&#8217;ve put together some code snippets and an example that shows how to integrate OIL and listen to OIL&#8217;s opt-later event.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Setting up OIL on your pages is really easy.
+All you need to do is include the main Javascript file and an additional configuration snippet.
+OIL uses JS events to communicate with its host site.
+</p>
+</li>
+<li>
+<p>
+The POI functionality is currently still in beta and should not be used without permission from the business owner.
+</p>
+</li>
+</ul></div>
 <div class="sect2">
 <h3 id="_basic_setup">Basic Setup</h3>
 <div class="paragraph"><p>Below you&#8217;ll find a simple example that shows you how to listen to OIL&#8217;s opt-later event. To run OIL in your page you need to include 3 scripts.</p></div>
@@ -942,10 +958,11 @@ cellspacing="0" cellpadding="4">
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt>  &lt;script type="application/configuration"&gt;
+<pre><tt>  &lt;script id="oil-configuration" type="application/configuration"&gt;
       <span style="color: #990000">{</span>
         "opt_later_event_name": "<span style="color: #FF0000">optedLater</span>"<span style="color: #990000">,</span>
-        "developer_mode": <span style="font-weight: bold"><span style="color: #0000FF">false</span></span>
+        "has_opted_later_event_name": "<span style="color: #FF0000">hasOptedLater</span>"<span style="color: #990000">,</span>
+        "developer_mode": <span style="font-weight: bold"><span style="color: #0000FF">false</span></span> /* yes<span style="color: #990000">,</span> that's right: start your 1st test with <span style="font-weight: bold"><span style="color: #0000FF">false</span></span> */
       <span style="color: #990000">}</span>
   &lt;/script&gt;</tt></pre></div></div>
 <div class="paragraph"><p>#2. Register an event handler with a callback to be executed when OIL fires the opt-later event.</p></div>
@@ -962,7 +979,10 @@ http://www.gnu.org/software/src-highlite -->
 
     <span style="font-style: italic"><span style="color: #9A1900">// Callback to be executed when event is fired</span></span>
     <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">receiveMessage</span></span><span style="color: #990000">(</span>event<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
-      <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>event <span style="color: #990000">&amp;&amp;</span> event<span style="color: #990000">.</span>data <span style="color: #990000">&amp;&amp;</span> event<span style="color: #990000">.</span>data<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">indexOf</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'optedLater'</span><span style="color: #990000">)</span> <span style="color: #990000">!==</span> <span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">eventDataContains</span></span><span style="color: #990000">(</span>str<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> JSON<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">stringify</span></span><span style="color: #990000">(</span>event<span style="color: #990000">.</span>data<span style="color: #990000">).</span><span style="font-weight: bold"><span style="color: #000000">indexOf</span></span><span style="color: #990000">(</span>str<span style="color: #990000">)</span> <span style="color: #990000">!==</span> <span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">;</span>
+      <span style="color: #FF0000">}</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>event <span style="color: #990000">&amp;&amp;</span> event<span style="color: #990000">.</span>data <span style="color: #990000">&amp;&amp;</span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">eventDataContains</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'optedLater'</span><span style="color: #990000">)</span> <span style="color: #990000">||</span> <span style="font-weight: bold"><span style="color: #000000">eventDataContains</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'hasOptedLater'</span><span style="color: #990000">)))</span> <span style="color: #FF0000">{</span>
         <span style="font-style: italic"><span style="color: #9A1900">// Do something when event is fired...</span></span>
         console<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">log</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Do something when event is fired..."</span><span style="color: #990000">);</span>
       <span style="color: #FF0000">}</span>
@@ -1000,94 +1020,130 @@ Don&#8217;t be fooled by the "demos" part in the URL, it&#8217;s for real.
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt>    &lt;script type="application/configuration"&gt;
+<pre><tt>    &lt;script id="oil-configuration" type="application/configuration"&gt;
       <span style="color: #990000">{</span>
         "opt_in_event_name": "<span style="color: #FF0000">oil_optin_done_custom</span>"<span style="color: #990000">,</span>
         "opt_later_event_name": "<span style="color: #FF0000">oil_optlater_custom</span>"<span style="color: #990000">,</span>
         "opt_out_event_name": "<span style="color: #FF0000">oil_optout_trigger</span>"<span style="color: #990000">,</span>
-        "developer_mode": "<span style="color: #FF0000">false</span>"<span style="color: #990000">,</span>
+        "developer_mode": <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">,</span>
         "privacy_page_url": "<span style="color: #FF0000">http://www.mysite.com/privacy</span>"<span style="color: #990000">,</span>
+        /*
+            POI optional params start here
+        */
         "activate_poi": <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">,</span>
         "hub_origin": "<span style="color: #FF0000">//www.somedomain.com</span>"<span style="color: #990000">,</span>
         "hub_path": "<span style="color: #FF0000">/some/path.html</span>"<span style="color: #990000">,</span>
-        "subscriber_set_cookie": <span style="font-weight: bold"><span style="color: #0000FF">true</span></span>
+        "subscriber_set_cookie": <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">,</span>
+        "ga_tracking": <span style="color: #993399">1</span>
       <span style="color: #990000">}</span>
     &lt;/script&gt;</tt></pre></div></div>
-<div class="tableblock">
-<table rules="all"
-width="100%"
-frame="border"
-cellspacing="0" cellpadding="4">
+<table class="tableblock frame-all grid-all"
+style="
+width:100%;
+">
 <caption class="title">Table 1. Configuration Parameters</caption>
-<col width="16%" />
-<col width="50%" />
-<col width="16%" />
-<col width="16%" />
+<col style="width:16%;">
+<col style="width:50%;">
+<col style="width:16%;">
+<col style="width:16%;">
 <thead>
 <tr>
-<th align="left" valign="top">Config Parameter </th>
-<th align="left" valign="top"> Description </th>
-<th align="left" valign="top"> Default Setting</th>
-<th align="left" valign="top">POI optional feature</th>
+<th class="tableblock halign-left valign-top" >Config Parameter </th>
+<th class="tableblock halign-left valign-top" > Description </th>
+<th class="tableblock halign-left valign-top" > Default Setting</th>
+<th class="tableblock halign-left valign-top" >POI optional feature</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left" valign="top"><p class="table">opt_in_event_name</p></td>
-<td align="left" valign="top"><p class="table">The name for the Javascript event that will be sent to the host when a users selects opt in. This event will also be fired on each page when the user has triggered this action previously.</p></td>
-<td align="left" valign="top"><p class="table"><em>oil_optin_done</em></p></td>
-<td align="left" valign="top"><p class="table">No</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">opt_in_event_name</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The name for the Javascript event that will be sent to the host when a users selects opt in.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><em>oil_optin_done</em></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">No</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">opt_later_event_name</p></td>
-<td align="left" valign="top"><p class="table">The name for the Javascript event name that will be sent to the host when a user selects opt later. This event will also be fired on each page when the user has triggered this action previously.</p></td>
-<td align="left" valign="top"><p class="table"> <em>oil_optlater_trigger</em></p></td>
-<td align="left" valign="top"><p class="table">No</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">opt_later_event_name</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The name for the Javascript event name that will be sent to the host when a user selects (clicks, taps) opt later.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"> <em>oil_optlater_trigger</em></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">No</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">opt_out_event_name</p></td>
-<td align="left" valign="top"><p class="table">The Javascript event name OIL is listening to for opting out. Please note: The opt-out functionality has to be implemented manually by the site owner on the host site!</p></td>
-<td align="left" valign="top"><p class="table"> <em>oil_optout_trigger</em></p></td>
-<td align="left" valign="top"><p class="table">No</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">opt_out_event_name</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The Javascript event name OIL is listening to for opting out. Please note: The opt-out functionality has to be implemented manually by the site owner on the host site!</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"> <em>oil_optout_trigger</em></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">No</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">developer_mode</p></td>
-<td align="left" valign="top"><p class="table">A boolean value to toggle a  developer mode. For security reasons the overlay <strong>will not show per default</strong> when the developer mode is enabled. Create a cookie named "oil_developer" with the value "true". This will show the OIL layer on your client.</p></td>
-<td align="left" valign="top"><p class="table">true</p></td>
-<td align="left" valign="top"><p class="table">No</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">has_opted_in_event_name</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">This event will be fired on each page load, but only if the user has opted in previously.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"> <em>has_opted_in_event_name</em></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">No</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table"> privacy_page_location</p></td>
-<td align="left" valign="top"><p class="table">OIL should always have a link to your privacy page ("Datenschutz"). If you add the key "privacy_page_location", the "Mehr erfahren" (<em>show more</em>, label can&#8217;t be changed) link will be added to OIL. It opens a page with the value you specified in a new tab or window. You can either use a relative or absolute URL.</p></td>
-<td align="left" valign="top"><p class="table"> "" (empty string)</p></td>
-<td align="left" valign="top"><p class="table">No</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">has_opted_later_event_name</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">This event will be fired on each page load, but only if the user has opted later previously.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"> <em>has_opted_later_event_name</em></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">No</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">activate_poi</p></td>
-<td align="left" valign="top"><p class="table">Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button.</p></td>
-<td align="left" valign="top"><p class="table"> false</p></td>
-<td align="left" valign="top"><p class="table">Yes</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">developer_mode</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The developer mode is useful when testing OIL in a production or live environment, it wil show more information for debugging. A boolean value to toggle a developer mode. For security reasons the overlay <strong>will not show per default</strong> when the developer mode is enabled. Create a cookie named "oil_developer" with the value "true". This will show the OIL layer on your client.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">No</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">hub_origin</p></td>
-<td align="left" valign="top"><p class="table">The origin of the hub.js installation, if any.</p></td>
-<td align="left" valign="top"><p class="table"> none</p></td>
-<td align="left" valign="top"><p class="table">Yes</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">privacy_page_url</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL should always have a link to your privacy page ("Datenschutz"). If you add the key "privacy_page_url", the show more label ("Mehr erfahren") can&#8217;t be changed and will be added to OIL. It opens a page with the value you specified in a new tab or window. You can either use a relative or absolute URL.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">"" (empty string)</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">No</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">hub_path</p></td>
-<td align="left" valign="top"><p class="table">The path to the hub.html installation on the origin, if any.</p></td>
-<td align="left" valign="top"><p class="table"> none</p></td>
-<td align="left" valign="top"><p class="table">Yes</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">activate_poi</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Yes</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table"> subscriber_set_cookie</p></td>
-<td align="left" valign="top"><p class="table">Whether to set the SOI cookie on POI opt-ins or not.</p></td>
-<td align="left" valign="top"><p class="table"> true</p></td>
-<td align="left" valign="top"><p class="table">Yes</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">hub_origin</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The origin of the hub.js installation, if any.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">hub_path</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The path to the hub.html installation on the origin, if any.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">subscriber_set_cookie</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Whether to set the SOI cookie on POI opt-ins or not.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">ga_tracking</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">A nummeric value to enable/disable Google Anayltics event tracking.
+* 0=disabled
+* 1=enabled for YES clicks
+* 2=enabled for all clicks including NO</p>
+<p class="tableblock">The core Google Analytics script has to be available on the site, OIL is not injecting a GA script onto the site. See the separate chapter below for furhter details.
+<strong>Important!</strong> Please note that GA tracking should of course only be enabled for testing purposes.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">No</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_google_analytics_dashboard_for_oil_events">Google Analytics Dashboard for OIL Events</h3>
+<div class="paragraph"><p>Please import this dashboard into your Google Analytics account to see all events which are tracked in the Event Category "OIL",
+* <a href="https://analytics.google.com/analytics/web/template?uid=XRNeLppXRiy-u1h2deSNcg">https://analytics.google.com/analytics/web/template?uid=XRNeLppXRiy-u1h2deSNcg</a>
+* OIL Event Dashboard by <a href="mailto:ideaxels@gmail.com">ideaxels@gmail.com</a></p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GA-OIL-Dashboard.png" alt="images/GA-OIL-Dashboard.png">
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1117,10 +1173,10 @@ A <strong>subscriber</strong>, which communicates with this hub to get the the n
 </ul></div>
 <div class="imageblock">
 <div class="content">
-<img src="src/images/oil-poi-flow.png" alt="OIL Flow" />
+<img src="src/images/oil-poi-flow.png" alt="OIL Flow">
 </div>
 </div>
-<div class="paragraph"><p>So when a user give the Power Opt In (POI) the subscriber sends a message via postMessage to the hub to inform the activation of the 3rd party cookie. By setting the cookie in the hub the 3rd party cookie became then a 1st party cookie. For some even stricter browsers, e.g. newer Safari versions <span class="footnote"><br />[Chrome maybe also disable it by default in the future]<br /></span> a fallback is implemented which redirects then the user to hub site to set the cookie and then redirects back. But this fallback is only needed for the first visit.</p></div>
+<div class="paragraph"><p>So when a user give the Power Opt In (POI) the subscriber sends a message via postMessage to the hub to inform the activation of the 3rd party cookie. By setting the cookie in the hub the 3rd party cookie became then a 1st party cookie. For some even stricter browsers, e.g. newer Safari versions <span class="footnote"><br>[Chrome maybe also disable it by default in the future]<br></span> a fallback is implemented which redirects then the user to hub site to set the cookie and then redirects back. But this fallback is only needed for the first visit.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1147,7 +1203,7 @@ A <strong>subscriber</strong>, which communicates with this hub to get the the n
 <div class="content">
 <div class="imageblock">
 <div class="content">
-<img src="src/images/deployment.png" alt="OIL Deployment" />
+<img src="src/images/deployment.png" alt="OIL Deployment">
 </div>
 </div>
 <div class="paragraph"><p>To deploy the hub (i.e. as a MyPass service) you need to deploy the project with an index.html loading dist/hub.123.js. In our examples this is demos/complete-integration-mypass.html</p></div>
@@ -1193,7 +1249,7 @@ Save and Publish your Tealium configuration changes in your desired stages (Dev,
 Tealium clients will be informed of your changes and need to publish/deploy their profile to activate your changes.</p></div>
 <div class="imageblock">
 <div class="content">
-<img src="src/images/tealium-lib-profile-extension-view.png" alt="Tealium Library Profile" />
+<img src="src/images/tealium-lib-profile-extension-view.png" alt="Tealium Library Profile">
 </div>
 </div>
 <div class="paragraph"><p>As a client of Tealium (see image below)</p></div>
@@ -1216,98 +1272,10 @@ Publish / deploy your profile to activate the changes to Oil.js
 </ul></div>
 <div class="imageblock">
 <div class="content">
-<img src="src/images/tealium-user-profile-extension-view.png" alt="Tealium Client Profile" />
+<img src="src/images/tealium-user-profile-extension-view.png" alt="Tealium Client Profile">
 </div>
 </div>
 <div class="paragraph"><p>Within an extension it&#8217;s possible to handle the OptOut/OptIn logic during preload. This also allows to alter the later behaviour within Tealium.</p></div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">OIL Configuration</div>
-<div class="paragraph"><p>You need to add an OIL configuration to the html of your host and hub site. This is an example configuration:</p></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.8
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>    &lt;script type="application/configuration"&gt;
-      <span style="color: #990000">{</span>
-        "activate_poi": <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">,</span>
-        "hub_origin": "<span style="color: #FF0000">//www.somedomain.com</span>"<span style="color: #990000">,</span>
-        "hub_path": "<span style="color: #FF0000">/some/path.html</span>"<span style="color: #990000">,</span>
-        "subscriber_set_cookie": <span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">,</span>
-        "opt_in_event_name": "<span style="color: #FF0000">oil_optin_done_custom</span>"<span style="color: #990000">,</span>
-        "opt_later_event_name": "<span style="color: #FF0000">oil_optlater_custom</span>"<span style="color: #990000">,</span>
-        "opt_out_event_name": "<span style="color: #FF0000">oil_optout_trigger</span>"<span style="color: #990000">,</span>
-        "developer_mode": "<span style="color: #FF0000">true</span>"<span style="color: #990000">,</span>
-        "privacy_page_location": "<span style="color: #FF0000">http://www.welt.de/datenschutz</span>"
-      <span style="color: #990000">}</span>
-    &lt;/script&gt;</tt></pre></div></div>
-<div class="tableblock">
-<table rules="all"
-width="100%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<caption class="title">Table 2. Configuration Parameter</caption>
-<col width="20%" />
-<col width="60%" />
-<col width="20%" />
-<thead>
-<tr>
-<th align="left" valign="top"> Config Parameter </th>
-<th align="left" valign="top"> Description </th>
-<th align="left" valign="top"> Default Setting</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left" valign="top"><p class="table">activate_poi</p></td>
-<td align="left" valign="top"><p class="table">Activates or disactivates <em>Power Opt In</em>. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button.</p></td>
-<td align="left" valign="top"><p class="table"> false</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">hub_origin</p></td>
-<td align="left" valign="top"><p class="table">The origin of the hub.js installation, if any.</p></td>
-<td align="left" valign="top"><p class="table"> none</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">hub_path</p></td>
-<td align="left" valign="top"><p class="table">The path to the hub.html installation on the origin, if any.</p></td>
-<td align="left" valign="top"><p class="table"> none</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"> subscriber_set_cookie</p></td>
-<td align="left" valign="top"><p class="table">Whether to set the <em>SOI</em> cookie on <em>POI</em> opt-ins or not.</p></td>
-<td align="left" valign="top"><p class="table"> true</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">opt_in_event_name</p></td>
-<td align="left" valign="top"><p class="table">The event name that will be sent to the window of the host site on opt-in. This will be fired on returning visits as well, when the user already opted in.</p></td>
-<td align="left" valign="top"><p class="table"><em>oil_optin_done</em></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">opt_later_event_name</p></td>
-<td align="left" valign="top"><p class="table">The event name that will be sent to the window of the host site on opt-later. This will be fired on returning visits as well, when the user delayed the optin for later.</p></td>
-<td align="left" valign="top"><p class="table"> <em>oil_optlater_trigger</em></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">opt_out_event_name</p></td>
-<td align="left" valign="top"><p class="table">The event name <em>OIL</em> is listening to for opting out. The opt-out functionality can be implemented in the settings part of the host site.</p></td>
-<td align="left" valign="top"><p class="table"> <em>oil_optout_trigger</em></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">developer_mode</p></td>
-<td align="left" valign="top"><p class="table">If developer mode is activated, the overlay won&#8217;t show unless a specific cookie is set. Set a cookie with the name "oil_developer" and the value "true" to activate the layer for your client.</p></td>
-<td align="left" valign="top"><p class="table">true</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"> privacy_page_location</p></td>
-<td align="left" valign="top"><p class="table"><em>OIL</em> should contain text, that refers to an external page detailing privacy ("Datenschutz"). If you add the key "privacy_page_location" and give it a value other than an empty string, a "Mehr erfahren" (<em>show more</em>) text link will be added to <em>OIL</em>. It opens a page with the value you specified in a new tab or window.</p></td>
-<td align="left" valign="top"><p class="table"> "" (empty string)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div></div>
 <div style="page-break-after:always"></div>
 <div class="paragraph" id="section-design-decisions"><p>The ``postMessage()`` method lifts this restriction by providing a way to securely pass messages across domains. The ``postMessage()`` method accepts two parameters.</p></div>
 <div class="sidebarblock">
@@ -1346,42 +1314,42 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>window<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">addEventListener</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'message'</span><span style="color: #990000">,</span> <span style="color: #990000">(</span>e<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="color: #FF0000">{</span>
   let data <span style="color: #990000">=</span> e<span style="color: #990000">.</span>data<span style="color: #990000">;</span>
-import <span style="color: #FF0000">{</span> logDebug <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'../scripts/log.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> logInfo <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'../scripts/log.js'</span><span style="color: #990000">;</span>
 import <span style="color: #FF0000">{</span> registerMessageListener<span style="color: #990000">,</span> removeMessageListener <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./utils.js'</span><span style="color: #990000">;</span>
 import <span style="color: #FF0000">{</span> setPoiOptIn<span style="color: #990000">,</span> getPoiOptIn <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./cookies.js'</span><span style="color: #990000">;</span>
+
 let initComplete <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
 
 <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">parseJson</span></span><span style="color: #990000">(</span>data<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
   <span style="font-weight: bold"><span style="color: #0000FF">try</span></span> <span style="color: #FF0000">{</span>
     <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">typeof</span></span> data <span style="color: #990000">!==</span> <span style="color: #FF0000">'object'</span> <span style="color: #990000">?</span> JSON<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parse</span></span><span style="color: #990000">(</span>data<span style="color: #990000">)</span> <span style="color: #990000">:</span> data<span style="color: #990000">);</span>
   <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">catch</span></span><span style="color: #990000">(</span>err<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
-    <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - couldnt parse following data:'</span><span style="color: #990000">,</span> data<span style="color: #990000">);</span>
+    <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - couldnt parse following data:'</span><span style="color: #990000">,</span> data<span style="color: #990000">);</span>
     <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
   <span style="color: #FF0000">}</span>
 <span style="color: #FF0000">}</span>
 
 <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">handler</span></span><span style="color: #990000">(</span>message<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
   let parsedMessage <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">parseJson</span></span><span style="color: #990000">(</span>message<span style="color: #990000">.</span>data<span style="color: #990000">),</span>
-    poiOptin <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">null</span></span><span style="color: #990000">;</span>
+      poiOptin <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">null</span></span><span style="color: #990000">;</span>
 
-  <span style="font-style: italic"><span style="color: #9A1900">// save parent url</span></span>
-  <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - Got following parent data:'</span><span style="color: #990000">,</span> parsedMessage<span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - Got following parent data:'</span><span style="color: #990000">,</span> parsedMessage<span style="color: #990000">);</span>
   <span style="font-style: italic"><span style="color: #9A1900">// only react on our data</span></span>
   <span style="font-style: italic"><span style="color: #9A1900">// tag::hub-listener[]</span></span>
   <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>parsedMessage<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
     <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>parsedMessage<span style="color: #990000">.</span>event <span style="color: #990000">&amp;&amp;</span> parsedMessage<span style="color: #990000">.</span>event<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">indexOf</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'oil-'</span><span style="color: #990000">)</span> <span style="color: #990000">!==</span> <span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+
       let event <span style="color: #990000">=</span> parsedMessage<span style="color: #990000">.</span>event<span style="color: #990000">,</span>
           origin <span style="color: #990000">=</span> parsedMessage<span style="color: #990000">.</span>origin<span style="color: #990000">;</span>
+
       <span style="font-weight: bold"><span style="color: #0000FF">switch</span></span> <span style="color: #990000">(</span>event<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
         <span style="font-weight: bold"><span style="color: #0000FF">case</span></span> <span style="color: #FF0000">'oil-poi-activate'</span><span style="color: #990000">:</span>
-          <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - activating POI '</span><span style="color: #990000">);</span>
+          <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - activating POI '</span><span style="color: #990000">);</span>
           <span style="font-weight: bold"><span style="color: #000000">setPoiOptIn</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">true</span></span><span style="color: #990000">);</span>
-          <span style="font-style: italic"><span style="color: #9A1900">// Cookie.set(OIL_COOKIE.NAME, { [OIL_COOKIE.ATTR_POI]: true, [OIL_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp() }, { expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS] });</span></span>
           <span style="font-weight: bold"><span style="color: #0000FF">break</span></span><span style="color: #990000">;</span>
         <span style="font-weight: bold"><span style="color: #0000FF">case</span></span> <span style="color: #FF0000">'oil-status-read'</span><span style="color: #990000">:</span>
           poiOptin <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">getPoiOptIn</span></span><span style="color: #990000">();</span>
-          <span style="font-style: italic"><span style="color: #9A1900">// status = Cookie.getJSON(OIL_COOKIE.NAME) || {};</span></span>
-          <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - read the following poi status:'</span><span style="color: #990000">,</span> poiOptin<span style="color: #990000">);</span>
+          <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'OIL Hub - read the following poi status:'</span><span style="color: #990000">,</span> poiOptin<span style="color: #990000">);</span>
           parent<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">postMessage</span></span><span style="color: #990000">(</span>JSON<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">stringify</span></span><span style="color: #990000">(</span>poiOptin<span style="color: #990000">)</span> <span style="color: #990000">||</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">,</span> origin<span style="color: #990000">);</span>
           <span style="font-weight: bold"><span style="color: #0000FF">break</span></span><span style="color: #990000">;</span>
         <span style="font-weight: bold"><span style="color: #0000FF">default</span></span><span style="color: #990000">:</span>
@@ -1410,7 +1378,7 @@ http://www.gnu.org/software/src-highlite -->
 import <span style="color: #FF0000">{</span> getConfiguration<span style="color: #990000">,</span> isPoiActive <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./config.js'</span><span style="color: #990000">;</span>
 import <span style="color: #FF0000">{</span> addFrame <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./iframe.js'</span><span style="color: #990000">;</span>
 import <span style="color: #FF0000">{</span> getOrigin<span style="color: #990000">,</span> registerMessageListener<span style="color: #990000">,</span> removeMessageListener <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./utils.js'</span><span style="color: #990000">;</span>
-import <span style="color: #FF0000">{</span> logDebug<span style="color: #990000">,</span> logError<span style="color: #990000">,</span> logInfo <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./log.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> logError<span style="color: #990000">,</span> logInfo <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./log.js'</span><span style="color: #990000">;</span>
 
 <span style="font-style: italic"><span style="color: #9A1900">// Timeout after which promises should return</span></span>
 <span style="font-weight: bold"><span style="color: #0000FF">const</span></span> TIMEOUT <span style="color: #990000">=</span> <span style="color: #993399">500</span><span style="color: #990000">;</span>
@@ -1449,7 +1417,7 @@ let config <span style="color: #990000">=</span> <span style="font-weight: bold"
         <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
       <span style="color: #FF0000">}</span>
     <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
-      <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'POI not active. Frame not initialized.'</span><span style="color: #990000">);</span>
+      <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'POI not active. Frame not initialized.'</span><span style="color: #990000">);</span>
       <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
     <span style="color: #FF0000">}</span>
   <span style="color: #FF0000">}</span><span style="color: #990000">));</span>
@@ -1500,7 +1468,7 @@ let config <span style="color: #990000">=</span> <span style="font-weight: bold"
       let hubOrigin <span style="color: #990000">=</span> config<span style="color: #990000">[</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_ORIGIN<span style="color: #990000">];</span>
       <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>config <span style="color: #990000">&amp;&amp;</span> hubOrigin <span style="color: #990000">&amp;&amp;</span> hubOrigin<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">indexOf</span></span><span style="color: #990000">(</span>event<span style="color: #990000">.</span>origin<span style="color: #990000">)</span> <span style="color: #990000">!==</span> <span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
         let message <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">typeof</span></span> event<span style="color: #990000">.</span>data <span style="color: #990000">!==</span> <span style="color: #FF0000">'object'</span> <span style="color: #990000">?</span> JSON<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parse</span></span><span style="color: #990000">(</span>event<span style="color: #990000">.</span>data<span style="color: #990000">)</span> <span style="color: #990000">:</span> event<span style="color: #990000">.</span>data<span style="color: #990000">;</span>
-        <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Message from hub received...'</span><span style="color: #990000">,</span> event<span style="color: #990000">.</span>origin<span style="color: #990000">,</span> message<span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Message from hub received...'</span><span style="color: #990000">,</span> event<span style="color: #990000">.</span>origin<span style="color: #990000">,</span> message<span style="color: #990000">);</span>
         <span style="font-weight: bold"><span style="color: #000000">removeMessageListener</span></span><span style="color: #990000">(</span>handler<span style="color: #990000">);</span>
         frameListenerRegistered <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
         <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span>message<span style="color: #990000">);</span>
@@ -1547,7 +1515,7 @@ let config <span style="color: #990000">=</span> <span style="font-weight: bold"
           <span style="font-weight: bold"><span style="color: #000000">readConfigFromFrame</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">getOrigin</span></span><span style="color: #990000">()).</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">((</span>data<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span>data<span style="color: #990000">));</span>
         <span style="color: #FF0000">}</span>
       <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
-        <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Could not initialize POI. Fallback to POI false.'</span><span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Could not initialize POI. Fallback to POI false.'</span><span style="color: #990000">);</span>
         <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">);</span>
       <span style="color: #FF0000">}</span>
     <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
@@ -1559,7 +1527,7 @@ let config <span style="color: #990000">=</span> <span style="font-weight: bold"
 <span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> Promise when done</span></span>
 <span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
 <span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">activatePowerOptInWithIFrame</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
-  <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'activatePowerOptIn'</span><span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'activatePowerOptIn'</span><span style="color: #990000">);</span>
 
   <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
     <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span>  <span style="color: #FF0000">{</span>
@@ -1610,7 +1578,7 @@ import <span style="color: #FF0000">{</span> OIL_CONFIG<span style="color: #9900
 import <span style="color: #FF0000">{</span> getConfiguration<span style="color: #990000">,</span> isPoiActive <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./config.js'</span><span style="color: #990000">;</span>
 import <span style="color: #FF0000">{</span> addFrame <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./iframe.js'</span><span style="color: #990000">;</span>
 import <span style="color: #FF0000">{</span> getOrigin<span style="color: #990000">,</span> registerMessageListener<span style="color: #990000">,</span> removeMessageListener <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./utils.js'</span><span style="color: #990000">;</span>
-import <span style="color: #FF0000">{</span> logDebug<span style="color: #990000">,</span> logError<span style="color: #990000">,</span> logInfo <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./log.js'</span><span style="color: #990000">;</span>
+import <span style="color: #FF0000">{</span> logError<span style="color: #990000">,</span> logInfo <span style="color: #FF0000">}</span> from <span style="color: #FF0000">'./log.js'</span><span style="color: #990000">;</span>
 
 <span style="font-style: italic"><span style="color: #9A1900">// Timeout after which promises should return</span></span>
 <span style="font-weight: bold"><span style="color: #0000FF">const</span></span> TIMEOUT <span style="color: #990000">=</span> <span style="color: #993399">500</span><span style="color: #990000">;</span>
@@ -1649,7 +1617,7 @@ let config <span style="color: #990000">=</span> <span style="font-weight: bold"
         <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
       <span style="color: #FF0000">}</span>
     <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
-      <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'POI not active. Frame not initialized.'</span><span style="color: #990000">);</span>
+      <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'POI not active. Frame not initialized.'</span><span style="color: #990000">);</span>
       <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="color: #FF0000">{</span> config<span style="color: #990000">:</span> config <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
     <span style="color: #FF0000">}</span>
   <span style="color: #FF0000">}</span><span style="color: #990000">));</span>
@@ -1700,7 +1668,7 @@ let config <span style="color: #990000">=</span> <span style="font-weight: bold"
       let hubOrigin <span style="color: #990000">=</span> config<span style="color: #990000">[</span>OIL_CONFIG<span style="color: #990000">.</span>ATTR_HUB_ORIGIN<span style="color: #990000">];</span>
       <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>config <span style="color: #990000">&amp;&amp;</span> hubOrigin <span style="color: #990000">&amp;&amp;</span> hubOrigin<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">indexOf</span></span><span style="color: #990000">(</span>event<span style="color: #990000">.</span>origin<span style="color: #990000">)</span> <span style="color: #990000">!==</span> <span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
         let message <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">typeof</span></span> event<span style="color: #990000">.</span>data <span style="color: #990000">!==</span> <span style="color: #FF0000">'object'</span> <span style="color: #990000">?</span> JSON<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parse</span></span><span style="color: #990000">(</span>event<span style="color: #990000">.</span>data<span style="color: #990000">)</span> <span style="color: #990000">:</span> event<span style="color: #990000">.</span>data<span style="color: #990000">;</span>
-        <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Message from hub received...'</span><span style="color: #990000">,</span> event<span style="color: #990000">.</span>origin<span style="color: #990000">,</span> message<span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Message from hub received...'</span><span style="color: #990000">,</span> event<span style="color: #990000">.</span>origin<span style="color: #990000">,</span> message<span style="color: #990000">);</span>
         <span style="font-weight: bold"><span style="color: #000000">removeMessageListener</span></span><span style="color: #990000">(</span>handler<span style="color: #990000">);</span>
         frameListenerRegistered <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">;</span>
         <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span>message<span style="color: #990000">);</span>
@@ -1747,7 +1715,7 @@ let config <span style="color: #990000">=</span> <span style="font-weight: bold"
           <span style="font-weight: bold"><span style="color: #000000">readConfigFromFrame</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">getOrigin</span></span><span style="color: #990000">()).</span><span style="font-weight: bold"><span style="color: #000000">then</span></span><span style="color: #990000">((</span>data<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span> <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span>data<span style="color: #990000">));</span>
         <span style="color: #FF0000">}</span>
       <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
-        <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Could not initialize POI. Fallback to POI false.'</span><span style="color: #990000">);</span>
+        <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Could not initialize POI. Fallback to POI false.'</span><span style="color: #990000">);</span>
         <span style="font-weight: bold"><span style="color: #000000">resolve</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">false</span></span><span style="color: #990000">);</span>
       <span style="color: #FF0000">}</span>
     <span style="color: #FF0000">}</span><span style="color: #990000">);</span>
@@ -1759,7 +1727,7 @@ let config <span style="color: #990000">=</span> <span style="font-weight: bold"
 <span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> Promise when done</span></span>
 <span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
 <span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">activatePowerOptInWithIFrame</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
-  <span style="font-weight: bold"><span style="color: #000000">logDebug</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'activatePowerOptIn'</span><span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #000000">logInfo</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'activatePowerOptIn'</span><span style="color: #990000">);</span>
 
   <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">isPoiActive</span></span><span style="color: #990000">())</span> <span style="color: #FF0000">{</span>
     <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Promise</span></span><span style="color: #990000">((</span>resolve<span style="color: #990000">)</span> <span style="color: #990000">=&gt;</span>  <span style="color: #FF0000">{</span>
@@ -1800,63 +1768,61 @@ let config <span style="color: #990000">=</span> <span style="font-weight: bold"
   <span style="color: #FF0000">}</span>
 <span style="color: #FF0000">}</span>
 <span style="color: #FF0000">}</span><span style="color: #990000">);</span></tt></pre></div></div>
-<div class="tableblock">
-<table rules="all"
-width="100%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
+<table class="tableblock frame-all grid-all"
+style="
+width:100%;
+">
+<col style="width:33%;">
+<col style="width:33%;">
+<col style="width:33%;">
 <thead>
 <tr>
-<th align="left" valign="top"> ID         </th>
-<th align="left" valign="top"> Decision                                             </th>
-<th align="left" valign="top"> Date / Attendees</th>
+<th class="tableblock halign-left valign-top" > ID         </th>
+<th class="tableblock halign-left valign-top" > Decision                                             </th>
+<th class="tableblock halign-left valign-top" > Date / Attendees</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left" valign="top"><p class="table">OIL-DEC-1</p></td>
-<td align="left" valign="top"><p class="table">Tealium is responsible to not track by default.</p></td>
-<td align="left" valign="top"><p class="table">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL-DEC-1</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Tealium is responsible to not track by default.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">OIL-DEC-2</p></td>
-<td align="left" valign="top"><p class="table">OIL is integrated as <a href="https://community.tealiumiq.com/t5/iQ-Tag-Management/JavaScript-Code-Extension/ta-p/11925">JavaScript Code Extension</a> in Tealium</p></td>
-<td align="left" valign="top"><p class="table">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL-DEC-2</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL is integrated as <a href="https://community.tealiumiq.com/t5/iQ-Tag-Management/JavaScript-Code-Extension/ta-p/11925">JavaScript Code Extension</a> in Tealium</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">OIL-DEC-3</p></td>
-<td align="left" valign="top"><p class="table">OIL is included within Tealium as Library for each business unit</p></td>
-<td align="left" valign="top"><p class="table">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL-DEC-3</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL is included within Tealium as Library for each business unit</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">OIL-DEC-4</p></td>
-<td align="left" valign="top"><p class="table">OIL sets one cookie which will be read by Tealium to optin tracking</p></td>
-<td align="left" valign="top"><p class="table">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL-DEC-4</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL sets one cookie which will be read by Tealium to optin tracking</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">OIL-DEC-5</p></td>
-<td align="left" valign="top"><p class="table">OIL Deployment is done manual via Tealium Web UI</p></td>
-<td align="left" valign="top"><p class="table">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL-DEC-5</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL Deployment is done manual via Tealium Web UI</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">12.04.2017 / Dr. Michael Sievers, Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">OIL-DEC-6</p></td>
-<td align="left" valign="top"><p class="table">OIL uses postMessage with an iFrame to work without 3rd Party Cookies</p></td>
-<td align="left" valign="top"><p class="table">19.04.2017 /  Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL-DEC-6</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">OIL uses postMessage with an iFrame to work without 3rd Party Cookies</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">19.04.2017 /  Marcel Bankmann, Andreas Wagner, Michiel Slot, Martin Reinhardt</p></td>
 </tr>
 </tbody>
 </table>
-</div>
 </div></div>
 </div>
 </div>
 </div>
-<div id="footnotes"><hr /></div>
+<div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-14 13:44:07 CEST
+Last updated 2017-07-04 15:48:51 CEST
 </div>
 </div>
 </body>
