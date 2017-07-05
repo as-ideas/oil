@@ -149,6 +149,16 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 
 /**
+ * Utils
+ *
+ */
+
+.no-break {
+  white-space: nowrap;
+}
+
+
+/**
  * Our OIL Overlay
  * Wraps all Oil content
  *

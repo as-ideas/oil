@@ -30,5 +30,10 @@ export const oilHeading = () => {
 }
 
 export const oilIntroText = () => {
-    return `Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen. ${privacyPageSnippet()} Jetzt Einverständnis erklären:`; 
+    return `
+        Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren.
+        Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.
+        ${privacyPageSnippet()}
+        <span class="no-break">Jetzt Einverständnis erklären:</span>
+    `; 
 }
