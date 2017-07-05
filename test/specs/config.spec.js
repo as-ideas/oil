@@ -40,9 +40,9 @@ describe('configuration', () => {
 
   it('should generate location', () => {
     let config = {
-      'hub_origin': '//oil-integration-cdn.herokuapp.com',
-      'hub_path': '/end2end-tests/complete-integration-mypass.html',
-      'subscriber_set_cookie': false
+      'poi_hub_origin': '//oil-integration-cdn.herokuapp.com',
+      'poi_hub_path': '/end2end-tests/complete-integration-mypass.html',
+      'poi_subscriber_set_cookie': false
     };
     let parsedConfig = readConfiguration({ text: JSON.stringify(config) });
     expect(parsedConfig).toBeDefined();

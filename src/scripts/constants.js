@@ -5,11 +5,11 @@ export const OIL_COOKIE = {
 };
 
 export const OIL_CONFIG = {
-  ATTR_ACTIVATE_POI: 'activate_poi',
-  ATTR_HUB_ORIGIN: 'hub_origin',
-  ATTR_HUB_PATH: 'hub_path',
-  ATTR_HUB_LOCATION: 'hub_location', // complete hub location, gets generated
-  ATTR_SUB_SET_COOKIE: 'subscriber_set_cookie',
+  ATTR_ACTIVATE_POI: 'poi_activate_poi',
+  ATTR_HUB_ORIGIN: 'poi_hub_origin',
+  ATTR_HUB_PATH: 'poi_hub_path',
+  ATTR_HUB_LOCATION: 'poi_hub_location', // complete hub location, gets generated
+  ATTR_SUB_SET_COOKIE: 'poi_subscriber_set_cookie',
   ATTR_OPT_IN_EVENT_NAME: 'opt_in_event_name',
   ATTR_OPT_OUT_EVENT_NAME: 'opt_out_event_name',
   ATTR_OPT_LATER_EVENT_NAME: 'opt_later_event_name',
