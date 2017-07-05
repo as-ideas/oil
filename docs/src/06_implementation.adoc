@@ -50,7 +50,7 @@ Below you'll find a simple example that shows you how to listen to OIL's opt-lat
 #3. Add the main Oil.js file somewhere in the lower part of your page.
 [source, javascript]
 ----
-<script type="text/javascript" src="https://oil-integration-cdn.herokuapp.com/demos/direct-integration.b61689c4f4dab56dfa43.bundle.js"></script>
+<script type="text/javascript" src="https://oil-integration-cdn.herokuapp.com/demos/direct-integration.1.0.1.min.js"></script>
 ----
 * Updated versions of the script will be deployed using a different filename hence we'll never alter an existing version.
 * Don't be fooled by the "demos" part in the URL, it's for real.
