@@ -142,5 +142,5 @@ module.exports = {
       .useXpath()
       .waitForElementVisible(OIL_LAYER_FULL, ASSERT_TIMEOUT, false)
       .end();
-  },
+  }
 };

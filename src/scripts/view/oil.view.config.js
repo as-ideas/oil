@@ -26,7 +26,7 @@ export const CSSPrefix = oilPrefix(Prefix);
  */
 
 export const oilHeading = () => {
-    return "Um unsere Services bestmöglich erbringen zu können, brauchen wir euer Einverständnis";
+    return "Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis";
 }
 
 export const oilIntroText = () => {
