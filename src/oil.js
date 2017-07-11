@@ -47,7 +47,8 @@ export function initOilLayer() {
         }
         else {
           renderOil(oilWrapper, {optLater: false});
-          gaTrackEvent('Loaded/Initial');
+          // Defer to try to track event even if Google Analytics is loaded later than Oil.js
+          window.setTimeout(() => {gaTrackEvent('Loaded/Initial')}, 1000);
         }
       });
     }
