@@ -1,5 +1,5 @@
 import { getConfiguration } from './../../config.js';
-import { OIL_CONFIG } from './../../constants.js';
+import { OIL_CONFIG, DATAQA_PRIVACY_PAGE } from './../../constants.js';
 import { logInfo } from './../../log';
 import { CSSPrefix } from './../oil.view.config.js';
 
@@ -15,6 +15,7 @@ export const privacyPageSnippet = () => {
         return `
             <a href="${privacyPage}" 
                 class="${CSSPrefix}oil__intro-txt--link"
+                data-qa="${DATAQA_PRIVACY_PAGE}"
                 target="_blank"
             >Mehr erfahren</a>`;
     }

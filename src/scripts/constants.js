@@ -26,3 +26,5 @@ export const POI_FALLBACK_NAME = 'fallback';
 
 // Data-QA value for the yes button on the initial OIL Layer, needed to differentiate various instances from the Yes button 
 export const DATAQA_BUTTON_YES = "oil-YesButton";
+// Identify privacy page link, eg. for tracking
+export const DATAQA_PRIVACY_PAGE = "oil-PrivacyPage";
