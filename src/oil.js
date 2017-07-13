@@ -47,7 +47,8 @@ export function initOilLayer() {
         }
         else {
           renderOil(oilWrapper, {optLater: false});
-          // Defer to try to track event even if Google Analytics is loaded later than Oil.js
+          // Defer Google Analytics (GA) track event. GA is implemented by the host site, it could be that we try
+          // to send GA events even if GA is not loaded and ready.
           window.setTimeout(() => {gaTrackEvent('Loaded/Initial')}, 1000);
         }
       });
