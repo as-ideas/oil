@@ -15,9 +15,41 @@ function isDeveloperCookieSet() {
   return Cookie.get('oil_developer') === 'true';
 }
 
-// PUBLIC API
+
+/**
+ * Defer Google Analytics (GA) tracking event. This is needed because we have to wait
+ * for GA to be loaded and initialized by the host site, which we don't control...
+ * Old way: window.setTimeout(() => {gaTrackEvent('Loaded/Initial')}, 2000);
+ */
+
+// See https://stackoverflow.com/questions/1954910/javascript-detect-if-google-analytics-is-loaded-yet
+
+const checkIfAnalyticsLoaded = () => {
+  return new Promise((resolve, reject) => {
+    let timeStart = Date.now();
+    const TIMEOUT = 5000;
+
+  const _isLoaded = () => {
+    if (Date.now() - timeStart > TIMEOUT) {
+      reject("Timeout: Google Analytics not found in page");
+      return;
+    }
+    if (window.ga && window.ga.create) {
+      resolve(window.ga);
+      return;
+    } else {
+      setTimeout(_isLoaded, 500);
+    }
+  };
+
+  _isLoaded();
+  });
+};
+
+
 /**
  * Initialize the Oil Layer on Host Site side.
+ * 
  */
 export function initOilLayer() {
   logInfo('Init OilLayer');
@@ -47,9 +79,14 @@ export function initOilLayer() {
         }
         else {
           renderOil(oilWrapper, {optLater: false});
-          // Defer Google Analytics (GA) track event. GA is implemented by the host site, it could be that we try
-          // to send GA events even if GA is not loaded and ready.
-          window.setTimeout(() => {gaTrackEvent('Loaded/Initial')}, 1000);
+          // Check for GA and send event 
+          checkIfAnalyticsLoaded()
+            .then(() => {
+              gaTrackEvent('Loaded/Initial');
+            })
+            .catch((e) => {
+              logInfo(e)
+            })
         }
       });
     }
@@ -59,3 +96,6 @@ export function initOilLayer() {
 export function initOilHub() {
   initOilFrame();
 }
+
+
+
