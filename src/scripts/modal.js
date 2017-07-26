@@ -105,7 +105,7 @@ function handleOptLater() {
     renderOil(oilWrapper, {optLater: cookieOptLater});
 
     if(config[OIL_CONFIG.ATTR_GA_TRACKING]===2) {
-      gaTrackEvent('Later');
+      gaTrackEvent('Later', 0);
     }
   });
 }
@@ -115,9 +115,9 @@ function handleSoiOptIn() {
     renderOil(oilWrapper, {optIn: cookieOptIn});
 
     if(this.getAttribute("data-qa") === DATAQA_BUTTON_YES){
-      gaTrackEvent('SOI/yes-1');
+      gaTrackEvent('SOI/yes-1', 0);
     } else {
-      gaTrackEvent('SOI/yes-2');
+      gaTrackEvent('SOI/yes-2', 0);
     }
   });
 }
@@ -127,7 +127,7 @@ function handlePoiOptIn() {
     oilPowerOptIn(!config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
       renderOil(oilWrapper, {optIn: true});
 
-      gaTrackEvent('POI/yes');
+      gaTrackEvent('POI/yes', 0);
     });
   });
 }

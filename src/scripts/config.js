@@ -16,7 +16,17 @@ const defaultConfig = {
   'activate_poi': false,
   'privacy_page_url': undefined,
   'ga_tracking': 0,
-  'productionDebugMode': false
+  'productionDebugMode': false,
+  'label_heading': 'Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis',
+  'label_introText_start': 'Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.',
+  'label_introText_end': 'Jetzt Einverständnis erklären:',
+  'label_laterText_start': 'Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.',
+  'label_laterText_end': 'Jetzt Einverständnis erklären:',
+  'label_button_yes_soi': 'Jetzt zustimmen',
+  'label_button_yes_poi': 'Global zustimmen',
+  'label_button_yes_later': 'Global zustimmen',
+  'label_button_no': 'Nein, jetzt nicht',
+  'label_button_more': 'Mehr erfahren'
 };
 
 let cachedConfig = null;
@@ -136,17 +146,18 @@ export function resetConfiguration() {
 
 /**
  * Track OIL Events in Google Analytics
- * 
+ * eventAction = Text label, for identifying the event
+ * nonInteraction = a boolean value to send an event as a non-interaction event for GA
  */
-export function gaTrackEvent(eventAction) {
+export function gaTrackEvent(eventAction, nonInteraction) {
   cachedConfig = getConfiguration();
   let gaTracking = cachedConfig[OIL_CONFIG.ATTR_GA_TRACKING];
 
-  logInfo("OIL gaTrackEvent config="+ gaTracking +" eventAction="+ eventAction);
+  logInfo("OIL gaTrackEvent config="+ gaTracking +" eventAction="+ eventAction +" nonInteraction="+ nonInteraction);
 
   if(gaTracking && window.ga && (typeof window.ga !== "undefined" && window.ga.loaded)) { 
       // the following line throws a 'ga is not defined' warning, because ga is a method provided by the Google Analytics script
-      window.ga('send', 'event', 'OIL', eventAction);
+      window.ga('send', 'event', 'OIL', eventAction, {'nonInteraction': nonInteraction});
   }
 }
 

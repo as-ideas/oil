@@ -63,7 +63,7 @@ export function initOilLayer() {
       if (!isBrowserCookieEnabled()) {
         logInfo('This browser doesn\'t allow cookies.');
         renderOil(oilWrapper, {noCookie: true});
-        gaTrackEvent('Loaded/No cookies');
+        gaTrackEvent('Loaded/No cookies', 1);
         return;
       }
 
@@ -75,14 +75,14 @@ export function initOilLayer() {
         else if (getOptLater()) {
           renderOil(oilWrapper, {optLater: true});
           fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_LATER_EVENT_NAME);
-          gaTrackEvent('Loaded/Later');
+          gaTrackEvent('Loaded/Later', 1);
         }
         else {
           renderOil(oilWrapper, {optLater: false});
           // Check for GA and send event 
           checkIfAnalyticsLoaded()
             .then(() => {
-              gaTrackEvent('Loaded/Initial');
+              gaTrackEvent('Loaded/Initial', 1);
             })
             .catch((e) => {
               logInfo(e)
@@ -96,6 +96,3 @@ export function initOilLayer() {
 export function initOilHub() {
   initOilFrame();
 }
-
-
-

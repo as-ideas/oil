@@ -1,4 +1,5 @@
 import { privacyPageSnippet } from './components/oil.privacy.page';
+import { getConfiguration } from './../config.js';
 
 /**
  * Prefix for our Oil CSS classes
@@ -20,9 +21,11 @@ const oilPrefix = (str) => {
 // And export our prefix
 export const CSSPrefix = oilPrefix(Prefix);
 
+let config = getConfiguration();
+
 /**
  * Definition of various text snippets for our Oil Layer
- *   
+ *  
  */
 
 export const oilHeading = () => {
@@ -36,4 +39,12 @@ export const oilIntroText = () => {
         ${privacyPageSnippet()}
         <span class="no-break">Jetzt Einverständnis erklären:</span>
     `; 
+}
+
+export const label_heading = () => {
+    return config.label_heading;
+}
+
+export const label_introText_start = () => {
+    return config.label_introText_start;
 }

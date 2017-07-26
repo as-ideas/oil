@@ -14,7 +14,7 @@ export const POIButtonSnippet = () => {
     return (
         `
         <button class="${CSSPrefix}oil-loi__btn-poi js-optin-poi" data-qa="oil-small-poi-YesButton">
-            Global zustimmen
+            `+ config.label_button_yes_later +`
         </button>
         `
     );
