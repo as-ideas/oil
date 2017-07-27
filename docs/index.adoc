@@ -6,8 +6,14 @@ image::src/images/oil-asideas.png[]
 
 ***
 === Release Notes
-* 4 July 2017 - v1.0.1 Added tracking for Google Analytics, new events for page load, bug fixing and updated wording
-* 14 June 2017 - v.1.0 Initial release
+
+[width="100%",options="", cols="1,1,6a"]
+|====
+| 28 July 2017 | 1.0.2 |* Localisation of text labels. See "OIL Configuration > Table 2. Label Keys"  below.
+* Tracking for Google Analytics: added the non-interactive param, clicks will now considered to be an interaction triggered by users (whereas loading / showing OIL still won't affect this). This allows us to have proper bounce rate values. https://analytics.googleblog.com/2011/10/non-interaction-events-wait-what.html[More Info on the Google Analytics Blog]
+| 4 July 2017 | 1.0.1 | Added tracking for Google Analytics, new events for page load, bug fixing and updated wording
+| 14 June 2017 | 1.0 | Initial release
+|====
 
 // horizontal line
 ***
