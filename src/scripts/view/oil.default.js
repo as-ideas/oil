@@ -13,8 +13,8 @@ export const oilDefaultTemplate = `
                 `+ config.label_heading +`
             </h1>
             <p class="${CSSPrefix}oil__intro-txt">
-                `+ config.label_introText_start +` ${privacyPageSnippet()}
-                `+ config.label_introText_end +`
+                `+ config.label_intro_start +` ${privacyPageSnippet()}
+                `+ config.label_intro_end +`
             </p>
             <div class="${CSSPrefix}oil-l-row">
                 ${POIButtonSnippet()}

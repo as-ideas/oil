@@ -72,6 +72,18 @@ You need to add the configuration snippet to all pages where OIL is required. Th
         "developer_mode": false,
         "privacy_page_url": "http://www.mysite.com/privacy",
         /* 
+            Text labels, see Label Keys section below
+        */
+        "label_heading": "- label_heading -",
+        "label_intro_start": "- label_intro_start -",
+        "label_intro_end": "- label_intro_end -",      
+        "label_later_start": "- label_later_start -",
+        "label_later_end": "- label_later_end -",
+        "label_button_yes_soi": "- label_button_yes_soi -",
+        "label_button_yes_poi": "- label_button_yes_poi -",
+        "label_button_no": "- label_button_no -",
+        "label_button_privacy": "- label_button_privacy -",          
+        /* 
             POI optional params start here
         */
         "activate_poi": true,
@@ -106,6 +118,31 @@ You need to add the configuration snippet to all pages where OIL is required. Th
 The core Google Analytics script has to be available on the site, OIL is not injecting a GA script onto the site. See the separate chapter below for furhter details. 
 *Important!* Please note that GA tracking should of course only be enabled for testing purposes. | 0 | No 
 |====
+
+.Label Keys
+[width="100%",options="header", cols="1,3"]
+|====
+|Config Parameter|Default value
+|label_heading| Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis
+|label_intro_start| Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.
+|label_intro_end| Jetzt Einverständnis erklären:
+|label_later_start| Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen. In unseren Datenschutzbestimmungen erfahren Sie, wie Sie Cookies deaktivieren können
+|label_later_end| Jetzt Einverständnis erklären:
+|label_button_yes_soi| Jetzt zustimmen
+|label_button_yes_poi| Global zustimmen
+|label_button_no| Nein, jetzt nicht
+|label_button_privacy| Mehr erfahren  
+|====
+
+image::images/oil-labels-intro.png[]
+Initial state: Configuration keys for labels used initially
+
+---
+
+image::images/oil-labels-later.png[]
+Later state: Configuration keys for labels when the user has clicked "no" in the initial state
+
+---
 
 === Google Analytics Dashboard for OIL Events
 

@@ -14,8 +14,8 @@ export const oilOptLaterTemplate =
                     `+ config.label_heading +`
                 </h1>
                 <p class="${CSSPrefix}oil-loi__intro-txt">
-                `+ config.label_laterText_start +` ${privacyPageSnippet()}
-                `+ config.label_laterText_end +`
+                `+ config.label_later_start +` ${privacyPageSnippet()}
+                `+ config.label_later_end +`
                 </p>
             </div>
             <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
