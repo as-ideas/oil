@@ -15,7 +15,7 @@ export const POIButtonSnippet = () => {
         `
         <div class="${CSSPrefix}oil-l-item">
           <button class="${CSSPrefix}oil__btn-poi js-optin-poi" data-qa="oil-poi-YesButton">
-              `+ config.label_button_yes_poi +`
+              ${config.label_button_yes_poi}
           </button>
         </div>
         `
