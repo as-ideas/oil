@@ -131,6 +131,14 @@ export function setPoiOptIn(value) {
   }
 }
 
+export function setOilOptClose(value) {
+  let cookie = getOilSessionCookie();
+  if(value !== cookie.opt_close) {
+    cookie.opt_close = value;
+    setSessionCookie(getOilSessionCookieConfig().name, cookie);
+  }
+}
+
 export function getSoiOptIn() {
   let cookie = getOilDomainCookie();
   logInfo(cookie);
@@ -143,6 +151,13 @@ export function getOptLater() {
   logInfo(cookie);
   logInfo(cookie.opt_later);
   return cookie.opt_later;
+}
+
+export function getOptClose() {
+  let cookie = getOilSessionCookie();
+  logInfo(cookie);
+  logInfo(cookie.opt_close);
+  return cookie.opt_close;
 }
 
 export function getPoiOptIn() {

@@ -8,6 +8,14 @@ let config = getConfiguration();
 export const oilOptLaterTemplate =
     `
     <div class="${CSSPrefix}oil-content-overlay" data-qa="oil-optlater">
+        <div class="${CSSPrefix}oil-close js-oil-close" data-qa="oil-closeButton">
+            <svg class="${CSSPrefix}oil-icon-close" width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+                <g fill-rule="evenodd">
+                    <path d="M.222 13.364L12.95.636l1.414 1.414L1.636 14.778z"/>
+                    <path d="M1.636.636l12.728 12.728-1.414 1.414L.222 2.05z"/>
+                </g>
+            </svg>
+        </div>
         <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-row--fixed-width">
             <div class="${CSSPrefix}oil-l-item">
                 <h1 class="${CSSPrefix}oil-loi__heading">

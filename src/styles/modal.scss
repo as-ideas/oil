@@ -541,3 +541,33 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     flex: 1;
   }
 }
+
+
+
+/**
+ * Close Button
+ *
+ */
+
+.#{$prefix}oil-close {
+  position: absolute;
+  top:   15px;
+  right: 15px;
+  width:  25px;
+  height: 25px;
+  padding: 5px;
+  fill: rgba(255,255,255, 0.66);
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    fill: $text-color-secondary;
+  }
+}
+
+
+.#{$prefix}oil-icon-close {
+  display: block;
+  width:  15px;
+  height: 15px;
+}

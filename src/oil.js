@@ -7,7 +7,7 @@ import { getConfiguration, isDevMode, gaTrackEvent } from './scripts/config.js';
 import { OIL_CONFIG } from './scripts/constants.js';
 import Cookie from 'js-cookie';
 import { isBrowserCookieEnabled } from './scripts/utils.js';
-import { getOptLater } from './scripts/cookies.js';
+import { getOptLater, getOptClose } from './scripts/cookies.js';
 
 let config = null;
 
@@ -71,6 +71,11 @@ export function initOilLayer() {
         registerOptOutListener();
         if (optin) {
           fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_IN_EVENT_NAME);
+        }
+        else if (getOptClose()) {
+          renderOil(oilWrapper, {optClose: true});
+          fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_CLOSE_EVENT_NAME);
+          gaTrackEvent('Ignored', 1);
         }
         else if (getOptLater()) {
           renderOil(oilWrapper, {optLater: true});

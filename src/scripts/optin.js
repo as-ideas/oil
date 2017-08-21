@@ -3,7 +3,7 @@ import { logInfo } from './log.js';
 import { sendEventToHostSite } from './utils.js';
 import { OIL_CONFIG } from './constants.js';
 import { getConfiguration, isPoiActive } from './config.js';
-import { getSoiOptIn, setSoiOptIn, setOptLater } from './cookies.js';
+import { getSoiOptIn, setSoiOptIn, setOptLater, setOilOptClose } from './cookies.js';
 
 let config = null;
 
@@ -81,6 +81,20 @@ export function oilOptLater() {
   setOptLater(true);
   // Send event to notify host site
   fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_LATER_EVENT_NAME);
+
+  return new Promise((resolve) => {
+    resolve(true);
+  });
+}
+
+/**
+ * Oil optClose
+ * @return promise with updated cookie value
+ */
+export function oilOptClose() {
+  setOilOptClose(true);
+  // Send event to notify host site
+  fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_CLOSE_EVENT_NAME);
 
   return new Promise((resolve) => {
     resolve(true);
