@@ -113,6 +113,6 @@
   "engine-strict": true,
   "engines": {
     "node": ">= 6",
-    "npm": ">= 6"
+    "npm": ">= 5.3"
   }
 }
