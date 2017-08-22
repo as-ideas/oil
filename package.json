@@ -55,7 +55,7 @@
     "eslint": "3.7.1",
     "eslint-loader": "1.5.0",
     "eslint-plugin-es6-recommended": "0.1.2",
-    "eslint-plugin-import": "2.0.0",
+    "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jasmine": "2.2.0",
     "eslint-plugin-jasmine-jquery": "1.0.0",
     "exports-loader": "0.6.3",
@@ -112,7 +112,7 @@
   "license": "UNLICENSED",
   "engine-strict": true,
   "engines": {
-    "node": ">= 4.4",
-    "npm": ">= 3"
+    "node": ">= 6",
+    "npm": ">= 6"
   }
 }
