@@ -287,9 +287,9 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 // Mixins
 
 @mixin btn-poi-soi-shared {
-  min-width:  280px;
+  min-width:  250px;
   min-height: 50px;
-  margin:  0;
+  margin:   0;
   padding: 0.5rem 1rem;
   font-size: 0.875rem; // 14px
   font-weight: 400;
@@ -411,7 +411,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   @include media('<=phone') {
-    margin: 0.625rem 0;
+    margin: 0.625rem 2.25rem 0.625rem 0; // Make space to the right for our absolute positioned close button
     font-size: 1.125rem;
   }
 }
@@ -505,12 +505,16 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 .#{$prefix}oil-l-wrapper-layout-max-width {
   max-width: $layout-max-width;
   margin: 0 auto; 
+  
+  @include media('>phone', '<desktop') {
+    padding-right: 1rem; // Make space for our absolute positioned close button
+  }
 }
 
 
 .#{$prefix}oil-l-item {
   float: left; // Fallback for non flexbox capable browsers
-  margin: 0 1rem;
+  margin: 0 0.5rem;
   
   @supports (display: flex) {
     float: none;
@@ -528,10 +532,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     @include stack-items-remove-horizontal-margins;
     width: 100%;
     margin: 1rem 0;
-  }
-
-  @include media('>phone', '<desktop') {
-    margin-right: 1rem;
   }
 }
 
@@ -551,23 +551,25 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .#{$prefix}oil-close {
   position: absolute;
-  top:   15px;
-  right: 15px;
-  width:  25px;
-  height: 25px;
-  padding: 5px;
-  fill: rgba(255,255,255, 0.66);
+  top:   1rem;
+  right: 1rem;
+  width:  1.5rem;
+  height: 1.5rem;
+  padding: 0.25rem;
+  fill: rgb(255,255,255);
+  opacity: 0.66;
   cursor: pointer;
   user-select: none;
 
   &:hover {
     fill: $text-color-secondary;
+    opacity: 1;
   }
 }
 
 
 .#{$prefix}oil-icon-close {
   display: block;
-  width:  15px;
-  height: 15px;
+  width:  0.875rem;
+  height: 0.875rem;
 }

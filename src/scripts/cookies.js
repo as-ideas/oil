@@ -131,10 +131,10 @@ export function setPoiOptIn(value) {
   }
 }
 
-export function setOilOptClose(value) {
+export function setOilOptIgnore(value) {
   let cookie = getOilSessionCookie();
-  if(value !== cookie.opt_close) {
-    cookie.opt_close = value;
+  if(value !== cookie.opt_ignore) {
+    cookie.opt_ignore = value;
     setSessionCookie(getOilSessionCookieConfig().name, cookie);
   }
 }
@@ -153,11 +153,11 @@ export function getOptLater() {
   return cookie.opt_later;
 }
 
-export function getOptClose() {
+export function getOptIgnore() {
   let cookie = getOilSessionCookie();
   logInfo(cookie);
-  logInfo(cookie.opt_close);
-  return cookie.opt_close;
+  logInfo(cookie.opt_ignore);
+  return cookie.opt_ignore;
 }
 
 export function getPoiOptIn() {

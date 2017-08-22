@@ -1,7 +1,7 @@
 import "../styles/modal.scss";
 import { getConfiguration, gaTrackEvent } from './config.js';
 import { OIL_CONFIG, DATAQA_BUTTON_YES } from './constants.js';
-import { oilOptIn, oilPowerOptIn,  oilOptLater, oilOptClose } from "./optin.js";
+import { oilOptIn, oilPowerOptIn,  oilOptLater, oilOptIgnore } from "./optin.js";
 import { oilDefaultTemplate } from './view/oil.default.js';
 import { oilOptLaterTemplate } from './view/oil.opt.later.js';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
@@ -66,7 +66,7 @@ function injectOilWrapperInDOM(wrapper, props) {
    * @param {*} props 
    */
   function renderOilLayer(props) {
-    return props.optIn === true ? false : props.optClose === true ? false : true
+    return props.optIn === true ? false : props.optIgnore === true ? false : true
   }
 
   let domNodes = getOilDOMNodes();
@@ -96,7 +96,7 @@ function getOilDOMNodes() {
     btnSoiOptIn: document.querySelector(`.${CSSPrefix}oil .js-optin`),
     btnPoiOptIn: document.querySelector(`.${CSSPrefix}oil .js-optin-poi`),
     btnOptLater: document.querySelector(`.${CSSPrefix}oil .js-optlater`),
-    btnClose:    document.querySelector(`.${CSSPrefix}oil .js-oil-close`)
+    btnClose:    document.querySelector(`.${CSSPrefix}oil .js-optignore`)
   }
 }
 
@@ -137,9 +137,9 @@ function handlePoiOptIn() {
   });
 }
 
-function handleOilClose() {
-  oilOptClose().then((cookieOptClose) => {
-    renderOil(oilWrapper, {optClose: cookieOptClose});
+function handleOilIgnore() {
+  oilOptIgnore().then((cookieOptIgnore) => {
+    renderOil(oilWrapper, {optIgnore: cookieOptIgnore});
     if(config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
       gaTrackEvent('Ignored', 0);
     }
@@ -156,14 +156,14 @@ function addOilHandlers(nodes) {
   nodes.btnSoiOptIn && nodes.btnSoiOptIn.addEventListener('click', handleSoiOptIn, false);
   nodes.btnPoiOptIn && nodes.btnPoiOptIn.addEventListener('click', handlePoiOptIn, false);
   nodes.btnOptLater && nodes.btnOptLater.addEventListener('click', handleOptLater, false);
-  nodes.btnClose && nodes.btnClose.addEventListener('click', handleOilClose, false);
+  nodes.btnClose && nodes.btnClose.addEventListener('click', handleOilIgnore, false);
 }
 
 function removeOilWrapperAndHandlers(nodes) {
   nodes.btnSoiOptIn && nodes.btnSoiOptIn.removeEventListener('click', handleSoiOptIn, false);
   nodes.btnOptLater && nodes.btnOptLater.removeEventListener('click', handleOptLater, false);
   nodes.btnPoiOptIn && nodes.btnPoiOptIn.removeEventListener('click', handlePoiOptIn, false);
-  nodes.btnClose && nodes.btnClose.removeEventListener('click', handleOilClose, false);
+  nodes.btnClose && nodes.btnClose.removeEventListener('click', handleOilIgnore, false);
 
   if (nodes.oilWrapper) {
     nodes.oilWrapper.parentElement.removeChild(nodes.oilWrapper);
