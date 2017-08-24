@@ -19,7 +19,7 @@ export const oilOptLaterTemplate =
         <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-row--fixed-width">
             <div class="${CSSPrefix}oil-l-item">
                 <h1 class="${CSSPrefix}oil-loi__heading">
-                    ${config.label_heading}
+                    ${config.label_later_heading}
                 </h1>
                 <p class="${CSSPrefix}oil-loi__intro-txt">
                     ${config.label_later_start} ${privacyPageSnippet()}
