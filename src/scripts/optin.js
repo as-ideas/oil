@@ -59,6 +59,7 @@ export function oilPowerOptIn(powerOnly = true) {
   });
 }
 
+
 /**
  * Oil SOI optIn
  * @return promise with updated cookie value
@@ -72,6 +73,7 @@ export function oilOptIn() {
     resolve(true);
   });
 }
+
 
 /**
  * Oil optLater
@@ -87,6 +89,7 @@ export function oilOptLater() {
   });
 }
 
+
 /**
  * Oil optClose
  * @return promise with updated cookie value
@@ -101,11 +104,11 @@ export function oilOptIgnore() {
   });
 }
 
+
 /**
  * Fire a postmessage event to host site to notify of e.g. optin or optlater
  * @param eventname defined in OIL config constants keys, e.g. OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME
  */
-
 export function fireConfiguredMessageEvent(configEventName) {
   if (!config) {
     config = getConfiguration();

@@ -65,7 +65,7 @@ function injectOilWrapperInDOM(wrapper, props) {
    * Oil layer is not rendered eg. if user opted in or opted close 
    * @param {*} props 
    */
-  function renderOilLayer(props) {
+  function shouldRenderOilLayer(props) {
     return props.optIn === true ? false : props.optIgnore === true ? false : true
   }
 
@@ -77,7 +77,7 @@ function injectOilWrapperInDOM(wrapper, props) {
   }
 
   // Insert OIL into DOM
-  if (renderOilLayer(props)) {
+  if (shouldRenderOilLayer(props)) {
     document.body.insertBefore(wrapper, document.body.firstElementChild);
     addOilHandlers(getOilDOMNodes());
   }

@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie';
 import { oilOptIn, oilOptLater } from "../../src/scripts/optin";
 import { deleteAllCookies } from "../utils";
-import { getSoiOptIn, getOptLater } from '../../src/scripts/cookies.js';
+import { getSoiOptIn, hasOptedLater } from '../../src/scripts/cookies.js';
 
 describe('optin', () => {
 
@@ -12,19 +12,19 @@ describe('optin', () => {
     describe('without changes', () => {
         it('it should define default cookie', () => {
             expect(getSoiOptIn()).toBe(false);
-            expect(getOptLater()).toBe(false);
+            expect(hasOptedLater()).toBe(false);
         });
 
         it('should reset to default cookie if cookie name is not set to oil', () => {
             Cookie.set('oil_data2', { optin: false, optLater: false }, { expires: 31 });
             expect(getSoiOptIn()).toBe(false);
-            expect(getOptLater()).toBe(false);
+            expect(hasOptedLater()).toBe(false);
         });
 
         it('should reset to default cookie if cookie keys are not matching', () => {
             Cookie.set('oil_data', { optin2: false, optLater2: false }, { expires: 31 });
             expect(getSoiOptIn()).toBe(false);
-            expect(getOptLater()).toBe(false);
+            expect(hasOptedLater()).toBe(false);
         });
     });
 
@@ -33,7 +33,7 @@ describe('optin', () => {
             oilOptIn().then((optin) => {
                 expect(optin).toBe(true);
                 expect(getSoiOptIn()).toBe(true);
-                expect(getOptLater()).toBe(false);
+                expect(hasOptedLater()).toBe(false);
                 done();
             });
         });
@@ -44,7 +44,7 @@ describe('optin', () => {
             oilOptLater().then((optlater) => {
               expect(optlater).toBe(true);
               expect(getSoiOptIn()).toBe(false);
-              expect(getOptLater()).toBe(true);
+              expect(hasOptedLater()).toBe(true);
                 done();
             });
         });

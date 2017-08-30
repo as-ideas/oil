@@ -5,95 +5,82 @@ import { initOilFrame } from "./scripts/iframe.listener.js";
 import { logInfo } from './scripts/log.js';
 import { getConfiguration, isDevMode, gaTrackEvent } from './scripts/config.js';
 import { OIL_CONFIG } from './scripts/constants.js';
-import Cookie from 'js-cookie';
-import { isBrowserCookieEnabled } from './scripts/utils.js';
-import { getOptLater, getOptIgnore } from './scripts/cookies.js';
+import { isBrowserCookieEnabled, hasGALoaded } from './scripts/utils.js';
+import { hasOptedLater, hasOptedIgnore, isDeveloperCookieSet } from './scripts/cookies.js';
 
+
+/**
+ * Config Object
+ * We store and cache our config in this object, later on...
+ */
 let config = null;
 
-function isDeveloperCookieSet() {
-  return Cookie.get('oil_developer') === 'true';
-}
-
 
 /**
- * Defer Google Analytics (GA) tracking event. This is needed because we have to wait
- * for GA to be loaded and initialized by the host site, which we don't control...
- * Old way: window.setTimeout(() => {gaTrackEvent('Loaded/Initial')}, 2000);
- */
-
-// See https://stackoverflow.com/questions/1954910/javascript-detect-if-google-analytics-is-loaded-yet
-
-const checkIfAnalyticsLoaded = () => {
-  return new Promise((resolve, reject) => {
-    let timeStart = Date.now();
-    const TIMEOUT = 5000;
-
-  const _isLoaded = () => {
-    if (Date.now() - timeStart > TIMEOUT) {
-      reject("Timeout: Google Analytics not found in page");
-      return;
-    }
-    if (window.ga && window.ga.create) {
-      resolve(window.ga);
-      return;
-    } else {
-      setTimeout(_isLoaded, 500);
-    }
-  };
-
-  _isLoaded();
-  });
-};
-
-
-/**
- * Initialize the Oil Layer on Host Site side.
- * 
+ * Initialize Oil on Host Site
+ * This functions gets called directly after Oil has loaded
  */
 export function initOilLayer() {
   logInfo('Init OilLayer');
 
-  if (!config) {
+  // Fill config object with configuration data once and for all
+    if (config === null) {
     config = getConfiguration();
   }
 
-  if (config) {
-    if (!isDevMode() || isDeveloperCookieSet()) {
-      if (!isBrowserCookieEnabled()) {
-        logInfo('This browser doesn\'t allow cookies.');
-        renderOil(oilWrapper, {noCookie: true});
-        gaTrackEvent('Loaded/No cookies', 1);
-        return;
-      }
 
-      checkOptIn().then((optin) => {
-        registerOptOutListener();
-        if (optin) {
-          fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_IN_EVENT_NAME);
-        }
-        else if (getOptIgnore()) {
-          fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_IGNORE_EVENT_NAME);
-          gaTrackEvent('Loaded/Ignored', 1);
-        }
-        else if (getOptLater()) {
-          renderOil(oilWrapper, {optLater: true});
-          fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_LATER_EVENT_NAME);
-          gaTrackEvent('Loaded/Later', 1);
-        }
-        else {
-          renderOil(oilWrapper, {optLater: false});
-          // Check for GA and send event 
-          checkIfAnalyticsLoaded()
-            .then(() => {
-              gaTrackEvent('Loaded/Initial', 1);
-            })
-            .catch((e) => {
-              logInfo(e)
-            })
-        }
-      });
+  /**
+   * We show OIL depending on the following conditions:
+   * With Dev Mode turned on, we only show Oil if a developer cookie is set
+   */
+  if (!isDevMode() || isDeveloperCookieSet()) {
+    
+    /**
+     * Cookies are not enabled
+     */
+    if (!isBrowserCookieEnabled()) {
+      logInfo('This browser doesn\'t allow cookies.');
+      renderOil(oilWrapper, {noCookie: true});
+      gaTrackEvent('Loaded/No cookies', 1);
+      return;
     }
+
+    /**
+     * We read our cookie and get an optin value, true or false
+     */
+    checkOptIn().then((optin) => {
+      registerOptOutListener();
+      /**
+       * User has opted in
+       */
+      if (optin) {
+        fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_IN_EVENT_NAME);
+      }
+      /**
+       * User has opted ignore
+       */
+      else if (hasOptedIgnore()) {
+        fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_IGNORE_EVENT_NAME);
+        gaTrackEvent('Loaded/Ignored', 1);
+      }
+      /**
+       * User has opted later
+       */
+      else if (hasOptedLater()) {
+        renderOil(oilWrapper, {optLater: true});
+        fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_LATER_EVENT_NAME);
+        gaTrackEvent('Loaded/Later', 1);
+      }
+      /**
+       * Any other case
+       */
+      else {
+        renderOil(oilWrapper, {optLater: false});
+        hasGALoaded()
+          .then(() => gaTrackEvent('Loaded/Initial', 1))
+          .catch((e) => logInfo(e))
+      }
+    });
   }
 }
 

@@ -25,7 +25,6 @@ function receiveOptOutMessage(event) {
         logInfo("OptOut Received.");
         // Update Oil cookie
         removeSubscriberCookies();
-        // Cookie.remove(getOilCookieConfig().name);
       }
     }
   }
