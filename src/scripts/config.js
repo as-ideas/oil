@@ -3,9 +3,6 @@ import { extend } from "./utils";
 import { logInfo, logError } from './log';
 
 const defaultConfig = {
-  'hub_origin': '',
-  'hub_path': '',
-  'subscriber_set_cookie': true,
   'opt_in_event_name': 'oil_optin_done',
   'opt_out_event_name': 'oil_optout_trigger',
   'opt_later_event_name': 'oil_optlater_trigger',
@@ -15,7 +12,6 @@ const defaultConfig = {
   'has_opted_ignore_event_name': 'oil_has_optedignore',
   'developer_mode': 'true',
   'cookie_expires_in_days' : 31,
-  'activate_poi': false,
   'privacy_page_url': undefined,
   'ga_tracking': 0,
   'productionDebugMode': false,
@@ -28,7 +24,12 @@ const defaultConfig = {
   "label_button_yes_soi": "Jetzt zustimmen",
   "label_button_yes_poi": "Global zustimmen",
   "label_button_no": "Nein, jetzt nicht",
-  "label_button_privacy": "Mehr erfahren"
+  "label_button_privacy": "Mehr erfahren",
+  'poi_activate_poi': false,
+  'poi_hub_origin': '',
+  'poi_hub_path': '',
+  'poi_subscriber_set_cookie': true,
+  'oil_ignore': false
 };
 
 let cachedConfig = null;

@@ -21,7 +21,8 @@ export const OIL_CONFIG = {
   ATTR_COOKIE_EXPIRES_IN_DAYS: 'cookie_expires_in_days',
   ATTR_TIMESTAMP: 'timestamp',
   ATTR_PRIVACY_PAGE_URL: 'privacy_page_url',
-  ATTR_GA_TRACKING: 'ga_tracking'
+  ATTR_GA_TRACKING: 'ga_tracking',
+  ATTR_OIL_IGNORE: 'oil_ignore'
 };
 
 export const POI_FALLBACK_NAME = 'fallback';
