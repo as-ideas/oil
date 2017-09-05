@@ -7,23 +7,21 @@
 
 // Generate the right prefix for empty and non empty strings
 // So for an empty prefix our CSS classes are .oil, otherwise our CSS classes will look
-// like .prefix-oil  
+// like .prefix-oil
 
 @function CSSPrefix($str) {
   @if $str == "" {
     @return #{$str};
-  } 
-  @else {
+  } @else {
     @return #{$str}-;
   }
-} 
+}
 
-// Set Oil CSS prefix here, the prefix has to be in sync with a Javascript file, 
+// Set Oil CSS prefix here, the prefix has to be in sync with a Javascript file,
 // see modal.js                                  ------------------------------
 // ------------
 
 $prefix: CSSPrefix("as");
-
 
 /**
  * Define media queries,
@@ -31,44 +29,39 @@ $prefix: CSSPrefix("as");
  */
 
 $breakpoints: (
-  'phone':   580px,
-  'tablet':  768px,
+  'phone': 580px,
+  'tablet': 768px,
   'desktop': 1024px
 ) !default;
-
 
 /**
  * Import Media query library
  * Pretty Nice!
  */
 
-@import  "./node_modules/include-media/dist/_include-media.scss";
-
+@import "./node_modules/include-media/dist/_include-media.scss";
 
 /**
  * Config Data
  *
  */
 
-$text-color-primary:    rgba(255,255,255,0.85);
-$text-color-secondary:  rgb(70,200,120);
-$text-color-dark:       rgb(43, 43, 43);
-$btn-primary:           rgb(50,170,100);
-$btn-secondary:           transparent;
+$text-color-primary: rgba(255, 255, 255, 0.85);
+$text-color-secondary: rgb(70, 200, 120);
+$text-color-dark: rgb(43, 43, 43);
+$btn-primary: rgb(50, 170, 100);
+$btn-secondary: transparent;
 
-$layout-max-width:  1280px; 
-
+$layout-max-width: 1280px;
 
 // Our Oil overlay needs to trump every other element, so we need the highest possible z-index
 // which is the following number
 
 $z-index-max: 2147483647;
 
-
 // Font stack
 
 $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
 
 /**
  * Mixins
@@ -93,7 +86,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 @mixin stack-items-remove-horizontal-margins {
   &:first-of-type {
     margin-top: 0;
@@ -104,20 +96,18 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 /**
  * Clearfix
  *
  */
 
- @mixin clearfix {
-   &:after {
+@mixin clearfix {
+  &:after {
     content: "";
     display: table;
     clear: both;
-   }
- }
-
+  }
+}
 
 /**
  * Adds font-smoothing for text
@@ -125,17 +115,16 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  */
 
 @mixin font-smoothing {
-  -webkit-font-smoothing:  antialiased;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 /**
  * Changes box model, defaults to border-box
  *
  */
 
- @mixin box-model($model: border-box) {
+@mixin box-model($model: border-box) {
   &,
   & * {
     box-sizing: $model;
@@ -145,8 +134,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
       box-sizing: $model;
     }
   }
- }
-
+}
 
 /**
  * Utils
@@ -156,7 +144,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 .no-break {
   white-space: nowrap;
 }
-
 
 /**
  * Our OIL Overlay
@@ -170,11 +157,10 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   position: fixed;
   z-index: $z-index-max;
   bottom: 0;
-  width:  100%;
+  width: 100%;
   font-family: $font-stack;
   color: $text-color-primary;
 }
-
 
 /**
  * Wraps all our Oil content, eg. text and buttons
@@ -183,9 +169,9 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 .#{$prefix}oil-content-overlay {
   @include clearfix;
   position: absolute;
-  width:   100%;
-  bottom:  0;
-  left:    0;
+  width: 100%;
+  bottom: 0;
+  left: 0;
   padding: 2rem 5rem;
   background-color: rgba(40, 40, 40, 0.98);
 
@@ -198,9 +184,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 /**
- * Add gradient to expanded overlay 
+ * Add gradient to expanded overlay
  *
  */
 
@@ -209,24 +194,23 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     content: "";
     position: absolute;
     pointer-events: none;
-    width:  100%;
+    width: 100%;
     height: 100%;
-    top:   -100%;
-    left:   0;
-    background-image: linear-gradient(rgba(255,255,255,0), rgb(0, 0, 0));
+    top: -100%;
+    left: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgb(0, 0, 0));
 
     @include media('<=phone') {
       height: 50px;
-      top:   -50px;
+      top: -50px;
     }
 
     @include media('>phone', '<desktop') {
       height: 50%;
-      top:   -50%;
+      top: -50%;
     }
   }
 }
-
 
 /**
  * Text Styles
@@ -251,7 +235,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 .#{$prefix}oil__intro-txt {
   max-width: 980px;
   margin: 1rem 0;
@@ -266,9 +249,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 .#{$prefix}oil__intro-txt--link {
-  padding: 4px; 
+  padding: 4px;
   color: $text-color-secondary;
   text-decoration: none;
   border-bottom: 1px solid;
@@ -278,7 +260,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 /**
  * Button Styles
  *
@@ -287,9 +268,9 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 // Mixins
 
 @mixin btn-poi-soi-shared {
-  min-width:  250px;
+  min-width: 250px;
   min-height: 50px;
-  margin:   0;
+  margin: 0;
   padding: 0.5rem 1rem;
   font-size: 0.875rem; // 14px
   font-weight: 400;
@@ -300,7 +281,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   @include media('<=phone') {
     width: 100%;
-    min-width:  auto;
+    min-width: auto;
     min-height: 40px;
     padding: 0;
   }
@@ -310,7 +291,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     min-height: 40px;
   }
 }
-
 
 @mixin btn-poi {
   color: $text-color-dark;
@@ -323,7 +303,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-image: linear-gradient(35deg, darken($btn-primary, 8%), darken(rgb(70, 200, 100), 8%));
   }
 }
-
 
 @mixin btn-soi {
   color: $text-color-primary;
@@ -338,14 +317,12 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
-// Power Optin Button Declaration 
+// Power Optin Button Declaration
 
 .#{$prefix}oil__btn-poi {
   @include btn-poi-soi-shared;
   @include btn-poi;
 }
-
 
 // Site Optin Button Declaration
 
@@ -353,7 +330,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   @include btn-poi-soi-shared;
   @include btn-soi;
 }
-
 
 // Later Optin Button Declaration
 
@@ -380,21 +356,20 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   @include media('<=phone') {
     float: none;
     width: 100%;
-    margin: 1rem 0;  // We are vertically aligning this btn by using margins, which is a bit dirty 
+    margin: 1rem 0; // We are vertically aligning this btn by using margins, which is a bit dirty
     font-size: 0.75rem;
     border-bottom: none;
   }
 
   @include media('>phone', '<desktop') {
-    // We are vertically aligning this btn by using margins, which is a bit dirty 
+    // We are vertically aligning this btn by using margins, which is a bit dirty
     margin: 0.25rem 0;
   }
 }
 
-
 /**
  * Later Optin Overlay LOI
- * 
+ *
  */
 
 // Text styles
@@ -416,7 +391,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 .#{$prefix}oil-loi__intro-txt {
   margin: 1rem 0;
   font-size: 0.875rem;
@@ -434,7 +408,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 /**
  * Button Styles
  *
@@ -449,24 +422,20 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0.5rem 0;
 }
 
-
 @mixin oil-loi-btn-poi {
   @include btn-poi;
 }
-
 
 @mixin oil-loi-btn-soi {
   @include btn-soi;
 }
 
-
-// Loi Power Optin Button Declaration 
+// Loi Power Optin Button Declaration
 
 .#{$prefix}oil-loi__btn-poi {
   @include oil-loi-btn-poi-soi-shared;
   @include btn-poi;
 }
-
 
 // Loi Site Optin Button Declaration
 
@@ -475,12 +444,10 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   @include btn-soi;
 }
 
-
 /**
  * Layout Stuff
  *
  */
-
 
 .#{$prefix}oil-l-row {
   margin: 2rem 0;
@@ -500,22 +467,20 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 .#{$prefix}oil-l-row--fixed-width,
 .#{$prefix}oil-l-wrapper-layout-max-width {
   max-width: $layout-max-width;
-  margin: 0 auto; 
-  
+  margin: 0 auto;
+
   @include media('>phone', '<desktop') {
     padding-right: 1rem; // Make space for our absolute positioned close button
   }
 }
 
-
 .#{$prefix}oil-l-item {
   float: left; // Fallback for non flexbox capable browsers
   margin: 0 0.5rem;
-  
+
   @supports (display: flex) {
     float: none;
   }
@@ -535,14 +500,11 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 .#{$prefix}oil-l-item--stretch {
   @supports (display: flex) {
     flex: 1;
   }
 }
-
-
 
 /**
  * Close Button
@@ -551,12 +513,12 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .#{$prefix}oil-close {
   position: absolute;
-  top:   1rem;
+  top: 1rem;
   right: 1rem;
-  width:  1.5rem;
+  width: 1.5rem;
   height: 1.5rem;
   padding: 0.25rem;
-  fill: rgb(255,255,255);
+  fill: rgb(255, 255, 255);
   opacity: 0.66;
   cursor: pointer;
   user-select: none;
@@ -567,9 +529,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 .#{$prefix}oil-icon-close {
   display: block;
-  width:  0.875rem;
+  width: 0.875rem;
   height: 0.875rem;
 }

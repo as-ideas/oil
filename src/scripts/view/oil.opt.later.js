@@ -11,8 +11,8 @@ let config = getConfiguration();
  * Returned element is used to ignore Oil completely
  */
 const OilIgnore = (oilIgnore) => {
-    return oilIgnore === true ?  (
-        `
+  return oilIgnore === true ? (
+    `
         <div class="${CSSPrefix}oil-close js-optignore" data-qa="oil-closeButton">
             <svg class="${CSSPrefix}oil-icon-close" width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
                 <g fill-rule="evenodd">
@@ -21,8 +21,8 @@ const OilIgnore = (oilIgnore) => {
                 </g>
             </svg>
         </div>
-        `    
-    ) : ``;
+        `
+  ) : '';
 };
 
 
@@ -30,7 +30,7 @@ const OilIgnore = (oilIgnore) => {
  * Opt Later Template
  */
 export const oilOptLaterTemplate =
-    `
+  `
     <div class="${CSSPrefix}oil-content-overlay" data-qa="oil-optlater">
         ${OilIgnore(config[OIL_CONFIG.ATTR_OIL_IGNORE])}
         <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-row--fixed-width">

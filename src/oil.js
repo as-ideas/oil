@@ -1,7 +1,7 @@
-import { renderOil, oilWrapper } from "./scripts/modal.js";
-import { checkOptIn, fireConfiguredMessageEvent } from "./scripts/optin.js";
-import { registerOptOutListener } from "./scripts/optout.js";
-import { initOilFrame } from "./scripts/iframe.listener.js";
+import { renderOil, oilWrapper } from './scripts/modal.js';
+import { checkOptIn, fireConfiguredMessageEvent } from './scripts/optin.js';
+import { registerOptOutListener } from './scripts/optout.js';
+import { initOilFrame } from './scripts/iframe.listener.js';
 import { logInfo } from './scripts/log.js';
 import { getConfiguration, isDevMode, gaTrackEvent } from './scripts/config.js';
 import { OIL_CONFIG } from './scripts/constants.js';
@@ -24,7 +24,7 @@ export function initOilLayer() {
   logInfo('Init OilLayer');
 
   // Fill config object with configuration data once and for all
-    if (config === null) {
+  if (config === null) {
     config = getConfiguration();
   }
 
@@ -34,7 +34,7 @@ export function initOilLayer() {
    * With Dev Mode turned on, we only show Oil if a developer cookie is set
    */
   if (!isDevMode() || isDeveloperCookieSet()) {
-    
+
     /**
      * Cookies are not enabled
      */

@@ -1,16 +1,16 @@
-import { isDev } from "./utils";
+import { isDev } from './utils';
 
 /**
  * Allow 'console logs' Logging Output in Production Environments
  * Useful in some cases when you have to debug on test servers
  */
 
-import { allowProductionDebugMode } from "./config";
+import { allowProductionDebugMode } from './config';
 
 
 function concatLogArguments(args) {
   let concatedString = '';
-  for (var i = 0; i < args.length; i++) {
+  for (let i = 0; i < args.length; i++) {
     concatedString = concatedString + args[i];
   }
   return concatedString;
@@ -22,7 +22,8 @@ function concatLogArguments(args) {
  */
 function fixLogging() {
   if (!window.console) window.console = {};
-  if (!window.console.log) window.console.log = function () { };
+  if (!window.console.log) window.console.log = function () {
+  };
 }
 
 
@@ -39,7 +40,8 @@ export function logError() {
       } catch (e) {
         try {
           window.console.error(concatLogArguments(arguments));
-        } catch (ignored) {}
+        } catch (ignored) {
+        }
       }
     } else {
       window.console.log(concatLogArguments(arguments));
@@ -61,7 +63,8 @@ export function logInfo() {
       } catch (e) {
         try {
           window.console.info(concatLogArguments(arguments));
-        } catch (ignored) {}
+        } catch (ignored) {
+        }
       }
     } else {
       window.console.log(concatLogArguments(arguments));

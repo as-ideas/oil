@@ -73,7 +73,7 @@ function setSessionCookie(name, value) {
 
 
 function setDomainCookie(name, value, expires_in_days) {
-  Cookie.set(name, value, { expires: expires_in_days });
+  Cookie.set(name, value, {expires: expires_in_days});
 }
 
 
@@ -118,12 +118,12 @@ function getOilHubDomainCookie() {
 
 /**
  * Public Interface
- *  
+ *
  */
 
 export function setSoiOptIn(value) {
   let cookie = getOilDomainCookie();
-  if(value !== cookie.opt_in) {
+  if (value !== cookie.opt_in) {
     cookie.opt_in = value;
     cookie.timestamp = getClientTimestamp();
     setDomainCookie(getOilDomainCookieConfig().name, cookie, getOilDomainCookieConfig().expires);
@@ -133,7 +133,7 @@ export function setSoiOptIn(value) {
 
 export function setOptLater(value) {
   let cookie = getOilSessionCookie();
-  if(value !== cookie.opt_later) {
+  if (value !== cookie.opt_later) {
     cookie.opt_later = value;
     setSessionCookie(getOilSessionCookieConfig().name, cookie);
   }
@@ -142,7 +142,7 @@ export function setOptLater(value) {
 
 export function setPoiOptIn(value) {
   let cookie = getOilHubDomainCookie();
-  if(value !== cookie.power_opt_in) {
+  if (value !== cookie.power_opt_in) {
     cookie.power_opt_in = value;
     cookie.timestamp = getClientTimestamp();
     setDomainCookie(getOilHubDomainCookieConfig().name, cookie, getOilHubDomainCookieConfig().expires);
@@ -152,7 +152,7 @@ export function setPoiOptIn(value) {
 
 export function setOilOptIgnore(value) {
   let cookie = getOilSessionCookie();
-  if(value !== cookie.opt_ignore) {
+  if (value !== cookie.opt_ignore) {
     cookie.opt_ignore = value;
     setSessionCookie(getOilSessionCookieConfig().name, cookie);
   }

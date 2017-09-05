@@ -7,7 +7,7 @@ let initComplete = false;
 function parseJson(data) {
   try {
     return (typeof data !== 'object' ? JSON.parse(data) : data);
-  } catch(err) {
+  } catch (err) {
     logInfo('OIL Hub - couldnt parse following data:', data);
     return false;
   }
@@ -15,17 +15,17 @@ function parseJson(data) {
 
 function handler(message) {
   let parsedMessage = parseJson(message.data),
-      poiOptin = null;
+    poiOptin = null;
 
   logInfo('OIL Hub - Got following parent data:', parsedMessage);
   // only react on our data
   // tag::hub-listener[]
   if (parsedMessage) {
     if (parsedMessage.event && parsedMessage.event.indexOf('oil-') !== -1) {
-      
+
       let event = parsedMessage.event,
-          origin = parsedMessage.origin;
-      
+        origin = parsedMessage.origin;
+
       switch (event) {
         case 'oil-poi-activate':
           logInfo('OIL Hub - activating POI ');
