@@ -18,7 +18,7 @@ let DOCUMENT_ROOT = __dirname + '/dist';
 // end::cors-express[]
 let allowCrossDomain = function (req, res, next) {
   //res.header('Content-Security-Policy', 'script-src \'self\' *');
-  for (key in headerConfig.headers) {
+  for (let key in headerConfig.headers) {
     // skip loop if the property is from prototype
     if (!headerConfig.headers.hasOwnProperty(key)) continue;
     // copy header config
@@ -45,7 +45,7 @@ app.all(allowCrossDomain);
 // app.use(auth.connect(basic));
 
 // static with cache headers
-app.use(serveStatic(DOCUMENT_ROOT, { maxAge: CACHE_DURATION, cacheControl: true }));
+app.use(serveStatic(DOCUMENT_ROOT, {maxAge: CACHE_DURATION, cacheControl: true}));
 
 console.log('server is now starting on port ', port);
 app.listen(port, '0.0.0.0');
