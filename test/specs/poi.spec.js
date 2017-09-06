@@ -1,6 +1,6 @@
-import { activatePowerOptInWithIFrame, verifyPowerOptIn } from "../../src/scripts/poi";
-import { loadFixture, deleteAllCookies } from "../utils";
-import { resetConfiguration } from "../../src/scripts/config";
+import { activatePowerOptInWithIFrame, verifyPowerOptIn } from '../../src/scripts/poi';
+import { loadFixture, deleteAllCookies } from '../utils';
+import { resetConfiguration } from '../../src/scripts/config';
 
 describe('poi', () => {
 
@@ -25,28 +25,28 @@ describe('poi', () => {
     loadFixture('poi/poi.config-error.html');
 
     activatePowerOptInWithIFrame().then(() => verifyPowerOptIn().then((optin) => {
-      expect(optin).toBe(false);
-      done();
-    })
+        expect(optin).toBe(false);
+        done();
+      })
     );
   });
 
   it('should disable POI on config error', (done) => {
     loadFixture('poi/poi.wrong-iframe.html');
     activatePowerOptInWithIFrame().then(() => verifyPowerOptIn().then((optin) => {
-      expect(optin).toBe(false);
-      done();
-    })
+        expect(optin).toBe(false);
+        done();
+      })
     );
   });
 
   it('should activate POI', (done) => {
     loadFixture('poi/poi.default.html');
     activatePowerOptInWithIFrame().then(() => verifyPowerOptIn().then((optin) => {
-      expect(optin).toBeDefined();
-      expect(optin).toBe(true);
-      done();
-    })
+        expect(optin).toBeDefined();
+        expect(optin).toBe(true);
+        done();
+      })
     );
   });
 

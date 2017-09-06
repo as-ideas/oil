@@ -1,6 +1,6 @@
-import { OIL_CONFIG } from "../../src/scripts/constants";
-import { getConfiguration, readConfiguration, resetConfiguration } from "../../src/scripts/config";
-import { loadFixture } from "../utils";
+import { OIL_CONFIG } from '../../src/scripts/constants';
+import { getConfiguration, readConfiguration, resetConfiguration } from '../../src/scripts/config';
+import { loadFixture } from '../utils';
 
 describe('configuration', () => {
 
@@ -44,7 +44,7 @@ describe('configuration', () => {
       'poi_hub_path': '/end2end-tests/complete-integration-mypass.html',
       'poi_subscriber_set_cookie': false
     };
-    let parsedConfig = readConfiguration({ text: JSON.stringify(config) });
+    let parsedConfig = readConfiguration({text: JSON.stringify(config)});
     expect(parsedConfig).toBeDefined();
     expect(parsedConfig[OIL_CONFIG.ATTR_HUB_ORIGIN]).toBe('http://oil-integration-cdn.herokuapp.com');
     expect(parsedConfig[OIL_CONFIG.ATTR_HUB_PATH]).toBe('/end2end-tests/complete-integration-mypass.html');
