@@ -1,5 +1,5 @@
 import { OIL_CONFIG } from './constants.js';
-import { extend } from "./utils";
+import { extend } from './utils';
 import { logInfo, logError } from './log';
 
 const defaultConfig = {
@@ -11,20 +11,20 @@ const defaultConfig = {
   'has_opted_later_event_name': 'oil_has_optedlater',
   'has_opted_ignore_event_name': 'oil_has_optedignore',
   'developer_mode': 'true',
-  'cookie_expires_in_days' : 31,
+  'cookie_expires_in_days': 31,
   'privacy_page_url': undefined,
   'ga_tracking': 0,
   'productionDebugMode': false,
-  "label_intro_heading": "Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis",
-  "label_later_heading": "Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis",
-  "label_intro_start": "Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.",
-  "label_intro_end": "Jetzt Einverständnis erklären:",
-  "label_later_start": "Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen. In unseren Datenschutzbestimmungen erfahren Sie, wie Sie Cookies deaktivieren können",
-  "label_later_end": "Jetzt Einverständnis erklären:",
-  "label_button_yes_soi": "Jetzt zustimmen",
-  "label_button_yes_poi": "Global zustimmen",
-  "label_button_no": "Nein, jetzt nicht",
-  "label_button_privacy": "Mehr erfahren",
+  'label_intro_heading': 'Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis',
+  'label_later_heading': 'Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis',
+  'label_intro_start': 'Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.',
+  'label_intro_end': 'Jetzt Einverständnis erklären:',
+  'label_later_start': 'Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen. In unseren Datenschutzbestimmungen erfahren Sie, wie Sie Cookies deaktivieren können',
+  'label_later_end': 'Jetzt Einverständnis erklären:',
+  'label_button_yes_soi': 'Jetzt zustimmen',
+  'label_button_yes_poi': 'Global zustimmen',
+  'label_button_no': 'Nein, jetzt nicht',
+  'label_button_privacy': 'Mehr erfahren',
   'poi_activate_poi': false,
   'poi_hub_origin': '',
   'poi_hub_path': '',
@@ -92,8 +92,8 @@ export function readConfiguration(configurationElement) {
     if (configurationElement && configurationElement.text) {
       parsedConfig = JSON.parse(configurationElement.text);
       // normalize path and origin with protocol prefix
-      parsedConfig[OIL_CONFIG.ATTR_HUB_ORIGIN]  = getHubDomain(parsedConfig);
-      parsedConfig[OIL_CONFIG.ATTR_HUB_LOCATION]  = getHubLocation(parsedConfig);
+      parsedConfig[OIL_CONFIG.ATTR_HUB_ORIGIN] = getHubDomain(parsedConfig);
+      parsedConfig[OIL_CONFIG.ATTR_HUB_LOCATION] = getHubLocation(parsedConfig);
       logInfo('Got the following parsed config', parsedConfig);
     }
   } catch (errorDetails) {
@@ -108,7 +108,7 @@ export function readConfiguration(configurationElement) {
  * @returns Object parsed config
  */
 export function getConfiguration() {
-  if(!cachedConfig) {
+  if (!cachedConfig) {
     let configurationElement = document.querySelector('script[type="application/configuration"]#oil-configuration');
     if (configurationElement === null) {
       logInfo('No configuration script found, using default values');
@@ -156,11 +156,11 @@ export function gaTrackEvent(eventAction, nonInteraction) {
   cachedConfig = getConfiguration();
   let gaTracking = cachedConfig[OIL_CONFIG.ATTR_GA_TRACKING];
 
-  logInfo("OIL gaTrackEvent config=" + gaTracking + " eventAction=" + eventAction + " nonInteraction=" + nonInteraction);
+  logInfo('OIL gaTrackEvent config=' + gaTracking + ' eventAction=' + eventAction + ' nonInteraction=' + nonInteraction);
 
-  if(gaTracking && window.ga && (typeof window.ga !== "undefined" && window.ga.loaded)) { 
-      // the following line throws a 'ga is not defined' warning, because ga is a method provided by the Google Analytics script
-      window.ga('send', 'event', 'OIL', eventAction, {'nonInteraction': nonInteraction});
+  if (gaTracking && window.ga && (typeof window.ga !== 'undefined' && window.ga.loaded)) {
+    // the following line throws a 'ga is not defined' warning, because ga is a method provided by the Google Analytics script
+    window.ga('send', 'event', 'OIL', eventAction, {'nonInteraction': nonInteraction});
   }
 }
 

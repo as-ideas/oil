@@ -22,7 +22,7 @@ export function extend() {
     length = arguments.length;
 
   function merge(obj) {
-    for (var prop in obj) {
+    for (let prop in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, prop)) {
         // If deep merge and property is an object, merge properties
         if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
@@ -42,7 +42,7 @@ export function extend() {
 
   // Loop through each object and conduct a merge
   for (; i < length; i++) {
-    var obj = arguments[i];
+    let obj = arguments[i];
     merge(obj);
   }
 
@@ -57,10 +57,10 @@ export function extend() {
  */
 export function isProd() {
   switch (process.env.NODE_ENV) {
-    case "production":
-    case "prod":
+    case 'production':
+    case 'prod':
       return true;
-    default: 
+    default:
       return false;
   }
 }
@@ -73,10 +73,10 @@ export function isProd() {
  */
 export function isDev() {
   switch (process.env.NODE_ENV) {
-    case "development":
-    case "dev":
+    case 'development':
+    case 'dev':
       return true;
-    default: 
+    default:
       return false;
   }
 }
@@ -101,8 +101,8 @@ export function sendEventToHostSite(eventName) {
  */
 export function isDOMElement(o) {
   return (
-    typeof HTMLElement === "object" ? o instanceof HTMLElement : // DOM2
-      o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName === "string"
+    typeof HTMLElement === 'object' ? o instanceof HTMLElement : // DOM2
+      o && typeof o === 'object' && o !== null && o.nodeType === 1 && typeof o.nodeName === 'string'
   );
 }
 
@@ -170,7 +170,7 @@ export function cookieDataHasKeys(name, data) {
  */
 export function getOrigin() {
   if (!window.location.origin) {
-    window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+    window.location.origin = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
   }
   return window.location.origin
 }
@@ -220,7 +220,9 @@ export function registerMessageListener(callback) {
  */
 export function getClientTimestamp() {
   if (!Date.now) {
-    Date.now = function() { return new Date().getTime(); }
+    Date.now = function () {
+      return new Date().getTime();
+    }
   }
 
   return Date.now();
@@ -245,7 +247,7 @@ export const hasGALoaded = () => {
 
     const _isLoaded = () => {
       if (Date.now() - timeStart > TIMEOUT) {
-        reject("Timeout: Google Analytics not found in page");
+        reject('Timeout: Google Analytics not found in page');
         return;
       }
       if (window.ga && window.ga.create) {
@@ -256,7 +258,7 @@ export const hasGALoaded = () => {
       }
     };
 
-    GATracking === 0 ? reject("Google Analytics not enabled in configuration") : _isLoaded();
-    
+    GATracking === 0 ? reject('Google Analytics not enabled in configuration') : _isLoaded();
+
   });
 };

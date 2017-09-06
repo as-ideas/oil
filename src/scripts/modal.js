@@ -1,7 +1,7 @@
-import "../styles/modal.scss";
+import '../styles/modal.scss';
 import { getConfiguration, gaTrackEvent } from './config.js';
 import { OIL_CONFIG, DATAQA_BUTTON_YES } from './constants.js';
-import { oilOptIn, oilPowerOptIn,  oilOptLater, oilOptIgnore } from "./optin.js";
+import { oilOptIn, oilPowerOptIn, oilOptLater, oilOptIgnore } from './optin.js';
 import { oilDefaultTemplate } from './view/oil.default.js';
 import { oilOptLaterTemplate } from './view/oil.opt.later.js';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
@@ -62,8 +62,8 @@ function writeOilContentToWrapper(wrapper, props) {
 function injectOilWrapperInDOM(wrapper, props) {
   /**
    * Helper that determines if Oil layer is shown or not...
-   * Oil layer is not rendered eg. if user opted in or opted close 
-   * @param {*} props 
+   * Oil layer is not rendered eg. if user opted in or opted close
+   * @param {*} props
    */
   function shouldRenderOilLayer(props) {
     return props.optIn === true ? false : props.optIgnore === true ? false : true
@@ -92,11 +92,11 @@ function injectOilWrapperInDOM(wrapper, props) {
 
 function getOilDOMNodes() {
   return {
-    oilWrapper:  document.querySelector(`.${CSSPrefix}oil`),
+    oilWrapper: document.querySelector(`.${CSSPrefix}oil`),
     btnSoiOptIn: document.querySelector(`.${CSSPrefix}oil .js-optin`),
     btnPoiOptIn: document.querySelector(`.${CSSPrefix}oil .js-optin-poi`),
     btnOptLater: document.querySelector(`.${CSSPrefix}oil .js-optlater`),
-    btnClose:    document.querySelector(`.${CSSPrefix}oil .js-optignore`)
+    btnClose: document.querySelector(`.${CSSPrefix}oil .js-optignore`)
   }
 }
 
@@ -120,7 +120,7 @@ function handleOptLater() {
 function handleSoiOptIn() {
   oilOptIn().then((cookieOptIn) => {
     renderOil(oilWrapper, {optIn: cookieOptIn});
-    if (this.getAttribute("data-qa") === DATAQA_BUTTON_YES){
+    if (this.getAttribute('data-qa') === DATAQA_BUTTON_YES) {
       gaTrackEvent('SOI/yes-1', 0);
     } else {
       gaTrackEvent('SOI/yes-2', 0);
@@ -140,7 +140,7 @@ function handlePoiOptIn() {
 function handleOilIgnore() {
   oilOptIgnore().then((cookieOptIgnore) => {
     renderOil(oilWrapper, {optIgnore: cookieOptIgnore});
-    if(config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
+    if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
       gaTrackEvent('Ignored', 0);
     }
   });

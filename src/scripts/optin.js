@@ -40,14 +40,14 @@ export function oilPowerOptIn(powerOnly = true) {
   }
 
   return new Promise((resolve) => {
-    if(isPoiActive()) {
+    if (isPoiActive()) {
       // Update Oil cookie (mypass - POI)
       activatePowerOptInWithIFrame();
 
       // Check if fallback is needed
       verifyPowerOptIn().then((result) => {
         if (result !== true) {
-          logInfo("iFrame POI didnt work. Trying fallback now.");
+          logInfo('iFrame POI didnt work. Trying fallback now.');
           activatePowerOptInWithRedirect();
         }
       });

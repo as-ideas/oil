@@ -20,9 +20,9 @@ function receiveOptOutMessage(event) {
 
   if (config) {
     let optOutEventName = config[OIL_CONFIG.ATTR_OPT_OUT_EVENT_NAME];
-    if (event && event.data && typeof(event.data.indexOf) !== "undefined") {
+    if (event && event.data && typeof(event.data.indexOf) !== 'undefined') {
       if (event.data.indexOf(optOutEventName) !== -1) {
-        logInfo("OptOut Received.");
+        logInfo('OptOut Received.');
         // Update Oil cookie
         removeSubscriberCookies();
       }

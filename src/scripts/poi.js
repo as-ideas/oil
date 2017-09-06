@@ -7,7 +7,7 @@ import { logError, logInfo } from './log.js';
 // Timeout after which promises should return
 const TIMEOUT = 500;
 let config = null,
-    frameListenerRegistered = false;
+  frameListenerRegistered = false;
 
 // INTERNAL FUNCTIONS
 
@@ -18,7 +18,7 @@ let config = null,
  */
 function init() {
   return new Promise((resolve) => setTimeout(() => {
-    logInfo("Initializing Frame...");
+    logInfo('Initializing Frame...');
     // read config data if not already set
     if (!config) {
       config = getConfiguration();
@@ -31,21 +31,22 @@ function init() {
         let iframe = addFrame(hubLocation);
         if (iframe && !iframe.onload) {
           // Listen to message from child window after iFrame load
-          iframe.onload = () => resolve({ iframe: iframe, config: config });
+          iframe.onload = () => resolve({iframe: iframe, config: config});
         } else {
           // if already loaded directly invoke
-          resolve({ iframe: iframe, config: config });
+          resolve({iframe: iframe, config: config});
         }
       } else {
         logError(`Config for ${OIL_CONFIG.ATTR_HUB_ORIGIN} and ${OIL_CONFIG.ATTR_HUB_PATH} isnt set. No POI possible.`);
-        resolve({ config: config });
+        resolve({config: config});
       }
     } else {
       logInfo('POI not active. Frame not initialized.');
-      resolve({ config: config });
+      resolve({config: config});
     }
   }));
 }
+
 /**
  * Sent given event to hidden iframe
  * @param eventName - event to sent
@@ -53,9 +54,9 @@ function init() {
  * @function
  */
 function sendEventToFrame(eventName, origin) {
-  logInfo("Send to Frame:", eventName, origin);
+  logInfo('Send to Frame:', eventName, origin);
 
-  if(!isPoiActive()) {
+  if (!isPoiActive()) {
     return;
   }
 
@@ -67,12 +68,13 @@ function sendEventToFrame(eventName, origin) {
       // tag::subscriber-postMessage[]
       // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
       // MSIE needs Strings in postMessage
-      let message = JSON.stringify({ event: eventName, origin: origin});
+      let message = JSON.stringify({event: eventName, origin: origin});
       iframe.contentWindow.postMessage(message, hubDomain);
       // end::subscriber-postMessage[]
     }
   });
 }
+
 /**
  * Read configuration from hidden iframe
  * @param origin - origin url (aka parent)
@@ -82,7 +84,7 @@ function sendEventToFrame(eventName, origin) {
 function readConfigFromFrame(origin) {
   return new Promise((resolve) => {
 
-    if(!isPoiActive()) {
+    if (!isPoiActive()) {
       resolve(false);
     }
 
@@ -99,6 +101,7 @@ function readConfigFromFrame(origin) {
       }
       // end::subscriber-receiveMessage[]
     }
+
     // defer post to next tick
     setTimeout(() => sendEventToFrame('oil-status-read', origin));
     if (!frameListenerRegistered) {
@@ -124,7 +127,7 @@ function readConfigFromFrame(origin) {
  */
 export function verifyPowerOptIn() {
   return new Promise((resolve) => {
-    if(!isPoiActive()) {
+    if (!isPoiActive()) {
       resolve(false);
     }
 
@@ -145,6 +148,7 @@ export function verifyPowerOptIn() {
     });
   });
 }
+
 /**
  * Activate Power Opt IN with the use of an iframe
  * @function
@@ -153,8 +157,8 @@ export function verifyPowerOptIn() {
 export function activatePowerOptInWithIFrame() {
   logInfo('activatePowerOptIn');
 
-  if(!isPoiActive()) {
-    return new Promise((resolve) =>  {
+  if (!isPoiActive()) {
+    return new Promise((resolve) => {
       resolve();
     });
   }
@@ -176,7 +180,7 @@ export function activatePowerOptInWithIFrame() {
  * @return
  */
 export function activatePowerOptInWithRedirect() {
-  if(!isPoiActive()) {
+  if (!isPoiActive()) {
     return;
   }
 

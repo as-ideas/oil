@@ -1,4 +1,4 @@
-import { CSSPrefix} from './oil.view.config.js';
+import { CSSPrefix } from './oil.view.config.js';
 
 export const oilNoCookiesTemplate = `
     <div class="${CSSPrefix}oil-content-overlay" data-qa="oil-nocookies">

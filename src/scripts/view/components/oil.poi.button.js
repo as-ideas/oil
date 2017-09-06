@@ -12,7 +12,7 @@ let activatePoi = config[OIL_CONFIG.ATTR_ACTIVATE_POI];
 export const POIButtonSnippet = () => {
   if (activatePoi) {
     return (
-        `
+      `
         <div class="${CSSPrefix}oil-l-item">
           <button class="${CSSPrefix}oil__btn-poi js-optin-poi" data-qa="oil-poi-YesButton">
               ${config.label_button_yes_poi}
