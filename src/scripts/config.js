@@ -10,11 +10,10 @@ const defaultConfig = {
   'has_opted_in_event_name': 'oil_has_optedin',
   'has_opted_later_event_name': 'oil_has_optedlater',
   'has_opted_ignore_event_name': 'oil_has_optedignore',
-  'developer_mode': 'true',
+  'developer_mode': 'false',
   'cookie_expires_in_days': 31,
   'privacy_page_url': undefined,
   'ga_tracking': 0,
-  'productionDebugMode': false,
   'label_intro_heading': 'Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis',
   'label_later_heading': 'Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis',
   'label_intro_start': 'Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.',
@@ -166,12 +165,3 @@ export function gaTrackEvent(eventAction, nonInteraction) {
 
 // Make gaTrackEvents globally available, ie. for onClick events in HTML
 window.gaTrackEvent = gaTrackEvent;
-
-
-/**
- * Allow Console Logging Output in Production Environments
- * @return boolean
- */
-export const allowProductionDebugMode = () => {
-  return defaultConfig.productionDebugMode;
-}
