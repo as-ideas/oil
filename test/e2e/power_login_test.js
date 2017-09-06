@@ -1,4 +1,12 @@
-import { OIL_LAYER, OIL_YES_BUTTON, OIL_NO_BUTTON, OIL_YES_POI_SMALL_BUTTON, OIL_YES_POI_BUTTON, OIL_LAYER_FULL, OIL_LAYER_OPTLATER} from "../constants.js";
+import {
+  OIL_LAYER,
+  OIL_YES_BUTTON,
+  OIL_NO_BUTTON,
+  OIL_YES_POI_SMALL_BUTTON,
+  OIL_YES_POI_BUTTON,
+  OIL_LAYER_FULL,
+  OIL_LAYER_OPTLATER
+} from '../constants.js';
 
 const REDIRECT_TIMEOUT = 5000;
 const ASSERT_TIMEOUT = 2000;
@@ -15,7 +23,7 @@ module.exports = {
       .url(browser.globals.launch_url_host2)
       .useCss()
       .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
-    // wait for init of fake "CDN"
+    // wait for init of fake 'CDN'
     browser
       .url(browser.globals.launch_url_cdn)
       .useCss()
@@ -34,9 +42,9 @@ module.exports = {
       .click(OIL_YES_POI_BUTTON);
     browser.url((result) => {
       if (result.toString().indexOf('fallback') !== -1) {
-          browser
-            .pause(200)
-            .waitForElementNotPresent(OIL_LAYER, ASSERT_TIMEOUT);
+        browser
+          .pause(200)
+          .waitForElementNotPresent(OIL_LAYER, ASSERT_TIMEOUT);
       } else {
         browser.pause(ASSERT_TIMEOUT);
       }

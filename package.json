@@ -16,7 +16,7 @@
     "pree2e": "node etc/nightwatch.local.conf.js",
     "e2e": "mkdir -p target/reports &&./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e chrome",
     "e2esafari": "./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e safari",
-    "eslint": "eslint \"src/**/*.js\" && eslint \"etc/*\"",
+    "eslint": "eslint \"src/**/*.js\" && eslint \"etc/*\" && eslint \"test/specs/**/*.js\" && eslint \"test/e2e/**/*.js\"",
     "check": "npm run eslint && nsp check",
     "jsdoc": "jsdoc -c ./jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md ./etc",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",

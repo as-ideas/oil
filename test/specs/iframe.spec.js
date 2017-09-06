@@ -1,4 +1,4 @@
-import { addFrame } from "../../src/scripts/iframe";
+import { addFrame } from '../../src/scripts/iframe';
 
 describe('iframe', () => {
 
