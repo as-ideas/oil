@@ -17,5 +17,5 @@ class HerokuPerformanceSimulation extends Simulation {
 
   // 30_000 Request in 60s (= 500req/s) with 10x dynos
 //  setUp(myScenario.inject(rampUsers(30000) over (60 seconds)).protocols(httpConf))
-  setUp(myScenario.inject(rampUsers(60000) over (120 seconds)).protocols(httpConf))
+  setUp(myScenario.inject(rampUsers(30) over (30 seconds)).protocols(httpConf))
 }

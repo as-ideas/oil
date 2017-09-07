@@ -16,10 +16,7 @@ let CACHE_DURATION = '10m';
 let DOCUMENT_ROOT = __dirname + '/dist';
 
 let domainWhitelist = function (req, res, next) {
-
   let host = req.header("host") || req.header("Host");
-  console.info("Host", host, isHostInWhitelist(host));
-
   if (isHostInWhitelist(host)) {
     next();
   } else {
@@ -34,8 +31,9 @@ function isHostInWhitelist(host) {
   let length = split.length;
   if (length >= 2) {
     let domainNameWithEnding = split[length - 2] + '.' + split[length - 1];
-    console.info("domainNameWithEnding", domainNameWithEnding);
     return whitelist.whitelist.includes(domainNameWithEnding);
+  } else if (host.startsWith("localhost")) {
+    return true;
   }
   return false;
 }

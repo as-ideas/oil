@@ -32,6 +32,26 @@ describe('nodejs http server', () => {
       }, 1000);
   });
 
+  it('should work with whitelisted hosts and ignore header case', function (done) {
+    request(app)
+      .get('/end2end-tests/complete-integration-site-a.html')
+      .set({"Host": "finanzen.net"})
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(200);
+        done();
+      }, 1000);
+  });
+
+  it('should work with localhost', function (done) {
+    request(app)
+      .get('/end2end-tests/complete-integration-site-a.html')
+      .set({"host": "localhost:8080"})
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(200);
+        done();
+      }, 1000);
+  });
+
   it('should return 403 with not whitelisted hosts', function (done) {
     request(app)
       .get('/end2end-tests/complete-integration-site-a.html')
