@@ -104,7 +104,7 @@ You need to add the configuration snippet to all pages where OIL is required. Th
 | opt_out_event_name | The Javascript event name OIL is listening to for opting out. Please note: The opt-out functionality has to be implemented manually by the site owner on the host site! | 'oil_optout_trigger'|No
 | has_opted_in_event_name | This event will be fired on each page load, but only if the user has opted in previously. | 'has_opted_in_event_name'| No
 | has_opted_later_event_name | This event will be fired on each page load, but only if the user has opted later previously. | 'has_opted_later_event_name'| No
-| developer_mode | The developer mode is useful when testing OIL in a production or live environment, it wil show more information for debugging. A boolean value to toggle a developer mode. For security reasons the overlay **will not show per default** when the developer mode is enabled. Create a cookie named "oil_developer" with the value "true". This will show the OIL layer on your client. | true|No
+| developer_mode | The developer mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_developer" with the value "true". This will show the OIL layer on your client. | false |No
 | privacy_page_url | OIL should always have a link to your privacy page ("Datenschutz"). If you add the key "privacy_page_url", the show more label ("Mehr erfahren") can't be changed and will be added to OIL. It opens a page with the value you specified in a new tab or window. You can either use a relative or absolute URL.| "" (empty string)|No
 | activate_poi | Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false|Yes
 | hub_origin | The origin of the hub.js installation, if any. | none|Yes
@@ -114,6 +114,8 @@ You need to add the configuration snippet to all pages where OIL is required. Th
 * 0=disabled
 * 1=enabled for YES clicks
 * 2=enabled for all clicks including NO 
+
+In a production build OIL will show no logs, except you set a cookie named "oil_developer" to "true".
 
 The core Google Analytics script has to be available on the site, OIL is not injecting a GA script onto the site. See the separate chapter below for furhter details. 
 *Important!* Please note that GA tracking should of course only be enabled for testing purposes. | 0 | No 

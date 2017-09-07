@@ -1,12 +1,5 @@
 import { isDev } from './utils';
-
-/**
- * Allow 'console logs' Logging Output in Production Environments
- * Useful in some cases when you have to debug on test servers
- */
-
-import { allowProductionDebugMode } from './config';
-
+import { isDeveloperCookieSet } from './cookies.js'
 
 function concatLogArguments(args) {
   let concatedString = '';
@@ -26,13 +19,12 @@ function fixLogging() {
   };
 }
 
-
 /**
  * LogError on none-production environments.
  * if console.error is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logError() {
-  if ((isDev() || allowProductionDebugMode()) && window.console) {
+  if ((isDev() || isDeveloperCookieSet()) && window.console) {
     fixLogging();
     if (window.console.error) {
       try {
@@ -49,13 +41,12 @@ export function logError() {
   }
 }
 
-
 /**
  * LogInfo on none-production environments.
  * if console.info is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logInfo() {
-  if ((isDev() || allowProductionDebugMode()) && window.console) {
+  if ((isDev() || isDeveloperCookieSet()) && window.console) {
     fixLogging();
     if (window.console.info) {
       try {
