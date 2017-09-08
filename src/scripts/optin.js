@@ -1,5 +1,5 @@
 import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect, verifyPowerOptIn } from './poi.js';
-import { logInfo } from './log.js';
+import { logInfo, logPreviewInfo } from './log.js';
 import { sendEventToHostSite } from './utils.js';
 import { OIL_CONFIG } from './constants.js';
 import { getConfiguration, isPoiActive } from './config.js';
@@ -7,26 +7,39 @@ import { getSoiOptIn, setSoiOptIn, setOptLater, setOilOptIgnore } from './cookie
 
 let config = null;
 
+/**
+ * Log Helper function for checkOptIn
+ * @param {*} singleOptIn 
+ * @param {*} powerOptIn 
+ */
+function logPreviewOptInInfo(singleOptIn, powerOptIn) {
+  if (powerOptIn) {
+    logPreviewInfo('User has given POI permit, OIL not shown.');
+  } else if (singleOptIn) {
+    logPreviewInfo('User has given SOI permit, OIL not shown.');
+  } else {
+    logPreviewInfo('User has not opted in at all, OIL should be shown.');
+  }
+}
 
 /**
  * Check Opt In
  * @return promise with updated cookie value
  */
 export function checkOptIn() {
-  let cookieOptin = getSoiOptIn();
-
   return new Promise((resolve) => {
-    // Verify Power Opt In (will return immediately if not activated)
-    verifyPowerOptIn().then((optIn) => {
-      logInfo('Got following POI value', optIn);
-      if (optIn) {
-        cookieOptin = optIn;
+    let optIn = getSoiOptIn();
+
+    // Verify Power Opt In (will return immediately if not activated), it will overwrite the SOI result only if its positive
+    verifyPowerOptIn().then((powerOptIn) => {
+      logPreviewOptInInfo(optIn, powerOptIn);
+      if (powerOptIn) {
+        optIn = powerOptIn;
       }
-      resolve(cookieOptin);
+      resolve(optIn);  
     });
   });
 }
-
 
 /**
  * Oil optIn power

@@ -10,7 +10,7 @@ const defaultConfig = {
   'has_opted_in_event_name': 'oil_has_optedin',
   'has_opted_later_event_name': 'oil_has_optedlater',
   'has_opted_ignore_event_name': 'oil_has_optedignore',
-  'developer_mode': false,
+  'preview_mode': false, // Product TODO: Do we really want preview mode false on default? 
   'cookie_expires_in_days': 31,
   'privacy_page_url': undefined,
   'ga_tracking': 0,
@@ -129,12 +129,12 @@ export function isPoiActive() {
 }
 
 /**
- * Checks if devMode is activated.
+ * Checks if PreviewMode is activated.
  * @returns {*}
  */
-export function isDevMode() {
+export function isPreviewMode() {
   cachedConfig = getConfiguration();
-  let result = cachedConfig[OIL_CONFIG.ATTR_DEVELOPER_MODE];
+  let result = cachedConfig[OIL_CONFIG.ATTR_PREVIEW_MODE];
   return result ? result : false;
 }
 

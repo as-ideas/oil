@@ -17,7 +17,7 @@ export const OIL_CONFIG = {
   ATTR_HAS_OPTED_IN_EVENT_NAME: 'has_opted_in_event_name',
   ATTR_HAS_OPTED_LATER_EVENT_NAME: 'has_opted_later_event_name',
   ATTR_HAS_OPTED_IGNORE_EVENT_NAME: 'has_opted_ignore_event_name',
-  ATTR_DEVELOPER_MODE: 'developer_mode',
+  ATTR_PREVIEW_MODE: 'preview_mode',
   ATTR_COOKIE_EXPIRES_IN_DAYS: 'cookie_expires_in_days',
   ATTR_TIMESTAMP: 'timestamp',
   ATTR_PRIVACY_PAGE_URL: 'privacy_page_url',

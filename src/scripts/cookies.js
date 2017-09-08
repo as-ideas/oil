@@ -202,7 +202,12 @@ export function removeHubCookies() {
 }
 
 
-export function isDeveloperCookieSet() {
-  return Cookie.get('oil_developer') === 'true';
+export function isPreviewCookieSet() {
+  return Cookie.get('oil_preview') === 'true';
+}
+
+
+export function isDebugCookieSet() {
+  return Cookie.get('oil_verbose') === 'true';
 }
 
