@@ -114,7 +114,6 @@ export function getConfiguration() {
     }
     cachedConfig = readConfiguration(configurationElement);
   }
-  console.log(cachedConfig);
   return cachedConfig;
 }
 

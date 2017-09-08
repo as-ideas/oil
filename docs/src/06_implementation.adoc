@@ -115,7 +115,12 @@ You need to add the configuration snippet to all pages where OIL is required. Th
 * 1=enabled for YES clicks
 * 2=enabled for all clicks including NO 
 
-In a production build OIL will show no logs, except you set a cookie named "oil_developer" to "true".
+In a production build OIL will show no logs, except in preview_mode and when a cookie named "oil_preview" is set to "true". You can even go a step further and switch on "oil_verbose" as well, which will show you all logs, no matter the mode.
+There are convience methods you can run in the developer console of your browser to set the right cookies:
+* window.oilPreviewModeOn();
+* window.oilPreviewModeOff();
+* window.oilVerboseModeOn();
+* window.oilVerboseModeOff();
 
 The core Google Analytics script has to be available on the site, OIL is not injecting a GA script onto the site. See the separate chapter below for furhter details. 
 *Important!* Please note that GA tracking should of course only be enabled for testing purposes. | 0 | No 

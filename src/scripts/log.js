@@ -1,5 +1,5 @@
 import { isDev } from './utils';
-import { isPreviewCookieSet } from './cookies.js'
+import { isVerboseCookieSet } from './cookies.js'
 import { isPreviewMode } from './config.js'
 
 function concatLogArguments(args) {
@@ -25,7 +25,7 @@ function fixLogging() {
  * if console.error is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logError() {
-  if (isDev() || isPreviewCookieSet()) {
+  if (isDev() || isVerboseCookieSet()) {
     if (window.console) {
       fixLogging();
       if (window.console.error) {
@@ -49,7 +49,7 @@ export function logError() {
  * if console.info is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logInfo() {
-  if (isDev() || isPreviewCookieSet()) {
+  if (isDev() || isVerboseCookieSet()) {
     if (window.console) {
       fixLogging();
       if (window.console.info) {
@@ -73,7 +73,7 @@ export function logInfo() {
  * if console.info is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logPreviewInfo() {
-  if (isPreviewMode()) {
+  if (isDev() || isPreviewMode() || isVerboseCookieSet()) {
     if (window.console) {
       fixLogging();
       if (window.console.info) {

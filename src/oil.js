@@ -6,7 +6,7 @@ import { logInfo, logPreviewInfo } from './scripts/log.js';
 import { getConfiguration, isPreviewMode, gaTrackEvent } from './scripts/config.js';
 import { OIL_CONFIG } from './scripts/constants.js';
 import { isBrowserCookieEnabled, hasGALoaded } from './scripts/utils.js';
-import { hasOptedLater, hasOptedIgnore, isPreviewCookieSet } from './scripts/cookies.js';
+import { hasOptedLater, hasOptedIgnore, isPreviewCookieSet, setPreviewCookie, setVerboseCookie, removePreviewCookie, removeVerboseCookie } from './scripts/cookies.js';
 
 
 /**
@@ -15,6 +15,24 @@ import { hasOptedLater, hasOptedIgnore, isPreviewCookieSet } from './scripts/coo
  */
 let config = null;
 
+function attachUtilityFunctionsToWindowObject() {
+  window.oilPreviewModeOn   = () => {
+    setPreviewCookie();
+    return 'preview mode on';
+  };
+  window.oilPreviewModeOff = () => {
+    removePreviewCookie();
+    return 'preview mode off';
+  };
+  window.oilVerboseModeOn = () => {
+    setVerboseCookie();
+    return 'verbose mode on';
+  };
+  window.oilVerboseModeOff = () => {
+    removeVerboseCookie();
+    return 'verbose mode off';
+  };
+}
 
 /**
  * Initialize Oil on Host Site
@@ -22,6 +40,8 @@ let config = null;
  */
 export function initOilLayer() {
   logInfo('Init OilLayer');
+  
+  attachUtilityFunctionsToWindowObject();
 
   // Fill config object with configuration data once and for all
   if (config === null) {
