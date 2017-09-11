@@ -259,6 +259,5 @@ export const hasGALoaded = () => {
     };
 
     GATracking === 0 ? reject('Google Analytics not enabled in configuration') : _isLoaded();
-
   });
 };
