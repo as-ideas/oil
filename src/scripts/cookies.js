@@ -28,6 +28,11 @@ const OIL_HUB_DOMAIN_COOKIE = {
   ATTR_TIMESTAMP: 'timestamp'
 };
 
+const COOKIE_PREVIEW_NAME = 'oil_preview';
+
+
+const COOKIE_VERBOSE_NAME = 'oil_verbose';
+
 
 function getOilSessionCookieConfig() {
   return {
@@ -201,8 +206,32 @@ export function removeHubCookies() {
   Cookie.remove(OIL_HUB_DOMAIN_COOKIE.NAME);
 }
 
+export function setPreviewCookie() {
+    setSessionCookie(COOKIE_PREVIEW_NAME, 'true');
+}
 
-export function isDeveloperCookieSet() {
-  return Cookie.get('oil_developer') === 'true';
+
+export function setVerboseCookie() {
+  setSessionCookie(COOKIE_VERBOSE_NAME, 'true');
+}
+
+
+export function removePreviewCookie() {
+  Cookie.remove(COOKIE_PREVIEW_NAME);
+}
+
+
+export function removeVerboseCookie() {
+  Cookie.remove(COOKIE_VERBOSE_NAME);
+}
+
+
+export function isPreviewCookieSet() {
+  return Cookie.get(COOKIE_PREVIEW_NAME) === 'true';
+}
+
+
+export function isVerboseCookieSet() {
+  return Cookie.get(COOKIE_VERBOSE_NAME) === 'true';
 }
 

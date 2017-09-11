@@ -2,11 +2,11 @@ import { renderOil, oilWrapper } from './scripts/modal.js';
 import { checkOptIn, fireConfiguredMessageEvent } from './scripts/optin.js';
 import { registerOptOutListener } from './scripts/optout.js';
 import { initOilFrame } from './scripts/iframe.listener.js';
-import { logInfo } from './scripts/log.js';
-import { getConfiguration, isDevMode, gaTrackEvent } from './scripts/config.js';
+import { logInfo, logPreviewInfo } from './scripts/log.js';
+import { getConfiguration, isPreviewMode, gaTrackEvent } from './scripts/config.js';
 import { OIL_CONFIG } from './scripts/constants.js';
 import { isBrowserCookieEnabled, hasGALoaded } from './scripts/utils.js';
-import { hasOptedLater, hasOptedIgnore, isDeveloperCookieSet } from './scripts/cookies.js';
+import { hasOptedLater, hasOptedIgnore, isPreviewCookieSet, setPreviewCookie, setVerboseCookie, removePreviewCookie, removeVerboseCookie } from './scripts/cookies.js';
 
 
 /**
@@ -15,6 +15,24 @@ import { hasOptedLater, hasOptedIgnore, isDeveloperCookieSet } from './scripts/c
  */
 let config = null;
 
+function attachUtilityFunctionsToWindowObject() {
+  window.oilPreviewModeOn   = () => {
+    setPreviewCookie();
+    return 'preview mode on';
+  };
+  window.oilPreviewModeOff = () => {
+    removePreviewCookie();
+    return 'preview mode off';
+  };
+  window.oilVerboseModeOn = () => {
+    setVerboseCookie();
+    return 'verbose mode on';
+  };
+  window.oilVerboseModeOff = () => {
+    removeVerboseCookie();
+    return 'verbose mode off';
+  };
+}
 
 /**
  * Initialize Oil on Host Site
@@ -22,18 +40,23 @@ let config = null;
  */
 export function initOilLayer() {
   logInfo('Init OilLayer');
+  
+  attachUtilityFunctionsToWindowObject();
 
   // Fill config object with configuration data once and for all
   if (config === null) {
     config = getConfiguration();
   }
 
+  if (isPreviewMode() && !isPreviewCookieSet()) {
+    logPreviewInfo('Preview mode not correctly set, please see the documentation on how to set the cookie.');
+  }
 
   /**
    * We show OIL depending on the following conditions:
    * With Dev Mode turned on, we only show Oil if a developer cookie is set
    */
-  if (!isDevMode() || isDeveloperCookieSet()) {
+  if (!isPreviewMode() || isPreviewCookieSet()) {
 
     /**
      * Cookies are not enabled

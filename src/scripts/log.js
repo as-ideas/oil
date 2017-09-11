@@ -1,5 +1,6 @@
 import { isDev } from './utils';
-import { isDeveloperCookieSet } from './cookies.js'
+import { isVerboseCookieSet } from './cookies.js'
+import { isPreviewMode } from './config.js'
 
 function concatLogArguments(args) {
   let concatedString = '';
@@ -24,19 +25,21 @@ function fixLogging() {
  * if console.error is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logError() {
-  if ((isDev() || isDeveloperCookieSet()) && window.console) {
-    fixLogging();
-    if (window.console.error) {
-      try {
-        window.console.error.apply(window.console, arguments);
-      } catch (e) {
+  if (isDev() || isVerboseCookieSet()) {
+    if (window.console) {
+      fixLogging();
+      if (window.console.error) {
         try {
-          window.console.error(concatLogArguments(arguments));
-        } catch (ignored) {
+          window.console.error.apply(window.console, arguments);
+        } catch (e) {
+          try {
+            window.console.error(concatLogArguments(arguments));
+          } catch (ignored) {
+          }
         }
+      } else {
+        window.console.log(concatLogArguments(arguments));
       }
-    } else {
-      window.console.log(concatLogArguments(arguments));
     }
   }
 }
@@ -46,19 +49,45 @@ export function logError() {
  * if console.info is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logInfo() {
-  if ((isDev() || isDeveloperCookieSet()) && window.console) {
-    fixLogging();
-    if (window.console.info) {
-      try {
-        window.console.info.apply(window.console, arguments);
-      } catch (e) {
+  if (isDev() || isVerboseCookieSet()) {
+    if (window.console) {
+      fixLogging();
+      if (window.console.info) {
         try {
-          window.console.info(concatLogArguments(arguments));
-        } catch (ignored) {
+          window.console.info.apply(window.console, arguments);
+        } catch (e) {
+          try {
+            window.console.info(concatLogArguments(arguments));
+          } catch (ignored) {
+          }
         }
+      } else {
+        window.console.log(concatLogArguments(arguments));
       }
-    } else {
-      window.console.log(concatLogArguments(arguments));
+    }
+  }
+}
+
+/**
+ * LogPreviewInfo is for preview production environments.
+ * if console.info is not defined, fall back to console.log, ignore completely on weird cases
+ */
+export function logPreviewInfo() {
+  if (isDev() || isPreviewMode() || isVerboseCookieSet()) {
+    if (window.console) {
+      fixLogging();
+      if (window.console.info) {
+        try {
+          window.console.info.apply(window.console, arguments);
+        } catch (e) {
+          try {
+            window.console.info(concatLogArguments(arguments));
+          } catch (ignored) {
+          }
+        }
+      } else {
+        window.console.log(concatLogArguments(arguments));
+      }  
     }
   }
 }
