@@ -1,5 +1,5 @@
 import { OIL_CONFIG } from '../../src/scripts/constants';
-import { getConfiguration, readConfiguration, resetConfiguration } from '../../src/scripts/config';
+import { getConfiguration, readConfiguration, resetConfiguration, gaTrackEvent } from '../../src/scripts/config';
 import { loadFixture } from '../utils';
 
 describe('configuration', () => {
@@ -51,5 +51,21 @@ describe('configuration', () => {
     expect(parsedConfig[OIL_CONFIG.ATTR_HUB_LOCATION]).toBe('http://oil-integration-cdn.herokuapp.com/end2end-tests/complete-integration-mypass.html');
   });
 
+  it('should use config in ga_tracking', () => {
+    loadFixture('config/ga_tracking.config.html');
+    let parsedConfig = getConfiguration();
+    expect(parsedConfig).toBeDefined();
+    expect(parsedConfig[OIL_CONFIG.ATTR_GA_TRACKING]).toBe(2);
+    expect(parsedConfig[OIL_CONFIG.ATTR_GA_COMMAND_PREFIX]).toBe('homer');
+
+    // Google Analytics mocks
+    window.ga = function (param1, param2, param3, param4, param5) {
+      window.ga_result = param1 + param2 + param3 + param4 + param5;
+    };
+    window.ga.loaded = 1;
+
+    gaTrackEvent('myAction', 0);
+    expect(window.ga_result).toBe('homer.sendeventOILmyAction[object Object]');
+  });
 
 });
