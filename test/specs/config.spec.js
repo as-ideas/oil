@@ -56,7 +56,7 @@ describe('configuration', () => {
     let parsedConfig = getConfiguration();
     expect(parsedConfig).toBeDefined();
     expect(parsedConfig[OIL_CONFIG.ATTR_GA_TRACKING]).toBe(2);
-    expect(parsedConfig[OIL_CONFIG.ATTR_GA_COMMAND_PREFIX]).toBe('homer');
+    expect(parsedConfig[OIL_CONFIG.ATTR_GA_COMMAND_PREFIX]).toBe('homer.');
 
     // Google Analytics mocks
     window.ga = function (param1, param2, param3, param4, param5) {

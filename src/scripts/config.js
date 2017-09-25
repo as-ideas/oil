@@ -153,12 +153,12 @@ export function resetConfiguration() {
 export function gaTrackEvent(eventAction, nonInteraction) {
   cachedConfig = getConfiguration();
   let gaTracking = cachedConfig[OIL_CONFIG.ATTR_GA_TRACKING];
-  let gaCommandPrefix = cachedConfig[OIL_CONFIG.ATTR_GA_COMMAND_PREFIX]
+  let gaCommandPrefix = cachedConfig[OIL_CONFIG.ATTR_GA_COMMAND_PREFIX];
   
   if (gaTracking && window.ga && (typeof window.ga !== 'undefined' && window.ga.loaded)) {
     logInfo('OIL ' + gaCommandPrefix + 'gaTrackEvent config=' + gaTracking + ' eventAction=' + eventAction + ' nonInteraction=' + nonInteraction);
     // the following line throws a 'ga is not defined' warning, because ga is a method provided by the Google Analytics script
-    window.ga(gaCommandPrefix + '.send', 'event', 'OIL', eventAction, {'nonInteraction': nonInteraction});
+    window.ga(gaCommandPrefix + 'send', 'event', 'OIL', eventAction, {'nonInteraction': nonInteraction});
   }
 }
 
