@@ -21,7 +21,7 @@ export const OIL_CONFIG = {
   ATTR_COOKIE_EXPIRES_IN_DAYS: 'cookie_expires_in_days',
   ATTR_TIMESTAMP: 'timestamp',
   ATTR_PRIVACY_PAGE_URL: 'privacy_page_url',
-  ATTR_GA_COMMAND_PREFIX: 'ga_command_prefix',
+  ATTR_GA_TRACKER_NAME: 'ga_tracker_name',
   ATTR_GA_TRACKING: 'ga_tracking',
   ATTR_OIL_IGNORE: 'oil_ignore'
 };

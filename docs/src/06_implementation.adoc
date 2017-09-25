@@ -111,6 +111,7 @@ You need to add the configuration snippet to all pages where OIL is required. Th
 | hub_path | The path to the hub.html installation on the origin, if any. | none|Yes
 | subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
 | ga_tracking | A nummeric value to enable/disable Google Anayltics event tracking.
+| ga_tracker_name | If you use custom tracker names, configure it here.
 * 0=disabled
 * 1=enabled for YES clicks
 * 2=enabled for all clicks including NO 

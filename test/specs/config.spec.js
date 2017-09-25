@@ -51,12 +51,12 @@ describe('configuration', () => {
     expect(parsedConfig[OIL_CONFIG.ATTR_HUB_LOCATION]).toBe('http://oil-integration-cdn.herokuapp.com/end2end-tests/complete-integration-mypass.html');
   });
 
-  it('should use config in ga_tracking', () => {
+  it('should use tracker name in ga_tracking config', () => {
     loadFixture('config/ga_tracking.config.html');
     let parsedConfig = getConfiguration();
     expect(parsedConfig).toBeDefined();
     expect(parsedConfig[OIL_CONFIG.ATTR_GA_TRACKING]).toBe(2);
-    expect(parsedConfig[OIL_CONFIG.ATTR_GA_COMMAND_PREFIX]).toBe('homer.');
+    expect(parsedConfig[OIL_CONFIG.ATTR_GA_TRACKER_NAME]).toBe('homer');
 
     // Google Analytics mocks
     window.ga = function (param1, param2, param3, param4, param5) {
@@ -66,6 +66,23 @@ describe('configuration', () => {
 
     gaTrackEvent('myAction', 0);
     expect(window.ga_result).toBe('homer.sendeventOILmyAction[object Object]');
+  });
+
+  it('should work without tracker name in ga_tracking config', () => {
+    loadFixture('config/ga_tracking_notrackername.config.html');
+    let parsedConfig = getConfiguration();
+    expect(parsedConfig).toBeDefined();
+    expect(parsedConfig[OIL_CONFIG.ATTR_GA_TRACKING]).toBe(2);
+    expect(parsedConfig[OIL_CONFIG.ATTR_GA_TRACKER_NAME]).toBe('');
+
+    // Google Analytics mocks
+    window.ga = function (param1, param2, param3, param4, param5) {
+      window.ga_result = param1 + param2 + param3 + param4 + param5;
+    };
+    window.ga.loaded = 1;
+
+    gaTrackEvent('myAction', 0);
+    expect(window.ga_result).toBe('sendeventOILmyAction[object Object]');
   });
 
 });

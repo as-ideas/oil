@@ -14,7 +14,7 @@ const defaultConfig = {
   'cookie_expires_in_days': 31,
   'privacy_page_url': undefined,
   'ga_tracking': 0,
-  'ga_command_prefix': '',
+  'ga_tracker_name': '',
   'label_intro_heading': 'Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis',
   'label_later_heading': 'Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis',
   'label_intro_start': 'Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.',
@@ -153,7 +153,11 @@ export function resetConfiguration() {
 export function gaTrackEvent(eventAction, nonInteraction) {
   cachedConfig = getConfiguration();
   let gaTracking = cachedConfig[OIL_CONFIG.ATTR_GA_TRACKING];
-  let gaCommandPrefix = cachedConfig[OIL_CONFIG.ATTR_GA_COMMAND_PREFIX];
+  let gaCommandPrefix = cachedConfig[OIL_CONFIG.ATTR_GA_TRACKER_NAME];
+
+  if (gaCommandPrefix) {
+    gaCommandPrefix = gaCommandPrefix + '.';
+  }
   
   if (gaTracking && window.ga && (typeof window.ga !== 'undefined' && window.ga.loaded)) {
     logInfo('OIL ' + gaCommandPrefix + 'gaTrackEvent config=' + gaTracking + ' eventAction=' + eventAction + ' nonInteraction=' + nonInteraction);
