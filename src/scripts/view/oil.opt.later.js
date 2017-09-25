@@ -35,9 +35,9 @@ export const oilOptLaterTemplate =
         ${OilIgnore(config[OIL_CONFIG.ATTR_OIL_IGNORE])}
         <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-row--fixed-width">
             <div class="${CSSPrefix}oil-l-item">
-                <h1 class="${CSSPrefix}oil-loi__heading">
+                <div class="${CSSPrefix}oil-loi__heading">
                     ${config.label_later_heading}
-                </h1>
+                </div>
                 <p class="${CSSPrefix}oil-loi__intro-txt">
                     ${config.label_later_start} ${privacyPageSnippet()}
                     ${config.label_later_end}

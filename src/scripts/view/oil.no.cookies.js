@@ -3,9 +3,9 @@ import { CSSPrefix } from './oil.view.config.js';
 export const oilNoCookiesTemplate = `
     <div class="${CSSPrefix}oil-content-overlay" data-qa="oil-nocookies">
         <div class="${CSSPrefix}oil-l-wrapper-layout-max-width">
-            <h1 class="${CSSPrefix}oil__heading">
+            <div class="${CSSPrefix}oil__heading">
                 Um unsere Services bestmöglich erbringen zu können, müssen in deinem Browser Cookies aktiviert sein.
-            </h1>
+            </div>
             <p class="${CSSPrefix}oil__intro-txt">
                 Bitte aktiviere Cookies in den Einstellungen deines Browsers. 
                 So kannst du in 
