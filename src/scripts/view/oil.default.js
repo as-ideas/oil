@@ -9,9 +9,9 @@ let config = getConfiguration();
 export const oilDefaultTemplate = `
     <div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient" data-qa="oil-full">
         <div class="${CSSPrefix}oil-l-wrapper-layout-max-width">
-            <h1 class="${CSSPrefix}oil__heading">
+            <div class="${CSSPrefix}oil__heading">
                 ${config.label_intro_heading}
-            </h1>
+            </div>
             <p class="${CSSPrefix}oil__intro-txt">
                 ${config.label_intro_start} ${privacyPageSnippet()}
                 ${config.label_intro_end}
