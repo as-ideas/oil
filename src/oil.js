@@ -1,7 +1,6 @@
 import { renderOil, oilWrapper } from './scripts/modal.js';
 import { checkOptIn, fireConfiguredMessageEvent } from './scripts/optin.js';
 import { registerOptOutListener } from './scripts/optout.js';
-import { initOilFrame } from './scripts/iframe.listener.js';
 import { logInfo, logPreviewInfo } from './scripts/log.js';
 import { getConfiguration, isPreviewMode, gaTrackEvent } from './scripts/config.js';
 import { OIL_CONFIG } from './scripts/constants.js';
@@ -105,9 +104,4 @@ export function initOilLayer() {
       }
     });
   }
-}
-
-export function initOilHub() {
-  logInfo('Init OilHub');
-  initOilFrame();
 }
