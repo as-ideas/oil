@@ -3,6 +3,7 @@
 const express = require('express');
 const serveStatic = require('serve-static');
 const compression = require('compression');
+const serveIndex = require('serve-index');
 
 // import CORS config
 const headerConfig = require('./etc/headerConfig');
@@ -69,6 +70,9 @@ app.all(allowCrossDomain);
 
 // simple basic auth
 // app.use(auth.connect(basic));
+
+// Serve directory indexes for public/ftp folder (with icons)
+app.use('/release', serveIndex('release', {'icons': true}));
 
 // static with cache headers
 app.use(serveStatic(DOCUMENT_ROOT, {maxAge: CACHE_DURATION, cacheControl: true}));
