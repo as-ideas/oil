@@ -1,7 +1,3 @@
-/**
- * @author: @mreinhardt
- */
-
 const helpers = require('./helpers');
 const util = require('util');
 const debugLog = util.debuglog('oil-debug');
@@ -35,7 +31,7 @@ const METADATA = webpackMerge(commonConfig.metadata, {
   HMR: false
 });
 
-const BUNDLE_VERSION = "1.0.1";
+const {BUNDLE_VERSION} = require('./../version');
 
 var config = webpackMerge(commonConfig, {
 
