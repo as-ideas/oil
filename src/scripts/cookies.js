@@ -166,32 +166,28 @@ export function setOilOptIgnore(value) {
 
 export function getSoiOptIn() {
   let cookie = getOilDomainCookie();
-  logInfo(cookie);
-  logInfo(cookie.opt_in);
+  logInfo('Current Oil Domain Cookie: ', cookie);
   return cookie.opt_in;
 }
 
 
 export function hasOptedLater() {
   let cookie = getOilSessionCookie();
-  logInfo(cookie);
-  logInfo(cookie.opt_later);
+  logInfo('Current Oil Session Cookie: ', cookie);
   return cookie.opt_later;
 }
 
 
 export function hasOptedIgnore() {
   let cookie = getOilSessionCookie();
-  logInfo(cookie);
-  logInfo(cookie.opt_ignore);
+  logInfo('Current Oil Session Cookie: ', cookie);
   return cookie.opt_ignore;
 }
 
 
 export function getPoiOptIn() {
   let cookie = getOilHubDomainCookie();
-  logInfo(cookie);
-  logInfo(cookie.power_opt_in);
+  logInfo('Current Oil Hub Domain Cookie: ', cookie);
   return cookie.power_opt_in;
 }
 
@@ -207,7 +203,7 @@ export function removeHubCookies() {
 }
 
 export function setPreviewCookie() {
-    setSessionCookie(COOKIE_PREVIEW_NAME, 'true');
+  setSessionCookie(COOKIE_PREVIEW_NAME, 'true');
 }
 
 

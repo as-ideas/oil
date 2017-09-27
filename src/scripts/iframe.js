@@ -1,7 +1,6 @@
 import { logInfo } from '../scripts/log.js';
 
 export function addFrame(iframeUrl) {
-  logInfo('addFrame');
   let iframe = document.getElementById('oil-frame');
   if (!iframe) {
     logInfo('Creating frame...');
@@ -15,7 +14,7 @@ export function addFrame(iframeUrl) {
     iframe.style.border = 'none';
     document.body.appendChild(iframe);
   } else {
-    logInfo('Found frame already!');
+    logInfo('Found frame already, not creating another one.');
   }
   return iframe;
 }

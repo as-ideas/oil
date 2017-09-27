@@ -40,7 +40,7 @@ function attachUtilityFunctionsToWindowObject() {
  */
 export function initOilLayer() {
   logInfo('Init OilLayer');
-  
+
   attachUtilityFunctionsToWindowObject();
 
   // Fill config object with configuration data once and for all
@@ -108,5 +108,6 @@ export function initOilLayer() {
 }
 
 export function initOilHub() {
+  logInfo('Init OilHub');
   initOilFrame();
 }
