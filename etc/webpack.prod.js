@@ -31,7 +31,7 @@ const METADATA = webpackMerge(commonConfig.metadata, {
   HMR: false
 });
 
-const {BUNDLE_VERSION} = require('./../version');
+const BUNDLE_VERSION = process.env.npm_package_version;
 
 var config = webpackMerge(commonConfig, {
 
