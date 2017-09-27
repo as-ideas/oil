@@ -22,84 +22,74 @@ module.exports = {
   indexFiles: [{
     filename: 'demos/direct-integration.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration.html'),
-    chunks: ['demos/direct-integration'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/complete-integration-site-a.html',
     template: path.resolve(sourcePath, 'demos', 'complete-integration-site-a.html'),
-    chunks: ['demos/complete-integration-site-a'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/complete-integration-site-b.html',
     template: path.resolve(sourcePath, 'demos', 'complete-integration-site-b.html'),
-    chunks: ['demos/complete-integration-site-b'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/complete-integration-mypass.html',
     template: path.resolve(sourcePath, 'demos', 'complete-integration-mypass.html'),
-    chunks: ['demos/complete-integration-mypass'],
+    chunks: ['hub'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'end2end-tests/direct-integration.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration.html'),
-    chunks: ['end2end-tests/direct-integration'],
+    chunks: ['hub'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'end2end-tests/direct-integration-preview-mode.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration-preview-mode.html'),
-    chunks: ['end2end-tests/direct-integration-preview-mode'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'end2end-tests/direct-integration-event-test.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration-event-test.html'),
-    chunks: ['end2end-tests/direct-integration-event-test'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'end2end-tests/direct-integration-opt-later-event-test.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration-opt-later-event-test.html'),
-    chunks: ['end2end-tests/direct-integration-opt-later-event-test'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'end2end-tests/direct-integration-opt-out-event-test.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration-opt-out-event-test.html'),
-    chunks: ['end2end-tests/direct-integration-opt-out-event-test'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'end2end-tests/complete-integration-mypass.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'complete-integration-mypass.html'),
-    chunks: ['end2end-tests/complete-integration-mypass'],
+    chunks: ['hub'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'end2end-tests/complete-integration-site-a.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'complete-integration-site-a.html'),
-    chunks: ['end2end-tests/complete-integration-site-a'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'end2end-tests/complete-integration-site-b.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'complete-integration-site-b.html'),
-    chunks: ['end2end-tests/complete-integration-site-b'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }],
   entry: {
     'oil': path.resolve(sourcePath, 'oil.js'),
-    'hub': path.resolve(sourcePath, 'hub.js'),
-    'subscriber': path.resolve(sourcePath, 'subscriber.js'),
-    'demos/direct-integration': path.resolve(sourcePath, 'demos/direct-integration.js'),
-    'demos/complete-integration-site-a': path.resolve(sourcePath, 'subscriber.js'),
-    'demos/complete-integration-site-b': [path.resolve(sourcePath, 'subscriber.js'), path.resolve(sourcePath, 'demos', 'complete-integration-site-b.js')],
-    'demos/complete-integration-mypass': path.resolve(sourcePath, 'hub.js'),
-    'end2end-tests/direct-integration': path.resolve(sourcePath, 'subscriber.js'),
-    'end2end-tests/direct-integration-event-test': path.resolve(sourcePath, 'subscriber.js'),
-    'end2end-tests/direct-integration-opt-out-event-test': path.resolve(sourcePath, 'subscriber.js'),
-    'end2end-tests/direct-integration-opt-later-event-test': path.resolve(sourcePath, 'subscriber.js'),
-    'end2end-tests/complete-integration-site-a': path.resolve(sourcePath, 'subscriber.js'),
-    'end2end-tests/complete-integration-site-b': path.resolve(sourcePath, 'subscriber.js'),
-    'end2end-tests/complete-integration-mypass': path.resolve(sourcePath, 'hub.js'),
-    'end2end-tests/direct-integration-preview-mode': path.resolve(sourcePath, 'subscriber.js'),
+    'hub': path.resolve(sourcePath, 'hub.js')
   },
   copy: [{
     from: path.resolve(sourcePath, 'assets'),
     to: 'assets'
+  }, {
+    from: path.resolve(sourcePath, '../release'),
+    to: 'release'
   }, {
     from: path.resolve(sourcePath, 'index.html'),
     to: 'index.html'

@@ -8,6 +8,10 @@ import { isBrowserCookieEnabled, hasGALoaded } from './scripts/utils.js';
 import { hasOptedLater, hasOptedIgnore, isPreviewCookieSet, setPreviewCookie, setVerboseCookie, removePreviewCookie, removeVerboseCookie } from './scripts/cookies.js';
 
 
+(function () {
+  initOilLayer();
+}());
+
 /**
  * Config Object
  * We store and cache our config in this object, later on...
