@@ -22,7 +22,7 @@ module.exports = {
   indexFiles: [{
     filename: 'demos/direct-integration.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration.html'),
-    chunks: ['oil'],
+    chunks: ['demos/direct-integration'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/complete-integration-site-a.html',
@@ -82,6 +82,7 @@ module.exports = {
   }],
   entry: {
     'oil': path.resolve(sourcePath, 'oil.js'),
+    'demos/direct-integration': path.resolve(sourcePath, 'oil.js'),
     'hub': path.resolve(sourcePath, 'hub.js')
   },
   copy: [{
