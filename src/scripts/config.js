@@ -10,7 +10,7 @@ const defaultConfig = {
   'has_opted_in_event_name': 'oil_has_optedin',
   'has_opted_later_event_name': 'oil_has_optedlater',
   'has_opted_ignore_event_name': 'oil_has_optedignore',
-  'preview_mode': false, // Product TODO: Do we really want preview mode false on default? 
+  'preview_mode': false, // Product TODO: Do we really want preview mode false on default?
   'cookie_expires_in_days': 31,
   'privacy_page_url': undefined,
   'ga_tracking': 0,
@@ -29,7 +29,8 @@ const defaultConfig = {
   'poi_hub_origin': '',
   'poi_hub_path': '',
   'poi_subscriber_set_cookie': true,
-  'oil_ignore': false
+  'oil_ignore': false,
+  'poi_group_name' : ''
 };
 
 let cachedConfig = null;
@@ -158,7 +159,7 @@ export function gaTrackEvent(eventAction, nonInteraction) {
   if (gaCommandPrefix) {
     gaCommandPrefix = gaCommandPrefix + '.';
   }
-  
+
   if (gaTracking && window.ga && (typeof window.ga !== 'undefined' && window.ga.loaded)) {
     logInfo('OIL ' + gaCommandPrefix + 'gaTrackEvent config=' + gaTracking + ' eventAction=' + eventAction + ' nonInteraction=' + nonInteraction);
     // the following line throws a 'ga is not defined' warning, because ga is a method provided by the Google Analytics script
