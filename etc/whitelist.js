@@ -3,7 +3,8 @@ let whitelist = [
   "welt.de",
   "herokuapp.com",
   "geld-anlegen.de",
-  "finanzennet.gmbh"
+  "finanzennet.gmbh",
+  "asideas.de"
 ];
 
 module.exports = {
