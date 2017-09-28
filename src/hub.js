@@ -1,11 +1,19 @@
 import { logInfo } from './scripts/log.js';
-import { POI_FALLBACK_NAME } from './scripts/constants.js';
+import { POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME } from './scripts/constants.js';
 import { setPoiOptIn, getPoiOptIn } from './scripts/cookies.js';
-import { registerMessageListener, removeMessageListener } from './scripts/utils.js';
+import { registerMessageListener, removeMessageListener, getLocationParam } from './scripts/utils.js';
 
 (function () {
   if (isPoiFallback()) {
-    setPoiOptIn(true);
+
+    let groupName = '';
+    if (location.search.substr(1).indexOf(POI_FALLBACK_GROUP_NAME) !== -1) {
+      groupName = getLocationParam(POI_FALLBACK_GROUP_NAME);
+    }
+
+    logInfo('Doing fallback round trip for init OilHub');
+
+    setPoiOptIn(true, groupName);
 
     // To make it visible: setTimeout(function(){ window.location.replace(document.referrer); }, 2000);
     window.location.replace(document.referrer);
@@ -30,7 +38,7 @@ export function initOilHub() {
 
 export function handlerFunction(message) {
   let parsedMessage = parseJson(message.data),
-    poiOptin = null;
+      poiOptin = null;
 
   logInfo('OIL Hub - Got following parent data:', parsedMessage);
   // only react on our data
@@ -38,16 +46,17 @@ export function handlerFunction(message) {
   if (parsedMessage) {
     if (parsedMessage.event && parsedMessage.event.indexOf('oil-') !== -1) {
 
-      let event = parsedMessage.event,
-        origin = parsedMessage.origin;
+      let event       = parsedMessage.event,
+          origin      = parsedMessage.origin,
+          groupName   = parsedMessage.group_name;
 
       switch (event) {
         case 'oil-poi-activate':
           logInfo('OIL Hub - activating POI ');
-          setPoiOptIn(true);
+          setPoiOptIn(true, groupName);
           break;
         case 'oil-status-read':
-          poiOptin = getPoiOptIn();
+          poiOptin = getPoiOptIn(groupName);
           logInfo('OIL Hub - read the following poi status:', poiOptin);
           parent.postMessage(JSON.stringify(poiOptin) || false, origin);
           break;

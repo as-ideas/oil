@@ -228,6 +228,24 @@ export function getClientTimestamp() {
   return Date.now();
 }
 
+/**
+ * Get the value of a location string parameter if exists
+ * @param paramName
+ * @returns {*}
+ */
+export function getLocationParam(paramName) {
+  let searchString = window.location.search.substring(1),
+    i, val, params = searchString.split('&');
+
+  for (i=0;i<params.length;i++) {
+    val = params[i].split('=');
+    if (val[0] === paramName) {
+      return val[1];
+    }
+  }
+  return null;
+}
+
 
 /**
  * Defer Google Analytics (GA) tracking event. This is needed because we have to wait

@@ -42,7 +42,7 @@ module.exports = {
   }, {
     filename: 'end2end-tests/direct-integration.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration.html'),
-    chunks: ['hub'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'end2end-tests/direct-integration-preview-mode.html',

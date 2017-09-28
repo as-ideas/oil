@@ -33,7 +33,7 @@ function isHostInWhitelist(host) {
   if (length >= 2) {
     let domainNameWithEnding = split[length - 2] + '.' + split[length - 1];
     return whitelist.whitelist.includes(domainNameWithEnding);
-  } else if (host.startsWith("localhost") || host.startsWith("oilsite")) {
+  } else if (host.startsWith("localhost") || host.startsWith("oilsite") || host.startsWith("oilcdn")) {
     return true;
   }
   return false;
