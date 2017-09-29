@@ -18,6 +18,7 @@
     "test": "npm run test:unit && npm run test:node",
     "test:unit": "cross-env NODE_ENV=test karma start etc/karma.conf.ci.js && npm run test:node",
     "test:node": "mocha 3000 test/node",
+    "test:selenium": "mkdir -p target/reports &&./node_modules/.bin/nightwatch -c etc/nightwatch.jenkins.conf.js -e chrome",
     "test:watch": "cross-env NODE_ENV=test karma start etc/karma.conf.js",
     "eslint": "eslint \"src/**/*.js\" && eslint \"etc/*\" && eslint \"test/specs/**/*.js\" && eslint \"test/e2e/**/*.js\"",
     "check": "npm run eslint && nsp check",
@@ -111,7 +112,7 @@
     "type": "git",
     "url": "https://github.com/as-ideas/oil.git"
   },
-  "author": "Martin Reinhardt",
+  "author": "Axel Springer Ideas Engineering GmbH",
   "license": "UNLICENSED",
   "engine-strict": true,
   "engines": {
