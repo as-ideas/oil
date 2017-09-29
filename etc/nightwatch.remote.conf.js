@@ -6,7 +6,7 @@ nightwatch_config = {
   ],
 
   "output_folder": "./target/browserstack-reports",
-  "globals_path": "./etc/remote_globals.js",
+  "globals_path": "./etc/nightwatch.remote.globals.js",
 
   selenium : {
     "start_process" : false,

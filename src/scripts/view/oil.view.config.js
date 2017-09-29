@@ -13,7 +13,7 @@ const Prefix = 'as';
 
 const oilPrefix = (str) => {
   return (str === '') ? '' : `${str}-`;
-}
+};
 
 // And export our prefix
 export const CSSPrefix = oilPrefix(Prefix);

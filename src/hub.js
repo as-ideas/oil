@@ -15,7 +15,7 @@ let initComplete = false;
 }());
 
 export function initOilHub(locationString) {
-  logInfo('Init OilHub');
+  logInfo(`Init OilHub (version ${process.env.OIL_VERSION})`);
   if (isPoiFallbackMode(locationString)) {
     logInfo('Fallback mode, doing round trip...');
 
