@@ -137,10 +137,8 @@ export function isBrowserCookieEnabled() {
  * @return true or false
  */
 export function isCookie(name) {
-  if (typeof (Cookie.get(name)) === 'undefined') {
-    return false
-  }
-  return true
+  return typeof (Cookie.get(name)) !== 'undefined';
+
 }
 
 
@@ -153,14 +151,13 @@ export function isCookie(name) {
 export function cookieDataHasKeys(name, data) {
   if (typeof (name) === 'string' && Array.isArray(data)) {
     if (isCookie(name)) {
-      const cookieData = Cookie.getJSON(name)
+      const cookieData = Cookie.getJSON(name);
       return data.every((item) => {
-        return cookieData.hasOwnProperty(item)
+        return cookieData.hasOwnProperty(item);
       })
     }
-    return false
   }
-  return false
+  return false;
 }
 
 
