@@ -229,13 +229,13 @@ export function getClientTimestamp() {
 }
 
 /**
- * Get the value of a location string parameter if exists
+ * Get the value of a string parameter in searchString if exists
+ * @param searchString
  * @param paramName
  * @returns {*}
  */
-export function getLocationParam(paramName) {
-  let searchString = window.location.search.substring(1),
-    i, val, params = searchString.split('&');
+export function getStringParam(searchString, paramName) {
+  let i, val, params = searchString.split('&');
 
   for (i=0;i<params.length;i++) {
     val = params[i].split('=');

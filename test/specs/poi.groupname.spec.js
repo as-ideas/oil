@@ -22,27 +22,8 @@ describe('poi', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
-  it('should disable POI by default', (done) => {
-    loadFixture('poi/poi.config-error.html');
-
-    PoiAPI.activatePowerOptInWithIFrame().then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
-        expect(optin).toBe(false);
-        done();
-      })
-    );
-  });
-
-  it('should disable POI on config error', (done) => {
-    loadFixture('poi/poi.wrong-iframe.html');
-    PoiAPI.activatePowerOptInWithIFrame().then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
-        expect(optin).toBe(false);
-        done();
-      })
-    );
-  });
-
-  it('should activate POI', (done) => {
-    loadFixture('poi/poi.default.html');
+  it('should activate POI with groupname', (done) => {
+    loadFixture('poi/poi.groupname.html');
 
     PoiAPI.activatePowerOptInWithIFrame().then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
         expect(optin).toBeDefined();
@@ -52,14 +33,14 @@ describe('poi', () => {
     );
   });
 
-  it('should redirect to the right hub without groupname', () => {
+  it('should redirect to the right hub with groupname', () => {
     let redirectionTarget = '';
     spyOn(PoiAPI, 'redirectToLocation').and.callFake(function (location) { redirectionTarget = location; });
 
-    loadFixture('poi/poi.default.html');
+    loadFixture('poi/poi.groupname.html');
 
     PoiAPI.activatePowerOptInWithRedirect();
-    expect(redirectionTarget).not.toContain('group_name');
+    expect(redirectionTarget).toContain('homersimpson');
   });
 
 });

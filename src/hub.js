@@ -1,42 +1,42 @@
 import { logInfo } from './scripts/log.js';
 import { POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME } from './scripts/constants.js';
 import { setPoiOptIn, getPoiOptIn } from './scripts/cookies.js';
-import { registerMessageListener, removeMessageListener, getLocationParam } from './scripts/utils.js';
-
-(function () {
-  if (isPoiFallback()) {
-
-    let groupName = '';
-    if (location.search.substr(1).indexOf(POI_FALLBACK_GROUP_NAME) !== -1) {
-      groupName = getLocationParam(POI_FALLBACK_GROUP_NAME);
-    }
-
-    logInfo('Doing fallback round trip for init OilHub');
-
-    setPoiOptIn(true, groupName);
-
-    // To make it visible: setTimeout(function(){ window.location.replace(document.referrer); }, 2000);
-    window.location.replace(document.referrer);
-  } else {
-    logInfo('Init OilHub');
-    initOilHub();
-  }
-}());
+import { registerMessageListener, removeMessageListener, getStringParam } from './scripts/utils.js';
 
 let initComplete = false;
 
-export function isPoiFallback() {
-  return location.search && location.search.substr(1) && location.search.substr(1).indexOf(POI_FALLBACK_NAME) !== -1;
-}
+(function () {
+  let locationString = '';
+  if (location && location.search && location.search.substr(1)) {
+    locationString = location.search.substr(1);
+  }
 
-export function initOilHub() {
-  if (!initComplete) {
-    removeMessageListener(handlerFunction);
-    registerMessageListener(handlerFunction);
+  initOilHub(locationString);
+}());
+
+export function initOilHub(locationString) {
+  logInfo('Init OilHub');
+  if (isPoiFallbackMode(locationString)) {
+    logInfo('Fallback mode, doing round trip...');
+
+    let groupName = '';
+    if (hasGroupName(locationString)) {
+      groupName = getStringParam(locationString, POI_FALLBACK_GROUP_NAME);
+      logInfo('Using group name:', groupName);
+    }
+
+    setPoiOptIn(true, groupName);
+    exports.redirectBack();
+
+  } else {
+    if (!initComplete) {
+      removeMessageListener(handlerFunction);
+      registerMessageListener(handlerFunction);
+    }
   }
 }
 
-export function handlerFunction(message) {
+function handlerFunction(message) {
   let parsedMessage = parseJson(message.data),
       poiOptin = null;
 
@@ -69,11 +69,24 @@ export function handlerFunction(message) {
   }
 }
 
-export function parseJson(data) {
+function isPoiFallbackMode(locationString) {
+  return locationString.indexOf(POI_FALLBACK_NAME) !== -1;
+}
+
+function hasGroupName(locationString) {
+  return locationString.indexOf(POI_FALLBACK_GROUP_NAME) !== -1;
+}
+
+function parseJson(data) {
   try {
     return (typeof data !== 'object' ? JSON.parse(data) : data);
   } catch (err) {
     logInfo('OIL Hub - couldnt parse following data:', data);
     return false;
   }
+}
+
+export function redirectBack() {
+  // To make it visible: setTimeout(function(){ window.location.replace(document.referrer); }, 2000);
+  window.location.replace(document.referrer);
 }

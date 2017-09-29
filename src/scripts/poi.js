@@ -175,6 +175,10 @@ export function activatePowerOptInWithIFrame() {
   }));
 }
 
+export function redirectToLocation(location) {
+  window.location.replace(location);
+}
+
 /**
  * Activate Power Opt IN with the use of an redirect
  * @function
@@ -193,7 +197,12 @@ export function activatePowerOptInWithRedirect() {
     let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION],
         groupName = config[OIL_CONFIG.ATTR_OIL_POI_GROUP_NAME];
     if (hubLocation) {
-      window.location.replace(hubLocation + '?' + POI_FALLBACK_NAME + '=1&' + POI_FALLBACK_GROUP_NAME + '=' + groupName);
+      let targetLocation = hubLocation + '?' + POI_FALLBACK_NAME + '=1';
+      if (groupName) {
+        targetLocation = targetLocation + '&' + POI_FALLBACK_GROUP_NAME + '=' + groupName;
+      }
+      exports.redirectToLocation(targetLocation);
     }
   }
 }
+
