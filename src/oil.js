@@ -5,7 +5,15 @@ import { logInfo, logPreviewInfo } from './scripts/log.js';
 import { getConfiguration, isPreviewMode, gaTrackEvent } from './scripts/config.js';
 import { OIL_CONFIG } from './scripts/constants.js';
 import { isBrowserCookieEnabled, hasGALoaded } from './scripts/utils.js';
-import { hasOptedLater, hasOptedIgnore, isPreviewCookieSet, setPreviewCookie, setVerboseCookie, removePreviewCookie, removeVerboseCookie } from './scripts/cookies.js';
+import {
+  hasOptedLater,
+  hasOptedIgnore,
+  isPreviewCookieSet,
+  setPreviewCookie,
+  setVerboseCookie,
+  removePreviewCookie,
+  removeVerboseCookie
+} from './scripts/cookies.js';
 
 
 (function () {
@@ -19,7 +27,7 @@ import { hasOptedLater, hasOptedIgnore, isPreviewCookieSet, setPreviewCookie, se
 let config = null;
 
 function attachUtilityFunctionsToWindowObject() {
-  window.oilPreviewModeOn   = () => {
+  window.oilPreviewModeOn = () => {
     setPreviewCookie();
     return 'preview mode on';
   };
@@ -42,7 +50,7 @@ function attachUtilityFunctionsToWindowObject() {
  * This functions gets called directly after Oil has loaded
  */
 export function initOilLayer() {
-  logInfo('Init OilLayer');
+  logInfo(`Init OilLayer (version ${process.env.OIL_VERSION})`);
 
   attachUtilityFunctionsToWindowObject();
 

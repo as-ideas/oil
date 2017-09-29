@@ -10,7 +10,7 @@ import { registerMessageListener, removeMessageListener } from './scripts/utils.
     // To make it visible: setTimeout(function(){ window.location.replace(document.referrer); }, 2000);
     window.location.replace(document.referrer);
   } else {
-    logInfo('Init OilHub');
+    logInfo(`Init OilHub (version ${process.env.OIL_VERSION})`);
     initOilHub();
   }
 }());

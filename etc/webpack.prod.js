@@ -120,7 +120,8 @@ var config = webpackMerge(commonConfig, {
     // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env.ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.OIL_VERSION': JSON.stringify(BUNDLE_VERSION)
     }),
 
     /**
