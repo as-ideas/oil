@@ -11,7 +11,6 @@
     "builddebug": "cross-env NODE_ENV=production webpack --config etc/webpack.config.js && cross-env NODE_ENV=debug webpack --config etc/webpack.config.js",
     "browserstack": "bash ./etc/runBrowserstackSeq.sh",
     "browserstack:full": "bash ./etc/runFullBrowserstackSeq.sh",
-    "fullBrowserstack": "bash ./etc/runFullBrowserstackSeq.sh",
     "pree2e": "node etc/nightwatch.local.conf.js",
     "e2e": "mkdir -p target/reports &&./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e chrome",
     "e2esafari": "./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e safari",

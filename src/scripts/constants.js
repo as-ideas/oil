@@ -23,12 +23,14 @@ export const OIL_CONFIG = {
   ATTR_PRIVACY_PAGE_URL: 'privacy_page_url',
   ATTR_GA_TRACKER_NAME: 'ga_tracker_name',
   ATTR_GA_TRACKING: 'ga_tracking',
-  ATTR_OIL_IGNORE: 'oil_ignore'
+  ATTR_OIL_IGNORE: 'oil_ignore',
+  ATTR_OIL_POI_GROUP_NAME: 'poi_group_name'
 };
 
 export const POI_FALLBACK_NAME = 'fallback';
+export const POI_FALLBACK_GROUP_NAME = 'group_name';
 
-// Data-QA value for the yes button on the initial OIL Layer, needed to differentiate various instances from the Yes button 
+// Data-QA value for the yes button on the initial OIL Layer, needed to differentiate various instances from the Yes button
 export const DATAQA_BUTTON_YES = 'oil-YesButton';
 // Identify privacy page link, eg. for tracking
 export const DATAQA_PRIVACY_PAGE = 'oil-PrivacyPage';

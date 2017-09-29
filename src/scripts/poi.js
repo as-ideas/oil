@@ -1,4 +1,4 @@
-import { OIL_CONFIG, POI_FALLBACK_NAME } from './constants.js';
+import { OIL_CONFIG, POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME } from './constants.js';
 import { getConfiguration, isPoiActive } from './config.js';
 import { addFrame } from './iframe.js';
 import { getOrigin, registerMessageListener, removeMessageListener } from './utils.js';
@@ -63,12 +63,13 @@ function sendEventToFrame(eventName, origin) {
   init().then((result) => {
     let iframe = result.iframe,
       config = result.config;
-    let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN];
+    let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN],
+        groupName = config[OIL_CONFIG.ATTR_OIL_POI_GROUP_NAME];
     if (iframe && hubDomain) {
       // tag::subscriber-postMessage[]
       // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
       // MSIE needs Strings in postMessage
-      let message = JSON.stringify({event: eventName, origin: origin});
+      let message = JSON.stringify({event: eventName, origin: origin, group_name: groupName});
       iframe.contentWindow.postMessage(message, hubDomain);
       // end::subscriber-postMessage[]
     }
@@ -174,6 +175,10 @@ export function activatePowerOptInWithIFrame() {
   }));
 }
 
+export function redirectToLocation(location) {
+  window.location.replace(location);
+}
+
 /**
  * Activate Power Opt IN with the use of an redirect
  * @function
@@ -189,9 +194,15 @@ export function activatePowerOptInWithRedirect() {
   }
 
   if (config) {
-    let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION];
+    let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION],
+        groupName = config[OIL_CONFIG.ATTR_OIL_POI_GROUP_NAME];
     if (hubLocation) {
-      window.location.replace(hubLocation + '?' + POI_FALLBACK_NAME + '=1');
+      let targetLocation = hubLocation + '?' + POI_FALLBACK_NAME + '=1';
+      if (groupName) {
+        targetLocation = targetLocation + '&' + POI_FALLBACK_GROUP_NAME + '=' + groupName;
+      }
+      exports.redirectToLocation(targetLocation);
     }
   }
 }
+
