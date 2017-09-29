@@ -17,7 +17,7 @@ let initComplete = false;
 export function initOilHub(locationString) {
   logInfo(`Init OilHub (version ${process.env.OIL_VERSION})`);
   if (isPoiFallbackMode(locationString)) {
-    logInfo('Fallback mode, doing round trip...');
+    logInfo('Fallback mode, doing round trip...', 'a', 'b', {c: 'c'});
 
     let groupName = '';
     if (hasGroupName(locationString)) {
@@ -38,7 +38,7 @@ export function initOilHub(locationString) {
 
 function handlerFunction(message) {
   let parsedMessage = parseJson(message.data),
-      poiOptin = null;
+    poiOptin = null;
 
   logInfo('OIL Hub - Got following parent data:', parsedMessage);
   // only react on our data
@@ -46,9 +46,9 @@ function handlerFunction(message) {
   if (parsedMessage) {
     if (parsedMessage.event && parsedMessage.event.indexOf('oil-') !== -1) {
 
-      let event       = parsedMessage.event,
-          origin      = parsedMessage.origin,
-          groupName   = parsedMessage.group_name;
+      let event = parsedMessage.event,
+        origin = parsedMessage.origin,
+        groupName = parsedMessage.group_name;
 
       switch (event) {
         case 'oil-poi-activate':

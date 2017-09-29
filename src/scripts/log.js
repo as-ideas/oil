@@ -8,7 +8,7 @@ import { isPreviewMode } from './config.js'
  */
 export function logError() {
   if ((isDev() || isVerboseCookieSet()) && window.console) {
-    logInternally(window.console.error);
+    logInternally(window.console.error, arguments);
   }
 }
 
@@ -18,7 +18,7 @@ export function logError() {
  */
 export function logInfo() {
   if ((isDev() || isVerboseCookieSet()) && window.console) {
-    logInternally(window.console.info);
+    logInternally(window.console.info, arguments);
   }
 }
 
@@ -28,23 +28,23 @@ export function logInfo() {
  */
 export function logPreviewInfo() {
   if (isDev() || isPreviewMode() || isVerboseCookieSet()) {
-    logInternally(window.console.info);
+    logInternally(window.console.info, arguments);
   }
 }
 
-function logInternally(logFunction) {
+function logInternally(logFunction, args) {
   fixLogging();
   if (logFunction) {
     try {
-      logFunction.apply(window.console, arguments);
+      logFunction.apply(window.console, args);
     } catch (e) {
       try {
-        logFunction(concatArgs(arguments));
+        logFunction(concatArgs(args));
       } catch (ignored) {
       }
     }
   } else {
-    window.console.log(concatArgs(arguments));
+    window.console.log(concatArgs(args));
   }
 }
 
