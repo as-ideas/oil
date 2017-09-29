@@ -25,21 +25,6 @@ module.exports = {
     chunks: ['demos/direct-integration'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'demos/complete-integration-site-a.html',
-    template: path.resolve(sourcePath, 'demos', 'complete-integration-site-a.html'),
-    chunks: ['oil'],
-    chunksSortMode: 'dependency'
-  }, {
-    filename: 'demos/complete-integration-site-b.html',
-    template: path.resolve(sourcePath, 'demos', 'complete-integration-site-b.html'),
-    chunks: ['oil'],
-    chunksSortMode: 'dependency'
-  }, {
-    filename: 'demos/complete-integration-mypass.html',
-    template: path.resolve(sourcePath, 'demos', 'complete-integration-mypass.html'),
-    chunks: ['hub'],
-    chunksSortMode: 'dependency'
-  }, {
     filename: 'end2end-tests/direct-integration.html',
     template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration.html'),
     chunks: ['oil'],
@@ -98,9 +83,6 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, 'end2end-tests', 'tealium-integration-test.html'),
     to: 'end2end-tests/tealium-integration-test.html'
-  }, {
-    from: path.resolve(sourcePath, 'demos', 'tealium-integration-production.html'),
-    to: 'demos/tealium-integration-production.html'
   }],
   mangle: {},
   proxy: {},
