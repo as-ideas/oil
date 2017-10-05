@@ -2,6 +2,8 @@ import { isDev } from './utils';
 import { isVerboseCookieSet } from './cookies.js'
 import { isPreviewMode } from './config.js'
 
+const prefix = 'OIL: ';
+
 /**
  * LogError on none-production environments.
  * if console.error is not defined, fall back to console.log, ignore completely on weird cases
@@ -32,8 +34,9 @@ export function logPreviewInfo() {
   }
 }
 
-function logInternally(logFunction, args) {
+function logInternally(logFunction, argsWithoutPrefix) {
   fixLogging();
+  let args = [prefix].concat(Array.prototype.slice.call(argsWithoutPrefix));
   if (logFunction) {
     try {
       logFunction.apply(window.console, args);
