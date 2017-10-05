@@ -36,9 +36,9 @@ module.exports = {
         "javascriptEnabled": true
       },
     },
-    "safari": {
+    "firefox": {
       "desiredCapabilities": {
-        "browserName": "safari",
+        "browserName": "firefox",
         "javascriptEnabled": true
       }
     }
