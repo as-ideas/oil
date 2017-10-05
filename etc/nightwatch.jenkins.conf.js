@@ -16,7 +16,7 @@ module.exports = {
     "host": "127.0.0.1",
     "port": 4444, // standard selenium port
     "cli_args": { // chromedriver is downloaded by selenium-download (see readme)
-      "webdriver.chrome.driver" : "./node_modules/nightwatch/bin/chromedriver"
+      "webdriver.chrome.driver": "./node_modules/nightwatch/bin/chromedriver"
     }
   },
 
@@ -36,9 +36,9 @@ module.exports = {
         "javascriptEnabled": true
       },
     },
-    "firefox": {
+    "phantomjs": {
       "desiredCapabilities": {
-        "browserName": "firefox",
+        "browserName": "phantomjs",
         "javascriptEnabled": true
       }
     }
@@ -54,7 +54,7 @@ module.exports = {
 
 require('fs').stat(BINPATH + 'selenium.jar', function (err, stat) { // got it?
   if (err || !stat || stat.size < 1) {
-    require('selenium-download').ensure(BINPATH, function(error) {
+    require('selenium-download').ensure(BINPATH, function (error) {
       if (error) throw new Error(error); // no point continuing so exit!
       console.log('✔ Selenium & Chromedriver downloaded to:', BINPATH);
     });
