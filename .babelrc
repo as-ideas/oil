@@ -1,18 +1,20 @@
 {
   "presets": [
-    "es2015"
+    [
+      "es2015",
+      {
+        "loose": true
+      }
+    ]
   ],
   "plugins": [
     "es6-promise",
     "transform-es2015-arrow-functions",
-    [
-      "transform-es2015-classes",
-      {
-        loose: true
-      }
-    ],
+    "transform-es2015-classes",
     "transform-es2015-destructuring",
-    "transform-es2015-modules-commonjs",
+    ["transform-es2015-modules-commonjs", {
+      "loose": true
+    }],
     "transform-es2015-object-super",
     "transform-class-properties",
     "transform-es3-member-expression-literals",
