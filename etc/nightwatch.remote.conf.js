@@ -1,17 +1,17 @@
 require('babel-register')();
 
 nightwatch_config = {
-  src_folders : [
+  src_folders: [
     "test/e2e"
   ],
 
   "output_folder": "./target/browserstack-reports",
   "globals_path": "./etc/nightwatch.remote.globals.js",
 
-  selenium : {
-    "start_process" : false,
-    "host" : "hub-cloud.browserstack.com",
-    "port" : 80
+  selenium: {
+    "start_process": false,
+    "host": "hub-cloud.browserstack.com",
+    "port": 80
   },
 
   common_capabilities: {
@@ -20,8 +20,7 @@ nightwatch_config = {
   },
 
   test_settings: {
-    default: {
-    },
+    default: {},
     chrome14: {
       desiredCapabilities: {
         'browser': 'Chrome',
@@ -32,6 +31,11 @@ nightwatch_config = {
       desiredCapabilities: {
         'browser': 'Chrome',
         'browser_version': '40.0'
+      },
+      chromeOptions: {
+        "args": [
+          "window-size=1280,800"
+        ]
       }
     },
     chrome57: {
@@ -157,12 +161,12 @@ nightwatch_config = {
 };
 
 // Code to support common capabilites
-for(let i in nightwatch_config.test_settings){
+for (let i in nightwatch_config.test_settings) {
   let config = nightwatch_config.test_settings[i];
   config['selenium_host'] = nightwatch_config.selenium.host;
   config['selenium_port'] = nightwatch_config.selenium.port;
   config['desiredCapabilities'] = config['desiredCapabilities'] || {};
-  for(let j in nightwatch_config.common_capabilities){
+  for (let j in nightwatch_config.common_capabilities) {
     config['desiredCapabilities'][j] = config['desiredCapabilities'][j] || nightwatch_config.common_capabilities[j];
   }
 }
