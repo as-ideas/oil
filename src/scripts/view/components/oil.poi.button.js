@@ -1,5 +1,5 @@
 import { getConfiguration } from './../../config.js';
-import { OIL_CONFIG } from './../../constants.js';
+import { OIL_CONFIG, DATA_CONTEXT_YES_POI } from './../../constants.js';
 import { CSSPrefix } from './../oil.view.config.js';
 
 let config = getConfiguration();
@@ -14,7 +14,7 @@ export const POIButtonSnippet = () => {
     return (
       `
         <div class="${CSSPrefix}oil-l-item">
-          <button class="${CSSPrefix}oil__btn-poi js-optin-poi" data-qa="oil-poi-YesButton">
+          <button class="${CSSPrefix}oil__btn-poi js-optin-poi" data-context="${DATA_CONTEXT_YES_POI}" data-qa="oil-poi-YesButton">
               ${config.label_button_yes_poi}
           </button>
         </div>
