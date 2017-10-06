@@ -19,7 +19,7 @@ export const oilDefaultTemplate = `
             <div class="${CSSPrefix}oil-l-row">
                 ${POIButtonSnippet()}
                 <div class="${CSSPrefix}oil-l-item">
-                    <button class="${CSSPrefix}oil__btn-soi js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="${DATAQA_BUTTON_YES}">
+                    <button class="${CSSPrefix}oil__btn-soi js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
                         ${config.label_button_yes_soi}
                     </button>
                 </div>
