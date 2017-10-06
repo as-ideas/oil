@@ -9,6 +9,8 @@
     "transform-es2015-destructuring",
     "transform-es2015-modules-commonjs",
     "transform-es2015-object-super",
-    "transform-class-properties"
+    "transform-class-properties",
+    "transform-es3-member-expression-literals",
+    "transform-es3-property-literals"
   ]
 }
