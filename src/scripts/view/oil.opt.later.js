@@ -2,7 +2,7 @@ import { CSSPrefix } from './oil.view.config.js';
 import { POIButtonSnippet } from './components/oil.poi.button.opt.later';
 import { privacyPageSnippet } from './components/oil.privacy.page';
 import { getConfiguration } from './../config.js';
-import { OIL_CONFIG, DATA_CONTEXT_YES_WHILE_LATER } from './../constants.js';
+import { OIL_CONFIG, DATA_CONTEXT_YES_WHILE_LATER, DATA_CONTEXT_IGNORE_WHILE_LATER } from './../constants.js';
 
 let config = getConfiguration();
 
@@ -13,7 +13,7 @@ let config = getConfiguration();
 const OilIgnore = (oilIgnore) => {
   return oilIgnore === true ? (
     `
-        <div class="${CSSPrefix}oil-close js-optignore" data-qa="oil-closeButton">
+        <div class="${CSSPrefix}oil-close js-optignore" data-context="${DATA_CONTEXT_IGNORE_WHILE_LATER}" data-qa="oil-closeButton">
             <svg class="${CSSPrefix}oil-icon-close" width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
                 <g fill-rule="evenodd">
                     <path d="M.222 13.364L12.95.636l1.414 1.414L1.636 14.778z"/>
