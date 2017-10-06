@@ -502,7 +502,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .#{$prefix}oil-l-item--stretch {
   @supports (display: flex) {
-    flex: 1;
+    flex: 1 0 auto;
   }
 }
 
