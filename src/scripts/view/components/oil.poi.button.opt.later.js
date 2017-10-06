@@ -1,5 +1,5 @@
 import { getConfiguration } from './../../config.js';
-import { OIL_CONFIG } from './../../constants.js';
+import { OIL_CONFIG, DATA_CONTEXT_YES_POI_WHILE_LATER } from './../../constants.js';
 import { CSSPrefix } from './../oil.view.config.js';
 
 let config = getConfiguration();
@@ -13,7 +13,7 @@ export const POIButtonSnippet = () => {
   if (activatePoi) {
     return (
       `
-        <button class="${CSSPrefix}oil-loi__btn-poi js-optin-poi" data-qa="oil-small-poi-YesButton">
+        <button class="${CSSPrefix}oil-loi__btn-poi js-optin-poi" data-context="${DATA_CONTEXT_YES_POI_WHILE_LATER}" data-qa="oil-small-poi-YesButton">
             ${config.label_button_yes_poi}
         </button>
         `

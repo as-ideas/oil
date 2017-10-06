@@ -34,3 +34,9 @@ export const POI_FALLBACK_GROUP_NAME = 'group_name';
 export const DATAQA_BUTTON_YES = 'oil-YesButton';
 // Identify privacy page link, eg. for tracking
 export const DATAQA_PRIVACY_PAGE = 'oil-PrivacyPage';
+
+export const DATA_CONTEXT_YES = 'YES';
+export const DATA_CONTEXT_YES_POI = 'YESPOI';
+export const DATA_CONTEXT_LATER = 'LATER';
+export const DATA_CONTEXT_YES_WHILE_LATER = 'YESWHILELATER';
+export const DATA_CONTEXT_YES_POI_WHILE_LATER = 'YESPOIWHILELATER';

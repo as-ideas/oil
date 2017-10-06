@@ -2,7 +2,7 @@ import { CSSPrefix } from './oil.view.config.js';
 import { POIButtonSnippet } from './components/oil.poi.button.opt.later';
 import { privacyPageSnippet } from './components/oil.privacy.page';
 import { getConfiguration } from './../config.js';
-import { OIL_CONFIG } from './../constants.js';
+import { OIL_CONFIG, DATA_CONTEXT_YES_WHILE_LATER } from './../constants.js';
 
 let config = getConfiguration();
 
@@ -45,7 +45,7 @@ export const oilOptLaterTemplate =
             </div>
             <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
                 ${POIButtonSnippet()}
-                <button class="${CSSPrefix}oil-loi__btn-soi js-optin" data-qa="oil-small-YesButton">
+                <button class="${CSSPrefix}oil-loi__btn-soi js-optin" data-context="${DATA_CONTEXT_YES_WHILE_LATER}" data-qa="oil-small-YesButton">
                     ${config.label_button_yes_soi}
                 </button>
             </div>
