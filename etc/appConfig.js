@@ -64,6 +64,26 @@ module.exports = {
     template: path.resolve(sourcePath, 'end2end-tests', 'complete-integration-site-b.html'),
     chunks: ['oil'],
     chunksSortMode: 'dependency'
+  }, {
+    filename: 'demos/demo-group-a-site-a.html',
+    template: path.resolve(sourcePath, 'demos', 'demo-group-a-site-a.html'),
+    chunks: ['oil'],
+    chunksSortMode: 'dependency'
+  }, {
+    filename: 'demos/demo-group-a-site-b.html',
+    template: path.resolve(sourcePath, 'demos', 'demo-group-a-site-b.html'),
+    chunks: ['oil'],
+    chunksSortMode: 'dependency'
+  }, {
+    filename: 'demos/demo-group-b-site-a.html',
+    template: path.resolve(sourcePath, 'demos', 'demo-group-b-site-a.html'),
+    chunks: ['oil'],
+    chunksSortMode: 'dependency'
+  }, {
+    filename: 'demos/demo-group-b-site-b.html',
+    template: path.resolve(sourcePath, 'demos', 'demo-group-b-site-b.html'),
+    chunks: ['oil'],
+    chunksSortMode: 'dependency'
   }],
   entry: {
     'oil': path.resolve(sourcePath, 'oil.js'),
