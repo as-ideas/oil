@@ -1,6 +1,6 @@
 import '../styles/modal.scss';
 import { getConfiguration, gaTrackEvent } from './config.js';
-import { OIL_CONFIG, DATAQA_BUTTON_YES } from './constants.js';
+import { OIL_CONFIG, DATA_CONTEXT_YES, DATA_CONTEXT_YES_POI } from './constants.js';
 import { oilOptIn, oilPowerOptIn, oilOptLater, oilOptIgnore } from './optin.js';
 import { oilDefaultTemplate } from './view/oil.default.js';
 import { oilOptLaterTemplate } from './view/oil.opt.later.js';
@@ -112,7 +112,7 @@ function handleOptLater() {
   oilOptLater().then((cookieOptLater) => {
     renderOil(oilWrapper, {optLater: cookieOptLater});
     if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
-      gaTrackEvent('Later', 0);
+        gaTrackEvent('later', 0);
     }
   });
 }
@@ -120,10 +120,10 @@ function handleOptLater() {
 function handleSoiOptIn() {
   oilOptIn().then((cookieOptIn) => {
     renderOil(oilWrapper, {optIn: cookieOptIn});
-    if (this.getAttribute('data-qa') === DATAQA_BUTTON_YES) {
-      gaTrackEvent('SOI/yes-1', 0);
+    if (this.getAttribute('data-context') === DATA_CONTEXT_YES) {
+      gaTrackEvent('SOI/yes', 0);
     } else {
-      gaTrackEvent('SOI/yes-2', 0);
+      gaTrackEvent('SOI/yes-while-later', 0);
     }
   });
 }
@@ -132,7 +132,11 @@ function handlePoiOptIn() {
   oilOptIn().then(() => {
     oilPowerOptIn(!config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
       renderOil(oilWrapper, {optIn: true});
-      gaTrackEvent('POI/yes', 0);
+      if (this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
+        gaTrackEvent('POI/yes', 0);
+      } else {
+        gaTrackEvent('POI/yes-while-later', 0);
+      }
     });
   });
 }
@@ -141,11 +145,10 @@ function handleOilIgnore() {
   oilOptIgnore().then((cookieOptIgnore) => {
     renderOil(oilWrapper, {optIgnore: cookieOptIgnore});
     if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
-      gaTrackEvent('Ignored', 0);
+      gaTrackEvent('ignored', 0);
     }
   });
 }
-
 
 /**
  * Add and Remove Handlers to Oil Action Elements
