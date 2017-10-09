@@ -1,5 +1,5 @@
 import { isDev } from './utils';
-import { isVerboseCookieSet } from './cookies.js'
+import { isVerboseCookieSet, isPreviewCookieSet } from './cookies.js'
 import { isPreviewMode } from './config.js'
 
 const prefix = 'OIL: ';
@@ -29,7 +29,7 @@ export function logInfo() {
  * if console.info is not defined, fall back to console.log, ignore completely on weird cases
  */
 export function logPreviewInfo() {
-  if (isDev() || isPreviewMode() || isVerboseCookieSet()) {
+  if (isDev() || isPreviewMode() || isPreviewCookieSet() || isVerboseCookieSet()) {
     logInternally(window.console.info, arguments);
   }
 }
