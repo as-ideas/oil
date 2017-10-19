@@ -367,6 +367,40 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
+.#{$prefix}oil__btn-as {
+  float: right;
+  min-height: auto;
+  margin: 0.75rem 0;
+  padding: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  color: $text-color-secondary;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid;
+  border-radius: 0;
+  cursor: pointer;
+
+  &:hover {
+    color: darken($text-color-secondary, 10%);
+    background-color: transparent;
+  }
+
+  @include media('<=phone') {
+    float: none;
+    width: 100%;
+    margin: 1rem 0; // We are vertically aligning this btn by using margins, which is a bit dirty
+    font-size: 0.75rem;
+    border-bottom: none;
+  }
+
+  @include media('>phone', '<desktop') {
+    // We are vertically aligning this btn by using margins, which is a bit dirty
+    margin: 0.25rem 0;
+  }
+}
+
 /**
  * Later Optin Overlay LOI
  *

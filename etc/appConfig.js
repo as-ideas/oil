@@ -25,43 +25,48 @@ module.exports = {
     chunks: ['demos/direct-integration'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'end2end-tests/direct-integration.html',
-    template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration.html'),
+    filename: 'demos/advanced-settings.html',
+    template: path.resolve(sourcePath, 'demos', 'advanced-settings.html'),
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'end2end-tests/direct-integration-preview-mode.html',
-    template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration-preview-mode.html'),
+    filename: 'demos/direct-integration.html',
+    template: path.resolve(sourcePath, 'demos', 'direct-integration.html'),
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'end2end-tests/direct-integration-event-test.html',
-    template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration-event-test.html'),
+    filename: 'demos/direct-integration-preview-mode.html',
+    template: path.resolve(sourcePath, 'demos', 'direct-integration-preview-mode.html'),
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'end2end-tests/direct-integration-opt-later-event-test.html',
-    template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration-opt-later-event-test.html'),
+    filename: 'demos/direct-integration-event-test.html',
+    template: path.resolve(sourcePath, 'demos', 'direct-integration-event-test.html'),
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'end2end-tests/direct-integration-opt-out-event-test.html',
-    template: path.resolve(sourcePath, 'end2end-tests', 'direct-integration-opt-out-event-test.html'),
+    filename: 'demos/direct-integration-opt-later-event-test.html',
+    template: path.resolve(sourcePath, 'demos', 'direct-integration-opt-later-event-test.html'),
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'end2end-tests/complete-integration-mypass.html',
-    template: path.resolve(sourcePath, 'end2end-tests', 'complete-integration-mypass.html'),
+    filename: 'demos/direct-integration-opt-out-event-test.html',
+    template: path.resolve(sourcePath, 'demos', 'direct-integration-opt-out-event-test.html'),
+    chunks: ['oil'],
+    chunksSortMode: 'dependency'
+  }, {
+    filename: 'demos/complete-integration-mypass.html',
+    template: path.resolve(sourcePath, 'demos', 'complete-integration-mypass.html'),
     chunks: ['hub'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'end2end-tests/complete-integration-site-a.html',
-    template: path.resolve(sourcePath, 'end2end-tests', 'complete-integration-site-a.html'),
+    filename: 'demos/complete-integration-site-a.html',
+    template: path.resolve(sourcePath, 'demos', 'complete-integration-site-a.html'),
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'end2end-tests/complete-integration-site-b.html',
-    template: path.resolve(sourcePath, 'end2end-tests', 'complete-integration-site-b.html'),
+    filename: 'demos/complete-integration-site-b.html',
+    template: path.resolve(sourcePath, 'demos', 'complete-integration-site-b.html'),
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
@@ -101,8 +106,8 @@ module.exports = {
     to: 'index.html'
 
   }, {
-    from: path.resolve(sourcePath, 'end2end-tests', 'tealium-integration-test.html'),
-    to: 'end2end-tests/tealium-integration-test.html'
+    from: path.resolve(sourcePath, 'demos', 'tealium-integration-test.html'),
+    to: 'demos/tealium-integration-test.html'
   }],
   mangle: {},
   proxy: {},

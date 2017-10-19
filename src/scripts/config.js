@@ -10,7 +10,8 @@ const defaultConfig = {
   'has_opted_in_event_name': 'oil_has_optedin',
   'has_opted_later_event_name': 'oil_has_optedlater',
   'has_opted_ignore_event_name': 'oil_has_optedignore',
-  'preview_mode': false, // Product TODO: Do we really want preview mode false on default?
+  'preview_mode': false,
+  'renderAdvancedSettings': false,
   'cookie_expires_in_days': 31,
   'privacy_page_url': undefined,
   'ga_tracking': 0,
@@ -25,6 +26,7 @@ const defaultConfig = {
   'label_button_yes_poi': 'Global zustimmen',
   'label_button_no': 'Nein, jetzt nicht',
   'label_button_privacy': 'Mehr erfahren',
+  'label_button_advanced_settings': 'Erweiterte Einstellungen',
   'poi_activate_poi': false,
   'poi_hub_origin': '',
   'poi_hub_path': '',

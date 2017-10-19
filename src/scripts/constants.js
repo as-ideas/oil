@@ -24,7 +24,8 @@ export const OIL_CONFIG = {
   ATTR_GA_TRACKER_NAME: 'ga_tracker_name',
   ATTR_GA_TRACKING: 'ga_tracking',
   ATTR_OIL_IGNORE: 'oil_ignore',
-  ATTR_OIL_POI_GROUP_NAME: 'poi_group_name'
+  ATTR_OIL_POI_GROUP_NAME: 'poi_group_name',
+  ATTR_ADVANCED_SETTINGS: 'advanced_settings'
 };
 
 export const POI_FALLBACK_NAME = 'fallback';
@@ -37,6 +38,8 @@ export const DATAQA_PRIVACY_PAGE = 'oil-PrivacyPage';
 export const DATA_CONTEXT_YES = 'YES';
 export const DATA_CONTEXT_YES_POI = 'YESPOI';
 export const DATA_CONTEXT_LATER = 'LATER';
+export const DATA_CONTEXT_ADVANCED_SETTINGS = 'ADVANCEDSETTINGS'
 export const DATA_CONTEXT_YES_WHILE_LATER = 'YESWHILELATER';
 export const DATA_CONTEXT_YES_POI_WHILE_LATER = 'YESPOIWHILELATER';
 export const DATA_CONTEXT_IGNORE_WHILE_LATER = 'IGNOREWHILELATER';
+

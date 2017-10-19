@@ -5,23 +5,54 @@ import { oilOptIn, oilPowerOptIn, oilOptLater, oilOptIgnore } from './optin.js';
 import { oilDefaultTemplate } from './view/oil.default.js';
 import { oilOptLaterTemplate } from './view/oil.opt.later.js';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
+import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
 import { CSSPrefix } from './view/oil.view.config.js';
 
 // Initialize our Oil wrapper and save it ...
 
 export const oilWrapper = defineOilWrapper();
 
+/**
+ * Helper that determines if Oil layer is shown or not...
+ * Oil layer is not rendered eg. if user opted in or opted close
+ * @param {*} props
+ */
+function shouldRenderOilLayer(props) {
+  return props.optIn === true ? false : props.optIgnore === true ? false : true
+}
 
 /**
  * Oil Main Render Function:
- *
  */
-
 export function renderOil(wrapper, props) {
-  writeOilContentToWrapper(wrapper, props);
-  injectOilWrapperInDOM(wrapper, props);
+  if (shouldRenderOilLayer(props)) {
+    if (props.noCookie) {
+      renderOilContentToWrapper(wrapper, oilNoCookiesTemplate);
+    } else if (props.optLater) {
+      renderOilContentToWrapper(wrapper, oilOptLaterTemplate);
+    } else {
+      renderOilContentToWrapper(wrapper, oilDefaultTemplate);
+    }
+  }
 }
 
+function getAdvancedSettingsEntryNode() {
+  let customNode = document.querySelector('#oil-preference-center');
+  if (customNode) {
+    return customNode;
+  }
+  return document.querySelector('#oil-internal-preference-center');
+}
+
+export function oilShowPreferenceCenter() {
+  console.log('advanced settings');
+  let entryNode = getAdvancedSettingsEntryNode();
+  // get correct dom node
+  // remove
+  // render
+  entryNode.innerHTML = oilAdvancedSettingsTemplate;
+
+}
 
 /**
  * Define Oil Wrapper DOM Node
@@ -30,12 +61,9 @@ export function renderOil(wrapper, props) {
 
 function defineOilWrapper() {
   let oilWrapper = document.createElement('div');
-
   // Set some attributes as CSS classes and attributes for testing
-
   oilWrapper.setAttribute('class', `${CSSPrefix}oil`);
   oilWrapper.setAttribute('data-qa', 'oil-Layer');
-
   return oilWrapper;
 }
 
@@ -43,32 +71,13 @@ function defineOilWrapper() {
 /**
  * Define Content of our Oil Wrapper
  * Sets HTML based on props ...
- *
  */
-
-function writeOilContentToWrapper(wrapper, props) {
-  if (props.noCookie) {
-    wrapper.innerHTML = oilNoCookiesTemplate;
-  }
-  else if (props.optLater) {
-    wrapper.innerHTML = oilOptLaterTemplate;
-  }
-  else {
-    wrapper.innerHTML = oilDefaultTemplate;
-  }
+function renderOilContentToWrapper(wrapper, content) {
+  wrapper.innerHTML = content;
+  injectOilWrapperInDOM(wrapper);
 }
 
-
-function injectOilWrapperInDOM(wrapper, props) {
-  /**
-   * Helper that determines if Oil layer is shown or not...
-   * Oil layer is not rendered eg. if user opted in or opted close
-   * @param {*} props
-   */
-  function shouldRenderOilLayer(props) {
-    return props.optIn === true ? false : props.optIgnore === true ? false : true
-  }
-
+function injectOilWrapperInDOM(wrapper) {
   let domNodes = getOilDOMNodes();
 
   // For every render cycle our OIL main DOM node gets removed, in case it already exists in DOM
@@ -77,10 +86,8 @@ function injectOilWrapperInDOM(wrapper, props) {
   }
 
   // Insert OIL into DOM
-  if (shouldRenderOilLayer(props)) {
-    document.body.insertBefore(wrapper, document.body.firstElementChild);
-    addOilHandlers(getOilDOMNodes());
-  }
+  document.body.insertBefore(wrapper, document.body.firstElementChild);
+  addOilHandlers(getOilDOMNodes());
 }
 
 
@@ -96,6 +103,7 @@ function getOilDOMNodes() {
     btnSoiOptIn: document.querySelector(`.${CSSPrefix}oil .js-optin`),
     btnPoiOptIn: document.querySelector(`.${CSSPrefix}oil .js-optin-poi`),
     btnOptLater: document.querySelector(`.${CSSPrefix}oil .js-optlater`),
+    btnAdvancedSettings: document.querySelector(`.${CSSPrefix}oil .js-advanced-settings`),
     btnClose: document.querySelector(`.${CSSPrefix}oil .js-optignore`)
   }
 }
@@ -115,6 +123,13 @@ function handleOptLater() {
         gaTrackEvent('later', 0);
     }
   });
+}
+
+function handleAdvancedSettings() {
+    oilShowPreferenceCenter();
+    if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
+      gaTrackEvent('advanced-settings', 0);
+    }
 }
 
 function handleSoiOptIn() {
@@ -159,6 +174,7 @@ function addOilHandlers(nodes) {
   nodes.btnSoiOptIn && nodes.btnSoiOptIn.addEventListener('click', handleSoiOptIn, false);
   nodes.btnPoiOptIn && nodes.btnPoiOptIn.addEventListener('click', handlePoiOptIn, false);
   nodes.btnOptLater && nodes.btnOptLater.addEventListener('click', handleOptLater, false);
+  nodes.btnAdvancedSettings && nodes.btnAdvancedSettings.addEventListener('click', handleAdvancedSettings, false);
   nodes.btnClose && nodes.btnClose.addEventListener('click', handleOilIgnore, false);
 }
 
@@ -166,6 +182,7 @@ function removeOilWrapperAndHandlers(nodes) {
   nodes.btnSoiOptIn && nodes.btnSoiOptIn.removeEventListener('click', handleSoiOptIn, false);
   nodes.btnOptLater && nodes.btnOptLater.removeEventListener('click', handleOptLater, false);
   nodes.btnPoiOptIn && nodes.btnPoiOptIn.removeEventListener('click', handlePoiOptIn, false);
+  nodes.btnAdvancedSettings && nodes.btnAdvancedSettings.removeEventListener('click', handleAdvancedSettings, false);
   nodes.btnClose && nodes.btnClose.removeEventListener('click', handleOilIgnore, false);
 
   if (nodes.oilWrapper) {

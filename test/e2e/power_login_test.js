@@ -32,9 +32,9 @@ module.exports = {
 
   'OIL Layer Power Opt-In is working across two domains': function (browser) {
     browser
-      .url(browser.globals.launch_url_host1 + 'end2end-tests/complete-integration-site-a.html')
+      .url(browser.globals.launch_url_host1 + 'demos/complete-integration-site-a.html')
       .deleteCookies()
-      .url(browser.globals.launch_url_host1 + 'end2end-tests/complete-integration-site-a.html')
+      .url(browser.globals.launch_url_host1 + 'demos/complete-integration-site-a.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
@@ -51,7 +51,7 @@ module.exports = {
     });
     browser
       .pause(REDIRECT_TIMEOUT)
-      .url(browser.globals.launch_url_host2 + 'end2end-tests/complete-integration-site-b.html')
+      .url(browser.globals.launch_url_host2 + 'demos/complete-integration-site-b.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
@@ -61,9 +61,9 @@ module.exports = {
 
   'OIL Layer Power Opt-In is working across two domains (small button)': function (browser) {
     browser
-      .url(browser.globals.launch_url_host1 + 'end2end-tests/complete-integration-site-a.html')
+      .url(browser.globals.launch_url_host1 + 'demos/complete-integration-site-a.html')
       .deleteCookies()
-      .url(browser.globals.launch_url_host1 + 'end2end-tests/complete-integration-site-a.html')
+      .url(browser.globals.launch_url_host1 + 'demos/complete-integration-site-a.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
@@ -83,7 +83,7 @@ module.exports = {
       console.log(result);
     });
     browser
-      .url(browser.globals.launch_url_host2 + 'end2end-tests/complete-integration-site-b.html')
+      .url(browser.globals.launch_url_host2 + 'demos/complete-integration-site-b.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
@@ -93,9 +93,9 @@ module.exports = {
 
   'OIL Layer Power local yes is working across two domains': function (browser) {
     browser
-      .url(browser.globals.launch_url_host1 + 'end2end-tests/complete-integration-site-a.html')
+      .url(browser.globals.launch_url_host1 + 'demos/complete-integration-site-a.html')
       .deleteCookies()
-      .url(browser.globals.launch_url_host1 + 'end2end-tests/complete-integration-site-a.html')
+      .url(browser.globals.launch_url_host1 + 'demos/complete-integration-site-a.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
@@ -114,7 +114,7 @@ module.exports = {
     });
 
     browser
-      .url(browser.globals.launch_url_host2 + 'end2end-tests/complete-integration-site-b.html')
+      .url(browser.globals.launch_url_host2 + 'demos/complete-integration-site-b.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
@@ -124,9 +124,9 @@ module.exports = {
 
   'OIL Layer Power not now is working across two domains': function (browser) {
     browser
-      .url(browser.globals.launch_url_host1 + 'end2end-tests/complete-integration-site-a.html')
+      .url(browser.globals.launch_url_host1 + 'demos/complete-integration-site-a.html')
       .deleteCookies()
-      .url(browser.globals.launch_url_host1 + 'end2end-tests/complete-integration-site-a.html')
+      .url(browser.globals.launch_url_host1 + 'demos/complete-integration-site-a.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
@@ -144,7 +144,7 @@ module.exports = {
     });
 
     browser
-      .url(browser.globals.launch_url_host2 + 'end2end-tests/complete-integration-site-b.html')
+      .url(browser.globals.launch_url_host2 + 'demos/complete-integration-site-b.html')
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
