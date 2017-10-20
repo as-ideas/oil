@@ -14,13 +14,9 @@ let config = getConfiguration();
 const OilAdvancedSettings = (advancedSettings) => {
   return advancedSettings === true ? (
       `
-        <div class="${CSSPrefix}oil-l-row">
-            <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
-                <button class="${CSSPrefix}oil__btn-as js-advanced-settings" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
-                    ${config.label_button_advanced_settings}
-                </button>
-            </div>
-        </div>
+          <button class="${CSSPrefix}oil__btn-as js-advanced-settings" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
+              ${config.label_button_advanced_settings}
+          </button>
         `
     ) : '';
 };
@@ -46,10 +42,10 @@ export const oilDefaultTemplate = `
                     <button class="${CSSPrefix}oil__btn-loi js-optlater" data-context="${DATA_CONTEXT_LATER}" data-qa="oil-NotNowButton">
                         ${config.label_button_no}
                     </button>
+                    ${OilAdvancedSettings(config[OIL_CONFIG.ATTR_ADVANCED_SETTINGS])}
                 </div>
             </div>
-            <div id="oil-internal-preference-center"></div>
-            ${OilAdvancedSettings(config[OIL_CONFIG.ATTR_ADVANCED_SETTINGS])}          
+      
         </div>
     </div>
 `;

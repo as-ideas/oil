@@ -568,3 +568,17 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 0.875rem;
   height: 0.875rem;
 }
+
+.#{$prefix}slider-wrapper {
+  display: inline-block;
+  width: 20px;
+  height: 150px;
+  padding: 0;
+}
+.#{$prefix}slider-wrapper input {
+  width: 150px;
+  height: 20px;
+  margin: 0;
+  transform-origin: 75px 75px;
+  transform: rotate(-90deg);
+}

@@ -6,6 +6,7 @@ import { oilDefaultTemplate } from './view/oil.default.js';
 import { oilOptLaterTemplate } from './view/oil.opt.later.js';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
+import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
 import { CSSPrefix } from './view/oil.view.config.js';
 
 // Initialize our Oil wrapper and save it ...
@@ -30,28 +31,22 @@ export function renderOil(wrapper, props) {
       renderOilContentToWrapper(wrapper, oilNoCookiesTemplate);
     } else if (props.optLater) {
       renderOilContentToWrapper(wrapper, oilOptLaterTemplate);
+    } else if (props.advancedSettings) {
+      renderOilContentToWrapper(wrapper, oilAdvancedSettingsTemplate);
     } else {
       renderOilContentToWrapper(wrapper, oilDefaultTemplate);
     }
   }
 }
 
-function getAdvancedSettingsEntryNode() {
-  let customNode = document.querySelector('#oil-preference-center');
-  if (customNode) {
-    return customNode;
-  }
-  return document.querySelector('#oil-internal-preference-center');
-}
-
-export function oilShowPreferenceCenter() {
+export function oilShowPreferenceCenter(wrapper) {
   console.log('advanced settings');
-  let entryNode = getAdvancedSettingsEntryNode();
-  // get correct dom node
-  // remove
-  // render
-  entryNode.innerHTML = oilAdvancedSettingsTemplate;
-
+  let entryNode = document.querySelector('#oil-preference-center');
+  if (entryNode) {
+    entryNode.innerHTML = advancedSettingsSnippet();
+  } else {
+    renderOil(wrapper, { advancedSettings : true})
+  }
 }
 
 /**
@@ -126,7 +121,7 @@ function handleOptLater() {
 }
 
 function handleAdvancedSettings() {
-    oilShowPreferenceCenter();
+    oilShowPreferenceCenter(oilWrapper);
     if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
       gaTrackEvent('advanced-settings', 0);
     }
