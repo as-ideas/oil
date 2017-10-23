@@ -40,6 +40,7 @@ $breakpoints: (
  */
 
 @import "./node_modules/include-media/dist/_include-media.scss";
+@import "../../node_modules/nouislider/distribute/nouislider.css";
 
 /**
  * Config Data
@@ -575,10 +576,4 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   height: 150px;
   padding: 0;
 }
-.#{$prefix}slider-wrapper input {
-  width: 150px;
-  height: 20px;
-  margin: 0;
-  transform-origin: 75px 75px;
-  transform: rotate(-90deg);
-}
+

@@ -1,4 +1,5 @@
 import '../styles/modal.scss';
+import noUiSlider from 'nouislider';
 import { getConfiguration, gaTrackEvent } from './config.js';
 import { OIL_CONFIG, DATA_CONTEXT_YES, DATA_CONTEXT_YES_POI } from './constants.js';
 import { oilOptIn, oilPowerOptIn, oilOptLater, oilOptIgnore } from './optin.js';
@@ -47,6 +48,20 @@ export function oilShowPreferenceCenter(wrapper) {
   } else {
     renderOil(wrapper, { advancedSettings : true})
   }
+
+  let rangeSlider = document.getElementById('slider-range');
+
+  noUiSlider.create(rangeSlider, {
+    start: 0,
+    step: 1,
+    orientation: 'vertical',
+    range: {
+      'min': 0,
+      'max': 2
+    }
+  });
+
+  // rangeSlider.noUiSlider.on('slide', console.log(rangeSlider.noUiSlider.get()));
 }
 
 /**
