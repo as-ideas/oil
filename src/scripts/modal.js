@@ -61,7 +61,35 @@ export function oilShowPreferenceCenter(wrapper) {
     }
   });
 
-  rangeSlider.noUiSlider.on('update', function(params){ console.log(params); });
+  let essential = document.getElementById(CSSPrefix+'slider-essential-title');
+  let functional = document.getElementById(CSSPrefix+'slider-functional-title');
+  let advertising =  document.getElementById(CSSPrefix+'slider-advertising-title');
+
+  rangeSlider.noUiSlider.on('update', function(params){
+    let currentSelection = params[0];
+    console.log(currentSelection);
+    switch (currentSelection) {
+      case '0.00':
+      default:
+        console.log('essential');
+        essential.setAttribute('class', CSSPrefix+'slider-active');
+        functional.setAttribute('class', CSSPrefix+'slider-inactive');
+        advertising.setAttribute('class', CSSPrefix+'slider-inactive');
+        break;
+      case '1.00':
+        console.log('functional');
+        essential.setAttribute('class', CSSPrefix+'slider-inactive');
+        functional.setAttribute('class', CSSPrefix+'slider-active');
+        advertising.setAttribute('class', CSSPrefix+'slider-inactive');
+        break;
+      case '2.00':
+        console.log('ads');
+        essential.setAttribute('class', CSSPrefix+'slider-inactive');
+        functional.setAttribute('class', CSSPrefix+'slider-inactive');
+        advertising.setAttribute('class', CSSPrefix+'slider-active');
+        break;
+    }
+  });
 }
 
 /**

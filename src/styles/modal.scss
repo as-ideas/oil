@@ -584,7 +584,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .#{$prefix}slider-wrapper {
   height: 180px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .#{$prefix}slider-desc {
@@ -607,10 +607,10 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .#{$prefix}slider-inactive {
-
+  opacity: 0.4;
 }
 
 .#{$prefix}slider-active {
-
+  opacity: 1.0;
 }
 
