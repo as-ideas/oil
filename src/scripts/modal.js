@@ -49,7 +49,7 @@ export function oilShowPreferenceCenter(wrapper) {
     renderOil(wrapper, { advancedSettings : true})
   }
 
-  let rangeSlider = document.getElementById('slider-range');
+  let rangeSlider = document.getElementById(CSSPrefix+'slider-range');
 
   noUiSlider.create(rangeSlider, {
     start: 0,
@@ -61,7 +61,7 @@ export function oilShowPreferenceCenter(wrapper) {
     }
   });
 
-  // rangeSlider.noUiSlider.on('slide', console.log(rangeSlider.noUiSlider.get()));
+  rangeSlider.noUiSlider.on('update', function(params){ console.log(params); });
 }
 
 /**

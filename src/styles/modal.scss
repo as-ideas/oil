@@ -40,7 +40,6 @@ $breakpoints: (
  */
 
 @import "./node_modules/include-media/dist/_include-media.scss";
-@import "../../node_modules/nouislider/distribute/nouislider.css";
 
 /**
  * Config Data
@@ -575,5 +574,43 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 20px;
   height: 150px;
   padding: 0;
+}
+
+/**
+* NoUiSlider CSS and overrides
+ */
+
+@import "../../node_modules/nouislider/distribute/nouislider.css";
+
+.#{$prefix}slider-wrapper {
+  height: 180px;
+  margin-top: 30px;
+}
+
+.#{$prefix}slider-desc {
+  margin-left: 20px;
+}
+
+.#{$prefix}slider-option-title {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: $text-color-secondary;
+}
+
+.#{$prefix}slider-option-verbose {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: $text-color-primary;
+  margin-bottom: 20px;
+}
+
+.#{$prefix}slider-inactive {
+
+}
+
+.#{$prefix}slider-active {
+
 }
 
