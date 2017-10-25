@@ -9,10 +9,13 @@ import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
 import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
 import { CSSPrefix } from './view/oil.view.config.js';
+import { logInfo } from './log.js';
 
 // Initialize our Oil wrapper and save it ...
 
 export const oilWrapper = defineOilWrapper();
+
+let advancedSetting = 2;
 
 /**
  * Helper that determines if Oil layer is shown or not...
@@ -75,18 +78,21 @@ export function oilShowPreferenceCenter(wrapper) {
         essential.setAttribute('class', CSSPrefix+'slider-active');
         functional.setAttribute('class', CSSPrefix+'slider-inactive');
         advertising.setAttribute('class', CSSPrefix+'slider-inactive');
+        advancedSetting = 0;
         break;
       case '1.00':
         console.log('functional');
         essential.setAttribute('class', CSSPrefix+'slider-inactive');
         functional.setAttribute('class', CSSPrefix+'slider-active');
         advertising.setAttribute('class', CSSPrefix+'slider-inactive');
+        advancedSetting = 1;
         break;
       case '2.00':
         console.log('ads');
         essential.setAttribute('class', CSSPrefix+'slider-inactive');
         functional.setAttribute('class', CSSPrefix+'slider-inactive');
         advertising.setAttribute('class', CSSPrefix+'slider-active');
+        advancedSetting = 2;
         break;
     }
   });
@@ -171,6 +177,7 @@ function handleAdvancedSettings() {
 }
 
 function handleSoiOptIn() {
+  logInfo('Handling POI with settings: ' + advancedSetting);
   oilOptIn().then((cookieOptIn) => {
     renderOil(oilWrapper, {optIn: cookieOptIn});
     if (this.getAttribute('data-context') === DATA_CONTEXT_YES) {
@@ -182,6 +189,7 @@ function handleSoiOptIn() {
 }
 
 function handlePoiOptIn() {
+  logInfo('Handling POI with settings: ' + advancedSetting);
   oilOptIn().then(() => {
     oilPowerOptIn(!config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
       renderOil(oilWrapper, {optIn: true});

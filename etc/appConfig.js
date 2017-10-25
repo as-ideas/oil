@@ -30,6 +30,11 @@ module.exports = {
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
+    filename: 'demos/advanced-settings-poi.html',
+    template: path.resolve(sourcePath, 'demos', 'advanced-settings-poi.html'),
+    chunks: ['oil'],
+    chunksSortMode: 'dependency'
+  }, {
     filename: 'demos/direct-integration.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration.html'),
     chunks: ['oil'],
