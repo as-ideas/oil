@@ -9,8 +9,8 @@ let config = null;
 
 /**
  * Log Helper function for checkOptIn
- * @param {*} singleOptIn 
- * @param {*} powerOptIn 
+ * @param {*} singleOptIn
+ * @param {*} powerOptIn
  */
 function logPreviewOptInInfo(singleOptIn, powerOptIn) {
   if (powerOptIn) {
@@ -36,7 +36,7 @@ export function checkOptIn() {
       if (powerOptIn) {
         optIn = powerOptIn;
       }
-      resolve(optIn);  
+      resolve(optIn);
     });
   });
 }
@@ -46,7 +46,7 @@ export function checkOptIn() {
  * @param powerOnly - only set Power Opt In (POI), no local site cookie (SOI)
  * @return Promise with updated cookie value
  */
-export function oilPowerOptIn(powerOnly = true) {
+export function oilPowerOptIn(privacySettings, powerOnly = true) {
   if (!powerOnly) {
     // Update Oil cookie (site - SOI)
     setSoiOptIn(true);
@@ -77,7 +77,7 @@ export function oilPowerOptIn(powerOnly = true) {
  * Oil SOI optIn
  * @return promise with updated cookie value
  */
-export function oilOptIn() {
+export function oilOptIn(privacySettings) {
   setSoiOptIn(true);
   // Send event to notify host site
   fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME);

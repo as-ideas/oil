@@ -1,7 +1,7 @@
 import '../styles/modal.scss';
 import noUiSlider from 'nouislider';
 import { getConfiguration, gaTrackEvent } from './config.js';
-import { OIL_CONFIG, DATA_CONTEXT_YES, DATA_CONTEXT_YES_POI } from './constants.js';
+import { OIL_CONFIG, DATA_CONTEXT_YES, DATA_CONTEXT_YES_POI, PRIVACY_SETTINGS_FULL_TRACKING, PRIVACY_SETTINGS_FUNCTIONAL_TRACKING, PRIVACY_SETTINGS_MINIMUM_TRACKING } from './constants.js';
 import { oilOptIn, oilPowerOptIn, oilOptLater, oilOptIgnore } from './optin.js';
 import { oilDefaultTemplate } from './view/oil.default.js';
 import { oilOptLaterTemplate } from './view/oil.opt.later.js';
@@ -15,7 +15,7 @@ import { logInfo } from './log.js';
 
 export const oilWrapper = defineOilWrapper();
 
-let advancedSetting = 2;
+let privacySettings = PRIVACY_SETTINGS_FULL_TRACKING;
 
 /**
  * Helper that determines if Oil layer is shown or not...
@@ -23,13 +23,14 @@ let advancedSetting = 2;
  * @param {*} props
  */
 function shouldRenderOilLayer(props) {
-  return props.optIn === true ? false : props.optIgnore === true ? false : true
+  return props.optIn === true ? false : props.optIgnore !== true;
 }
 
 /**
  * Oil Main Render Function:
  */
 export function renderOil(wrapper, props) {
+  privacySettings = PRIVACY_SETTINGS_FULL_TRACKING;
   if (shouldRenderOilLayer(props)) {
     if (props.noCookie) {
       renderOilContentToWrapper(wrapper, oilNoCookiesTemplate);
@@ -40,6 +41,8 @@ export function renderOil(wrapper, props) {
     } else {
       renderOilContentToWrapper(wrapper, oilDefaultTemplate);
     }
+  } else {
+    renderOilContentToWrapper(wrapper, '');
   }
 }
 
@@ -78,21 +81,21 @@ export function oilShowPreferenceCenter(wrapper) {
         essential.setAttribute('class', CSSPrefix+'slider-active');
         functional.setAttribute('class', CSSPrefix+'slider-inactive');
         advertising.setAttribute('class', CSSPrefix+'slider-inactive');
-        advancedSetting = 0;
+        privacySettings = PRIVACY_SETTINGS_MINIMUM_TRACKING;
         break;
       case '1.00':
         console.log('functional');
         essential.setAttribute('class', CSSPrefix+'slider-inactive');
         functional.setAttribute('class', CSSPrefix+'slider-active');
         advertising.setAttribute('class', CSSPrefix+'slider-inactive');
-        advancedSetting = 1;
+        privacySettings = PRIVACY_SETTINGS_FUNCTIONAL_TRACKING;
         break;
       case '2.00':
         console.log('ads');
         essential.setAttribute('class', CSSPrefix+'slider-inactive');
         functional.setAttribute('class', CSSPrefix+'slider-inactive');
         advertising.setAttribute('class', CSSPrefix+'slider-active');
-        advancedSetting = 2;
+        privacySettings = PRIVACY_SETTINGS_FULL_TRACKING;
         break;
     }
   });
@@ -178,7 +181,7 @@ function handleAdvancedSettings() {
 
 function handleSoiOptIn() {
   logInfo('Handling POI with settings: ' + advancedSetting);
-  oilOptIn().then((cookieOptIn) => {
+  oilOptIn(privacySettings).then((cookieOptIn) => {
     renderOil(oilWrapper, {optIn: cookieOptIn});
     if (this.getAttribute('data-context') === DATA_CONTEXT_YES) {
       gaTrackEvent('SOI/yes', 0);
@@ -190,15 +193,13 @@ function handleSoiOptIn() {
 
 function handlePoiOptIn() {
   logInfo('Handling POI with settings: ' + advancedSetting);
-  oilOptIn().then(() => {
-    oilPowerOptIn(!config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
-      renderOil(oilWrapper, {optIn: true});
-      if (this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
-        gaTrackEvent('POI/yes', 0);
-      } else {
-        gaTrackEvent('POI/yes-while-later', 0);
-      }
-    });
+  oilPowerOptIn(privacySettings, !config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
+    renderOil(oilWrapper, {optIn: true});
+    if (this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
+      gaTrackEvent('POI/yes', 0);
+    } else {
+      gaTrackEvent('POI/yes-while-later', 0);
+    }
   });
 }
 
