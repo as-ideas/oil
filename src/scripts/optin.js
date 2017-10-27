@@ -49,19 +49,19 @@ export function checkOptIn() {
 export function oilPowerOptIn(privacySettings, powerOnly = true) {
   if (!powerOnly) {
     // Update Oil cookie (site - SOI)
-    setSoiOptIn(true);
+    setSoiOptIn(privacySettings);
   }
 
   return new Promise((resolve) => {
     if (isPoiActive()) {
       // Update Oil cookie (mypass - POI)
-      activatePowerOptInWithIFrame();
+      activatePowerOptInWithIFrame(privacySettings);
 
       // Check if fallback is needed
       verifyPowerOptIn().then((result) => {
         if (result !== true) {
           logInfo('iFrame POI didnt work. Trying fallback now.');
-          activatePowerOptInWithRedirect();
+          activatePowerOptInWithRedirect(privacySettings);
         }
       });
     }
@@ -78,7 +78,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = true) {
  * @return promise with updated cookie value
  */
 export function oilOptIn(privacySettings) {
-  setSoiOptIn(true);
+  setSoiOptIn(privacySettings);
   // Send event to notify host site
   fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME);
 

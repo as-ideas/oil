@@ -47,7 +47,6 @@ export function renderOil(wrapper, props) {
 }
 
 export function oilShowPreferenceCenter(wrapper) {
-  console.log('advanced settings');
   let entryNode = document.querySelector('#oil-preference-center');
   if (entryNode) {
     entryNode.innerHTML = advancedSettingsSnippet();
@@ -73,25 +72,24 @@ export function oilShowPreferenceCenter(wrapper) {
 
   rangeSlider.noUiSlider.on('update', function(params){
     let currentSelection = params[0];
-    console.log(currentSelection);
     switch (currentSelection) {
       case '0.00':
       default:
-        console.log('essential');
+        logInfo('Essential Cookies selected');
         essential.setAttribute('class', CSSPrefix+'slider-active');
         functional.setAttribute('class', CSSPrefix+'slider-inactive');
         advertising.setAttribute('class', CSSPrefix+'slider-inactive');
         privacySettings = PRIVACY_SETTINGS_MINIMUM_TRACKING;
         break;
       case '1.00':
-        console.log('functional');
+        logInfo('Functional Cookies selected');
         essential.setAttribute('class', CSSPrefix+'slider-inactive');
         functional.setAttribute('class', CSSPrefix+'slider-active');
         advertising.setAttribute('class', CSSPrefix+'slider-inactive');
         privacySettings = PRIVACY_SETTINGS_FUNCTIONAL_TRACKING;
         break;
       case '2.00':
-        console.log('ads');
+        logInfo('Full Cookies selected');
         essential.setAttribute('class', CSSPrefix+'slider-inactive');
         functional.setAttribute('class', CSSPrefix+'slider-inactive');
         advertising.setAttribute('class', CSSPrefix+'slider-active');
@@ -180,7 +178,7 @@ function handleAdvancedSettings() {
 }
 
 function handleSoiOptIn() {
-  logInfo('Handling POI with settings: ' + advancedSetting);
+  logInfo('Handling POI with settings: ', privacySettings);
   oilOptIn(privacySettings).then((cookieOptIn) => {
     renderOil(oilWrapper, {optIn: cookieOptIn});
     if (this.getAttribute('data-context') === DATA_CONTEXT_YES) {
@@ -192,7 +190,7 @@ function handleSoiOptIn() {
 }
 
 function handlePoiOptIn() {
-  logInfo('Handling POI with settings: ' + advancedSetting);
+  logInfo('Handling POI with settings: ', privacySettings);
   oilPowerOptIn(privacySettings, !config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
     renderOil(oilWrapper, {optIn: true});
     if (this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
