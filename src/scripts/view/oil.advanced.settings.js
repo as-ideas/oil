@@ -1,7 +1,7 @@
 
 import { CSSPrefix } from './oil.view.config.js';
 import { advancedSettingsSnippet } from './components/oil.advanced.settings.content';
-import { DATA_CONTEXT_YES } from './../constants.js';
+import { DATA_CONTEXT_YES, DATA_CONTEXT_BACK } from './../constants.js';
 import { getConfiguration } from './../config.js';
 import { POIButtonSnippet } from './components/oil.poi.button';
 import { OIL_CONFIG } from './../constants.js';
@@ -33,6 +33,9 @@ export const oilAdvancedSettingsTemplate = `
             <div class="${CSSPrefix}oil-l-row">
                 ${POIButtonSnippet()}
                 ${SOIButtonSnippet(config[OIL_CONFIG.ATTR_ACTIVATE_POI])}
+                <button class="${CSSPrefix}oil__btn-loi js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-NotNowButton">
+                    ${config.label_button_back}
+                </button>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 import { logInfo } from './scripts/log.js';
 import { POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME, POI_PAYLOAD } from './scripts/constants.js';
-import { setPoiOptIn, getPoiOptIn } from './scripts/cookies.js';
+import { setPoiOptIn, getPoiCookie } from './scripts/cookies.js';
 import { registerMessageListener, removeMessageListener, getStringParam } from './scripts/utils.js';
 
 let initComplete = false;
@@ -66,8 +66,8 @@ function handlerFunction(message) {
           setPoiOptIn(groupName, payload);
           break;
         case 'oil-status-read':
-          poiOptin = getPoiOptIn(groupName);
-          logInfo('OIL Hub - read the following poi status:', poiOptin);
+          poiOptin = getPoiCookie(groupName);
+          logInfo('OIL Hub - read the following poi status:', poiOptin.power_opt_in);
           parent.postMessage(JSON.stringify(poiOptin) || false, origin);
           break;
         default:

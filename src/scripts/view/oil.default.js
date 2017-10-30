@@ -8,14 +8,26 @@ import { OIL_CONFIG } from './../constants.js';
 let config = getConfiguration();
 
 /**
- * OIL Ignore or Close Button
- * Returned element is used to ignore Oil completely
+ * OIL advanced settings button
  */
 const OilAdvancedSettings = (advancedSettings) => {
   return advancedSettings === true ? (
       `
           <button class="${CSSPrefix}oil__btn-as js-advanced-settings" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
               ${config.label_button_advanced_settings}
+          </button>
+        `
+    ) : '';
+};
+
+/**
+ * OIL Later Button
+ */
+const OilLaterButton = (advancedSettings) => {
+  return advancedSettings !== true ? (
+      `
+          <button class="${CSSPrefix}oil__btn-loi js-optlater" data-context="${DATA_CONTEXT_LATER}" data-qa="oil-NotNowButton">
+              ${config.label_button_no}
           </button>
         `
     ) : '';
@@ -39,9 +51,7 @@ export const oilDefaultTemplate = `
                     </button>
                 </div>
                 <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
-                    <button class="${CSSPrefix}oil__btn-loi js-optlater" data-context="${DATA_CONTEXT_LATER}" data-qa="oil-NotNowButton">
-                        ${config.label_button_no}
-                    </button>
+                    ${OilLaterButton(config[OIL_CONFIG.ATTR_ADVANCED_SETTINGS])}
                     ${OilAdvancedSettings(config[OIL_CONFIG.ATTR_ADVANCED_SETTINGS])}
                 </div>
             </div>

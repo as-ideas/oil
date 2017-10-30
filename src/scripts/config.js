@@ -25,8 +25,9 @@ const defaultConfig = {
   'label_button_yes_soi': 'Jetzt zustimmen',
   'label_button_yes_poi': 'Global zustimmen',
   'label_button_no': 'Nein, jetzt nicht',
+  'label_button_back': 'Zurück',
   'label_button_privacy': 'Mehr erfahren',
-  'label_button_advanced_settings': 'Erweiterte Einstellungen',
+  'label_button_advanced_settings': 'Mehr Informationen',
   'label_title_advanced_settings': 'Bitte wähle eine Datenschutzeinstellung aus:',
   'label_title_essentials': 'Essentielle Cookies',
   'label_title_analytics': 'Seitenperformance Analyse',
@@ -136,6 +137,16 @@ export function getConfiguration() {
 export function isPoiActive() {
   cachedConfig = getConfiguration();
   let result = cachedConfig[OIL_CONFIG.ATTR_ACTIVATE_POI];
+  return result ? result : false;
+}
+
+/**
+ * Checks if POI set SOI is activated.
+ * @returns {*}
+ */
+export function isSubscriberSetCookieActive() {
+  cachedConfig = getConfiguration();
+  let result = cachedConfig[OIL_CONFIG.ATTR_SUB_SET_COOKIE];
   return result ? result : false;
 }
 

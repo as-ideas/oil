@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
 import { isCookie, isCookieValid, getClientTimestamp } from './utils.js';
-import { OIL_CONFIG, PRIVACY_SETTINGS_FULL_TRACKING } from './constants.js';
+import { OIL_CONFIG, PRIVACY_MINIMUM_TRACKING, PRIVACY_FUNCTIONAL_TRACKING, PRIVACY_FULL_TRACKING, PRIVACY_SETTINGS_FULL_TRACKING, PRIVACY_SETTINGS_FUNCTIONAL_TRACKING, PRIVACY_SETTINGS_MINIMUM_TRACKING } from './constants.js';
 import { getConfiguration } from './config.js';
 import { logInfo } from './log.js';
 
@@ -170,10 +170,10 @@ export function setOilOptIgnore(value) {
 }
 
 
-export function getSoiOptIn() {
+export function getSoiCookie() {
   let cookie = getOilDomainCookie();
   logInfo('Current Oil Domain Cookie: ', cookie);
-  return cookie.opt_in;
+  return cookie;
 }
 
 export function getSoiPrivacy() {
@@ -197,10 +197,10 @@ export function hasOptedIgnore() {
 }
 
 
-export function getPoiOptIn(groupName) {
+export function getPoiCookie(groupName) {
   let cookie = getOilHubDomainCookie(groupName);
   logInfo('Current Oil Hub Domain Cookie: ', cookie);
-  return cookie.power_opt_in;
+  return cookie;
 }
 
 export function getPoiPrivacy(groupName) {
@@ -247,5 +247,17 @@ export function isPreviewCookieSet() {
 
 export function isVerboseCookieSet() {
   return Cookie.get(COOKIE_VERBOSE_NAME) === 'true';
+}
+
+export function convertPrivacySettingsToCookieValue(value) {
+  switch (value) {
+    default:
+    case PRIVACY_MINIMUM_TRACKING:
+      return PRIVACY_SETTINGS_MINIMUM_TRACKING;
+    case PRIVACY_FUNCTIONAL_TRACKING:
+      return PRIVACY_SETTINGS_FUNCTIONAL_TRACKING;
+    case PRIVACY_FULL_TRACKING:
+      return PRIVACY_SETTINGS_FULL_TRACKING;
+  }
 }
 

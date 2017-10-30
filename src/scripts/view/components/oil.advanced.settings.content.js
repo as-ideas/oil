@@ -10,7 +10,7 @@ export const advancedSettingsSnippet = () => {
                 <div id="${CSSPrefix}slider-range" class="${CSSPrefix}slider-wrapper"></div>
                 <div class="${CSSPrefix}slider-desc">
                   <div id="${CSSPrefix}slider-essential-title" class="${CSSPrefix}slider-inactive ">
-                    <div class="${CSSPrefix}slider-option-title">Erforderliche Cookies</div>
+                    <div class="${CSSPrefix}slider-option-title">Nur erforderliche Cookies</div>
                     <div class="${CSSPrefix}slider-option-verbose">Diese Cookies sind für die grundlegenden Funktionen der Website erforderlich.</div>
                   </div>
                   <div id="${CSSPrefix}slider-functional-title" class="${CSSPrefix}slider-inactive">
