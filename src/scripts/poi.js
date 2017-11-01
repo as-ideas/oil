@@ -130,7 +130,7 @@ function readConfigFromFrame(origin) {
 export function verifyPowerOptIn() {
   return new Promise((resolve) => {
     if (!isPoiActive()) {
-      resolve(false);
+      resolve({ power_opt_in: false });
     }
 
     init().then((result) => {
@@ -138,14 +138,18 @@ export function verifyPowerOptIn() {
       if (iframe) {
         if (!iframe.onload) {
           // Listen to message from child window after iFrame load
-          iframe.onload = () => readConfigFromFrame(getOrigin()).then((data) => resolve(data));
+          iframe.onload = () => readConfigFromFrame(getOrigin()).then((data) => {
+            resolve(data);
+          });
         } else {
           // if already loaded directly invoke
-          readConfigFromFrame(getOrigin()).then((data) => resolve(data));
+          readConfigFromFrame(getOrigin()).then((data) => {
+            resolve(data);
+          });
         }
       } else {
         logInfo('Could not initialize POI. Fallback to POI false.');
-        resolve(false);
+        resolve({ power_opt_in: false });
       }
     });
   });
