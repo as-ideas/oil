@@ -1,16 +1,17 @@
 import '../styles/modal.scss';
 import noUiSlider from 'nouislider';
 import { getConfiguration, gaTrackEvent } from './config.js';
-import { convertPrivacySettingsToCookieValue } from './cookies.js';
+import { convertPrivacySettingsToCookieValue, removeSubscriberCookies, getSoiPrivacy } from './cookies.js';
 import { PRIVACY_MINIMUM_TRACKING, PRIVACY_FUNCTIONAL_TRACKING, PRIVACY_FULL_TRACKING, OIL_CONFIG, DATA_CONTEXT_YES, DATA_CONTEXT_YES_POI } from './constants.js';
 import { oilOptIn, oilPowerOptIn, oilOptLater, oilOptIgnore } from './optin.js';
+import { deActivatePowerOptIn } from './poi.js';
 import { oilDefaultTemplate } from './view/oil.default.js';
 import { oilOptLaterTemplate } from './view/oil.opt.later.js';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
 import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
 import { CSSPrefix } from './view/oil.view.config.js';
-import { logInfo } from './log.js';
+import { logInfo, logError } from './log.js';
 
 // Initialize our Oil wrapper and save it ...
 
@@ -60,18 +61,29 @@ function interpretSliderValue(value) {
 }
 
 
-export function oilShowPreferenceCenter(wrapper) {
+export function oilShowPreferenceCenter(wrapper = false, preset = PRIVACY_MINIMUM_TRACKING) {
   let entryNode = document.querySelector('#oil-preference-center');
-  if (entryNode) {
+  if (wrapper) {
+    renderOil(wrapper, { advancedSettings : true});
+  } else if (entryNode) {
     entryNode.innerHTML = advancedSettingsSnippet();
   } else {
-    renderOil(wrapper, { advancedSettings : true})
+    logError('No wrapper for the CPC with the id #oil-preference-center was found.');
+    return;
   }
 
   let rangeSlider = document.getElementById(CSSPrefix+'slider-range');
 
+  // we take the soi privacy for now as start value, since this should always represent the poi privacy if it was set
+  // we need a product decision how to handle this if poi and soi values can differ
+  let currentPrivacySetting = preset;
+  let soiPrivacy = getSoiPrivacy();
+  if (soiPrivacy) {
+    currentPrivacySetting = soiPrivacy.oiid;
+  }
+
   noUiSlider.create(rangeSlider, {
-    start: PRIVACY_FULL_TRACKING,
+    start: currentPrivacySetting,
     step: 1,
     orientation: 'vertical',
     range: {
@@ -197,42 +209,45 @@ function handleBackToMainDialog() {
 }
 
 function handleAdvancedSettings() {
-  oilShowPreferenceCenter(oilWrapper);
+  oilShowPreferenceCenter(oilWrapper, PRIVACY_FULL_TRACKING);
   if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
     gaTrackEvent('advanced-settings', 0);
   }
 }
 
-function handleSoiOptIn() {
+export function handleSoiOptIn() {
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
   if(privacySetting !== PRIVACY_MINIMUM_TRACKING) {
     oilOptIn(convertPrivacySettingsToCookieValue(privacySetting)).then((cookieOptIn) => {
       renderOil(oilWrapper, {optIn: cookieOptIn});
-      if (this.getAttribute('data-context') === DATA_CONTEXT_YES) {
+      if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES) {
         gaTrackEvent('SOI/yes', 0);
-      } else {
+      } else if (this) {
         gaTrackEvent('SOI/yes-while-later', 0);
       }
     });
   } else {
+    removeSubscriberCookies();
     handleOptLater();
   }
 }
 
-function handlePoiOptIn() {
+export function handlePoiOptIn() {
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
   if(privacySetting !== PRIVACY_MINIMUM_TRACKING) {
     oilPowerOptIn(convertPrivacySettingsToCookieValue(privacySetting), !config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
       renderOil(oilWrapper, {optIn: true});
-      if (this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
+      if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
         gaTrackEvent('POI/yes', 0);
-      } else {
+      } else if (this) {
         gaTrackEvent('POI/yes-while-later', 0);
       }
     });
   } else {
+    removeSubscriberCookies();
+    deActivatePowerOptIn();
     handleOptLater();
   }
 }

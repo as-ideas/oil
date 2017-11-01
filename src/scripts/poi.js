@@ -180,6 +180,31 @@ export function activatePowerOptInWithIFrame(payload) {
   }));
 }
 
+/**
+ * DeActivate Power Opt IN
+ * @function
+ * @return Promise when done
+ */
+export function deActivatePowerOptIn() {
+  logInfo('deActivatePowerOptIn');
+
+  if (!isPoiActive()) {
+    return new Promise((resolve) => {
+      resolve();
+    });
+  }
+
+  // reset config
+  config = null;
+  // init iFrame first
+  return new Promise((resolve) => init().then(() => {
+    // then deactivate
+    sendEventToFrame('oil-poi-delete', getOrigin(), {});
+    // defer answer to next tick
+    setTimeout(resolve);
+  }));
+}
+
 export function redirectToLocation(location) {
   window.location.replace(location);
 }

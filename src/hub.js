@@ -1,6 +1,6 @@
 import { logInfo } from './scripts/log.js';
 import { POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME, POI_PAYLOAD } from './scripts/constants.js';
-import { setPoiOptIn, getPoiCookie } from './scripts/cookies.js';
+import { setPoiOptIn, getPoiCookie, removeSubscriberCookies } from './scripts/cookies.js';
 import { registerMessageListener, removeMessageListener, getStringParam } from './scripts/utils.js';
 
 let initComplete = false;
@@ -69,6 +69,10 @@ function handlerFunction(message) {
           poiOptin = getPoiCookie(groupName);
           logInfo('OIL Hub - read the following poi status:', poiOptin.power_opt_in);
           parent.postMessage(JSON.stringify(poiOptin) || false, origin);
+          break;
+        case 'oil-poi-delete':
+          logInfo('OIL Hub - remove POI cookie.');
+          removeSubscriberCookies();
           break;
         default:
           break;

@@ -55,7 +55,7 @@ export function getOilDomainCookieConfig() {
     default_content: {
       [OIL_DOMAIN_COOKIE.ATTR_OPTIN]: false,
       [OIL_DOMAIN_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp(),
-      [OIL_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_SETTINGS_FULL_TRACKING
+      [OIL_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_MINIMUM_TRACKING
     }
   };
 }
@@ -76,7 +76,7 @@ export function getOilHubDomainCookieConfig(groupName) {
     default_content: {
       [OIL_HUB_DOMAIN_COOKIE.ATTR_POI]: false,
       [OIL_HUB_DOMAIN_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp(),
-      [OIL_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_SETTINGS_FULL_TRACKING
+      [OIL_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_MINIMUM_TRACKING
     }
   };
 }
