@@ -33,9 +33,11 @@ export const oilAdvancedSettingsTemplate = `
             <div class="${CSSPrefix}oil-l-row">
                 ${POIButtonSnippet()}
                 ${SOIButtonSnippet(config[OIL_CONFIG.ATTR_ACTIVATE_POI])}
-                <button class="${CSSPrefix}oil__btn-loi js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-NotNowButton">
-                    ${config.label_button_back}
-                </button>
+                <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
+                  <button class="${CSSPrefix}oil__btn-loi js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-NotNowButton">
+                      ${config.label_button_back}
+                  </button>
+                </div>
             </div>
         </div>
     </div>
