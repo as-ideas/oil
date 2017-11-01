@@ -27,7 +27,7 @@ export function initOilHub(locationString) {
 
     let payload = {};
     if (hasPayload(locationString)) {
-      let payloadString = getStringParam(locationString, POI_PAYLOAD);
+      let payloadString = decodeURIComponent(getStringParam(locationString, POI_PAYLOAD));
       payload = JSON.parse(payloadString);
       logInfo('Using payload:', payload);
     }
