@@ -41,7 +41,7 @@ export function renderOil(wrapper, props) {
       renderOilContentToWrapper(wrapper, oilDefaultTemplate);
     }
   } else {
-    renderOilContentToWrapper(wrapper, '');
+    removeOilWrapperFromDOM();
   }
 }
 
@@ -144,13 +144,17 @@ function renderOilContentToWrapper(wrapper, content) {
   injectOilWrapperInDOM(wrapper);
 }
 
-function injectOilWrapperInDOM(wrapper) {
+function removeOilWrapperFromDOM() {
   let domNodes = getOilDOMNodes();
 
   // For every render cycle our OIL main DOM node gets removed, in case it already exists in DOM
   if (domNodes.oilWrapper) {
     removeOilWrapperAndHandlers(domNodes);
   }
+}
+
+function injectOilWrapperInDOM(wrapper) {
+  removeOilWrapperFromDOM();
 
   // Insert OIL into DOM
   document.body.insertBefore(wrapper, document.body.firstElementChild);
