@@ -1,4 +1,5 @@
 import { OIL_CONFIG } from './constants.js';
+import { deActivatePowerOptIn } from './poi.js';
 import { registerMessageListener } from './utils.js';
 import { getConfiguration } from './config.js';
 import { logInfo } from './log.js';
@@ -25,6 +26,8 @@ function receiveOptOutMessage(event) {
         logInfo('OptOut Received.');
         // Update Oil cookie
         removeSubscriberCookies();
+        // delete POI too if exists
+        deActivatePowerOptIn();
       }
     }
   }

@@ -63,7 +63,7 @@ function sendEventToFrame(eventName, origin, payload = {}) {
 
   init().then((result) => {
     let iframe = result.iframe,
-      config = result.config;
+        config = result.config;
     let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN],
         groupName = config[OIL_CONFIG.ATTR_OIL_POI_GROUP_NAME];
     if (iframe && hubDomain) {
@@ -139,11 +139,17 @@ export function verifyPowerOptIn() {
         if (!iframe.onload) {
           // Listen to message from child window after iFrame load
           iframe.onload = () => readConfigFromFrame(getOrigin()).then((data) => {
+            if (!data) {
+              resolve({ power_opt_in: false });
+            }
             resolve(data);
           });
         } else {
           // if already loaded directly invoke
           readConfigFromFrame(getOrigin()).then((data) => {
+            if (!data) {
+              resolve({ power_opt_in: false });
+            }
             resolve(data);
           });
         }

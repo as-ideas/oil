@@ -1,7 +1,7 @@
 import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect, verifyPowerOptIn } from './poi.js';
 import { logInfo, logPreviewInfo } from './log.js';
 import { sendEventToHostSite } from './utils.js';
-import { OIL_CONFIG } from './constants.js';
+import { OIL_CONFIG, PRIVACY_SETTINGS_MINIMUM_TRACKING } from './constants.js';
 import { getConfiguration, isPoiActive, isSubscriberSetCookieActive } from './config.js';
 import { getSoiCookie, setSoiOptIn, setOptLater, setOilOptIgnore } from './cookies.js';
 
@@ -85,7 +85,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = false  ) {
  * Oil SOI optIn
  * @return promise with updated cookie value
  */
-export function oilOptIn(privacySettings) {
+export function oilOptIn(privacySettings = PRIVACY_SETTINGS_MINIMUM_TRACKING) {
   setSoiOptIn(privacySettings);
   // Send event to notify host site
   fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME);
