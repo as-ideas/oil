@@ -65,9 +65,14 @@
       <h2>Docs</h2>
       <ul>
         <li>
-          <a href="https://as-wiki.axelspringer.de/display/IDEASINNO/OIL+Starting+Guide" target="_blank">OIL -
-            Documentation (needs
-            Login)</a>
+          <a href="https://as-wiki.axelspringer.de/display/IDEASINNO/OIL+Starting+Guide" target="_blank">
+            OIL - Documentation (needs Login)
+          </a>
+        </li>
+        <li>
+          <a href="https://as-wiki.axelspringer.de/display/IDEASINNO/OIL+with+Tealium+guide" target="_blank">
+            Tealium-Guide
+          </a>
         </li>
         <li>
           <a href="release/" target="_blank">Released versions</a>
@@ -110,6 +115,8 @@
         <li><a href="https://kube-jenkins.ipool.asideas.de/view/OIL%20Project/" target="_blank">CI-Server</a></li>
       </ul>
     </div>
+
+    <!-- END: LEFT -->
   </div>
 
   <!-- RIGHT -->
@@ -121,7 +128,7 @@
       </button>
       <div id="demo-quickstart" class="collapse">
         <pre>
-* Include oil.js into your website
+* Include oil.js into your website with tealium or as direct integration
 * Add a configuration-tag into your website
         </pre>
       </div>
@@ -186,6 +193,25 @@ This is the OIL Hub
         </pre>
       </div>
     </div>
+
+    <div>
+      <button type="button" class="btn btn-sm btn-info" data-toggle="collapse" data-target="#tealium-wrapper">
+        > Tealium tag
+      </button>
+      <div id="tealium-wrapper" class="collapse">
+        <pre>
+        &lt;!-- TEALIUM TAG - please change YOUR_ACCOUNT to the name or your account --&gt;
+        &lt;script type=&quot;text/javascript&quot;&gt;
+            (function(a,b,c,d){
+              a=&apos;//tags.tiqcdn.com/utag/axelspringer/YOUR_ACCOUNT/prod/utag.js&apos;;
+              b=document;c=&apos;script&apos;;d=b.createElement(c);d.src=a;d.type=&apos;text/java&apos;+c;d.async=true;
+              a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+            })();
+        &lt;/script&gt;
+        </pre>
+      </div>
+    </div>
+
   </div>
 </div>
 
