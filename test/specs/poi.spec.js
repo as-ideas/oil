@@ -25,8 +25,8 @@ describe('poi', () => {
   it('should disable POI by default', (done) => {
     loadFixture('poi/poi.config-error.html');
 
-    PoiAPI.activatePowerOptInWithIFrame().then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
-        expect(optin).toBe(false);
+    PoiAPI.activatePowerOptInWithIFrame({}).then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
+        expect(optin.power_opt_in).toBe(false);
         done();
       })
     );
@@ -34,8 +34,8 @@ describe('poi', () => {
 
   it('should disable POI on config error', (done) => {
     loadFixture('poi/poi.wrong-iframe.html');
-    PoiAPI.activatePowerOptInWithIFrame().then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
-        expect(optin).toBe(false);
+    PoiAPI.activatePowerOptInWithIFrame({}).then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
+        expect(optin.power_opt_in).toBe(false);
         done();
       })
     );
@@ -44,9 +44,9 @@ describe('poi', () => {
   it('should activate POI', (done) => {
     loadFixture('poi/poi.default.html');
 
-    PoiAPI.activatePowerOptInWithIFrame().then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
-        expect(optin).toBeDefined();
-        expect(optin).toBe(true);
+    PoiAPI.activatePowerOptInWithIFrame({}).then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
+        expect(optin.power_opt_in).toBeDefined();
+        expect(optin.power_opt_in).toBe(true);
         done();
       })
     );
@@ -58,7 +58,7 @@ describe('poi', () => {
 
     loadFixture('poi/poi.default.html');
 
-    PoiAPI.activatePowerOptInWithRedirect();
+    PoiAPI.activatePowerOptInWithRedirect({});
     expect(redirectionTarget).not.toContain('group_name');
   });
 

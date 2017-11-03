@@ -1,6 +1,6 @@
 import { logInfo } from './scripts/log.js';
-import { POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME } from './scripts/constants.js';
-import { setPoiOptIn, getPoiOptIn } from './scripts/cookies.js';
+import { POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME, POI_PAYLOAD } from './scripts/constants.js';
+import { setPoiOptIn, getPoiCookie, removeSubscriberCookies } from './scripts/cookies.js';
 import { registerMessageListener, removeMessageListener, getStringParam } from './scripts/utils.js';
 
 let initComplete = false;
@@ -25,7 +25,14 @@ export function initOilHub(locationString) {
       logInfo('Using group name:', groupName);
     }
 
-    setPoiOptIn(true, groupName);
+    let payload = {};
+    if (hasPayload(locationString)) {
+      let payloadString = decodeURIComponent(getStringParam(locationString, POI_PAYLOAD));
+      payload = JSON.parse(payloadString);
+      logInfo('Using payload:', payload);
+    }
+
+    setPoiOptIn(groupName, payload);
     exports.redirectBack();
 
   } else {
@@ -48,17 +55,24 @@ function handlerFunction(message) {
 
       let event = parsedMessage.event,
         origin = parsedMessage.origin,
+        payload = parsedMessage.payload,
         groupName = parsedMessage.group_name;
 
       switch (event) {
         case 'oil-poi-activate':
           logInfo('OIL Hub - activating POI ');
-          setPoiOptIn(true, groupName);
+          logInfo('Using groupName:', groupName);
+          logInfo('Using payload:', payload);
+          setPoiOptIn(groupName, payload);
           break;
         case 'oil-status-read':
-          poiOptin = getPoiOptIn(groupName);
-          logInfo('OIL Hub - read the following poi status:', poiOptin);
+          poiOptin = getPoiCookie(groupName);
+          logInfo('OIL Hub - read the following poi status:', poiOptin.power_opt_in);
           parent.postMessage(JSON.stringify(poiOptin) || false, origin);
+          break;
+        case 'oil-poi-delete':
+          logInfo('OIL Hub - remove POI cookie.');
+          removeSubscriberCookies();
           break;
         default:
           break;
@@ -75,6 +89,10 @@ function isPoiFallbackMode(locationString) {
 
 function hasGroupName(locationString) {
   return locationString.indexOf(POI_FALLBACK_GROUP_NAME) !== -1;
+}
+
+function hasPayload(locationString) {
+  return locationString.indexOf(POI_PAYLOAD) !== -1;
 }
 
 function parseJson(data) {

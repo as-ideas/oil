@@ -10,7 +10,8 @@ const defaultConfig = {
   'has_opted_in_event_name': 'oil_has_optedin',
   'has_opted_later_event_name': 'oil_has_optedlater',
   'has_opted_ignore_event_name': 'oil_has_optedignore',
-  'preview_mode': false, // Product TODO: Do we really want preview mode false on default?
+  'preview_mode': false,
+  'renderAdvancedSettings': false,
   'cookie_expires_in_days': 31,
   'privacy_page_url': undefined,
   'ga_tracking': 0,
@@ -24,7 +25,17 @@ const defaultConfig = {
   'label_button_yes_soi': 'Jetzt zustimmen',
   'label_button_yes_poi': 'Global zustimmen',
   'label_button_no': 'Nein, jetzt nicht',
+  'label_button_back': 'Zurück',
   'label_button_privacy': 'Mehr erfahren',
+  'label_button_advanced_settings': 'Mehr Informationen',
+  'label_title_advanced_settings': 'Bitte wähle eine Datenschutzeinstellung aus:',
+  'label_title_essentials': 'Essentielle Cookies',
+  'label_title_analytics': 'Seitenperformance Analyse',
+  'label_title_social': 'Soziale Verbindungen',
+  'label_title_basic_ads': 'Basis Werbung',
+  'label_title_ad_behaviour': 'Werbeverhalten',
+  'label_title_none': 'Alles blockieren.',
+  'label_advanced_settings_intro': '',
   'poi_activate_poi': false,
   'poi_hub_origin': '',
   'poi_hub_path': '',
@@ -126,6 +137,16 @@ export function getConfiguration() {
 export function isPoiActive() {
   cachedConfig = getConfiguration();
   let result = cachedConfig[OIL_CONFIG.ATTR_ACTIVATE_POI];
+  return result ? result : false;
+}
+
+/**
+ * Checks if POI set SOI is activated.
+ * @returns {*}
+ */
+export function isSubscriberSetCookieActive() {
+  cachedConfig = getConfiguration();
+  let result = cachedConfig[OIL_CONFIG.ATTR_SUB_SET_COOKIE];
   return result ? result : false;
 }
 

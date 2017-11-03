@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie';
 import { oilOptIn, oilOptLater } from '../../src/scripts/optin';
 import { deleteAllCookies } from '../utils';
-import { getSoiOptIn, hasOptedLater } from '../../src/scripts/cookies.js';
+import { getSoiCookie, hasOptedLater } from '../../src/scripts/cookies.js';
 
 describe('optin', () => {
 
@@ -11,19 +11,19 @@ describe('optin', () => {
 
   describe('without changes', () => {
     it('it should define default cookie', () => {
-      expect(getSoiOptIn()).toBe(false);
+      expect(getSoiCookie().opt_in).toBe(false);
       expect(hasOptedLater()).toBe(false);
     });
 
-    it('should reset to default cookie if cookie name is not set to oil', () => {
-      Cookie.set('oil_data2', {optin: false, optLater: false}, {expires: 31});
-      expect(getSoiOptIn()).toBe(false);
+    it('should reset to default cookie if cookie name is not set to oil_data', () => {
+      Cookie.set('oil_data2', {opt_in: false, optLater: false}, {expires: 31});
+      expect(getSoiCookie().opt_in).toBe(false);
       expect(hasOptedLater()).toBe(false);
     });
 
     it('should reset to default cookie if cookie keys are not matching', () => {
       Cookie.set('oil_data', {optin2: false, optLater2: false}, {expires: 31});
-      expect(getSoiOptIn()).toBe(false);
+      expect(getSoiCookie().opt_in).toBe(false);
       expect(hasOptedLater()).toBe(false);
     });
   });
@@ -32,7 +32,7 @@ describe('optin', () => {
     it('should persist optin', (done) => {
       oilOptIn().then((optin) => {
         expect(optin).toBe(true);
-        expect(getSoiOptIn()).toBe(true);
+        expect(getSoiCookie().opt_in).toBe(true);
         expect(hasOptedLater()).toBe(false);
         done();
       });
@@ -43,7 +43,7 @@ describe('optin', () => {
     it('should persist optlater', (done) => {
       oilOptLater().then((optlater) => {
         expect(optlater).toBe(true);
-        expect(getSoiOptIn()).toBe(false);
+        expect(getSoiCookie().opt_in).toBe(false);
         expect(hasOptedLater()).toBe(true);
         done();
       });

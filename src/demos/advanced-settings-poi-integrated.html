@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- tag::oil-config[] -->
+    <script id="oil-configuration" type="application/configuration">
+      {
+        "advanced_settings": true,
+        "poi_activate_poi": true,
+        "poi_hub_origin": "//oil-integration-cdn.herokuapp.com",
+        "poi_hub_path": "/demos/complete-integration-mypass.html"
+      }
+    </script>
+    <!-- end::oil-config[] -->
+    <style>
+      body {
+        font-family: 'Nunito', sans-serif;
+        font-size: 60px;
+        color: #f7f7f7;
+        min-height: 100vh;
+        height: 100%;
+        background: linear-gradient(20deg, #3a871a 0%, #a5ba10 50%, #cfcd26 100%);
+        padding: 0;
+        margin: 0;
+      }
+
+      .demoname {
+        padding: 24px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="demoname">Group A Site A</div>
+    <button onclick="oilShowPreferenceCenter();">Insert CPC</button>
+    <button onclick="oilTriggerSoiOptIn();">Yes Soi</button>
+    <button onclick="oilTriggerPoiOptin();">Yes Poi</button>
+    <div style="background: #555555; padding: 20px;" id="oil-preference-center"></div>
+
+  </body>
+</html>

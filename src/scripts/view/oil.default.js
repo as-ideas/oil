@@ -1,10 +1,37 @@
-import { DATA_CONTEXT_YES, DATA_CONTEXT_LATER } from './../constants.js';
+import { DATA_CONTEXT_YES, DATA_CONTEXT_LATER, DATA_CONTEXT_ADVANCED_SETTINGS } from './../constants.js';
 import { getConfiguration } from './../config.js';
 import { POIButtonSnippet } from './components/oil.poi.button';
 import { privacyPageSnippet } from './components/oil.privacy.page';
 import { CSSPrefix } from './oil.view.config.js';
+import { OIL_CONFIG } from './../constants.js';
 
 let config = getConfiguration();
+
+/**
+ * OIL advanced settings button
+ */
+const OilAdvancedSettings = (advancedSettings) => {
+  return advancedSettings === true ? (
+      `
+          <button class="${CSSPrefix}oil__btn-as js-advanced-settings" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
+              ${config.label_button_advanced_settings}
+          </button>
+        `
+    ) : '';
+};
+
+/**
+ * OIL Later Button
+ */
+const OilLaterButton = (advancedSettings) => {
+  return advancedSettings !== true ? (
+      `
+          <button class="${CSSPrefix}oil__btn-loi js-optlater" data-context="${DATA_CONTEXT_LATER}" data-qa="oil-NotNowButton">
+              ${config.label_button_no}
+          </button>
+        `
+    ) : '';
+};
 
 export const oilDefaultTemplate = `
     <div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient" data-qa="oil-full">
@@ -24,11 +51,11 @@ export const oilDefaultTemplate = `
                     </button>
                 </div>
                 <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
-                    <button class="${CSSPrefix}oil__btn-loi js-optlater" data-context="${DATA_CONTEXT_LATER}" data-qa="oil-NotNowButton">
-                        ${config.label_button_no}
-                    </button>
+                    ${OilLaterButton(config[OIL_CONFIG.ATTR_ADVANCED_SETTINGS])}
+                    ${OilAdvancedSettings(config[OIL_CONFIG.ATTR_ADVANCED_SETTINGS])}
                 </div>
             </div>
+      
         </div>
     </div>
 `;

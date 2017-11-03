@@ -41,14 +41,14 @@ describe('configuration', () => {
   it('should generate location', () => {
     let config = {
       'poi_hub_origin': '//oil-integration-cdn.herokuapp.com',
-      'poi_hub_path': '/end2end-tests/complete-integration-mypass.html',
+      'poi_hub_path': '/demos/complete-integration-mypass.html',
       'poi_subscriber_set_cookie': false
     };
     let parsedConfig = readConfiguration({text: JSON.stringify(config)});
     expect(parsedConfig).toBeDefined();
     expect(parsedConfig[OIL_CONFIG.ATTR_HUB_ORIGIN]).toBe('http://oil-integration-cdn.herokuapp.com');
-    expect(parsedConfig[OIL_CONFIG.ATTR_HUB_PATH]).toBe('/end2end-tests/complete-integration-mypass.html');
-    expect(parsedConfig[OIL_CONFIG.ATTR_HUB_LOCATION]).toBe('http://oil-integration-cdn.herokuapp.com/end2end-tests/complete-integration-mypass.html');
+    expect(parsedConfig[OIL_CONFIG.ATTR_HUB_PATH]).toBe('/demos/complete-integration-mypass.html');
+    expect(parsedConfig[OIL_CONFIG.ATTR_HUB_LOCATION]).toBe('http://oil-integration-cdn.herokuapp.com/demos/complete-integration-mypass.html');
   });
 
   it('should use tracker name in ga_tracking config', () => {

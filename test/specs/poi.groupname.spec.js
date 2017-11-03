@@ -25,9 +25,9 @@ describe('poi', () => {
   it('should activate POI with groupname', (done) => {
     loadFixture('poi/poi.groupname.html');
 
-    PoiAPI.activatePowerOptInWithIFrame().then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
-        expect(optin).toBeDefined();
-        expect(optin).toBe(true);
+    PoiAPI.activatePowerOptInWithIFrame({}).then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
+        expect(optin.power_opt_in).toBeDefined();
+        expect(optin.power_opt_in).toBe(true);
         done();
       })
     );
@@ -39,7 +39,7 @@ describe('poi', () => {
 
     loadFixture('poi/poi.groupname.html');
 
-    PoiAPI.activatePowerOptInWithRedirect();
+    PoiAPI.activatePowerOptInWithRedirect({});
     expect(redirectionTarget).toContain('homersimpson');
   });
 
