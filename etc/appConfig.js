@@ -20,6 +20,11 @@ module.exports = {
     name: ['polyfills'].reverse()
   },
   indexFiles: [{
+    filename: 'hub.html',
+    template: path.resolve(sourcePath, '', 'hub.html'),
+    chunks: ['hub'],
+    chunksSortMode: 'dependency'
+  }, {
     filename: 'demos/direct-integration.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration.html'),
     chunks: ['demos/direct-integration'],
@@ -114,10 +119,6 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, 'index.html'),
     to: 'index.html'
-
-  }, {
-    from: path.resolve(sourcePath, 'hub.html'),
-    to: 'hub.html'
 
   }, {
     from: path.resolve(sourcePath, 'demos', 'tealium-integration-test.html'),
