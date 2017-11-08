@@ -24,7 +24,7 @@ const SOIButtonSnippet = (poiActivated) => {
 };
 
 export const oilAdvancedSettingsTemplate = `
-<div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient" data-qa="oil-full">
+<div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient" data-qa="oil-as-overlay">
         <div class="${CSSPrefix}oil-l-wrapper-layout-max-width">
             <div class="${CSSPrefix}oil__heading">
                 ${config.label_title_advanced_settings}
