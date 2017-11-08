@@ -129,6 +129,14 @@ nightwatch_config = {
         'device': 'iPad 4th'
       }
     },
+    iphone4S: {
+      desiredCapabilities: {
+        'browserName': 'iPhone',
+        'platform': 'MAC',
+        'device': 'iPhone 4S',
+        'os_version': '6'
+      }
+    },
     iphone5: {
       desiredCapabilities: {
         'browserName': 'iPhone',
