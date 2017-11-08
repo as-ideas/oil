@@ -4,6 +4,7 @@ let whitelist = [
   "herokuapp.com",
   "geld-anlegen.de",
   "finanzennet.gmbh",
+  "immonet.de",
   "asideas.de"
 ];
 
