@@ -13,8 +13,6 @@
 <body class="has-big-bad-background">
   <script id="oil-configuration" type="application/configuration">
       {
-        "opt_in_event_name": "oil_optin_done_custom",
-        "opt_out_event_name": "foobar3000"
       }
   </script>
 
@@ -32,7 +30,7 @@
   </script>
 
 
-<button data-qa="send-opt-out-button" onclick="window.postMessage('foobar3000', getMyOrigin());">Send Opt-Out-Event</button>
+<button data-qa="send-opt-out-button" onclick="window.postMessage('oil_optout_trigger', getMyOrigin());">Send Opt-Out-Event</button>
   </body>
 </html>
 

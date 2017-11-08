@@ -1,7 +1,7 @@
 import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect, verifyPowerOptIn } from './poi.js';
 import { logInfo, logPreviewInfo } from './log.js';
 import { sendEventToHostSite } from './utils.js';
-import { OIL_CONFIG, PRIVACY_SETTINGS_MINIMUM_TRACKING } from './constants.js';
+import { EVENT_NAME_OPT_LATER, EVENT_NAME_OPT_IN, PRIVACY_SETTINGS_MINIMUM_TRACKING, EVENT_NAME_OPT_IGNORE } from './constants.js';
 import { getConfiguration, isPoiActive, isSubscriberSetCookieActive } from './config.js';
 import { getSoiCookie, setSoiOptIn, setOptLater, setOilOptIgnore } from './cookies.js';
 
@@ -75,7 +75,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = false  ) {
     }
 
     // Send event to notify host site
-    fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME);
+    fireConfiguredMessageEvent(EVENT_NAME_OPT_IN);
     resolve(true);
   });
 }
@@ -88,7 +88,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = false  ) {
 export function oilOptIn(privacySettings = PRIVACY_SETTINGS_MINIMUM_TRACKING) {
   setSoiOptIn(privacySettings);
   // Send event to notify host site
-  fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME);
+  fireConfiguredMessageEvent(EVENT_NAME_OPT_IN);
 
   return new Promise((resolve) => {
     resolve(true);
@@ -103,7 +103,7 @@ export function oilOptIn(privacySettings = PRIVACY_SETTINGS_MINIMUM_TRACKING) {
 export function oilOptLater() {
   setOptLater(true);
   // Send event to notify host site
-  fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_LATER_EVENT_NAME);
+  fireConfiguredMessageEvent(EVENT_NAME_OPT_LATER);
 
   return new Promise((resolve) => {
     resolve(true);
@@ -118,7 +118,7 @@ export function oilOptLater() {
 export function oilOptIgnore() {
   setOilOptIgnore(true);
   // Send event to notify host site
-  fireConfiguredMessageEvent(OIL_CONFIG.ATTR_OPT_IGNORE_EVENT_NAME);
+  fireConfiguredMessageEvent(EVENT_NAME_OPT_IGNORE);
 
   return new Promise((resolve) => {
     resolve(true);
@@ -128,21 +128,8 @@ export function oilOptIgnore() {
 
 /**
  * Fire a postmessage event to host site to notify of e.g. optin or optlater
- * @param eventname defined in OIL config constants keys, e.g. OIL_CONFIG.ATTR_OPT_IN_EVENT_NAME
+ * @param eventname is the event name that will be used
  */
-export function fireConfiguredMessageEvent(configEventName) {
-  if (!config) {
-    config = getConfiguration();
-  }
-
-  if (config) {
-    let eventName = config[configEventName];
-
-    if (eventName) {
-      sendEventToHostSite(eventName);
-    }
-    else {
-      logInfo(`Event ${configEventName} has not been configured. We couldn't notify the host application.`);
-    }
-  }
+export function fireConfiguredMessageEvent(eventName) {
+  sendEventToHostSite(eventName);
 }

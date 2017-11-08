@@ -99,11 +99,6 @@ You need to add the configuration snippet to all pages where OIL is required. Th
 [width="100%",options="header", cols="1,3,1,1"]
 |====
 |Config Parameter | Description | Default Setting|POI optional feature
-| opt_in_event_name | The name for the Javascript event that will be sent to the host when a users selects opt in. | 'oil_optin_done'|No
-| opt_later_event_name | The name for the Javascript event name that will be sent to the host when a user selects (clicks, taps) opt later. | 'oil_optlater_trigger'|No
-| opt_out_event_name | The Javascript event name OIL is listening to for opting out. Please note: The opt-out functionality has to be implemented manually by the site owner on the host site! | 'oil_optout_trigger'|No
-| has_opted_in_event_name | This event will be fired on each page load, but only if the user has opted in previously. | 'has_opted_in_event_name'| No
-| has_opted_later_event_name | This event will be fired on each page load, but only if the user has opted later previously. | 'has_opted_later_event_name'| No
 | preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false |No
 | privacy_page_url | OIL should always have a link to your privacy page ("Datenschutz"). If you add the key "privacy_page_url", the show more label ("Mehr erfahren") can't be changed and will be added to OIL. It opens a page with the value you specified in a new tab or window. You can either use a relative or absolute URL.| "" (empty string)|No
 | activate_poi | Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false|Yes
@@ -165,3 +160,22 @@ image::images/GA-OIL-Dashboard.png[]
 
 The Tealium integration of Oil.js has not yet been completed for company-wide use in production.
 We keep you up to date and will update the instructions here accordingly.
+
+=== OIL Events and API
+
+There are different events that OIL will throw or listen to in order to communicate with the host site:
+
+'oil_optin_done': The Javascript event that will be sent to the host when a users selects opt in.
+'oil_optlater_done': The Javascript event that will be sent to the host when a users selects opt later.
+'oil_optignore_done': The Javascript event that will be sent to the host when a users selects opt ignore.
+
+'oil_has_optedin': The Javascript event that will be sent to the host on every page reload, when the user has opted_in previously
+'oil_has_optedlater': The Javascript event that will be sent to the host on every page reload, when the user has opted_later previously
+'oil_has_optedignore': The Javascript event that will be sent to the host on every page reload, when the user has opted_ignore previously
+
+'oil_optout_trigger': Contrary this event is listened to by OIL and will remove all cookies if triggered and therefor opt_out.
+
+There are also javascript functions on the window object that can be used to communicate with oil:
+window.oilShowPreferenceCenter() - inserts the CPC into the predefined div with the id #oil-preference-center into the host site
+window.oilTriggerSoiOptIn() - will trigger the CPC SOI optin (can also result in an optout)
+window.oilTriggerPoiOptin() - will trigger the CPC POI optin (can also result in an optout)

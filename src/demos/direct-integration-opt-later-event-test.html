@@ -33,8 +33,6 @@
 <body class="has-big-bad-background">
   <script id="oil-configuration" type="application/configuration">
       {
-        "opt_later_event_name": "optLater",
-        "has_opted_later_event_name": "hasOptedLater"
       }
   </script>
 
@@ -64,7 +62,7 @@
       function eventDataContains(str) {
         return JSON.stringify(event.data).indexOf(str) !== -1;
       }
-      if (event && event.data && (eventDataContains('optLater') || eventDataContains('hasOptedLater'))) {
+      if (event && event.data && (eventDataContains('oil_optlater_done') || eventDataContains('oil_has_optedlater'))) {
           var element = document.getElementById('optical-event-notifier');
           element.className = 'event-notifier';
       }
