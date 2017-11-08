@@ -36,8 +36,6 @@
   </div>
   <script id="oil-configuration" type="application/configuration">
       {
-        "opt_in_event_name": "oil_optin_done_custom",
-        "has_opted_in_event_name": "oil_has_optedin"
       }
   </script>
 
@@ -54,7 +52,7 @@
       function eventDataContains(str) {
         return JSON.stringify(event.data).indexOf(str) !== -1;
       }
-      if (event && event.data && (eventDataContains('oil_optin_done_custom') || eventDataContains('oil_has_optedin'))) {
+      if (event && event.data && (eventDataContains('oil_optin_done') || eventDataContains('oil_has_optedin'))) {
           var element = document.getElementById('optical-event-notifier');
           element.className = 'event-notifier';
       }

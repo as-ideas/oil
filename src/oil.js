@@ -3,7 +3,7 @@ import { checkOptIn, fireConfiguredMessageEvent } from './scripts/optin.js';
 import { registerOptOutListener } from './scripts/optout.js';
 import { logInfo, logPreviewInfo } from './scripts/log.js';
 import { getConfiguration, isPreviewMode, gaTrackEvent } from './scripts/config.js';
-import { OIL_CONFIG } from './scripts/constants.js';
+import { EVENT_NAME_HAS_OPTED_IGNORE, EVENT_NAME_HAS_OPTED_LATER, EVENT_NAME_HAS_OPTED_IN } from './scripts/constants.js';
 import { isBrowserCookieEnabled, hasGALoaded } from './scripts/utils.js';
 import {
   hasOptedLater,
@@ -92,13 +92,13 @@ export function initOilLayer() {
        * User has opted in
        */
       if (optin) {
-        fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_IN_EVENT_NAME);
+        fireConfiguredMessageEvent(EVENT_NAME_HAS_OPTED_IN);
       }
       /**
        * User has opted ignore
        */
       else if (hasOptedIgnore()) {
-        fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_IGNORE_EVENT_NAME);
+        fireConfiguredMessageEvent(EVENT_NAME_HAS_OPTED_IGNORE);
         gaTrackEvent('Loaded/Ignored', 1);
       }
       /**
@@ -106,7 +106,7 @@ export function initOilLayer() {
        */
       else if (hasOptedLater()) {
         renderOil(oilWrapper, {optLater: true});
-        fireConfiguredMessageEvent(OIL_CONFIG.ATTR_HAS_OPTED_LATER_EVENT_NAME);
+        fireConfiguredMessageEvent(EVENT_NAME_HAS_OPTED_LATER);
         gaTrackEvent('Loaded/Later', 1);
       }
       /**

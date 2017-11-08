@@ -3,13 +3,6 @@ import { extend } from './utils';
 import { logInfo, logError } from './log';
 
 const defaultConfig = {
-  'opt_in_event_name': 'oil_optin_done',
-  'opt_out_event_name': 'oil_optout_trigger',
-  'opt_later_event_name': 'oil_optlater_trigger',
-  'opt_ignore_event_name': 'oil_optignore_trigger',
-  'has_opted_in_event_name': 'oil_has_optedin',
-  'has_opted_later_event_name': 'oil_has_optedlater',
-  'has_opted_ignore_event_name': 'oil_has_optedignore',
   'preview_mode': false,
   'renderAdvancedSettings': false,
   'cookie_expires_in_days': 31,
