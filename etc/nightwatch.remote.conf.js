@@ -131,10 +131,9 @@ nightwatch_config = {
     },
     iphone4S: {
       desiredCapabilities: {
-        'browserName': 'iPhone',
-        'platform': 'MAC',
-        'device': 'iPhone 4S',
-        'os_version': '6'
+        'browserName' : 'iPhone',
+        'platform' : 'MAC',
+        'device' : 'iPhone 4S (6.0)'
       }
     },
     iphone5: {
