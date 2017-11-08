@@ -116,6 +116,10 @@ module.exports = {
     to: 'index.html'
 
   }, {
+    from: path.resolve(sourcePath, 'hub.html'),
+    to: 'hub.html'
+
+  }, {
     from: path.resolve(sourcePath, 'demos', 'tealium-integration-test.html'),
     to: 'demos/tealium-integration-test.html'
   }],
