@@ -6,8 +6,7 @@ import { logError, logInfo } from './log.js';
 
 // Timeout after which promises should return
 const TIMEOUT = 500;
-let config = null,
-  frameListenerRegistered = false;
+let frameListenerRegistered = false;
 
 // INTERNAL FUNCTIONS
 
@@ -19,10 +18,7 @@ let config = null,
 function init() {
   return new Promise((resolve) => setTimeout(() => {
     logInfo('Initializing Frame...');
-    // read config data if not already set
-    if (!config) {
-      config = getConfiguration();
-    }
+    let config = getConfiguration();
 
     if (isPoiActive()) {
       let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION];
@@ -63,9 +59,9 @@ function sendEventToFrame(eventName, origin, payload = {}) {
 
   init().then((result) => {
     let iframe = result.iframe,
-        config = result.config;
+      config = result.config;
     let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN],
-        groupName = config[OIL_CONFIG.ATTR_OIL_POI_GROUP_NAME];
+      groupName = config[OIL_CONFIG.ATTR_OIL_POI_GROUP_NAME];
     if (iframe && hubDomain) {
       // tag::subscriber-postMessage[]
       // see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax
@@ -130,7 +126,7 @@ function readConfigFromFrame(origin) {
 export function verifyPowerOptIn() {
   return new Promise((resolve) => {
     if (!isPoiActive()) {
-      resolve({ power_opt_in: false });
+      resolve({power_opt_in: false});
     }
 
     init().then((result) => {
@@ -140,7 +136,7 @@ export function verifyPowerOptIn() {
           // Listen to message from child window after iFrame load
           iframe.onload = () => readConfigFromFrame(getOrigin()).then((data) => {
             if (!data) {
-              resolve({ power_opt_in: false });
+              resolve({power_opt_in: false});
             }
             resolve(data);
           });
@@ -148,14 +144,14 @@ export function verifyPowerOptIn() {
           // if already loaded directly invoke
           readConfigFromFrame(getOrigin()).then((data) => {
             if (!data) {
-              resolve({ power_opt_in: false });
+              resolve({power_opt_in: false});
             }
             resolve(data);
           });
         }
       } else {
         logInfo('Could not initialize POI. Fallback to POI false.');
-        resolve({ power_opt_in: false });
+        resolve({power_opt_in: false});
       }
     });
   });
@@ -231,10 +227,10 @@ export function activatePowerOptInWithRedirect(payload) {
 
   if (config) {
     let payloadString = JSON.stringify(payload),
-        payloadUriParam = encodeURIComponent(payloadString);
+      payloadUriParam = encodeURIComponent(payloadString);
 
     let hubLocation = config[OIL_CONFIG.ATTR_HUB_LOCATION],
-        groupName = config[OIL_CONFIG.ATTR_OIL_POI_GROUP_NAME];
+      groupName = config[OIL_CONFIG.ATTR_OIL_POI_GROUP_NAME];
     if (hubLocation) {
       let targetLocation = hubLocation + '?' + POI_FALLBACK_NAME + '=1';
       if (groupName) {

@@ -1,6 +1,7 @@
 import { CSSPrefix } from './oil.view.config.js';
 
-export const oilNoCookiesTemplate = `
+export function oilNoCookiesTemplate() {
+  return `
     <div class="${CSSPrefix}oil-content-overlay" data-qa="oil-nocookies">
         <div class="${CSSPrefix}oil-l-wrapper-layout-max-width">
             <div class="${CSSPrefix}oil__heading">
@@ -24,4 +25,5 @@ export const oilNoCookiesTemplate = `
             </p>
         </div>
     </div>
-`;
+`
+}
