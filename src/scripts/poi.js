@@ -171,8 +171,6 @@ export function activatePowerOptInWithIFrame(payload) {
     });
   }
 
-  // reset config
-  config = null;
   // init iFrame first
   return new Promise((resolve) => init().then(() => {
     // then activate
@@ -196,8 +194,6 @@ export function deActivatePowerOptIn() {
     });
   }
 
-  // reset config
-  config = null;
   // init iFrame first
   return new Promise((resolve) => init().then(() => {
     // then deactivate
@@ -221,9 +217,7 @@ export function activatePowerOptInWithRedirect(payload) {
     return;
   }
 
-  if (!config) {
-    config = getConfiguration();
-  }
+  let config = getConfiguration();
 
   if (config) {
     let payloadString = JSON.stringify(payload),

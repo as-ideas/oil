@@ -27,7 +27,6 @@ import {
  * Config Object
  * We store and cache our config in this object, later on...
  */
-let config = null;
 
 function attachUtilityFunctionsToWindowObject() {
   window.oilPreviewModeOn = () => {
@@ -47,7 +46,6 @@ function attachUtilityFunctionsToWindowObject() {
     return 'verbose mode off';
   };
   window.oilReload = () => {
-    config = null;
     resetConfiguration();
     initOilLayer();
     return 'OIL reloaded';
@@ -66,11 +64,6 @@ export function initOilLayer() {
   logInfo(`Init OilLayer (version ${process.env.OIL_VERSION})`);
 
   attachUtilityFunctionsToWindowObject();
-
-  // Fill config object with configuration data once and for all
-  if (config === null) {
-    config = getConfiguration();
-  }
 
   if (isPreviewMode() && !isPreviewCookieSet()) {
     logPreviewInfo('Preview mode not correctly set, please see the documentation on how to set the cookie.');
