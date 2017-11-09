@@ -30,7 +30,7 @@ function shouldRenderOilLayer(props) {
  * Oil Main Render Function:
  */
 export function renderOil(wrapper, props) {
-  if (shouldRenderOilLayer(props)) {
+  if (wrapper && shouldRenderOilLayer(props)) {
     if (props.noCookie) {
       renderOilContentToWrapper(wrapper, oilNoCookiesTemplate);
     } else if (props.optLater) {
@@ -169,13 +169,13 @@ function injectOilWrapperInDOM(wrapper) {
  */
 function getOilDOMNodes() {
   return {
-    oilWrapper: document.querySelector(`.${CSSPrefix}oil`),
-    btnSoiOptIn: document.querySelector(`.${CSSPrefix}oil .js-optin`),
-    btnPoiOptIn: document.querySelector(`.${CSSPrefix}oil .js-optin-poi`),
-    btnOptLater: document.querySelector(`.${CSSPrefix}oil .js-optlater`),
-    btnAdvancedSettings: document.querySelector(`.${CSSPrefix}oil .js-advanced-settings`),
-    btnClose: document.querySelector(`.${CSSPrefix}oil .js-optignore`),
-    btnBack: document.querySelector(`.${CSSPrefix}oil .js-oilback`)
+    oilWrapper: document.querySelectorAll(`.${CSSPrefix}oil`),
+    btnSoiOptIn: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-optin`),
+    btnPoiOptIn: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-optin-poi`),
+    btnOptLater: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-optlater`),
+    btnAdvancedSettings: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-advanced-settings`),
+    btnClose: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-optignore`),
+    btnBack: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-oilback`)
   }
 }
 
@@ -266,28 +266,54 @@ function handleOilIgnore() {
 }
 
 /**
- * Add and Remove Handlers to Oil Action Elements
- *
+ * adds a listener to all dom nodes in this list
+ * @param listOfDoms
+ * @param listener
  */
+function addEventListenersToDOMList(listOfDoms, listener) {
+  if (listOfDoms) {
+    listOfDoms.forEach((domNode) => {
+      domNode && domNode.addEventListener('click', listener, false);
+    });
+  }
+}
 
+/**
+ * removes a listener from all dom nodes in this list
+ * @param listOfDoms
+ * @param listener
+ */
+function removeEventListenersToDOMList(listOfDoms, listener) {
+  if (listOfDoms) {
+    listOfDoms.forEach((domNode) => {
+      domNode && domNode.removeEventListener('click', listener, false);
+    });
+  }
+}
+
+/**
+ * Add and Remove Handlers to Oil Action Elements
+ */
 function addOilHandlers(nodes) {
-  nodes.btnSoiOptIn && nodes.btnSoiOptIn.addEventListener('click', handleSoiOptIn, false);
-  nodes.btnPoiOptIn && nodes.btnPoiOptIn.addEventListener('click', handlePoiOptIn, false);
-  nodes.btnOptLater && nodes.btnOptLater.addEventListener('click', handleOptLater, false);
-  nodes.btnAdvancedSettings && nodes.btnAdvancedSettings.addEventListener('click', handleAdvancedSettings, false);
-  nodes.btnClose && nodes.btnClose.addEventListener('click', handleOilIgnore, false);
-  nodes.btnBack && nodes.btnBack.addEventListener('click', handleBackToMainDialog, false);
+  addEventListenersToDOMList(nodes.btnSoiOptIn, handleSoiOptIn);
+  addEventListenersToDOMList(nodes.btnPoiOptIn, handlePoiOptIn);
+  addEventListenersToDOMList(nodes.btnOptLater, handleOptLater);
+  addEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
+  addEventListenersToDOMList(nodes.btnClose, handleOilIgnore);
+  addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 }
 
 function removeOilWrapperAndHandlers(nodes) {
-  nodes.btnSoiOptIn && nodes.btnSoiOptIn.removeEventListener('click', handleSoiOptIn, false);
-  nodes.btnOptLater && nodes.btnOptLater.removeEventListener('click', handleOptLater, false);
-  nodes.btnPoiOptIn && nodes.btnPoiOptIn.removeEventListener('click', handlePoiOptIn, false);
-  nodes.btnAdvancedSettings && nodes.btnAdvancedSettings.removeEventListener('click', handleAdvancedSettings, false);
-  nodes.btnClose && nodes.btnClose.removeEventListener('click', handleOilIgnore, false);
-  nodes.btnBack && nodes.btnBack.removeEventListener('click', handleBackToMainDialog, false);
+  removeEventListenersToDOMList(nodes.btnSoiOptIn, handleSoiOptIn);
+  removeEventListenersToDOMList(nodes.btnPoiOptIn, handlePoiOptIn);
+  removeEventListenersToDOMList(nodes.btnOptLater, handleOptLater);
+  removeEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
+  removeEventListenersToDOMList(nodes.btnClose, handleOilIgnore);
+  removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 
   if (nodes.oilWrapper) {
-    nodes.oilWrapper.parentElement.removeChild(nodes.oilWrapper);
+    nodes.oilWrapper.forEach((domNode) => {
+      domNode.parentElement.removeChild(domNode);
+    });
   }
 }

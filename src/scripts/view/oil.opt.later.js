@@ -13,7 +13,7 @@ let config = getConfiguration();
 const OilIgnore = (oilIgnore) => {
   return oilIgnore === true ? (
     `
-        <div class="${CSSPrefix}oil-close js-optignore" data-context="${DATA_CONTEXT_IGNORE_WHILE_LATER}" data-qa="oil-closeButton">
+        <div class="${CSSPrefix}oil-close ${CSSPrefix}js-optignore" data-context="${DATA_CONTEXT_IGNORE_WHILE_LATER}" data-qa="oil-closeButton">
             <svg class="${CSSPrefix}oil-icon-close" width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
                 <g fill-rule="evenodd">
                     <path d="M.222 13.364L12.95.636l1.414 1.414L1.636 14.778z"/>
@@ -45,7 +45,7 @@ export const oilOptLaterTemplate =
             </div>
             <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
                 ${POIButtonSnippet()}
-                <button class="${CSSPrefix}oil-loi__btn-soi js-optin" data-context="${DATA_CONTEXT_YES_WHILE_LATER}" data-qa="oil-small-YesButton">
+                <button class="${CSSPrefix}oil-loi__btn-soi ${CSSPrefix}js-optin" data-context="${DATA_CONTEXT_YES_WHILE_LATER}" data-qa="oil-small-YesButton">
                     ${config.label_button_yes_soi}
                 </button>
             </div>

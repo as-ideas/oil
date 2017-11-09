@@ -13,7 +13,7 @@ let config = getConfiguration();
 const OilAdvancedSettings = (advancedSettings) => {
   return advancedSettings === true ? (
       `
-          <button class="${CSSPrefix}oil__btn-as js-advanced-settings" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
+          <button class="${CSSPrefix}oil__btn-as ${CSSPrefix}js-advanced-settings" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
               ${config.label_button_advanced_settings}
           </button>
         `
@@ -26,7 +26,7 @@ const OilAdvancedSettings = (advancedSettings) => {
 const OilLaterButton = (advancedSettings) => {
   return advancedSettings !== true ? (
       `
-          <button class="${CSSPrefix}oil__btn-loi js-optlater" data-context="${DATA_CONTEXT_LATER}" data-qa="oil-NotNowButton">
+          <button class="${CSSPrefix}oil__btn-loi ${CSSPrefix}js-optlater" data-context="${DATA_CONTEXT_LATER}" data-qa="oil-NotNowButton">
               ${config.label_button_no}
           </button>
         `
@@ -46,7 +46,7 @@ export const oilDefaultTemplate = `
             <div class="${CSSPrefix}oil-l-row">
                 ${POIButtonSnippet()}
                 <div class="${CSSPrefix}oil-l-item">
-                    <button class="${CSSPrefix}oil__btn-soi js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
+                    <button class="${CSSPrefix}oil__btn-soi ${CSSPrefix}js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
                         ${config.label_button_yes_soi}
                     </button>
                 </div>
