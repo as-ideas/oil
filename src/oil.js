@@ -3,7 +3,11 @@ import { checkOptIn, fireConfiguredMessageEvent } from './scripts/optin.js';
 import { registerOptOutListener } from './scripts/optout.js';
 import { logInfo, logPreviewInfo } from './scripts/log.js';
 import { getConfiguration, isPreviewMode, gaTrackEvent } from './scripts/config.js';
-import { EVENT_NAME_HAS_OPTED_IGNORE, EVENT_NAME_HAS_OPTED_LATER, EVENT_NAME_HAS_OPTED_IN } from './scripts/constants.js';
+import {
+  EVENT_NAME_HAS_OPTED_IGNORE,
+  EVENT_NAME_HAS_OPTED_LATER,
+  EVENT_NAME_HAS_OPTED_IN
+} from './scripts/constants.js';
 import { isBrowserCookieEnabled, hasGALoaded } from './scripts/utils.js';
 import {
   hasOptedLater,
@@ -42,6 +46,10 @@ function attachUtilityFunctionsToWindowObject() {
   window.oilVerboseModeOff = () => {
     removeVerboseCookie();
     return 'verbose mode off';
+  };
+  window.oilReload = () => {
+    initOilLayer();
+    return 'OIL reloaded';
   };
 
   window.oilShowPreferenceCenter = oilShowPreferenceCenter;
