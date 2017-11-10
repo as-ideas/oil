@@ -2,7 +2,7 @@ import { renderOil, oilWrapper, oilShowPreferenceCenter, handleSoiOptIn, handleP
 import { checkOptIn, fireConfiguredMessageEvent } from './scripts/optin.js';
 import { registerOptOutListener } from './scripts/optout.js';
 import { logInfo, logPreviewInfo } from './scripts/log.js';
-import { getConfiguration, isPreviewMode, gaTrackEvent } from './scripts/config.js';
+import { getConfiguration, resetConfiguration, isPreviewMode, gaTrackEvent } from './scripts/config.js';
 import {
   EVENT_NAME_HAS_OPTED_IGNORE,
   EVENT_NAME_HAS_OPTED_LATER,
@@ -19,7 +19,6 @@ import {
   removeVerboseCookie
 } from './scripts/cookies.js';
 
-
 (function () {
   initOilLayer();
 }());
@@ -28,7 +27,6 @@ import {
  * Config Object
  * We store and cache our config in this object, later on...
  */
-let config = null;
 
 function attachUtilityFunctionsToWindowObject() {
   window.oilPreviewModeOn = () => {
@@ -48,6 +46,7 @@ function attachUtilityFunctionsToWindowObject() {
     return 'verbose mode off';
   };
   window.oilReload = () => {
+    resetConfiguration();
     initOilLayer();
     return 'OIL reloaded';
   };
@@ -65,11 +64,6 @@ export function initOilLayer() {
   logInfo(`Init OilLayer (version ${process.env.OIL_VERSION})`);
 
   attachUtilityFunctionsToWindowObject();
-
-  // Fill config object with configuration data once and for all
-  if (config === null) {
-    config = getConfiguration();
-  }
 
   if (isPreviewMode() && !isPreviewCookieSet()) {
     logPreviewInfo('Preview mode not correctly set, please see the documentation on how to set the cookie.');

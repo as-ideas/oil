@@ -5,7 +5,7 @@ import { CSSPrefix } from './../oil.view.config.js';
  */
 
 export const advancedSettingsSnippet = () => {
-    return `
+  return `
               <div class="${CSSPrefix}oil-l-row">
                 <div id="${CSSPrefix}slider-range" class="${CSSPrefix}slider-wrapper" data-qa="oil-as-slider"></div>
                 <div class="${CSSPrefix}slider-desc">
@@ -24,4 +24,4 @@ export const advancedSettingsSnippet = () => {
                 </div>
               </div>
 `;
-}
+};

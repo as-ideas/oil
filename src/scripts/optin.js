@@ -1,11 +1,14 @@
 import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect, verifyPowerOptIn } from './poi.js';
 import { logInfo, logPreviewInfo } from './log.js';
 import { sendEventToHostSite } from './utils.js';
-import { EVENT_NAME_OPT_LATER, EVENT_NAME_OPT_IN, PRIVACY_SETTINGS_MINIMUM_TRACKING, EVENT_NAME_OPT_IGNORE } from './constants.js';
-import { getConfiguration, isPoiActive, isSubscriberSetCookieActive } from './config.js';
+import {
+  EVENT_NAME_OPT_LATER,
+  EVENT_NAME_OPT_IN,
+  PRIVACY_SETTINGS_MINIMUM_TRACKING,
+  EVENT_NAME_OPT_IGNORE
+} from './constants.js';
+import { isPoiActive, isSubscriberSetCookieActive } from './config.js';
 import { getSoiCookie, setSoiOptIn, setOptLater, setOilOptIgnore } from './cookies.js';
-
-let config = null;
 
 /**
  * Log Helper function for checkOptIn
@@ -27,10 +30,6 @@ function logPreviewOptInInfo(singleOptIn, powerOptIn) {
  * @return Promise with updated cookie value
  */
 export function checkOptIn() {
-  if (!config) {
-    config = getConfiguration();
-  }
-
   return new Promise((resolve) => {
     let soiOptIn = getSoiCookie().opt_in;
     let resultOptIn = soiOptIn;
@@ -54,7 +53,7 @@ export function checkOptIn() {
  * @param powerOnly - only set Power Opt In (POI), no local site cookie (SOI)
  * @return Promise with updated cookie value
  */
-export function oilPowerOptIn(privacySettings, powerOnly = false  ) {
+export function oilPowerOptIn(privacySettings, powerOnly = false) {
   if (!powerOnly) {
     // Update Oil cookie (site - SOI)
     setSoiOptIn(privacySettings);

@@ -4,7 +4,6 @@ import { privacyPageSnippet } from './components/oil.privacy.page';
 import { getConfiguration } from './../config.js';
 import { OIL_CONFIG, DATA_CONTEXT_YES_WHILE_LATER, DATA_CONTEXT_IGNORE_WHILE_LATER } from './../constants.js';
 
-let config = getConfiguration();
 
 /**
  * OIL Ignore or Close Button
@@ -29,8 +28,9 @@ const OilIgnore = (oilIgnore) => {
 /**
  * Opt Later Template
  */
-export const oilOptLaterTemplate =
-  `
+export function oilOptLaterTemplate() {
+  let config = getConfiguration();
+  return `
     <div class="${CSSPrefix}oil-content-overlay" data-qa="oil-optlater">
         ${OilIgnore(config[OIL_CONFIG.ATTR_OIL_IGNORE])}
         <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-row--fixed-width">
@@ -51,4 +51,5 @@ export const oilOptLaterTemplate =
             </div>
         </div>
     </div>
-`;
+`
+}
