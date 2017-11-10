@@ -13,12 +13,12 @@ import { OIL_CONFIG } from './../constants.js';
 const SOIButtonSnippet = (poiActivated) => {
   let config = getConfiguration();
   return poiActivated !== true ? (
-    ` <div class="${CSSPrefix}oil-l-item">
-            <button class="${CSSPrefix}oil__btn-soi js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
+      ` <div class="${CSSPrefix}oil-l-item">
+            <button class="${CSSPrefix}oil__btn-soi ${CSSPrefix}js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
                 ${config.label_button_yes_soi}
             </button>
         </div>
-        `
+      `
   ) : '';
 };
 
@@ -35,7 +35,7 @@ export function oilAdvancedSettingsTemplate() {
                 ${POIButtonSnippet()}
                 ${SOIButtonSnippet(config[OIL_CONFIG.ATTR_ACTIVATE_POI])}
                 <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
-                  <button class="${CSSPrefix}oil__btn-loi js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-NotNowButton">
+                  <button class="${CSSPrefix}oil__btn-loi ${CSSPrefix}js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-NotNowButton">
                       ${config.label_button_back}
                   </button>
                 </div>
