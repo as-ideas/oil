@@ -27,6 +27,19 @@ function shouldRenderOilLayer(props) {
 }
 
 /**
+ * Utility function for forEach safety
+ *
+ * @param array
+ * @param callback
+ * @param scope
+ */
+export function forEach(array, callback, scope) {
+  for (let i = 0; i < array.length; i++) {
+    callback.call(scope, array[i]);
+  }
+}
+
+/**
  * Oil Main Render Function:
  */
 export function renderOil(wrapper, props) {
@@ -272,7 +285,7 @@ function handleOilIgnore() {
  */
 function addEventListenersToDOMList(listOfDoms, listener) {
   if (listOfDoms) {
-    listOfDoms.forEach((domNode) => {
+    forEach(listOfDoms, function (domNode) {
       domNode && domNode.addEventListener('click', listener, false);
     });
   }
@@ -285,7 +298,7 @@ function addEventListenersToDOMList(listOfDoms, listener) {
  */
 function removeEventListenersToDOMList(listOfDoms, listener) {
   if (listOfDoms) {
-    listOfDoms.forEach((domNode) => {
+    forEach(listOfDoms, function (domNode) {
       domNode && domNode.removeEventListener('click', listener, false);
     });
   }
@@ -312,7 +325,7 @@ function removeOilWrapperAndHandlers(nodes) {
   removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 
   if (nodes.oilWrapper) {
-    nodes.oilWrapper.forEach((domNode) => {
+    forEach(nodes.oilWrapper, function (domNode) {
       domNode.parentElement.removeChild(domNode);
     });
   }
