@@ -2,7 +2,7 @@ import { renderOil, oilWrapper, oilShowPreferenceCenter, handleSoiOptIn, handleP
 import { checkOptIn, fireConfiguredMessageEvent } from './scripts/optin.js';
 import { registerOptOutListener } from './scripts/optout.js';
 import { logInfo, logPreviewInfo } from './scripts/log.js';
-import { getConfiguration, resetConfiguration, isPreviewMode, gaTrackEvent } from './scripts/config.js';
+import { resetConfiguration, isPreviewMode, gaTrackEvent } from './scripts/config.js';
 import {
   EVENT_NAME_HAS_OPTED_IGNORE,
   EVENT_NAME_HAS_OPTED_LATER,

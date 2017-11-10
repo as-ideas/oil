@@ -59,7 +59,7 @@ function sendEventToFrame(eventName, origin, payload = {}) {
 
   init().then((result) => {
     let iframe = result.iframe,
-      config = result.config;
+        config = result.config;
     let hubDomain = config[OIL_CONFIG.ATTR_HUB_ORIGIN],
       groupName = config[OIL_CONFIG.ATTR_OIL_POI_GROUP_NAME];
     if (iframe && hubDomain) {
@@ -81,7 +81,8 @@ function sendEventToFrame(eventName, origin, payload = {}) {
  */
 function readConfigFromFrame(origin) {
   return new Promise((resolve) => {
-
+    let config = getConfiguration();
+    
     if (!isPoiActive()) {
       resolve(false);
     }
