@@ -6,7 +6,7 @@ import { CSSPrefix } from './../oil.view.config.js';
 
 export const advancedSettingsSnippet = () => {
   return `
-              <div class="${CSSPrefix}oil-l-row">
+              <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-cpc">
                 <div id="${CSSPrefix}slider-range" class="${CSSPrefix}slider-wrapper" data-qa="oil-as-slider"></div>
                 <div class="${CSSPrefix}slider-desc">
                   <div id="${CSSPrefix}slider-essential-title" class="${CSSPrefix}slider-inactive ">
