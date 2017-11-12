@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm install && node http_server.js",
     "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 ",
-    "prebuild": "npm run check && rm -rf dist/*",
+    "prebuild": "npm run check && rimraf dist/*",
     "build": "cross-env NODE_ENV=debug webpack --config etc/webpack.config.js && cross-env NODE_ENV=production webpack --config etc/webpack.config.js",
     "builddebug": "cross-env NODE_ENV=production webpack --config etc/webpack.config.js && cross-env NODE_ENV=debug webpack --config etc/webpack.config.js",
     "browserstack": "bash ./etc/runBrowserstackSeq.sh",
@@ -94,6 +94,7 @@
     "phantomjs-prebuilt": "2.1.13",
     "raw-loader": "0.5.1",
     "remap-istanbul": "0.6.4",
+    "rimraf": "^2.6.2",
     "sass-loader": "6.0.5",
     "selenium-download": "2.0.9",
     "source-map-loader": "0.1.5",
