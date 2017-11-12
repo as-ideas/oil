@@ -13,7 +13,7 @@ import { OIL_CONFIG } from './../constants.js';
 const SOIButtonSnippet = (poiActivated) => {
   let config = getConfiguration();
   return poiActivated !== true ? (
-      ` <div class="${CSSPrefix}oil-l-item">
+    ` <div class="${CSSPrefix}oil-l-item">
             <button class="${CSSPrefix}oil__btn-soi ${CSSPrefix}js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
                 ${config.label_button_yes_soi}
             </button>
@@ -28,10 +28,13 @@ export function oilAdvancedSettingsTemplate() {
 <div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient" data-qa="oil-as-overlay">
         <div class="${CSSPrefix}oil-l-wrapper-layout-max-width">
             <div class="${CSSPrefix}oil__heading">
-                ${config.label_title_advanced_settings}
+                ${config.label_advanced_settings_heading}
             </div>
-                ${advancedSettingsSnippet()}
-            <div class="${CSSPrefix}oil-l-row">
+            <p class="${CSSPrefix}oil__intro-txt">
+                ${config.label_advanced_settings_text}
+            </p>
+            ${advancedSettingsSnippet()}
+            <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-buttons">
                 ${POIButtonSnippet()}
                 ${SOIButtonSnippet(config[OIL_CONFIG.ATTR_ACTIVATE_POI])}
                 <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">

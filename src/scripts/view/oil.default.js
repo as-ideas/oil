@@ -47,7 +47,7 @@ export function oilDefaultTemplate() {
                 ${config.label_intro_start} ${privacyPageSnippet()}
                 ${config.label_intro_end}
             </p>
-            <div class="${CSSPrefix}oil-l-row">
+            <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-buttons">
                 ${POIButtonSnippet()}
                 <div class="${CSSPrefix}oil-l-item">
                     <button class="${CSSPrefix}oil__btn-soi ${CSSPrefix}js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
