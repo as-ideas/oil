@@ -124,8 +124,11 @@ module.exports = {
     to: 'index.html'
 
   }, {
-    from: path.resolve(sourcePath, 'demos', 'tealium-integration-test.html'),
-    to: 'demos/tealium-integration-test.html'
+    from: path.resolve(sourcePath, 'demos', 'kameleoon-immonet.html'),
+    to: 'demos/kameleoon-immonet.html'
+  }, {
+    from: path.resolve(sourcePath, 'demos', 'kameleoon-integration.html'),
+    to: 'demos/kameleoon-integration.html'
   }],
   mangle: {},
   proxy: {},
