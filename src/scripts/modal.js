@@ -211,8 +211,6 @@ function getRangeSliderValue() {
  * Handler Functions for our Oil Action Elements
  *
  */
-
-
 function handleOptLater() {
   let config = getConfiguration();
   logInfo('Handling OptLater');
@@ -235,7 +233,7 @@ function handleBackToMainDialog() {
 
 function handleAdvancedSettings() {
   let config = getConfiguration();
-  oilShowPreferenceCenter(oilWrapper, PRIVACY_FULL_TRACKING);
+  oilShowPreferenceCenter(oilWrapper, PRIVACY_MINIMUM_TRACKING);
   if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
     gaTrackEvent('advanced-settings', 0);
   }
