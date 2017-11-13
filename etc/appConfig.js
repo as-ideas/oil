@@ -123,12 +123,6 @@ module.exports = {
     from: path.resolve(sourcePath, 'index.html'),
     to: 'index.html'
 
-  }, {
-    from: path.resolve(sourcePath, 'demos', 'kameleoon-immonet.html'),
-    to: 'demos/kameleoon-immonet.html'
-  }, {
-    from: path.resolve(sourcePath, 'demos', 'kameleoon-integration.html'),
-    to: 'demos/kameleoon-integration.html'
   }],
   mangle: {},
   proxy: {},
