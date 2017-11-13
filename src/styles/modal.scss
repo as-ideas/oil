@@ -220,7 +220,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 .#{$prefix}oil__heading {
   max-width: 840px;
   margin: 2rem 0;
-  font-size: 2rem;
+  font-size: 2em;
   font-weight: 300;
   color: $text-color-secondary;
   line-height: 1.1875;
@@ -231,21 +231,21 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   @include media('<=phone') {
     margin: 0.625rem 0;
-    font-size: 1.125rem;
+    font-size: 1.125em;
   }
 }
 
 .#{$prefix}oil__intro-txt {
   max-width: 980px;
   margin: 1rem 0;
-  font-size: 0.9375rem;
+  font-size: 0.9375em;
   font-weight: 400;
   line-height: 1.4;
   color: $text-color-primary;
 
   @include media('<=phone') {
     margin: 1.5rem 0;
-    font-size: 0.75rem;
+    font-size: 0.75em;
   }
 }
 
@@ -272,7 +272,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   min-height: 50px;
   margin: 0;
   padding: 0.5rem 1rem;
-  font-size: 0.875rem; // 14px
+  font-size: 0.875em; // 14px
   font-weight: 400;
   border: none;
   border-radius: 3px;
@@ -357,7 +357,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     float: none;
     width: 100%;
     margin: 1rem 0; // We are vertically aligning this btn by using margins, which is a bit dirty
-    font-size: 0.75rem;
+    font-size: 0.75em;
     border-bottom: none;
   }
 
@@ -391,7 +391,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     float: none;
     width: 100%;
     margin: 1rem 0; // We are vertically aligning this btn by using margins, which is a bit dirty
-    font-size: 0.75rem;
+    font-size: 0.75em;
     border-bottom: none;
   }
 
@@ -410,7 +410,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .#{$prefix}oil-loi__heading {
   margin: 1rem 0;
-  font-size: 1.25rem;
+  font-size: 1.25em;
   font-weight: 300;
   color: $text-color-secondary;
   line-height: 1.1875;
@@ -421,13 +421,13 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   @include media('<=phone') {
     margin: 0.625rem 2.25rem 0.625rem 0; // Make space to the right for our absolute positioned close button
-    font-size: 1.125rem;
+    font-size: 1.125em;
   }
 }
 
 .#{$prefix}oil-loi__intro-txt {
   margin: 1rem 0;
-  font-size: 0.875rem;
+  font-size: 0.875em;
   font-weight: 400;
   line-height: 1.4;
   color: $text-color-primary;
@@ -592,14 +592,14 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .#{$prefix}slider-option-title {
-  font-size: 1.2rem;
+  font-size: 1.2em;
   font-weight: 400;
   line-height: 1.4;
   color: $text-color-secondary;
 }
 
 .#{$prefix}slider-option-verbose {
-  font-size: 0.9375rem;
+  font-size: 0.9375em;
   font-weight: 400;
   line-height: 1.4;
   color: $text-color-primary;
