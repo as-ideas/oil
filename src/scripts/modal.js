@@ -279,7 +279,7 @@ export function handlePoiOptIn() {
   }
 }
 
-function handleOilIgnore() {
+export function handleOilIgnore() {
   let config = getConfiguration();
   oilOptIgnore().then((cookieOptIgnore) => {
     renderOil(oilWrapper, {optIgnore: cookieOptIgnore});

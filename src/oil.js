@@ -1,4 +1,4 @@
-import { renderOil, oilWrapper, oilShowPreferenceCenter, handleSoiOptIn, handlePoiOptIn } from './scripts/modal.js';
+import { renderOil, oilWrapper, oilShowPreferenceCenter, handleSoiOptIn, handlePoiOptIn, handleOilIgnore } from './scripts/modal.js';
 import { checkOptIn, fireConfiguredMessageEvent } from './scripts/optin.js';
 import { registerOptOutListener } from './scripts/optout.js';
 import { logInfo, logPreviewInfo } from './scripts/log.js';
@@ -54,6 +54,7 @@ function attachUtilityFunctionsToWindowObject() {
   window.oilShowPreferenceCenter = oilShowPreferenceCenter;
   window.oilTriggerSoiOptIn = handleSoiOptIn;
   window.oilTriggerPoiOptin = handlePoiOptIn;
+  window.oilTriggerIgnore = handleOilIgnore;
 }
 
 /**
