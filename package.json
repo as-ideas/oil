@@ -4,7 +4,7 @@
   "description": "Module for Axel Springer Oil",
   "main": "http_server.js",
   "scripts": {
-    "start": "npm install && node http_server.js",
+    "start": "node http_server.js",
     "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 ",
     "prebuild": "npm run check && rimraf dist/*",
     "build": "cross-env NODE_ENV=debug webpack --config etc/webpack.config.js && cross-env NODE_ENV=production webpack --config etc/webpack.config.js",
