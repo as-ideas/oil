@@ -1,5 +1,0 @@
-- OIL-Dokumentation: https://as-wiki.axelspringer.de/display/IDEASINNO/OIL+Starting+Guide
-- OIL-Examples: https://oil.asideas.de/demos/advanced-settings-poi-integrated.html
-- Tealium
-- Kameleoon
-- InVision-Designs für StepStone

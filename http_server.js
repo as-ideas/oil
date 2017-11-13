@@ -73,6 +73,7 @@ app.all(allowCrossDomain);
 
 // Serve directory indexes for public/ftp folder (with icons)
 app.use('/release', serveIndex('release', {'icons': true}));
+app.use('/examples', serveIndex('examples', {'icons': true}));
 
 // static with cache headers
 app.use(serveStatic(DOCUMENT_ROOT, {maxAge: CACHE_DURATION, cacheControl: true}));
