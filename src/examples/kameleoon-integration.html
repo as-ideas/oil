@@ -52,6 +52,22 @@
 
     window.oilReload();
 
+    // Custom Goal Opt-In
+    if(Kameleoon) {
+      Kameleoon.API.runWhenConditionTrue(function() {
+        var result = !!document.querySelector('.as-js-optin');
+        console.log('.as-js-optin', result);
+        return result;
+      }, function() {
+        var myElements = document.getElementsByClassName('as-js-optin');
+        for (let i = 0; i < myElements.length; i++) {
+          myElements[i].addEventListener('mousedown', function() {
+            console.log('Goal 70586 scored');
+            Kameleoon.API.processConversion(70586);
+          });
+        }
+      }, 100);
+    }
   }, 2000);
 </script>
 
