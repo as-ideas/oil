@@ -2,7 +2,7 @@ import { CSSPrefix } from './oil.view.config.js';
 
 export function oilNoCookiesTemplate() {
   return `
-    <div class="${CSSPrefix}oil-content-overlay" data-qa="oil-nocookies">
+    <div class="${CSSPrefix}oil-content-overlay oil-nocookies" data-qa="oil-nocookies">
         <div class="${CSSPrefix}oil-l-wrapper-layout-max-width">
             <div class="${CSSPrefix}oil__heading">
                 Um unsere Services bestmöglich erbringen zu können, müssen in deinem Browser Cookies aktiviert sein.

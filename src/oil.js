@@ -18,6 +18,7 @@ import {
   removePreviewCookie,
   removeVerboseCookie
 } from './scripts/cookies.js';
+import { getSoiCookie } from "./scripts/cookies";
 
 (function () {
   initOilLayer();
@@ -49,6 +50,9 @@ function attachUtilityFunctionsToWindowObject() {
     resetConfiguration();
     initOilLayer();
     return 'OIL reloaded';
+  };
+  window.oilStatus = () => {
+    return getSoiCookie();
   };
 
   window.oilShowPreferenceCenter = oilShowPreferenceCenter;

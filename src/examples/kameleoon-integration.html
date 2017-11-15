@@ -16,6 +16,9 @@
         "preview_mode": true
       }
 
+
+
+
 </script>
 
 <script type="text/javascript">
@@ -51,24 +54,68 @@
     head.appendChild(script);
 
     window.oilReload();
-
-    // Custom Goal Opt-In
-    if(Kameleoon) {
-      Kameleoon.API.runWhenConditionTrue(function() {
-        var result = !!document.querySelector('.as-js-optin');
-        console.log('.as-js-optin', result);
-        return result;
-      }, function() {
-        var myElements = document.getElementsByClassName('as-js-optin');
-        for (let i = 0; i < myElements.length; i++) {
-          myElements[i].addEventListener('mousedown', function() {
-            console.log('Goal 70586 scored');
-            Kameleoon.API.processConversion(70586);
-          });
-        }
-      }, 100);
-    }
   }, 2000);
+
+</script>
+
+<script type="text/javascript">
+  // Custom Goal Opt-In
+  if (Kameleoon) {
+
+    // Normal SOI-Button
+    Kameleoon.API.runWhenConditionTrue(function () {
+      var result = !!document.querySelector('.as-js-optin');
+      return result;
+    }, function () {
+
+      // SOI button
+      var myElements = document.getElementsByClassName('as-js-optin');
+      for (let i = 0; i < myElements.length; i++) {
+        myElements[i].addEventListener('mousedown', function () {
+          Kameleoon.API.processConversion(70586);
+        });
+      }
+
+      // DSE button
+      var myElements = document.getElementsByClassName('as-oil__intro-txt--link');
+      for (let i = 0; i < myElements.length; i++) {
+        myElements[i].addEventListener('mousedown', function () {
+          Kameleoon.API.processConversion(70618);
+        });
+      }
+
+      // CPC button
+      var myElements = document.getElementsByClassName('as-js-advanced-settings--link');
+      for (let i = 0; i < myElements.length; i++) {
+        myElements[i].addEventListener('mousedown', function () {
+          Kameleoon.API.processConversion(70619);
+        });
+      }
+    }, 200);
+
+    // No Cookies shown
+    Kameleoon.API.runWhenConditionTrue(function () {
+      var result = !!document.querySelector('.oil-nocookies"');
+      return result;
+    }, function () {
+      Kameleoon.API.processConversion(70655);
+    }, 200);
+
+    // CPC is shown
+    Kameleoon.API.runWhenConditionTrue(function () {
+      var result = !!document.querySelector('.as-oil-l-cpc"');
+      return result;
+    }, function () {
+
+      // SOI-Button in CPC gets it's own Event!
+      var myElements = document.getElementsByClassName('as-js-optin');
+      for (let i = 0; i < myElements.length; i++) {
+        myElements[i].addEventListener('mousedown', function () {
+          Kameleoon.API.processConversion(70668);
+        });
+      }
+    }, 200);
+  }
 </script>
 
 <style>
