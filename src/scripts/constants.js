@@ -59,7 +59,7 @@ export const PRIVACY_FUNCTIONAL_TRACKING = 1;
 export const PRIVACY_FULL_TRACKING = 2;
 
 const PRIVACY_SETTING_ESSENTIAL       = 'esse';
-const PRIVACY_SETTING_ANALYTICS       = 'anal';
+const PRIVACY_SETTING_ANALYTICS       = 'analy';
 const PRIVACY_SETTING_SOCIAL_CONNECT  = 'soci';
 const PRIVACY_SETTING_ADS_BASE        = 'adsbase';
 const PRIVACY_SETTING_ADS_BEHAVIOUR   = 'adsbehav';
