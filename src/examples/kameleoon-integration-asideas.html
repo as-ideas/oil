@@ -72,22 +72,25 @@
       var myElements = document.getElementsByClassName('as-js-optin');
       for (let i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
+          console.info("GOAL reached: SOI Button clicked");
           Kameleoon.API.processConversion(70586);
         });
       }
 
-      // DSE button
+      // DSE Link
       var myElements = document.getElementsByClassName('as-oil__intro-txt--link');
       for (let i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
+          console.info("GOAL reached: DSE-Link clicked");
           Kameleoon.API.processConversion(70618);
         });
       }
 
-      // CPC button
+      // CPC Link
       var myElements = document.getElementsByClassName('as-js-advanced-settings--link');
       for (let i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
+          console.info("GOAL reached: CPC-Link clicked");
           Kameleoon.API.processConversion(70619);
         });
       }
@@ -95,15 +98,16 @@
 
     // No Cookies shown
     Kameleoon.API.runWhenConditionTrue(function () {
-      var result = !!document.querySelector('.oil-nocookies"');
+      var result = !!document.querySelector('.oil-nocookies');
       return result;
     }, function () {
+      console.info("GOAL reached: No cookies shown");
       Kameleoon.API.processConversion(70655);
     }, 200);
 
     // CPC is shown
     Kameleoon.API.runWhenConditionTrue(function () {
-      var result = !!document.querySelector('.as-oil-l-cpc"');
+      var result = !!document.querySelector('.as-oil-l-cpc');
       return result;
     }, function () {
 
@@ -111,6 +115,7 @@
       var myElements = document.getElementsByClassName('as-js-optin');
       for (let i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
+          console.info("GOAL reached: SOI in CPC clicked");
           Kameleoon.API.processConversion(70668);
         });
       }
