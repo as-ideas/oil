@@ -18,7 +18,7 @@ import {
   removePreviewCookie,
   removeVerboseCookie
 } from './scripts/cookies.js';
-import { getSoiCookie } from "./scripts/cookies";
+import { getSoiCookie } from './scripts/cookies';
 
 (function () {
   initOilLayer();
