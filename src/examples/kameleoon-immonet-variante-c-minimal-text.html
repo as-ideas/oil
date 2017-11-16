@@ -29,23 +29,38 @@
   div.as-oil-loi__heading, div.as-oil__heading {
     color: white;
     margin: 0 0;
-    font-size: 1.3rem;
+    font-size: 1.3em;
     font-weight: 400;
   }
 
-  p.as-oil__intro-txt, a.as-oil__intro-txt--link {
-    padding: 3px 0;
-    margin-right: 20px;
+  a.as-js-advanced-settings--link {
     color: #c0c0c0;
+    padding: 3px;
+    border-bottom: 1px solid;
+  }
+
+  a.as-js-advanced-settings--link:hover {
+    color: #8a8a8a;
+  }
+
+  a.as-oil__intro-txt--link {
+    color: #c0c0c0;
+    padding: 3px;
+    border-bottom: 1px solid;
+    margin-right: 20px;
+  }
+
+  a.as-oil__intro-txt--link:hover {
+    color: #8a8a8a;
   }
 
   p.as-oil__intro-txt {
+    padding: 3px 0;
+    margin-right: 20px;
+    color: #c0c0c0;
     min-width: 75%;
     max-width: 75%;
-    /*float: left;*/
     display: inline-block;
-    padding-right: 20px;
-    /*margin: 0.4rem 0;*/
   }
 
   /* REDESIGN */
@@ -70,12 +85,12 @@
   }
 
   div.as-slider-option-title {
-    font-size: 1rem;
+    font-size: 1em;
     color: #e3e3e3;
   }
 
   div.as-slider-option-verbose {
-    font-size: 0.9rem;
+    font-size: 0.9em;
   }
 
   div.as-slider-inactive {
@@ -91,9 +106,6 @@
     position: absolute;
     bottom: 0;
     float: right;
-    /*position: fixed;*/
-    /*bottom: 20px;*/
-    /*right: 20px;*/
   }
 
   button.as-oil-loi__btn-soi, button.as-oil__btn-soi {
@@ -153,7 +165,7 @@
       "preview_mode": false,
       "label_intro_heading": "Wir benötigen Ihre Zustimmung",
       "label_intro_start": "",
-      "label_intro_end": "<a class=\"as-oil__intro-txt--link as-js-advanced-settings\">Erweiterte Einstellungen</a>",
+      "label_intro_end": "<a class=\"as-js-advanced-settings as-js-advanced-settings--link\">Erweiterte Einstellungen</a>",
       "label_button_yes_soi": "Zustimmen",
       "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
       "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",

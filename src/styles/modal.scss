@@ -160,6 +160,9 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 100%;
   font-family: $font-stack;
   color: $text-color-primary;
+
+  // THE DEFAULT FONT-SIZE !!! IMPORTANT FOR em !!!
+  font-size: 18px;
 }
 
 /**
