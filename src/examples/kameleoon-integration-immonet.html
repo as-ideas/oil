@@ -19,6 +19,7 @@
 
 
 
+
 </script>
 
 <script type="text/javascript">
@@ -72,7 +73,6 @@
       var myElements = document.getElementsByClassName('as-js-optin');
       for (let i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
-          console.info("GOAL reached: SOI Button clicked");
           Kameleoon.API.processConversion(70830);
         });
       }
@@ -81,7 +81,6 @@
       var myElements = document.getElementsByClassName('as-oil__intro-txt--link');
       for (let i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
-          console.info("GOAL reached: DSE-Link clicked");
           Kameleoon.API.processConversion(70829);
         });
       }
@@ -90,7 +89,6 @@
       var myElements = document.getElementsByClassName('as-js-advanced-settings--link');
       for (let i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
-          console.info("GOAL reached: CPC-Link clicked");
           Kameleoon.API.processConversion(70828);
         });
       }
@@ -101,7 +99,6 @@
       var result = !!document.querySelector('.oil-nocookies');
       return result;
     }, function () {
-      console.info("GOAL reached: No cookies shown");
       Kameleoon.API.processConversion(70827);
     }, 200);
 
@@ -115,7 +112,6 @@
       var myElements = document.getElementsByClassName('as-js-optin');
       for (let i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
-          console.info("GOAL reached: SOI in CPC clicked");
           Kameleoon.API.processConversion(70826);
         });
       }
