@@ -35,7 +35,8 @@ const defaultConfig = {
   'poi_hub_path': '',
   'poi_subscriber_set_cookie': true,
   'oil_ignore': false,
-  'poi_group_name': ''
+  'poi_group_name': '',
+  'persist_min_tracking': true
 };
 
 let cachedConfig = null;

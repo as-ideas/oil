@@ -261,7 +261,7 @@ export function handlePoiOptIn() {
   let config = getConfiguration();
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
-  if (privacySetting !== PRIVACY_MINIMUM_TRACKING) {
+  if (privacySetting !== PRIVACY_MINIMUM_TRACKING || config[OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING]) {
     oilPowerOptIn(convertPrivacySettingsToCookieValue(privacySetting), !config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
       renderOil(oilWrapper, {optIn: true});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
