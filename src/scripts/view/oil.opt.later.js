@@ -31,7 +31,7 @@ const OilIgnore = (oilIgnore) => {
 export function oilOptLaterTemplate() {
   let config = getConfiguration();
   return `
-    <div class="${CSSPrefix}oil-content-overlay" data-qa="oil-optlater">
+    <div class="${CSSPrefix}oil-content-overlay oil-opt-later" data-qa="oil-optlater">
         ${OilIgnore(config[OIL_CONFIG.ATTR_OIL_IGNORE])}
         <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-row--fixed-width">
             <div class="${CSSPrefix}oil-l-item">
