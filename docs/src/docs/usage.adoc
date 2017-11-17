@@ -1,0 +1,295 @@
+
+== How to implement OIL on your site
+
+Setting up OIL on your page consists of the following steps:
+
+** Add the oil.js javascript snippet to your page
+** Add a configuration block to your pages DOM
+
+OIL creates a standard for the OptIn but can't automatically stops your site from tracking your users. So to actually make your page respond to optins you also need to to the following.
+
+** Make sure your page doesn't track the user in its default state.
+** Use Tealium for all tracking activities
+** Listen to OIL events for activating non-Tealium tags, after the user opted in.
+
+=== Adding oil.js to your site via Tealium (recommended)
+
+Axel Springer Tealium needs to configure your site inheriting from the predefined lib-dip-optin library profile. Once this is in place you publish those changes in the following way:
+
+* Open your Tealium profile and go to "extensions"
+* Find the entry for "AS Opt-in Overlay", you'll be noticed of a change to this extension
+* Publish / deploy your profile to activate the changes to Oil.js
+
+[caption="Oil.js Tealium Deployment"]
+image::src/images/tealium-user-profile-extension-view.png[Tealium Client Profile]
+
+This needs to be repeated for every new version of OIL. The library profile can't push new code to your website without your action.
+
+=== Adding oil.js to your site via direct integration
+
+If Tealium can't be used on your site you also can add OIL directly from our CDN.
+
+Example:
+[source, javascript]
+----
+<script type="text/javascript" src="https://http://oil.asideas.de/release/oil.1.0.7.min.js"></script>
+----
+
+Updated versions of the script will be deployed using a different filename hence we'll never alter an existing version.
+
+Please make sure you're working with the latest version available.
+
+Check https://oil.asideas.de/ for further updates.
+
+IMPORTANT: Your domain needs to be whitelisted in order to work with OIL (contact us to get whitelisted: Team ANDROID AGASSI <ANDROIDAGASSI@moveoffice.com>)
+
+=== Configuring OIL
+
+OIL comes with a wide range of customization features which can be configured via a configuration block. Put the configuration object somewhere in the upper part of your page. Please leave the preview mode false to begin with, if you test on your machine or on a staging system. Preview Mode hides the OIL_Layer except you enable it on your browser session. See the parameter section below for more details.
+
+OIL also comes with a default configuration, that will support Single Opt In with a german standard text and the options to opt in or opt later.
+
+==== SOI configuration
+You need to add the configuration snippet to all pages where OIL is required. This is an example SOI configuration:
+
+[source,json]
+----
+    <script id="oil-configuration" type="application/configuration">
+      {
+        "preview_mode": false,
+        "privacy_page_url": "http://www.mysite.com/privacy",
+        /*
+            Text labels, see Label Keys section below
+        */
+        "label_heading": "Bitte stimmen Sie zu",
+        "label_intro_start": "Wir benutzen Cookies.",
+        "label_intro_end": "Bitte stimmen sie zu:",
+        "label_later_start": "Wir benutzen Cookies.",
+        "label_later_end": "Bitte stimmen sie zu:",
+        "label_button_yes_soi": "Zustimmen",
+        "label_button_yes_poi": "Für alle zustimmen",
+        "label_button_no": "Jetzt nicht",
+        "label_button_privacy": "Mehr erfahren",
+        "ga_tracking": 0
+      }
+    </script>
+----
+
+==== POI configuration
+You need to add the configuration snippet to all pages where OIL is required. Give extra attention to the configuration, if you want to use POI, which needs the additional POI configuration added and tailored to your situation. Contact us, if you need help. This is an example SOI configuration:
+
+[source,json]
+----
+    <script id="oil-configuration" type="application/configuration">
+      {
+        "preview_mode": false,
+        "privacy_page_url": "http://www.mysite.com/privacy",
+        /*
+            Text labels, see Label Keys section below
+        */
+        "label_heading": "Bitte stimmen Sie zu",
+        "label_intro_start": "Wir benutzen Cookies.",
+        "label_intro_end": "Bitte stimmen sie zu:",
+        "label_later_start": "Wir benutzen Cookies.",
+        "label_later_end": "Bitte stimmen sie zu:",
+        "label_button_yes_soi": "Zustimmen",
+        "label_button_yes_poi": "Für alle zustimmen",
+        "label_button_no": "Jetzt nicht",
+        "label_button_privacy": "Mehr erfahren",
+        /*
+            POI optional params start here
+        *
+        "activate_poi": true,
+        "hub_origin": "//oil.asideas.de",
+        "hub_path": "/hub.html",
+        "subscriber_set_cookie": true,
+        "poi_group_name": "BILD",
+        "ga_tracking": 0
+      }
+    </script>
+----
+
+POI can be partitioned in different groups using a prefix or group name. You need to use the same group name as every other unit in your group. This is an optional parameter.
+
+==== Functional Configuration Parameters
+
+This is a full list of configurable options.
+
+[width="100%",options="header", cols="1,3,1,1"]
+|====
+|Config Parameter | Description | Default Setting|POI optional feature
+| preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false |No
+| privacy_page_url | OIL should always have a link to your privacy page ("Datenschutz"). If you add the key "privacy_page_url", the show more label ("Mehr erfahren") can't be changed and will be added to OIL. It opens a page with the value you specified in a new tab or window. You can either use a relative or absolute URL.| "" (empty string)|No
+| poi_activate_poi | Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false|Yes
+| poi_hub_origin | The origin of the hub.js installation, if any. | none|Yes
+| poi_hub_path | The path to the hub.html installation on the origin, if any. | none|Yes
+| poi_group_name | POI group name. POI only affects those sites with the same group name (optional). | ''|Yes
+| poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
+| ga_tracking | A nummeric value to enable/disable Google Anayltics event tracking, where 0=disabled, 1=enabled for YES clicks, 2=enabled for all clicks including NO.
+The core Google Analytics script has to be available on the site, OIL is not injecting a GA script onto the site. Important! Please note that GA tracking should of course only be enabled for testing purposes. | 0 | No
+| ga_tracker_name | If you use a custom tracker name, like in Google Tag Manager, configure it here. | None | No
+| cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31 | No
+| oil_ignore | Display a X top right of the layer. | False | No
+| advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False | No
+| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and display the "opt later" layer or close the layer and store this selection in the oil cookie. | True | No
+|====
+
+==== Label Configuration Parameters
+
+[width="100%",options="header", cols="1,3"]
+|====
+|Config Parameter|Default value
+|label_heading| Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis
+|label_intro_start| Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.
+|label_intro_end| Jetzt Einverständnis erklären:
+|label_later_start| Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen. In unseren Datenschutzbestimmungen erfahren Sie, wie Sie Cookies deaktivieren können
+|label_later_end| Jetzt Einverständnis erklären:
+|label_button_yes_soi| Jetzt zustimmen
+|label_button_yes_poi| Global zustimmen
+|label_button_no| Nein, jetzt nicht
+|label_button_privacy| Mehr erfahren
+|label_button_advanced_settings| Mehr Informationen
+|label_advanced_settings_heading| Bitte wähle eine Datenschutzeinstellung aus:
+|label_advanced_settings_text| Leer
+|label_title_essentials| Essentielle Cookies
+|label_title_analytics| Seitenperformance Analyse
+|label_title_social| Soziale Verbindungen
+|label_title_basic_ads| Basis Werbung
+|label_title_ad_behaviour| Werbeverhalten
+|label_title_none| Alles blockieren.
+|====
+
+Example Screenshots:
+
+image::src/images/oil-labels-intro.png[]
+image::src/images/oil-labels-later.png[]
+
+=== Listening and interacting with OIL
+
+Set aside the configuration the host site can communicate with the OIL layer within a running site and react to its status. Also a implementing developer can debug the layer using the console logs the OIL layer can create.
+
+==== Test Deployment and Preview Mode
+The preview mode is useful for testing OIL in a live environment without making it available to your end-users.
+
+The preview mode is turned off by default, meaning OIL will be available to all your users. If you turn the preview mode on (please see configuration), OIL won't be shown at first, but can be enabled for your current session on the browser's console:
+[source,javascript]
+----
+window.oilPreviewModeOn();
+----
+
+and turned off again
+
+[source,javascript]
+----
+window.oilPreviewModeOff();
+----
+
+When Preview mode is turned on useful debug information will be seen on the browser console. See also "Verbose Logging" below for more detailed logging.
+
+==== OIL Verbose Logging
+In a production build OIL will show no logs, except in preview_mode or verbose mode.
+
+Run the following commands on the console of your browser to switch verbose logging on and off:
+[source,javascript]
+----
+window.oilVerboseModeOn();
+
+window.oilVerboseModeOff();
+----
+
+Debug mode can be turned on at any time, whereas the similar "preview_mode" can only be enabled in the configuration, please see above.
+
+Start debugging with figuring out which config was actually parsed, by looking at the "Got the following parsed config" message.
+
+Please note that verbose logging can only be activated for your browser, all other users wont see those logs.
+
+==== OIL Events
+
+Below you'll find a simple example that shows you how to listen to OIL's opt-later event.
+
+#2. Register an event handler with a callback to be executed when OIL fires the opt-in event or the user has opted in on an earlier occasion and revisits the page.
+[source,javascript]
+----
+  <script type="text/javascript">
+    // Cross browser event handler definition
+    var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+    var eventer = window[eventMethod];
+
+    // Callback to be executed when event is fired
+    function receiveMessage(event) {
+      function eventDataContains(str) {
+        return JSON.stringify(event.data).indexOf(str) !== -1;
+      }
+      if (event && event.data && (eventDataContains('oil_optin_done') || eventDataContains('oil_has_optedin'))) {
+        // Do something when event is fired...
+        console.log("Do something when event is fired...");
+      }
+    }
+
+    // Register event handler
+    eventer(messageEvent, receiveMessage, false);
+  </script>
+----
+
+OIL is currently emitting the following events:
+
+[width="100%",options="header", cols="1,3"]
+|====
+| Event name | Description
+| oil_optin_done | The Javascript event that will be sent to the host when a users selects opt in.
+|oil_optlater_done| The Javascript event that will be sent to the host when a users selects opt later.
+|oil_optignore_done| The Javascript event that will be sent to the host when a users selects opt ignore.
+|oil_has_optedin| The Javascript event that will be sent to the host on every page reload, when the user has opted_in previously
+|oil_has_optedlater| The Javascript event that will be sent to the host on every page reload, when the user has opted_later previously
+|oil_has_optedignore| The Javascript event that will be sent to the host on every page reload, when the user has opted_ignore previously
+|====
+
+OIL is currently listening to the following events:
+[width="100%",options="header", cols="1,3"]
+|====
+| Event name | Description
+|oil_optout_trigger | Contrary this event is listened to by OIL and will remove all cookies if triggered and therefor opt_out.
+|====
+
+==== OIL CPC API
+
+You can add an integrated version of the OIL Cookie Preference Center to your page to give the user the chance to reverse his initial selection.
+
+For this include a div with the id below in your page:
+[source,html]
+----
+<div id="oil-preference-center"></div>
+----
+To insert the OIL CPC in the prepared div, which you included in your page: window.oilShowPreferenceCenter(); Create a SAVE Button with one of the two possible actions: window.oilTriggerPoiOptin(); or window.oilTriggerSoiOptIn();
+
+The inserted CPC will show the users current setting when inserted. Make sure OIL is part of the page to make this work.
+
+These are all CPC API definitions:
+
+[width="100%",options="header", cols="1,3"]
+|====
+| Function Name | Description
+| window.oilShowPreferenceCenter() | inserts the CPC into the predefined div with the id #oil-preference-center into the host site
+| window.oilTriggerSoiOptIn() | will trigger the CPC SOI optin (can also result in an optout)
+| window.oilTriggerPoiOptin() | will trigger the CPC POI optin (can also result in an optout)
+|====
+
+==== Google Analytics Events
+
+If you have configured Google Analytics you will receiving these events in your GA installation:
+
+[width="100%",options="header", cols="1,1,3"]
+|====
+|Event Type	| Event Name | Event Explanation
+|Loading Events | Loaded/No cookies | If Cookie support wasn’t found
+| Loading Events | Loaded/Later | if the User opted later in a session before
+| Loading Events | Loaded/Ignored | if the User opted ignored in a session before
+| Loading Events | Loaded/Initial | if the User opted any other case before
+| Click Events | later | The user clicked “later”
+| Click Events | SOI/yes | the user clicked Single Opt In Yes
+| Click Events | SOI/yes-while-later | The user clicked Single Opt In Yes in the small version of the overlay (“Later” Version)
+| Click Events | POI/yes | The user clicked POI Yes
+| Click Events | POI/yes-while-later | the user clicked POI Yes in the small oversion of the overlay
+| Click Events | ignored | the user clicked the ignore cross (only visible on the small version if configured to do so)
+|====

@@ -1,0 +1,11 @@
+= OIL Documentation
+
+image::src/images/oil-asideas.png[]
+// horizontal line
+***
+
+include::src/docs/intro.adoc[]
+include::src/docs/usage.adoc[]
+include::src/docs/development.adoc[]
+include::src/docs/appendix.adoc[]
+
