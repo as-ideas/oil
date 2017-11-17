@@ -18,7 +18,8 @@ export const OIL_CONFIG = {
   ATTR_GA_TRACKING: 'ga_tracking',
   ATTR_OIL_IGNORE: 'oil_ignore',
   ATTR_OIL_POI_GROUP_NAME: 'poi_group_name',
-  ATTR_ADVANCED_SETTINGS: 'advanced_settings'
+  ATTR_ADVANCED_SETTINGS: 'advanced_settings',
+  ATTR_PERSIST_MINIMUM_TRACKING: 'persist_min_tracking'
 };
 
 // Click Events
@@ -58,7 +59,7 @@ export const PRIVACY_FUNCTIONAL_TRACKING = 1;
 export const PRIVACY_FULL_TRACKING = 2;
 
 const PRIVACY_SETTING_ESSENTIAL       = 'esse';
-const PRIVACY_SETTING_ANALYTICS       = 'anal';
+const PRIVACY_SETTING_ANALYTICS       = 'analy';
 const PRIVACY_SETTING_SOCIAL_CONNECT  = 'soci';
 const PRIVACY_SETTING_ADS_BASE        = 'adsbase';
 const PRIVACY_SETTING_ADS_BEHAVIOUR   = 'adsbehav';

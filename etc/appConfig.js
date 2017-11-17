@@ -114,15 +114,15 @@ module.exports = {
     from: path.resolve(sourcePath, 'assets'),
     to: 'assets'
   }, {
+    from: path.resolve(sourcePath, 'examples'),
+    to: 'examples'
+  }, {
     from: path.resolve(sourcePath, '../release'),
     to: 'release'
   }, {
     from: path.resolve(sourcePath, 'index.html'),
     to: 'index.html'
 
-  }, {
-    from: path.resolve(sourcePath, 'demos', 'tealium-integration-test.html'),
-    to: 'demos/tealium-integration-test.html'
   }],
   mangle: {},
   proxy: {},

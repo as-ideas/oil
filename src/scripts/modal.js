@@ -211,8 +211,6 @@ function getRangeSliderValue() {
  * Handler Functions for our Oil Action Elements
  *
  */
-
-
 function handleOptLater() {
   let config = getConfiguration();
   logInfo('Handling OptLater');
@@ -235,16 +233,17 @@ function handleBackToMainDialog() {
 
 function handleAdvancedSettings() {
   let config = getConfiguration();
-  oilShowPreferenceCenter(oilWrapper, PRIVACY_FULL_TRACKING);
+  oilShowPreferenceCenter(oilWrapper, PRIVACY_MINIMUM_TRACKING);
   if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
     gaTrackEvent('advanced-settings', 0);
   }
 }
 
 export function handleSoiOptIn() {
+  let config = getConfiguration();
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
-  if (privacySetting !== PRIVACY_MINIMUM_TRACKING) {
+  if (privacySetting !== PRIVACY_MINIMUM_TRACKING || config[OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING]) {
     oilOptIn(convertPrivacySettingsToCookieValue(privacySetting)).then((cookieOptIn) => {
       renderOil(oilWrapper, {optIn: cookieOptIn});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES) {
@@ -263,7 +262,7 @@ export function handlePoiOptIn() {
   let config = getConfiguration();
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
-  if (privacySetting !== PRIVACY_MINIMUM_TRACKING) {
+  if (privacySetting !== PRIVACY_MINIMUM_TRACKING || config[OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING]) {
     oilPowerOptIn(convertPrivacySettingsToCookieValue(privacySetting), !config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
       renderOil(oilWrapper, {optIn: true});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
@@ -279,7 +278,7 @@ export function handlePoiOptIn() {
   }
 }
 
-function handleOilIgnore() {
+export function handleOilIgnore() {
   let config = getConfiguration();
   oilOptIgnore().then((cookieOptIgnore) => {
     renderOil(oilWrapper, {optIgnore: cookieOptIgnore});

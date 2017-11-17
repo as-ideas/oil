@@ -5,8 +5,7 @@ import { logInfo } from './log.js';
 import { removeSubscriberCookies } from './cookies.js';
 
 /**
- * Opt-Out Handler
- * ATTENTION: THIS WORKS FOR SOI ONLY RIGHT NOW. THERE IS NO OPT-OUT FOR POI YET, NEW STORY!
+ * Opt-Out Handler // Is this supposed to be an event or an api function like the others?
  *
  * @param event
  * @return none
