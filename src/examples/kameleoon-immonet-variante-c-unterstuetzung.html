@@ -89,7 +89,18 @@
   }
 
   div.as-slider-wrapper {
+    height: 150px;
+    width: 10px;
     display: inline-block;
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+
+  div.noUi-vertical div.noUi-handle {
+    left: -11px;
+    width: 30px;
+    height: 30px;
+    border-radius: 16px;
   }
 
   div.as-slider-desc {
@@ -178,19 +189,19 @@
   (function () {
     var config = {
       "preview_mode": false,
-      "label_intro_heading": "Bitte stimmen Sie zu",
-      "label_intro_start": "Große Teile unserer Inhalte sind für Sie völlig kostenlos. Und wir hoffen, Ihnen eine echte Hilfe zu sein.<br/> Wir finanzieren uns zu einem Teil durch Werbung und verwenden dafür ",
-      "label_button_privacy": "Cookies und andere Technologien",
+      "label_intro_heading": "Wir bitten um Ihre Unterstützung",
+      "label_intro_start": "Wie viele andere Portale finanzieren auch wir uns zum Teil durch Werbung und verwenden dafür",
+      "label_button_privacy": "Cookies.",
       "privacy_page_url": "/service/datenschutz.html#cookies",
-      "label_intro_end": "Bitte stimmen Sie deshalb der Nutzung von Cookies zu.<br />Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
+      "label_intro_end": "Mit Ihrer Zustimmung helfen Sie uns dabei Ihnen weiterhin große Teile von immonet.de kostenlos anzubieten. Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
       "label_button_yes_soi": "OK",
       "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
       "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",
 
       "label_advanced_settings_essential_title": "Technisch erforderliche Cookies",
       "label_advanced_settings_essential_verbose": "Diese Cookies sind für die Auslieferung der Angebots unserer Website technisch erforderlich.",
-      "label_advanced_settings_functional_text": "Funktionelle Cookies",
-      "label_advanced_settings_functional_verbose": "Diese Cookies ermöglichen die Analyse der Website-Nutzung. Hierdurch können wir unsere Leistung messen und verbessern. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben.",
+      "label_advanced_settings_functional_text": "Funktionelle und Marketing Cookies",
+      "label_advanced_settings_functional_verbose": "Diese Cookies ermöglichen die Analyse der Website-Nutzung. Hierdurch können wir unsere Leistung messen und verbessern. Außerdem sind diese Cookies notwendig für die Bereitstellung von Werbung, die für Ihre Interessen relevant ist. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben.",
       "label_advanced_settings_advertising_text": "Marketing Cookies",
       "label_advanced_settings_advertising_verbose": "Diese Cookies sind notwendig für die Bereitstellung von Werbung, die für Ihre Interessen relevant ist. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben."
     };

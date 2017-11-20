@@ -58,7 +58,6 @@
     color: #c0c0c0;
     padding: 3px;
     border-bottom: none;
-    margin-right: 20px;
   }
 
   a.as-oil__intro-txt--link:hover {
@@ -87,7 +86,18 @@
   }
 
   div.as-slider-wrapper {
+    height: 150px;
+    width: 10px;
     display: inline-block;
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+
+  div.noUi-vertical div.noUi-handle {
+    left: -11px;
+    width: 30px;
+    height: 30px;
+    border-radius: 16px;
   }
 
   div.as-slider-desc {
@@ -174,19 +184,19 @@
   (function () {
     var config = {
       "preview_mode": false,
-      "label_intro_heading": "Bitte stimmen Sie zu",
-      "label_intro_start": "Der Dienstanbieter darf für Zwecke der Werbung, der Marktforschung oder zur bedarfsgerechten Gestaltung der Website Nutzungsprofile bei Verwendung von Pseudonymen erstellen, sofern der Nutzer dem nicht widerspricht. Diese Nutzungsprofile dürfen nicht mit Daten über den Träger des Pseudonyms zusammengeführt werden. Detaillierte Einstellungen zur Verwendung von ",
-      "label_button_privacy": "Cookies",
+      "label_intro_heading": "Wir verwenden Cookies",
+      "label_intro_start": "Wir verwenden",
+      "label_button_privacy": "Cookies,",
       "privacy_page_url": "/service/datenschutz.html#cookies",
-      "label_intro_end": "und anderer Technologien können Sie  <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
+      "label_intro_end": "um Inhalte und Anzeigen zu personalisieren, Funktionen für soziale Medien anbieten zu können und die Zugriffe auf unsere Website zu analysieren. Außerdem geben wir Informationen zu Ihrer Nutzung unserer Website an unsere Partner für soziale Medien, Werbung und Analysen weiter. Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
       "label_button_yes_soi": "OK",
       "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
       "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",
 
       "label_advanced_settings_essential_title": "Technisch erforderliche Cookies",
       "label_advanced_settings_essential_verbose": "Diese Cookies sind für die Auslieferung der Angebots unserer Website technisch erforderlich.",
-      "label_advanced_settings_functional_text": "Funktionelle Cookies",
-      "label_advanced_settings_functional_verbose": "Diese Cookies ermöglichen die Analyse der Website-Nutzung. Hierdurch können wir unsere Leistung messen und verbessern. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben.",
+      "label_advanced_settings_functional_text": "Funktionelle und Marketing Cookies",
+      "label_advanced_settings_functional_verbose": "Diese Cookies ermöglichen die Analyse der Website-Nutzung. Hierdurch können wir unsere Leistung messen und verbessern. Außerdem sind diese Cookies notwendig für die Bereitstellung von Werbung, die für Ihre Interessen relevant ist. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben.",
       "label_advanced_settings_advertising_text": "Marketing Cookies",
       "label_advanced_settings_advertising_verbose": "Diese Cookies sind notwendig für die Bereitstellung von Werbung, die für Ihre Interessen relevant ist. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben."
     };
