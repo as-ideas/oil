@@ -17,6 +17,11 @@
     font-size: 18px;
   }
 
+  div.as-oil a {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
   div.as-oil-has-gradient:before {
     background: none;
   }
@@ -47,7 +52,7 @@
   a.as-js-advanced-settings--link {
     color: #1a9bcd;
     padding: 3px;
-    border-bottom: 1px solid;
+    border-bottom: none;
   }
 
   a.as-js-advanced-settings--link:hover {
@@ -57,7 +62,7 @@
   a.as-oil__intro-txt--link {
     color: #c0c0c0;
     padding: 3px;
-    border-bottom: 1px solid;
+    border-bottom: none;
   }
 
   a.as-oil__intro-txt--link:hover {
@@ -173,11 +178,11 @@
   (function () {
     var config = {
       "preview_mode": false,
-      "label_intro_heading": "Bitte stimmen Sie zu",
-      "label_intro_start": "Die Website darf für die bedarfsgerechte Gestaltung der Website, für Werbung oder für Marktforschung Nutzungsprofile mit Pseudonymen erstellen und diese an Dritte weitergeben, wenn Nutzer nicht widersprechen. Diese Nutzungsprofile dürfen nicht mit Daten über den Träger des Pseudonyms zusammengeführt werden. Bitte stimmen Sie deshalb der Nutzung von ",
+      "label_intro_heading": "Maßgeschneiderte Angebote für Sie",
+      "label_intro_start": "Wir verwenden ",
       "label_button_privacy": "Cookies",
       "privacy_page_url": "/service/datenschutz.html#cookies",
-      "label_intro_end": "zu. Detaillierte Einstellungen zur Verwendung von Cookies und anderen Technologien können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
+      "label_intro_end": "und anderen Technologien, um unser Angebot zu verbessern und Ihnen maßgeschneiderte Inhalte zu präsentieren. Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
       "label_button_yes_soi": "OK",
       "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
       "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden."
@@ -251,7 +256,7 @@
 
         window.setTimeout(function () {
           closeOil();
-        }, 5000);
+        }, 15000);
       }
     }
 

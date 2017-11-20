@@ -1,25 +1,26 @@
 import { CSSPrefix } from './../oil.view.config.js';
+import { getConfiguration } from '../../config';
 
 /**
  * Returns html content for advanced settings snippit
  */
-
 export const advancedSettingsSnippet = () => {
+  let config = getConfiguration();
   return `
               <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-cpc">
                 <div id="${CSSPrefix}slider-range" class="${CSSPrefix}slider-wrapper" data-qa="oil-as-slider"></div>
                 <div class="${CSSPrefix}slider-desc">
                   <div id="${CSSPrefix}slider-essential-title" class="${CSSPrefix}slider-inactive ">
-                    <div class="${CSSPrefix}slider-option-title">Nur erforderliche Cookies</div>
-                    <div class="${CSSPrefix}slider-option-verbose">Diese Cookies sind für die grundlegenden Funktionen der Website erforderlich.</div>
+                    <div class="${CSSPrefix}slider-option-title">${config.label_advanced_settings_essential_title}</div>
+                    <div class="${CSSPrefix}slider-option-verbose">${config.label_advanced_settings_essential_verbose}</div>
                   </div>
                   <div id="${CSSPrefix}slider-functional-title" class="${CSSPrefix}slider-inactive">
-                    <div class="${CSSPrefix}slider-option-title">Funktionelle Cookies</div>
-                    <div class="${CSSPrefix}slider-option-verbose">Diese Cookies ermöglichen uns die Analyse der Website-Nutzung, damit wir deren Leistung messen und verbessern können.</div>
+                    <div class="${CSSPrefix}slider-option-title">${config.label_advanced_settings_functional_text}</div>
+                    <div class="${CSSPrefix}slider-option-verbose">${config.label_advanced_settings_functional_verbose}</div>
                   </div>
                   <div id="${CSSPrefix}slider-advertising-title" class="${CSSPrefix}slider-inactive">
-                    <div class="${CSSPrefix}slider-option-title">Marketing-Cookies</div>
-                    <div class="${CSSPrefix}slider-option-verbose">Diese Cookies werden von Werbeagenturen verwendet, um Ihnen Werbung zu unterbreiten, die für Ihre Interessen relevant ist.</div>
+                    <div class="${CSSPrefix}slider-option-title">${config.label_advanced_settings_advertising_text}</div>
+                    <div class="${CSSPrefix}slider-option-verbose">${config.label_advanced_settings_advertising_verbose}</div>
                   </div>
                 </div>
               </div>

@@ -163,6 +163,10 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   // THE DEFAULT FONT-SIZE !!! IMPORTANT FOR em !!!
   font-size: 18px;
+
+  a {
+    cursor: pointer;;
+  }
 }
 
 /**

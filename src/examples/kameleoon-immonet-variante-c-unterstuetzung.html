@@ -17,6 +17,11 @@
     font-size: 18px;
   }
 
+  div.as-oil a {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
   div.as-oil-has-gradient:before {
     background: none;
   }
@@ -26,9 +31,6 @@
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
     padding: 3em 5em;
     min-height: 200px;
-    position: fixed;
-    bottom: auto;
-    top: 0;
   }
 
   div.as-oil-l-wrapper-layout-max-width {
@@ -38,13 +40,33 @@
   div.as-oil-loi__heading, div.as-oil__heading {
     color: white;
     margin: 0 0;
-    font-size: 1.3rem;
+    font-size: 1.3em;
     font-weight: 400;
   }
 
-  p.as-oil__intro-txt, a.as-oil__intro-txt--link {
+  p.as-oil__intro-txt {
     padding: 3px;
     color: #c0c0c0;
+  }
+
+  a.as-js-advanced-settings--link {
+    color: #1a9bcd;
+    padding: 3px;
+    border-bottom: none;
+  }
+
+  a.as-js-advanced-settings--link:hover {
+    color: #c0c0c0;
+  }
+
+  a.as-oil__intro-txt--link {
+    color: #c0c0c0;
+    padding: 3px;
+    border-bottom: none;
+  }
+
+  a.as-oil__intro-txt--link:hover {
+    color: #1a9bcd;
   }
 
   p.as-oil__intro-txt {
@@ -52,7 +74,6 @@
     /*float: left;*/
     display: inline-block;
     padding-right: 20px;
-    /*margin: 0.4rem 0;*/
   }
 
   /* REDESIGN */
@@ -77,12 +98,12 @@
   }
 
   div.as-slider-option-title {
-    font-size: 1rem;
+    font-size: 1em;
     color: #e3e3e3;
   }
 
   div.as-slider-option-verbose {
-    font-size: 0.9rem;
+    font-size: 0.9em;
   }
 
   div.as-slider-inactive {
@@ -152,18 +173,19 @@
 
 </style>
 
+
 <script type="text/javascript">
   (function () {
     var config = {
       "preview_mode": false,
-      "label_intro_heading": "Wir benötigen Ihre Zustimmung",
-      "label_intro_start": "",
-      "label_intro_end": "<a class=\"as-js-advanced-settings as-js-advanced-settings--link\">Erweiterte Einstellungen</a>",
-      "label_button_yes_soi": "Zustimmen",
+      "label_intro_heading": "Bitte stimmen Sie zu",
+      "label_intro_start": "Große Teile unserer Inhalte sind für Sie völlig kostenlos. Und wir hoffen, Ihnen eine echte Hilfe zu sein.<br/> Wir finanzieren uns zu einem Teil durch Werbung und verwenden dafür ",
+      "label_button_privacy": "Cookies und andere Technologien",
+      "privacy_page_url": "/service/datenschutz.html#cookies",
+      "label_intro_end": "Bitte stimmen Sie deshalb der Nutzung von Cookies zu.<br />Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
+      "label_button_yes_soi": "OK",
       "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
-      "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",
-      "label_button_privacy": "Weitere Informationen",
-      "privacy_page_url": "/service/datenschutz.html"
+      "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden."
     };
     var oldScript = document.getElementById('oil-configuration');
     if (oldScript) {
@@ -234,7 +256,7 @@
 
         window.setTimeout(function () {
           closeOil();
-        }, 5000);
+        }, 15000);
       }
     }
 

@@ -17,6 +17,11 @@
     font-size: 18px;
   }
 
+  div.as-oil a {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
   div.as-oil-has-gradient:before {
     background: none;
   }
@@ -39,36 +44,34 @@
     font-weight: 400;
   }
 
-  p.as-oil__intro-txt {
-    padding: 3px;
-    color: #c0c0c0;
-  }
-
   a.as-js-advanced-settings--link {
-    color: #1a9bcd;
+    color: #c0c0c0;
     padding: 3px;
-    border-bottom: 1px solid;
+    border-bottom: none;
   }
 
   a.as-js-advanced-settings--link:hover {
-    color: #c0c0c0;
+    color: #8a8a8a;
   }
 
   a.as-oil__intro-txt--link {
     color: #c0c0c0;
     padding: 3px;
-    border-bottom: 1px solid;
+    border-bottom: none;
+    margin-right: 20px;
   }
 
   a.as-oil__intro-txt--link:hover {
-    color: #1a9bcd;
+    color: #8a8a8a;
   }
 
   p.as-oil__intro-txt {
+    padding: 3px 0;
+    margin-right: 20px;
+    color: #c0c0c0;
+    min-width: 75%;
     max-width: 75%;
-    /*float: left;*/
     display: inline-block;
-    padding-right: 20px;
   }
 
   /* REDESIGN */
@@ -114,9 +117,6 @@
     position: absolute;
     bottom: 0;
     float: right;
-    /*position: fixed;*/
-    /*bottom: 20px;*/
-    /*right: 20px;*/
   }
 
   button.as-oil-loi__btn-soi, button.as-oil__btn-soi {
@@ -168,20 +168,20 @@
 
 </style>
 
-
+<!-- THANK YOU WINDOW-->
 <script type="text/javascript">
+
   (function () {
     var config = {
       "preview_mode": false,
-      "label_intro_heading": "Wir benötigen Ihre Zustimmung",
-      "label_intro_start": "Große Teile unserer Inhalte sind für Sie völlig kostenlos. Und wir hoffen, Ihnen eine echte Hilfe zu sein. Wir finanzieren uns zu einem Teil durch Werbung und verwenden dafür ",
+      "label_intro_heading": "Bitte stimmen Sie zu",
+      "label_intro_start": "Der Dienstanbieter darf für Zwecke der Werbung, der Marktforschung oder zur bedarfsgerechten Gestaltung der Website Nutzungsprofile bei Verwendung von Pseudonymen erstellen, sofern der Nutzer dem nicht widerspricht. Diese Nutzungsprofile dürfen nicht mit Daten über den Träger des Pseudonyms zusammengeführt werden. Detaillierte Einstellungen zur Verwendung von ",
       "label_button_privacy": "Cookies",
       "privacy_page_url": "/service/datenschutz.html#cookies",
-      "label_intro_end": "und andere Technologien. Bitte stimmen Sie deshalb der Nutzung von Cookies zu. Detailiere Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
+      "label_intro_end": "und anderer Technologien können Sie  <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
       "label_button_yes_soi": "OK",
       "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
       "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden."
-
     };
     var oldScript = document.getElementById('oil-configuration');
     if (oldScript) {
@@ -252,7 +252,7 @@
 
         window.setTimeout(function () {
           closeOil();
-        }, 5000);
+        }, 15000);
       }
     }
 
