@@ -1,0 +1,94 @@
+:project_root: ../../../
+== Development
+
+=== General
+We have unit tests as well as selenium tests. We use jenkins for building, releasing and deploying the software. Tealium Deployment contains a manual step as described below.
+
+Building and Testing:
+
+* npm run build
+* npm run start
+* npm run test
+* npm run e2e
+
+=== Quick Links
+Jira: https://id-jira.axelspringer.de/browse/OIL
+
+Jenkins: https://kube-jenkins.ipool.asideas.de/view/OIL%20Project/
+
+Overview: http://oil.asideas.de
+
+=== OIL Flow
+
+This is the latest general functional overview over OIL:
+
+[caption="Oil.js Tealium Deployment"]
+image::src/images/oil-poi-flow.png[Tealium Library Profile]
+
+=== Hub Deployment
+To deploy the hub you need to deploy the project with an index.html loading dist/hub.123.js.
+
+For compatibility with Internet Explorer 9+ you need to add the following header to the server response to allow 3rd party cookies for POI. It's needed in SOI only mode.
+
+[source,json]
+----
+include::{project_root}etc/headerConfig.js[tags=p3p-config]
+----
+
+=== Tealium Deployment
+For our PoC we decided to use Tealium to deliver our Javascript artefact to client browsers. To achieve this you have to follow some steps:
+
+As a developer of Oil.js (see image below)
+
+* Open your Tealium lib profile and move to extensions
+* Open the predefined Javascript extension "AS Opt-in Overlay"
+* Some forms will show up, paste your code (dist/oil.123.js) in the "configuration" section
+* Save and Publish your Tealium configuration changes in your desired stages (Dev, QA, Prod)
+
+Please note that once published, your code will be delivered to all Tealium clients automatically.
+Tealium clients will be informed of your changes and need to publish/deploy their profile to activate your changes.
+
+[caption="Oil.js Tealium Deployment"]
+image::src/images/tealium-lib-profile-extension-view.png[Tealium Library Profile]
+
+== Design Decisions
+
+=== Cross-Origin Messaging
+
+The ``postMessage()`` method lifts this restriction by providing a way to securely pass messages across domains. The ``postMessage()`` method accepts two parameters.
+
+****
+*   ``message`` – A string or object that will be sent to the receiving window.
+*   ``targetOrigin`` – The URL of the window that the message is being sent to. The protocol, port and hostname of the target window must match this parameter for the message to be sent. Specifying ``"*"`` will match any URL however this is strongly discouraged for security reasons.
+This method should be called on the window that the message is being sent to. A reference to the target window can be obtained in a number of different ways:
+
+*   When using ``window.open()`` a reference to the new window will be returned by the ``open()`` method.
+*   For iframes you can access the ``contentWindow`` property on the desired iframe.
+****
+When a call to ``postMessage()`` is executed successfully a https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent[``MessageEvent``] will be fired on the receiving window. You can use a standard event listener to watch for this event and execute some code when it occurs.
+
+The event passed into the listener callback has a property called ``data`` that can be used to access the string or object that was sent by ``postMessage()``.
+
+So on the OIL hub side an event listener is added:
+
+[source,javascript]
+----
+window.addEventListener('message', (e) => {
+  let data = e.data;
+include::{project_root}/src/scripts/iframe.listener.js[tags=hub-listener]
+});
+----
+
+At the subscriber side the ``postMessage`` happens to trigger an action on the hub:
+[source,javascript]
+----
+include::{project_root}/src/scripts/poi.js[tags=subscriber-postMessage]
+----
+
+Now the subscriber can listen to messages from the hub:
+[source,javascript]
+----
+window.addEventListener('message', (event) => {
+include::{project_root}/src/scripts/poi.js[tags=subscriber-receiveMessage]
+});
+----

@@ -4,7 +4,7 @@ import { logInfo, logError } from './log';
 
 const defaultConfig = {
   'preview_mode': false,
-  'renderAdvancedSettings': false,
+  'advanced_settings': false,
   'cookie_expires_in_days': 31,
   'privacy_page_url': undefined,
   'ga_tracking': 0,
@@ -29,7 +29,6 @@ const defaultConfig = {
   'label_title_basic_ads': 'Basis Werbung',
   'label_title_ad_behaviour': 'Werbeverhalten',
   'label_title_none': 'Alles blockieren.',
-  'label_advanced_settings_intro': '',
   'poi_activate_poi': false,
   'poi_hub_origin': '',
   'poi_hub_path': '',
