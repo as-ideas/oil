@@ -17,6 +17,11 @@
     font-size: 18px;
   }
 
+  div.as-oil a {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
   div.as-oil-has-gradient:before {
     background: none;
   }
@@ -39,34 +44,36 @@
     font-weight: 400;
   }
 
-  a.as-js-advanced-settings--link {
-    color: #c0c0c0;
+  p.as-oil__intro-txt {
     padding: 3px;
-    border-bottom: 1px solid;
+    color: #c0c0c0;
+  }
+
+  a.as-js-advanced-settings--link {
+    color: #1a9bcd;
+    padding: 3px;
+    border-bottom: none;
   }
 
   a.as-js-advanced-settings--link:hover {
-    color: #8a8a8a;
+    color: #c0c0c0;
   }
 
   a.as-oil__intro-txt--link {
     color: #c0c0c0;
     padding: 3px;
-    border-bottom: 1px solid;
-    margin-right: 20px;
+    border-bottom: none;
   }
 
   a.as-oil__intro-txt--link:hover {
-    color: #8a8a8a;
+    color: #1a9bcd;
   }
 
   p.as-oil__intro-txt {
-    padding: 3px 0;
-    margin-right: 20px;
-    color: #c0c0c0;
-    min-width: 75%;
     max-width: 75%;
+    /*float: left;*/
     display: inline-block;
+    padding-right: 20px;
   }
 
   /* REDESIGN */
@@ -112,6 +119,9 @@
     position: absolute;
     bottom: 0;
     float: right;
+    /*position: fixed;*/
+    /*bottom: 20px;*/
+    /*right: 20px;*/
   }
 
   button.as-oil-loi__btn-soi, button.as-oil__btn-soi {
@@ -163,20 +173,19 @@
 
 </style>
 
-<!-- THANK YOU WINDOW-->
-<script type="text/javascript">
 
+<script type="text/javascript">
   (function () {
     var config = {
       "preview_mode": false,
-      "label_intro_heading": "Wir benötigen Ihre Zustimmung",
-      "label_intro_start": "",
-      "label_intro_end": "<a class=\"as-js-advanced-settings as-js-advanced-settings--link\">Erweiterte Einstellungen</a>",
+      "label_intro_heading": "Maßgeschneiderte Angebote für Sie",
+      "label_intro_start": "Wir verwenden ",
+      "label_button_privacy": "Cookies",
+      "privacy_page_url": "/service/datenschutz.html#cookies",
+      "label_intro_end": "und anderen Technologien, um unser Angebot zu verbessern und Ihnen maßgeschneiderte Inhalte zu präsentieren. Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
       "label_button_yes_soi": "OK",
       "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
-      "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",
-      "label_button_privacy": "Weitere Informationen",
-      "privacy_page_url": "/service/datenschutz.html#cookies"
+      "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden."
     };
     var oldScript = document.getElementById('oil-configuration');
     if (oldScript) {
@@ -247,7 +256,7 @@
 
         window.setTimeout(function () {
           closeOil();
-        }, 5000);
+        }, 15000);
       }
     }
 
