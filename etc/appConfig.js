@@ -2,13 +2,14 @@ const path = require("path");
 
 const sourcePath = 'src';
 const testPath = 'test';
+const docsPath = 'docs';
 const outputPath = 'dist';
-
 
 module.exports = {
   appName: 'OptInLayer',
   srcPath: sourcePath,
   testPath: testPath,
+  docsPath: docsPath,
   junit: {
     title: 'OptInLayer',
     dir: 'target/test-reports'
@@ -113,6 +114,9 @@ module.exports = {
   copy: [{
     from: path.resolve(sourcePath, 'assets'),
     to: 'assets'
+  }, {
+    from: path.resolve(docsPath, 'src/images'),
+    to: 'docs/src/images'
   }, {
     from: path.resolve(sourcePath, 'examples'),
     to: 'examples'
