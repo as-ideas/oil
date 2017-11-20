@@ -8,6 +8,7 @@
     "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 ",
     "prebuild": "npm run check && rimraf dist/*",
     "build": "cross-env NODE_ENV=debug webpack --config etc/webpack.config.js && cross-env NODE_ENV=production webpack --config etc/webpack.config.js",
+    "postbuild": "npm run build:docs",
     "build:watch": "webpack -- webpack-dev-server --inline --watch --config etc/webpack.config.js",
     "builddebug": "cross-env NODE_ENV=production webpack --config etc/webpack.config.js && cross-env NODE_ENV=debug webpack --config etc/webpack.config.js",
     "browserstack": "bash ./etc/runBrowserstackSeq.sh",
