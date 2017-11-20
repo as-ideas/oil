@@ -1,4 +1,3 @@
-:project_root: ../../../
 == Development
 
 === General
@@ -32,7 +31,7 @@ For compatibility with Internet Explorer 9+ you need to add the following header
 
 [source,json]
 ----
-include::{project_root}etc/headerConfig.js[tags=p3p-config]
+include::../../../etc/headerConfig.js[tags=p3p-config]
 ----
 
 === Tealium Deployment
@@ -75,20 +74,20 @@ So on the OIL hub side an event listener is added:
 ----
 window.addEventListener('message', (e) => {
   let data = e.data;
-include::{project_root}src/hub.js[tags=hub-listener]
+include::../../../src/hub.js[tags=hub-listener]
 });
 ----
 
 At the subscriber side the ``postMessage`` happens to trigger an action on the hub:
 [source,javascript]
 ----
-include::{project_root}src/scripts/poi.js[tags=subscriber-postMessage]
+include::../../../src/scripts/poi.js[tags=subscriber-postMessage]
 ----
 
 Now the subscriber can listen to messages from the hub:
 [source,javascript]
 ----
 window.addEventListener('message', (event) => {
-include::{project_root}src/scripts/poi.js[tags=subscriber-receiveMessage]
+include::../../../src/scripts/poi.js[tags=subscriber-receiveMessage]
 });
 ----
