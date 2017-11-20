@@ -32,7 +32,7 @@ If Tealium can't be used on your site you also can add OIL directly from our CDN
 Example:
 [source, javascript]
 ----
-<script type="text/javascript" src="https://http://oil.asideas.de/release/oil.1.0.7.min.js"></script>
+<script type="text/javascript" src="https://oil.asideas.de/release/oil.1.0.7.min.js"></script>
 ----
 
 Updated versions of the script will be deployed using a different filename hence we'll never alter an existing version.
@@ -293,3 +293,15 @@ If you have configured Google Analytics you will receiving these events in your 
 | Click Events | POI/yes-while-later | the user clicked POI Yes in the small oversion of the overlay
 | Click Events | ignored | the user clicked the ignore cross (only visible on the small version if configured to do so)
 |====
+
+=== Kameleoon A/B Testing with OIL
+
+If you want to optimize and test your OIL installation with our Kameleoon A/B testing, you also need to include the right kameleoon script into your website, which will alter the optics and behaviour of OIL according to the test and your specific environment.
+
+An example link would look like:
+[source,html]
+----
+<script type="text/javascript" src="//static-bp.kameleoon.com/css/customers/xxxxxxxxxxx/0/kameleoon.js"></script>
+----
+
+Instead of xxxxxxxxxxx the right hash needs to be present, so Kameleoon knows which website it deals with. When we setup OIL A/B testing on your page this hash needs to be generated within Kameleoon.

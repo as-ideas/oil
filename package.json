@@ -23,7 +23,8 @@
     "eslint": "eslint \"src/**/*.js\" && eslint \"etc/*\" && eslint \"test/specs/**/*.js\" && eslint \"test/e2e/**/*.js\"",
     "check": "npm run eslint && nsp check",
     "jsdoc": "jsdoc -c ./jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md ./etc",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "build:docs": "asciidoctor -D ./dist/docs/ ./docs/full-documentation.adoc; asciidoctor -D ./dist/docs/ ./docs/oil-users-guide.adoc"
   },
   "dependencies": {
     "compression": "^1.6.2",

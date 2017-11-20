@@ -18,6 +18,7 @@ npm install
 * Start App locally: `npm start`
 * Running unit-tests: `npm run test`
 * Running end2end-tests locally: Start app in one terminal `npm start` and then in the next terminal `npm run e2e`
+* Creating Docs: `npm run build:docs`
 
 * Before testing locally add the following dns entries into your /etc/hosts
 ```
