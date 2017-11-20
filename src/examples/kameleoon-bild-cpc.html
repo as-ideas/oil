@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+<head>
+  <meta charset="utf-8"/>
+  <title>OIL - Aktuelles</title>
+  <style>
+    .has-big-bad-background {
+      background: url('../assets/images/background-large.png') top center no-repeat;
+    }
+  </style>
+</head>
+
+<body class="has-big-bad-background">
+
+<style>
+  div.as-oil {
+    font-size: 18px;
+  }
+
+  div.as-oil a {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  div.as-oil-has-gradient:before {
+    background: none;
+  }
+
+  div.as-oil-content-overlay {
+    background-color: #ffffff;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    padding: 3em 5em;
+    min-height: 200px;
+  }
+
+  div.as-oil-l-wrapper-layout-max-width {
+    position: relative;
+  }
+
+  div.as-oil-loi__heading, div.as-oil__heading {
+    color: black;
+    margin: 0 0;
+    font-size: 1.3em;
+    font-weight: 400;
+  }
+
+  a.as-js-advanced-settings--link {
+    color: black;
+    padding: 3px;
+    border-bottom: none;
+  }
+
+  a.as-js-advanced-settings--link:hover {
+    color: black;
+  }
+
+  a.as-oil__intro-txt--link {
+    color: black;
+    padding: 3px;
+    border-bottom: none;
+    margin-right: 20px;
+  }
+
+  a.as-oil__intro-txt--link:hover {
+    color: black;
+  }
+
+  p.as-oil__intro-txt {
+    padding: 3px 0;
+    margin-right: 20px;
+    color: black;
+    min-width: 75%;
+    max-width: 75%;
+    display: inline-block;
+  }
+
+  /* REDESIGN */
+  div.as-oil-l-row {
+    display: inline-block;
+  }
+
+  /* SLIDER */
+  div.as-oil-l-cpc {
+    display: inline-block;
+    max-width: 80%;
+    margin: 0.6rem 0;
+  }
+
+  div.as-slider-wrapper {
+    display: inline-block;
+  }
+
+  div.as-slider-desc {
+    display: inline-block;
+    max-width: 85%;
+  }
+
+  div.as-slider-option-title {
+    font-size: 1em;
+    color: black;
+  }
+
+  div.as-slider-option-verbose {
+    font-size: 0.9em;
+    color: black;
+  }
+
+  div.as-slider-inactive {
+    opacity: 1.0;
+  }
+
+  div.as-slider-active ~ div.as-slider-inactive {
+    opacity: 0.4;
+  }
+
+  /* BUTTONS */
+  div.as-oil-l-buttons {
+    position: absolute;
+    bottom: 0;
+    float: right;
+  }
+
+  button.as-oil-loi__btn-soi, button.as-oil__btn-soi {
+    background-color: #1a9bcd;
+    border: none;
+    border-radius: 3px;
+    min-width: 200px;
+    min-height: 40px;
+    padding: .1rem .5rem;
+    font-weight: 600;
+  }
+
+  button.as-oil__btn-soi:hover {
+    background-color: #146084;
+  }
+
+  button.as-oil__btn-loi {
+    display: none;
+  }
+
+  @media screen and (max-width: 800px) {
+    /* TEXT */
+    p.as-oil__intro-txt {
+      text-align: justify;
+      max-width: 100%;
+    }
+
+    /* BUTTONS */
+    div.as-oil-l-buttons {
+      width: 100%;
+      position: inherit;
+      bottom: auto;
+      display: block;
+    }
+
+    button.as-oil__btn-soi {
+      width: 100%;
+    }
+
+    /* SLIDER */
+    div.as-oil-l-cpc {
+      max-width: 90%;
+    }
+
+    div.as-slider-desc {
+      max-width: 90%;
+    }
+  }
+
+</style>
+
+<!-- THANK YOU WINDOW-->
+<script type="text/javascript">
+
+  (function () {
+    var config = {
+      "preview_mode": false,
+      "label_intro_heading": "Bitte stimmen Sie zu",
+      "label_intro_start": "Der Dienstanbieter darf für Zwecke der Werbung, der Marktforschung oder zur bedarfsgerechten Gestaltung der Website Nutzungsprofile bei Verwendung von Pseudonymen erstellen, sofern der Nutzer dem nicht widerspricht. Diese Nutzungsprofile dürfen nicht mit Daten über den Träger des Pseudonyms zusammengeführt werden. Detaillierte Einstellungen zur Verwendung von ",
+      "label_button_privacy": "Cookies",
+      "privacy_page_url": "/service/datenschutz.html#cookies",
+      "label_intro_end": "und anderer Technologien können Sie  <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
+      "label_button_yes_soi": "OK",
+      "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
+      "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden."
+    };
+    var oldScript = document.getElementById('oil-configuration');
+    if (oldScript) {
+      oldScript.parentNode.removeChild(oldScript);
+    }
+
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+
+    script.id = 'oil-configuration';
+    script.type = 'application/configuration';
+    script.text = JSON.stringify(config);
+
+    head.appendChild(script);
+
+    window.oilReload();
+
+  }());
+
+  function closeOil() {
+    var oilNode = document.getElementById("as-oil-thank-you");
+    if (oilNode) {
+      document.body.removeChild(oilNode);
+    }
+  }
+
+
+  (function () {
+
+    // Cross browser event handler definition
+    var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+    var eventer = window[eventMethod];
+
+
+    // Callback to be executed when event is fired
+    function receiveMessage(event) {
+      function eventDataContains(str) {
+        return JSON.stringify(event.data).indexOf(str) !== -1;
+      }
+
+      if (event && event.data && (eventDataContains('oil_opt'))) {
+        var htmlCode = '<div class="as-oil-content-overlay">'
+          + '<div class="as-oil-l-wrapper-layout-max-width">'
+          + '<div class="as-oil__heading">'
+          + 'Vielen Dank für Ihr Feedback!'
+          + '</div>'
+          + '<p class="as-oil__intro-txt">'
+          + 'Wir als Unternehmen legen viel Wert auf Datenschutz und kümmern uns um die frühzeitige Umsetzung neuer regulatorischer '
+          + 'Vorgaben. In diesem Zusammenhang führen wir aktuell diese Abfrage als Test durch. Danke für Ihr Verständnis!'
+          + '</p>'
+          + '<div class="as-oil-l-row as-oil-l-buttons">'
+          + '<div class="as-oil-l-item">'
+          + '<button class="as-oil__btn-soi as-js-optin" onclick="closeOil()">'
+          + 'Schließen'
+          + '</button>'
+          + '</div>'
+          + '</div>'
+          + '</div>'
+          + '</div>';
+
+        var thankYouNode = document.createElement('div');
+        thankYouNode.id = "as-oil-thank-you";
+        thankYouNode.innerHTML = htmlCode;
+        thankYouNode.setAttribute('class', 'as-oil');
+        document.body.appendChild(thankYouNode);
+
+
+        window.setTimeout(function () {
+          closeOil();
+        }, 15000);
+      }
+    }
+
+    // Register event handler
+    eventer(messageEvent, receiveMessage, false);
+  }());
+</script>
+
+</body>
+</html>
+<script type="text/javascript" src="http://oil-integration-cdn.herokuapp.com/oil.bundle.js"></script>
+
