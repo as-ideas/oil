@@ -20,6 +20,8 @@
 
 
 
+
+
 </script>
 
 <script type="text/javascript">
@@ -60,6 +62,13 @@
 </script>
 
 <script type="text/javascript">
+  function expimentVariant() {
+    var activeExperiment = Kameleoon.API.currentVisit.activeExperiments[0];
+    if (activeExperiment) {
+      return activeExperiment.variationName;
+    }
+  }
+
   // Custom Goal Opt-In
   if (Kameleoon) {
 
@@ -69,11 +78,26 @@
       return result;
     }, function () {
 
+      // OIL is shown!
+      utag.link({
+        event_category: "AB Test",
+        event_action: "Opt in Layer",
+        event_label: "Layer load",
+        ab_testing_var: expimentVariant()
+      });
+
+
       // SOI button
       var myElements = document.getElementsByClassName('as-js-optin');
       for (let i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
           Kameleoon.API.processConversion(70830);
+          utag.link({
+            event_category: "AB Test",
+            event_action: "Opt in Layer",
+            event_label: "Ok Button click",
+            ab_testing_var: expimentVariant()
+          });
         });
       }
 
@@ -107,12 +131,25 @@
       var result = !!document.querySelector('.as-oil-l-cpc');
       return result;
     }, function () {
+      // CPC shown
+      utag.link({
+        event_category: "AB Test",
+        event_action: "Opt in Layer",
+        event_label: "CPC Layer load",
+        ab_testing_var: expimentVariant()
+      });
 
       // SOI-Button in CPC gets it's own Event!
       var myElements = document.getElementsByClassName('as-js-optin');
       for (let i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
           Kameleoon.API.processConversion(70826);
+          utag.link({
+            event_category: "AB Test",
+            event_action: "Opt in Layer",
+            event_label: "CPC Layer Button click",
+            ab_testing_var: expimentVariant()
+          });
         });
       }
     }, 200);
