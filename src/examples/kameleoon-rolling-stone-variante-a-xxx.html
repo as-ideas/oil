@@ -5,7 +5,7 @@
   <title>OIL - Aktuelles</title>
   <style>
     .has-big-bad-background {
-      background: url('../assets/images/background-large.png') top center no-repeat;
+      background: url('../assets/images/rolling-stone.png') top center no-repeat;
     }
   </style>
 </head>
@@ -265,7 +265,7 @@
           + '</p>'
           + '<div class="as-oil-l-row as-oil-l-buttons">'
           + '<div class="as-oil-l-item">'
-          + '<button class="as-oil__btn-soi as-js-optin as-close-ty-button" onclick="closeOil()">'
+          + '<button class="as-oil__btn-soi as-js-optin" onclick="closeOil()">'
           + 'Schließen'
           + '</button>'
           + '</div>'
@@ -278,6 +278,11 @@
         thankYouNode.innerHTML = htmlCode;
         thankYouNode.setAttribute('class', 'as-oil');
         document.body.appendChild(thankYouNode);
+
+
+        window.setTimeout(function () {
+          closeOil();
+        }, 15000);
       }
     }
 

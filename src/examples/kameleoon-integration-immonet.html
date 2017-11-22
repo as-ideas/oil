@@ -22,6 +22,9 @@
 
 
 
+
+
+
 </script>
 
 <script type="text/javascript">
@@ -124,6 +127,25 @@
       return result;
     }, function () {
       Kameleoon.API.processConversion(70827);
+    }, 200);
+
+
+    // Thank you is shown
+    Kameleoon.API.runWhenConditionTrue(function () {
+      var result = !!document.querySelector('#as-oil-thank-you');
+      return result;
+    }, function () {
+      var myElements = document.getElementsByClassName('as-close-ty-button');
+      for (let i = 0; i < myElements.length; i++) {
+        myElements[i].addEventListener('mousedown', function () {
+          utag.link({
+            event_category: "AB Test",
+            event_action: "Opt in Layer",
+            event_label: "Close Button click",
+            ab_testing_var: expimentVariant()
+          });
+        });
+      }
     }, 200);
 
     // CPC is shown

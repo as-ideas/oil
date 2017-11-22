@@ -270,7 +270,7 @@
           + '</p>'
           + '<div class="as-oil-l-row as-oil-l-buttons">'
           + '<div class="as-oil-l-item">'
-          + '<button class="as-oil__btn-soi as-js-optin" onclick="closeOil()">'
+          + '<button class="as-oil__btn-soi as-js-optin as-close-ty-button" onclick="closeOil()">'
           + 'Schließen'
           + '</button>'
           + '</div>'
@@ -283,11 +283,6 @@
         thankYouNode.innerHTML = htmlCode;
         thankYouNode.setAttribute('class', 'as-oil');
         document.body.appendChild(thankYouNode);
-
-
-        window.setTimeout(function () {
-          closeOil();
-        }, 15000);
       }
     }
 
