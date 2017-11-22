@@ -19,6 +19,8 @@
 
   div.as-oil {
     font-size: 18px;
+    bottom: 0;
+    left: 0;
   }
 
   div.as-oil a {
@@ -54,13 +56,13 @@
   }
 
   a.as-js-advanced-settings--link {
-    color: #1a9bcd;
+    color: #c0c0c0;
     padding: 3px;
     border-bottom: none;
   }
 
   a.as-js-advanced-settings--link:hover {
-    color: #c0c0c0;
+    color: #1a9bcd;
   }
 
   a.as-oil__intro-txt--link {
@@ -87,17 +89,19 @@
 
   /* SLIDER */
   div.as-oil-l-cpc {
+    position: relative;
     display: inline-block;
     max-width: 80%;
     margin: 0.6rem 0;
   }
 
   div.as-slider-wrapper {
-    height: 150px;
+    position: absolute;
+    height: auto;
     width: 10px;
-    display: inline-block;
-    margin-top: 0;
-    margin-bottom: 40px;
+
+    top: 20px;
+    bottom: 60px;
   }
 
   div.noUi-vertical div.noUi-handle {
@@ -108,6 +112,7 @@
   }
 
   div.as-slider-desc {
+    margin-left: 40px;
     display: inline-block;
     max-width: 85%;
   }
@@ -177,6 +182,10 @@
     }
 
     /* SLIDER */
+    div.as-slider-wrapper {
+      bottom: 80px;
+    }
+
     div.as-oil-l-cpc {
       max-width: 90%;
     }
