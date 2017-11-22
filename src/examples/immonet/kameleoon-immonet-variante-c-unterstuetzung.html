@@ -5,7 +5,7 @@
   <title>OIL - Aktuelles</title>
   <style>
     .has-big-bad-background {
-      background: url('../assets/images/background-large.png') top center no-repeat;
+      background: url('../../assets/images/background-large.png') top center no-repeat;
     }
   </style>
 </head>
@@ -76,10 +76,12 @@
   }
 
   p.as-oil__intro-txt {
+    padding: 3px 0;
+    margin-right: 20px;
+    color: #c0c0c0;
+    min-width: 75%;
     max-width: 75%;
-    /*float: left;*/
     display: inline-block;
-    padding-right: 20px;
   }
 
   /* REDESIGN */
@@ -139,9 +141,6 @@
     position: absolute;
     bottom: 0;
     float: right;
-    /*position: fixed;*/
-    /*bottom: 20px;*/
-    /*right: 20px;*/
   }
 
   button.as-oil-loi__btn-soi, button.as-oil__btn-soi {
@@ -202,11 +201,11 @@
   (function () {
     var config = {
       "preview_mode": false,
-      "label_intro_heading": "Maßgeschneiderte Angebote für Sie",
-      "label_intro_start": "Wir verwenden",
-      "label_button_privacy": "Cookies",
+      "label_intro_heading": "Wir bitten um Ihre Unterstützung",
+      "label_intro_start": "Wie viele andere Portale finanzieren auch wir uns zum Teil durch Werbung und verwenden dafür",
+      "label_button_privacy": "Cookies.",
       "privacy_page_url": "/service/datenschutz.html#cookies",
-      "label_intro_end": "und anderen Technologien, um unser Angebot zu verbessern und Ihnen maßgeschneiderte Inhalte zu präsentieren. Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
+      "label_intro_end": "Mit Ihrer Zustimmung helfen Sie uns dabei Ihnen weiterhin große Teile von immonet.de kostenlos anzubieten. Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
       "label_button_yes_soi": "OK",
       "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
       "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",
@@ -240,6 +239,7 @@
     var oilNode = document.getElementById("as-oil-thank-you");
     if (oilNode) {
       document.body.removeChild(oilNode);
+
     }
   }
 

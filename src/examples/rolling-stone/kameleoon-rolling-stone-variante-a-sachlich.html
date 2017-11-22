@@ -5,7 +5,7 @@
   <title>OIL - Aktuelles</title>
   <style>
     .has-big-bad-background {
-      background: url('../assets/images/background-large.png') top center no-repeat;
+      background: url('../../assets/images/rolling-stone.png') top center no-repeat;
     }
   </style>
 </head>
@@ -18,7 +18,7 @@
   }
 
   div.as-oil {
-    font-size: 18px;
+    font-size: 15px;
     bottom: 0;
     left: 0;
   }
@@ -33,8 +33,8 @@
   }
 
   div.as-oil-content-overlay {
-    background-color: #2d2d2d;
-    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    background-color: #000000;
+    font-family: "Source Sans Pro", Tahoma, Verdana, sans-serif;
     padding: 3em 5em;
     min-height: 200px;
   }
@@ -47,7 +47,12 @@
     color: white;
     margin: 0 0;
     font-size: 1.3em;
-    font-weight: 400;
+    font-weight: 600;
+  }
+
+  p.as-oil__intro-txt {
+    padding: 3px;
+    color: #c0c0c0;
   }
 
   a.as-js-advanced-settings--link {
@@ -57,7 +62,7 @@
   }
 
   a.as-js-advanced-settings--link:hover {
-    color: #1a9bcd;
+    color: #9c2422;
   }
 
   a.as-oil__intro-txt--link {
@@ -67,7 +72,7 @@
   }
 
   a.as-oil__intro-txt--link:hover {
-    color: #1a9bcd;
+    color: #9C2422;
   }
 
   p.as-oil__intro-txt {
@@ -138,24 +143,30 @@
     float: right;
   }
 
-  button.as-oil-loi__btn-soi, button.as-oil__btn-soi {
-    background-color: #1a9bcd;
+  button.as-oil-loi__btn-soi, button.as-oil__btn-soi, button.as-oil__btn-loi {
+    color: white;
+    background-color: #cb2f2c;
     border: none;
     border-radius: 3px;
     min-width: 200px;
     min-height: 40px;
     padding: .1rem .5rem;
-    font-weight: 600;
+    font-weight: 800;
   }
 
-  button.as-oil__btn-soi:hover {
-    background-color: #146084;
+  button.as-oil-loi__btn-soi:hover, button.as-oil__btn-soi:hover, button.as-oil__btn-loi:hover {
+    background-color: #9C2422;
+  }
+
+  button.as-oil__btn-soi {
+    display: none;
   }
 
   button.as-oil__btn-loi {
     display: none;
   }
 
+  /* MEDIA QUERY */
   @media screen and (max-width: 800px) {
     /* TEXT */
     p.as-oil__intro-txt {
@@ -197,21 +208,24 @@
   (function () {
     var config = {
       "preview_mode": false,
+      "poi_activate_poi": true,
+      "poi_hub_origin": "//oil.asideas.de",
+      "poi_hub_path": "/oil.html",
       "label_intro_heading": "Wir verwenden Cookies",
       "label_intro_start": "Wir verwenden",
       "label_button_privacy": "Cookies,",
-      "privacy_page_url": "/service/datenschutz.html#cookies",
+      "privacy_page_url": "http://www.axelspringer.de/artikel/Hinweise-zum-Datenschutz_40410.html",
       "label_intro_end": "um Inhalte und Anzeigen zu personalisieren, Funktionen für soziale Medien anbieten zu können und die Zugriffe auf unsere Website zu analysieren. Außerdem geben wir Informationen zu Ihrer Nutzung unserer Website für soziale Medien, Werbung und Analysen weiter. Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
       "label_button_yes_soi": "OK",
-      "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
-      "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",
 
+      "label_advanced_settings_heading": "Ihre Einstellungen für Cookies auf unserer Website",
+      "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",
       "label_advanced_settings_essential_title": "Technisch erforderliche Cookies",
       "label_advanced_settings_essential_verbose": "Diese Cookies sind für die Auslieferung der Angebote unserer Website technisch erforderlich.",
-      "label_advanced_settings_functional_text": "Funktionelle und Marketing Cookies",
-      "label_advanced_settings_functional_verbose": "Diese Cookies ermöglichen die Analyse der Website-Nutzung. Hierdurch können wir unsere Leistung messen und verbessern. Außerdem sind diese Cookies notwendig für die Bereitstellung von Werbung, die für Ihre Interessen relevant ist. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben.",
-      "label_advanced_settings_advertising_text": "Marketing Cookies",
-      "label_advanced_settings_advertising_verbose": "Diese Cookies sind notwendig für die Bereitstellung von Werbung, die für Ihre Interessen relevant ist. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben."
+      "label_advanced_settings_functional_text": "Erweiterte Funktionen und Marketing",
+      "label_advanced_settings_functional_verbose": "Diese Cookies und andere Technologien ermöglichen die Analyse der Website-Nutzung. Hierdurch können wir unsere Leistung messen und verbessern. Außerdem sind sie notwendig für die Bereitstellung von Werbung, die für Ihre Interessen relevant ist. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben.",
+      "label_advanced_settings_advertising_text": "Erweiterte Funktionen und Marketing für diese und andere Websites von Axel Springer",
+      "label_advanced_settings_advertising_verbose": 'Wir bieten Ihnen hier die Möglichkeit, Ihre Zustimmung für diese und andere Websites von Axel Springer zu geben, damit Sie in Zukunft diese Auswahl nicht wiederholen müssen. Detaillierte Informationen über Axel Springer finden  Sie <a target="_blank">hier</a>.'
     };
     var oldScript = document.getElementById('oil-configuration');
     if (oldScript) {
