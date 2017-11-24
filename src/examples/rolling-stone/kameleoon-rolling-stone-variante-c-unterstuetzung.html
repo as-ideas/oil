@@ -8,9 +8,11 @@
       background: url('../../assets/images/rolling-stone.png') top center no-repeat;
     }
   </style>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
 </head>
 
 <body class="has-big-bad-background">
+<script type="text/javascript" src="http://oil-integration-cdn.herokuapp.com/oil.bundle.js"></script>
 
 <style>
   div#cookiebar-container {
@@ -18,7 +20,7 @@
   }
 
   div.as-oil {
-    font-size: 15px;
+    font-size: 16px;
     bottom: 0;
     left: 0;
   }
@@ -46,13 +48,14 @@
   div.as-oil-loi__heading, div.as-oil__heading {
     color: white;
     margin: 0 0;
-    font-size: 1.3em;
-    font-weight: 600;
+    font-size: 1.5625rem;
+    font-weight: 700;
   }
 
   p.as-oil__intro-txt {
     padding: 3px;
     color: #c0c0c0;
+    margin-bottom: 0;
   }
 
   a.as-js-advanced-settings--link {
@@ -120,12 +123,13 @@
   }
 
   div.as-slider-option-title {
-    font-size: 1em;
+    font-size: 1rem;
+    font-weight: 700;
     color: #e3e3e3;
   }
 
   div.as-slider-option-verbose {
-    font-size: 0.9em;
+    font-size: 0.9375rem;
   }
 
   div.as-slider-inactive {
@@ -156,10 +160,6 @@
 
   button.as-oil-loi__btn-soi:hover, button.as-oil__btn-soi:hover, button.as-oil__btn-loi:hover, button.as-oil__btn-poi:hover {
     background: #9C2422 none;
-  }
-
-  button.as-oil__btn-soi {
-    display: none;
   }
 
   button.as-oil__btn-loi {
@@ -208,9 +208,6 @@
   (function () {
     var config = {
       "preview_mode": false,
-      "poi_activate_poi": true,
-      "poi_hub_origin": "//oil.asideas.de",
-      "poi_hub_path": "/oil.html",
       "label_intro_heading": "Wir benötigen Ihre Zustimmung",
       "label_intro_start": "Wir verwenden",
       "label_button_privacy": "Cookies,",
@@ -302,5 +299,4 @@
 
 </body>
 </html>
-<script type="text/javascript" src="http://oil-integration-cdn.herokuapp.com/oil.bundle.js"></script>
 

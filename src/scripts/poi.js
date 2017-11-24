@@ -82,7 +82,7 @@ function sendEventToFrame(eventName, origin, payload = {}) {
 function readConfigFromFrame(origin) {
   return new Promise((resolve) => {
     let config = getConfiguration();
-    
+
     if (!isPoiActive()) {
       resolve(false);
     }
@@ -128,33 +128,33 @@ export function verifyPowerOptIn() {
   return new Promise((resolve) => {
     if (!isPoiActive()) {
       resolve({power_opt_in: false});
-    }
-
-    init().then((result) => {
-      let iframe = result.iframe;
-      if (iframe) {
-        if (!iframe.onload) {
-          // Listen to message from child window after iFrame load
-          iframe.onload = () => readConfigFromFrame(getOrigin()).then((data) => {
-            if (!data) {
-              resolve({power_opt_in: false});
-            }
-            resolve(data);
-          });
+    } else {
+      init().then((result) => {
+        let iframe = result.iframe;
+        if (iframe) {
+          if (!iframe.onload) {
+            // Listen to message from child window after iFrame load
+            iframe.onload = () => readConfigFromFrame(getOrigin()).then((data) => {
+              if (!data) {
+                resolve({power_opt_in: false});
+              }
+              resolve(data);
+            });
+          } else {
+            // if already loaded directly invoke
+            readConfigFromFrame(getOrigin()).then((data) => {
+              if (!data) {
+                resolve({power_opt_in: false});
+              }
+              resolve(data);
+            });
+          }
         } else {
-          // if already loaded directly invoke
-          readConfigFromFrame(getOrigin()).then((data) => {
-            if (!data) {
-              resolve({power_opt_in: false});
-            }
-            resolve(data);
-          });
+          logInfo('Could not initialize POI. Fallback to POI false.');
+          resolve({power_opt_in: false});
         }
-      } else {
-        logInfo('Could not initialize POI. Fallback to POI false.');
-        resolve({power_opt_in: false});
-      }
-    });
+      });
+    }
   });
 }
 
