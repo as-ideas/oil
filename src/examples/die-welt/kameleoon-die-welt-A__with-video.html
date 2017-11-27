@@ -72,7 +72,7 @@
         position: fixed;
         width: 100%;
 
-        transition: all 0.9s ease-in-out 0.4s;
+        transition: all 0.9s ease-in-out 0.2s;
     }
 
     div.as-oil-content-overlay.as-oil-content-overlay--video {
@@ -281,7 +281,7 @@
 
 </style>
 
-<!-- THANK YOU WINDOW-->
+<!-- THANK YOU WINDOW & VIDEO -->
 <script type="text/javascript">
     function closeOil() {
         var oilNode = document.getElementById("as-oil-thank-you");
@@ -290,13 +290,24 @@
         }
     }
 
+    function playVideo() {
+        var videoPlayerNode = document.getElementById('as-oil-video-player');
+        videoPlayerNode.currentTime = 0;
+
+        document.getElementById('as-oil-video').classList.remove('as-oil-video--hidden');
+
+        // START VIDEO; We give the animation some time and start the video when the animation is finished
+        window.setTimeout(function () {
+            videoPlayerNode.play();
+        }, 1200);
+    }
+
     (function () {
         window.setTimeout(function () {
             var oilState = window.oilStatus();
 
             if (oilState && !oilState.opt_in) {
                 // SHOW VIDYA
-                console.error("SHOW VIDYA!");
                 var htmlCode = '<div class="as-oil-content-overlay as-oil-content-overlay--video">'
                     + '<div class="as-oil-l-wrapper-layout-max-width" style="padding-right: 0;">'
 
@@ -317,19 +328,24 @@
                 videoNode.setAttribute('class', 'as-oil-video as-oil-video--hidden');
                 document.body.appendChild(videoNode);
 
-                // FLY VIDEO IN: After a short time, we UNHIDE the container to trigger the animation
-                window.setTimeout(function () {
-                    document.getElementById('as-oil-video').classList.remove('as-oil-video--hidden');
-
-                    // START VIDEO; We give the animation some time and start the video when the animation is finished
-                    window.setTimeout(function () {
-                        document.getElementById('as-oil-video-player').play();
-                    }, 900);
-                }, 400);
-
                 // VIDEO ENDED: We attach an eventhandler when the video ends to hide the container again
-                document.getElementById('as-oil-video-player').addEventListener('ended', function () {
+                var videoPlayerNode = document.getElementById('as-oil-video-player');
+                videoPlayerNode.addEventListener('ended', function () {
                     document.getElementById('as-oil-video').classList.add('as-oil-video--hidden');
+                }, false);
+
+
+                // ATTACH playHandler()
+                var playButton = document.querySelector('.as-oil-video-player-button');
+                if (playButton) {
+                    playButton.addEventListener('click', function () {
+                        playVideo();
+                    }, false);
+                }
+
+                // FLY VIDEO IN: After a short time, we UNHIDE the container to trigger the animation
+                videoPlayerNode.addEventListener('loadeddata', function () {
+                    playVideo();
                 }, false);
             }
         }, 500);
@@ -386,7 +402,7 @@
         var config = {
             "preview_mode": false,
             "label_intro_heading": "Bitte stimmen Sie zu.",
-            "label_intro_start": "Wir verwenden Cookies, um Inhalte und Anzeigen zu personalisieren, Funktionen für soziale Medien anbieten zu können und die Zugriffe auf unsere Website zu analysieren. Außerdem geben wir Informationen zu Ihrer Nutzung unserer Website für soziale Medien, Werbung und Analysen weiter. Detaillierte Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen. Bitte stimmen Sie der Nutzung von Cookies und anderer Technologien auf Websiten von <a href=\"http://www.axelspringer.de/en/media/Our-Offerings-Paid-Models-National_21139179.html\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Axel Springer</a> zu.",
+            "label_intro_start": "Wir verwenden Cookies, um Inhalte und Anzeigen zu personalisieren, Funktionen für soziale Medien anbieten zu können und die Zugriffe auf unsere Website zu analysieren. Außerdem geben wir Informationen zu Ihrer Nutzung unserer Website für soziale Medien, Werbung und Analysen weiter. Detaillierte Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen. Bitte stimmen Sie der Nutzung von Cookies und anderer Technologien auf Websiten von <a href=\"http://www.axelspringer.de/en/media/Our-Offerings-Paid-Models-National_21139179.html\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Axel Springer</a> zu.<br /><br /><span class=\"as-oil-video-player-button\">Video abspielen</span>",
             "label_button_privacy": "",
             "privacy_page_url": "",
             "label_intro_end": "",
