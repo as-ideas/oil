@@ -8,11 +8,10 @@
             background: url('../../assets/images/die-welt.png') top center no-repeat;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
 </head>
 
 <body class="has-big-bad-background">
-<script type="text/javascript" src="http://oil-integration-cdn.herokuapp.com/oil.bundle.js"></script>
+<script type="text/javascript" src="//oil-integration-cdn.herokuapp.com/oil.bundle.js"></script>
 
 <style>
 
@@ -64,15 +63,46 @@
 </style>
 
 <style>
-    div#cookiebar-container {
-        display: none;
+    /* Video style */
+    div.as-oil-video {
+        z-index: 2000000001;
+        bottom: 0;
+        left: 0;
+        box-sizing: border-box;
+        position: fixed;
+        width: 100%;
+
+        transition: all 0.9s ease-in-out 0.4s;
     }
 
+    div.as-oil-content-overlay.as-oil-content-overlay--video {
+        padding: unset;
+        margin: auto;
+        text-align: center;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+    }
+
+    .as-oil-video {
+        display: block;
+        max-width: 100%;
+    }
+
+    .as-oil-video--hidden {
+        /* the OUT animation */
+        bottom: -500px !important;
+        transition: all 1.0s ease-in-out 0.3s !important;
+    }
+
+    /* WELT Style */
     div.as-oil {
         font-size: 16px;
         font-family: ffmark, Helvetica Neue, Helvetica, Arial, sans-serif;
         bottom: 0;
         left: 0;
+        z-index: 2000000000;
     }
 
     div.as-oil a {
@@ -253,50 +283,54 @@
 
 <!-- THANK YOU WINDOW-->
 <script type="text/javascript">
-
-    (function () {
-        var config = {
-            "preview_mode": false,
-            "label_intro_heading": "Bitte stimmen Sie zu.",
-            "label_intro_start": "Wir verwenden Cookies, um Inhalte und Anzeigen zu personalisieren, Funktionen für soziale Medien anbieten zu können und die Zugriffe auf unsere Website zu analysieren. Außerdem geben wir Informationen zu Ihrer Nutzung unserer Website für soziale Medien, Werbung und Analysen weiter. Detaillierte Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen. Bitte stimmen Sie der Nutzung von Cookies und anderer Technologien auf Websiten von <a href=\"http://www.axelspringer.de/en/media/Our-Offerings-Paid-Models-National_21139179.html\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Axel Springer</a> zu.",
-            "label_button_privacy": "",
-            "privacy_page_url": "",
-            "label_intro_end": "",
-            "label_button_yes_soi": "OK",
-
-            "label_advanced_settings_heading": "Ihre Einstellungen für Cookies auf unserer Website",
-            "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",
-            "label_advanced_settings_essential_title": "Technisch erforderliche Cookies",
-            "label_advanced_settings_essential_verbose": "Diese Cookies sind für die Auslieferung der Angebote unserer Website technisch erforderlich.",
-            "label_advanced_settings_functional_text": "Erweiterte Funktionen und Marketing",
-            "label_advanced_settings_functional_verbose": "Diese Cookies und andere Technologien ermöglichen die Analyse der Website-Nutzung. Hierdurch können wir unsere Leistung messen und verbessern. Außerdem sind sie notwendig für die Bereitstellung von Werbung, die für Ihre Interessen relevant ist. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben.",
-            "label_advanced_settings_advertising_text": "Erweiterte Funktionen und Marketing für diese und andere Websites von Axel Springer",
-            "label_advanced_settings_advertising_verbose": "Wir bieten Ihnen hier die Möglichkeit, Ihre Zustimmung für diese und andere Websites von Axel Springer zu geben, damit Sie in Zukunft diese Auswahl nicht wiederholen müssen. Detaillierte Informationen über Axel Springer finden Sie <a href=\"http://www.axelspringer.de/en/media/Our-Offerings-Paid-Models-National_21139179.html\" target=\"_blank\">hier</a>."
-        };
-        var oldScript = document.getElementById('oil-configuration');
-        if (oldScript) {
-            oldScript.parentNode.removeChild(oldScript);
-        }
-
-        var head = document.getElementsByTagName('head')[0];
-        var script = document.createElement('script');
-
-        script.id = 'oil-configuration';
-        script.type = 'application/configuration';
-        script.text = JSON.stringify(config);
-
-        head.appendChild(script);
-
-        window.oilReload();
-
-    }());
-
     function closeOil() {
         var oilNode = document.getElementById("as-oil-thank-you");
         if (oilNode) {
             document.body.removeChild(oilNode);
         }
     }
+
+    (function () {
+        window.setTimeout(function () {
+            var oilState = window.oilStatus();
+
+            if (oilState && !oilState.opt_in) {
+                // SHOW VIDYA
+                console.error("SHOW VIDYA!");
+                var htmlCode = '<div class="as-oil-content-overlay as-oil-content-overlay--video">'
+                    + '<div class="as-oil-l-wrapper-layout-max-width" style="padding-right: 0;">'
+
+                    + '<video id="as-oil-video-player"  class="as-oil-video">'
+                    + '<source src="./OIL_Animation_Welt_15fps_1280px_24k_171110.mp4" type="video/mp4">'
+                    + '<source src="./OIL_Animation_Welt_15fps_1280px_24k_171110.ogv" type="video/ogg">'
+                    + '<source src="./OIL_Animation_Welt_15fps_1280px_24k_171110.webm" type="video/webm">'
+                    + 'Your browser does not support the video tag.'
+                    + '</video>'
+
+                    + '</div>'
+                    + '</div>';
+
+                var videoNode = document.createElement('div');
+                videoNode.id = "as-oil-video";
+                videoNode.innerHTML = htmlCode;
+                videoNode.setAttribute('class', 'as-oil-video as-oil-video--hidden');
+                document.body.appendChild(videoNode);
+
+                window.setTimeout(function () {
+                    document.getElementById('as-oil-video').classList.remove('as-oil-video--hidden');
+                    window.setTimeout(function () {
+                        document.getElementById('as-oil-video-player').play();
+                    }, 800);
+                }, 400);
+
+                document.getElementById('as-oil-video-player').addEventListener('ended', function () {
+                    document.getElementById('as-oil-video').classList.add('as-oil-video--hidden');
+                }, false);
+            }
+        }, 500);
+
+
+    }());
 
 
     (function () {
@@ -343,6 +377,43 @@
 
         // Register event handler
         eventer(messageEvent, receiveMessage, false);
+    }());
+
+    (function () {
+        var config = {
+            "preview_mode": false,
+            "label_intro_heading": "Bitte stimmen Sie zu.",
+            "label_intro_start": "Wir verwenden Cookies, um Inhalte und Anzeigen zu personalisieren, Funktionen für soziale Medien anbieten zu können und die Zugriffe auf unsere Website zu analysieren. Außerdem geben wir Informationen zu Ihrer Nutzung unserer Website für soziale Medien, Werbung und Analysen weiter. Detaillierte Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen. Bitte stimmen Sie der Nutzung von Cookies und anderer Technologien auf Websiten von <a href=\"http://www.axelspringer.de/en/media/Our-Offerings-Paid-Models-National_21139179.html\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Axel Springer</a> zu.",
+            "label_button_privacy": "",
+            "privacy_page_url": "",
+            "label_intro_end": "",
+            "label_button_yes_soi": "OK",
+
+            "label_advanced_settings_heading": "Ihre Einstellungen für Cookies auf unserer Website",
+            "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",
+            "label_advanced_settings_essential_title": "Technisch erforderliche Cookies",
+            "label_advanced_settings_essential_verbose": "Diese Cookies sind für die Auslieferung der Angebote unserer Website technisch erforderlich.",
+            "label_advanced_settings_functional_text": "Erweiterte Funktionen und Marketing",
+            "label_advanced_settings_functional_verbose": "Diese Cookies und andere Technologien ermöglichen die Analyse der Website-Nutzung. Hierdurch können wir unsere Leistung messen und verbessern. Außerdem sind sie notwendig für die Bereitstellung von Werbung, die für Ihre Interessen relevant ist. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben.",
+            "label_advanced_settings_advertising_text": "Erweiterte Funktionen und Marketing für diese und andere Websites von Axel Springer",
+            "label_advanced_settings_advertising_verbose": "Wir bieten Ihnen hier die Möglichkeit, Ihre Zustimmung für diese und andere Websites von Axel Springer zu geben, damit Sie in Zukunft diese Auswahl nicht wiederholen müssen. Detaillierte Informationen über Axel Springer finden Sie <a href=\"http://www.axelspringer.de/en/media/Our-Offerings-Paid-Models-National_21139179.html\" target=\"_blank\">hier</a>."
+        };
+        var oldScript = document.getElementById('oil-configuration');
+        if (oldScript) {
+            oldScript.parentNode.removeChild(oldScript);
+        }
+
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+
+        script.id = 'oil-configuration';
+        script.type = 'application/configuration';
+        script.text = JSON.stringify(config);
+
+        head.appendChild(script);
+
+        window.oilReload();
+
     }());
 </script>
 

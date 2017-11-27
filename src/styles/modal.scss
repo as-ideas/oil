@@ -55,9 +55,9 @@ $btn-secondary: transparent;
 $layout-max-width: 1280px;
 
 // Our Oil overlay needs to trump every other element, so we need the highest possible z-index
-// which is the following number
+// Which is the following number: 2147483647 <-- for possible HACKS wie go with a high number
 
-$z-index-max: 2147483647;
+$z-index-max: 2000000000;
 
 // Font stack
 
