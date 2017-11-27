@@ -92,7 +92,7 @@
 
       // SOI button
       var myElements = document.getElementsByClassName('as-js-optin');
-      for (let i = 0; i < myElements.length; i++) {
+      for (var i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
           Kameleoon.API.processConversion(70830);
           utag.link({
@@ -106,7 +106,7 @@
 
       // DSE Link
       var myElements = document.getElementsByClassName('as-oil__intro-txt--link');
-      for (let i = 0; i < myElements.length; i++) {
+      for (var i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
           Kameleoon.API.processConversion(70829);
         });
@@ -114,7 +114,7 @@
 
       // CPC Link
       var myElements = document.getElementsByClassName('as-js-advanced-settings--link');
-      for (let i = 0; i < myElements.length; i++) {
+      for (var i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
           Kameleoon.API.processConversion(70828);
         });
@@ -136,7 +136,7 @@
       return result;
     }, function () {
       var myElements = document.getElementsByClassName('as-close-ty-button');
-      for (let i = 0; i < myElements.length; i++) {
+      for (var i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
           utag.link({
             event_category: "AB Test",
@@ -163,7 +163,7 @@
 
       // SOI-Button in CPC gets it's own Event!
       var myElements = document.getElementsByClassName('as-js-optin');
-      for (let i = 0; i < myElements.length; i++) {
+      for (var i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
           Kameleoon.API.processConversion(70826);
           utag.link({

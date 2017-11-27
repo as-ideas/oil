@@ -129,7 +129,7 @@
 
       // SOI button
       var myElements = document.getElementsByClassName('as-js-optin');
-      for (let i = 0; i < myElements.length; i++) {
+      for (var i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
           console.info("GOAL reached: SOI Button clicked");
           Kameleoon.API.processConversion(70586);
@@ -144,7 +144,7 @@
 
       // DSE Link
       var myElements = document.getElementsByClassName('as-oil__intro-txt--link');
-      for (let i = 0; i < myElements.length; i++) {
+      for (var i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
           console.info("GOAL reached: DSE-Link clicked");
           Kameleoon.API.processConversion(70618);
@@ -153,7 +153,7 @@
 
       // CPC Link
       var myElements = document.getElementsByClassName('as-js-advanced-settings--link');
-      for (let i = 0; i < myElements.length; i++) {
+      for (var i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
           console.info("GOAL reached: CPC-Link clicked");
           Kameleoon.API.processConversion(70619);
@@ -181,7 +181,7 @@
 
       // SOI-Button in CPC gets it's own Event!
       var myElements = document.getElementsByClassName('as-js-optin');
-      for (let i = 0; i < myElements.length; i++) {
+      for (var i = 0; i < myElements.length; i++) {
         myElements[i].addEventListener('mousedown', function () {
           console.info("GOAL reached: SOI in CPC clicked");
           Kameleoon.API.processConversion(70668);
