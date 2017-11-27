@@ -310,26 +310,29 @@
                     + '</div>'
                     + '</div>';
 
+                // CREATE HTML: Create the overall container and HIDE it by default
                 var videoNode = document.createElement('div');
                 videoNode.id = "as-oil-video";
                 videoNode.innerHTML = htmlCode;
                 videoNode.setAttribute('class', 'as-oil-video as-oil-video--hidden');
                 document.body.appendChild(videoNode);
 
+                // FLY VIDEO IN: After a short time, we UNHIDE the container to trigger the animation
                 window.setTimeout(function () {
                     document.getElementById('as-oil-video').classList.remove('as-oil-video--hidden');
+
+                    // START VIDEO; We give the animation some time and start the video when the animation is finished
                     window.setTimeout(function () {
                         document.getElementById('as-oil-video-player').play();
-                    }, 800);
+                    }, 900);
                 }, 400);
 
+                // VIDEO ENDED: We attach an eventhandler when the video ends to hide the container again
                 document.getElementById('as-oil-video-player').addEventListener('ended', function () {
                     document.getElementById('as-oil-video').classList.add('as-oil-video--hidden');
                 }, false);
             }
         }, 500);
-
-
     }());
 
 

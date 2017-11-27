@@ -21,7 +21,7 @@
     "test:node": "mocha 3000 test/node",
     "test:selenium": "node etc/nightwatch.local.conf.js && mkdir -p target/reports &&./node_modules/.bin/nightwatch -c etc/nightwatch.jenkins.conf.js -e phantomjs",
     "test:watch": "cross-env NODE_ENV=test karma start etc/karma.conf.js",
-    "eslint": "eslint \"src/**/*.js\" && eslint \"etc/*\" && eslint \"test/specs/**/*.js\" && eslint \"test/e2e/**/*.js\"",
+    "eslint": "eslint \"src/*.js\" && eslint \"src/scripts/*.js\" && eslint \"etc/*\" && eslint \"test/specs/**/*.js\" && eslint \"test/e2e/**/*.js\"",
     "check": "npm run eslint && nsp check",
     "jsdoc": "jsdoc -c ./jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md ./etc",
     "postinstall": "npm run build",
