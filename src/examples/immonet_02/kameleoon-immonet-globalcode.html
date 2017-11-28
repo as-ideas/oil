@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+<head>
+  <meta charset="utf-8"/>
+  <title>OIL - Aktuelles</title>
+  <style>
+    .has-big-bad-background {
+      background: url('../../assets/images/background-large.png') top center no-repeat;
+    }
+  </style>
+</head>
+
+<body class="has-big-bad-background">
+<script id="oil-configuration" type="application/configuration">
+      {
+        "preview_mode": true
+      }
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<script type="text/javascript">
+  var utag_data = {}
+</script>
+
+<script type="text/javascript">
+  window.setTimeout(function () {
+    var config = {
+      "preview_mode": false,
+      "label_intro_heading": "Wir benötigen Deine Zustimmung",
+      "label_intro_start": "Guten Journalismus gibt es nicht umsonst. Wir finanzieren journalistische Arbeit zu einem großen Teil durch Werbung. Werbung wird mit Cookies ausgespielt. Bitte stimmte der Nutzung von Cookies zu. Detaillierte Cookie-Einstellungen kannst du ",
+      "label_intro_end": " vornehmen.",
+      "label_later_heading": "Wir benötigen Deine Zustimmung",
+      "label_later_start": "Guten Journalismus gibt es nicht umsonst. Wir finanzieren journalistische Arbeit zu einem großen Teil durch Werbung. Werbung wird mit Cookies ausgespielt. Bitte stimmte der Nutzung von Cookies zu. Detaillierte Cookie-Einstellungen kannst du ",
+      "label_later_end": " vornehmen.",
+      "label_button_privacy": "hier",
+      "privacy_page_url": "http://www.mysite.com/privacy"
+
+    };
+    var oldScript = document.getElementById('oil-configuration');
+    if (oldScript) {
+      oldScript.parentNode.removeChild(oldScript);
+    }
+
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+
+    script.id = 'oil-configuration';
+    script.type = 'application/configuration';
+    script.text = JSON.stringify(config);
+
+    head.appendChild(script);
+
+    window.oilReload();
+  }, 2000);
+
+</script>
+
+<script src= "script/global.js" type="text/javascript">
+</script>
+
+<style>
+  div.as-oil-loi__heading, div.as-oil__heading {
+    color: white;
+  }
+
+  div.as-oil-content-overlay {
+    background-color: #2a2d7a;
+  }
+
+  button.as-oil-loi__btn-soi, button.as-oil__btn-soi {
+    background-color: #4e92df;
+    border: none;
+    border-radius: 3px;
+  }
+
+  a.as-oil__intro-txt--link {
+    color: white;
+  }
+
+  button.as-oil__btn-loi {
+    display: none;
+  }
+
+  .as-oil__intro-txt {
+    display: inline-block !important;
+    padding-right: 20px;
+  }
+
+  .as-oil-l-row {
+    display: inline-block !important;
+  }
+</style>
+
+</body>
+</html>
+

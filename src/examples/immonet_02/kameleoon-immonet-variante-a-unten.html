@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+<head>
+  <meta charset="utf-8"/>
+  <title>OIL - Aktuelles</title>
+  <style>
+    .has-big-bad-background {
+      background: url('../../assets/images/background-large.png') top center no-repeat;
+    }
+  </style>
+</head>
+
+<body class="has-big-bad-background">
+
+<style>
+  div#cookiebar-container {
+    display: none;
+  }
+
+  div.as-oil {
+    font-size: 18px;
+    bottom: 0;
+    left: 0;
+  }
+
+  div.as-oil a {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  div.as-oil-has-gradient:before {
+    background: none;
+  }
+
+  div.as-oil-content-overlay {
+    background-color: #2d2d2d;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    padding: 3em 5em;
+    min-height: 200px;
+  }
+
+  div.as-oil-l-wrapper-layout-max-width {
+    position: relative;
+  }
+
+  div.as-oil-loi__heading, div.as-oil__heading {
+    color: white;
+    margin: 0 0;
+    font-size: 1.3em;
+    font-weight: 400;
+  }
+
+  p.as-oil__intro-txt {
+    padding: 3px;
+    color: #c0c0c0;
+  }
+
+  a.as-js-advanced-settings--link {
+    color: #c0c0c0;
+    padding: 3px;
+    border-bottom: none;
+  }
+
+  a.as-js-advanced-settings--link:hover {
+    color: #1a9bcd;
+  }
+
+  a.as-oil__intro-txt--link {
+    color: #c0c0c0;
+    padding: 3px;
+    border-bottom: none;
+  }
+
+  a.as-oil__intro-txt--link:hover {
+    color: #1a9bcd;
+  }
+
+  p.as-oil__intro-txt {
+    padding: 3px 0;
+    margin-right: 20px;
+    color: #c0c0c0;
+    min-width: 75%;
+    max-width: 75%;
+    display: inline-block;
+  }
+
+  /* REDESIGN */
+  div.as-oil-l-row {
+    display: inline-block;
+  }
+
+  /* SLIDER */
+  div.as-oil-l-cpc {
+    position: relative;
+    display: inline-block;
+    max-width: 80%;
+    margin: 0.6rem 0;
+  }
+
+  div.as-slider-wrapper {
+    position: absolute;
+    height: auto;
+    width: 10px;
+
+    top: 20px;
+    bottom: 60px;
+  }
+
+  div.noUi-vertical div.noUi-handle {
+    left: -11px;
+    width: 30px;
+    height: 30px;
+    border-radius: 16px;
+  }
+
+  div.as-slider-desc {
+    margin-left: 40px;
+    display: inline-block;
+    max-width: 85%;
+  }
+
+  div.as-slider-option-title {
+    font-size: 1em;
+    color: #e3e3e3;
+  }
+
+  div.as-slider-option-verbose {
+    font-size: 0.9em;
+  }
+
+  div.as-slider-inactive {
+    opacity: 1.0;
+  }
+
+  div.as-slider-active ~ div.as-slider-inactive {
+    opacity: 0.4;
+  }
+
+  /* BUTTONS */
+  div.as-oil-l-buttons {
+    position: absolute;
+    bottom: 0;
+    float: right;
+  }
+
+  button.as-oil-loi__btn-soi, button.as-oil__btn-soi {
+    background-color: #1a9bcd;
+    border: none;
+    border-radius: 3px;
+    min-width: 200px;
+    min-height: 40px;
+    padding: .1rem .5rem;
+    font-weight: 600;
+  }
+
+  button.as-oil__btn-soi:hover {
+    background-color: #146084;
+  }
+
+  button.as-oil__btn-loi {
+    display: none;
+  }
+
+  @media screen and (max-width: 800px) {
+    /* TEXT */
+    p.as-oil__intro-txt {
+      text-align: justify;
+      max-width: 100%;
+    }
+
+    /* BUTTONS */
+    div.as-oil-l-buttons {
+      width: 100%;
+      position: inherit;
+      bottom: auto;
+      display: block;
+    }
+
+    button.as-oil__btn-soi {
+      width: 100%;
+    }
+
+    /* SLIDER */
+    div.as-slider-wrapper {
+      bottom: 80px;
+    }
+
+    div.as-oil-l-cpc {
+      max-width: 90%;
+    }
+
+    div.as-slider-desc {
+      max-width: 90%;
+    }
+  }
+
+</style>
+
+
+<script type="text/javascript">
+  (function () {
+    var config = {
+      "preview_mode": false,
+      "label_intro_heading": "Wir bitten um Ihre Unterstützung",
+      "label_intro_start": "Wie viele andere Portale finanzieren auch wir uns zum Teil durch Werbung und verwenden dafür",
+      "label_button_privacy": "Cookies.",
+      "privacy_page_url": "/service/datenschutz.html#cookies",
+      "label_intro_end": "Mit Ihrer Zustimmung helfen Sie uns dabei Ihnen weiterhin große Teile von immonet.de kostenlos anzubieten. Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
+      "label_button_yes_soi": "OK",
+      "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
+      "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",
+
+      "label_advanced_settings_essential_title": "Technisch erforderliche Cookies",
+      "label_advanced_settings_essential_verbose": "Diese Cookies sind für die Auslieferung der Angebote unserer Website technisch erforderlich.",
+      "label_advanced_settings_functional_text": "Funktionelle und Marketing Cookies",
+      "label_advanced_settings_functional_verbose": "Diese Cookies ermöglichen die Analyse der Website-Nutzung. Hierdurch können wir unsere Leistung messen und verbessern. Außerdem sind diese Cookies notwendig für die Bereitstellung von Werbung, die für Ihre Interessen relevant ist. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben.",
+      "label_advanced_settings_advertising_text": "Marketing Cookies",
+      "label_advanced_settings_advertising_verbose": "Diese Cookies sind notwendig für die Bereitstellung von Werbung, die für Ihre Interessen relevant ist. Hierfür werden Daten auch pseudonymisiert an Dritte weitergegeben."
+    };
+    var oldScript = document.getElementById('oil-configuration');
+    if (oldScript) {
+      oldScript.parentNode.removeChild(oldScript);
+    }
+
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+
+    script.id = 'oil-configuration';
+    script.type = 'application/configuration';
+    script.text = JSON.stringify(config);
+
+    head.appendChild(script);
+
+    window.oilReload();
+
+  }());
+
+  function closeOil() {
+    var oilNode = document.getElementById("as-oil-thank-you");
+    if (oilNode) {
+      document.body.removeChild(oilNode);
+
+    }
+  }
+
+
+  (function () {
+
+    // Cross browser event handler definition
+    var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+    var eventer = window[eventMethod];
+
+
+    // Callback to be executed when event is fired
+    function receiveMessage(event) {
+      function eventDataContains(str) {
+        return JSON.stringify(event.data).indexOf(str) !== -1;
+      }
+
+      if (event && event.data && (eventDataContains('oil_opt'))) {
+        var htmlCode = '<div class="as-oil-content-overlay">'
+          + '<div class="as-oil-l-wrapper-layout-max-width">'
+          + '<div class="as-oil__heading">'
+          + 'Vielen Dank für Ihr Feedback!'
+          + '</div>'
+          + '<p class="as-oil__intro-txt">'
+          + 'Wir als Unternehmen legen viel Wert auf Datenschutz und kümmern uns um die frühzeitige Umsetzung neuer regulatorischer '
+          + 'Vorgaben. In diesem Zusammenhang führen wir aktuell diese Abfrage als Test durch. Danke für Ihr Verständnis!'
+          + '</p>'
+          + '<div class="as-oil-l-row as-oil-l-buttons">'
+          + '<div class="as-oil-l-item">'
+          + '<button class="as-oil__btn-soi as-js-optin as-close-ty-button" onclick="closeOil()">'
+          + 'Schließen'
+          + '</button>'
+          + '</div>'
+          + '</div>'
+          + '</div>'
+          + '</div>';
+
+        var thankYouNode = document.createElement('div');
+        thankYouNode.id = "as-oil-thank-you";
+        thankYouNode.innerHTML = htmlCode;
+        thankYouNode.setAttribute('class', 'as-oil');
+        document.body.appendChild(thankYouNode);
+      }
+    }
+
+    // Register event handler
+    eventer(messageEvent, receiveMessage, false);
+  }());
+</script>
+
+</body>
+</html>
+<script type="text/javascript" src="//oil-integration-cdn.herokuapp.com/oil.bundle.js"></script>
+
