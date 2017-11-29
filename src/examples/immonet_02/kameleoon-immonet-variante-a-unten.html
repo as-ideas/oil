@@ -11,6 +11,7 @@
 </head>
 
 <body class="has-big-bad-background">
+<script type="text/javascript" src="//oil-integration-cdn.herokuapp.com/oil.bundle.js"></script>
 
 <style>
   div#cookiebar-container {
@@ -196,16 +197,17 @@
 
 </style>
 
-
+<!-- THANK YOU WINDOW-->
 <script type="text/javascript">
+
   (function () {
     var config = {
       "preview_mode": false,
-      "label_intro_heading": "Wir bitten um Ihre Unterstützung",
-      "label_intro_start": "Wie viele andere Portale finanzieren auch wir uns zum Teil durch Werbung und verwenden dafür",
-      "label_button_privacy": "Cookies.",
+      "label_intro_heading": "Wir verwenden Cookies",
+      "label_intro_start": "Wir verwenden",
+      "label_button_privacy": "Cookies,",
       "privacy_page_url": "/service/datenschutz.html#cookies",
-      "label_intro_end": "Mit Ihrer Zustimmung helfen Sie uns dabei Ihnen weiterhin große Teile von immonet.de kostenlos anzubieten. Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
+      "label_intro_end": "um Inhalte und Anzeigen zu personalisieren, Funktionen für soziale Medien anbieten zu können und die Zugriffe auf unsere Website zu analysieren. Außerdem geben wir Informationen zu Ihrer Nutzung unserer Website für soziale Medien, Werbung und Analysen weiter. Detaillierte Cookie-Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen.",
       "label_button_yes_soi": "OK",
       "label_advanced_settings_heading": "Ihre Einwilligung für Cookies und andere Technologien auf unserer Webseite",
       "label_advanced_settings_text": "Sie haben die Wahl, welche Kategorien von Cookies verwendet werden.",
@@ -239,7 +241,6 @@
     var oilNode = document.getElementById("as-oil-thank-you");
     if (oilNode) {
       document.body.removeChild(oilNode);
-
     }
   }
 
@@ -293,5 +294,5 @@
 
 </body>
 </html>
-<script type="text/javascript" src="//oil-integration-cdn.herokuapp.com/oil.bundle.js"></script>
+
 
