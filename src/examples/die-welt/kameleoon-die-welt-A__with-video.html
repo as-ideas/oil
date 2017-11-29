@@ -294,7 +294,14 @@
         var videoPlayerNode = document.getElementById('as-oil-video-player');
         videoPlayerNode.currentTime = 0;
 
-        document.getElementById('as-oil-video').classList.remove('as-oil-video--hidden');
+        // Remove CLASS to show video (IE9 compatible)
+        var oilVideoNode = document.getElementById('as-oil-video');
+        if (oilVideoNode.classList) {
+            oilVideoNode.classList.remove('as-oil-video--hidden');
+        } else {
+            // IE9 hack
+            oilVideoNode.className = 'as-oil-video';
+        }
 
         // START VIDEO; We give the animation some time and start the video when the animation is finished
         window.setTimeout(function () {
@@ -331,7 +338,15 @@
                 // VIDEO ENDED: We attach an eventhandler when the video ends to hide the container again
                 var videoPlayerNode = document.getElementById('as-oil-video-player');
                 videoPlayerNode.addEventListener('ended', function () {
-                    document.getElementById('as-oil-video').classList.add('as-oil-video--hidden');
+
+                    // ADD CLASS to show video (IE9 compatible)
+                    var oilVideoNode = document.getElementById('as-oil-video');
+                    if (oilVideoNode.classList) {
+                        oilVideoNode.classList.add('as-oil-video--hidden');
+                    } else {
+                        // IE9 hack
+                        oilVideoNode.className = 'as-oil-video as-oil-video--hidden';
+                    }
                 }, false);
 
 
