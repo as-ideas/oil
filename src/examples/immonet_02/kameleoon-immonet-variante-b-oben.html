@@ -10,7 +10,55 @@
   </style>
 </head>
 
-<body class="has-big-bad-background">
+<body>
+  <div class="has-big-bad-background">
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+    <p>Hi, this is cool foo.</p>
+  </div>
+
 <script type="text/javascript" src="//oil-integration-cdn.herokuapp.com/oil.bundle.js"></script>
 
 <style>
@@ -19,9 +67,11 @@
   }
 
   div.as-oil {
-    font-size: 18px;
+    position: fixed;
     top: 0;
     left: 0;
+    bottom: auto;
+    font-size: 18px;
   }
 
   div.as-oil a {
@@ -243,9 +293,45 @@
     var oilNode = document.getElementById("as-oil-thank-you");
     if (oilNode) {
       document.body.removeChild(oilNode);
+      redrawPage();
     }
   }
 
+  function getFirstElementOnPage() {
+    var elList = document.body.children;
+    var firstEl;
+    return (elList[0].getAttribute("class") === "as-oil") ? elList[1] : elList[0];
+  }
+
+  function getOilHeight() {
+    var oilEl = document.getElementsByClassName("as-oil")[0];
+    return (typeof(oilEl) !== "undefined") ? oilEl.children[0].clientHeight : 0;
+  }
+
+  function setOilHeight(height) {
+    var oilEl = document.getElementsByClassName("as-oil")[0];
+    if (typeof(oilEl) !== "undefined") {
+      oilEl.style.height = height + "px";
+    }
+  }
+
+  function getOilElement() {
+    return document.getElementsByClassName("as-oil")[0];
+  }
+
+  function setFirstPageElementMarginTop(marginTop) {
+    getFirstElementOnPage().style.marginTop = getOilHeight() + "px";
+  }
+
+  function redrawPage() {
+    // We want to add a margin top to the first element on our host page,
+    // In case there is such a first element. which is not our overlay ...
+    if (typeof(getFirstElementOnPage()) !== "undefined") {
+      var oilElHeight = getOilHeight();
+      setOilHeight(oilElHeight);
+      setFirstPageElementMarginTop(oilElHeight)
+    }
+  }
 
   (function () {
 
@@ -291,7 +377,63 @@
 
     // Register event handler
     eventer(messageEvent, receiveMessage, false);
+
+    // Make Oil Layer sticky
+  // oilReload() has not finished rerendering yet, so we wait a very short amount of time before proceeding
+  setTimeout(function() {
+
+    // See here: https://developer.mozilla.org/de/docs/Web/Events/resize
+    var throttle = function(type, name, obj) {
+        obj = obj || window;
+        var running = false;
+        var func = function() {
+            if (running) { return; }
+            running = true;
+             requestAnimationFrame(function() {
+                obj.dispatchEvent(new CustomEvent(name));
+                running = false;
+            });
+        };
+        obj.addEventListener(type, func);
+    };
+
+    /* init - you can init any event */
+    throttle("resize", "optimizedResize");
+
+    // Add resize event listener
+    window.addEventListener("optimizedResize", function() {
+      redrawPage()
+    });
+
+    // Initial redrawing of page
+    redrawPage();
+
+    // Listen for optin
+
+    var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+    var eventer = window[eventMethod];
+
+
+    // Callback to be executed when event is fired
+    function receiveMessage(event) {
+      function eventDataContains(str) {
+        return JSON.stringify(event.data).indexOf(str) !== -1;
+      }
+
+      if (event && event.data && (eventDataContains('oil_opt'))) {
+        redrawPage();
+      }
+    }
+
+    // Register event handler
+    eventer(messageEvent, receiveMessage, false);
+    
+  }, 1);
+
   }());
+
+  
 </script>
 
 </body>
