@@ -32,7 +32,7 @@
     }
 
     .header {
-        font-size: 4rem;
+        font-size: 3.6rem;
         font-weight: 800;
     }
 
@@ -58,10 +58,19 @@
         background: #2d3a4e;
     }
 
+    #logo {
+        width: 394px;
+        height: 34px;
+    }
+
     @media screen and (max-width: 800px) {
         body {
-            font-size: 20px;
+            font-size: 18px;
             padding-bottom: 50px;
+        }
+
+        .header {
+            font-size: 3rem;
         }
 
         .content {
@@ -74,6 +83,11 @@
 
         pre {
             white-space: pre-wrap;
+        }
+
+        #logo {
+            width: calc(394px / 7 * 5);
+            height: calc(34px / 7 * 5);
         }
     }
 
@@ -251,7 +265,7 @@ This is the OIL Hub
 
 <!-- FOOTER -->
 <footer>
-    <svg width="394" height="34" viewBox="0 0 788 68" xmlns="http://www.w3.org/2000/svg"><title>Fenster_Aufkleber</title>
+    <svg id="logo" viewBox="0 0 788 68" xmlns="http://www.w3.org/2000/svg"><title>Fenster_Aufkleber</title>
         <g fill="none" fill-rule="evenodd">
             <path fill="#FE21FC" d="M96.6814 39.9702V28.0647l10.1833 5.8176"/>
             <path fill="#FFF" d="M17 24.5034v24.408l24.2964 14.057L60.028 53.472v-7.063"/>
