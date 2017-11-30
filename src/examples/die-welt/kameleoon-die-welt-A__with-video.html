@@ -63,6 +63,10 @@
 </style>
 
 <style>
+    .as-oil {
+      display: none;
+    }
+
     .as-oil.as-oil {
         opacity: 1;
         transform: translateY(0);
@@ -350,7 +354,7 @@
                 document.body.appendChild(videoNode);
                 var videoPlayerNode = document.getElementById('as-oil-video-player');
 
-                
+
                 function playVideo() {
                     var oilVideoNode = document.getElementById('as-oil-video');
                     var videoPlayerNode = document.getElementById('as-oil-video-player');
@@ -367,12 +371,15 @@
                         oilNode.className = "as-oil as-oil--hidden";
                     }
 
+                    var oilNode = document.getElementsByClassName("as-oil")[0];
+                    oilNode.style.display = 'block';
+
                     // START VIDEO; We give the animation some time and start the video when the animation is finished
                     window.setTimeout(function () {
                         videoPlayerNode.play();
                     }, 1500);
                 }
-                
+
                 function hideVideo() {
                     var oilVideoNode = document.getElementById('as-oil-video');
                     var oilNode = document.getElementsByClassName("as-oil")[0];
