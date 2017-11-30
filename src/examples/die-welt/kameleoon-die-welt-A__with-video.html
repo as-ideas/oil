@@ -63,6 +63,18 @@
 </style>
 
 <style>
+    .as-oil.as-oil {
+        opacity: 1;
+        transform: translateY(0);
+        transition: 300ms ease-in-out;
+    }
+
+    .as-oil--hidden.as-oil--hidden {
+        opacity: 0;
+        transform: translateY(250);
+        transition: 300ms ease-in-out;
+    }
+
     /* Video style */
     div.as-oil-video {
         z-index: 2000000001;
@@ -71,8 +83,9 @@
         box-sizing: border-box;
         position: fixed;
         width: 100%;
-
-        transition: all 0.9s ease-in-out 0.2s;
+        transform: translateY(0); /* better for transitons, uses graphic acceleration of browsers */
+        opacity: 1; /* we also use opacity for transitions to avoid different layer heights */
+        transition: all 400ms ease-in-out;
     }
 
     div.as-oil-content-overlay.as-oil-content-overlay--video {
@@ -90,10 +103,11 @@
         max-width: 100%;
     }
 
-    .as-oil-video--hidden {
+    .as-oil-video--hidden.as-oil-video--hidden { /* make CSS class more specific to avoid adding !important to statements below */
         /* the OUT animation */
-        bottom: -500px !important;
-        transition: all 1.0s ease-in-out 0.3s !important;
+        opacity: 0;
+        transform: translateY(350px);
+        transition: all 300ms ease-in-out;
     }
 
     /* WELT Style */
@@ -219,7 +233,6 @@
         opacity: 0.4;
     }
 
-    /* BUTTONS */
     div.as-oil-l-buttons {
         position: absolute;
         bottom: 0;
@@ -245,15 +258,35 @@
         display: none;
     }
 
-    /* MEDIA QUERY */
-    @media screen and (max-width: 800px) {
-        /* TEXT */
-        p.as-oil__intro-txt {
-            text-align: justify;
-            max-width: 100%;
+    .as-oil-video-player-button {
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 800px) and (min-width: 580px) {
+        .as-oil-video-player-button.as-oil-video-player-button {
+            margin-right: 16px;
+        }
+    }
+
+    @media screen and (min-width: 580px) {
+        .as-oil-video-player-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-right: 8px;
         }
 
-        /* BUTTONS */
+        .as-oil-l-buttons {
+            position: absolute;
+            right: 0;
+        }
+    }
+    @media screen and (max-width: 800px) {
+        p.as-oil__intro-txt {
+            max-width: 100%;
+            margin-right: 0;
+        }
+
         div.as-oil-l-buttons {
             width: 100%;
             position: inherit;
@@ -290,25 +323,6 @@
         }
     }
 
-    function playVideo() {
-        var videoPlayerNode = document.getElementById('as-oil-video-player');
-        videoPlayerNode.currentTime = 0;
-
-        // Remove CLASS to show video (IE9 compatible)
-        var oilVideoNode = document.getElementById('as-oil-video');
-        if (oilVideoNode.classList) {
-            oilVideoNode.classList.remove('as-oil-video--hidden');
-        } else {
-            // IE9 hack
-            oilVideoNode.className = 'as-oil-video';
-        }
-
-        // START VIDEO; We give the animation some time and start the video when the animation is finished
-        window.setTimeout(function () {
-            videoPlayerNode.play();
-        }, 1200);
-    }
-
     (function () {
         window.setTimeout(function () {
             var oilState = window.oilStatus();
@@ -334,21 +348,54 @@
                 videoNode.innerHTML = htmlCode;
                 videoNode.setAttribute('class', 'as-oil-video as-oil-video--hidden');
                 document.body.appendChild(videoNode);
-
-                // VIDEO ENDED: We attach an eventhandler when the video ends to hide the container again
                 var videoPlayerNode = document.getElementById('as-oil-video-player');
-                videoPlayerNode.addEventListener('ended', function () {
 
-                    // ADD CLASS to show video (IE9 compatible)
+                
+                function playVideo() {
                     var oilVideoNode = document.getElementById('as-oil-video');
+                    var videoPlayerNode = document.getElementById('as-oil-video-player');
+                    var oilNode = document.getElementsByClassName('as-oil')[0];
+                    videoPlayerNode.currentTime = 0;
+
+                    // Remove CLASS to show video (IE9 compatible)
+                    if (oilVideoNode.classList) {
+                        oilVideoNode.classList.remove('as-oil-video--hidden');
+                        oilNode.classList.add("as-oil--hidden");
+                    } else {
+                        // IE9 hack
+                        oilVideoNode.className = 'as-oil-video';
+                        oilNode.className = "as-oil as-oil--hidden";
+                    }
+
+                    // START VIDEO; We give the animation some time and start the video when the animation is finished
+                    window.setTimeout(function () {
+                        videoPlayerNode.play();
+                    }, 1500);
+                }
+                
+                function hideVideo() {
+                    var oilVideoNode = document.getElementById('as-oil-video');
+                    var oilNode = document.getElementsByClassName("as-oil")[0];
+
                     if (oilVideoNode.classList) {
                         oilVideoNode.classList.add('as-oil-video--hidden');
+                        oilNode.classList.remove("as-oil--hidden");
                     } else {
                         // IE9 hack
                         oilVideoNode.className = 'as-oil-video as-oil-video--hidden';
+                        oilNode.className = "as-oil";
                     }
+                }
+
+                videoPlayerNode.addEventListener('ended', function() {
+                    setTimeout(function() {
+                        hideVideo();
+                    }, 2500);
                 }, false);
 
+                videoPlayerNode.addEventListener("click", function() {
+                    hideVideo();
+                }, false)
 
                 // ATTACH playHandler()
                 var playButton = document.querySelector('.as-oil-video-player-button');
