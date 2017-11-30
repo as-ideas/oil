@@ -14,7 +14,7 @@ const whitelist = require('./etc/whitelist');
 // Application setup.
 const port = process.argv[2] || process.env.PORT || 8080;
 let CACHE_DURATION = '10m';
-let DOCUMENT_ROOT = __dirname + '/src';
+let DOCUMENT_ROOT = __dirname + '/dist';
 
 let domainWhitelist = function (req, res, next) {
   let host = req.header("host") || req.header("Host");
