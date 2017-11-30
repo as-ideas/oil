@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <div class="has-big-bad-background">
+  <div class="has-big-bad-background canvas-wrapper">
     <p>Hi, this is cool foo.</p>
     <p>Hi, this is cool foo.</p>
     <p>Hi, this is cool foo.</p>
@@ -298,9 +298,13 @@
   }
 
   function getFirstElementOnPage() {
-    var elList = document.body.children;
-    var firstEl;
-    return (elList[0].getAttribute("class") === "as-oil") ? elList[1] : elList[0];
+    var elList = document.getElementsByClassName("canvas-wrapper");
+    if (elList) {
+      return elList[0];
+    } else {
+      elList = document.body.children;
+      return (elList[0].getAttribute("class") === "as-oil") ? elList[1] : elList[0];
+    }
   }
 
   function getOilHeight() {
@@ -428,12 +432,12 @@
 
     // Register event handler
     eventer(messageEvent, receiveMessage, false);
-    
+
   }, 1);
 
   }());
 
-  
+
 </script>
 
 </body>
