@@ -14,18 +14,31 @@ export const OIL_CONFIG = {
   ATTR_COOKIE_EXPIRES_IN_DAYS: 'cookie_expires_in_days',
   ATTR_TIMESTAMP: 'timestamp',
   ATTR_PRIVACY_PAGE_URL: 'privacy_page_url',
-  ATTR_GA_TRACKER_NAME: 'ga_tracker_name',
-  ATTR_GA_TRACKING: 'ga_tracking',
+  // ATTR_GA_TRACKER_NAME: 'ga_tracker_name',
+  // ATTR_GA_TRACKING: 'ga_tracking',
   ATTR_OIL_IGNORE: 'oil_ignore',
   ATTR_OIL_POI_GROUP_NAME: 'poi_group_name',
   ATTR_ADVANCED_SETTINGS: 'advanced_settings',
   ATTR_PERSIST_MINIMUM_TRACKING: 'persist_min_tracking'
 };
 
-// Click Events
+// Main Click events
 export const EVENT_NAME_OPT_IN = 'oil_optin_done';
+export const EVENT_NAME_SOI_OPT_IN = 'oil_soi_optin_done';
+export const EVENT_NAME_POI_OPT_IN = 'oil_poi_optin_done';
+export const EVENT_NAME_SOI_OPT_IN_WHILE_LATER = 'oil_soi_optin_done_while_later';
+export const EVENT_NAME_POI_OPT_IN_WHILE_LATER = 'oil_poi_optin_done_while_later';
 export const EVENT_NAME_OPT_LATER = 'oil_optlater_done';
 export const EVENT_NAME_OPT_IGNORE = 'oil_optignore_done';
+
+// Tracking Events
+export const EVENT_NAME_AS_SELECTED_MINIMUM = 'oil_as_selected_minimum';
+export const EVENT_NAME_AS_SELECTED_FUNCTIONAL = 'oil_as_selected_functional';
+export const EVENT_NAME_AS_SELECTED_FULL = 'oil_as_selected_full';
+export const EVENT_NAME_ADVANCED_SETTINGS = 'oil_click_advanced_settings';
+export const EVENT_NAME_BACK_TO_MAIN = 'oil_click_back_to_main';
+export const EVENT_NAME_NO_COOKIES_ALLOWED = 'oil_no_cookies_allowed';
+export const EVENT_NAME_OIL_LOADED = 'oil_loaded';
 
 // Persisted Status Events (will fire after reload)
 export const EVENT_NAME_HAS_OPTED_IN = 'oil_has_optedin';

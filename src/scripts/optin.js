@@ -74,7 +74,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
     }
 
     // Send event to notify host site
-    fireConfiguredMessageEvent(EVENT_NAME_OPT_IN);
+    sendEventToHostSite(EVENT_NAME_OPT_IN);
     resolve(true);
   });
 }
@@ -87,7 +87,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
 export function oilOptIn(privacySettings = PRIVACY_SETTINGS_MINIMUM_TRACKING) {
   setSoiOptIn(privacySettings);
   // Send event to notify host site
-  fireConfiguredMessageEvent(EVENT_NAME_OPT_IN);
+  sendEventToHostSite(EVENT_NAME_OPT_IN);
 
   return new Promise((resolve) => {
     resolve(true);
@@ -102,7 +102,7 @@ export function oilOptIn(privacySettings = PRIVACY_SETTINGS_MINIMUM_TRACKING) {
 export function oilOptLater() {
   setOptLater(true);
   // Send event to notify host site
-  fireConfiguredMessageEvent(EVENT_NAME_OPT_LATER);
+  sendEventToHostSite(EVENT_NAME_OPT_LATER);
 
   return new Promise((resolve) => {
     resolve(true);
@@ -117,18 +117,9 @@ export function oilOptLater() {
 export function oilOptIgnore() {
   setOilOptIgnore(true);
   // Send event to notify host site
-  fireConfiguredMessageEvent(EVENT_NAME_OPT_IGNORE);
+  sendEventToHostSite(EVENT_NAME_OPT_IGNORE);
 
   return new Promise((resolve) => {
     resolve(true);
   });
-}
-
-
-/**
- * Fire a postmessage event to host site to notify of e.g. optin or optlater
- * @param eventname is the event name that will be used
- */
-export function fireConfiguredMessageEvent(eventName) {
-  sendEventToHostSite(eventName);
 }

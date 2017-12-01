@@ -125,9 +125,7 @@ This is a full list of configurable options.
 | poi_hub_path | The path to the hub.html installation on the origin, if any. | none|Yes
 | poi_group_name | POI group name. POI only affects those sites with the same group name (optional). | ''|Yes
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
-| ga_tracking | A nummeric value to enable/disable Google Anayltics event tracking, where 0=disabled, 1=enabled for YES clicks, 2=enabled for all clicks including NO.
 The core Google Analytics script has to be available on the site, OIL is not injecting a GA script onto the site. Important! Please note that GA tracking should of course only be enabled for testing purposes. | 0 | No
-| ga_tracker_name | If you use a custom tracker name, like in Google Tag Manager, configure it here. | None | No
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31 | No
 | oil_ignore | Display a X top right of the layer. | False | No
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False | No
@@ -237,12 +235,23 @@ OIL is currently emitting the following events:
 [width="100%",options="header", cols="1,3"]
 |====
 | Event name | Description
-| oil_optin_done | The Javascript event that will be sent to the host when a users selects opt in.
-|oil_optlater_done| The Javascript event that will be sent to the host when a users selects opt later.
-|oil_optignore_done| The Javascript event that will be sent to the host when a users selects opt ignore.
-|oil_has_optedin| The Javascript event that will be sent to the host on every page reload, when the user has opted_in previously
-|oil_has_optedlater| The Javascript event that will be sent to the host on every page reload, when the user has opted_later previously
-|oil_has_optedignore| The Javascript event that will be sent to the host on every page reload, when the user has opted_ignore previously
+| oil_optin_done | When a users selects opt in.
+| oil_soi_optin_done | When a users selects opt in via SOI.
+| oil_poi_optin_done | When a users selects opt in via SOI from the later page.
+| oil_soi_optin_done_while_later | When a users selects opt in via POI.
+| oil_poi_optin_done_while_later | When a users selects opt in via POI from the later page.
+| oil_optlater_done| When a users selects opt later.
+| oil_optignore_done| When a users selects opt ignore.
+| oil_as_selected_minimum| When a users selected minimum cookies before clicking opt in.
+| oil_as_selected_functional| When a users selected functional cookies before clicking opt in.
+| oil_as_selected_full| When a user selected full cookies before clicking opt in or didn't bother for advanced settings.
+| oil_click_advanced_settings| When a users clicks the advanced settings button/link.
+| oil_click_back_to_main| When a user clicks the back link from the advanced settings page.
+| oil_no_cookies_allowed| When a users has no cookies allowed and the no cookies layer is displayed
+| oil_has_optedin| On every page reload, when the user has opted_in previously
+| oil_has_optedlater| On every page reload, when the user has opted_later previously
+| oil_has_optedignore| On every page reload, when the user has opted_ignore previously
+| oil_loaded| When the script is loaded initially
 |====
 
 OIL is currently listening to the following events:

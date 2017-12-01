@@ -1,14 +1,17 @@
 import { renderOil, oilWrapper, oilShowPreferenceCenter, handleSoiOptIn, handlePoiOptIn, handleOilIgnore } from './scripts/modal.js';
-import { checkOptIn, fireConfiguredMessageEvent } from './scripts/optin.js';
+import { checkOptIn } from './scripts/optin.js';
+import { sendEventToHostSite } from './scripts/utils.js';
 import { registerOptOutListener } from './scripts/optout.js';
 import { logInfo, logPreviewInfo } from './scripts/log.js';
-import { resetConfiguration, isPreviewMode, gaTrackEvent } from './scripts/config.js';
+import { resetConfiguration, isPreviewMode } from './scripts/config.js';
 import {
   EVENT_NAME_HAS_OPTED_IGNORE,
   EVENT_NAME_HAS_OPTED_LATER,
-  EVENT_NAME_HAS_OPTED_IN
+  EVENT_NAME_HAS_OPTED_IN,
+  EVENT_NAME_NO_COOKIES_ALLOWED,
+  EVENT_NAME_OIL_LOADED
 } from './scripts/constants.js';
-import { isBrowserCookieEnabled, hasGALoaded } from './scripts/utils.js';
+import { isBrowserCookieEnabled } from './scripts/utils.js';
 import {
   hasOptedLater,
   hasOptedIgnore,
@@ -86,7 +89,7 @@ export function initOilLayer() {
     if (!isBrowserCookieEnabled()) {
       logInfo('This browser doesn\'t allow cookies.');
       renderOil(oilWrapper, {noCookie: true});
-      gaTrackEvent('Loaded/No cookies', 1);
+      sendEventToHostSite(EVENT_NAME_NO_COOKIES_ALLOWED);
       return;
     }
 
@@ -99,31 +102,27 @@ export function initOilLayer() {
        * User has opted in
        */
       if (optin) {
-        fireConfiguredMessageEvent(EVENT_NAME_HAS_OPTED_IN);
+        sendEventToHostSite(EVENT_NAME_HAS_OPTED_IN);
       }
       /**
        * User has opted ignore
        */
       else if (hasOptedIgnore()) {
-        fireConfiguredMessageEvent(EVENT_NAME_HAS_OPTED_IGNORE);
-        gaTrackEvent('Loaded/Ignored', 1);
+        sendEventToHostSite(EVENT_NAME_HAS_OPTED_IGNORE);
       }
       /**
        * User has opted later
        */
       else if (hasOptedLater()) {
         renderOil(oilWrapper, {optLater: true});
-        fireConfiguredMessageEvent(EVENT_NAME_HAS_OPTED_LATER);
-        gaTrackEvent('Loaded/Later', 1);
+        sendEventToHostSite(EVENT_NAME_HAS_OPTED_LATER);
       }
       /**
        * Any other case
        */
       else {
         renderOil(oilWrapper, {optLater: false});
-        hasGALoaded()
-          .then(() => gaTrackEvent('Loaded/Initial', 1))
-          .catch((e) => logInfo(e))
+        sendEventToHostSite(EVENT_NAME_OIL_LOADED);
       }
     });
   }

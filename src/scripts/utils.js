@@ -242,37 +242,3 @@ export function getStringParam(searchString, paramName) {
   }
   return null;
 }
-
-
-/**
- * Defer Google Analytics (GA) tracking event. This is needed because we have to wait
- * for GA to be loaded and initialized by the host site, which we don't control...
- * Old way: window.setTimeout(() => {gaTrackEvent('Loaded/Initial')}, 2000);
- */
-
-// See https://stackoverflow.com/questions/1954910/javascript-detect-if-google-analytics-is-loaded-yet
-
-export const hasGALoaded = () => {
-  cachedConfig = getConfiguration();
-  let GATracking = cachedConfig[OIL_CONFIG.ATTR_GA_TRACKING];
-
-  return new Promise((resolve, reject) => {
-    let timeStart = Date.now();
-    const TIMEOUT = 5000;
-
-    const _isLoaded = () => {
-      if (Date.now() - timeStart > TIMEOUT) {
-        reject('Timeout: Google Analytics not found in page');
-        return;
-      }
-      if (window.ga && window.ga.create) {
-        resolve(window.ga);
-        return;
-      } else {
-        setTimeout(_isLoaded, 500);
-      }
-    };
-
-    GATracking === 0 ? reject('Google Analytics not enabled in configuration') : _isLoaded();
-  });
-};
