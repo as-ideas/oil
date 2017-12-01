@@ -63,52 +63,6 @@
 </style>
 
 <style>
-    .as-oil.as-oil {
-        display: none;
-        opacity: 1;
-        transform: translateY(0);
-        transition: 300ms ease-in-out;
-    }
-
-    .as-oil--hidden.as-oil--hidden {
-        opacity: 0;
-        transform: translateY(350px);
-        transition: 300ms ease-in-out;
-    }
-
-    div.as-oil-video {
-        z-index: 2000000001;
-        opacity: 1;
-        box-sizing: border-box;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        transition: all 300ms ease-in-out;
-        transform: translateY(0); 
-    }
-
-    div.as-oil-content-overlay.as-oil-content-overlay--video {
-        padding: unset;
-        margin: auto;
-        text-align: center;
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-    }
-
-    .as-oil-video {
-        display: block;
-        max-width: 100%;
-    }
-
-    .as-oil-video--hidden.as-oil-video--hidden {
-        opacity: 0;
-        transition: all 300ms ease-in-out;
-        transform: translateY(350px);
-    }
-
     div.as-oil {
         z-index: 2000000000;
         bottom: 0;
@@ -253,24 +207,7 @@
         display: none;
     }
 
-    .as-oil-video-player-button {
-        cursor: pointer;
-    }
-
-    @media screen and (max-width: 800px) and (min-width: 580px) {
-        .as-oil-video-player-button.as-oil-video-player-button {
-            margin-right: 16px;
-        }
-    }
-
     @media screen and (min-width: 580px) {
-        .as-oil-video-player-button {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin-right: 8px;
-        }
-
         .as-oil-l-buttons {
             position: absolute;
             right: 0;
@@ -309,93 +246,6 @@
 </style>
 
 <script type="text/javascript">
-    
-    (function () {
-        /**
-         * Add Video
-         */
-        window.setTimeout(function () {
-            var oilState = window.oilStatus();
-
-            if (oilState && !oilState.opt_in) {
-                var htmlCode = '<div class="as-oil-content-overlay as-oil-content-overlay--video">'
-                    + '<div class="as-oil-l-wrapper-layout-max-width" style="padding-right: 0;">'
-
-                    + '<video id="as-oil-video-player"  class="as-oil-video">'
-                    + '<source src="./OIL_Animation_Welt_15fps_1280px_24k_171110.mp4" type="video/mp4">'
-                    + '<source src="./OIL_Animation_Welt_15fps_1280px_24k_171110.ogv" type="video/ogg">'
-                    + '<source src="./OIL_Animation_Welt_15fps_1280px_24k_171110.webm" type="video/webm">'
-                    + 'Your browser does not support the video tag.'
-                    + '</video>'
-
-                    + '</div>'
-                    + '</div>';
-
-                var videoNode = document.createElement('div');
-                videoNode.id = "as-oil-video";
-                videoNode.innerHTML = htmlCode;
-                videoNode.setAttribute('class', 'as-oil-video as-oil-video--hidden');
-                document.body.appendChild(videoNode);
-
-                function playVideo() {
-                    var oilVideoNode = document.getElementById('as-oil-video');
-                    var videoPlayerNode = document.getElementById('as-oil-video-player');
-                    var oilNode = document.getElementsByClassName('as-oil')[0];
-                    videoPlayerNode.currentTime = 0;
-
-                    if (typeof(oilVideoNode) !== "undefined") {
-                        oilVideoNode.className = 'as-oil-video';
-                    }
-
-                    if (typeof(oilNode) !== "undefined") {
-                        oilNode.className = "as-oil as-oil--hidden";
-                    }
-                    
-                    oilNode.style.display = 'block';
-
-                    window.setTimeout(function () {
-                        videoPlayerNode.play();
-                    }, 500);
-                }
-
-                function hideVideo() {
-                    var oilVideoNode = document.getElementById('as-oil-video');
-                    var oilNode = document.getElementsByClassName("as-oil")[0];
-
-                    if (typeof(oilVideoNode) !== "undefined") {
-                        oilVideoNode.className = 'as-oil-video as-oil-video--hidden';
-                    }
-
-                    if (typeof(oilNode) !== "undefined") {
-                        oilNode.className = "as-oil";
-                    }
-                }
-
-                var videoPlayerNode = document.getElementById('as-oil-video-player');
-                videoPlayerNode.addEventListener('ended', function() {
-                    setTimeout(function() {
-                        hideVideo();
-                    }, 2500);
-                }, false);
-
-                videoPlayerNode.addEventListener("click", function() {
-                    hideVideo();
-                }, false);
-
-                videoPlayerNode.addEventListener('loadeddata', function () {
-                    playVideo();
-                }, false);
-
-                var playButton = document.querySelector('.as-oil-video-player-button');
-                if (playButton) {
-                    playButton.addEventListener('click', function () {
-                        playVideo();
-                    }, false);
-                }
-            }
-        }, 1);
-    }());
-
     (function () {
         /**
          * Inject Config and Restart Oil
@@ -403,7 +253,7 @@
         var config = {
             "preview_mode": false,
             "label_intro_heading": "Bitte stimmen Sie zu.",
-            "label_intro_start": "Wir verwenden Cookies, um Inhalte und Anzeigen zu personalisieren, Funktionen für soziale Medien anbieten zu können und die Zugriffe auf unsere Website zu analysieren. Außerdem geben wir Informationen zu Ihrer Nutzung unserer Website für soziale Medien, Werbung und Analysen weiter. Detaillierte Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen. Bitte stimmen Sie der Nutzung von Cookies und anderer Technologien auf Websiten von <a href=\"http://www.axelspringer.de/en/media/Our-Offerings-Paid-Models-National_21139179.html\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Axel Springer</a> zu.<br /><br /><span class=\"as-oil-video-player-button\">Video abspielen</span>",
+            "label_intro_start": "Wir verwenden Cookies, um Inhalte und Anzeigen zu personalisieren, Funktionen für soziale Medien anbieten zu können und die Zugriffe auf unsere Website zu analysieren. Außerdem geben wir Informationen zu Ihrer Nutzung unserer Website für soziale Medien, Werbung und Analysen weiter. Detaillierte Einstellungen können Sie <a class=\"as-js-advanced-settings as-js-advanced-settings--link\">hier</a> vornehmen. Bitte stimmen Sie der Nutzung von Cookies und anderer Technologien auf Websiten von <a href=\"http://www.axelspringer.de/en/media/Our-Offerings-Paid-Models-National_21139179.html\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Axel Springer</a> zu.<br /><br />",
             "label_button_privacy": "",
             "privacy_page_url": "",
             "label_intro_end": "",
@@ -438,7 +288,7 @@
 
     (function () {
         /**
-         * Oil Thank you
+         * Oil Thankyou
          */
         function closeOilVariantThankYou() {
             var oilNode = document.getElementById("as-oil-thank-you");
