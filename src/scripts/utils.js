@@ -1,10 +1,5 @@
 import Cookie from 'js-cookie';
 import { logInfo } from './log.js';
-import { getConfiguration } from './config.js';
-import { OIL_CONFIG } from './constants.js';
-
-let cachedConfig = null;
-
 
 /**
  * Merge the objects,

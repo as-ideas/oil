@@ -220,7 +220,6 @@ function getRangeSliderValue() {
  *
  */
 function handleOptLater() {
-  let config = getConfiguration();
   logInfo('Handling OptLater');
   oilOptLater().then((cookieOptLater) => {
     renderOil(oilWrapper, {optLater: cookieOptLater});
