@@ -63,11 +63,8 @@
 </style>
 
 <style>
-    .as-oil {
-      display: none;
-    }
-
     .as-oil.as-oil {
+        display: none;
         opacity: 1;
         transform: translateY(0);
         transition: 300ms ease-in-out;
@@ -75,21 +72,20 @@
 
     .as-oil--hidden.as-oil--hidden {
         opacity: 0;
-        transform: translateY(250);
+        transform: translateY(350px);
         transition: 300ms ease-in-out;
     }
 
-    /* Video style */
     div.as-oil-video {
         z-index: 2000000001;
-        bottom: 0;
-        left: 0;
+        opacity: 1;
         box-sizing: border-box;
         position: fixed;
+        bottom: 0;
+        left: 0;
         width: 100%;
-        transform: translateY(0); /* better for transitons, uses graphic acceleration of browsers */
-        opacity: 1; /* we also use opacity for transitions to avoid different layer heights */
-        transition: all 400ms ease-in-out;
+        transition: all 300ms ease-in-out;
+        transform: translateY(0); 
     }
 
     div.as-oil-content-overlay.as-oil-content-overlay--video {
@@ -107,20 +103,18 @@
         max-width: 100%;
     }
 
-    .as-oil-video--hidden.as-oil-video--hidden { /* make CSS class more specific to avoid adding !important to statements below */
-        /* the OUT animation */
+    .as-oil-video--hidden.as-oil-video--hidden {
         opacity: 0;
-        transform: translateY(350px);
         transition: all 300ms ease-in-out;
+        transform: translateY(350px);
     }
 
-    /* WELT Style */
     div.as-oil {
-        font-size: 16px;
-        font-family: ffmark, Helvetica Neue, Helvetica, Arial, sans-serif;
+        z-index: 2000000000;
         bottom: 0;
         left: 0;
-        z-index: 2000000000;
+        font-size: 16px;
+        font-family: ffmark, "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
     div.as-oil a {
@@ -133,9 +127,9 @@
     }
 
     div.as-oil-content-overlay {
-        background-color: #00355c;
         padding: 3em 5em;
         min-height: 200px;
+        background-color: #00355c;
     }
 
     div.as-oil-l-wrapper-layout-max-width {
@@ -143,21 +137,21 @@
     }
 
     div.as-oil-loi__heading, div.as-oil__heading {
-        color: #ffffff;
         margin: 0 0;
         font-size: 1.5625rem;
         font-weight: 700;
+        color: #fff;
     }
 
     p.as-oil__intro-txt {
-        padding: 3px;
-        color: #ffffff;
         margin-bottom: 0;
+        padding: 3px;
+        color: #fff;
     }
 
     a.as-js-advanced-settings--link {
-        color: #ffffff;
         padding: 3px;
+        color: #fff;
         border-bottom: none;
     }
 
@@ -166,8 +160,8 @@
     }
 
     a.as-oil__intro-txt--link {
-        color: #ffffff;
         padding: 3px;
+        color: #fff;
         border-bottom: none;
     }
 
@@ -176,20 +170,18 @@
     }
 
     p.as-oil__intro-txt {
-        padding: 3px 0;
-        margin-right: 20px;
-        color: #ffffff;
+        display: inline-block;
         min-width: 75%;
         max-width: 75%;
-        display: inline-block;
+        margin-right: 20px;
+        padding: 3px 0;
+        color: #fff;
     }
 
-    /* REDESIGN */
     div.as-oil-l-row {
         display: inline-block;
     }
 
-    /* SLIDER */
     div.as-oil-l-cpc {
         position: relative;
         display: inline-block;
@@ -199,11 +191,10 @@
 
     div.as-slider-wrapper {
         position: absolute;
-        height: auto;
-        width: 10px;
-
         top: 20px;
         bottom: 60px;
+        width: 10px;
+        height: auto;
     }
 
     div.noUi-vertical div.noUi-handle {
@@ -214,15 +205,15 @@
     }
 
     div.as-slider-desc {
-        margin-left: 40px;
         display: inline-block;
+        margin-left: 40px;
         max-width: 85%;
     }
 
     div.as-slider-option-title {
         font-size: 1rem;
         font-weight: 700;
-        color: #ffffff;
+        color: #fff;
     }
 
     div.as-slider-option-verbose {
@@ -230,7 +221,7 @@
     }
 
     div.as-slider-inactive {
-        opacity: 1.0;
+        opacity: 1;
     }
 
     div.as-slider-active ~ div.as-slider-inactive {
@@ -244,14 +235,14 @@
     }
 
     button.as-oil-loi__btn-soi, button.as-oil__btn-soi, button.as-oil__btn-loi, button.as-oil__btn-poi {
-        color: white;
+        padding: .1rem .5rem;
+        min-width: 200px;
+        min-height: 40px;
+        font-weight: 800;
+        color: #fff;
         background: #f18625 none;
         border: none;
         border-radius: 3px;
-        min-width: 200px;
-        min-height: 40px;
-        padding: .1rem .5rem;
-        font-weight: 800;
     }
 
     button.as-oil-loi__btn-soi:hover, button.as-oil__btn-soi:hover, button.as-oil__btn-loi:hover, button.as-oil__btn-poi:hover {
@@ -302,7 +293,6 @@
             width: 100%;
         }
 
-        /* SLIDER */
         div.as-slider-wrapper {
             bottom: 80px;
         }
@@ -318,21 +308,16 @@
 
 </style>
 
-<!-- THANK YOU WINDOW & VIDEO -->
 <script type="text/javascript">
-    function closeOil() {
-        var oilNode = document.getElementById("as-oil-thank-you");
-        if (oilNode) {
-            document.body.removeChild(oilNode);
-        }
-    }
-
+    
     (function () {
+        /**
+         * Add Video
+         */
         window.setTimeout(function () {
             var oilState = window.oilStatus();
 
             if (oilState && !oilState.opt_in) {
-                // SHOW VIDYA
                 var htmlCode = '<div class="as-oil-content-overlay as-oil-content-overlay--video">'
                     + '<div class="as-oil-l-wrapper-layout-max-width" style="padding-right: 0;">'
 
@@ -346,14 +331,11 @@
                     + '</div>'
                     + '</div>';
 
-                // CREATE HTML: Create the overall container and HIDE it by default
                 var videoNode = document.createElement('div');
                 videoNode.id = "as-oil-video";
                 videoNode.innerHTML = htmlCode;
                 videoNode.setAttribute('class', 'as-oil-video as-oil-video--hidden');
                 document.body.appendChild(videoNode);
-                var videoPlayerNode = document.getElementById('as-oil-video-player');
-
 
                 function playVideo() {
                     var oilVideoNode = document.getElementById('as-oil-video');
@@ -361,39 +343,35 @@
                     var oilNode = document.getElementsByClassName('as-oil')[0];
                     videoPlayerNode.currentTime = 0;
 
-                    // Remove CLASS to show video (IE9 compatible)
-                    if (oilVideoNode.classList) {
-                        oilVideoNode.classList.remove('as-oil-video--hidden');
-                        oilNode.classList.add("as-oil--hidden");
-                    } else {
-                        // IE9 hack
+                    if (typeof(oilVideoNode) !== "undefined") {
                         oilVideoNode.className = 'as-oil-video';
-                        oilNode.className = "as-oil as-oil--hidden";
                     }
 
-                    var oilNode = document.getElementsByClassName("as-oil")[0];
+                    if (typeof(oilNode) !== "undefined") {
+                        oilNode.className = "as-oil as-oil--hidden";
+                    }
+                    
                     oilNode.style.display = 'block';
 
-                    // START VIDEO; We give the animation some time and start the video when the animation is finished
                     window.setTimeout(function () {
                         videoPlayerNode.play();
-                    }, 1500);
+                    }, 500);
                 }
 
                 function hideVideo() {
                     var oilVideoNode = document.getElementById('as-oil-video');
                     var oilNode = document.getElementsByClassName("as-oil")[0];
 
-                    if (oilVideoNode.classList) {
-                        oilVideoNode.classList.add('as-oil-video--hidden');
-                        oilNode.classList.remove("as-oil--hidden");
-                    } else {
-                        // IE9 hack
+                    if (typeof(oilVideoNode) !== "undefined") {
                         oilVideoNode.className = 'as-oil-video as-oil-video--hidden';
+                    }
+
+                    if (typeof(oilNode) !== "undefined") {
                         oilNode.className = "as-oil";
                     }
                 }
 
+                var videoPlayerNode = document.getElementById('as-oil-video-player');
                 videoPlayerNode.addEventListener('ended', function() {
                     setTimeout(function() {
                         hideVideo();
@@ -402,72 +380,26 @@
 
                 videoPlayerNode.addEventListener("click", function() {
                     hideVideo();
-                }, false)
+                }, false);
 
-                // ATTACH playHandler()
+                videoPlayerNode.addEventListener('loadeddata', function () {
+                    playVideo();
+                }, false);
+
                 var playButton = document.querySelector('.as-oil-video-player-button');
                 if (playButton) {
                     playButton.addEventListener('click', function () {
                         playVideo();
                     }, false);
                 }
-
-                // FLY VIDEO IN: After a short time, we UNHIDE the container to trigger the animation
-                videoPlayerNode.addEventListener('loadeddata', function () {
-                    playVideo();
-                }, false);
             }
-        }, 500);
-    }());
-
-
-    (function () {
-
-        // Cross browser event handler definition
-        var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
-        var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
-        var eventer = window[eventMethod];
-
-
-        // Callback to be executed when event is fired
-        function receiveMessage(event) {
-            function eventDataContains(str) {
-                return JSON.stringify(event.data).indexOf(str) !== -1;
-            }
-
-            if (event && event.data && (eventDataContains('oil_opt'))) {
-                var htmlCode = '<div class="as-oil-content-overlay">'
-                    + '<div class="as-oil-l-wrapper-layout-max-width">'
-                    + '<div class="as-oil__heading">'
-                    + 'Vielen Dank für Ihr Feedback!'
-                    + '</div>'
-                    + '<p class="as-oil__intro-txt">'
-                    + 'Wir als Unternehmen legen viel Wert auf Datenschutz und kümmern uns um die frühzeitige Umsetzung neuer regulatorischer '
-                    + 'Vorgaben. In diesem Zusammenhang führen wir aktuell diese Abfrage als Test durch. Danke für Ihr Verständnis!'
-                    + '</p>'
-                    + '<div class="as-oil-l-row as-oil-l-buttons">'
-                    + '<div class="as-oil-l-item">'
-                    + '<button class="as-oil__btn-soi as-js-optin as-close-ty-button" onclick="closeOil()">'
-                    + 'Schließen'
-                    + '</button>'
-                    + '</div>'
-                    + '</div>'
-                    + '</div>'
-                    + '</div>';
-
-                var thankYouNode = document.createElement('div');
-                thankYouNode.id = "as-oil-thank-you";
-                thankYouNode.innerHTML = htmlCode;
-                thankYouNode.setAttribute('class', 'as-oil');
-                document.body.appendChild(thankYouNode);
-            }
-        }
-
-        // Register event handler
-        eventer(messageEvent, receiveMessage, false);
+        }, 1);
     }());
 
     (function () {
+        /**
+         * Inject Config and Restart Oil
+         */
         var config = {
             "preview_mode": false,
             "label_intro_heading": "Bitte stimmen Sie zu.",
@@ -486,6 +418,7 @@
             "label_advanced_settings_advertising_text": "Erweiterte Funktionen und Marketing für diese und andere Websites von Axel Springer",
             "label_advanced_settings_advertising_verbose": "Wir bieten Ihnen hier die Möglichkeit, Ihre Zustimmung für diese und andere Websites von Axel Springer zu geben, damit Sie in Zukunft diese Auswahl nicht wiederholen müssen. Detaillierte Informationen über Axel Springer finden Sie <a href=\"http://www.axelspringer.de/en/media/Our-Offerings-Paid-Models-National_21139179.html\" target=\"_blank\">hier</a>."
         };
+
         var oldScript = document.getElementById('oil-configuration');
         if (oldScript) {
             oldScript.parentNode.removeChild(oldScript);
@@ -501,7 +434,59 @@
         head.appendChild(script);
 
         window.oilReload();
+    }());
 
+    (function () {
+        /**
+         * Oil Thank you
+         */
+        function closeOilVariantThankYou() {
+            var oilNode = document.getElementById("as-oil-thank-you");
+            if (oilNode) {
+                document.body.removeChild(oilNode);
+            }
+        }
+
+        var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+        var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+        var eventer = window[eventMethod];
+
+        function receiveMessage(event) {
+            function eventDataContains(str) {
+                return JSON.stringify(event.data).indexOf(str) !== -1;
+            }
+
+            if (event && event.data && (eventDataContains('oil_opt'))) {
+                var htmlCode = '<div class="as-oil-content-overlay">'
+                    + '<div class="as-oil-l-wrapper-layout-max-width">'
+                    + '<div class="as-oil__heading">'
+                    + 'Vielen Dank für Ihr Feedback!'
+                    + '</div>'
+                    + '<p class="as-oil__intro-txt">'
+                    + 'Wir als Unternehmen legen viel Wert auf Datenschutz und kümmern uns um die frühzeitige Umsetzung neuer regulatorischer '
+                    + 'Vorgaben. In diesem Zusammenhang führen wir aktuell diese Abfrage als Test durch. Danke für Ihr Verständnis!'
+                    + '</p>'
+                    + '<div class="as-oil-l-row as-oil-l-buttons">'
+                    + '<div class="as-oil-l-item">'
+                    + '<button class="as-oil__btn-soi as-js-optin as-close-ty-button">'
+                    + 'Schließen'
+                    + '</button>'
+                    + '</div>'
+                    + '</div>'
+                    + '</div>'
+                    + '</div>';
+
+                var thankYouNode = document.createElement('div');
+                thankYouNode.id = "as-oil-thank-you";
+                thankYouNode.innerHTML = htmlCode;
+                thankYouNode.setAttribute('class', 'as-oil');
+                thankYouNode.style.display = "block";
+                document.body.appendChild(thankYouNode);
+                var btnCloseOilThankYou = document.getElementsByClassName("as-oil__btn-soi as-js-optin as-close-ty-button")[0];
+                btnCloseOilThankYou.addEventListener("click", closeOilVariantThankYou, false);
+            }
+        }
+        eventer(messageEvent, receiveMessage, false);
     }());
 </script>
 
