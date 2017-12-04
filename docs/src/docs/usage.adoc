@@ -284,24 +284,10 @@ These are all CPC API definitions:
 | window.oilTriggerPoiOptin() | will trigger the CPC POI optin (can also result in an optout)
 |====
 
-==== Google Analytics Events
+==== Tracking and Google Analytics Events
+The previous Google Analytics integration was removed from OIL to decrease the OIL file size. If you want to use Google Analytics with OIL you can use the new OIL Events (see above) instead and proxy them to your specific GA installation.
+This makes OIL load quicker and gives more freedom how the tracking takes place.
 
-If you have configured Google Analytics you will receiving these events in your GA installation:
-
-[width="100%",options="header", cols="1,1,3"]
-|====
-|Event Type	| Event Name | Event Explanation
-|Loading Events | Loaded/No cookies | If Cookie support wasn’t found
-| Loading Events | Loaded/Later | if the User opted later in a session before
-| Loading Events | Loaded/Ignored | if the User opted ignored in a session before
-| Loading Events | Loaded/Initial | if the User opted any other case before
-| Click Events | later | The user clicked “later”
-| Click Events | SOI/yes | the user clicked Single Opt In Yes
-| Click Events | SOI/yes-while-later | The user clicked Single Opt In Yes in the small version of the overlay (“Later” Version)
-| Click Events | POI/yes | The user clicked POI Yes
-| Click Events | POI/yes-while-later | the user clicked POI Yes in the small oversion of the overlay
-| Click Events | ignored | the user clicked the ignore cross (only visible on the small version if configured to do so)
-|====
 
 === Kameleoon A/B Testing with OIL
 
