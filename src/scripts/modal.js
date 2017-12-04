@@ -1,6 +1,7 @@
 import '../styles/modal.scss';
 import noUiSlider from 'nouislider';
-import { getConfiguration, gaTrackEvent } from './config.js';
+import { getConfiguration } from './config.js';
+import { sendEventToHostSite } from './utils.js';
 import { convertPrivacySettingsToCookieValue, removeSubscriberCookies, getSoiPrivacy } from './cookies.js';
 import {
   PRIVACY_MINIMUM_TRACKING,
@@ -8,7 +9,16 @@ import {
   PRIVACY_FULL_TRACKING,
   OIL_CONFIG,
   DATA_CONTEXT_YES,
-  DATA_CONTEXT_YES_POI
+  DATA_CONTEXT_YES_POI,
+  EVENT_NAME_BACK_TO_MAIN,
+  EVENT_NAME_ADVANCED_SETTINGS,
+  EVENT_NAME_SOI_OPT_IN,
+  EVENT_NAME_POI_OPT_IN,
+  EVENT_NAME_SOI_OPT_IN_WHILE_LATER,
+  EVENT_NAME_POI_OPT_IN_WHILE_LATER,
+  EVENT_NAME_AS_SELECTED_MINIMUM,
+  EVENT_NAME_AS_SELECTED_FUNCTIONAL,
+  EVENT_NAME_AS_SELECTED_FULL
 } from './constants.js';
 import { oilOptIn, oilPowerOptIn, oilOptLater, oilOptIgnore } from './optin.js';
 import { deActivatePowerOptIn } from './poi.js';
@@ -154,7 +164,6 @@ function defineOilWrapper() {
   return oilWrapper;
 }
 
-
 /**
  * Define Content of our Oil Wrapper
  * Sets HTML based on props ...
@@ -166,7 +175,6 @@ function renderOilContentToWrapper(wrapper, content) {
 
 function removeOilWrapperFromDOM() {
   let domNodes = getOilDOMNodes();
-
   // For every render cycle our OIL main DOM node gets removed, in case it already exists in DOM
   if (domNodes.oilWrapper) {
     removeOilWrapperAndHandlers(domNodes);
@@ -212,30 +220,35 @@ function getRangeSliderValue() {
  *
  */
 function handleOptLater() {
-  let config = getConfiguration();
   logInfo('Handling OptLater');
   oilOptLater().then((cookieOptLater) => {
     renderOil(oilWrapper, {optLater: cookieOptLater});
-    if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
-      gaTrackEvent('later', 0);
-    }
   });
 }
 
 function handleBackToMainDialog() {
-  let config = getConfiguration();
   logInfo('Handling Back Button');
   renderOil(oilWrapper, {});
-  if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
-    gaTrackEvent('back-to-main-dialog', 0);
-  }
+  sendEventToHostSite(EVENT_NAME_BACK_TO_MAIN);
 }
 
 function handleAdvancedSettings() {
-  let config = getConfiguration();
   oilShowPreferenceCenter(oilWrapper, PRIVACY_MINIMUM_TRACKING);
-  if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
-    gaTrackEvent('advanced-settings', 0);
+  sendEventToHostSite(EVENT_NAME_ADVANCED_SETTINGS);
+}
+
+function trackPrivacySetting(privacySetting) {
+  switch (privacySetting) {
+    default:
+    case PRIVACY_MINIMUM_TRACKING:
+      sendEventToHostSite(EVENT_NAME_AS_SELECTED_MINIMUM);
+      break;
+    case PRIVACY_FUNCTIONAL_TRACKING:
+      sendEventToHostSite(EVENT_NAME_AS_SELECTED_FUNCTIONAL);
+      break;
+    case PRIVACY_FULL_TRACKING:
+      sendEventToHostSite(EVENT_NAME_AS_SELECTED_FULL);
+      break;
   }
 }
 
@@ -243,13 +256,14 @@ export function handleSoiOptIn() {
   let config = getConfiguration();
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
+  trackPrivacySetting(privacySetting);
   if (privacySetting !== PRIVACY_MINIMUM_TRACKING || config[OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING]) {
     oilOptIn(convertPrivacySettingsToCookieValue(privacySetting)).then((cookieOptIn) => {
       renderOil(oilWrapper, {optIn: cookieOptIn});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES) {
-        gaTrackEvent('SOI/yes', 0);
+        sendEventToHostSite(EVENT_NAME_SOI_OPT_IN);
       } else if (this) {
-        gaTrackEvent('SOI/yes-while-later', 0);
+        sendEventToHostSite(EVENT_NAME_SOI_OPT_IN_WHILE_LATER);
       }
     });
   } else {
@@ -262,13 +276,14 @@ export function handlePoiOptIn() {
   let config = getConfiguration();
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
+  trackPrivacySetting(privacySetting);
   if (privacySetting !== PRIVACY_MINIMUM_TRACKING || config[OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING]) {
     oilPowerOptIn(convertPrivacySettingsToCookieValue(privacySetting), !config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
       renderOil(oilWrapper, {optIn: true});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
-        gaTrackEvent('POI/yes', 0);
+        sendEventToHostSite(EVENT_NAME_POI_OPT_IN);
       } else if (this) {
-        gaTrackEvent('POI/yes-while-later', 0);
+        sendEventToHostSite(EVENT_NAME_POI_OPT_IN_WHILE_LATER);
       }
     });
   } else {
@@ -279,12 +294,8 @@ export function handlePoiOptIn() {
 }
 
 export function handleOilIgnore() {
-  let config = getConfiguration();
   oilOptIgnore().then((cookieOptIgnore) => {
     renderOil(oilWrapper, {optIgnore: cookieOptIgnore});
-    if (config[OIL_CONFIG.ATTR_GA_TRACKING] === 2) {
-      gaTrackEvent('ignored', 0);
-    }
   });
 }
 
