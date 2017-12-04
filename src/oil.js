@@ -9,7 +9,7 @@ import {
   EVENT_NAME_HAS_OPTED_LATER,
   EVENT_NAME_HAS_OPTED_IN,
   EVENT_NAME_NO_COOKIES_ALLOWED,
-  EVENT_NAME_OIL_LOADED
+  EVENT_NAME_OIL_SHOWN
 } from './scripts/constants.js';
 import { isBrowserCookieEnabled } from './scripts/utils.js';
 import {
@@ -116,13 +116,14 @@ export function initOilLayer() {
       else if (hasOptedLater()) {
         renderOil(oilWrapper, {optLater: true});
         sendEventToHostSite(EVENT_NAME_HAS_OPTED_LATER);
+        sendEventToHostSite(EVENT_NAME_OIL_SHOWN);
       }
       /**
-       * Any other case
+       * Any other case, when the user didnt decide before and oil needs to be shown:
        */
       else {
         renderOil(oilWrapper, {optLater: false});
-        sendEventToHostSite(EVENT_NAME_OIL_LOADED);
+        sendEventToHostSite(EVENT_NAME_OIL_SHOWN);
       }
     });
   }

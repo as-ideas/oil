@@ -248,10 +248,10 @@ OIL is currently emitting the following events:
 | oil_click_advanced_settings| When a users clicks the advanced settings button/link.
 | oil_click_back_to_main| When a user clicks the back link from the advanced settings page.
 | oil_no_cookies_allowed| When a users has no cookies allowed and the no cookies layer is displayed
-| oil_has_optedin| On every page reload, when the user has opted_in previously
-| oil_has_optedlater| On every page reload, when the user has opted_later previously
-| oil_has_optedignore| On every page reload, when the user has opted_ignore previously
-| oil_loaded| When the script is loaded initially
+| oil_has_optedin| On every page reload, when the user has opted_in previously (OIL should be hidden)
+| oil_has_optedlater| On every page reload, when the user has opted_later previously (OIL should be shown)
+| oil_has_optedignore| On every page reload, when the user has opted_ignore previously (OIL should be hidden)
+| oil_shown| When oil is shown
 |====
 
 OIL is currently listening to the following events:
