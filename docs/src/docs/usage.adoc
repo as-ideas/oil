@@ -288,6 +288,26 @@ These are all CPC API definitions:
 The previous Google Analytics integration was removed from OIL to decrease the OIL file size. If you want to use Google Analytics with OIL you can use the new OIL Events (see above) instead and proxy them to your specific GA installation.
 This makes OIL load quicker and gives more freedom how the tracking takes place.
 
+This is an example script to subscribe to the event 'oil_optin_done' and forward it to Google Analytics. You might need to tweak it to your environment and needs.
+[source,javascript]
+----
+// Multibrowser Support
+var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+var eventer = window[eventMethod];
+
+function receiveOptInMessage(event) {
+  function eventDataContains(str) {
+    return JSON.stringify(event.data).indexOf(str) !== -1;
+  }
+  if (window.ga && window.ga.loaded && event && event.data && eventDataContains('oil_optin_done')) { // event name
+    var nonInteraction = true; // should be set to false for non-click events
+    window.ga('send', 'event', 'OIL', 'oil_optin_done', {'nonInteraction': nonInteraction});
+  }
+}
+
+eventer(messageEvent, receiveMessage, false);
+----
 
 === Kameleoon A/B Testing with OIL
 
