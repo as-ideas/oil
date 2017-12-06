@@ -1,4 +1,4 @@
-function expimentVariant() {
+function experimentVariant() {
   var activeExperiment = Kameleoon.API.currentVisit.activeExperiments[0];
   if (activeExperiment) {
     return activeExperiment.variationName;
@@ -7,6 +7,10 @@ function expimentVariant() {
 
 // Custom Goal Opt-In
 if (Kameleoon) {
+
+  var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+  var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+  var eventer = window[eventMethod];
 
   // Normal SOI-Button
   Kameleoon.API.runWhenConditionTrue(function () {
@@ -19,7 +23,7 @@ if (Kameleoon) {
       event_category: "AB Test",
       event_action: "Opt in Layer",
       event_label: "Layer load",
-      ab_testing_var: expimentVariant()
+      ab_testing_var: experimentVariant()
     });
 
 
@@ -32,7 +36,7 @@ if (Kameleoon) {
           event_category: "AB Test",
           event_action: "Opt in Layer",
           event_label: "Ok Button click",
-          ab_testing_var: expimentVariant()
+          ab_testing_var: experimentVariant()
         });
       });
     }
@@ -75,7 +79,7 @@ if (Kameleoon) {
           event_category: "AB Test",
           event_action: "Opt in Layer",
           event_label: "Close Button click",
-          ab_testing_var: expimentVariant()
+          ab_testing_var: experimentVariant()
         });
       });
     }
@@ -91,7 +95,7 @@ if (Kameleoon) {
       event_category: "AB Test",
       event_action: "Opt in Layer",
       event_label: "CPC Layer load",
-      ab_testing_var: expimentVariant()
+      ab_testing_var: experimentVariant()
     });
 
     // SOI-Button in CPC gets it's own Event!
@@ -103,7 +107,7 @@ if (Kameleoon) {
           event_category: "AB Test",
           event_action: "Opt in Layer",
           event_label: "CPC Layer Button click",
-          ab_testing_var: expimentVariant()
+          ab_testing_var: experimentVariant()
         });
       });
     }
