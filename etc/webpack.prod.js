@@ -31,7 +31,10 @@ const METADATA = webpackMerge(commonConfig.metadata, {
   HMR: false
 });
 
-const BUNDLE_VERSION = process.env.npm_package_version;
+if (!process.env.SNAPSHOT) {
+  process.env.SNAPSHOT = "-SNAPHOT";
+}
+const BUNDLE_VERSION = process.env.npm_package_version + process.env.SNAPSHOT;
 
 var config = webpackMerge(commonConfig, {
 
