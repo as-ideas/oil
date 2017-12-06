@@ -7,10 +7,27 @@ function experimentVariant() {
 
 // Custom Goal Opt-In
 if (Kameleoon) {
-
   var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
   var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
   var eventer = window[eventMethod];
+
+  function receiveCPCMessage(event) {
+    function eventDataContains(str) {
+      return JSON.stringify(event.data).indexOf(str) !== -1;
+    }
+
+    if (event && event.data && eventDataContains('oil_as_selected_')) {
+      if (eventDataContains('minimum')) {
+        Kameleoon.API.processConversion(73158)
+      } else if (eventDataContains('functional')) {
+        Kameleoon.API.processConversion(73159)
+      } else if (eventDataContains('full')) {
+        Kameleoon.API.processConversion(73160)
+      }
+    }
+  }
+
+  eventer(messageEvent, receiveCPCMessage, false);
 
   // Normal SOI-Button
   Kameleoon.API.runWhenConditionTrue(function () {
