@@ -16,7 +16,7 @@ module.exports = {
   'OIL Layer wont open in dev Mode without cookie': function (browser) {
     browser
       .pause(500)
-      .waitForElementNotPresent(OIL_LAYER, 500)
+      .waitForElementNotPresent(OIL_LAYER, 1000)
       .end();
   }
 };

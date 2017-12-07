@@ -21,13 +21,13 @@ module.exports = {
     browser
       .click(OIL_YES_BUTTON)
       .pause(200)
-      .waitForElementNotPresent(OIL_LAYER, 500)
+      .waitForElementNotPresent(OIL_LAYER, 1000)
       .refresh()
       .useCss()
       .waitForElementVisible('body', 1000, false)
       .useXpath()
       .pause(500)
-      .waitForElementNotPresent(OIL_LAYER, 500)
+      .waitForElementNotPresent(OIL_LAYER, 1000)
       .end();
   }
 };
