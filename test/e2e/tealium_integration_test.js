@@ -1,4 +1,4 @@
-import { OIL_LAYER, OIL_YES_BUTTON, OIL_NO_BUTTON, OIL_YES_SMALL_BUTTON, OIL_LAYER_OPTLATER } from '../constants.js';
+import { OIL_LAYER, OIL_YES_BUTTON } from '../constants.js';
 
 
 module.exports = {
@@ -29,5 +29,5 @@ module.exports = {
       .pause(500)
       .waitForElementNotPresent(OIL_LAYER, 500)
       .end();
-  },
+  }
 };
