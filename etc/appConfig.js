@@ -105,6 +105,11 @@ module.exports = {
     template: path.resolve(sourcePath, 'demos', 'demo-group-b-site-b.html'),
     chunks: ['oil'],
     chunksSortMode: 'dependency'
+  }, {
+    filename: 'demos/tealium-integration-test.html',
+    template: path.resolve(sourcePath, 'demos', 'tealium-integration-test.html'),
+    chunksSortMode: 'dependency'
+
   }],
   entry: {
     'oil': path.resolve(sourcePath, 'oil.js'),
