@@ -24,7 +24,7 @@ module.exports = {
       .waitForElementVisible('body', 1000, false)
       .useXpath()
       .pause(500)
-      .waitForElementNotPresent(OIL_LAYER, 500)
+      .waitForElementNotPresent(OIL_LAYER, 1000)
       .assert.cssClassNotPresent(EVENT_NOTIFIER_DIV, 'event-notifier-hidden')
       .end();
   }

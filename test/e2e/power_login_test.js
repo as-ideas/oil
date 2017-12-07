@@ -55,7 +55,7 @@ module.exports = {
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
-      .waitForElementNotPresent(OIL_LAYER, 500)
+      .waitForElementNotPresent(OIL_LAYER, 1000)
       .end();
   },
 
@@ -87,7 +87,7 @@ module.exports = {
       .useCss()
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
-      .waitForElementNotPresent(OIL_LAYER, 500)
+      .waitForElementNotPresent(OIL_LAYER, 1000)
       .end();
   },
 
