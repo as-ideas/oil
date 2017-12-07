@@ -1,6 +1,6 @@
 {
   "name": "oil",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Module for Axel Springer Oil",
   "main": "http_server.js",
   "scripts": {
