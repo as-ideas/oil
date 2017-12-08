@@ -14,6 +14,8 @@ const PAGE_INIT_TIMEOUT = 20000;
 
 module.exports = {
   beforeEach: browser => {
+    // Create a new session
+    browser.session('post');
     // wait for site hosts
     browser
       .url(browser.globals.launch_url_host1)
