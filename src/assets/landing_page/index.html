@@ -17,7 +17,7 @@
           crossorigin="anonymous"></script>
 
   <!-- FONTS -->
-  <link href="//fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
@@ -26,6 +26,7 @@
     min-height: 100vh;
     margin: 0;
     padding: 0;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .black-line-on-top {
@@ -41,8 +42,8 @@
   .content-wrapper {
     margin: auto;
     max-width: 1000px;
-    background-color: #00bfbf;
-    padding: 80px 20px;
+    /*background-color: #00bfbf;*/
+    padding: 80px 20px 20px 20px;
   }
 
   .logo {
@@ -54,17 +55,172 @@
     margin-bottom: 20px;
   }
 
+  /* CLAIM */
   .claim-wrapper {
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 50px;
+  }
+
+  .claim-wrapper .logo-claim {
+    font-size: 51px;
+    margin-bottom: 0;
+  }
+
+  .claim-wrapper .logo-claim-2 {
+    margin-top: 0;
+    letter-spacing: 0.1px;
+  }
+
+  /* MAIN HERO */
+  .fa-ul {
+    font-size: 24px;
+  }
+
+  .fa-ul .fa {
+    font-size: 28px;
+  }
+
+  .fa-ul li {
+    margin: 12px 4px;
+  }
+
+  .hero-call-to-action {
+    margin-top: 40px;
+  }
+
+  .hero-call-to-action a {
+    padding: 16px;
+    width: 100%;
+    background-color: black;
+    color: white;
+  }
+
+  .hero-call-to-action a:hover {
+    background-color: #4e4e4e;
+  }
+
+  /* HUGE IMAGE ROW */
+  .image-row {
+    width: 100vw;
+    height: 500px;
+    background: #151515;
+    padding: 10px 20px;
+    margin: 40px 0;
+  }
+
+  .badmovie {
+    width: 100%;
+    height: 100%;
+    background: url('badmovie.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  /* 2nd content */
+  .full-row {
+    width: 100vw;
+    height: 300px;
+    background-color: black;
+    color: white;
+    padding: 50px 60px;
+    margin-bottom: 20px;
 
   }
 
-  .colophon a:after {
-    padding-left: 15px;
-    padding-right: 13px;
-    display: inline;
-    content: '\2022';
+  .full-row .logo-claim-2 {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.4;
+    padding-top: 20px;
+    color: white;
+    max-width: 700px;
+    margin: auto;
+  }
+
+  .full-row .logo-claim {
+    color: white;
+  }
+
+  /* FOOTER */
+  .footer-menu {
+    margin: auto;
     color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    font-weight: 100;
   }
+
+  .footer-menu a {
+    margin: 0 8px 0 11px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    font-weight: 100;
+    letter-spacing: 0.2px;
+  }
+
+  .social-links {
+    font-size: 22px;
+    font-weight: 100;
+  }
+
+  .social-links a {
+    color: #c0c0c0;
+    font-weight: 100;
+    opacity: 0.8;
+  }
+
+  .social-links .fa {
+    /*color: #50aad1;*/
+    color: #c0c0c0;
+  }
+
+  .bottom-line {
+    width: 100%;
+    margin-top: 50px;
+    height: 100px;
+    background-color: #333333;
+    color: #c0c0c0;
+  }
+
+  .bottom-line .footer-wrapper {
+    margin: auto;
+    max-width: 1000px;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  /* BOOTSTRAP MAGIC */
+
+  .btn {
+    border-radius: 0;
+    border: 0;
+
+    background-color: black;
+    color: white;
+  }
+
+  hr {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    border-top: 1px solid #515151;
+  }
+
+  .jumbotron {
+    background-color: white;
+  }
+
+  pre {
+    color: #ffffff;
+    background: #1f2726;
+    font-family: Consolas, 'Lucida Console', monospace;
+    font-size: 14px;
+    vertical-align: middle;
+    padding: 20px;
+    border-radius: 0;
+  }
+
 </style>
 
 <body>
@@ -75,80 +231,230 @@
   <div class="logo"></div>
 
   <div class="claim-wrapper">
-    <h1 class="logo-claim">Makes you ready for ePrivacy.</h1>
+    <h1 class="logo-claim">Makes you ready for ePrivacy</h1>
     <h2 class="logo-claim-2">Optimized. Tested. Compatible. Fast to get ready.</h2>
   </div>
 
-  <div>
+  <div class="jumbotron hero">
+    <div class="row">
 
-    Featuresset OIL
+      <div class="col-md-offset-1 col-md-4 ">
+        <ul class="fa-ul visible-md visible-lg">
+          <li><i class="fa fa-li fa-cog"></i>Fully customizable</li>
+          <li><i class="fa fa-li fa-heart"></i>Looks great on every device</li>
+          <li><i class="fa fa-li fa-cloud"></i>Fast installation</li>
+          <li><i class="fa fa-li fa-magic"></i>Highly optimized</li>
+        </ul>
 
-    Bereits erledigt
-    Complete Tealium Integration
-    Non-Tealium Integration
-    Demo-Seite
-    Dokumentation auf oil.asideas.de
-    Single Opt-In
-    Power Opt-In mit Third Party Cookie Softblock Fallback
-    Power Opt-In freie Gruppenkonfiguration möglich (1-n POI-Gruppen)
-    Central domain oil.asideas.de as cookie registry for power opt in
-    Domain White Listing um Fremd-Einbindung zu verhindern
-    Cookie Preference Center
-    Embedable Cookie Preference Center (z.B. auf einer Datenschutz-Seite)
-    Highly Customizable Layer
-    Ein oder mehrere Buttons ("Yes", "Later", "CPC", "Ignore")
-    Texte frei veränderbar
-    Aussehen frei per CSS veränderbar
-    Javascript Events für alle Interaktionen und Status des Opt-Ins, für Unit eigenes Tracking und Integration
-    Kameleoon A/B Testing
-    Preview Mode
-    Debug Mode
-    Wichtige Parameter frei konfigurierbar (Cookie Persistence in Days, Cookie Persistence on Opt-Out, etc)
+        <p class="hero-call-to-action">
+          <a href="https://oil.asideas.de/docs/oil-users-guide.html" class="btn btn-primary btn-lg" target="_blank"
+             role="button">Learn More <i class="fa fa-chevron-right"></i></a>
+        </p>
+      </div>
 
-    Noch offen; Muss aber gemacht werden, bevor Rollout starten kann
-    Mobile UX
-    Kategorie-Mapping und Reaktion auf OIL-Settings in Tealium (todo von Dr. Sievers)
-
-    Noch offen; Nice to have
-    Vollkonfigurierbares Cookie Preference Center
-
-
-    Tech Stack
-    Vollkonfigurierbares Cookie Preference Center
-    Low profile minimized Javascript App
-    Written in Ecma Script 2015
-    Build with WebPack2
-    Transpiliert in hoch Browser kompatibles Javascript mit Babel (>Android 4, >Iphone 4s, >ie9 >Chrome 14, >Firefox 9,
-    >Safari 6)
-    Jasmine & Mocha Unittests
-    Nightwatch Selenium Tests
-    Continuous Integration mit Jenkins
-    Automatisierte Browserstack Testfarm Multibrowser Desktop, Android, iOS
-    Lasttest mit 2.000 requests/s
-    Heavy duty hosting für Power Opt In Hub bei Heroku
-
-  </div>
-
-  <div>
-    <h1>OIL.JS QUICK INSTALL</h1>
-    <p></p>
-    <pre></pre>
-    <p></p>
-    <button><i class="fa fa-bolt" aria-hidden="true"></i> READ QUICKSTART GUIDE</button>
-  </div>
-
-  <div class="bottom-line">
-    <div class="footer-copy">
-      <p class="colophon">
-        <a href="/about">Axel Springer Ideas Engineering © 2017</a>
-        <a href="/contact" title="Contact Tesla" class="hide-on-mobile vertical-separator">Contact</a>
-        <a href="/careers" title="Careers at Tesla" class="hide-on-mobile vertical-separator">Careers</a>
-        <a href="/findus/list" title="Tesla Locations" class="hide-on-mobile vertical-separator">Documentation</a>
-        <a href="/user/logout" title="Sign out of your account"
-           class="tsla-link_for-logout vertical-separator">Examples</a>
-      </p>
+      <div class="col-md-7">
+        <img class="img-responsive animated slideInRight" alt="Looks great on every device" src="main.png">
+        <br>
+      </div>
     </div>
   </div>
 </div>
+
+
+<div class="full-row">
+  <div class="claim-wrapper">
+    <h1 class="logo-claim">Makes you ready for ePrivacy</h1>
+    <h1 class="logo-claim-2">The "Opt-In Layer" is a JavaScript library for displaying the user consent dialog. It comes
+      with a huge varierty of options and helps you to manage your tags.<br/> Best served with <a
+        href="https://tealiumiq.com" target="_blank">Tealium</a>!</h1>
+  </div>
+</div>
+
+<div class="content-wrapper">
+
+  <div class="row">
+    <div class="col-sm-7">
+      <h1>
+        We can help you.
+        <span class="text-muted">No worries.</span>
+      </h1>
+      <p class="lead hidden-xs">
+        We help you with our battleproven and ePrivacy approved solution. You don't know what's required for ePrivacy?
+        No
+        problem. We know. </p>
+      <p class="lead hidden-xs">
+        We looked at every known JS-Tag and categorized them. With the help of any tag manager using OIL.js becomes as
+        easy as adding the library.</p>
+    </div>
+    <div class="col-sm-5">
+      <img class="img-responsive pull-right" src="privacy.jpg" alt="Generic placeholder image">
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="claim-wrapper">
+    <h1 class="logo-claim">Taste some of our features</h1>
+  </div>
+
+  <hr/>
+
+  <div>
+    <ul class="fa-ul visible-md visible-lg">
+      <li><i class="fa fa-li fa-arrow-right"></i>Direct integration or complete integration with tealium</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Single Opt-In for one website</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Power Opt-In with third party cookie softblock fallback</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Power Opt-In for groups of websites (1-n POI-Gruppen)</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Central domain oil.asideas.de as cookie registry for Power Opt-In</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>So many demos, examples, and documentation</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Domain White Listing against unauthorized usage</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Cookie Preference Center, and it is even embedable</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Highly Customizable Layer - just some lines of CSS away</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Multiple possible buttons ("Yes", "Later", "CPC", "Ignore", "X")</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>All texts are configurable</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Javascript events for everything</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Preview and debug modes</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Works with all resolutions and all device types</li>
+    </ul>
+  </div>
+</div>
+
+<div class="image-row">
+  <div class="badmovie"></div>
+</div>
+
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-sm-7 col-sm-push-5">
+      <h1>
+        Oil, no vinegar. <span class="text-muted">See for yourself.</span>
+      </h1>
+      <p class="lead hidden-xs">
+        Our library was AB-Tested with hundred of thounsands of users.
+        We used multiple websites from our Axel Springer family to check that everything works
+        and to create the optimal guidelines for you. We are your experts for Opt-In layers! </p>
+    </div>
+    <div class="col-sm-5 col-sm-pull-7">
+      <img class="img-responsive" src="oil.jpeg" alt="Generic placeholder image">
+    </div>
+  </div>
+
+  <hr/>
+
+  <div>
+    <h1>OIL.JS QUICK INSTALL</h1>
+    <p>You have two options: Include the JS-Library via our CDN. Or serve it with
+      <a href="https://tealiumiq.com" target="_blank">Tealium</a>!
+      For Tealium you only need to include our dip-lib-opti-in profile and you are ready to go.
+      For direct integration you only need to add our tag: </p>
+    <pre># This will add the layer with default options and default styling to your website
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;//oil.asideas.de/release/oil.1.0.13-RELEASE.min.js&quot;&gt;&lt;/script&gt;</pre>
+    <p>And if you want some options:</p>
+    <pre>&lt;script id=&quot;oil-configuration&quot; type=&quot;application/configuration&quot;&gt;
+    {
+        &quot;privacy_page_url&quot;: &quot;http://www.mysite.com/privacy&quot;,
+        &quot;label_intro_heading&quot;: &quot;- You name it! -&quot;,
+        &quot;poi_activate_poi&quot;: true,
+        &quot;poi_hub_origin&quot;: &quot;//oil.asideas.de&quot;,
+        &quot;poi_hub_path&quot;: &quot;/hub.html&quot;,
+    }
+&lt;/script&gt;</pre>
+    <a class="btn btn-primary btn-lg" href="http://oil.asideas.de/docs/oil-users-guide.html">
+      <i class="fa fa-bolt" aria-hidden="true"></i> READ QUICKSTART GUIDE
+    </a>
+    <a class="btn btn-primary btn-lg" href="http://oil.asideas.de/docs/oil-users-guide.html">
+      <i class="fa fa-gear" aria-hidden="true"></i> GET TO KNOW THE CONFIGURATION
+    </a>
+  </div>
+
+  <hr/>
+
+  <div class="claim-wrapper">
+    <h1 class="logo-claim">Let's talk tech</h1>
+  </div>
+
+  <div>
+    <ul class="fa-ul visible-md visible-lg">
+      <li><i class="fa fa-li fa-arrow-right"></i>JavaScript. Super optimized. Non-blocking.</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Written in ECMA Script 2015 and transpiled to ES5.</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Comes with a super slim pre-loader to minimize traffic.</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Build with WebPack2 and lots of optimizations.</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Jasmine & Mocha Unittests which cover everything.</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Nightwatch Selenium Tests to test all features.</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Automated Browserstack Testfarm -> Multibrowser, Desktop, Android, iOS
+      </li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Continuous Integration with Jenkins. We got it continously.</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Load tested with 2.000 requests/s and it still holds.</li>
+      <li><i class="fa fa-li fa-arrow-right"></i>Heavy duty hosting with CDN and it just scales.</li>
+    </ul>
+  </div>
+
+  <br/>
+  <hr/>
+  <br/>
+
+  <div class="row">
+    <div class="col-sm-7">
+      <h1>
+        And lastly, we support 99,99% of all Browsers. <span class="text-muted">Checkmate.</span>
+      </h1>
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="fa-ul visible-md visible-lg">
+            <li><i class="fa fa-li fa-android"></i> Android 4+</li>
+            <li><i class="fa fa-li fa-apple"></i> Iphone 4S+</li>
+            <li><i class="fa fa-li fa-internet-explorer"></i> ie9+</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="fa-ul visible-md visible-lg">
+            <li><i class="fa fa-li fa-chrome"></i> Chrome 14+</li>
+            <li><i class="fa fa-li fa-firefox"></i> Firefox 9+</li>
+            <li><i class="fa fa-li fa-safari"></i> Safari 6+</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <img class="img-responsive pull-right" src="coffee.gif" alt="Generic placeholder image">
+    </div>
+  </div>
+</div>
+
+<footer class="bottom-line">
+  <div class="footer-wrapper">
+    <ul class="list-unstyled list-inline social-links">
+      <li>
+        <a href="http://www.axelspringerideas.de/blog"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;Blog</a>
+      </li>
+      <li>·</li>
+      <li>
+        <a href="https://twitter.com/as_ideas" target="_blank"><i class="fa fa-twitter"></i>&nbsp;&nbsp;Twitter</a>
+      </li>
+      <li>·</li>
+      <li>
+        <a href="https://www.facebook.com/AxelSpringerIdeas/" target="_blank"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Facebook</a>
+      </li>
+    </ul>
+
+    <p class="footer-menu">
+      <a href="http://www.axelspringerideas.de" target="_blank">Axel Springer Ideas Engineering © 2017</a>
+      |
+      <a href="http://axelspringerideas.de/contact" target="_blank" title="Contact Axel Springer Ideas Engieering"
+         class="hide-on-mobile vertical-separator">Contact</a>
+      |
+      <a href="https://career.axelspringer.com/jobangebote/#ideas|engineering"
+         title="Careers at Axel Springer Ideas Engineering" target="_blank" class="hide-on-mobile vertical-separator">Careers</a>
+      |
+      <a href="http://oil.asideas.de/docs/oil-users-guide.html" target="_blank" title="OIL Documentation"
+         class="hide-on-mobile vertical-separator">Documentation</a>
+      |
+      <a href="https://oil.asideas.de" target="_blank" title="OIL Examples"
+         class="tsla-link_for-logout vertical-separator">Examples</a>
+    </p>
+  </div>
+</footer>
+
 </body>
 </html>
