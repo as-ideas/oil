@@ -34,9 +34,17 @@ const OilLaterButton = (advancedSettings) => {
   ) : '';
 };
 
+const introLabelSnippet = () => {
+  let config = getConfiguration();
+  if(config.label_intro) {
+    return config.label_intro;
+  } else {
+    return (`${config.label_intro_start} ${privacyPageSnippet()} ${config.label_intro_end}`);
+  }
+};
+
 export function oilDefaultTemplate() {
   let config = getConfiguration();
-
   return `
     <div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient" data-qa="oil-full">
         <div class="${CSSPrefix}oil-l-wrapper-layout-max-width">
@@ -44,8 +52,7 @@ export function oilDefaultTemplate() {
                 ${config.label_intro_heading}
             </div>
             <p class="${CSSPrefix}oil__intro-txt">
-                ${config.label_intro_start} ${privacyPageSnippet()}
-                ${config.label_intro_end}
+                ${introLabelSnippet()}
             </p>
             <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-buttons">
                 ${POIButtonSnippet()}

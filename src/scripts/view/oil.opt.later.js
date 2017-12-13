@@ -5,6 +5,16 @@ import { getConfiguration } from './../config.js';
 import { OIL_CONFIG, DATA_CONTEXT_YES_WHILE_LATER, DATA_CONTEXT_IGNORE_WHILE_LATER } from './../constants.js';
 
 
+const laterLabelSnippet = () => {
+  let config = getConfiguration();
+
+  if(config.label_later) {
+    return config.label_later;
+  } else {
+    return (`${config.label_later_start} ${privacyPageSnippet()} ${config.label_later_end}`);
+  }
+};
+
 /**
  * OIL Ignore or Close Button
  * Returned element is used to ignore Oil completely
@@ -39,8 +49,7 @@ export function oilOptLaterTemplate() {
                     ${config.label_later_heading}
                 </div>
                 <p class="${CSSPrefix}oil-loi__intro-txt">
-                    ${config.label_later_start} ${privacyPageSnippet()}
-                    ${config.label_later_end}
+                    ${laterLabelSnippet()}
                 </p>
             </div>
             <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">

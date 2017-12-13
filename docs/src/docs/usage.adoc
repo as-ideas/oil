@@ -119,7 +119,6 @@ This is a full list of configurable options.
 |====
 |Config Parameter | Description | Default Setting|POI optional feature
 | preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false |No
-| privacy_page_url | OIL should always have a link to your privacy page ("Datenschutz"). If you add the key "privacy_page_url", the show more label ("Mehr erfahren") can't be changed and will be added to OIL. It opens a page with the value you specified in a new tab or window. You can either use a relative or absolute URL.| "" (empty string)|No
 | poi_activate_poi | Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false|Yes
 | poi_hub_origin | The origin of the hub.js installation, if any. | none|Yes
 | poi_hub_path | The path to the hub.html installation on the origin, if any. | none|Yes
@@ -138,14 +137,11 @@ The core Google Analytics script has to be available on the site, OIL is not inj
 |====
 |Config Parameter|Default value
 |label_heading| Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis
-|label_intro_start| Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.
-|label_intro_end| Jetzt Einverständnis erklären:
-|label_later_start| Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen. In unseren Datenschutzbestimmungen erfahren Sie, wie Sie Cookies deaktivieren können
-|label_later_end| Jetzt Einverständnis erklären:
+|label_intro| Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.
+|label_later| Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen. In unseren Datenschutzbestimmungen erfahren Sie, wie Sie Cookies deaktivieren können
 |label_button_yes_soi| Jetzt zustimmen
 |label_button_yes_poi| Global zustimmen
 |label_button_no| Nein, jetzt nicht
-|label_button_privacy| Mehr erfahren
 |label_button_advanced_settings| Mehr Informationen
 |label_advanced_settings_heading| Bitte wähle eine Datenschutzeinstellung aus:
 |label_advanced_settings_text| Leer
