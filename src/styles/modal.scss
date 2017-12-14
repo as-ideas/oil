@@ -57,7 +57,7 @@ $layout-max-width: 1280px;
 // Our Oil overlay needs to trump every other element, so we need the highest possible z-index
 // Which is the following number: 2147483647 <-- for possible HACKS wie go with a high number
 
-$z-index-max: 2000000000;
+$z-index-max: 2147483647;
 
 // Font stack
 
@@ -159,10 +159,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   bottom: 0;
   width: 100%;
   font-family: $font-stack;
+  font-size: 16px; // Set font size here as a base for em units, which we'll use, cause' we don't know what base font-size size a host site will use 
   color: $text-color-primary;
-
-  // THE DEFAULT FONT-SIZE !!! IMPORTANT FOR em !!!
-  font-size: 18px;
 
   a {
     cursor: pointer;;
@@ -179,15 +177,15 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 100%;
   bottom: 0;
   left: 0;
-  padding: 2rem 5rem;
+  padding: 2em 5em;
   background-color: rgba(40, 40, 40, 0.98);
 
   @include media('<=phone') {
-    padding: 1rem;
+    padding: 1em;
   }
 
   @include media('>phone', '<desktop') {
-    padding: 1.5rem 3rem;
+    padding: 1.5em 3em;
   }
 }
 
@@ -226,32 +224,33 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .#{$prefix}oil__heading {
   max-width: 840px;
-  margin: 2rem 0;
-  font-size: 2em;
+  margin: 0.5em 0;
+  font-size: 1.7em;
   font-weight: 300;
   color: $text-color-secondary;
-  line-height: 1.1875;
+  line-height: 1.15;
 
   &:first-of-type {
     margin-top: 0;
   }
 
   @include media('<=phone') {
-    margin: 0.625rem 0;
-    font-size: 1.125em;
+    margin: 0.5em 0;
+    font-size: 1em;
+    line-height: 1.3333;
   }
 }
 
 .#{$prefix}oil__intro-txt {
   max-width: 980px;
-  margin: 1rem 0;
+  margin: 1em 0;
   font-size: 0.9375em;
   font-weight: 400;
   line-height: 1.4;
   color: $text-color-primary;
 
   @include media('<=phone') {
-    margin: 1.5rem 0;
+    margin: 0.5em 0;
     font-size: 0.75em;
   }
 }
@@ -278,7 +277,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   min-width: 250px;
   min-height: 50px;
   margin: 0;
-  padding: 0.5rem 1rem;
+  padding: 0.5em 1em;
   font-size: 0.875em; // 14px
   font-weight: 400;
   border: none;
@@ -291,6 +290,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     min-width: auto;
     min-height: 40px;
     padding: 0;
+    font-size: 0.8175em;
   }
 
   @include media('>phone', '<desktop') {
@@ -343,9 +343,9 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 .#{$prefix}oil__btn-loi {
   float: right;
   min-height: auto;
-  margin: 0.75rem 0;
+  margin: 0.75em 0;
   padding: 4px;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 400;
   color: $text-color-secondary;
   text-decoration: none;
@@ -363,21 +363,21 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   @include media('<=phone') {
     float: none;
     width: 100%;
-    margin: 1rem 0; // We are vertically aligning this btn by using margins, which is a bit dirty
+    margin: 1em 0; // We are vertically aligning this btn by using margins, which is a bit dirty
     font-size: 0.75em;
     border-bottom: none;
   }
 
   @include media('>phone', '<desktop') {
     // We are vertically aligning this btn by using margins, which is a bit dirty
-    margin: 0.25rem 0;
+    margin: 0.25em 0;
   }
 }
 
 .#{$prefix}oil__btn-as {
   float: right;
   min-height: auto;
-  margin: 0.75rem 0;
+  margin: 0.75em 0;
   padding: 4px;
   font-size: 14px;
   font-weight: 400;
@@ -397,14 +397,14 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   @include media('<=phone') {
     float: none;
     width: 100%;
-    margin: 1rem 0; // We are vertically aligning this btn by using margins, which is a bit dirty
+    margin: 1em 0; // We are vertically aligning this btn by using margins, which is a bit dirty
     font-size: 0.75em;
     border-bottom: none;
   }
 
   @include media('>phone', '<desktop') {
     // We are vertically aligning this btn by using margins, which is a bit dirty
-    margin: 0.25rem 0;
+    margin: 0.25em 0;
   }
 }
 
@@ -416,7 +416,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 // Text styles
 
 .#{$prefix}oil-loi__heading {
-  margin: 1rem 0;
+  margin: 1em 0;
   font-size: 1.25em;
   font-weight: 300;
   color: $text-color-secondary;
@@ -427,7 +427,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   @include media('<=phone') {
-    margin: 0.625rem 2.25rem 0.625rem 0; // Make space to the right for our absolute positioned close button
+    margin: 0.625em 2.25em 0.625em 0; // Make space to the right for our absolute positioned close button
     font-size: 1.125em;
   }
 }
@@ -460,7 +460,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   @include stack-items-remove-horizontal-margins;
   @include btn-poi-soi-shared;
   min-height: 40px;
-  margin: 0.5rem 0;
+  margin: 0.5em 0;
 }
 
 @mixin oil-loi-btn-poi {
@@ -491,7 +491,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  */
 
 .#{$prefix}oil-l-row {
-  margin: 2rem 0;
+  margin: 1em 0;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -514,13 +514,13 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0 auto;
 
   @include media('>phone', '<desktop') {
-    padding-right: 1rem; // Make space for our absolute positioned close button
+    padding-right: 1em; // Make space for our absolute positioned close button
   }
 }
 
 .#{$prefix}oil-l-item {
   float: left; // Fallback for non flexbox capable browsers
-  margin: 0 0.5rem;
+  margin: 0 0.5em;
 
   @supports (display: flex) {
     float: none;
@@ -537,7 +537,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   @include media('<=phone') {
     @include stack-items-remove-horizontal-margins;
     width: 100%;
-    margin: 1rem 0;
+    margin: 1em 0;
   }
 }
 
@@ -554,11 +554,11 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .#{$prefix}oil-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 0.25rem;
+  top: 1em;
+  right: 1em;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0.25em;
   fill: rgb(255, 255, 255);
   opacity: 0.66;
   cursor: pointer;
@@ -572,8 +572,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .#{$prefix}oil-icon-close {
   display: block;
-  width: 0.875rem;
-  height: 0.875rem;
+  width: 0.875em;
+  height: 0.875em;
 }
 
 .#{$prefix}slider-wrapper {
