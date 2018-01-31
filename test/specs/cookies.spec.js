@@ -1,6 +1,6 @@
 import {getOilHubDomainCookieConfig, getOilDomainCookieConfig, setSoiOptIn, setPoiOptIn} from '../../src/scripts/cookies.js';
 
-fdescribe('cookies', () => {
+describe('cookies', () => {
   beforeEach(() => {
   });
 
@@ -31,7 +31,7 @@ fdescribe('cookies', () => {
     expect(resultCookie.timestamp).toBeLessThan(Date.now() + 1);
   });
 
-  fit('tbd..2', () => {
+  it('tbd..2', () => {
     let startTimestamp = Date.now();
     setPoiOptIn('group-test', 'privacy-test');
     let resultCookie = JSON.parse(getCookie('group-test_oil_data'));
