@@ -101,7 +101,8 @@ var config = webpackMerge(commonConfig, {
             'process.env': {
                 'ENV': JSON.stringify(ENV),
                 'NODE_ENV': JSON.stringify(ENV),
-                'HMR': false
+                'HMR': false,
+                'OIL_VERSION': JSON.stringify('test-version')
             },
             'APP_CONFIG': JSON.stringify(appConfig)
         })
