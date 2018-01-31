@@ -19,7 +19,7 @@ describe('cookies', () => {
 
   });
 
-  it('tbd..1', () => {
+  it('should fill the single opt-in cookie with the correct values', () => {
     let startTimestamp = Date.now();
     setSoiOptIn('privacy-test');
     let resultCookie = JSON.parse(getCookie('oil_data'));
@@ -31,7 +31,7 @@ describe('cookies', () => {
     expect(resultCookie.timestamp).toBeLessThan(Date.now() + 1);
   });
 
-  it('tbd..2', () => {
+  it('should fill the power opt-in cookie with the correct values', () => {
     let startTimestamp = Date.now();
     setPoiOptIn('group-test', 'privacy-test');
     let resultCookie = JSON.parse(getCookie('group-test_oil_data'));
@@ -60,7 +60,12 @@ describe('cookies', () => {
 
 });
 
-
+/**
+ * Reads a set cookie as a low level value
+ *
+ * @param sKey
+ * @returns {*}
+ */
 function getCookie(sKey) {
   if (!sKey) { return null; }
   return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
