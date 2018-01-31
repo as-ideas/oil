@@ -17,7 +17,7 @@ module.exports = {
   },
 
   // This test only tests the tealium integration - it does not test the latest version of oil, but the version on tealium
-  'OIL Layer works while beeing loaded over Tealium - Closed after clicking yes': function (browser) {
+  'OIL Layer works while being loaded over Tealium - Closed after clicking yes': function (browser) {
     browser
       .click(OIL_YES_BUTTON)
       .pause(200)
