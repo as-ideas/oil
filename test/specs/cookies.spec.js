@@ -7,6 +7,11 @@ describe('cookies', () => {
   afterEach(() => {
   });
 
+  it('should store the version of oil in the hub domain cookie', () => {
+    let resultCookie = getOilHubDomainCookieConfig('');
+    expect(resultCookie.version).toBe('oil_data');
+  });
+
   it('should create the correct hub domain default cookie with groupname empty', () => {
     let resultCookie = getOilHubDomainCookieConfig('');
     expect(resultCookie.name).toBe('oil_data');
