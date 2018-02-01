@@ -1,6 +1,6 @@
-import {getOilHubDomainCookieConfig, getOilDomainCookieConfig, setSoiOptIn, setPoiOptIn} from '../../src/scripts/cookies.js';
+import {getOilHubDomainCookieConfig, getOilDomainCookieConfig, setSoiOptIn, setPoiOptIn, getOilVersion} from '../../src/scripts/cookies.js';
 
-describe('cookies', () => {
+fdescribe('cookies', () => {
   beforeEach(() => {
   });
 
@@ -19,16 +19,24 @@ describe('cookies', () => {
 
   });
 
-  it('should fill the single opt-in cookie with the correct values', () => {
+  fit('should fill the single opt-in cookie with the correct values', () => {
     let startTimestamp = Date.now();
+
+    spyOn(getOilVersion, 'default').andReturn('Pow!');
+
     setSoiOptIn('privacy-test');
     let resultCookie = JSON.parse(getCookie('oil_data'));
-
     expect(resultCookie.version).toBe('test-version');
     expect(resultCookie.opt_in).toBe(true);
     expect(resultCookie.privacy).toBe('privacy-test');
     expect(resultCookie.timestamp).toBeGreaterThan(startTimestamp - 1);
     expect(resultCookie.timestamp).toBeLessThan(Date.now() + 1);
+
+    setSoiOptIn('privacy-test');
+
+    resultCookie = JSON.parse(getCookie('oil_data'));
+    expect(resultCookie.version).toBe('test-version');
+
   });
 
   it('should fill the power opt-in cookie with the correct values', () => {

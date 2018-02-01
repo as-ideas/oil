@@ -50,14 +50,14 @@ export function getOilSessionCookieConfig() {
 
 export function getOilDomainCookieConfig() {
   let config = getConfiguration();
-
+  console.info('#####dsds#####'+process.env.OIL_VERSION);
   return {
     name: OIL_DOMAIN_COOKIE.NAME,
     expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS],
     default_content: {
       [OIL_DOMAIN_COOKIE.ATTR_OPTIN]: false,
       [OIL_DOMAIN_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp(),
-      [OIL_DOMAIN_COOKIE.ATTR_VERSION]: `${process.env.OIL_VERSION}`,
+      [OIL_DOMAIN_COOKIE.ATTR_VERSION]: getOilVersion(),
       [OIL_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_MINIMUM_TRACKING
     }
   };
@@ -79,7 +79,7 @@ export function getOilHubDomainCookieConfig(groupName) {
     default_content: {
       [OIL_HUB_DOMAIN_COOKIE.ATTR_POI]: false,
       [OIL_HUB_DOMAIN_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp(),
-      [OIL_HUB_DOMAIN_COOKIE.ATTR_VERSION]: `${process.env.OIL_VERSION}`,
+      [OIL_HUB_DOMAIN_COOKIE.ATTR_VERSION]: getOilVersion(),
       [OIL_HUB_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_MINIMUM_TRACKING
     }
   };
@@ -132,6 +132,14 @@ function getOilHubDomainCookie(groupName) {
   }
 
   return Cookie.getJSON(getOilHubDomainCookieConfig(groupName).name);
+}
+
+// export OilVersion = {
+//   function
+// }
+
+export function getOilVersion() {
+  return `${process.env.OIL_VERSION}`;
 }
 
 
