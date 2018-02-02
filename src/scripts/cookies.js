@@ -56,7 +56,7 @@ export function getOilDomainCookieConfig() {
     default_content: {
       [OIL_DOMAIN_COOKIE.ATTR_OPTIN]: false,
       [OIL_DOMAIN_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp(),
-      [OIL_DOMAIN_COOKIE.ATTR_VERSION]: OilVersion.getOilVersion(),
+      [OIL_DOMAIN_COOKIE.ATTR_VERSION]: getOilVersion(),
       [OIL_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_MINIMUM_TRACKING
     }
   };
@@ -77,7 +77,7 @@ export function getOilHubDomainCookieConfig(groupName) {
     default_content: {
       [OIL_HUB_DOMAIN_COOKIE.ATTR_POI]: false,
       [OIL_HUB_DOMAIN_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp(),
-      [OIL_HUB_DOMAIN_COOKIE.ATTR_VERSION]: OilVersion.getOilVersion(),
+      [OIL_HUB_DOMAIN_COOKIE.ATTR_VERSION]: getOilVersion(),
       [OIL_HUB_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_MINIMUM_TRACKING
     }
   };
@@ -132,12 +132,9 @@ function getOilHubDomainCookie(groupName) {
   return Cookie.getJSON(getOilHubDomainCookieConfig(groupName).name);
 }
 
-export let OilVersion = {
-  getOilVersion: function () {
+export function getOilVersion() {
     return `${process.env.OIL_VERSION}`;
-  }
-};
-
+}
 
 
 /**
@@ -148,6 +145,7 @@ export function setSoiOptIn(privacySettings) {
   cookie.opt_in = true;
   cookie.privacy = privacySettings;
   cookie.timestamp = getClientTimestamp();
+  cookie.version = getOilVersion();
   setDomainCookie(getOilDomainCookieConfig().name, cookie, getOilDomainCookieConfig().expires);
 }
 
@@ -166,6 +164,7 @@ export function setPoiOptIn(groupName, privacySettings) {
   cookie.power_opt_in = true;
   cookie.privacy = privacySettings;
   cookie.timestamp = getClientTimestamp();
+  cookie.version = getOilVersion();
   setDomainCookie(getOilHubDomainCookieConfig(groupName).name, cookie, getOilHubDomainCookieConfig(groupName).expires);
 }
 

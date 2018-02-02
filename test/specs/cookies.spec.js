@@ -1,7 +1,8 @@
-import {getOilHubDomainCookieConfig, getOilDomainCookieConfig, setSoiOptIn, setPoiOptIn, OilVersion} from '../../src/scripts/cookies.js';
+import {getOilHubDomainCookieConfig, getOilDomainCookieConfig, setSoiOptIn, setPoiOptIn} from '../../src/scripts/cookies.js';
 
 fdescribe('cookies', () => {
   beforeEach(() => {
+    deleteAllCookies();
   });
 
   afterEach(() => {
@@ -19,37 +20,43 @@ fdescribe('cookies', () => {
 
   });
 
-  fit('should fill the single opt-in cookie with the correct values', () => {
-
-    spyOn(OilVersion, 'getOilVersion').and.returnValues('test-version1', 'test-version2', 'test-version3', 'test-version4', 'test-version5', 'test-version6');
-
+  it('should fill the single opt-in cookie with the correct values', () => {
     let startTimestamp = Date.now();
 
     setSoiOptIn('privacy-test1');
+
+    let initialCookie = document.cookie;
     let resultCookie = JSON.parse(getCookie('oil_data'));
 
-    console.info('info1: ' + resultCookie.version);
-
-    //ToDo: comment on after karma re config
-    //expect(resultCookie.version).toBe('test-version1');
+    expect(resultCookie.version).toBe('test-version');
     expect(resultCookie.opt_in).toBe(true);
     expect(resultCookie.privacy).toBe('privacy-test1');
     expect(resultCookie.timestamp).toBeGreaterThan(startTimestamp - 1);
     expect(resultCookie.timestamp).toBeLessThan(Date.now() + 1);
 
+    //prepare cookie for the next test step
+    deleteAllCookies();
+    document.cookie = initialCookie.replace('test-version', 'test-version-fake');
+
+    //test prepared cookie
+    resultCookie = JSON.parse(getCookie('oil_data'));
+    expect(resultCookie.version).toBe('test-version-fake');
+
+    //test override funktion
     setSoiOptIn('privacy-test2');
     resultCookie = JSON.parse(getCookie('oil_data'));
 
-    console.info('info2: ' + getCookie('oil_data'));
-
-    //
-    // expect(resultCookie2.version).toBe('test-version2');
-
+    expect(resultCookie.version).toBe('test-version');
+    expect(resultCookie.opt_in).toBe(true);
+    expect(resultCookie.privacy).toBe('privacy-test2');
   });
 
   it('should fill the power opt-in cookie with the correct values', () => {
     let startTimestamp = Date.now();
     setPoiOptIn('group-test', 'privacy-test');
+
+    let initialCookie = document.cookie;
+
     let resultCookie = JSON.parse(getCookie('group-test_oil_data'));
 
     expect(resultCookie.version).toBe('test-version');
@@ -57,6 +64,22 @@ fdescribe('cookies', () => {
     expect(resultCookie.privacy).toBe('privacy-test');
     expect(resultCookie.timestamp).toBeGreaterThan(startTimestamp - 1);
     expect(resultCookie.timestamp).toBeLessThan(Date.now() + 1);
+
+    //prepare cookie for the next test step
+    deleteAllCookies();
+    document.cookie = initialCookie.replace('test-version', 'test-version-fake');
+
+    //test prepared cookie
+    resultCookie = JSON.parse(getCookie('group-test_oil_data'));
+    expect(resultCookie.version).toBe('test-version-fake');
+
+    //test override funktion
+    setPoiOptIn('group-test', 'privacy-test2');
+    resultCookie = JSON.parse(getCookie('group-test_oil_data'));
+
+    expect(resultCookie.version).toBe('test-version');
+    expect(resultCookie.power_opt_in).toBe(true);
+    expect(resultCookie.privacy).toBe('privacy-test2');
   });
 
   it('should create the correct hub domain default cookie with groupname empty', () => {
@@ -83,6 +106,24 @@ fdescribe('cookies', () => {
  * @returns {*}
  */
 function getCookie(sKey) {
-  if (!sKey) { return null; }
+  if (!sKey) {
+    return null;
+  }
   return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+}
+
+/**
+ * Remove all cookies
+ *
+ * @returns void
+ */
+function deleteAllCookies() {
+  let cookies = document.cookie.split(';');
+
+  for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i];
+    let eqPos = cookie.indexOf('=');
+    let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+  }
 }
