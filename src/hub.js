@@ -1,7 +1,7 @@
 import { logInfo } from './scripts/log.js';
 import { POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME, POI_PAYLOAD } from './scripts/constants.js';
 import { setPoiOptIn, getPoiCookie, removeSubscriberCookies } from './scripts/cookies.js';
-import { registerMessageListener, removeMessageListener, getStringParam } from './scripts/utils.js';
+import { registerMessageListener, removeMessageListener, getStringParam, OilVersion } from './scripts/utils.js';
 
 let initComplete = false;
 
@@ -15,7 +15,7 @@ let initComplete = false;
 }());
 
 export function initOilHub(locationString) {
-  logInfo(`Init OilHub (version ${process.env.OIL_VERSION})`);
+  logInfo(`Init OilHub (version ${OilVersion.get()})`);
   if (isPoiFallbackMode(locationString)) {
     logInfo('Fallback mode, doing round trip...', 'a', 'b', {c: 'c'});
 

@@ -10,12 +10,14 @@ describe('cookies', () => {
   });
 
   it('should store the version of oil in the hub domain cookie', () => {
+    spyOn(OilVersion, 'get').and.returnValue('test-version');
     let resultCookie = getOilHubDomainCookieConfig();
     expect(resultCookie.default_content.version).toBe('test-version');
 
   });
 
   it('should store the version of oil in the domain cookie', () => {
+    spyOn(OilVersion, 'get').and.returnValue('test-version');
     let resultCookie = getOilDomainCookieConfig();
     expect(resultCookie.default_content.version).toBe('test-version');
 
