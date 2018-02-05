@@ -1,6 +1,6 @@
 import {getOilHubDomainCookieConfig, getOilDomainCookieConfig, setSoiOptIn, setPoiOptIn} from '../../src/scripts/cookies.js';
 
-fdescribe('cookies', () => {
+describe('cookies', () => {
   beforeEach(() => {
     deleteAllCookies();
   });
