@@ -1,4 +1,5 @@
 import {getOilHubDomainCookieConfig, getOilDomainCookieConfig, setSoiOptIn, setPoiOptIn} from '../../src/scripts/cookies.js';
+import {OilVersion} from '../../src/scripts/utils.js';
 
 describe('cookies', () => {
   beforeEach(() => {
@@ -20,66 +21,72 @@ describe('cookies', () => {
 
   });
 
-  it('should fill the single opt-in cookie with the correct values', () => {
-    let startTimestamp = Date.now();
+  it('should fill the single opt-in cookie with the correct values and overwrite', () => {
+    let currentFakeTime = 1;
+    let testVersion = 'test-version1';
+
+    spyOn(Date, 'now').and.callFake(function() {
+      return currentFakeTime;
+    });
+
+    spyOn(OilVersion, 'get').and.callFake(function() {
+      return testVersion;
+    });
 
     setSoiOptIn('privacy-test1');
 
-    let initialCookie = document.cookie;
     let resultCookie = JSON.parse(getCookie('oil_data'));
 
-    expect(resultCookie.version).toBe('test-version');
+    expect(resultCookie.version).toBe('test-version1');
     expect(resultCookie.opt_in).toBe(true);
     expect(resultCookie.privacy).toBe('privacy-test1');
-    expect(resultCookie.timestamp).toBeGreaterThan(startTimestamp - 1);
-    expect(resultCookie.timestamp).toBeLessThan(Date.now() + 1);
+    expect(resultCookie.timestamp).toBe(1);
 
-    //prepare cookie for the next test step
-    deleteAllCookies();
-    document.cookie = initialCookie.replace('test-version', 'test-version-fake');
-
-    //test prepared cookie
-    resultCookie = JSON.parse(getCookie('oil_data'));
-    expect(resultCookie.version).toBe('test-version-fake');
-
-    //test override funktion
+    // set again and check if the values got updated
+    currentFakeTime = 2;
+    testVersion = 'test-version2';
     setSoiOptIn('privacy-test2');
     resultCookie = JSON.parse(getCookie('oil_data'));
 
-    expect(resultCookie.version).toBe('test-version');
+    expect(resultCookie.version).toBe('test-version2');
     expect(resultCookie.opt_in).toBe(true);
     expect(resultCookie.privacy).toBe('privacy-test2');
+    expect(resultCookie.timestamp).toBe(2);
   });
 
-  it('should fill the power opt-in cookie with the correct values', () => {
-    let startTimestamp = Date.now();
-    setPoiOptIn('group-test', 'privacy-test');
 
-    let initialCookie = document.cookie;
+  it('should fill the power opt-in cookie with the correct values and overwrite', () => {
+    let currentFakeTime = 1;
+    let testVersion = 'test-version1';
+
+    spyOn(Date, 'now').and.callFake(function() {
+      return currentFakeTime;
+    });
+
+    spyOn(OilVersion, 'get').and.callFake(function() {
+      return testVersion;
+    });
+
+    setPoiOptIn('group-test', 'privacy-test');
 
     let resultCookie = JSON.parse(getCookie('group-test_oil_data'));
 
-    expect(resultCookie.version).toBe('test-version');
+    expect(resultCookie.version).toBe('test-version1');
     expect(resultCookie.power_opt_in).toBe(true);
     expect(resultCookie.privacy).toBe('privacy-test');
-    expect(resultCookie.timestamp).toBeGreaterThan(startTimestamp - 1);
-    expect(resultCookie.timestamp).toBeLessThan(Date.now() + 1);
+    expect(resultCookie.timestamp).toBe(1);
 
-    //prepare cookie for the next test step
-    deleteAllCookies();
-    document.cookie = initialCookie.replace('test-version', 'test-version-fake');
 
-    //test prepared cookie
-    resultCookie = JSON.parse(getCookie('group-test_oil_data'));
-    expect(resultCookie.version).toBe('test-version-fake');
+    // set again and check if the values got updated
+    currentFakeTime = 2;
+    testVersion = 'test-version2';
+    setPoiOptIn('group-test2', 'privacy-test2');
+    resultCookie = JSON.parse(getCookie('group-test2_oil_data'));
 
-    //test override funktion
-    setPoiOptIn('group-test', 'privacy-test2');
-    resultCookie = JSON.parse(getCookie('group-test_oil_data'));
-
-    expect(resultCookie.version).toBe('test-version');
+    expect(resultCookie.version).toBe('test-version2');
     expect(resultCookie.power_opt_in).toBe(true);
     expect(resultCookie.privacy).toBe('privacy-test2');
+    expect(resultCookie.timestamp).toBe(2);
   });
 
   it('should create the correct hub domain default cookie with groupname empty', () => {

@@ -1,5 +1,5 @@
 import Cookie from 'js-cookie';
-import { isCookie, isCookieValid, getClientTimestamp } from './utils.js';
+import { isCookie, isCookieValid, getClientTimestamp, OilVersion } from './utils.js';
 import { OIL_CONFIG, PRIVACY_MINIMUM_TRACKING, PRIVACY_FUNCTIONAL_TRACKING, PRIVACY_FULL_TRACKING, PRIVACY_SETTINGS_FULL_TRACKING, PRIVACY_SETTINGS_FUNCTIONAL_TRACKING, PRIVACY_SETTINGS_MINIMUM_TRACKING } from './constants.js';
 import { getConfiguration } from './config.js';
 import { logInfo } from './log.js';
@@ -56,7 +56,7 @@ export function getOilDomainCookieConfig() {
     default_content: {
       [OIL_DOMAIN_COOKIE.ATTR_OPTIN]: false,
       [OIL_DOMAIN_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp(),
-      [OIL_DOMAIN_COOKIE.ATTR_VERSION]: getOilVersion(),
+      [OIL_DOMAIN_COOKIE.ATTR_VERSION]: OilVersion.get(),
       [OIL_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_MINIMUM_TRACKING
     }
   };
@@ -77,7 +77,7 @@ export function getOilHubDomainCookieConfig(groupName) {
     default_content: {
       [OIL_HUB_DOMAIN_COOKIE.ATTR_POI]: false,
       [OIL_HUB_DOMAIN_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp(),
-      [OIL_HUB_DOMAIN_COOKIE.ATTR_VERSION]: getOilVersion(),
+      [OIL_HUB_DOMAIN_COOKIE.ATTR_VERSION]: OilVersion.get(),
       [OIL_HUB_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_MINIMUM_TRACKING
     }
   };
@@ -132,9 +132,8 @@ function getOilHubDomainCookie(groupName) {
   return Cookie.getJSON(getOilHubDomainCookieConfig(groupName).name);
 }
 
-export function getOilVersion() {
-    return `${process.env.OIL_VERSION}`;
-}
+
+
 
 
 /**
@@ -145,7 +144,7 @@ export function setSoiOptIn(privacySettings) {
   cookie.opt_in = true;
   cookie.privacy = privacySettings;
   cookie.timestamp = getClientTimestamp();
-  cookie.version = getOilVersion();
+  cookie.version = OilVersion.get();
   setDomainCookie(getOilDomainCookieConfig().name, cookie, getOilDomainCookieConfig().expires);
 }
 
@@ -164,7 +163,7 @@ export function setPoiOptIn(groupName, privacySettings) {
   cookie.power_opt_in = true;
   cookie.privacy = privacySettings;
   cookie.timestamp = getClientTimestamp();
-  cookie.version = getOilVersion();
+  cookie.version = OilVersion.get();
   setDomainCookie(getOilHubDomainCookieConfig(groupName).name, cookie, getOilHubDomainCookieConfig(groupName).expires);
 }
 
