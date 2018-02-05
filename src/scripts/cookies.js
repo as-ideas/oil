@@ -1,5 +1,5 @@
 import Cookie from 'js-cookie';
-import { isCookie, isCookieValid, getClientTimestamp } from './utils.js';
+import { isCookie, isCookieValid, getClientTimestamp, OilVersion } from './utils.js';
 import { OIL_CONFIG, PRIVACY_MINIMUM_TRACKING, PRIVACY_FUNCTIONAL_TRACKING, PRIVACY_FULL_TRACKING, PRIVACY_SETTINGS_FULL_TRACKING, PRIVACY_SETTINGS_FUNCTIONAL_TRACKING, PRIVACY_SETTINGS_MINIMUM_TRACKING } from './constants.js';
 import { getConfiguration } from './config.js';
 import { logInfo } from './log.js';
@@ -13,6 +13,7 @@ const OIL_DOMAIN_COOKIE = {
   NAME: 'oil_data',
   ATTR_OPTIN: 'opt_in',
   ATTR_TIMESTAMP: 'timestamp',
+  ATTR_VERSION: 'version',
   ATTR_PRIVACY: 'privacy'
 };
 
@@ -27,6 +28,7 @@ const OIL_HUB_DOMAIN_COOKIE = {
   NAME: 'oil_data',
   ATTR_POI: 'power_opt_in',
   ATTR_TIMESTAMP: 'timestamp',
+  ATTR_VERSION: 'version',
   ATTR_PRIVACY: 'privacy'
 };
 
@@ -48,13 +50,13 @@ export function getOilSessionCookieConfig() {
 
 export function getOilDomainCookieConfig() {
   let config = getConfiguration();
-
   return {
     name: OIL_DOMAIN_COOKIE.NAME,
     expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS],
     default_content: {
       [OIL_DOMAIN_COOKIE.ATTR_OPTIN]: false,
       [OIL_DOMAIN_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp(),
+      [OIL_DOMAIN_COOKIE.ATTR_VERSION]: OilVersion.get(),
       [OIL_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_MINIMUM_TRACKING
     }
   };
@@ -69,14 +71,14 @@ function getOilHubCookieName(groupName) {
 
 export function getOilHubDomainCookieConfig(groupName) {
   let config = getConfiguration();
-
   return {
     name: getOilHubCookieName(groupName),
     expires: config[OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS],
     default_content: {
       [OIL_HUB_DOMAIN_COOKIE.ATTR_POI]: false,
       [OIL_HUB_DOMAIN_COOKIE.ATTR_TIMESTAMP]: getClientTimestamp(),
-      [OIL_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_MINIMUM_TRACKING
+      [OIL_HUB_DOMAIN_COOKIE.ATTR_VERSION]: OilVersion.get(),
+      [OIL_HUB_DOMAIN_COOKIE.ATTR_PRIVACY]: PRIVACY_MINIMUM_TRACKING
     }
   };
 }
@@ -131,6 +133,9 @@ function getOilHubDomainCookie(groupName) {
 }
 
 
+
+
+
 /**
  * Public Interface
  */
@@ -139,6 +144,7 @@ export function setSoiOptIn(privacySettings) {
   cookie.opt_in = true;
   cookie.privacy = privacySettings;
   cookie.timestamp = getClientTimestamp();
+  cookie.version = OilVersion.get();
   setDomainCookie(getOilDomainCookieConfig().name, cookie, getOilDomainCookieConfig().expires);
 }
 
@@ -157,6 +163,7 @@ export function setPoiOptIn(groupName, privacySettings) {
   cookie.power_opt_in = true;
   cookie.privacy = privacySettings;
   cookie.timestamp = getClientTimestamp();
+  cookie.version = OilVersion.get();
   setDomainCookie(getOilHubDomainCookieConfig(groupName).name, cookie, getOilHubDomainCookieConfig(groupName).expires);
 }
 

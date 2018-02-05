@@ -237,3 +237,13 @@ export function getStringParam(searchString, paramName) {
   }
   return null;
 }
+
+/**
+ * Mockable OilVersion Object for getting the current software version in code, set at compile time
+ * @type {{get: (())}}
+ */
+export let OilVersion = {
+  get: () => {
+    return `${process.env.OIL_VERSION}`;
+  }
+}

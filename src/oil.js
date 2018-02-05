@@ -1,6 +1,6 @@
 import { renderOil, oilWrapper, oilShowPreferenceCenter, handleSoiOptIn, handlePoiOptIn, handleOilIgnore } from './scripts/modal.js';
 import { checkOptIn } from './scripts/optin.js';
-import { sendEventToHostSite } from './scripts/utils.js';
+import { sendEventToHostSite, OilVersion } from './scripts/utils.js';
 import { registerOptOutListener } from './scripts/optout.js';
 import { logInfo, logPreviewInfo } from './scripts/log.js';
 import { resetConfiguration, isPreviewMode } from './scripts/config.js';
@@ -69,7 +69,7 @@ function attachUtilityFunctionsToWindowObject() {
  * This functions gets called directly after Oil has loaded
  */
 export function initOilLayer() {
-  logInfo(`Init OilLayer (version ${process.env.OIL_VERSION})`);
+  logInfo(`Init OilLayer (version ${OilVersion.get()})`);
 
   attachUtilityFunctionsToWindowObject();
 
