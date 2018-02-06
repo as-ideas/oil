@@ -74,6 +74,7 @@ app.all(allowCrossDomain);
 // Serve directory indexes folder (with icons)
 app.use('/release', serveIndex('release', {'icons': true}));
 app.use('/examples', serveIndex('dist/examples', {'icons': true}));
+app.use('/demos', serveIndex('dist/demos', {'icons': true}));
 app.use('/devExamples', serveIndex('src/examples', {'icons': true}));
 
 // static with cache headers
