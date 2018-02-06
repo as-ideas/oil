@@ -44,6 +44,12 @@ nightwatch_config = {
         'browser_version': '57.0',
       }
     },
+    chrome64: {
+      desiredCapabilities: {
+        'browser': 'Chrome',
+        'browser_version': '64.0',
+      }
+    },
     ie8: {
       desiredCapabilities: {
         'browser': 'IE',
@@ -74,6 +80,12 @@ nightwatch_config = {
         'browser_version': '14.0'
       }
     },
+    edge16: {
+      desiredCapabilities: {
+        'browser': 'Edge',
+        'browser_version': '16.0'
+      }
+    },
     ff9: {
       desiredCapabilities: {
         'browser': 'Firefox',
@@ -90,6 +102,12 @@ nightwatch_config = {
       desiredCapabilities: {
         'browser': 'Firefox',
         'browser_version': '52.0'
+      }
+    },
+    ff58quantum: {
+      desiredCapabilities: {
+        'browser': 'Firefox',
+        'browser_version': '58.0'
       }
     },
     safari6: {
@@ -116,6 +134,12 @@ nightwatch_config = {
         'browser_version': '9.1'
       }
     },
+    safari11: {
+      desiredCapabilities: {
+        'browser': 'Safari',
+        'browser_version': '11.0'
+      }
+    },
     opera1216: {
       desiredCapabilities: {
         'browser': 'Opera',
@@ -127,6 +151,14 @@ nightwatch_config = {
         'browserName': 'iPad',
         'platform': 'MAC',
         'device': 'iPad 4th'
+      }
+    },
+    iPadPro: {
+      desiredCapabilities: {
+        'browserName' : 'iPad',
+        'device' : 'iPad Pro',
+        'realMobile' : 'true',
+        'os_version' : '11.2',
       }
     },
     iphone4S: {
@@ -150,18 +182,59 @@ nightwatch_config = {
         'device': 'iPhone 6'
       }
     },
+    iphone7: {
+      desiredCapabilities: {
+        'browserName' : 'iPhone',
+        'device' : 'iPhone 7',
+        'realMobile' : 'true',
+        'os_version' : '10.3'
+      }
+    },
+    iphone8: {
+      desiredCapabilities: {
+        'browserName' : 'iPhone',
+        'device' : 'iPhone 8',
+        'realMobile' : 'true',
+        'os_version' : '11.0'
+      }
+    },
     android4: {
       desiredCapabilities: {
-        'browserName': 'android',
-        'platform': 'ANDROID',
-        'device': 'HTC One M8'
+        'browserName' : 'android',
+        'platform' : 'ANDROID',
+        'device' : 'Samsung Galaxy S5 Mini'
       }
     },
     android5: {
       desiredCapabilities: {
-        'browserName': 'android',
-        'platform': 'ANDROID',
-        'device': 'Google Nexus 5'
+        'browserName' : 'android',
+        'device' : 'Samsung Galaxy S6',
+        'realMobile' : 'true',
+        'os_version' : '5.0',
+      }
+    },
+    android6: {
+      desiredCapabilities: {
+        'browserName' : 'android',
+        'device' : 'Google Nexus 6',
+        'realMobile' : 'true',
+        'os_version' : '6.0'
+      }
+    },
+    android7: {
+      desiredCapabilities: {
+        'browserName' : 'android',
+        'device' : 'Samsung Galaxy S8',
+        'realMobile' : 'true',
+        'os_version' : '7.0'
+      }
+    },
+    android8: {
+      desiredCapabilities: {
+        'browserName' : 'android',
+        'device' : 'Google Pixel',
+        'realMobile' : 'true',
+        'os_version' : '8.0'
       }
     },
   },
