@@ -19,6 +19,8 @@ nightwatch_config = {
     'browserstack.key': 'r7VdBAeqfwx3o3Drqg81'
   },
 
+  // get new configs from https://www.browserstack.com/automate/node
+
   test_settings: {
     default: {},
     chrome14: {
