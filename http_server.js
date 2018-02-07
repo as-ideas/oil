@@ -51,7 +51,7 @@ let additionalHeaders = function (req, res, next) {
 
 function basicAuth(req, res, next) {
   let done = false;
-  let whitelist = ['\/legal', '\/release', '\/demos'];
+  let whitelist = ['\/legal', '\/assets', '\/release', '\/demos', '.+\.min\.js'];
   whitelist.forEach(function(regexp) {
     if (req.url.match(regexp)) {
       done = true;
@@ -73,7 +73,6 @@ function basicAuth(req, res, next) {
   next();
 }
 
-
 /*
  * start server
  */
@@ -87,8 +86,6 @@ app.use(additionalHeaders);
 
 // server gzip
 app.use(compression());
-
-app.all(additionalHeaders);
 
 // Serve directory indexes folder (with icons)
 app.use('/release', serveIndex('release', {'icons': true}));
