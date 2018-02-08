@@ -113,6 +113,7 @@ module.exports = {
   }],
   entry: {
     'oil': path.resolve(sourcePath, 'oil.js'),
+    'oil_preloader': path.resolve(sourcePath, 'oil_preloader.js'),
     'demos/direct-integration': path.resolve(sourcePath, 'oil.js'),
     'hub': path.resolve(sourcePath, 'hub.js')
   },
