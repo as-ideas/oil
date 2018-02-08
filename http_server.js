@@ -59,11 +59,11 @@ function basicAuth(req, res, next) {
   });
 
   if (!done) {
-    const auth = {login: 'oiluser', password: '3b!Ak8tRR.'};
+    const auth = {login: 'oiluser', password: '3b!Ak8tRZ;'};
     const b64auth = (req.headers.authorization || '').split(' ')[1] || '';
     const [login, password] = new Buffer(b64auth, 'base64').toString().split(':');
 
-    // Verify login and password are se t and correct
+    // Verify login and password are set and correct
     if (!login || !password || login !== auth.login || password !== auth.password) {
       res.set('WWW-Authenticate', 'Basic realm="OIL Project"');
       res.status(401).send('401 Authentication required.');

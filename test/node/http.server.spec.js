@@ -5,7 +5,14 @@ let app = require('../../http_server'),
   request = require('supertest');
 let expect = chai.expect;
 
-describe('nodejs http server', () => {
+let packageJSON = require('../../package.json');
+
+const credentials = {
+  user : 'oiluser',
+  password : '3b!Ak8tRZ;'
+};
+
+  describe('nodejs http server', () => {
 
   beforeEach(() => {
 
@@ -71,4 +78,138 @@ describe('nodejs http server', () => {
         done();
       }, 1000);
   });
+
+  it('should return 401 without credentials on restricted route /docs', function (done) {
+    request(app)
+      .get('/docs')
+      .set({'host': 'oilsiteN:8080'})
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(401);
+        done();
+      }, 1000);
+  });
+
+  it('should return 401 without credentials on restricted route /examples', function (done) {
+    request(app)
+      .get('/examples')
+      .set({'host': 'oilsiteN:8080'})
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(401);
+        done();
+      }, 1000);
+  });
+
+  it('should return 401 without credentials on restricted route /index.html', function (done) {
+    request(app)
+      .get('/index.html')
+      .set({'host': 'oilsiteN:8080'})
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(401);
+        done();
+      }, 1000);
+  });
+
+  it('should return 401 without credentials on restricted route /', function (done) {
+    request(app)
+      .get('/')
+      .set({'host': 'oilsiteN:8080'})
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(401);
+        done();
+      }, 1000);
+  });
+
+  it('should return 200 without credentials on unrestricted route /assets/images/logo.png', function (done) {
+    request(app)
+      .get('/assets/images/logo.png')
+      .set({'host': 'oilsiteN:8080'})
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(200);
+        done();
+      }, 1000);
+  });
+
+  it('should return 200 without credentials on unrestricted route /demos', function (done) {
+    request(app)
+      .get('/demos')
+      .set({'host': 'oilsiteN:8080'})
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(200);
+        done();
+      }, 1000);
+  });
+
+  it('should return 200 without credentials on unrestricted route /legal', function (done) {
+    request(app)
+      .get('/legal/companies.html')
+      .set({'host': 'oilsiteN:8080'})
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(200);
+        done();
+      }, 1000);
+  });
+
+  it('should return 200 without credentials on unrestricted route /oil.' + packageJSON.version + '-SNAPSHOT.min.js', function (done) {
+    request(app)
+      .get('/oil.' + packageJSON.version + '-SNAPSHOT.min.js')
+      .set({'host': 'oilsiteN:8080'})
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(200);
+        done();
+      }, 1000);
+  });
+
+  it('should return 200 without credentials on unrestricted route /release', function (done) {
+    request(app)
+      .get('/release')
+      .set({'host': 'oilsiteN:8080'})
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(200);
+        done();
+      }, 1000);
+  });
+
+  it('should return 200 with credentials on restricted route /docs/full-documentation.html', function (done) {
+    request(app)
+      .get('/docs/full-documentation.html')
+      .set({'host': 'oilsiteN:8080'})
+      .auth(credentials.user, credentials.password)
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(200);
+        done();
+      }, 1000);
+  });
+
+    it('should return 200 with credentials on restricted route /examples', function (done) {
+      request(app)
+        .get('/examples')
+        .set({'host': 'oilsiteN:8080'})
+        .auth(credentials.user, credentials.password)
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
+
+    it('should return 200 with credentials on restricted route /index.html', function (done) {
+      request(app)
+        .get('/index.html')
+        .set({'host': 'oilsiteN:8080'})
+        .auth(credentials.user, credentials.password)
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
+
+    it('should return 200 with credentials on restricted route /', function (done) {
+      request(app)
+        .get('/')
+        .set({'host': 'oilsiteN:8080'})
+        .auth(credentials.user, credentials.password)
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
 });
