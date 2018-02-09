@@ -7,14 +7,14 @@ describe('oil_preloader.js', () => {
 
   beforeEach(() => {
       deleteAllCookies();
-    console.info('querzAll',document.querySelectorAll('#oil-script'));
-
-       let head = document.getElementsByTagName('head')[0];
-        head.removeChild(document.getElementById('oil-script'));
-      let oil = document.getElementById('oil-script');
-      oil.parentNode.removeChild(oil);
-
-      console.info('script is: ', document.getElementById('oil-script'));
+    // console.info('querzAll',document.querySelectorAll('#oil-script'));
+    //
+    //    let head = document.getElementsByTagName('head')[0];
+    //     head.removeChild(document.getElementById('oil-script'));
+    //   let oil = document.getElementById('oil-script');
+    //   oil.parentNode.removeChild(oil);
+    //
+    //   console.info('script is: ', document.getElementById('oil-script'));
   });
 
   it('should load oil script if cookie is undefined', () => {
