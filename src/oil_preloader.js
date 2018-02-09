@@ -1,4 +1,5 @@
 import {OIL_COOKIE as OIL_DOMAIN_COOKIE} from './scripts/constants';
+import {OilVersion} from './scripts/utils';
 import Cookie from 'js-cookie';
 
 (function () {
@@ -26,6 +27,6 @@ function loadOil() {
   let script = document.createElement('script');
   script.id = 'oil-script';
   script.type = 'text/javascript';
-  script.src = `https://oil-integration-cdn.herokuapp.com/oil.${process.env.OIL_VERSION}.min.js`;
+  script.src = `https://oil-integration-cdn.herokuapp.com/oil.${OilVersion.get()}.min.js`;
   head.appendChild(script);
 }
