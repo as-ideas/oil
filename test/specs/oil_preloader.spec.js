@@ -1,51 +1,40 @@
-import {initPreloader} from '../../src/oil_preloader';
-import {deleteAllCookies} from '../utils';
-import {OIL_COOKIE as OIL_DOMAIN_COOKIE} from '../../src/scripts/constants';
+import { initPreloader } from '../../src/oil_preloader';
+import { deleteAllCookies } from '../utils';
+import { OIL_COOKIE as OIL_DOMAIN_COOKIE } from '../../src/scripts/constants';
 import Cookie from 'js-cookie';
-import {OilVersion} from '../../src/scripts/utils.js';
+import { OilVersion } from '../../src/scripts/utils.js';
 
-fdescribe('oil_preloader.js', () => {
+describe('oil_preloader.js', () => {
 
   beforeEach(() => {
-    console.info('beforeEach');
-      deleteAllCookies();
-    // console.info('querzAll',document.querySelectorAll('#oil-script'));
-    //
-    //    let head = document.getElementsByTagName('head')[0];
-    //     head.removeChild(document.getElementById('oil-script'));
-    //   let oil = document.getElementById('oil-script');
-    //   oil.parentNode.removeChild(oil);
-    //
-    //   console.info('script is: ', document.getElementById('oil-script'));
-    spyOn(OilVersion, 'get').and.callFake(function() {
-      return '1.0.18';
-    });
-  });
-
-  afterEach(() => {
-    console.info('afterEach');
     deleteAllCookies();
-    let oil = document.getElementById('oil-script');
-    oil.parentNode.removeChild(oil);
+    let head = document.getElementsByTagName('head')[0];
+    head.removeChild(document.getElementById('oil-script'));
   });
 
-  // it('should load oil script if cookie is undefined', () => {
-  //   givenNoCookie();
-  //   whenInitPreloaderIsInvoked();
-  //   thenOilIsLoaded();
-  // });
-  //
-  // it('should load oil script if cookie is defined but opt-in is false', () => {
-  //   givenCookieWithoutOptIn();
-  //   whenInitPreloaderIsInvoked();
-  //   thenOilIsLoaded();
-  // });
+  it('should load oil script only once', () => {
+    givenNoCookie();
+    whenInitPreloaderIsInvoked();
+    whenInitPreloaderIsInvoked();
+    thenOilIsLoadedOnlyOnce();
+  });
 
-  fit('should not load oil script if cookie is defined and opt-in is true', () => {
-    console.info(document);
-    // givenCookieWithOptIn();
-    // whenInitPreloaderIsInvoked();
-    // thenOilIsNotLoaded();
+  it('should load oil script if cookie is undefined', () => {
+    givenNoCookie();
+    whenInitPreloaderIsInvoked();
+    thenOilIsLoaded();
+  });
+
+  it('should load oil script if cookie is defined but opt-in is false', () => {
+    givenCookieWithoutOptIn();
+    whenInitPreloaderIsInvoked();
+    thenOilIsLoaded();
+  });
+
+  it('should not load oil script if cookie is defined and opt-in is true', () => {
+    givenCookieWithOptIn();
+    whenInitPreloaderIsInvoked();
+    thenOilIsNotLoaded();
   });
 
 
@@ -60,7 +49,7 @@ fdescribe('oil_preloader.js', () => {
     Cookie.set(OIL_DOMAIN_COOKIE.NAME, {opt_in: true});
   }
 
-  function  whenInitPreloaderIsInvoked() {
+  function whenInitPreloaderIsInvoked() {
     initPreloader();
   }
 
@@ -69,10 +58,10 @@ fdescribe('oil_preloader.js', () => {
   }
 
   function thenOilIsNotLoaded() {
-    let oil = document.getElementById('oil-script');
-    // console.info('querzAll',document.querySelectorAll('#oil-script'));
-    console.info('####', oil);
-    expect(oil).toBeUndefined(oil);
+    expect(document.getElementById('oil-script')).toBeNull();
   }
 
+  function thenOilIsLoadedOnlyOnce() {
+    expect(document.querySelectorAll('#oil-script').length).toBe(1);
+  }
 });
