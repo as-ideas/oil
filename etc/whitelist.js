@@ -5,7 +5,8 @@ let whitelist = [
   "geld-anlegen.de",
   "finanzennet.gmbh",
   "immonet.de",
-  "asideas.de"
+  "asideas.de",
+  "axelspringer.com"
 ];
 
 module.exports = {
