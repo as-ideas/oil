@@ -8,11 +8,9 @@ const serveIndex = require('serve-index');
 // import CORS config
 const headerConfig = require('./etc/headerConfig');
 const whitelist = require('./etc/whitelist');
-
-// let basic = auth.basic({realm: 'Project OIL'}, (username, password, callback) => callback(username === 'oil' && password === 'rig'));
-
 // Application setup.
 const port = process.argv[2] || process.env.PORT || 8080;
+
 let CACHE_DURATION = '10m';
 let DOCUMENT_ROOT = __dirname + '/dist';
 
@@ -39,9 +37,7 @@ function isHostInWhitelist(host) {
   return false;
 }
 
-// tag::cors-express[]
-// end::cors-express[]
-let allowCrossDomain = function (req, res, next) {
+let additionalHeaders = function (req, res, next) {
   //res.header('Content-Security-Policy', 'script-src \'self\' *');
   for (let key in headerConfig.headers) {
     // skip loop if the property is from prototype
@@ -53,32 +49,54 @@ let allowCrossDomain = function (req, res, next) {
   next();
 };
 
+function basicAuth(req, res, next) {
+  let done = false;
+  let whitelist = ['\/legal', '\/assets', '\/release', '\/demos', '.+\.min\.js'];
+  whitelist.forEach(function(regexp) {
+    if (req.url.match(regexp)) {
+      done = true;
+    }
+  });
+
+  if (!done) {
+    const auth = {login: 'oiluser', password: '3b!Ak8tRZ;'};
+    const b64auth = (req.headers.authorization || '').split(' ')[1] || '';
+    const [login, password] = new Buffer(b64auth, 'base64').toString().split(':');
+
+    // Verify login and password are set and correct
+    if (!login || !password || login !== auth.login || password !== auth.password) {
+      res.set('WWW-Authenticate', 'Basic realm="OIL Project"');
+      res.status(401).send('401 Authentication required.');
+      return;
+    }
+  }
+  next();
+}
+
 /*
  * start server
  */
-let app = express();
 
+let app = express();
 app.use(domainWhitelist);
 
-// CORS
-app.use(allowCrossDomain);
+app.all('*', basicAuth);
+
+app.use(additionalHeaders);
 
 // server gzip
 app.use(compression());
 
-app.all(allowCrossDomain);
-
-// simple basic auth
-// app.use(auth.connect(basic));
-
 // Serve directory indexes folder (with icons)
 app.use('/release', serveIndex('release', {'icons': true}));
 app.use('/examples', serveIndex('dist/examples', {'icons': true}));
-app.use('/devExamples', serveIndex('src/examples', {'icons': true}));
+app.use('/demos', serveIndex('dist/demos', {'icons': true}));
 
 // static with cache headers
 app.use(serveStatic(DOCUMENT_ROOT, {maxAge: CACHE_DURATION, cacheControl: true}));
-app.use('/devExamples', express.static('src/examples'))
+app.use('/devExamples', express.static('src/examples'));
+
+app.use('/devExamples', serveIndex('src/examples', {'icons': true}));
 
 console.log('server is now starting on port ', port);
 app.listen(port, '0.0.0.0');
