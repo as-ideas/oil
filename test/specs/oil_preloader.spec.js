@@ -1,4 +1,4 @@
-import { initPreloader } from '../../src/oil_preloader';
+import { needsOptIn } from '../../src/oil_preloader';
 import { deleteAllCookies } from '../utils';
 import Cookie from 'js-cookie';
 
@@ -6,35 +6,22 @@ describe('oil_preloader.js', () => {
 
   beforeEach(() => {
     deleteAllCookies();
-    let head = document.getElementsByTagName('head')[0];
-    head.removeChild(document.getElementById('oil-script'));
-  });
-
-  it('should load oil script only once', () => {
-    givenNoCookie();
-    whenInitPreloaderIsInvoked();
-    whenInitPreloaderIsInvoked();
-    thenOilIsLoadedOnlyOnce();
   });
 
   it('should load oil script if cookie is undefined', () => {
     givenNoCookie();
-    whenInitPreloaderIsInvoked();
-    thenOilIsLoaded();
+    thenNeedsOptInReturnsTrue();
   });
 
   it('should load oil script if cookie is defined but opt-in is false', () => {
     givenCookieWithoutOptIn();
-    whenInitPreloaderIsInvoked();
-    thenOilIsLoaded();
+    thenNeedsOptInReturnsTrue();
   });
 
   it('should not load oil script if cookie is defined and opt-in is true', () => {
     givenCookieWithOptIn();
-    whenInitPreloaderIsInvoked();
-    thenOilIsNotLoaded();
+    thenNeedsOptInReturnsFalse();
   });
-
 
   function givenNoCookie() {
   }
@@ -47,19 +34,12 @@ describe('oil_preloader.js', () => {
     Cookie.set('oil_data', {opt_in: true});
   }
 
-  function whenInitPreloaderIsInvoked() {
-    initPreloader();
+  function thenNeedsOptInReturnsTrue() {
+    expect(needsOptIn()).toBeTruthy();
   }
 
-  function thenOilIsLoaded() {
-    expect(document.getElementById('oil-script')).toBeDefined();
+  function thenNeedsOptInReturnsFalse() {
+    expect(needsOptIn()).toBeFalsy();
   }
 
-  function thenOilIsNotLoaded() {
-    expect(document.getElementById('oil-script')).toBeNull();
-  }
-
-  function thenOilIsLoadedOnlyOnce() {
-    expect(document.querySelectorAll('#oil-script').length).toBe(1);
-  }
 });

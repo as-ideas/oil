@@ -9,7 +9,7 @@ let packageJSON = require('../../package.json');
 
 const credentials = {
   user : 'oiluser',
-  password : '3b!Ak8tRZ;'
+  password : 'ePrivacy'
 };
 
   describe('nodejs http server', () => {

@@ -28,6 +28,10 @@ npm install
 * Creating Docs: `npm run build:docs`
 
 ### Advanced Usage
+npm run build:release creates an app version that loads its parts
+from oil.axelspringer.com/release/*.min.js
+
+This should be used in production.
 
 ### debug logging
 
