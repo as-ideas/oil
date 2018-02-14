@@ -1,4 +1,3 @@
-import {OIL_COOKIE as OIL_DOMAIN_COOKIE} from './scripts/constants';
 import Cookie from 'js-cookie';
 
 (function () {
@@ -14,7 +13,7 @@ export function initPreloader() {
 }
 
 function hasFirstPartyOilCookie() {
-  let cookieJSON = Cookie.getJSON(OIL_DOMAIN_COOKIE.NAME);
+  let cookieJSON = Cookie.getJSON('oil_data');
   let isCookieDefined = typeof (cookieJSON) !== 'undefined';
   console.info('####', isCookieDefined, cookieJSON);
   console.info('#### hasFirstPartyOilCookie', (isCookieDefined && cookieJSON.opt_in));
