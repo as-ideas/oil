@@ -1,10 +1,13 @@
 import Cookie from 'js-cookie';
 import * as HubAPI from '../../src/hub';
-import { OIL_COOKIE } from '../../src/scripts/constants.js';
 import { deleteAllCookies } from '../utils';
 import { resetConfiguration } from '../../src/scripts/config';
 
 describe('the hub.js', () => {
+
+  let OIL_COOKIE = {
+    NAME: 'oil_data'
+  };
 
   describe('in event mode', function() {
     beforeEach(() => {

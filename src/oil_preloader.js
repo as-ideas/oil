@@ -1,5 +1,3 @@
-import { OIL_COOKIE as OIL_DOMAIN_COOKIE } from './scripts/constants';
-import { OilVersion } from './scripts/utils';
 import Cookie from 'js-cookie';
 
 (function () {
@@ -13,7 +11,7 @@ export function initPreloader() {
 }
 
 function hasFirstPartyOilCookie() {
-  let cookieJSON = Cookie.getJSON(OIL_DOMAIN_COOKIE.NAME);
+  let cookieJSON = Cookie.getJSON('oil_data');
   let isCookieDefined = typeof (cookieJSON) !== 'undefined';
   return isCookieDefined && cookieJSON.opt_in;
 }
@@ -24,7 +22,7 @@ function loadOil() {
     let script = document.createElement('script');
     script.id = 'oil-script';
     script.type = 'text/javascript';
-    script.src = `https://oil-integration-cdn.herokuapp.com/oil.${OilVersion.get()}.min.js`;
+    script.src = `https://oil-integration-cdn.herokuapp.com/oil.${process.env.OIL_VERSION}.min.js`;
     head.appendChild(script);
   }
 }

@@ -1,8 +1,6 @@
 import { initPreloader } from '../../src/oil_preloader';
 import { deleteAllCookies } from '../utils';
-import { OIL_COOKIE as OIL_DOMAIN_COOKIE } from '../../src/scripts/constants';
 import Cookie from 'js-cookie';
-import { OilVersion } from '../../src/scripts/utils.js';
 
 describe('oil_preloader.js', () => {
 
@@ -42,11 +40,11 @@ describe('oil_preloader.js', () => {
   }
 
   function givenCookieWithoutOptIn() {
-    Cookie.set(OIL_DOMAIN_COOKIE.NAME, {opt_in: false});
+    Cookie.set('oil_data', {opt_in: false});
   }
 
   function givenCookieWithOptIn() {
-    Cookie.set(OIL_DOMAIN_COOKIE.NAME, {opt_in: true});
+    Cookie.set('oil_data', {opt_in: true});
   }
 
   function whenInitPreloaderIsInvoked() {

@@ -141,54 +141,38 @@ var config = webpackMerge(commonConfig, {
      */
     // NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
     new UglifyJsPlugin({
-      debug: false,
-      // beautify: true, //debug
-      //mangle: false, //debug
-      // dead_code: false, //debug
-      // unused: false, //debug
-      // deadCode: false, //debug
-      // compress: {
-      //   screw_ie8: true,
-      //   keep_fnames: true,
-      //   drop_debugger: false,
-      //   dead_code: false,
-      //   unused: false
-      // }, // debug
-      // comments: true, //debug
-      sourceMap: false, //prod
-      beautify: false, //prod
-      mangle: {
-        except: appConfig.mangle.except || ['jQuery', 'angular'],
-        screw_ie8: true,
-        dead_code: true,
-        unused: true,
-        sequences: true,  // join consecutive statemets with the “comma operator”
-        properties: true,  // optimize property access: a["foo"] → a.foo
-        dead_code: true,  // discard unreachable code
-        drop_debugger: true,  // discard “debugger” statements
-        unsafe: false, // some unsafe optimizations (see below)
-        conditionals: true,  // optimize if-s and conditional expressions
-        comparisons: true,  // optimize comparisons
-        evaluate: true,  // evaluate constant expressions
-        booleans: true,  // optimize boolean expressions
-        loops: true,  // optimize loops
-        unused: true,  // drop unused variables/functions
-        hoist_funs: true,  // hoist function declarations
-        hoist_vars: false, // hoist variable declarations
-        if_return: true,  // optimize if-s followed by return/continue
-        join_vars: true,  // join var declarations
-        cascade: true,  // try to cascade `right` into `left` in sequences
-        side_effects: true,  // drop side-effect-free statements
-        warnings: false,
-        global_defs: { // global definitions
-          NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-          ENV: JSON.stringify(process.env.NODE_ENV)
-        }
-      }, //prod
-      compress: {
-        screw_ie8: true
-      }, //prod
-      comments: false //prod
+      uglifyOptions: {
+        debug: false,
+        sourceMap: false,
+        beautify: false,
+        compress: {
+          screw_ie8: true,
+          passes: 3
+        },
+        parse: {
+          // screw_ie8: true,
+          // sequences: true,  // join consecutive statemets with the “comma operator”
+          // properties: true,  // optimize property access: a["foo"] → a.foo
+          // dead_code: true,  // discard unreachable code
+          // drop_debugger: true,  // discard “debugger” statements
+          // unsafe: false, // some unsafe optimizations (see below)
+          // conditionals: true,  // optimize if-s and conditional expressions
+          // comparisons: true,  // optimize comparisons
+          // evaluate: true,  // evaluate constant expressions
+          // booleans: true,  // optimize boolean expressions
+          // loops: true,  // optimize loops
+          // unused: true,  // drop unused variables/functions
+          // hoist_funs: true,  // hoist function declarations
+          // hoist_vars: false, // hoist variable declarations
+          // if_return: true,  // optimize if-s followed by return/continue
+          // join_vars: true,  // join var declarations
+          // cascade: true,  // try to cascade `right` into `left` in sequences
+          // side_effects: true,  // drop side-effect-free statements
+          // warnings: false,
+        },
+        comments: false
+
+      }
     })
   ],
 
