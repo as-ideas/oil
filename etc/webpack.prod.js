@@ -49,7 +49,6 @@ var config = webpackMerge(commonConfig, {
    * See: http://webpack.github.io/docs/configuration.html#output
    */
   output: {
-
     /**
      * The output directory as absolute path (required).
      *
@@ -106,7 +105,6 @@ var config = webpackMerge(commonConfig, {
      * See: https://www.npmjs.com/package/webpack-md5-hash
      */
     new WebpackMd5Hash(),
-
 
     /**
      * Plugin: DefinePlugin
