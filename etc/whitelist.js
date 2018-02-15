@@ -6,7 +6,8 @@ let whitelist = [
   "finanzennet.gmbh",
   "immonet.de",
   "asideas.de",
-  "axelspringer.com"
+  "axelspringer.com",
+  "onet.pl"
 ];
 
 module.exports = {
