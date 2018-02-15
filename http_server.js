@@ -59,7 +59,7 @@ function basicAuth(req, res, next) {
   });
 
   if (!done) {
-    const auth = {login: 'oiluser', password: '3b!Ak8tRZ;'};
+    const auth = {login: 'oiluser', password: 'ePrivacy'};
     const b64auth = (req.headers.authorization || '').split(' ')[1] || '';
     const [login, password] = new Buffer(b64auth, 'base64').toString().split(':');
 
