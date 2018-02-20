@@ -3,7 +3,6 @@ import {getLabelButtonYesPoi} from '../../userview_config.js';
 import {DATA_CONTEXT_YES_POI_WHILE_LATER} from '../../../core/core_constants.js';
 import {CSSPrefix} from './../oil.view.config.js';
 
-
 /**
  * Returns html content for OIL power opt in button
  */

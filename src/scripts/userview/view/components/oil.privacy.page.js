@@ -1,6 +1,6 @@
 import {CSSPrefix} from './../oil.view.config.js';
 import {getPrivacyPageUrl, getLabelButtonPrivacy} from '../../userview_config.js';
-import {DATAQA_PRIVACY_PAGE} from '../../../core/core_constants';
+import {DATAQA_PRIVACY_PAGE} from '../../../core/core_constants.js';
 
 /**
  * Returns html content for privacy page link
