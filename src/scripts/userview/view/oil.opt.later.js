@@ -1,17 +1,23 @@
 import { CSSPrefix } from './oil.view.config.js';
 import { POIButtonSnippet } from './components/oil.poi.button.opt.later';
 import { privacyPageSnippet } from './components/oil.privacy.page';
-import { getConfiguration } from './../config.js';
-import { OIL_CONFIG, DATA_CONTEXT_YES_WHILE_LATER, DATA_CONTEXT_IGNORE_WHILE_LATER } from './../constants.js';
+import { DATA_CONTEXT_YES_WHILE_LATER, DATA_CONTEXT_IGNORE_WHILE_LATER } from '../../core/core_constants.js';
+import {
+  isOilIgnore,
+  getLabelLaterHeading,
+  getLabelButtonYesSoi,
+  getLabelLater,
+  getLabelLaterStart,
+  getLabelLaterEnd
+} from './../userview_config.js';
 
 
 const laterLabelSnippet = () => {
-  let config = getConfiguration();
-
-  if(config.label_later) {
-    return config.label_later;
+  let labelLater = getLabelLater();
+  if(labelLater) {
+    return labelLater;
   } else {
-    return (`${config.label_later_start} ${privacyPageSnippet()} ${config.label_later_end}`);
+    return (`${getLabelLaterStart()} ${privacyPageSnippet()} ${getLabelLaterEnd()}`);
   }
 };
 
@@ -39,14 +45,13 @@ const OilIgnore = (oilIgnore) => {
  * Opt Later Template
  */
 export function oilOptLaterTemplate() {
-  let config = getConfiguration();
   return `
     <div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-opt-later" data-qa="oil-optlater">
-        ${OilIgnore(config[OIL_CONFIG.ATTR_OIL_IGNORE])}
+        ${OilIgnore(isOilIgnore())}
         <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-row--fixed-width">
             <div class="${CSSPrefix}oil-l-item">
                 <div class="${CSSPrefix}oil-loi__heading">
-                    ${config.label_later_heading}
+                    ${getLabelLaterHeading()}
                 </div>
                 <p class="${CSSPrefix}oil-loi__intro-txt">
                     ${laterLabelSnippet()}
@@ -55,7 +60,7 @@ export function oilOptLaterTemplate() {
             <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
                 ${POIButtonSnippet()}
                 <button class="${CSSPrefix}oil-loi__btn-soi ${CSSPrefix}js-optin" data-context="${DATA_CONTEXT_YES_WHILE_LATER}" data-qa="oil-small-YesButton">
-                    ${config.label_button_yes_soi}
+                    ${getLabelButtonYesSoi}
                 </button>
             </div>
         </div>

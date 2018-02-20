@@ -2,6 +2,10 @@ import { USERVIEW_OIL_CONFIG } from './userview_constants.js';
 import { OIL_CONFIG } from '../core/core_constants.js';
 import { getConfigValue } from '../core/core_config.js';
 
+export function isOilIgnore() {
+  return getConfigValue(OIL_CONFIG.ATTR_OIL_IGNORE, false);
+}
+
 export function isAdvancedSettings() {
   return getConfigValue(OIL_CONFIG.ATTR_ADVANCED_SETTINGS, false);
 }
