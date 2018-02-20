@@ -1,4 +1,4 @@
-import { OIL_CONFIG, POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME, POI_PAYLOAD } from './core_constants.js';
+import { OIL_CONFIG } from './core_constants.js';
 import { isPoiActive, getHubLocation, getHubOrigin, getPoiGroupName } from './core_config.js';
 import { getOrigin, registerMessageListener, removeMessageListener } from './core_utils.js';
 import { logError, logInfo } from './core_log.js';
@@ -34,7 +34,7 @@ export function addFrame(iframeUrl) {
  * @function
  * @return promise as object {iframe:Element,config:{}}when iFrame is loaded
  */
-function init() {
+export function init() {
   return new Promise((resolve) => setTimeout(() => {
     logInfo('Initializing Frame...');
 
@@ -68,7 +68,7 @@ function init() {
  * @param payload - payload to send
  * @function
  */
-function sendEventToFrame(eventName, origin, payload = {}) {
+export function sendEventToFrame(eventName, origin, payload = {}) {
   logInfo('Send to Frame:', eventName, origin);
 
   if (!isPoiActive()) {

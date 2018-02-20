@@ -1,6 +1,6 @@
 import { sendEventToHostSite, OilVersion } from './core_utils.js';
 import { registerOptOutListener } from './core_optout.js';
-import { logInfo, logError, logPreviewInfo } from './core_log.js';
+import { logInfo, logPreviewInfo } from './core_log.js';
 import { checkOptIn, hasOptedIgnore, hasOptedLater } from './core_optin.js';
 import { resetConfiguration, isPreviewMode } from './core_config.js';
 import {

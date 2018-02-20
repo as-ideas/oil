@@ -44,7 +44,7 @@ function getConfiguration() {
  * @param defaultValue
  * @returns {*}
  */
-function getConfigValue(name, defaultValue) {
+export function getConfigValue(name, defaultValue) {
   let config = getConfiguration();
   return config[name] ? config[name] : defaultValue;
 }

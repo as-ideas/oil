@@ -10,7 +10,7 @@ const COOKIE_VERBOSE_NAME = 'oil_verbose';
 const OIL_DOMAIN_COOKIE_NAME = 'oil_data';
 const OIL_SESSION_COOKIE_NAME = 'oil_data_session';
 
-function setSessionCookie(name, value) {
+export function setSessionCookie(name, value) {
   Cookie.set(name, value);
 }
 

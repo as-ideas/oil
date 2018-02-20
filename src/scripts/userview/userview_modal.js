@@ -1,4 +1,4 @@
-import '../styles/modal.scss';
+import '../../styles/modal.scss';
 import noUiSlider from 'nouislider';
 import { sendEventToHostSite } from '../core/core_utils.js';
 import { removeSubscriberCookies } from '../core/core_cookies.js';
@@ -7,7 +7,6 @@ import {
   PRIVACY_MINIMUM_TRACKING,
   PRIVACY_FUNCTIONAL_TRACKING,
   PRIVACY_FULL_TRACKING,
-  OIL_CONFIG,
   DATA_CONTEXT_YES,
   DATA_CONTEXT_YES_POI,
   EVENT_NAME_BACK_TO_MAIN,
@@ -29,6 +28,7 @@ import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
 import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
 import { CSSPrefix } from './view/oil.view.config.js';
 import { logInfo, logError } from '../core/core_log.js';
+import { isPersistMinimumTracking, isSubsetCookie } from './userview_config.js';
 
 // Initialize our Oil wrapper and save it ...
 
@@ -253,12 +253,10 @@ function trackPrivacySetting(privacySetting) {
 }
 
 export function handleSoiOptIn() {
-  // let config = getConfiguration();
-  // TODO fix configuration shit
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
   trackPrivacySetting(privacySetting);
-  if (privacySetting !== PRIVACY_MINIMUM_TRACKING || config[OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING]) {
+  if (privacySetting !== PRIVACY_MINIMUM_TRACKING || isPersistMinimumTracking()) {
     oilOptIn(convertPrivacySettingsToCookieValue(privacySetting)).then((cookieOptIn) => {
       renderOil(oilWrapper, {optIn: cookieOptIn});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES) {
@@ -274,13 +272,11 @@ export function handleSoiOptIn() {
 }
 
 export function handlePoiOptIn() {
-  // let config = getConfiguration();
-  // TODO fix configuration shit
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
   trackPrivacySetting(privacySetting);
-  if (privacySetting !== PRIVACY_MINIMUM_TRACKING || config[OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING]) {
-    oilPowerOptIn(convertPrivacySettingsToCookieValue(privacySetting), !config[OIL_CONFIG.ATTR_SUB_SET_COOKIE]).then(() => {
+  if (privacySetting !== PRIVACY_MINIMUM_TRACKING || isPersistMinimumTracking()) {
+    oilPowerOptIn(convertPrivacySettingsToCookieValue(privacySetting), !isSubsetCookie()).then(() => {
       renderOil(oilWrapper, {optIn: true});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
         sendEventToHostSite(EVENT_NAME_POI_OPT_IN);
