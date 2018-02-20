@@ -1,7 +1,7 @@
-import { verifyPowerOptIn } from './headless_poi.js';
-import { logInfo, logPreviewInfo } from './headless_log.js';
-import { isSubscriberSetCookieActive } from './headless_config.js';
-import { getSoiCookie, setSoiOptIn, getOilSessionCookie } from './headless_cookies.js';
+import { verifyPowerOptIn } from './core_poi.js';
+import { logInfo, logPreviewInfo } from './core_log.js';
+import { isSubscriberSetCookieActive } from './core_config.js';
+import { getSoiCookie, setSoiOptIn, getOilSessionCookie } from './core_cookies.js';
 
 /**
  * Log Helper function for checkOptIn

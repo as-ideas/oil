@@ -1,8 +1,8 @@
-import { EVENT_NAME_OPT_OUT_TRIGGER } from './headless_constants.js';
-import { deActivatePowerOptIn } from './headless_poi.js';
-import { registerMessageListener } from './headless_utils.js';
-import { logInfo } from './headless_log.js';
-import { removeSubscriberCookies } from './headless_cookies.js';
+import { EVENT_NAME_OPT_OUT_TRIGGER } from './core_constants.js';
+import { deActivatePowerOptIn } from './core_poi.js';
+import { registerMessageListener } from './core_utils.js';
+import { logInfo } from './core_log.js';
+import { removeSubscriberCookies } from './core_cookies.js';
 
 /**
  * Opt-Out Handler // Is this supposed to be an event or an api function like the others?
@@ -17,9 +17,8 @@ function receiveOptOutMessage(event) {
         // Update Oil cookie
         removeSubscriberCookies();
         // delete POI too if exists
-        // TODO deactivate PowerOptIn
         logInfo('deActivatePowerOptIn');
-        // deActivatePowerOptIn();
+        deActivatePowerOptIn();
       }
     }
 }

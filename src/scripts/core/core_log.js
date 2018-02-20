@@ -1,6 +1,6 @@
-import { isDev } from './headless_utils';
-import { isVerboseCookieSet, isPreviewCookieSet } from './headless_cookies.js'
-import { isPreviewMode } from './headless_config.js'
+import { isDev } from './core_utils';
+import { isVerboseCookieSet, isPreviewCookieSet } from './core_cookies.js'
+import { isPreviewMode } from './core_config.js'
 
 const prefix = 'OIL: ';
 

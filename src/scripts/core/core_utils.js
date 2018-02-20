@@ -1,4 +1,4 @@
-import { logInfo } from './headless_log.js';
+import { logInfo } from './core_log.js';
 
 /**
  * Check if environment is set to production
