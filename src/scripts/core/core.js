@@ -44,8 +44,8 @@ export function initOilLayer() {
     if (!isBrowserCookieEnabled()) {
       logInfo('This browser doesn\'t allow cookies.');
       System.import('../userview/userview_modal.js')
-        .then(core_modal => {
-          core_modal.renderOil(core_modal.oilWrapper, {noCookie: true});
+        .then(userview_modal => {
+          userview_modal.renderOil(userview_modal.oilWrapper, {noCookie: true});
         });
       sendEventToHostSite(EVENT_NAME_NO_COOKIES_ALLOWED);
       return;
@@ -72,8 +72,10 @@ export function initOilLayer() {
        * User has opted later
        */
       else if (hasOptedLater()) {
-        // TODO load core and render oil
-        // renderOil(oilWrapper, {optLater: true});
+        System.import('../userview/userview_modal.js')
+          .then(userview_modal => {
+            userview_modal.renderOil(userview_modal.oilWrapper, {optLater: true});
+          });
         sendEventToHostSite(EVENT_NAME_HAS_OPTED_LATER);
         sendEventToHostSite(EVENT_NAME_OIL_SHOWN);
       }
@@ -81,8 +83,10 @@ export function initOilLayer() {
        * Any other case, when the user didnt decide before and oil needs to be shown:
        */
       else {
-        // TODO load core and render oil
-        // renderOil(oilWrapper, {optLater: false});
+        System.import('../userview/userview_modal.js')
+          .then(userview_modal => {
+            userview_modal.renderOil(userview_modal.oilWrapper, {optLater: false});
+          });
         sendEventToHostSite(EVENT_NAME_OIL_SHOWN);
       }
     });
@@ -117,11 +121,30 @@ function attachUtilityFunctionsToWindowObject() {
   window.oilStatus = () => {
     return getRawSoiCookie();
   };
-  // TODO load core and execute
-  // window.oilShowPreferenceCenter = oilShowPreferenceCenter;
-  // window.oilTriggerSoiOptIn = handleSoiOptIn;
-  // window.oilTriggerPoiOptin = handlePoiOptIn;
-  // window.oilTriggerIgnore = handleOilIgnore;
+  window.oilShowPreferenceCenter = () => {
+    System.import('../userview/userview_modal.js')
+      .then(userview_modal => {
+        userview_modal.oilShowPreferenceCenter();
+      });
+  };
+  window.oilTriggerSoiOptIn = () => {
+    System.import('../userview/userview_optin.js')
+      .then(userview_optin => {
+        userview_optin.handleSoiOptIn();
+      });
+  };
+  window.oilTriggerPoiOptin = () => {
+    System.import('../userview/userview_optin.js')
+      .then(userview_optin => {
+        userview_optin.handlePoiOptIn();
+      });
+  };
+  window.oilTriggerIgnore = () => {
+    System.import('../userview/userview_optin.js')
+      .then(userview_optin => {
+        userview_optin.handleOilIgnore();
+      });
+  };
 }
 
 
