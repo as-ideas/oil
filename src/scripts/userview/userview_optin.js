@@ -1,5 +1,5 @@
-import { activatePowerOptInWithRedirect, verifyPowerOptIn } from '../core/core_poi.js';
-import { activatePowerOptInWithIFrame } from '../userview/userview_poi.js';
+import { verifyPowerOptIn } from '../core/core_poi.js';
+import { activatePowerOptInWithRedirect, activatePowerOptInWithIFrame } from './userview_poi.js';
 import { logInfo, logPreviewInfo } from '../core/core_log.js';
 import { sendEventToHostSite } from '../core/core_utils.js';
 import {

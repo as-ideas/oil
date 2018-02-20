@@ -203,33 +203,3 @@ export function redirectToLocation(location) {
   window.location.replace(location);
 }
 
-/**
- * Activate Power Opt IN with the use of an redirect
- * @function
- * @return
- */
-export function activatePowerOptInWithRedirect(payload) {
-  if (!isPoiActive()) {
-    return;
-  }
-
-  let payloadString = JSON.stringify(payload),
-    payloadUriParam = encodeURIComponent(payloadString);
-
-  let hubLocation = getHubLocation(),
-      groupName = getPoiGroupName();
-  if (hubLocation) {
-    let targetLocation = hubLocation + '?' + POI_FALLBACK_NAME + '=1';
-
-    if (groupName) {
-      targetLocation = targetLocation + '&' + POI_FALLBACK_GROUP_NAME + '=' + groupName;
-    }
-
-    if (payload) {
-      targetLocation = targetLocation + '&' + POI_PAYLOAD + '=' + payloadUriParam;
-    }
-
-    exports.redirectToLocation(targetLocation);
-  }
-}
-

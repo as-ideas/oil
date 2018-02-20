@@ -68,11 +68,12 @@ function getDomainCookieConfig() {
   };
 }
 
-function getOilSessionCookieConfig() {
+export function getOilSessionCookieConfig() {
   return {
     name: OIL_SESSION_COOKIE_NAME,
     default_content: {
-      'opt_later': false
+      'opt_later': false,
+      'opt_ignore': false
     }
   };
 }
