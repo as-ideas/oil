@@ -60,7 +60,7 @@ export function oilOptLaterTemplate() {
             <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
                 ${POIButtonSnippet()}
                 <button class="${CSSPrefix}oil-loi__btn-soi ${CSSPrefix}js-optin" data-context="${DATA_CONTEXT_YES_WHILE_LATER}" data-qa="oil-small-YesButton">
-                    ${getLabelButtonYesSoi}
+                    ${getLabelButtonYesSoi()}
                 </button>
             </div>
         </div>

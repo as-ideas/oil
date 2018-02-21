@@ -28,42 +28,42 @@ module.exports = {
   }, {
     filename: 'demos/advanced-settings.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/advanced-settings-poi.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings-poi.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/advanced-settings-poi-integrated.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings-poi-integrated.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/direct-integration.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/direct-integration-preview-mode.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration-preview-mode.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/direct-integration-event-test.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration-event-test.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/direct-integration-opt-later-event-test.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration-opt-later-event-test.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/direct-integration-opt-out-event-test.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration-opt-out-event-test.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/complete-integration-mypass.html',
@@ -73,32 +73,32 @@ module.exports = {
   }, {
     filename: 'demos/complete-integration-site-a.html',
     template: path.resolve(sourcePath, 'demos', 'complete-integration-site-a.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/complete-integration-site-b.html',
     template: path.resolve(sourcePath, 'demos', 'complete-integration-site-b.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/demo-group-a-site-a.html',
     template: path.resolve(sourcePath, 'demos', 'demo-group-a-site-a.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/demo-group-a-site-b.html',
     template: path.resolve(sourcePath, 'demos', 'demo-group-a-site-b.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/demo-group-b-site-a.html',
     template: path.resolve(sourcePath, 'demos', 'demo-group-b-site-a.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/demo-group-b-site-b.html',
     template: path.resolve(sourcePath, 'demos', 'demo-group-b-site-b.html'),
-    chunks: ['oil_cs'],
+    chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/tealium-integration-test.html',
@@ -108,7 +108,7 @@ module.exports = {
   }],
   entry: {
     'hub': path.resolve(sourcePath, 'hub.js'),
-    'oil_cs': path.resolve(sourcePath, 'oil_cs.js')
+    'oil': path.resolve(sourcePath, 'oil.js')
   },
   copy: [{
     from: path.resolve(sourcePath, 'assets'),

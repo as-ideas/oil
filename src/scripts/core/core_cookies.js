@@ -14,7 +14,7 @@ export function setSessionCookie(name, value) {
   Cookie.set(name, value);
 }
 
-function setDomainCookie(name, value, expires_in_days) {
+export function setDomainCookie(name, value, expires_in_days) {
   Cookie.set(name, value, {expires: expires_in_days});
 }
 
@@ -78,7 +78,12 @@ export function getOilSessionCookieConfig() {
   };
 }
 
-function getOilCookie(cookieConfig) {
+function getOilDomainCookie() {
+  return getOilCookie(getDomainCookieConfig());
+}
+
+// PUBLIC INTERFACE
+export function getOilCookie(cookieConfig) {
   if( isCookie(cookieConfig.name) &&
     isCookieValid(cookieConfig.name, Object.keys(cookieConfig.default_content))) {
     return Cookie.getJSON(cookieConfig.name);
@@ -87,11 +92,6 @@ function getOilCookie(cookieConfig) {
   return cookieConfig.default_content;
 }
 
-function getOilDomainCookie() {
-  return getOilCookie(getDomainCookieConfig());
-}
-
-// PUBLIC INTERFACE
 export function setSoiOptIn(privacySettings) {
   let cookie = getOilDomainCookie();
   cookie.opt_in = true;
