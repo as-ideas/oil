@@ -74,20 +74,20 @@ So on the OIL hub side an event listener is added:
 ----
 window.addEventListener('message', (e) => {
   let data = e.data;
-include::../../../src/hub.js[tags=hub-listener]
+include::../../../src/scripts/hub/hub_oil.js[tags=hub-listener]
 });
 ----
 
 At the subscriber side the ``postMessage`` happens to trigger an action on the hub:
 [source,javascript]
 ----
-include::../../../src/scripts/poi.js[tags=subscriber-postMessage]
+include::../../../src/scripts/core/core_poi.js[tags=subscriber-postMessage]
 ----
 
 Now the subscriber can listen to messages from the hub:
 [source,javascript]
 ----
 window.addEventListener('message', (event) => {
-include::../../../src/scripts/poi.js[tags=subscriber-receiveMessage]
+include::../../../src/scripts/core/core_poi.js[tags=subscriber-receiveMessage]
 });
 ----

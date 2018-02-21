@@ -1,6 +1,7 @@
-import * as PoiAPI from '../../src/scripts/poi';
-import { loadFixture, deleteAllCookies } from '../utils';
-import { resetConfiguration } from '../../src/scripts/config';
+import * as PoiAPICore from '../../src/scripts/core/core_poi.js';
+import * as PoiAPIUserview from '../../src/scripts/userview/userview_poi.js';
+import { loadFixture, deleteAllCookies } from '../utils.js';
+import { resetConfiguration } from '../../src/scripts/core/core_config.js';
 
 describe('poi', () => {
 
@@ -25,7 +26,7 @@ describe('poi', () => {
   it('should disable POI by default', (done) => {
     loadFixture('poi/poi.config-error.html');
 
-    PoiAPI.activatePowerOptInWithIFrame({}).then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
+    PoiAPIUserview.activatePowerOptInWithIFrame({}).then(() => PoiAPICore.verifyPowerOptIn().then((optin) => {
         expect(optin.power_opt_in).toBe(false);
         done();
       })
@@ -34,7 +35,7 @@ describe('poi', () => {
 
   it('should disable POI on config error', (done) => {
     loadFixture('poi/poi.wrong-iframe.html');
-    PoiAPI.activatePowerOptInWithIFrame({}).then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
+    PoiAPIUserview.activatePowerOptInWithIFrame({}).then(() => PoiAPICore.verifyPowerOptIn().then((optin) => {
         expect(optin.power_opt_in).toBe(false);
         done();
       })
@@ -44,7 +45,7 @@ describe('poi', () => {
   it('should activate POI', (done) => {
     loadFixture('poi/poi.default.html');
 
-    PoiAPI.activatePowerOptInWithIFrame({}).then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
+    PoiAPIUserview.activatePowerOptInWithIFrame({}).then(() => PoiAPICore.verifyPowerOptIn().then((optin) => {
         expect(optin.power_opt_in).toBeDefined();
         expect(optin.power_opt_in).toBe(true);
         done();
@@ -54,12 +55,13 @@ describe('poi', () => {
 
   it('should redirect to the right hub without groupname', () => {
     let redirectionTarget = '';
-    spyOn(PoiAPI, 'redirectToLocation').and.callFake(function (location) { redirectionTarget = location; });
-
-    loadFixture('poi/poi.default.html');
-
-    PoiAPI.activatePowerOptInWithRedirect({});
+    spyOn(PoiAPIUserview, 'redirectToLocation').and.callFake(function (location) { redirectionTarget = location; });
+    PoiAPIUserview.activatePowerOptInWithRedirect({});
     expect(redirectionTarget).not.toContain('group_name');
   });
 
+  it('should add iframe', () => {
+    let iframe = PoiAPICore.addFrame();
+    expect(iframe).toBeDefined();
+  });
 });

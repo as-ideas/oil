@@ -1,4 +1,4 @@
-import { forEach } from '../../src/scripts/modal.js';
+import { forEach } from '../../src/scripts/userview/userview_modal.js';
 
 describe('modal', () => {
   it('should have an functioning forEach replacement', () => {

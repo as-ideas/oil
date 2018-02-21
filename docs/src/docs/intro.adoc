@@ -45,3 +45,11 @@ So solve this issue the Opt In Layer (OIL) offers a standard to implement these 
 * A **hub** part, which acts as a registry site for POI on a domain hosted by AS Ideas. This is optional and only needed for POI functionality.
 
 Opt-In Information is stored in a first party cookie in the users browser and communicated in a general way to the host site and Tealium. For Power-Opt-In theres also a 3rd party cookie stored on a second domain to share information between sites. The OIL Layer currently does not have a central database.
+
+=== Why is there no native app support?
+
+Native mobile apps are very customized concerning technology stack and implementation of tracking and advertising. Therefore, the OIL project won't offer a generic solution for this purpose.
+Each unit has to review their app how tracking and advertising is implemented and find a solution to get the consent from the user by a dialog.
+Consents both on desktop or mobile browsers given by the user are not able to be used in the mobile app because:
+* mobile browsers and in app web views use different ressources to store their cookies
+* desktop browsers and mobile apps have no physical connections

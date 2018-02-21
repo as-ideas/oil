@@ -1,9 +1,3 @@
-export const OIL_COOKIE = {
-  NAME: 'oil_data',
-  ATTR_POI: 'power_opt_in',
-  ATTR_TIMESTAMP: 'timestamp'
-};
-
 export const OIL_CONFIG = {
   ATTR_ACTIVATE_POI: 'poi_activate_poi',
   ATTR_HUB_ORIGIN: 'poi_hub_origin',

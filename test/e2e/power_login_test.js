@@ -14,20 +14,18 @@ const PAGE_INIT_TIMEOUT = 20000;
 
 module.exports = {
   beforeEach: browser => {
-    // Create a new session
-    browser.session('post');
     // wait for site hosts
     browser
-      .url(browser.globals.launch_url_host1)
+      .url(browser.globals.launch_url_host1+'/demos/empty.html')
       .useCss()
       .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
     browser
-      .url(browser.globals.launch_url_host2)
+      .url(browser.globals.launch_url_host2+'/demos/empty.html')
       .useCss()
       .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
     // wait for init of fake 'CDN'
     browser
-      .url(browser.globals.launch_url_cdn)
+      .url(browser.globals.launch_url_cdn+'/demos/empty.html')
       .useCss()
       .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
   },
@@ -73,24 +71,24 @@ module.exports = {
       .click(OIL_NO_BUTTON)
       .waitForElementVisible(OIL_YES_POI_SMALL_BUTTON, ASSERT_TIMEOUT, false)
       .click(OIL_YES_POI_SMALL_BUTTON);
-    browser.url((result) => {
-      if (result.toString().indexOf('fallback') !== -1) {
-        browser
-          .pause(200)
-          .waitForElementNotPresent(OIL_LAYER, ASSERT_TIMEOUT);
-      } else {
-        browser.pause(REDIRECT_TIMEOUT)
-      }
-      // return the current url
-      console.log(result);
-    });
-    browser
-      .url(browser.globals.launch_url_host2 + 'demos/complete-integration-site-b.html')
-      .useCss()
-      .waitForElementVisible('body', ASSERT_TIMEOUT, false)
-      .useXpath()
-      .waitForElementNotPresent(OIL_LAYER, 1000)
-      .end();
+      browser.url((result) => {
+        if (result.toString().indexOf('fallback') !== -1) {
+          browser
+            .pause(200)
+            .waitForElementNotPresent(OIL_LAYER, ASSERT_TIMEOUT);
+        } else {
+          browser.pause(REDIRECT_TIMEOUT)
+        }
+        // return the current url
+        console.log(result);
+      });
+      browser
+        .url(browser.globals.launch_url_host2 + 'demos/complete-integration-site-b.html')
+        .useCss()
+        .waitForElementVisible('body', ASSERT_TIMEOUT, false)
+        .useXpath()
+        .waitForElementNotPresent(OIL_LAYER, 1000)
+        .end();
   },
 
   'OIL Layer Power local yes is working across two domains': function (browser) {
