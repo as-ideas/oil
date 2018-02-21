@@ -1,14 +1,16 @@
-import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect, verifyPowerOptIn } from './poi.js';
-import { logInfo, logPreviewInfo } from './log.js';
-import { sendEventToHostSite } from './utils.js';
+import { verifyPowerOptIn } from '../core/core_poi.js';
+import { activatePowerOptInWithRedirect, activatePowerOptInWithIFrame } from './userview_poi.js';
+import { logInfo, logPreviewInfo } from '../core/core_log.js';
+import { sendEventToHostSite } from '../core/core_utils.js';
 import {
   EVENT_NAME_OPT_LATER,
   EVENT_NAME_OPT_IN,
   PRIVACY_SETTINGS_MINIMUM_TRACKING,
   EVENT_NAME_OPT_IGNORE
-} from './constants.js';
-import { isPoiActive, isSubscriberSetCookieActive } from './config.js';
-import { getSoiCookie, setSoiOptIn, setOptLater, setOilOptIgnore } from './cookies.js';
+} from '../core/core_constants.js';
+import { isPoiActive, isSubscriberSetCookieActive } from '../core/core_config.js';
+import { getSoiCookie, setSoiOptIn } from '../core/core_cookies.js';
+import { setOptLater, setOilOptIgnore } from './userview_cookies.js';
 
 /**
  * Log Helper function for checkOptIn

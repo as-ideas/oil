@@ -1,6 +1,7 @@
-import * as PoiAPI from '../../src/scripts/poi';
-import { loadFixture, deleteAllCookies } from '../utils';
-import { resetConfiguration } from '../../src/scripts/config';
+import * as PoiAPICore from '../../src/scripts/core/core_poi.js';
+import * as PoiAPIUserview from '../../src/scripts/userview/userview_poi.js';
+import { loadFixture, deleteAllCookies } from '../utils.js';
+import { resetConfiguration } from '../../src/scripts/core/core_config.js';
 
 describe('poi', () => {
 
@@ -25,7 +26,7 @@ describe('poi', () => {
   it('should activate POI with groupname', (done) => {
     loadFixture('poi/poi.groupname.html');
 
-    PoiAPI.activatePowerOptInWithIFrame({}).then(() => PoiAPI.verifyPowerOptIn().then((optin) => {
+    PoiAPIUserview.activatePowerOptInWithIFrame({}).then(() => PoiAPICore.verifyPowerOptIn().then((optin) => {
         expect(optin.power_opt_in).toBeDefined();
         expect(optin.power_opt_in).toBe(true);
         done();
@@ -35,11 +36,11 @@ describe('poi', () => {
 
   it('should redirect to the right hub with groupname', () => {
     let redirectionTarget = '';
-    spyOn(PoiAPI, 'redirectToLocation').and.callFake(function (location) { redirectionTarget = location; });
+    spyOn(PoiAPIUserview, 'redirectToLocation').and.callFake(function (location) { redirectionTarget = location; });
 
     loadFixture('poi/poi.groupname.html');
 
-    PoiAPI.activatePowerOptInWithRedirect({});
+    PoiAPIUserview.activatePowerOptInWithRedirect({});
     expect(redirectionTarget).toContain('homersimpson');
   });
 

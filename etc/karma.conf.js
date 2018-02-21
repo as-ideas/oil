@@ -35,8 +35,11 @@ module.exports = function (config) {
 
     frameworks: [
       'jasmine-jquery',
-      'jasmine'
+      'jasmine',
+      'polyfill'
     ],
+
+    polyfill: ['Promise'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -110,6 +113,7 @@ module.exports = function (config) {
   config.proxies = {
     '/scripts/': 'http://localhost:' + config.port + '/base/src/scripts/'
   };
+
   for (var key in appConfig.entry) {
     if (key) {
       // skip demos

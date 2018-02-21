@@ -1,5 +1,7 @@
-import {getOilHubDomainCookieConfig, getOilDomainCookieConfig, setSoiOptIn, setPoiOptIn} from '../../src/scripts/cookies.js';
-import {OilVersion} from '../../src/scripts/utils.js';
+import {setSoiOptIn, getSoiCookie} from '../../src/scripts/core/core_cookies.js';
+import {setOptLater, setOilOptIgnore} from '../../src/scripts/userview/userview_cookies.js';
+import {getPoiCookie, setPoiOptIn} from '../../src/scripts/hub/hub_cookies.js';
+import {OilVersion} from '../../src/scripts/core/core_utils.js';
 
 describe('cookies', () => {
   beforeEach(() => {
@@ -11,16 +13,15 @@ describe('cookies', () => {
 
   it('should store the version of oil in the hub domain cookie', () => {
     spyOn(OilVersion, 'get').and.returnValue('test-version');
-    let resultCookie = getOilHubDomainCookieConfig();
-    expect(resultCookie.default_content.version).toBe('test-version');
+    let resultCookie = getPoiCookie();
+    expect(resultCookie.version).toBe('test-version');
 
   });
 
   it('should store the version of oil in the domain cookie', () => {
     spyOn(OilVersion, 'get').and.returnValue('test-version');
-    let resultCookie = getOilDomainCookieConfig();
-    expect(resultCookie.default_content.version).toBe('test-version');
-
+    let resultCookie = getSoiCookie();
+    expect(resultCookie.version).toBe('test-version');
   });
 
   it('should fill the single opt-in cookie with the correct values and overwrite', () => {
@@ -92,18 +93,39 @@ describe('cookies', () => {
   });
 
   it('should create the correct hub domain default cookie with groupname empty', () => {
-    let resultCookie = getOilHubDomainCookieConfig('');
-    expect(resultCookie.name).toBe('oil_data');
+    setPoiOptIn();
+    let resultCookie = JSON.parse(getCookie('oil_data'));
+    expect(resultCookie.power_opt_in).toBe(true);
   });
 
   it('should create the correct hub domain default cookie with groupname undefined', () => {
-    let resultCookie = getOilHubDomainCookieConfig();
-    expect(resultCookie.name).toBe('oil_data');
+    setPoiOptIn(undefined);
+    let resultCookie = JSON.parse(getCookie('oil_data'));
+    expect(resultCookie.power_opt_in).toBe(true);
   });
 
   it('should create the correct hub domain default cookie with groupname', () => {
-    let resultCookie = getOilHubDomainCookieConfig('lisasimpson');
-    expect(resultCookie.name).toBe('lisasimpson_oil_data');
+    setPoiOptIn('lisasimpson');
+    let resultCookie = JSON.parse(getCookie('lisasimpson_oil_data'));
+    expect(resultCookie.power_opt_in).toBe(true);
+  });
+
+  it('should set opt_later correctly', () => {
+    setOptLater(true);
+    let resultCookie = JSON.parse(getCookie('oil_data_session'));
+    expect(resultCookie.opt_later).toBe(true);
+    setOptLater(false);
+    resultCookie = JSON.parse(getCookie('oil_data_session'));
+    expect(resultCookie.opt_later).toBe(false);
+  });
+
+  it('should set opt_ignore correctly', () => {
+    setOilOptIgnore(true);
+    let resultCookie = JSON.parse(getCookie('oil_data_session'));
+    expect(resultCookie.opt_ignore).toBe(true);
+    setOilOptIgnore(false);
+    resultCookie = JSON.parse(getCookie('oil_data_session'));
+    expect(resultCookie.opt_ignore).toBe(false);
   });
 
 });

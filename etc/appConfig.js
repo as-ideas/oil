@@ -26,11 +26,6 @@ module.exports = {
     chunks: ['hub'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'demos/direct-integration.html',
-    template: path.resolve(sourcePath, 'demos', 'direct-integration.html'),
-    chunks: ['demos/direct-integration'],
-    chunksSortMode: 'dependency'
-  }, {
     filename: 'demos/advanced-settings.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings.html'),
     chunks: ['oil'],
@@ -112,9 +107,8 @@ module.exports = {
     chunksSortMode: 'dependency'
   }],
   entry: {
-    'oil': path.resolve(sourcePath, 'oil.js'),
-    'demos/direct-integration': path.resolve(sourcePath, 'oil.js'),
-    'hub': path.resolve(sourcePath, 'hub.js')
+    'hub': path.resolve(sourcePath, 'hub.js'),
+    'oil': path.resolve(sourcePath, 'oil.js')
   },
   copy: [{
     from: path.resolve(sourcePath, 'assets'),
@@ -131,11 +125,12 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, 'index.html'),
     to: 'index.html'
-
+  }, {
+    from: path.resolve(sourcePath, 'demos/empty.html'),
+    to: 'demos/empty.html'
   }, {
     from: path.resolve(sourcePath, 'legal'),
     to: 'legal'
-
   }],
   mangle: {},
   proxy: {},
