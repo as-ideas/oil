@@ -199,7 +199,3 @@ export function deActivatePowerOptIn() {
   }));
 }
 
-export function redirectToLocation(location) {
-  window.location.replace(location);
-}
-

@@ -32,4 +32,5 @@ export function setOilOptIgnore(value) {
     cookie.opt_ignore = value;
     setSessionCookie(getOilSessionCookieConfig().name, cookie);
   }
+
 }

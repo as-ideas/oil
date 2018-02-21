@@ -1,7 +1,8 @@
 import Cookie from 'js-cookie';
-import { oilOptIn, oilOptLater } from '../../src/scripts/optin';
-import { deleteAllCookies } from '../utils';
-import { getSoiCookie, hasOptedLater } from '../../src/scripts/cookies.js';
+import { oilOptIn, oilOptLater } from '../../src/scripts/userview/userview_optin.js';
+import { deleteAllCookies } from '../utils.js';
+import { getSoiCookie } from '../../src/scripts/core/core_cookies.js';
+import { hasOptedLater } from '../../src/scripts/core/core_optin.js';
 
 describe('optin', () => {
 

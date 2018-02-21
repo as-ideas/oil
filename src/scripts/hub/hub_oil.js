@@ -7,12 +7,7 @@ import { getStringParam } from './hub_utils.js';
 
 let initComplete = false;
 
-export function initOilHub() {
-  let locationString = '';
-  if (location && location.search && location.search.substr(1)) {
-    locationString = location.search.substr(1);
-  }
-
+export function initOilHub(locationString) {
   logInfo(`Init OilHub (version ${OilVersion.get()})`);
   if (isPoiFallbackMode(locationString)) {
     logInfo('Fallback mode, doing round trip...');
@@ -66,7 +61,7 @@ function handlerFunction(message) {
         case 'oil-status-read':
           poiOptin = getPoiCookie(groupName);
           logInfo('OIL Hub - read the following poi status:', poiOptin.power_opt_in);
-          parent.postMessage(JSON.stringify(poiOptin.power_opt_in) || false, origin);
+          parent.postMessage(JSON.stringify(poiOptin) || false, origin);
           break;
         case 'oil-poi-delete':
           logInfo('OIL Hub - remove POI cookie.');

@@ -25,6 +25,10 @@ export function activatePowerOptInWithIFrame(payload) {
   }));
 }
 
+export function redirectToLocation(location) {
+  window.location.replace(location);
+}
+
 /**
  * Activate Power Opt IN with the use of an redirect
  * @function
@@ -54,5 +58,7 @@ export function activatePowerOptInWithRedirect(payload) {
     exports.redirectToLocation(targetLocation);
   }
 }
+
+
 
 

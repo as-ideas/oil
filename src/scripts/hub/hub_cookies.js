@@ -36,13 +36,13 @@ function getOilHubDomainCookie(groupName) {
 /**
  * Public Interface
  */
-export function getPoiCookie(groupName) {
+export function getPoiCookie(groupName = '') {
   let cookie = getOilHubDomainCookie(groupName);
   logInfo('Current Oil Hub Domain Cookie: ', cookie);
   return cookie;
 }
 
-export function setPoiOptIn(groupName, privacySettings) {
+export function setPoiOptIn(groupName = '', privacySettings = PRIVACY_MINIMUM_TRACKING) {
   let cookie = getOilHubDomainCookie(groupName);
   cookie.power_opt_in = true;
   cookie.privacy = privacySettings;

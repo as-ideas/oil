@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie';
 import * as HubAPI from '../../src/scripts/hub/hub_oil.js';
-import { deleteAllCookies } from '../utils';
-import { resetConfiguration } from '../../src/scripts/config';
+import { deleteAllCookies } from '../utils.js';
+import { resetConfiguration } from '../../src/scripts/core/core_config.js';
 
 describe('the hub.js', () => {
 

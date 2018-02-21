@@ -30,7 +30,7 @@ function getConfiguration() {
   if (!cachedConfig) {
     let configurationElement = document.querySelector('script[type="application/configuration"]#oil-configuration');
     if (configurationElement === null) {
-      logInfo('No configuration script found, using default values');
+      logInfo('Using default config');
     }
     cachedConfig = readConfiguration(configurationElement);
   }
@@ -46,20 +46,7 @@ function getConfiguration() {
  */
 export function getConfigValue(name, defaultValue) {
   let config = getConfiguration();
-  return config[name] ? config[name] : defaultValue;
-}
-
-/**
- *
- * Get the hub iFrame domain with protocol prefix for the current location
- * @returns {string, null} domain iframe orgin
- */
-function getHubDomain() {
-  let origin = getHubOrigin();
-  if (origin) {
-    return origin.indexOf('http') !== -1 ? origin : location.protocol + origin;
-  }
-  return null;
+  return (config && config[name]) ? config[name] : defaultValue;
 }
 
 // **
@@ -85,8 +72,17 @@ export function isSubscriberSetCookieActive() {
   return getConfigValue(OIL_CONFIG.ATTR_SUB_SET_COOKIE, true);
 }
 
+/**
+ *
+ * Get the hub iFrame domain with protocol prefix for the current location
+ * @returns {string, null} domain iframe orgin
+ */
 export function getHubOrigin() {
-  return getConfigValue(OIL_CONFIG.ATTR_HUB_ORIGIN, '');
+  let origin = getConfigValue(OIL_CONFIG.ATTR_HUB_ORIGIN, '');
+  if (origin) {
+    return origin.indexOf('http') !== -1 ? origin : location.protocol + origin;
+  }
+  return null;
 }
 
 export function getHubPath() {
@@ -107,7 +103,7 @@ export function getCookieExpireInDays() {
  */
 export function getHubLocation() {
   if (getHubOrigin() && getHubPath()) {
-    return getHubDomain() + getHubPath();
+    return getHubOrigin() + getHubPath();
   }
   return null;
 }
