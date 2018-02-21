@@ -28,7 +28,9 @@ import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
 import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
 import { CSSPrefix } from './view/oil.view.config.js';
 import { logInfo, logError } from '../core/core_log.js';
-import { isPersistMinimumTracking, isSubsetCookie } from './userview_config.js';
+import { isPersistMinimumTracking } from './userview_config.js';
+import { isSubscriberSetCookieActive } from '../core/core_config.js';
+
 
 // Initialize our Oil wrapper and save it ...
 
@@ -276,7 +278,7 @@ export function handlePoiOptIn() {
   logInfo('Handling POI with settings: ', privacySetting);
   trackPrivacySetting(privacySetting);
   if (privacySetting !== PRIVACY_MINIMUM_TRACKING || isPersistMinimumTracking()) {
-    oilPowerOptIn(convertPrivacySettingsToCookieValue(privacySetting), !isSubsetCookie()).then(() => {
+    oilPowerOptIn(convertPrivacySettingsToCookieValue(privacySetting), !isSubscriberSetCookieActive()).then(() => {
       renderOil(oilWrapper, {optIn: true});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
         sendEventToHostSite(EVENT_NAME_POI_OPT_IN);

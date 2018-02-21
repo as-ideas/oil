@@ -10,11 +10,6 @@ export function isPersistMinimumTracking() {
   return getConfigValue(OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING, true);
 }
 
-// TODO check what this is and why its still around
-export function isSubsetCookie() {
-  return getConfigValue(OIL_CONFIG.ATTR_SUB_SET_COOKIE, false);
-}
-
 export function isAdvancedSettings() {
   return getConfigValue(OIL_CONFIG.ATTR_ADVANCED_SETTINGS, false);
 }
