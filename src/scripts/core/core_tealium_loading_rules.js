@@ -1,4 +1,4 @@
-import { getSoiPrivacy } from './cookies';
+import { getSoiCookie } from './core_cookies';
 
 const LOADING_RULE_ALL = '_dip_oil_consent_all';
 const LOADING_RULE_ESSENTIAL = '_dip_oil_consent_essential';
@@ -39,7 +39,7 @@ export function doSetTealiumVariables(optin) {
   }
 
   if (optin) {
-    let privacy = getSoiPrivacy();
+    let privacy = getSoiCookie().privacy;
     if (privacy) {
       window.utag_data[LOADING_RULE_ESSENTIAL] = privacy[PRIVACY_SETTING_ESSENTIAL] === 1;
       window.utag_data[LOADING_RULE_ANALYTICS] = privacy[PRIVACY_SETTING_ANALYTICS] === 1;
