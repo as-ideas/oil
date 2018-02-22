@@ -19,6 +19,7 @@ import {
   isBrowserCookieEnabled,
   getRawSoiCookie
 } from './core_cookies.js';
+import { doSetTealiumVariables } from "./core_tealium_loading_rules";
 
 /**
  * Initialize Oil on Host Site
@@ -56,6 +57,7 @@ export function initOilLayer() {
      */
     checkOptIn().then((optin) => {
       registerOptOutListener();
+      doSetTealiumVariables(optin);
       /**
        * User has opted in
        */
