@@ -63,11 +63,11 @@ export const PRIVACY_MINIMUM_TRACKING = 0;
 export const PRIVACY_FUNCTIONAL_TRACKING = 1;
 export const PRIVACY_FULL_TRACKING = 2;
 
-const PRIVACY_SETTING_ESSENTIAL       = 'esse';
-const PRIVACY_SETTING_ANALYTICS       = 'analy';
-const PRIVACY_SETTING_SOCIAL_CONNECT  = 'soci';
-const PRIVACY_SETTING_ADS_BASE        = 'adsbase';
-const PRIVACY_SETTING_ADS_BEHAVIOUR   = 'adsbehav';
+export const PRIVACY_SETTING_ESSENTIAL       = 'esse';
+export const PRIVACY_SETTING_ANALYTICS       = 'analy';
+export const PRIVACY_SETTING_SOCIAL_CONNECT  = 'soci';
+export const PRIVACY_SETTING_ADS_BASE        = 'adsbase';
+export const PRIVACY_SETTING_ADS_BEHAVIOUR   = 'adsbehav';
 
 export const PRIVACY_SETTINGS_FULL_TRACKING = {
   [PRIVACY_SETTING_ID]: PRIVACY_FULL_TRACKING,
