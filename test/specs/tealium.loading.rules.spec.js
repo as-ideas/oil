@@ -1,4 +1,4 @@
-import { doSetTealiumVariables } from '../../src/scripts/core/tealiumLoadingRules';
+import { doSetTealiumVariables } from '../../src/scripts/core/core_tealium_loading_rules';
 import { setSoiOptIn } from '../../src/scripts/core/core_cookies';
 import { PRIVACY_SETTINGS_FULL_TRACKING } from '../../src/scripts/core/core_constants';
 
