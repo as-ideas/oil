@@ -36,13 +36,13 @@
     "js-cookie": "^2.1.4",
     "nouislider": "^10.1.0",
     "serve-index": "^1.9.0",
-    "serve-static": "^1.12.1"
+    "serve-static": "^1.12.1",
+    "webpack2-polyfill-plugin": "0.0.2"
   },
   "devDependencies": {
     "asciidoctor.js": "^1.5.6-preview.4",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-plugin-es6-promise": "1.1.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
@@ -57,7 +57,6 @@
     "copy-webpack-plugin": "4.0.1",
     "cross-env": "^5.1.1",
     "css-loader": "0.25.0",
-    "es6-promise": "^4.1.1",
     "eslint": "3.7.1",
     "eslint-loader": "1.5.0",
     "eslint-plugin-es6-recommended": "0.1.2",

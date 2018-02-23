@@ -16,6 +16,7 @@ debugLog('Using following appConfig:', appConfig);
  */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Webpack2Polyfill = require("webpack2-polyfill-plugin");
 
 /*
  * Webpack Constants
@@ -186,6 +187,8 @@ var config = {
             jquery: "jQuery",
             "windows.jQuery": "jquery"
         }),
+
+        new Webpack2Polyfill(),
 
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
