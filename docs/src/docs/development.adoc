@@ -15,7 +15,7 @@ Jira: https://id-jira.axelspringer.de/browse/OIL
 
 Jenkins: https://kube-jenkins.ipool.asideas.de/view/OIL%20Project/
 
-Overview: http://oil.asideas.de
+Overview: http://oil.axelspringer.com
 
 === OIL Flow
 

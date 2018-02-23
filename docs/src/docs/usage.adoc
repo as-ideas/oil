@@ -32,14 +32,14 @@ If Tealium can't be used on your site you also can add OIL directly from our CDN
 Example:
 [source, javascript]
 ----
-<script type="text/javascript" src="https://oil.asideas.de/release/oil.1.0.7.min.js"></script>
+<script type="text/javascript" src="https://oil.axelspringer.com/release/oil.1.0.7.min.js"></script>
 ----
 
 Updated versions of the script will be deployed using a different filename hence we'll never alter an existing version.
 
 Please make sure you're working with the latest version available.
 
-Check https://oil.asideas.de/ for further updates.
+Check https://oil.axelspringer.com/ for further updates.
 
 IMPORTANT: Your domain needs to be whitelisted in order to work with OIL (contact us to get whitelisted: Team ANDROID AGASSI <ANDROIDAGASSI@moveoffice.com>)
 
@@ -61,7 +61,7 @@ You need to add the configuration snippet to all pages where OIL is required. Th
         /*
             Text labels, see Label Keys section below
         */
-        "label_heading": "Bitte stimmen Sie zu",
+        "label_intro_heading": "Bitte stimmen Sie zu",
         "label_intro_start": "Wir benutzen Cookies.",
         "label_intro_end": "Bitte stimmen sie zu:",
         "label_later_start": "Wir benutzen Cookies.",
@@ -87,7 +87,7 @@ You need to add the configuration snippet to all pages where OIL is required. Gi
         /*
             Text labels, see Label Keys section below
         */
-        "label_heading": "Bitte stimmen Sie zu",
+        "label_introheading": "Bitte stimmen Sie zu",
         "label_intro_start": "Wir benutzen Cookies.",
         "label_intro_end": "Bitte stimmen sie zu:",
         "label_later_start": "Wir benutzen Cookies.",
@@ -100,7 +100,7 @@ You need to add the configuration snippet to all pages where OIL is required. Gi
             POI optional params start here
         *
         "activate_poi": true,
-        "hub_origin": "//oil.asideas.de",
+        "hub_origin": "//oil.axelspringer.com",
         "hub_path": "/hub.html",
         "subscriber_set_cookie": true,
         "poi_group_name": "BILD",
@@ -135,7 +135,7 @@ This is a full list of configurable options.
 [width="100%",options="header", cols="1,3"]
 |====
 |Config Parameter|Default value
-|label_heading| Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis
+|label_intro_heading| Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis
 |label_intro| Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen.
 |label_later| Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen. In unseren Datenschutzbestimmungen erfahren Sie, wie Sie Cookies deaktivieren können
 |label_button_yes_soi| Jetzt zustimmen
