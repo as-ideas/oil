@@ -76,7 +76,6 @@ function receiveMessage(event) {
   }
 
   if (event && event.data && (eventDataContains('oil_opt'))) {
-    console.info('event', event.data);
     doSetTealiumVariables();
     reEvaluateTealiumLoadingRules();
   }
