@@ -1,12 +1,14 @@
 import { doSetTealiumVariables } from '../../src/scripts/core/core_tealium_loading_rules';
 import { setSoiOptIn } from '../../src/scripts/core/core_cookies';
-import { PRIVACY_SETTINGS_FULL_TRACKING } from '../../src/scripts/core/core_constants';
+import { EVENT_NAME_OPT_IN, PRIVACY_SETTINGS_FULL_TRACKING } from '../../src/scripts/core/core_constants';
+import { getOrigin } from '../../src/scripts/core/core_utils';
 
 describe('the tealium loading rules', () => {
   beforeEach(() => {
     deleteAllCookies();
     window.utag = undefined;
-
+    window.utag_data = undefined;
+    window.oilEventListenerForLoadingRules = undefined;
   });
 
   const PRIVACY_SETTING_ESSENTIAL = 'esse';
@@ -57,7 +59,7 @@ describe('the tealium loading rules', () => {
     givenUtagExists();
 
     doSetTealiumVariables();
-    doSetTealiumVariables();
+    // doSetTealiumVariables();
 
     expect(window.oilEventListenerForLoadingRules).toBeDefined();
   });
@@ -67,12 +69,12 @@ describe('the tealium loading rules', () => {
 
     doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(false);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(false);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(false);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(0);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(0);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(0);
   });
 
   it('should have all loading rules true, when all privacy details in cookie are set', () => {
@@ -81,12 +83,12 @@ describe('the tealium loading rules', () => {
 
     doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(true);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(true);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(true);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(true);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(true);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(true);
+    expect(window.utag_data._dip_oil_consent_all).toBe(1);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(1);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(1);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(1);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(1);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(1);
   });
 
   it('should have only ESSENTIAL, when only ESSENTIAL is set in cookie', () => {
@@ -97,12 +99,12 @@ describe('the tealium loading rules', () => {
 
     doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(true);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(false);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(false);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(1);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(0);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(0);
   });
 
   it('should have only ANALYTICS, when only ANALYTICS is set in cookie', () => {
@@ -113,12 +115,12 @@ describe('the tealium loading rules', () => {
 
     doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(false);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(true);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(false);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(0);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(1);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(0);
   });
 
   it('should have only SOCIAL_CONNECT, when only SOCIAL_CONNECT is set in cookie', () => {
@@ -129,12 +131,12 @@ describe('the tealium loading rules', () => {
 
     doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(false);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(false);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(true);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(false);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(0);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(0);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(1);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(0);
   });
 
   it('should have only ADS_BASE, when only ADS_BASE is set in cookie', () => {
@@ -145,12 +147,12 @@ describe('the tealium loading rules', () => {
 
     doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(false);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(false);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(true);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(false);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(0);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(0);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(1);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(0);
   });
 
   it('should have only ADS_BEHAVIOUR, when only ADS_BEHAVIOUR is set in cookie', () => {
@@ -161,12 +163,53 @@ describe('the tealium loading rules', () => {
 
     doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(false);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(false);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(true);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(0);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(0);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(1);
+  });
+
+  it('should reEvaluate tealium if there is an opt-in event and there was no consent', (done) => {
+    givenUtagExists();
+    spyOn(window.utag, 'view');
+
+    doSetTealiumVariables();
+    window.postMessage(EVENT_NAME_OPT_IN, getOrigin());
+
+    window.setTimeout(() => {
+      expect(window.utag.view).toHaveBeenCalledWith({
+        _dip_oil_consent_all: 0,
+        _dip_oil_consent_essential: 0,
+        _dip_oil_consent_analytics: 0,
+        _dip_oil_consent_social_connect: 0,
+        _dip_oil_consent_ads_base: 0,
+        _dip_oil_consent_ads_behaviour: 0
+      });
+      done();
+    }, 250);
+  });
+
+  it('should reEvaluate tealium if there is an opt-in event and all consents are set', (done) => {
+    givenUtagExists();
+    givenPrivacySettings(PRIVACY_SETTINGS_FULL_TRACKING);
+    spyOn(window.utag, 'view');
+
+    doSetTealiumVariables();
+    window.postMessage(EVENT_NAME_OPT_IN, getOrigin());
+
+    window.setTimeout(() => {
+      expect(window.utag.view).toHaveBeenCalledWith({
+        _dip_oil_consent_all: 1,
+        _dip_oil_consent_essential: 1,
+        _dip_oil_consent_analytics: 1,
+        _dip_oil_consent_social_connect: 1,
+        _dip_oil_consent_ads_base: 1,
+        _dip_oil_consent_ads_behaviour: 1
+      });
+      done();
+    }, 250);
   });
 
   function givenUtagDataAlreadyExists() {
@@ -175,7 +218,10 @@ describe('the tealium loading rules', () => {
   }
 
   function givenUtagExists() {
-    window.utag = {};
+    window.utag = {
+      view: () => {
+      }
+    };
   }
 
   function givenPrivacySettings(privacySettings) {
