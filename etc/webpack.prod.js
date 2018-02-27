@@ -123,6 +123,16 @@ var config = webpackMerge(commonConfig, {
     }),
 
     /**
+     * Plugin: banner-webpack-plugin
+     *
+     * Adds comments to ouput files, eg. the version
+     *
+     * See: https://webpack.js.org/plugins/banner-plugin/
+     * See: https://stackoverflow.com/questions/34280117/include-comment-at-top-of-webpack-file
+     */
+    new webpack.BannerPlugin(BUNDLE_VERSION),
+
+    /**
      * The UglifyJsPlugin will no longer put loaders into minimize mode, and the debug option has been deprecated. These options are simply moved into a new plugin, LoaderOptionsPlugin, for separation of concerns reasons. Use it as such:
      */
     new webpack.LoaderOptionsPlugin({
