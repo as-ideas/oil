@@ -23,37 +23,77 @@ const PRIVACY_SETTING_ADS_BEHAVIOUR = 'adsbehav';
  *
  * @param optin - the current cookie value
  */
-export function doSetTealiumVariables(optin) {
+export function doSetTealiumVariables() {
+  // attachEventListenerForLoadingRules();
 
   if (window && window.utag) {
     if (!window.utag_data) {
-      window.utag_data = {}
+      window.utag_data = {};
     }
 
-    window.utag_data[LOADING_RULE_ALL] = false;
-    window.utag_data[LOADING_RULE_ESSENTIAL] = false;
-    window.utag_data[LOADING_RULE_ANALYTICS] = false;
-    window.utag_data[LOADING_RULE_SOCIAL_CONNECT] = false;
-    window.utag_data[LOADING_RULE_ADS_BASE] = false;
-    window.utag_data[LOADING_RULE_ADS_BEHAVIOUR] = false;
-  }
-
-  if (optin) {
+    let ud = window.utag_data;
+    console.info('###### ud', ud);
     let privacy = getSoiCookie().privacy;
     if (privacy) {
-      window.utag_data[LOADING_RULE_ESSENTIAL] = privacy[PRIVACY_SETTING_ESSENTIAL] === 1;
-      window.utag_data[LOADING_RULE_ANALYTICS] = privacy[PRIVACY_SETTING_ANALYTICS] === 1;
-      window.utag_data[LOADING_RULE_SOCIAL_CONNECT] = privacy[PRIVACY_SETTING_SOCIAL_CONNECT] === 1;
-      window.utag_data[LOADING_RULE_ADS_BASE] = privacy[PRIVACY_SETTING_ADS_BASE] === 1;
-      window.utag_data[LOADING_RULE_ADS_BEHAVIOUR] = privacy[PRIVACY_SETTING_ADS_BEHAVIOUR] === 1;
+      ud[LOADING_RULE_ESSENTIAL] = privacy[PRIVACY_SETTING_ESSENTIAL];
+      ud[LOADING_RULE_ANALYTICS] = privacy[PRIVACY_SETTING_ANALYTICS];
+      ud[LOADING_RULE_SOCIAL_CONNECT] = privacy[PRIVACY_SETTING_SOCIAL_CONNECT];
+      ud[LOADING_RULE_ADS_BASE] = privacy[PRIVACY_SETTING_ADS_BASE];
+      ud[LOADING_RULE_ADS_BEHAVIOUR] = privacy[PRIVACY_SETTING_ADS_BEHAVIOUR];
 
-      window.utag_data[LOADING_RULE_ALL] =
-        window.utag_data[LOADING_RULE_ESSENTIAL] &&
-        window.utag_data[LOADING_RULE_ANALYTICS] &&
-        window.utag_data[LOADING_RULE_SOCIAL_CONNECT] &&
-        window.utag_data[LOADING_RULE_ADS_BASE] &&
-        window.utag_data[LOADING_RULE_ADS_BEHAVIOUR];
+      ud[LOADING_RULE_ALL] =
+        (ud[LOADING_RULE_ESSENTIAL] === 1 &&
+          ud[LOADING_RULE_ANALYTICS] === 1 &&
+          ud[LOADING_RULE_SOCIAL_CONNECT] === 1 &&
+          ud[LOADING_RULE_ADS_BASE] === 1 &&
+          ud[LOADING_RULE_ADS_BEHAVIOUR] === 1) ? 1 : 0;
+    } else {
+      ud[LOADING_RULE_ALL] = 0;
+      ud[LOADING_RULE_ESSENTIAL] = 0;
+      ud[LOADING_RULE_ANALYTICS] = 0;
+      ud[LOADING_RULE_SOCIAL_CONNECT] = 0;
+      ud[LOADING_RULE_ADS_BASE] = 0;
+      ud[LOADING_RULE_ADS_BEHAVIOUR] = 0;
     }
   }
+}
+
+function receiveMessage(event) {
+  function eventDataContains(str) {
+    return JSON.stringify(event.data).indexOf(str) !== -1;
+  }
+
+  if (event && event.data && (eventDataContains('oil_opt'))) {
+    doSetTealiumVariables();
+    reEvaluateTealiumLoadingRules();
+  }
+}
+
+
+function attachEventListenerForLoadingRules() {
+  if (!window.oilEventListenerForLoadingRules) {
+    window.oilEventListenerForLoadingRules = receiveMessage;
+
+    let eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    let messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+    let eventer = window[eventMethod];
+    eventer(messageEvent, window.oilEventListenerForLoadingRules, false);
+  }
+}
+
+function reEvaluateTealiumLoadingRules() {
+  // cf. https://community.tealiumiq.com/t5/Tealium-iQ-Tag-Management/Reload-re-evaluate-load-rules/td-p/7282
+  // and documentation under https://community.tealiumiq.com/t5/JavaScript-utag-js/Page-Tracking/ta-p/15563#toc-hId--1333191890
+  let ud = window.utag_data;
+  let payload = {
+    [LOADING_RULE_ALL]: ud[LOADING_RULE_ALL],
+    [LOADING_RULE_ESSENTIAL]: ud[LOADING_RULE_ESSENTIAL],
+    [LOADING_RULE_ANALYTICS]: ud[LOADING_RULE_ANALYTICS],
+    [LOADING_RULE_SOCIAL_CONNECT]: ud[LOADING_RULE_SOCIAL_CONNECT],
+    [LOADING_RULE_ADS_BASE]: ud[LOADING_RULE_ADS_BASE],
+    [LOADING_RULE_ADS_BEHAVIOUR]: ud[LOADING_RULE_ADS_BEHAVIOUR]
+  };
+  window.utag.view(payload);
+
 }
 

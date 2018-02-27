@@ -34,6 +34,8 @@ export function initOilLayer() {
     logPreviewInfo('Preview mode not correctly set, please see the documentation on how to set the cookie.');
   }
 
+  doSetTealiumVariables();
+
   /**
    * We show OIL depending on the following conditions:
    * With Dev Mode turned on, we only show Oil if a developer cookie is set
@@ -57,7 +59,6 @@ export function initOilLayer() {
      */
     checkOptIn().then((optin) => {
       registerOptOutListener();
-      doSetTealiumVariables(optin);
       /**
        * User has opted in
        */
