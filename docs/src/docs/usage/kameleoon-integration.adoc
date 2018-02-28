@@ -9,5 +9,3 @@ An example link would look like:
 ----
 
 Instead of xxxxxxxxxxx the right hash needs to be present, so Kameleoon knows which website it deals with. When we setup OIL A/B testing on your page this hash needs to be generated within Kameleoon.
-
-
