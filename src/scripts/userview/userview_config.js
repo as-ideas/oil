@@ -14,7 +14,8 @@ export function isAdvancedSettings() {
 }
 
 export function getLabel(configName) {
-  return getConfigValue(configName, window.AS_OIL_LOCALE[configName]);
+  let defaultLabel = (window.AS_OIL_LOCALE && window.AS_OIL_LOCALE[configName]) ? window.AS_OIL_LOCALE[configName] : '';
+  return getConfigValue(configName, defaultLabel);
 }
 
 //

@@ -21,22 +21,22 @@ function getOilHubCookieName(groupName) {
   return OIL_HUB_DOMAIN_COOKIE_NAME;
 }
 
-function getHubDomainCookieConfig(groupName, oilVersion, locale) {
+function getHubDomainCookieConfig(groupName) {
   return {
     name: getOilHubCookieName(groupName),
     expires: getCookieExpireInDays(),
     default_content: {
       'power_opt_in': false,
       'timestamp': getClientTimestamp(),
-      'version': oilVersion,
-      'locale': locale,
+      'version': 'unrecorded', // those values cant be figured out
+      'locale': 'unrecorded', //  in the hub and come from the sites config
       'privacy': PRIVACY_MINIMUM_TRACKING
     }
   };
 }
 
-function getOilHubDomainCookie(groupName, oilVersion, locale) {
-  return getOilCookie(getHubDomainCookieConfig(groupName, oilVersion, locale));
+function getOilHubDomainCookie(groupName) {
+  return getOilCookie(getHubDomainCookieConfig(groupName));
 }
 
 function getPrivacySettingsFromPayload(payload) {
@@ -78,8 +78,8 @@ export function setPoiOptIn(groupName = '', payload) {
   let oilVersion = getVersionFromPayload(payload);
   let locale = getLocaleFromPayload(payload);
 
-  let cookie = getOilHubDomainCookie(groupName, oilVersion, locale);
-  let cookieConfig = getHubDomainCookieConfig(groupName, oilVersion, locale);
+  let cookie = getOilHubDomainCookie(groupName);
+  let cookieConfig = getHubDomainCookieConfig(groupName);
   cookie.power_opt_in = true;
   cookie.privacy = privacySettings;
   cookie.timestamp = getClientTimestamp();
