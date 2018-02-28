@@ -173,13 +173,8 @@ describe('the tealium loading rules', () => {
 
   it('should reEvaluate tealium if there is an opt-in event and there was no consent', (done) => {
     givenUtagExists();
-    spyOn(window.utag, 'view');
-
-    doSetTealiumVariables();
-    window.postMessage(EVENT_NAME_OPT_IN, getOrigin());
-
-    window.setTimeout(() => {
-      expect(window.utag.view).toHaveBeenCalledWith({
+    window.utag.view = (payload) => {
+      expect(payload).toEqual({
         _dip_oil_consent_all: 0,
         _dip_oil_consent_essential: 0,
         _dip_oil_consent_analytics: 0,
@@ -187,20 +182,19 @@ describe('the tealium loading rules', () => {
         _dip_oil_consent_ads_base: 0,
         _dip_oil_consent_ads_behaviour: 0
       });
-      done();
-    }, 250);
+      done()
+    };
+
+
+    doSetTealiumVariables();
+    window.postMessage(EVENT_NAME_OPT_IN, getOrigin());
   });
 
   it('should reEvaluate tealium if there is an opt-in event and all consents are set', (done) => {
     givenUtagExists();
     givenPrivacySettings(PRIVACY_SETTINGS_FULL_TRACKING);
-    spyOn(window.utag, 'view');
-
-    doSetTealiumVariables();
-    window.postMessage(EVENT_NAME_OPT_IN, getOrigin());
-
-    window.setTimeout(() => {
-      expect(window.utag.view).toHaveBeenCalledWith({
+    window.utag.view = (payload) => {
+      expect(payload).toEqual({
         _dip_oil_consent_all: 1,
         _dip_oil_consent_essential: 1,
         _dip_oil_consent_analytics: 1,
@@ -208,8 +202,12 @@ describe('the tealium loading rules', () => {
         _dip_oil_consent_ads_base: 1,
         _dip_oil_consent_ads_behaviour: 1
       });
-      done();
-    }, 250);
+      done()
+    };
+
+
+    doSetTealiumVariables();
+    window.postMessage(EVENT_NAME_OPT_IN, getOrigin());
   });
 
   function givenUtagDataAlreadyExists() {
