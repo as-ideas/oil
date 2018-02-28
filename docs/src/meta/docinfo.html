@@ -1,0 +1,124 @@
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--><!--<script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>-->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/vendor/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<script>
+  $(document).ready(function () {
+    var element = document.querySelector('.sectlevel1');
+    element.classList.add('accordion');
+    element.setAttribute('data-accordion', '');
+    element.setAttribute('data-multi-expand', 'true');
+    element.setAttribute('data-allow-all-closed', 'true');
+    element.setAttribute('data-slide-speed', '500');
+    element.setAttribute('role', 'tablist');
+
+    var liElements = element.children;
+    for (var i = 0; i < liElements.length; i++) {
+      let liElement = liElements[i];
+      liElement.classList.add('accordion-item');
+      liElement.setAttribute('data-accordion-item', '');
+
+      let ulElement = liElement.querySelector('ul');
+      if (ulElement) {
+        ulElement.classList.add('accordion-content');
+        ulElement.setAttribute('data-tab-content', '');
+      }
+    }
+
+    $(document).foundation();
+    window.setTimeout(function () {
+      $('.accordion').foundation('up', $('.accordion-content'));
+    }, 500);
+  })
+</script>
+
+<style>
+  #header #toc {
+    background-color: #373737;
+    padding: 0;
+  }
+
+  #header #toc #toctitle {
+    color: #fafafa;
+    background-image: linear-gradient(to top, #25c6c9 0%, #1a448c 120%);
+    padding: 20px;
+    font-weight: 600;
+    border-bottom: 2px solid white;
+  }
+
+  #header #toc a {
+    color: #afb3b3;
+  }
+
+  #header #toc .sectlevel1 {
+    padding: 12px 12px 90px 12px;
+  }
+
+  #header #toc .sectlevel1 > li > a {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  #header #toc .sectlevel2 > li > a {
+    font-size: 0.9rem;
+  }
+
+  #header #toc .sectlevel3 > li {
+    margin-top: 2px;
+  }
+
+  #header #toc .sectlevel3 > li > a {
+    font-size: 0.8rem;
+  }
+
+  @media only screen and (max-width: 1279px) {
+    #content {
+      padding-left: 24px;
+    }
+  }
+
+  div.sticky-footer {
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    background: #373737;
+    color: #ffffff;
+    padding: 2px 12px 2px 12px;
+    border-top: 1px solid white;
+    display: flex;
+  }
+
+  .sticky-footer p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+  }
+
+  .sticky-footer a {
+    color: white;
+    font-weight: 500;
+    font-size: 0.8rem;
+  }
+
+  .sticky-footer .column-one {
+    flex: 0 0 250px;
+  }
+
+  .sticky-footer .column-two {
+    flex: 0 0 250px;
+
+  }
+
+  .sticky-footer .column-three {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+</style>
