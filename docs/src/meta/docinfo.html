@@ -77,15 +77,29 @@
     }
   }
 
-  .footer {
+  .sticky-footer {
+    display: grid;
+    grid-auto-rows: minmax(50px, auto);
     position: fixed;
     bottom: 0;
-    width: 100vw;
-    z-index: 10000;
-    background: black;
     margin: 0;
-    display: inline-block;
     left: 0;
-    right: 0;
+    width: 100%;
+    z-index: 10000;
+    background: #373737;
+    color: #ffffff;
+  }
+
+  .sticky-footer .column-one {
+    grid-column: 1 / 2;
+    grid-row: 1;
+  }
+
+  .sticky-footer .column-two {
+    grid-column: 2 / 2;
+    grid-row: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
   }
 </style>
