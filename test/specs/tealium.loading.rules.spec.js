@@ -1,12 +1,14 @@
 import { doSetTealiumVariables } from '../../src/scripts/core/core_tealium_loading_rules';
 import { setSoiOptIn } from '../../src/scripts/core/core_cookies';
-import { PRIVACY_SETTINGS_FULL_TRACKING } from '../../src/scripts/core/core_constants';
+import { EVENT_NAME_OPT_IN, PRIVACY_SETTINGS_FULL_TRACKING } from '../../src/scripts/core/core_constants';
+import { getOrigin } from '../../src/scripts/core/core_utils';
 
 describe('the tealium loading rules', () => {
   beforeEach(() => {
     deleteAllCookies();
     window.utag = undefined;
-
+    window.utag_data = undefined;
+    window.oilEventListenerForLoadingRules = undefined;
   });
 
   const PRIVACY_SETTING_ESSENTIAL = 'esse';
@@ -37,136 +39,187 @@ describe('the tealium loading rules', () => {
   });
 
   it('should define utag_data when it is not defined', () => {
-    givenNothingUtag();
+    givenUtagExists();
 
     doSetTealiumVariables();
 
     expect(window.utag_data).toBeDefined();
   });
 
-  it('should have every loading rule false if there is no optin and no pricacy settings', () => {
-    givenNothingUtag();
+  it('should not override utag_data when it is already defined', () => {
+    givenUtagExists();
+    givenUtagDataAlreadyExists();
 
     doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(false);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(false);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(false);
+    expect(window.utag_data.hello).toBe('World');
+  });
+
+  it('should attach the event handler only once', () => {
+    givenUtagExists();
+
+    doSetTealiumVariables();
+    // doSetTealiumVariables();
+
+    expect(window.oilEventListenerForLoadingRules).toBeDefined();
   });
 
   it('should have every loading rule false if there is no pricacy details in cookie', () => {
-    givenNothingUtag();
-    givenPrivacySettings();
+    givenUtagExists();
 
     doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(false);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(false);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(false);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(0);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(0);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(0);
   });
 
   it('should have all loading rules true, when all privacy details in cookie are set', () => {
-    givenNothingUtag();
+    givenUtagExists();
     givenPrivacySettings(PRIVACY_SETTINGS_FULL_TRACKING);
 
-    doSetTealiumVariables(true);
+    doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(true);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(true);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(true);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(true);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(true);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(true);
+    expect(window.utag_data._dip_oil_consent_all).toBe(1);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(1);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(1);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(1);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(1);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(1);
   });
 
   it('should have only ESSENTIAL, when only ESSENTIAL is set in cookie', () => {
-    givenNothingUtag();
+    givenUtagExists();
     givenPrivacySettings({
       [PRIVACY_SETTING_ESSENTIAL]: 1
     });
 
-    doSetTealiumVariables(true);
+    doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(true);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(false);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(false);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(1);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(0);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(0);
   });
 
   it('should have only ANALYTICS, when only ANALYTICS is set in cookie', () => {
-    givenNothingUtag();
+    givenUtagExists();
     givenPrivacySettings({
       [PRIVACY_SETTING_ANALYTICS]: 1
     });
 
-    doSetTealiumVariables(true);
+    doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(false);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(true);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(false);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(0);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(1);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(0);
   });
 
   it('should have only SOCIAL_CONNECT, when only SOCIAL_CONNECT is set in cookie', () => {
-    givenNothingUtag();
+    givenUtagExists();
     givenPrivacySettings({
       [PRIVACY_SETTING_SOCIAL_CONNECT]: 1
     });
 
-    doSetTealiumVariables(true);
+    doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(false);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(false);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(true);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(false);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(0);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(0);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(1);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(0);
   });
 
   it('should have only ADS_BASE, when only ADS_BASE is set in cookie', () => {
-    givenNothingUtag();
+    givenUtagExists();
     givenPrivacySettings({
       [PRIVACY_SETTING_ADS_BASE]: 1
     });
 
-    doSetTealiumVariables(true);
+    doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(false);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(false);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(true);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(false);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(0);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(0);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(1);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(0);
   });
 
   it('should have only ADS_BEHAVIOUR, when only ADS_BEHAVIOUR is set in cookie', () => {
-    givenNothingUtag();
+    givenUtagExists();
     givenPrivacySettings({
       [PRIVACY_SETTING_ADS_BEHAVIOUR]: 1
     });
 
-    doSetTealiumVariables(true);
+    doSetTealiumVariables();
 
-    expect(window.utag_data._dip_oil_consent_all).toBe(false);
-    expect(window.utag_data._dip_oil_consent_essential).toBe(false);
-    expect(window.utag_data._dip_oil_consent_analytics).toBe(false);
-    expect(window.utag_data._dip_oil_consent_social_connect).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_base).toBe(false);
-    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(true);
+    expect(window.utag_data._dip_oil_consent_all).toBe(0);
+    expect(window.utag_data._dip_oil_consent_essential).toBe(0);
+    expect(window.utag_data._dip_oil_consent_analytics).toBe(0);
+    expect(window.utag_data._dip_oil_consent_social_connect).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_base).toBe(0);
+    expect(window.utag_data._dip_oil_consent_ads_behaviour).toBe(1);
   });
 
-  function givenNothingUtag() {
-    window.utag = {};
+  it('should reEvaluate tealium if there is an opt-in event and there was no consent', (done) => {
+    givenUtagExists();
+    window.utag.view = (payload) => {
+      expect(payload).toEqual({
+        _dip_oil_consent_all: 0,
+        _dip_oil_consent_essential: 0,
+        _dip_oil_consent_analytics: 0,
+        _dip_oil_consent_social_connect: 0,
+        _dip_oil_consent_ads_base: 0,
+        _dip_oil_consent_ads_behaviour: 0
+      });
+      done()
+    };
+
+
+    doSetTealiumVariables();
+    window.postMessage(EVENT_NAME_OPT_IN, getOrigin());
+  });
+
+  it('should reEvaluate tealium if there is an opt-in event and all consents are set', (done) => {
+    givenUtagExists();
+    givenPrivacySettings(PRIVACY_SETTINGS_FULL_TRACKING);
+    window.utag.view = (payload) => {
+      expect(payload).toEqual({
+        _dip_oil_consent_all: 1,
+        _dip_oil_consent_essential: 1,
+        _dip_oil_consent_analytics: 1,
+        _dip_oil_consent_social_connect: 1,
+        _dip_oil_consent_ads_base: 1,
+        _dip_oil_consent_ads_behaviour: 1
+      });
+      done()
+    };
+
+
+    doSetTealiumVariables();
+    window.postMessage(EVENT_NAME_OPT_IN, getOrigin());
+  });
+
+  function givenUtagDataAlreadyExists() {
+    window.utag_data = {hello: 'World'};
+
+  }
+
+  function givenUtagExists() {
+    window.utag = {
+      view: () => {
+      }
+    };
   }
 
   function givenPrivacySettings(privacySettings) {

@@ -44,6 +44,7 @@ export function initOilLayer() {
   }
 
   attachUtilityFunctionsToWindowObject(locale);
+  doSetTealiumVariables();
 
   /**
    * We show OIL depending on the following conditions:
@@ -71,7 +72,6 @@ export function initOilLayer() {
      */
     checkOptIn().then((optin) => {
       registerOptOutListener();
-      doSetTealiumVariables(optin);
       /**
        * User has opted in
        */
