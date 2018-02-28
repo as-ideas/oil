@@ -1,7 +1,7 @@
 = OIL Documentation
 :toc: left
 :toclevels: 4
-:toc-title: Quick navigation
+:toc-title: OIL Documentation
 :sectanchors:
 :idprefix:
 :idseparator: -

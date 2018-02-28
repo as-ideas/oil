@@ -1,5 +1,7 @@
 == Introduction
 
+=== About oil.js
+
 The OIL project aims for a stable cross-company solution for the challenges the new EU ePrivacy Regulation will pose to our business.
 
 * Data privacy opt-in overlay for all users of services offered by various Axel Springer brands and/or units

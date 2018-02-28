@@ -1,20 +1,80 @@
-<link rel="stylesheet" href="doc.css">
-<script src="doc.js"></script>
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--><!--<script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>-->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/vendor/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>
+<script>
+  $(document).ready(function () {
+    var element = document.querySelector('.sectlevel1');
+    element.classList.add('accordion');
+    element.setAttribute('data-accordion', '');
+    element.setAttribute('data-multi-expand', 'true');
+    element.setAttribute('data-allow-all-closed', 'true');
+    element.setAttribute('data-slide-speed', '500');
+    element.setAttribute('role', 'tablist');
+
+    var liElements = element.children;
+    for (var i = 0; i < liElements.length; i++) {
+      let liElement = liElements[i];
+      liElement.classList.add('accordion-item');
+      liElement.setAttribute('data-accordion-item', '');
+
+      let ulElement = liElement.querySelector('ul');
+      if (ulElement) {
+        ulElement.classList.add('accordion-content');
+        ulElement.setAttribute('data-tab-content', '');
+      }
+    }
+
+    $(document).foundation();
+    window.setTimeout(function () {
+      $('.accordion').foundation('up', $('.accordion-content'));
+    }, 500);
+  })
+</script>
+
 <style>
-
-  .toc2 {
+  #header #toc {
     background-color: #373737;
+    padding: 0;
   }
 
-  .toc2 #toctitle {
-
+  #header #toc #toctitle {
+    color: #fafafa;
+    background-color: #1a4c90;
+    padding: 20px;
+    font-weight: 600;
   }
 
-  .toc2 #toctitle {
+  #header #toc a {
+    color: #afb3b3;
   }
 
-  .toc2 .sectlevel1  {
+  #header #toc .sectlevel1 {
+    padding: 12px 12px 90px 12px;
+  }
 
+  #header #toc .sectlevel1 > li > a {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  #header #toc .sectlevel2 > li > a {
+    font-size: 0.9rem;
+  }
+
+  #header #toc .sectlevel3 > li {
+    margin-top: 2px;
+  }
+
+  #header #toc .sectlevel3 > li > a {
+    font-size: 0.8rem;
+  }
+
+  @media only screen and (max-width: 1279px) {
+    #content {
+      padding-left: 24px;
+    }
   }
 
   .footer {

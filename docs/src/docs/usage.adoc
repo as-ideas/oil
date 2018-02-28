@@ -1,5 +1,6 @@
+== Usage
 
-== How to implement OIL on your site
+=== How to implement OIL on your site
 
 Setting up OIL on your page consists of the following steps:
 
