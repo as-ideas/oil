@@ -1,4 +1,6 @@
-== Glossary
+== Appendix
+
+=== Glossary
 
 [options="header",cols="1,2"]
 |===

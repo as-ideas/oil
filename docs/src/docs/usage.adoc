@@ -1,5 +1,6 @@
+== Usage
 
-== How to implement OIL on your site
+=== How to implement OIL on your site
 
 Setting up OIL on your page consists of the following steps:
 
@@ -295,16 +296,7 @@ function receiveOptInMessage(event) {
 eventer(messageEvent, receiveMessage, false);
 ----
 
-=== Kameleoon A/B Testing with OIL
+include::usage/kameleoon-integration.adoc[]
 
-If you want to optimize and test your OIL installation with our Kameleoon A/B testing, you also need to include the right kameleoon script into your website, which will alter the optics and behaviour of OIL according to the test and your specific environment.
-
-An example link would look like:
-[source,html]
-----
-<script type="text/javascript" src="//static-bp.kameleoon.com/css/customers/xxxxxxxxxxx/0/kameleoon.js"></script>
-----
-
-Instead of xxxxxxxxxxx the right hash needs to be present, so Kameleoon knows which website it deals with. When we setup OIL A/B testing on your page this hash needs to be generated within Kameleoon.
 
 
