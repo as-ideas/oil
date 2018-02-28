@@ -97,6 +97,11 @@ export function getCookieExpireInDays() {
   return getConfigValue(OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS, 31);
 }
 
+export function getLocale() {
+  return getConfigValue(OIL_CONFIG.ATTR_LOCALE, 'deDE_01');
+}
+
+
 /**
  * Get the hub iFrame URL with protocol prefix for the current location
  * @returns {string, null} complete iframe orgin

@@ -57,20 +57,15 @@ You need to add the configuration snippet to all pages where OIL is required. Th
     <script id="oil-configuration" type="application/configuration">
       {
         "preview_mode": false,
-        "privacy_page_url": "http://www.mysite.com/privacy",
         /*
             Text labels, see Label Keys section below
         */
         "label_intro_heading": "Bitte stimmen Sie zu",
-        "label_intro_start": "Wir benutzen Cookies.",
-        "label_intro_end": "Bitte stimmen sie zu:",
-        "label_later_start": "Wir benutzen Cookies.",
-        "label_later_end": "Bitte stimmen sie zu:",
+        "label_intro": "Wir benutzen Cookies. <a href='http://www.mysite.com/privacy'>Mehr erfahren.</a> Bitte stimmen sie zu:",
+        "label_later": "Wir benutzen Cookies. <a href='http://www.mysite.com/privacy'>Mehr erfahren.</a> Bitte stimmen sie zu:",
         "label_button_yes_soi": "Zustimmen",
         "label_button_yes_poi": "Für alle zustimmen",
-        "label_button_no": "Jetzt nicht",
-        "label_button_privacy": "Mehr erfahren",
-        "ga_tracking": 0
+        "label_button_no": "Jetzt nicht"
       }
     </script>
 ----
@@ -87,24 +82,20 @@ You need to add the configuration snippet to all pages where OIL is required. Gi
         /*
             Text labels, see Label Keys section below
         */
-        "label_introheading": "Bitte stimmen Sie zu",
-        "label_intro_start": "Wir benutzen Cookies.",
-        "label_intro_end": "Bitte stimmen sie zu:",
-        "label_later_start": "Wir benutzen Cookies.",
-        "label_later_end": "Bitte stimmen sie zu:",
+        "label_intro_heading": "Bitte stimmen Sie zu",
+        "label_intro": "Wir benutzen Cookies. <a href='http://www.mysite.com/privacy'>Mehr erfahren.</a> Bitte stimmen sie zu:",
+        "label_later": "Wir benutzen Cookies. <a href='http://www.mysite.com/privacy'>Mehr erfahren.</a> Bitte stimmen sie zu:",
         "label_button_yes_soi": "Zustimmen",
         "label_button_yes_poi": "Für alle zustimmen",
         "label_button_no": "Jetzt nicht",
-        "label_button_privacy": "Mehr erfahren",
         /*
             POI optional params start here
-        *
-        "activate_poi": true,
-        "hub_origin": "//oil.axelspringer.com",
-        "hub_path": "/hub.html",
-        "subscriber_set_cookie": true,
-        "poi_group_name": "BILD",
-        "ga_tracking": 0
+        */
+        "poi_activate_poi": true,
+        "poi_hub_origin": "//oil.axelspringer.com",
+        "poi_hub_path": "/hub.html",
+        "poi_subscriber_set_cookie": true,
+        "poi_group_name": "BILD"
       }
     </script>
 ----

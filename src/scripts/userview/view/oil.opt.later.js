@@ -2,22 +2,19 @@ import { CSSPrefix } from './oil.view.config.js';
 import { POIButtonSnippet } from './components/oil.poi.button.opt.later';
 import { privacyPageSnippet } from './components/oil.privacy.page';
 import { DATA_CONTEXT_YES_WHILE_LATER, DATA_CONTEXT_IGNORE_WHILE_LATER } from '../../core/core_constants.js';
+import { OIL_LABELS } from '../userview_constants.js'
 import {
   isOilIgnore,
-  getLabelLaterHeading,
-  getLabelButtonYesSoi,
-  getLabelLater,
-  getLabelLaterStart,
-  getLabelLaterEnd
+  getLabel
 } from './../userview_config.js';
 
 
 const laterLabelSnippet = () => {
-  let labelLater = getLabelLater();
+  let labelLater = getLabel(OIL_LABELS.ATTR_LABEL_LATER)
   if(labelLater) {
     return labelLater;
   } else {
-    return (`${getLabelLaterStart()} ${privacyPageSnippet()} ${getLabelLaterEnd()}`);
+    return (`${getLabel(OIL_LABELS.ATTR_LABEL_LATER_START)} ${privacyPageSnippet()} ${getLabel(OIL_LABELS.ATTR_LABEL_LATER_END)}`);
   }
 };
 
@@ -51,7 +48,7 @@ export function oilOptLaterTemplate() {
         <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-row--fixed-width">
             <div class="${CSSPrefix}oil-l-item">
                 <div class="${CSSPrefix}oil-loi__heading">
-                    ${getLabelLaterHeading()}
+                    ${getLabel(OIL_LABELS.ATTR_LABEL_LATER_HEADING)}
                 </div>
                 <p class="${CSSPrefix}oil-loi__intro-txt">
                     ${laterLabelSnippet()}
@@ -60,7 +57,7 @@ export function oilOptLaterTemplate() {
             <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
                 ${POIButtonSnippet()}
                 <button class="${CSSPrefix}oil-loi__btn-soi ${CSSPrefix}js-optin" data-context="${DATA_CONTEXT_YES_WHILE_LATER}" data-qa="oil-small-YesButton">
-                    ${getLabelButtonYesSoi()}
+                    ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES_SOI)}
                 </button>
             </div>
         </div>
