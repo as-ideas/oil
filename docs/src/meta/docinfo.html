@@ -3,6 +3,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/vendor/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 <script>
   $(document).ready(function () {
     var element = document.querySelector('.sectlevel1');
@@ -41,9 +43,10 @@
 
   #header #toc #toctitle {
     color: #fafafa;
-    background-color: #1a4c90;
+    background-image: linear-gradient(to top, #25c6c9 0%, #1a448c 120%);
     padding: 20px;
     font-weight: 600;
+    border-bottom: 2px solid white;
   }
 
   #header #toc a {
@@ -77,9 +80,7 @@
     }
   }
 
-  .sticky-footer {
-    display: grid;
-    grid-auto-rows: minmax(50px, auto);
+  div.sticky-footer {
     position: fixed;
     bottom: 0;
     margin: 0;
@@ -88,16 +89,34 @@
     z-index: 10000;
     background: #373737;
     color: #ffffff;
+    padding: 2px 12px 2px 12px;
+    border-top: 1px solid white;
+    display: flex;
+  }
+
+  .sticky-footer p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+  }
+
+  .sticky-footer a {
+    color: white;
+    font-weight: 500;
+    font-size: 0.8rem;
   }
 
   .sticky-footer .column-one {
-    grid-column: 1 / 2;
-    grid-row: 1;
+    flex: 0 0 250px;
   }
 
   .sticky-footer .column-two {
-    grid-column: 2 / 2;
-    grid-row: 1;
+    flex: 0 0 250px;
+
+  }
+
+  .sticky-footer .column-three {
+    flex: 1 1 auto;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
