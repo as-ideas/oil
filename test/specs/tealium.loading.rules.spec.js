@@ -182,7 +182,8 @@ describe('the tealium loading rules', () => {
         _dip_oil_consent_ads_base: 0,
         _dip_oil_consent_ads_behaviour: 0
       });
-      done()
+      window.utag.view = () => {};
+      done();
     };
 
 
@@ -202,7 +203,8 @@ describe('the tealium loading rules', () => {
         _dip_oil_consent_ads_base: 1,
         _dip_oil_consent_ads_behaviour: 1
       });
-      done()
+      window.utag.view = () => {};
+      done();
     };
 
 
