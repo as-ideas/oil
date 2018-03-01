@@ -62,11 +62,7 @@ You need to add the configuration snippet to all pages where OIL is required. Th
             Text labels, see Label Keys section below
         */
         "label_intro_heading": "Bitte stimmen Sie zu",
-        "label_intro": "Wir benutzen Cookies. <a href='http://www.mysite.com/privacy'>Mehr erfahren.</a> Bitte stimmen sie zu:",
-        "label_later": "Wir benutzen Cookies. <a href='http://www.mysite.com/privacy'>Mehr erfahren.</a> Bitte stimmen sie zu:",
-        "label_button_yes_soi": "Zustimmen",
-        "label_button_yes_poi": "Für alle zustimmen",
-        "label_button_no": "Jetzt nicht"
+        "locale": "deDE_01"
       }
     </script>
 ----
