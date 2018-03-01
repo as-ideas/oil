@@ -1,4 +1,4 @@
-import { OIL_LAYER, OIL_YES_BUTTON, EVENT_NOTIFIER_DIV } from '../constants.js';
+import { OIL_LAYER, OIL_YES_BUTTON, EVENT_NOTIFIER_DIV } from '../test_constants.js';
 
 module.exports = {
   beforeEach: browser => {
