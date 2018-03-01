@@ -62,11 +62,6 @@ export function forEach(array, callback, scope) {
  * Oil Main Render Function:
  */
 export function renderOil(wrapper, props) {
-  if(!window.AS_OIL_LOCALE) {
-    logError('no locale found');
-    return;
-  }
-
   if (wrapper && shouldRenderOilLayer(props)) {
     if (props.noCookie) {
       renderOilContentToWrapper(wrapper, oilNoCookiesTemplate());
@@ -99,16 +94,11 @@ function interpretSliderValue(value) {
 
 
 export function oilShowPreferenceCenter(locale, wrapper = false, preset = PRIVACY_MINIMUM_TRACKING) {
-  if(!window.AS_OIL_LOCALE) {
-    logError('no locale found');
-    return;
-  }
-
   let entryNode = document.querySelector('#oil-preference-center');
   if (wrapper) {
     renderOil(wrapper, {advancedSettings: true});
   } else if (entryNode) {
-    entryNode.innerHTML = advancedSettingsSnippet(locale);
+    entryNode.innerHTML = advancedSettingsSnippet();
   } else {
     logError('No wrapper for the CPC with the id #oil-preference-center was found.');
     return;
