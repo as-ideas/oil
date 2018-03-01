@@ -2,11 +2,9 @@ import { CSSPrefix } from './oil.view.config.js';
 import { advancedSettingsSnippet } from './components/oil.advanced.settings.content';
 import { DATA_CONTEXT_YES, DATA_CONTEXT_BACK } from '../../core/core_constants.js';
 import { POIButtonSnippet } from './components/oil.poi.button';
+import { OIL_LABELS } from '../userview_constants.js'
 import {
-  getLabelButtonYesSoi,
-  getLabelAdvancedSettingsHeading,
-  getLabelAdvancedSettingsText,
-  getLabelButtonBack
+  getLabel
 } from '../userview_config.js';
 import {
   isPoiActive
@@ -20,7 +18,7 @@ const SOIButtonSnippet = (poiActivated) => {
   return poiActivated !== true ? (
     ` <div class="${CSSPrefix}oil-l-item">
             <button class="${CSSPrefix}oil__btn-soi ${CSSPrefix}js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
-                ${getLabelButtonYesSoi()}
+                ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES_SOI)}
             </button>
         </div>
       `
@@ -32,10 +30,10 @@ export function oilAdvancedSettingsTemplate() {
 <div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient" data-qa="oil-as-overlay">
         <div class="${CSSPrefix}oil-l-wrapper-layout-max-width">
             <div class="${CSSPrefix}oil__heading">
-                ${getLabelAdvancedSettingsHeading()}
+                ${getLabel(OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_HEADING)}
             </div>
             <p class="${CSSPrefix}oil__intro-txt">
-                ${getLabelAdvancedSettingsText()}
+                ${getLabel(OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_TEXT)}
             </p>
             ${advancedSettingsSnippet()}
             <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-buttons">
@@ -43,7 +41,7 @@ export function oilAdvancedSettingsTemplate() {
                 ${SOIButtonSnippet(isPoiActive())}
                 <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
                   <button class="${CSSPrefix}oil__btn-loi ${CSSPrefix}js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-NotNowButton">
-                      ${getLabelButtonBack()}
+                      ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}
                   </button>
                 </div>
             </div>

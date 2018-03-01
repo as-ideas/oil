@@ -159,7 +159,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   bottom: 0;
   width: 100%;
   font-family: $font-stack;
-  font-size: 16px; // Set font size here as a base for em units, which we'll use, cause' we don't know what base font-size size a host site will use 
+  font-size: 16px; // Set font size here as a base for em units, which we'll use, cause' we don't know what base font-size size a host site will use
   color: $text-color-primary;
 
   a {

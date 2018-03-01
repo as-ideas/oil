@@ -1,4 +1,4 @@
-export const USERVIEW_OIL_CONFIG = {
+export const OIL_LABELS = {
   ATTR_LABEL_INTRO_HEADING: 'label_intro_heading',
   ATTR_LABEL_LATER_HEADING: 'label_later_heading',
   ATTR_LABEL_INTRO: 'label_intro',
@@ -15,11 +15,13 @@ export const USERVIEW_OIL_CONFIG = {
   ATTR_LABEL_BUTTON_ADVANCED_SETTINGS: 'label_button_advanced_settings',
   ATTR_LABEL_ADVANCED_SETTINGS_HEADING: 'label_advanced_settings_heading',
   ATTR_LABEL_ADVANCED_SETTINGS_TEXT: 'label_advanced_settings_text',
-  ATTR_LABEL_ADVANCED_SETTINGS_ESSENTIAL_TITLE: 'label_advanced_settings_essential_title',
+  ATTR_LABEL_ADVANCED_SETTINGS_ESSENTIAL_TEXT: 'label_advanced_settings_essential_text',
   ATTR_LABEL_ADVANCED_SETTINGS_ESSENTIAL_VERBOSE: 'label_advanced_settings_essential_verbose',
   ATTR_LABEL_ADVANCED_SETTINGS_FUNCTIONAL_TEXT: 'label_advanced_settings_functional_text',
   ATTR_LABEL_ADVANCED_SETTINGS_FUNCTIONAL_VERBOSE: 'label_advanced_settings_functional_verbose',
   ATTR_LABEL_ADVANCED_SETTINGS_ADVERTISING_TEXT: 'label_advanced_settings_advertising_text',
-  ATTR_LABEL_ADVANCED_SETTINGS_ADVERTISING_VERBOSE: 'label_advanced_settings_advertising_verbose'
+  ATTR_LABEL_ADVANCED_SETTINGS_ADVERTISING_VERBOSE: 'label_advanced_settings_advertising_verbose',
+  ATTR_LABEL_NO_COOKIES_HEADING: 'label_nocookie_head',
+  ATTR_LABEL_NO_COOKIES_TEXT: 'label_nocookie_text'
 };
 

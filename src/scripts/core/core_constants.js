@@ -11,7 +11,8 @@ export const OIL_CONFIG = {
   ATTR_OIL_IGNORE: 'oil_ignore',
   ATTR_OIL_POI_GROUP_NAME: 'poi_group_name',
   ATTR_ADVANCED_SETTINGS: 'advanced_settings',
-  ATTR_PERSIST_MINIMUM_TRACKING: 'persist_min_tracking'
+  ATTR_PERSIST_MINIMUM_TRACKING: 'persist_min_tracking',
+  ATTR_LOCALE: 'locale'
 };
 
 // Main Click events
@@ -96,4 +97,7 @@ export const PRIVACY_SETTINGS_MINIMUM_TRACKING = {
   [PRIVACY_SETTING_ADS_BEHAVIOUR]: 0
 };
 
+export const OIL_PAYLOAD_PRIVACY = 'p';
+export const OIL_PAYLOAD_VERSION = 'v';
+export const OIL_PAYLOAD_LOCALE = 'l';
 

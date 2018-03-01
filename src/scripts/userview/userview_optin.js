@@ -1,14 +1,17 @@
 import { verifyPowerOptIn } from '../core/core_poi.js';
 import { activatePowerOptInWithRedirect, activatePowerOptInWithIFrame } from './userview_poi.js';
 import { logInfo, logPreviewInfo } from '../core/core_log.js';
-import { sendEventToHostSite } from '../core/core_utils.js';
+import { sendEventToHostSite, OilVersion } from '../core/core_utils.js';
 import {
   EVENT_NAME_OPT_LATER,
   EVENT_NAME_OPT_IN,
   PRIVACY_SETTINGS_MINIMUM_TRACKING,
-  EVENT_NAME_OPT_IGNORE
+  EVENT_NAME_OPT_IGNORE,
+  OIL_PAYLOAD_PRIVACY,
+  OIL_PAYLOAD_VERSION,
+  OIL_PAYLOAD_LOCALE
 } from '../core/core_constants.js';
-import { isPoiActive, isSubscriberSetCookieActive } from '../core/core_config.js';
+import { isPoiActive, isSubscriberSetCookieActive, getLocale } from '../core/core_config.js';
 import { getSoiCookie, setSoiOptIn } from '../core/core_cookies.js';
 import { setOptLater, setOilOptIgnore } from './userview_cookies.js';
 
@@ -62,15 +65,21 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
   }
 
   return new Promise((resolve) => {
+    let payload = {
+      [OIL_PAYLOAD_PRIVACY]: privacySettings,
+      [OIL_PAYLOAD_VERSION]: OilVersion.get(),
+      [OIL_PAYLOAD_LOCALE]: getLocale()
+    };
+
     if (isPoiActive()) {
       // Update Oil cookie (mypass - POI)
-      activatePowerOptInWithIFrame(privacySettings);
+      activatePowerOptInWithIFrame(payload);
 
       // Check if fallback is needed
       verifyPowerOptIn().then((result) => {
         if (result.power_opt_in === false) {
           logInfo('iFrame POI didnt work. Trying fallback now.');
-          activatePowerOptInWithRedirect(privacySettings);
+          activatePowerOptInWithRedirect(payload);
         }
       });
     }
