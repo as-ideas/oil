@@ -142,38 +142,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /**
- * Add gradient to expanded overlay
- *
- */
-
-.as-oil-has-gradient {
-  &:before {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    top: -100%;
-    left: 0;
-    background-image: linear-gradient(rgba(255, 255, 255, 0), rgb(0, 0, 0));
-
-    @include media('<=phone') {
-      height: 50px;
-      top: -50px;
-    }
-
-    @include media('>phone', '<desktop') {
-      height: 50%;
-      top: -50%;
-    }
-  }
-}
-
-/**
  * Text Styles
- *
  */
-
 .as-oil__heading {
   max-width: 840px;
   margin: 0.5em 0;
@@ -220,11 +190,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 /**
  * Button Styles
- *
  */
-
-// Mixins
-
 @mixin btn-poi-soi-shared {
   min-width: 250px;
   min-height: 50px;
@@ -500,10 +466,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /**
- * Close Button
- *
+ * Close Button for later
  */
-
 .as-oil-close {
   position: absolute;
   top: 1em;
@@ -536,9 +500,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /**
-* NoUiSlider CSS and overrides
+ * NoUiSlider CSS and overrides
  */
-
 @import "../../node_modules/nouislider/distribute/nouislider.css";
 
 .as-slider-wrapper {
