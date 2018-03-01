@@ -46,6 +46,11 @@ module.exports = {
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
+    filename: 'demos/direct-integration-with-all-buttons.html',
+    template: path.resolve(sourcePath, 'demos', 'direct-integration-with-all-buttons.html'),
+    chunks: ['oil'],
+    chunksSortMode: 'dependency'
+  }, {
     filename: 'demos/direct-integration-preview-mode.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration-preview-mode.html'),
     chunks: ['oil'],

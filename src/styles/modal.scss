@@ -22,7 +22,7 @@ $breakpoints: (
  */
 
 $text-color-primary: #262626;
-$background-color: #f8f8f8;
+$background-color: #f9f9f9;
 
 $btn-primary: rgb(63, 126, 223);
 $btn-primary-text-color: #ffffff;
@@ -132,6 +132,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   left: 0;
   padding: 2em 5em;
   background-color: $background-color;
+  opacity: 0.96;
   box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, 0.2);
 
   @include media('<=phone') {
@@ -148,9 +149,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  */
 .as-oil__heading {
   max-width: 840px;
-  margin: 0.5em 0;
-  font-size: 1.7em;
-  font-weight: 300;
+  font-size: 1.45em;
+  font-weight: 600;
   color: $text-color-primary;
   line-height: 1.15;
 
@@ -167,9 +167,9 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .as-oil__intro-txt {
   display: inline-block;
-  min-width: 75%;
-  max-width: 75%;
-  margin: 1em 0;
+  min-width: 70%;
+  max-width: 70%;
+  margin: 1.3em 0;
   font-size: 0.9375em;
   font-weight: 400;
   line-height: 1.4;
@@ -182,11 +182,10 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .as-oil__intro-txt--link {
-  padding: 2px 2px 1px;
-  margin: 0 2px;
+  padding: 4px 1px 0;
+  margin: 0 1px;
   color: $text-color-primary;
-  text-decoration: none;
-  border-bottom: 1px solid;
+  text-decoration: underline;
 
   &:hover {
     color: darken($text-color-primary, 10%);
@@ -197,12 +196,12 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  * Button Styles
  */
 @mixin btn-poi-soi-shared {
-  min-width: 250px;
-  min-height: 50px;
+  min-width: 200px;
+  min-height: 42px;
   margin: 0;
   padding: 0.5em 1em;
-  font-size: 0.875em; // 14px
-  font-weight: 400;
+  font-size: 1.1em;
+  font-weight: 700;
   border: none;
   border-radius: 3px;
   outline: none;
@@ -223,27 +222,22 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @mixin btn-poi {
-  color: $text-color-primary;
+  color: $btn-primary-text-color;
   background-color: $btn-primary;
-  background-image: linear-gradient(35deg, $btn-primary, rgb(70, 200, 100));
-  border-color: transparent;
 
   &:hover {
-    background-color: darken($btn-primary, 8%);
-    background-image: linear-gradient(35deg, darken($btn-primary, 8%), darken(rgb(70, 200, 100), 8%));
+    color: darken($btn-primary-text-color, 5%);
+    background-color: darken($btn-primary, 10%);
   }
 }
 
 @mixin btn-soi {
-  color: $text-color-primary;
-  border: 2px solid $btn-primary;
-  background-color: transparent;
-  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.5);
+  color: $btn-primary-text-color;
+  background-color: $btn-primary;
 
   &:hover {
-    color: $text-color-primary;
-    border-color: darken($btn-primary, 8%);
-    background-color: transparent;
+    color: darken($btn-primary-text-color, 5%);
+    background-color: darken($btn-primary, 10%);
   }
 }
 
@@ -414,6 +408,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 .as-oil-l-row {
   display: inline-block;
   margin: 1em 0;
+  min-width: 25%;
+  max-width: 30%;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -437,7 +433,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .as-oil-l-item {
   float: left; // Fallback for non flexbox capable browsers
-  margin: 0 0.5em;
 
   @supports (display: flex) {
     float: none;
