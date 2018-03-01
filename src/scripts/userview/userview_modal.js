@@ -26,7 +26,6 @@ import { oilOptLaterTemplate } from './view/oil.opt.later.js';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
 import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
-import { CSSPrefix } from './view/oil.view.config.js';
 import { logInfo, logError } from '../core/core_log.js';
 import { isPersistMinimumTracking } from './userview_config.js';
 import { isSubscriberSetCookieActive } from '../core/core_config.js';
@@ -62,7 +61,7 @@ export function forEach(array, callback, scope) {
  * Oil Main Render Function:
  */
 export function renderOil(wrapper, props) {
-  if(!window.AS_OIL_LOCALE) {
+  if (!window.AS_OIL_LOCALE) {
     logError('no locale found');
     return;
   }
@@ -99,7 +98,7 @@ function interpretSliderValue(value) {
 
 
 export function oilShowPreferenceCenter(locale, wrapper = false, preset = PRIVACY_MINIMUM_TRACKING) {
-  if(!window.AS_OIL_LOCALE) {
+  if (!window.AS_OIL_LOCALE) {
     logError('no locale found');
     return;
   }
@@ -114,7 +113,7 @@ export function oilShowPreferenceCenter(locale, wrapper = false, preset = PRIVAC
     return;
   }
 
-  let rangeSlider = document.getElementById(CSSPrefix + 'slider-range');
+  let rangeSlider = document.getElementById('as-slider-range');
 
   // we take the soi privacy for now as start value, since this should always represent the poi privacy if it was set
   // we need a product decision how to handle this if poi and soi values can differ
@@ -134,9 +133,9 @@ export function oilShowPreferenceCenter(locale, wrapper = false, preset = PRIVAC
     }
   });
 
-  let essential = document.getElementById(CSSPrefix + 'slider-essential-title');
-  let functional = document.getElementById(CSSPrefix + 'slider-functional-title');
-  let advertising = document.getElementById(CSSPrefix + 'slider-advertising-title');
+  let essential = document.getElementById('as-slider-essential-title');
+  let functional = document.getElementById('as-slider-functional-title');
+  let advertising = document.getElementById('as-slider-advertising-title');
 
   rangeSlider.noUiSlider.on('update', function (params) {
     let currentSelection = params[0];
@@ -145,19 +144,19 @@ export function oilShowPreferenceCenter(locale, wrapper = false, preset = PRIVAC
     switch (result) {
       case PRIVACY_MINIMUM_TRACKING:
       default:
-        essential.setAttribute('class', CSSPrefix + 'slider-active');
-        functional.setAttribute('class', CSSPrefix + 'slider-inactive');
-        advertising.setAttribute('class', CSSPrefix + 'slider-inactive');
+        essential.setAttribute('class', 'as-slider-active');
+        functional.setAttribute('class', 'as-slider-inactive');
+        advertising.setAttribute('class', 'as-slider-inactive');
         break;
       case PRIVACY_FUNCTIONAL_TRACKING:
-        essential.setAttribute('class', CSSPrefix + 'slider-inactive');
-        functional.setAttribute('class', CSSPrefix + 'slider-active');
-        advertising.setAttribute('class', CSSPrefix + 'slider-inactive');
+        essential.setAttribute('class', 'as-slider-inactive');
+        functional.setAttribute('class', 'as-slider-active');
+        advertising.setAttribute('class', 'as-slider-inactive');
         break;
       case PRIVACY_FULL_TRACKING:
-        essential.setAttribute('class', CSSPrefix + 'slider-inactive');
-        functional.setAttribute('class', CSSPrefix + 'slider-inactive');
-        advertising.setAttribute('class', CSSPrefix + 'slider-active');
+        essential.setAttribute('class', 'as-slider-inactive');
+        functional.setAttribute('class', 'as-slider-inactive');
+        advertising.setAttribute('class', 'as-slider-active');
         break;
     }
   });
@@ -171,7 +170,7 @@ export function oilShowPreferenceCenter(locale, wrapper = false, preset = PRIVAC
 function defineOilWrapper() {
   let oilWrapper = document.createElement('div');
   // Set some attributes as CSS classes and attributes for testing
-  oilWrapper.setAttribute('class', `${CSSPrefix}oil`);
+  oilWrapper.setAttribute('class', 'as-oil');
   oilWrapper.setAttribute('data-qa', 'oil-Layer');
   return oilWrapper;
 }
@@ -209,18 +208,18 @@ function injectOilWrapperInDOM(wrapper) {
  */
 function getOilDOMNodes() {
   return {
-    oilWrapper: document.querySelectorAll(`.${CSSPrefix}oil`),
-    btnSoiOptIn: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-optin`),
-    btnPoiOptIn: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-optin-poi`),
-    btnOptLater: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-optlater`),
-    btnAdvancedSettings: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-advanced-settings`),
-    btnClose: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-optignore`),
-    btnBack: document.querySelectorAll(`.${CSSPrefix}oil .${CSSPrefix}js-oilback`)
+    oilWrapper: document.querySelectorAll('.as-oil'),
+    btnSoiOptIn: document.querySelectorAll('.as-oil .as-js-optin'),
+    btnPoiOptIn: document.querySelectorAll('.as-oil .as-js-optin-poi'),
+    btnOptLater: document.querySelectorAll('.as-oil .as-js-optlater'),
+    btnAdvancedSettings: document.querySelectorAll('.as-oil .as-js-advanced-settings'),
+    btnClose: document.querySelectorAll('.as-oil .as-js-optignore'),
+    btnBack: document.querySelectorAll('.as-oil .as-js-oilback')
   }
 }
 
 function getRangeSliderValue() {
-  let rangeSlider = document.getElementById(CSSPrefix + 'slider-range');
+  let rangeSlider = document.getElementById('as-slider-range');
   if (rangeSlider) {
     return interpretSliderValue(rangeSlider.noUiSlider.get());
   }
