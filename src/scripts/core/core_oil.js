@@ -1,12 +1,10 @@
 import { sendEventToHostSite, OilVersion } from './core_utils.js';
 import { registerOptOutListener } from './core_optout.js';
 import { logInfo, logPreviewInfo, logError } from './core_log.js';
-import { checkOptIn, hasOptedIgnore, hasOptedLater } from './core_optin.js';
+import { checkOptIn } from './core_optin.js';
 import { resetConfiguration, isPreviewMode, getLocale } from './core_config.js';
 import { isLocaleValid } from './core_locale.js'
 import {
-  EVENT_NAME_HAS_OPTED_IGNORE,
-  EVENT_NAME_HAS_OPTED_LATER,
   EVENT_NAME_HAS_OPTED_IN,
   EVENT_NAME_NO_COOKIES_ALLOWED,
   EVENT_NAME_OIL_SHOWN
@@ -79,26 +77,6 @@ export function initOilLayer() {
         sendEventToHostSite(EVENT_NAME_HAS_OPTED_IN);
       }
       /**
-       * User has opted ignore
-       */
-      else if (hasOptedIgnore()) {
-        sendEventToHostSite(EVENT_NAME_HAS_OPTED_IGNORE);
-      }
-      /**
-       * User has opted later
-       */
-      else if (hasOptedLater()) {
-        System.import(`../userview/locale/userview_oil_${locale}.js`)
-          .then(userview_modal => {
-            userview_modal.renderOil(userview_modal.oilWrapper, {optLater: true});
-          })
-          .catch(() => {
-            logError(`${locale} could not be loaded.`);
-          });
-        sendEventToHostSite(EVENT_NAME_HAS_OPTED_LATER);
-        sendEventToHostSite(EVENT_NAME_OIL_SHOWN);
-      }
-      /**
        * Any other case, when the user didnt decide before and oil needs to be shown:
        */
       else {
@@ -169,15 +147,6 @@ function attachUtilityFunctionsToWindowObject(locale) {
       .catch(() => {
         logError(`${locale} could not be loaded.`);
       });
-  };
-  window.oilTriggerIgnore = () => {
-    System.import(`../userview/locale/userview_oil_${locale}.js`)
-      .then(userview_modal => {
-        userview_modal.handleOilIgnore();
-      })
-    .catch(() => {
-      logError(`${locale} could not be loaded.`);
-    });
   };
 }
 

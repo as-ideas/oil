@@ -13,16 +13,13 @@ import {
   EVENT_NAME_ADVANCED_SETTINGS,
   EVENT_NAME_SOI_OPT_IN,
   EVENT_NAME_POI_OPT_IN,
-  EVENT_NAME_SOI_OPT_IN_WHILE_LATER,
-  EVENT_NAME_POI_OPT_IN_WHILE_LATER,
   EVENT_NAME_AS_SELECTED_MINIMUM,
   EVENT_NAME_AS_SELECTED_FUNCTIONAL,
   EVENT_NAME_AS_SELECTED_FULL
 } from '../core/core_constants.js';
-import { oilOptIn, oilPowerOptIn, oilOptLater, oilOptIgnore } from './userview_optin.js';
+import { oilOptIn, oilPowerOptIn } from './userview_optin.js';
 import { deActivatePowerOptIn } from '../core/core_poi.js';
 import { oilDefaultTemplate } from './view/oil.default.js';
-import { oilOptLaterTemplate } from './view/oil.opt.later.js';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
 import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
@@ -64,8 +61,6 @@ export function renderOil(wrapper, props) {
   if (wrapper && shouldRenderOilLayer(props)) {
     if (props.noCookie) {
       renderOilContentToWrapper(wrapper, oilNoCookiesTemplate());
-    } else if (props.optLater) {
-      renderOilContentToWrapper(wrapper, oilOptLaterTemplate());
     } else if (props.advancedSettings) {
       renderOilContentToWrapper(wrapper, oilAdvancedSettingsTemplate());
     } else {
@@ -220,12 +215,6 @@ function getRangeSliderValue() {
  * Handler Functions for our Oil Action Elements
  *
  */
-function handleOptLater() {
-  logInfo('Handling OptLater');
-  oilOptLater().then((cookieOptLater) => {
-    renderOil(oilWrapper, {optLater: cookieOptLater});
-  });
-}
 
 function handleBackToMainDialog() {
   logInfo('Handling Back Button');
@@ -262,13 +251,10 @@ export function handleSoiOptIn() {
       renderOil(oilWrapper, {optIn: cookieOptIn});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES) {
         sendEventToHostSite(EVENT_NAME_SOI_OPT_IN);
-      } else if (this) {
-        sendEventToHostSite(EVENT_NAME_SOI_OPT_IN_WHILE_LATER);
       }
     });
   } else {
     removeSubscriberCookies();
-    handleOptLater();
   }
 }
 
@@ -281,21 +267,12 @@ export function handlePoiOptIn() {
       renderOil(oilWrapper, {optIn: true});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
         sendEventToHostSite(EVENT_NAME_POI_OPT_IN);
-      } else if (this) {
-        sendEventToHostSite(EVENT_NAME_POI_OPT_IN_WHILE_LATER);
       }
     });
   } else {
     removeSubscriberCookies();
     deActivatePowerOptIn();
-    handleOptLater();
   }
-}
-
-export function handleOilIgnore() {
-  oilOptIgnore().then((cookieOptIgnore) => {
-    renderOil(oilWrapper, {optIgnore: cookieOptIgnore});
-  });
 }
 
 /**
@@ -330,18 +307,14 @@ function removeEventListenersToDOMList(listOfDoms, listener) {
 function addOilHandlers(nodes) {
   addEventListenersToDOMList(nodes.btnSoiOptIn, handleSoiOptIn);
   addEventListenersToDOMList(nodes.btnPoiOptIn, handlePoiOptIn);
-  addEventListenersToDOMList(nodes.btnOptLater, handleOptLater);
   addEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
-  addEventListenersToDOMList(nodes.btnClose, handleOilIgnore);
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 }
 
 function removeOilWrapperAndHandlers(nodes) {
   removeEventListenersToDOMList(nodes.btnSoiOptIn, handleSoiOptIn);
   removeEventListenersToDOMList(nodes.btnPoiOptIn, handlePoiOptIn);
-  removeEventListenersToDOMList(nodes.btnOptLater, handleOptLater);
   removeEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
-  removeEventListenersToDOMList(nodes.btnClose, handleOilIgnore);
   removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 
   if (nodes.oilWrapper) {

@@ -3,7 +3,6 @@ export {
   oilShowPreferenceCenter,
   handleSoiOptIn,
   handlePoiOptIn,
-  handleOilIgnore,
   oilWrapper
 } from '../userview_modal.js';
 import { OIL_LABELS } from '../userview_constants.js';
@@ -11,13 +10,9 @@ import { OIL_LABELS } from '../userview_constants.js';
 window.AS_OIL_LOCALE = {
   [OIL_LABELS.ATTR_PRIVACY_PAGE_URL]: undefined,
   [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis',
-  [OIL_LABELS.ATTR_LABEL_LATER_HEADING]: 'Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis',
   [OIL_LABELS.ATTR_LABEL_INTRO]: undefined,
   [OIL_LABELS.ATTR_LABEL_INTRO_START]: 'Wir verwenden <a href="//oil.asideas.de/legal/thirdparties.html" class="as-oil__intro-txt--link" target="_blank">Cookies</a>, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an <a href="//oil.asideas.de/legal/companies.html" class="as-oil__intro-txt--link" target="_blank">Partner</a> zu übertragen.',
   [OIL_LABELS.ATTR_LABEL_INTRO_END]: 'Jetzt Einverständnis erklären:',
-  [OIL_LABELS.ATTR_LABEL_LATER]: undefined,
-  [OIL_LABELS.ATTR_LABEL_LATER_START]: 'Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen. In unseren Datenschutzbestimmungen erfahren Sie, wie Sie Cookies deaktivieren können',
-  [OIL_LABELS.ATTR_LABEL_LATER_END]: 'Jetzt Einverständnis erklären:',
   [OIL_LABELS.ATTR_LABEL_BUTTON_YES_SOI]: 'Jetzt zustimmen',
   [OIL_LABELS.ATTR_LABEL_BUTTON_YES_POI]: 'Global zustimmen',
   [OIL_LABELS.ATTR_LABEL_BUTTON_NO]: 'Nein, jetzt nicht',
