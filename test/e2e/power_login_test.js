@@ -13,16 +13,16 @@ module.exports = {
   beforeEach: browser => {
     // wait for site hosts
     browser
-      .url(browser.globals.launch_url_host1+'/demos/empty.html')
+      .url(browser.globals.launch_url_host1 + '/demos/empty.html')
       .useCss()
       .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
     browser
-      .url(browser.globals.launch_url_host2+'/demos/empty.html')
+      .url(browser.globals.launch_url_host2 + '/demos/empty.html')
       .useCss()
       .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
     // wait for init of fake 'CDN'
     browser
-      .url(browser.globals.launch_url_cdn+'/demos/empty.html')
+      .url(browser.globals.launch_url_cdn + '/demos/empty.html')
       .useCss()
       .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
   },
@@ -36,7 +36,7 @@ module.exports = {
       .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
       .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
-      .click(OIL_YES_POI_BUTTON);
+      .click(OIL_YES_BUTTON);
     browser.url((result) => {
       if (result.toString().indexOf('fallback') !== -1) {
         browser

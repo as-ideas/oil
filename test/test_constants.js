@@ -4,8 +4,6 @@ export const OIL_LAYER_NOCOOKIES_ = '//*[@data-qa="oil-nocookies"]';
 export const OIL_YES_BUTTON = '//*[@data-qa="oil-YesButton"]';
 export const HOST_SEND_OPTOUT_BUTTON = '//*[@data-qa="send-opt-out-button"]';
 export const EVENT_NOTIFIER_DIV = '//*[@data-qa="event-notifier-div"]';
-export const OIL_YES_POI_SMALL_BUTTON = '//*[@data-qa="oil-small-poi-YesButton"]';
-export const OIL_YES_POI_BUTTON = '//*[@data-qa="oil-poi-YesButton"]';
 export const PRIVACY_PAGE_URL = '//*[@data-qa="oil-privacy-page"]';
 export const OIL_ADVANCED_SETTINGS = '//*[@data-qa="oil-AdvancedSettingsButton"]';
 export const OIL_ADVANCED_SETTINGS_WRAPPER = '//*[@data-qa="oil-as-overlay"]';

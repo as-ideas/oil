@@ -8,7 +8,6 @@ import {
   PRIVACY_FUNCTIONAL_TRACKING,
   PRIVACY_FULL_TRACKING,
   DATA_CONTEXT_YES,
-  DATA_CONTEXT_YES_POI,
   EVENT_NAME_BACK_TO_MAIN,
   EVENT_NAME_ADVANCED_SETTINGS,
   EVENT_NAME_SOI_OPT_IN,
@@ -26,6 +25,7 @@ import { advancedSettingsSnippet } from './view/components/oil.advanced.settings
 import { logInfo, logError } from '../core/core_log.js';
 import { isPersistMinimumTracking } from './userview_config.js';
 import { isSubscriberSetCookieActive } from '../core/core_config.js';
+import { isPoiActive } from '../core/core_config';
 
 
 // Initialize our Oil wrapper and save it ...
@@ -242,6 +242,14 @@ function trackPrivacySetting(privacySetting) {
   }
 }
 
+export function handleOptIn() {
+  if (isPoiActive()) {
+    handlePoiOptIn();
+  } else {
+    handleSoiOptIn();
+  }
+}
+
 export function handleSoiOptIn() {
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
@@ -265,7 +273,7 @@ export function handlePoiOptIn() {
   if (privacySetting !== PRIVACY_MINIMUM_TRACKING || isPersistMinimumTracking()) {
     oilPowerOptIn(convertPrivacySettingsToCookieValue(privacySetting), !isSubscriberSetCookieActive()).then(() => {
       renderOil(oilWrapper, {optIn: true});
-      if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES_POI) {
+      if (isPoiActive()) {
         sendEventToHostSite(EVENT_NAME_POI_OPT_IN);
       }
     });
@@ -305,15 +313,14 @@ function removeEventListenersToDOMList(listOfDoms, listener) {
  * Add and Remove Handlers to Oil Action Elements
  */
 function addOilHandlers(nodes) {
-  addEventListenersToDOMList(nodes.btnSoiOptIn, handleSoiOptIn);
-  addEventListenersToDOMList(nodes.btnPoiOptIn, handlePoiOptIn);
+  addEventListenersToDOMList(nodes.btnSoiOptIn, handleOptIn);
   addEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
+  addEventListenersToDOMList(nodes.btnClose, handleOilIgnore);
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 }
 
 function removeOilWrapperAndHandlers(nodes) {
-  removeEventListenersToDOMList(nodes.btnSoiOptIn, handleSoiOptIn);
-  removeEventListenersToDOMList(nodes.btnPoiOptIn, handlePoiOptIn);
+  removeEventListenersToDOMList(nodes.btnSoiOptIn, handleOptIn);
   removeEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
   removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 

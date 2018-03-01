@@ -8,7 +8,6 @@ export const OIL_LABELS = {
   ATTR_LABEL_LATER_START: 'label_later_start',
   ATTR_LABEL_LATER_END: 'label_later_end',
   ATTR_LABEL_BUTTON_YES_SOI: 'label_button_yes_soi',
-  ATTR_LABEL_BUTTON_YES_POI: 'label_button_yes_poi',
   ATTR_LABEL_BUTTON_NO: 'label_button_no',
   ATTR_LABEL_BUTTON_BACK: 'label_button_back',
   ATTR_LABEL_BUTTON_PRIVACY: 'label_button_privacy',
