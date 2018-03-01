@@ -93,7 +93,7 @@ function interpretSliderValue(value) {
 }
 
 
-export function oilShowPreferenceCenter(locale, wrapper = false, preset = PRIVACY_MINIMUM_TRACKING) {
+export function oilShowPreferenceCenter(wrapper = false, preset = PRIVACY_MINIMUM_TRACKING) {
   let entryNode = document.querySelector('#oil-preference-center');
   if (wrapper) {
     renderOil(wrapper, {advancedSettings: true});
