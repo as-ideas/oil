@@ -38,7 +38,7 @@ export function initOilLayer() {
   /**
    * Early death if the locale is invalid.
    */
-  if(!isLocaleValid(locale)) {
+  if (!isLocaleValid(locale)) {
     logError(`The locale ${locale} is not available.`);
     return;
   }
@@ -143,40 +143,42 @@ function attachUtilityFunctionsToWindowObject(locale) {
   window.oilStatus = () => {
     return getRawSoiCookie();
   };
+
+  function loadLocale(callback) {
+    System.import(`../userview/locale/userview_oil_${locale}.js`)
+      .then(callback)
+      .catch(() => {
+        logError(`${locale} could not be loaded.`);
+      });
+  }
+
   window.oilShowPreferenceCenter = () => {
-    System.import(`../userview/locale/userview_oil_${locale}.js`)
-      .then(userview_modal => {
-        userview_modal.showPreferenceCenter(false);
-      })
-      .catch(() => {
-        logError(`${locale} could not be loaded.`);
-      });
+    loadLocale(userview_modal => {
+      userview_modal.showPreferenceCenter(false);
+    });
   };
+
+  window.oilTriggerOptIn = () => {
+    loadLocale(userview_modal => {
+      userview_modal.handleOptIn();
+    });
+  };
+
   window.oilTriggerSoiOptIn = () => {
-    System.import(`../userview/locale/userview_oil_${locale}.js`)
-      .then(userview_modal => {
-        userview_modal.handleSoiOptIn();
-      })
-      .catch(() => {
-        logError(`${locale} could not be loaded.`);
-      });
+    loadLocale(userview_modal => {
+      userview_modal.handleSoiOptIn();
+    });
   };
+
   window.oilTriggerPoiOptin = () => {
-    System.import(`../userview/locale/userview_oil_${locale}.js`)
-      .then(userview_modal => {
-        userview_modal.handlePoiOptIn();
-      })
-      .catch(() => {
-        logError(`${locale} could not be loaded.`);
-      });
+    loadLocale(userview_modal => {
+      userview_modal.handlePoiOptIn();
+    });
   };
+
   window.oilTriggerIgnore = () => {
-    System.import(`../userview/locale/userview_oil_${locale}.js`)
-      .then(userview_modal => {
-        userview_modal.handleOilIgnore();
-      })
-    .catch(() => {
-      logError(`${locale} could not be loaded.`);
+    loadLocale(userview_modal => {
+      userview_modal.handleOilIgnore();
     });
   };
 }

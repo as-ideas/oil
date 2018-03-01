@@ -1,4 +1,3 @@
-import { POIButtonSnippet } from './components/oil.poi.button.opt.later';
 import { privacyPageSnippet } from './components/oil.privacy.page';
 import { DATA_CONTEXT_YES_WHILE_LATER, DATA_CONTEXT_IGNORE_WHILE_LATER } from '../../core/core_constants.js';
 import { OIL_LABELS } from '../userview_constants.js'
@@ -54,7 +53,6 @@ export function oilOptLaterTemplate() {
                 </p>
             </div>
             <div class="as-oil-l-item as-oil-l-item--stretch">
-                ${POIButtonSnippet()}
                 <button class="as-oil-loi__btn-soi as-js-optin" data-context="${DATA_CONTEXT_YES_WHILE_LATER}" data-qa="oil-small-YesButton">
                     ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES_SOI)}
                 </button>

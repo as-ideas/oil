@@ -1,27 +1,21 @@
 import { advancedSettingsSnippet } from './components/oil.advanced.settings.content';
 import { DATA_CONTEXT_YES, DATA_CONTEXT_BACK } from '../../core/core_constants.js';
-import { POIButtonSnippet } from './components/oil.poi.button';
 import { OIL_LABELS } from '../userview_constants.js'
 import {
   getLabel
 } from '../userview_config.js';
-import {
-  isPoiActive
-} from '../../core/core_config.js';
 
 /**
  * OIL SOI will be only shown, when there is no POI on the advanced settings
  * Returned element is used to ignore Oil completely
  */
-const SOIButtonSnippet = (poiActivated) => {
-  return poiActivated !== true ? (
-    ` <div class="as-oil-l-item">
+const SOIButtonSnippet = () => {
+  return ` <div class="as-oil-l-item">
             <button class="as-oil__btn-soi as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES_SOI)}
             </button>
         </div>
-      `
-  ) : '';
+      `;
 };
 
 export function oilAdvancedSettingsTemplate() {
@@ -36,8 +30,7 @@ export function oilAdvancedSettingsTemplate() {
             </p>
             ${advancedSettingsSnippet()}
             <div class="as-oil-l-row as-oil-l-buttons">
-                ${POIButtonSnippet()}
-                ${SOIButtonSnippet(isPoiActive())}
+                ${SOIButtonSnippet()}
                 <div class="as-oil-l-item as-oil-l-item--stretch">
                   <button class="as-oil__btn-loi as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-NotNowButton">
                       ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}

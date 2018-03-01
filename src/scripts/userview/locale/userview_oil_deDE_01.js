@@ -1,6 +1,7 @@
 export {
   renderOil,
   oilShowPreferenceCenter,
+  handleOptIn,
   handleSoiOptIn,
   handlePoiOptIn,
   handleOilIgnore,
@@ -19,7 +20,6 @@ window.AS_OIL_LOCALE = {
   [OIL_LABELS.ATTR_LABEL_LATER_START]: 'Wir verwenden Cookies, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an Partner zu übertragen. In unseren Datenschutzbestimmungen erfahren Sie, wie Sie Cookies deaktivieren können',
   [OIL_LABELS.ATTR_LABEL_LATER_END]: 'Jetzt Einverständnis erklären:',
   [OIL_LABELS.ATTR_LABEL_BUTTON_YES_SOI]: 'Jetzt zustimmen',
-  [OIL_LABELS.ATTR_LABEL_BUTTON_YES_POI]: 'Global zustimmen',
   [OIL_LABELS.ATTR_LABEL_BUTTON_NO]: 'Nein, jetzt nicht',
   [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: 'Zurück',
   [OIL_LABELS.ATTR_LABEL_BUTTON_PRIVACY]: 'Mehr erfahren',

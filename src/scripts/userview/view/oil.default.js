@@ -1,5 +1,4 @@
 import { DATA_CONTEXT_YES, DATA_CONTEXT_LATER, DATA_CONTEXT_ADVANCED_SETTINGS } from '../../core/core_constants.js';
-import { POIButtonSnippet } from './components/oil.poi.button';
 import { privacyPageSnippet } from './components/oil.privacy.page';
 import { OIL_LABELS } from '../userview_constants.js'
 import {
@@ -53,7 +52,6 @@ export function oilDefaultTemplate() {
                 ${introLabelSnippet()}
             </p>
             <div class="as-oil-l-row as-oil-l-buttons">
-                ${POIButtonSnippet()}
                 <div class="as-oil-l-item">
                     <button class="as-oil__btn-soi as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
                         ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES_SOI)}
