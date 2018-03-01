@@ -1,8 +1,18 @@
 = OIL Documentation
+:toc: left
+:toclevels: 4
+:toc-title: OIL Documentation
+:sectanchors:
+:idprefix:
+:idseparator: -
+:experimental:
+:description: The documentation for the Axel Springer Opt-In Layer
+:keywords: Tealium, OIL, Opt-In Layer
+:docinfo: shared
+:docinfodir: src/meta
 
 image::src/images/oil-asideas.png[]
 // horizontal line
-***
 
 include::src/docs/intro.adoc[]
 include::src/docs/usage.adoc[]

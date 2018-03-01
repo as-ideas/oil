@@ -97,3 +97,21 @@ export function getClientTimestamp() {
   }
   return Date.now();
 }
+
+/**
+ *
+ * Checks if an array contains obj.
+ * Use this instead of includes.
+ *
+ * @param array
+ * @param obj
+ * @returns {boolean}
+ */
+export function arrayContains(array, obj) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === obj) {
+      return true;
+    }
+  }
+  return false;
+}

@@ -2,6 +2,7 @@ import {setSoiOptIn, getSoiCookie} from '../../src/scripts/core/core_cookies.js'
 import {setOptLater, setOilOptIgnore} from '../../src/scripts/userview/userview_cookies.js';
 import {getPoiCookie, setPoiOptIn} from '../../src/scripts/hub/hub_cookies.js';
 import {OilVersion} from '../../src/scripts/core/core_utils.js';
+import {OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION, OIL_PAYLOAD_LOCALE} from '../../src/scripts/core/core_constants.js'
 
 describe('cookies', () => {
   beforeEach(() => {
@@ -11,10 +12,9 @@ describe('cookies', () => {
   afterEach(() => {
   });
 
-  it('should store the version of oil in the hub domain cookie', () => {
-    spyOn(OilVersion, 'get').and.returnValue('test-version');
+  it('shouldnt return the version of oil in the hub domain cookie, when never set', () => {
     let resultCookie = getPoiCookie();
-    expect(resultCookie.version).toBe('test-version');
+    expect(resultCookie.version).toBe('unknown');
 
   });
 
@@ -62,6 +62,12 @@ describe('cookies', () => {
     let currentFakeTime = 1;
     let testVersion = 'test-version1';
 
+    let payload1 = {
+      [OIL_PAYLOAD_PRIVACY]: 'privacy-test1',
+      [OIL_PAYLOAD_VERSION]: 'test-version1',
+      [OIL_PAYLOAD_LOCALE]: 'test_locale1'
+    };
+
     spyOn(Date, 'now').and.callFake(function() {
       return currentFakeTime;
     });
@@ -70,25 +76,33 @@ describe('cookies', () => {
       return testVersion;
     });
 
-    setPoiOptIn('group-test', 'privacy-test');
+    setPoiOptIn('group-test', payload1);
 
     let resultCookie = JSON.parse(getCookie('group-test_oil_data'));
 
     expect(resultCookie.version).toBe('test-version1');
     expect(resultCookie.power_opt_in).toBe(true);
-    expect(resultCookie.privacy).toBe('privacy-test');
+    expect(resultCookie.privacy).toBe('privacy-test1');
+    expect(resultCookie.locale).toBe('test_locale1');
     expect(resultCookie.timestamp).toBe(1);
 
+
+    let payload2 = {
+      [OIL_PAYLOAD_PRIVACY]: 'privacy-test2',
+      [OIL_PAYLOAD_VERSION]: 'test-version2',
+      [OIL_PAYLOAD_LOCALE]: 'test_locale2'
+    };
 
     // set again and check if the values got updated
     currentFakeTime = 2;
     testVersion = 'test-version2';
-    setPoiOptIn('group-test2', 'privacy-test2');
+    setPoiOptIn('group-test2', payload2);
     resultCookie = JSON.parse(getCookie('group-test2_oil_data'));
 
     expect(resultCookie.version).toBe('test-version2');
     expect(resultCookie.power_opt_in).toBe(true);
     expect(resultCookie.privacy).toBe('privacy-test2');
+    expect(resultCookie.locale).toBe('test_locale2');
     expect(resultCookie.timestamp).toBe(2);
   });
 

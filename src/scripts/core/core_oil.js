@@ -102,7 +102,6 @@ export function initOilLayer() {
        * Any other case, when the user didnt decide before and oil needs to be shown:
        */
       else {
-        logInfo(`../userview/locale/userview_oil_${locale}.js`);
         System.import(`../userview/locale/userview_oil_${locale}.js`)
           .then(userview_modal => {
             userview_modal.renderOil(userview_modal.oilWrapper, {optLater: false});
