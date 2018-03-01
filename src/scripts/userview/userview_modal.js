@@ -315,7 +315,6 @@ function removeEventListenersToDOMList(listOfDoms, listener) {
 function addOilHandlers(nodes) {
   addEventListenersToDOMList(nodes.btnSoiOptIn, handleOptIn);
   addEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
-  addEventListenersToDOMList(nodes.btnClose, handleOilIgnore);
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 }
 
