@@ -14,7 +14,7 @@ describe('cookies', () => {
 
   it('shouldnt return the version of oil in the hub domain cookie, when never set', () => {
     let resultCookie = getPoiCookie();
-    expect(resultCookie.version).toBe('unrecorded');
+    expect(resultCookie.version).toBe('unknown');
 
   });
 
