@@ -82,7 +82,7 @@ export function initOilLayer() {
       else {
         System.import(`../userview/locale/userview_oil_${locale}.js`)
           .then(userview_modal => {
-            userview_modal.renderOil(userview_modal.oilWrapper, {optLater: false});
+            userview_modal.renderOil(userview_modal.oilWrapper, {optIn: false});
           })
           .catch(() => {
             logError(`${locale} could not be loaded.`);

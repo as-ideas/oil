@@ -37,10 +37,8 @@ export const oilWrapper = defineOilWrapper();
  * Oil layer is not rendered eg. if user opted in or opted close
  * @param {*} props
  */
-
-//ToDo: check if all clear here
 function shouldRenderOilLayer(props) {
-  return props.optIn === true ? false : '';
+  return props.optIn === true ? false : true;
 }
 
 /**
