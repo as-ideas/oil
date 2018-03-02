@@ -91,11 +91,11 @@ function interpretSliderValue(value) {
   }
 }
 
-// FIXME WASCHI
-export function oilShowPreferenceCenter(wrapper = false, preset = PRIVACY_MINIMUM_TRACKING) {
+export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
+  let wrapper = document.querySelector('.as-oil');
   let entryNode = document.querySelector('#oil-preference-center');
   if (wrapper) {
-    renderOil(wrapper, {advancedSettings: true});
+    renderOil({advancedSettings: true});
   } else if (entryNode) {
     entryNode.innerHTML = advancedSettingsSnippet();
   } else {
@@ -112,7 +112,7 @@ export function oilShowPreferenceCenter(wrapper = false, preset = PRIVACY_MINIMU
   if (soiPrivacy) {
     currentPrivacySetting = soiPrivacy.oiid;
   }
-
+  console.info('as-slider-range', rangeSlider);
   noUiSlider.create(rangeSlider, {
     start: currentPrivacySetting,
     step: 1,

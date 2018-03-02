@@ -118,6 +118,7 @@ export function initOilLayer() {
 /**
  * Attach Utility Functions to window Object, so users of oil can use it.
  */
+// FIXME Needs to be tested and extracted!
 function attachUtilityFunctionsToWindowObject(locale) {
   window.oilPreviewModeOn = () => {
     setPreviewCookie();
@@ -154,7 +155,7 @@ function attachUtilityFunctionsToWindowObject(locale) {
 
   window.oilShowPreferenceCenter = () => {
     loadLocale(userview_modal => {
-      userview_modal.showPreferenceCenter(false);
+      userview_modal.oilShowPreferenceCenter();
     });
   };
 
