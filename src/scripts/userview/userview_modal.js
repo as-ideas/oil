@@ -32,17 +32,7 @@ import { getTheme, isPoiActive } from '../core/core_config';
 
 
 // Initialize our Oil wrapper and save it ...
-
-export const oilWrapper = defineOilWrapper();
-
-/**
- * Helper that determines if Oil layer is shown or not...
- * Oil layer is not rendered eg. if user opted in or opted close
- * @param {*} props
- */
-function shouldRenderOilLayer(props) {
-  return props.optIn === true ? false : props.optIgnore !== true;
-}
+export const oilWrapper = defineOilWrapper;
 
 /**
  * Utility function for forEach safety
@@ -60,20 +50,30 @@ export function forEach(array, callback, scope) {
 /**
  * Oil Main Render Function:
  */
-export function renderOil(wrapper, props) {
-  if (wrapper && shouldRenderOilLayer(props)) {
+export function renderOil(props) {
+  if (shouldRenderOilLayer(props)) {
     if (props.noCookie) {
-      renderOilContentToWrapper(wrapper, oilNoCookiesTemplate());
+      renderOilContentToWrapper(oilNoCookiesTemplate());
     } else if (props.optLater) {
-      renderOilContentToWrapper(wrapper, oilOptLaterTemplate());
+      renderOilContentToWrapper(oilOptLaterTemplate());
     } else if (props.advancedSettings) {
-      renderOilContentToWrapper(wrapper, oilAdvancedSettingsTemplate());
+      renderOilContentToWrapper(oilAdvancedSettingsTemplate());
     } else {
-      renderOilContentToWrapper(wrapper, oilDefaultTemplate());
+      renderOilContentToWrapper(oilDefaultTemplate());
     }
   } else {
     removeOilWrapperFromDOM();
   }
+}
+
+
+/**
+ * Helper that determines if Oil layer is shown or not...
+ * Oil layer is not rendered eg. if user opted in or opted close
+ * @param {*} props
+ */
+function shouldRenderOilLayer(props) {
+  return props.optIn === true ? false : props.optIgnore !== true;
 }
 
 function interpretSliderValue(value) {
@@ -91,7 +91,7 @@ function interpretSliderValue(value) {
   }
 }
 
-
+// FIXME WASCHI
 export function oilShowPreferenceCenter(wrapper = false, preset = PRIVACY_MINIMUM_TRACKING) {
   let entryNode = document.querySelector('#oil-preference-center');
   if (wrapper) {
@@ -169,7 +169,8 @@ function defineOilWrapper() {
  * Define Content of our Oil Wrapper
  * Sets HTML based on props ...
  */
-function renderOilContentToWrapper(wrapper, content) {
+function renderOilContentToWrapper(content) {
+  let wrapper = oilWrapper();
   wrapper.innerHTML = content;
   injectOilWrapperInDOM(wrapper);
 }
@@ -189,7 +190,6 @@ function injectOilWrapperInDOM(wrapper) {
   document.body.insertBefore(wrapper, document.body.firstElementChild);
   addOilHandlers(getOilDOMNodes());
 }
-
 
 /**
  * Small Utility Function to retrieve our Oil Wrapper and Action Elements,
@@ -223,18 +223,18 @@ function getRangeSliderValue() {
 function handleOptLater() {
   logInfo('Handling OptLater');
   oilOptLater().then((cookieOptLater) => {
-    renderOil(oilWrapper, {optLater: cookieOptLater});
+    renderOil({optLater: cookieOptLater});
   });
 }
 
 function handleBackToMainDialog() {
   logInfo('Handling Back Button');
-  renderOil(oilWrapper, {});
+  renderOil({});
   sendEventToHostSite(EVENT_NAME_BACK_TO_MAIN);
 }
 
 function handleAdvancedSettings() {
-  oilShowPreferenceCenter(oilWrapper, PRIVACY_MINIMUM_TRACKING);
+  oilShowPreferenceCenter(oilWrapper(), PRIVACY_MINIMUM_TRACKING);
   sendEventToHostSite(EVENT_NAME_ADVANCED_SETTINGS);
 }
 
@@ -267,7 +267,7 @@ export function handleSoiOptIn() {
   trackPrivacySetting(privacySetting);
   if (privacySetting !== PRIVACY_MINIMUM_TRACKING || isPersistMinimumTracking()) {
     oilOptIn(convertPrivacySettingsToCookieValue(privacySetting)).then((cookieOptIn) => {
-      renderOil(oilWrapper, {optIn: cookieOptIn});
+      renderOil({optIn: cookieOptIn});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES) {
         sendEventToHostSite(EVENT_NAME_SOI_OPT_IN);
       } else if (this) {
@@ -286,7 +286,7 @@ export function handlePoiOptIn() {
   trackPrivacySetting(privacySetting);
   if (privacySetting !== PRIVACY_MINIMUM_TRACKING || isPersistMinimumTracking()) {
     oilPowerOptIn(convertPrivacySettingsToCookieValue(privacySetting), !isSubscriberSetCookieActive()).then(() => {
-      renderOil(oilWrapper, {optIn: true});
+      renderOil({optIn: true});
       if (isPoiActive()) {
         sendEventToHostSite(EVENT_NAME_POI_OPT_IN);
       } else if (this) {
@@ -302,7 +302,7 @@ export function handlePoiOptIn() {
 
 export function handleOilIgnore() {
   oilOptIgnore().then((cookieOptIgnore) => {
-    renderOil(oilWrapper, {optIgnore: cookieOptIgnore});
+    renderOil({optIgnore: cookieOptIgnore});
   });
 }
 

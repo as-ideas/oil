@@ -58,7 +58,7 @@ export function initOilLayer() {
       logInfo('This browser doesn\'t allow cookies.');
       System.import(`../userview/locale/userview_oil_${locale}.js`)
         .then(userview_modal => {
-          userview_modal.renderOil(userview_modal.oilWrapper, {noCookie: true});
+          userview_modal.renderOil(userview_modal.oilWrapper(), {noCookie: true});
         })
         .catch(() => {
           logError(`${locale} could not be loaded.`);
@@ -90,7 +90,7 @@ export function initOilLayer() {
       else if (hasOptedLater()) {
         System.import(`../userview/locale/userview_oil_${locale}.js`)
           .then(userview_modal => {
-            userview_modal.renderOil(userview_modal.oilWrapper, {optLater: true});
+            userview_modal.renderOil(userview_modal.oilWrapper(), {optLater: true});
           })
           .catch(() => {
             logError(`${locale} could not be loaded.`);
@@ -104,7 +104,7 @@ export function initOilLayer() {
       else {
         System.import(`../userview/locale/userview_oil_${locale}.js`)
           .then(userview_modal => {
-            userview_modal.renderOil(userview_modal.oilWrapper, {optLater: false});
+            userview_modal.renderOil(userview_modal.oilWrapper(), {optLater: false});
           })
           .catch(() => {
             logError(`${locale} could not be loaded.`);
