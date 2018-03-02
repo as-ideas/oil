@@ -8,7 +8,6 @@ export const OIL_CONFIG = {
   ATTR_COOKIE_EXPIRES_IN_DAYS: 'cookie_expires_in_days',
   ATTR_TIMESTAMP: 'timestamp',
   ATTR_PRIVACY_PAGE_URL: 'privacy_page_url',
-  ATTR_OIL_IGNORE: 'oil_ignore',
   ATTR_OIL_POI_GROUP_NAME: 'poi_group_name',
   ATTR_ADVANCED_SETTINGS: 'advanced_settings',
   ATTR_PERSIST_MINIMUM_TRACKING: 'persist_min_tracking',
@@ -19,10 +18,6 @@ export const OIL_CONFIG = {
 export const EVENT_NAME_OPT_IN = 'oil_optin_done';
 export const EVENT_NAME_SOI_OPT_IN = 'oil_soi_optin_done';
 export const EVENT_NAME_POI_OPT_IN = 'oil_poi_optin_done';
-export const EVENT_NAME_SOI_OPT_IN_WHILE_LATER = 'oil_soi_optin_done_while_later';
-export const EVENT_NAME_POI_OPT_IN_WHILE_LATER = 'oil_poi_optin_done_while_later';
-export const EVENT_NAME_OPT_LATER = 'oil_optlater_done';
-export const EVENT_NAME_OPT_IGNORE = 'oil_optignore_done';
 
 // Tracking Events
 export const EVENT_NAME_AS_SELECTED_MINIMUM = 'oil_as_selected_minimum';
@@ -35,8 +30,6 @@ export const EVENT_NAME_OIL_SHOWN = 'oil_shown';
 
 // Persisted Status Events (will fire after reload)
 export const EVENT_NAME_HAS_OPTED_IN = 'oil_has_optedin';
-export const EVENT_NAME_HAS_OPTED_LATER = 'oil_has_optedlater';
-export const EVENT_NAME_HAS_OPTED_IGNORE = 'oil_has_optedignore';
 
 // Trigger Events (OIL is listening for them to trigger actions)
 export const EVENT_NAME_OPT_OUT_TRIGGER = 'oil_optout_trigger';
@@ -52,11 +45,7 @@ export const DATAQA_PRIVACY_PAGE = 'oil-PrivacyPage';
 // context attributes for action items, used for ga tracking
 export const DATA_CONTEXT_YES = 'YES';
 export const DATA_CONTEXT_YES_POI = 'YESPOI';
-export const DATA_CONTEXT_LATER = 'LATER';
 export const DATA_CONTEXT_ADVANCED_SETTINGS = 'ADVANCEDSETTINGS';
-export const DATA_CONTEXT_YES_WHILE_LATER = 'YESWHILELATER';
-export const DATA_CONTEXT_YES_POI_WHILE_LATER = 'YESPOIWHILELATER';
-export const DATA_CONTEXT_IGNORE_WHILE_LATER = 'IGNOREWHILELATER';
 export const DATA_CONTEXT_BACK = 'BACK';
 
 const PRIVACY_SETTING_ID              = 'oiid';

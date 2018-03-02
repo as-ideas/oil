@@ -1,4 +1,3 @@
-import {CSSPrefix} from './../oil.view.config.js';
 import { getLabel } from '../../userview_config.js';
 import { OIL_LABELS } from '../../userview_constants.js'
 import {DATAQA_PRIVACY_PAGE} from '../../../core/core_constants.js';
@@ -12,7 +11,7 @@ export const privacyPageSnippet = () => {
   if (privacyPage) {
     return `
             <a href="${privacyPage}" 
-                class="${CSSPrefix}oil__intro-txt--link"
+                class="as-oil__intro-txt--link"
                 data-qa="${DATAQA_PRIVACY_PAGE}"
                 target="_blank"
             >${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_PRIVACY)}</a>`;

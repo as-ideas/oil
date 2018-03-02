@@ -109,9 +109,8 @@ This is a full list of configurable options.
 | poi_group_name | POI group name. POI only affects those sites with the same group name (optional). | ''|Yes
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31 | No
-| oil_ignore | Display a X top right of the layer. | False | No
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False | No
-| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and display the "opt later" layer or close the layer and store this selection in the oil cookie. | True | No
+| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True | No
 |====
 
 ==== Label Configuration Parameters
@@ -123,13 +122,11 @@ Check developer documentation for information to change all labels.
 |====
 |Config Parameter|Default value
 |label_intro_heading| For the best user experience we need your confirmation
-|label_later_heading| For the best user experience we need your confirmation
 |====
 
 Example Screenshots:
 
 image::src/images/oil-labels-intro.png[]
-image::src/images/oil-labels-later.png[]
 
 === Listening and interacting with OIL
 
@@ -172,8 +169,6 @@ Please note that verbose logging can only be activated for your browser, all oth
 
 ==== OIL Events
 
-Below you'll find a simple example that shows you how to listen to OIL's opt-later event.
-
 #2. Register an event handler with a callback to be executed when OIL fires the opt-in event or the user has opted in on an earlier occasion and revisits the page.
 [source,javascript]
 ----
@@ -206,11 +201,6 @@ OIL is currently emitting the following events:
 | Event name | Description
 | oil_optin_done | When a users selects opt in.
 | oil_soi_optin_done | When a users selects opt in via SOI.
-| oil_poi_optin_done | When a users selects opt in via SOI from the later page.
-| oil_soi_optin_done_while_later | When a users selects opt in via POI.
-| oil_poi_optin_done_while_later | When a users selects opt in via POI from the later page.
-| oil_optlater_done| When a users selects opt later.
-| oil_optignore_done| When a users selects opt ignore.
 | oil_as_selected_minimum| When a users selected minimum cookies before clicking opt in.
 | oil_as_selected_functional| When a users selected functional cookies before clicking opt in.
 | oil_as_selected_full| When a user selected full cookies before clicking opt in or didn't bother for advanced settings.
@@ -218,8 +208,6 @@ OIL is currently emitting the following events:
 | oil_click_back_to_main| When a user clicks the back link from the advanced settings page.
 | oil_no_cookies_allowed| When a users has no cookies allowed and the no cookies layer is displayed
 | oil_has_optedin| On every page reload, when the user has opted_in previously (OIL should be hidden)
-| oil_has_optedlater| On every page reload, when the user has opted_later previously (OIL should be shown)
-| oil_has_optedignore| On every page reload, when the user has opted_ignore previously (OIL should be hidden)
 | oil_shown| When oil is shown
 |====
 

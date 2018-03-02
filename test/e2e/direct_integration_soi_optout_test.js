@@ -1,4 +1,4 @@
-import { OIL_LAYER, OIL_YES_BUTTON, HOST_SEND_OPTOUT_BUTTON } from '../constants.js';
+import { OIL_LAYER, OIL_YES_BUTTON, HOST_SEND_OPTOUT_BUTTON } from '../test_constants.js';
 
 module.exports = {
   beforeEach: browser => {

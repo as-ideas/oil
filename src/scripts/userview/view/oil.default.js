@@ -1,7 +1,5 @@
-import { DATA_CONTEXT_YES, DATA_CONTEXT_LATER, DATA_CONTEXT_ADVANCED_SETTINGS } from '../../core/core_constants.js';
-import { POIButtonSnippet } from './components/oil.poi.button';
+import { DATA_CONTEXT_YES, DATA_CONTEXT_ADVANCED_SETTINGS } from '../../core/core_constants.js';
 import { privacyPageSnippet } from './components/oil.privacy.page';
-import { CSSPrefix } from './oil.view.config.js';
 import { OIL_LABELS } from '../userview_constants.js'
 import {
   getLabel,
@@ -13,22 +11,9 @@ import {
  */
 const OilAdvancedSettings = (advancedSettings) => {
   return advancedSettings === true ? (
-      `
-        <button class="${CSSPrefix}oil__btn-as ${CSSPrefix}js-advanced-settings" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
+    `
+        <button class="as-oil__btn-as as-js-advanced-settings" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
             ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS)}
-        </button>
-      `
-  ) : '';
-};
-
-/**
- * OIL Later Button
- */
-const OilLaterButton = (advancedSettings) => {
-  return advancedSettings !== true ? (
-      `
-        <button class="${CSSPrefix}oil__btn-loi ${CSSPrefix}js-optlater" data-context="${DATA_CONTEXT_LATER}" data-qa="oil-NotNowButton">
-            ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_NO)}
         </button>
       `
   ) : '';
@@ -36,7 +21,7 @@ const OilLaterButton = (advancedSettings) => {
 
 const introLabelSnippet = () => {
   let labelIntro = getLabel(OIL_LABELS.ATTR_LABEL_INTRO);
-  if(labelIntro) {
+  if (labelIntro) {
     return labelIntro;
   } else {
     return (`${getLabel(OIL_LABELS.ATTR_LABEL_INTRO_START)} ${privacyPageSnippet()} ${getLabel(OIL_LABELS.ATTR_LABEL_INTRO_END)}`);
@@ -45,23 +30,21 @@ const introLabelSnippet = () => {
 
 export function oilDefaultTemplate() {
   return `
-    <div class="${CSSPrefix}oil-content-overlay ${CSSPrefix}oil-has-gradient" data-qa="oil-full">
-        <div class="${CSSPrefix}oil-l-wrapper-layout-max-width">
-            <div class="${CSSPrefix}oil__heading">
+    <div class="as-oil-content-overlay" data-qa="oil-full">
+        <div class="as-oil-l-wrapper-layout-max-width">
+            <div class="as-oil__heading">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_INTRO_HEADING)}
             </div>
-            <p class="${CSSPrefix}oil__intro-txt">
+            <p class="as-oil__intro-txt">
                 ${introLabelSnippet()}
             </p>
-            <div class="${CSSPrefix}oil-l-row ${CSSPrefix}oil-l-buttons">
-                ${POIButtonSnippet()}
-                <div class="${CSSPrefix}oil-l-item">
-                    <button class="${CSSPrefix}oil__btn-soi ${CSSPrefix}js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
-                        ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES_SOI)}
+            <div class="as-oil-l-row as-oil-l-buttons">
+                <div class="as-oil-l-item">
+                    <button class="as-oil__btn-soi as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
+                        ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES)}
                     </button>
                 </div>
-                <div class="${CSSPrefix}oil-l-item ${CSSPrefix}oil-l-item--stretch">
-                    ${OilLaterButton(isAdvancedSettings())}
+                <div class="as-oil-l-item as-oil-l-item--stretch">
                     ${OilAdvancedSettings(isAdvancedSettings())}
                 </div>
             </div>

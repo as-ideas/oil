@@ -60,7 +60,6 @@ All labels can be overwritten, even the default ones:
 |====
 |Config Parameter|Default value
 |label_intro| We're using cookies, please confirm.
-|label_later| We're using cookies, please confirm.
 |label_button_yes_soi| Yes
 |label_button_yes_poi| Yes for all
 |label_button_no| No
@@ -84,8 +83,6 @@ Deprecated label configurations:
 |Config Parameter|Default value
 |label_intro_start| We're using cookies, read
 |label_intro_end| and please confirm.
-|label_later_start| We're using cookies, read
-|label_later_end| and please confirm.
 |label_button_privacy| more information
 |privacy_page_url| http://my.url/information
 |====

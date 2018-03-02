@@ -1,29 +1,4 @@
 /**
- * Oil Prefix
- *
- * Define a prefix that will be used on all oil CSS classes to avoid naming conflicts
- * with external CSS libraries or declarations
- */
-
-// Generate the right prefix for empty and non empty strings
-// So for an empty prefix our CSS classes are .oil, otherwise our CSS classes will look
-// like .prefix-oil
-
-@function CSSPrefix($str) {
-  @if $str == "" {
-    @return #{$str};
-  } @else {
-    @return #{$str}-;
-  }
-}
-
-// Set Oil CSS prefix here, the prefix has to be in sync with a Javascript file,
-// see modal.js                                  ------------------------------
-// ------------
-
-$prefix: CSSPrefix("as");
-
-/**
  * Define media queries,
  * this must be set before media queries are imported
  */
@@ -46,11 +21,14 @@ $breakpoints: (
  *
  */
 
-$text-color-primary: rgba(255, 255, 255, 0.85);
-$text-color-secondary: rgb(70, 200, 120);
-$text-color-dark: rgb(43, 43, 43);
-$btn-primary: rgb(50, 170, 100);
+$text-color-primary: #262626;
+$background-color: #f9f9f9;
+
+$btn-primary: rgb(63, 126, 223);
+$btn-primary-text-color: #ffffff;
+
 $btn-secondary: transparent;
+$btn-secondary-text-color: #ffffff;
 
 $layout-max-width: 1280px;
 
@@ -75,7 +53,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  * <li>Bar</li>
  * <li>Baz</li>
  */
-
 @mixin stack-items-remove-vertical-margins {
   &:first-of-type {
     margin-left: 0;
@@ -96,11 +73,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-/**
- * Clearfix
- *
- */
-
 @mixin clearfix {
   &:after {
     content: "";
@@ -109,24 +81,13 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-/**
- * Adds font-smoothing for text
- *
- */
-
 @mixin font-smoothing {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/**
- * Changes box model, defaults to border-box
- *
- */
-
 @mixin box-model($model: border-box) {
-  &,
-  & * {
+  &, & * {
     box-sizing: $model;
 
     &:before,
@@ -137,30 +98,22 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /**
- * Utils
- *
+ * Our OIL Overlay - Wraps all Oil content
+ * HINT: Was no height! It's only the wrapper
  */
-
-.no-break {
-  white-space: nowrap;
-}
-
-/**
- * Our OIL Overlay
- * Wraps all Oil content
- *
- */
-
-.#{$prefix}oil {
+.as-oil {
   @include box-model;
   @include font-smoothing;
   position: fixed;
   z-index: $z-index-max;
   bottom: 0;
+  left: 0;
   width: 100%;
   font-family: $font-stack;
-  font-size: 16px; // Set font size here as a base for em units, which we'll use, cause' we don't know what base font-size size a host site will use
   color: $text-color-primary;
+
+  // Set font size here as a base for em units, which we'll use, cause' we don't know what base font-size size a host site will use
+  font-size: 14px;
 
   a {
     cursor: pointer;;
@@ -171,14 +124,16 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
  * Wraps all our Oil content, eg. text and buttons
  */
 
-.#{$prefix}oil-content-overlay {
+.as-oil-content-overlay {
   @include clearfix;
   position: absolute;
   width: 100%;
   bottom: 0;
   left: 0;
   padding: 2em 5em;
-  background-color: rgba(40, 40, 40, 0.98);
+  background-color: $background-color;
+  opacity: 0.96;
+  box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, 0.2);
 
   @include media('<=phone') {
     padding: 1em;
@@ -190,44 +145,13 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /**
- * Add gradient to expanded overlay
- *
- */
-
-.#{$prefix}oil-has-gradient {
-  &:before {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    top: -100%;
-    left: 0;
-    background-image: linear-gradient(rgba(255, 255, 255, 0), rgb(0, 0, 0));
-
-    @include media('<=phone') {
-      height: 50px;
-      top: -50px;
-    }
-
-    @include media('>phone', '<desktop') {
-      height: 50%;
-      top: -50%;
-    }
-  }
-}
-
-/**
  * Text Styles
- *
  */
-
-.#{$prefix}oil__heading {
+.as-oil__heading {
   max-width: 840px;
-  margin: 0.5em 0;
-  font-size: 1.7em;
-  font-weight: 300;
-  color: $text-color-secondary;
+  font-size: 1.45em;
+  font-weight: 600;
+  color: $text-color-primary;
   line-height: 1.15;
 
   &:first-of-type {
@@ -241,9 +165,11 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-.#{$prefix}oil__intro-txt {
-  max-width: 980px;
-  margin: 1em 0;
+.as-oil__intro-txt {
+  display: inline-block;
+  min-width: 70%;
+  max-width: 70%;
+  margin: 1.3em 0;
   font-size: 0.9375em;
   font-weight: 400;
   line-height: 1.4;
@@ -255,31 +181,27 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-.#{$prefix}oil__intro-txt--link {
-  padding: 4px;
-  color: $text-color-secondary;
-  text-decoration: none;
-  border-bottom: 1px solid;
+.as-oil__intro-txt--link {
+  padding: 4px 1px 0;
+  margin: 0 1px;
+  color: $text-color-primary;
+  text-decoration: underline;
 
   &:hover {
-    color: darken($text-color-secondary, 10%);
+    color: darken($text-color-primary, 10%);
   }
 }
 
 /**
  * Button Styles
- *
  */
-
-// Mixins
-
 @mixin btn-poi-soi-shared {
-  min-width: 250px;
-  min-height: 50px;
+  min-width: 200px;
+  min-height: 42px;
   margin: 0;
   padding: 0.5em 1em;
-  font-size: 0.875em; // 14px
-  font-weight: 400;
+  font-size: 1.1em;
+  font-weight: 700;
   border: none;
   border-radius: 3px;
   outline: none;
@@ -300,54 +222,49 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @mixin btn-poi {
-  color: $text-color-dark;
+  color: $btn-primary-text-color;
   background-color: $btn-primary;
-  background-image: linear-gradient(35deg, $btn-primary, rgb(70, 200, 100));
-  border-color: transparent;
 
   &:hover {
-    background-color: darken($btn-primary, 8%);
-    background-image: linear-gradient(35deg, darken($btn-primary, 8%), darken(rgb(70, 200, 100), 8%));
+    color: darken($btn-primary-text-color, 5%);
+    background-color: darken($btn-primary, 10%);
   }
 }
 
 @mixin btn-soi {
-  color: $text-color-primary;
-  border: 2px solid $btn-primary;
-  background-color: transparent;
-  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.5);
+  color: $btn-primary-text-color;
+  background-color: $btn-primary;
 
   &:hover {
-    color: $text-color-primary;
-    border-color: darken($btn-primary, 8%);
-    background-color: transparent;
+    color: darken($btn-primary-text-color, 5%);
+    background-color: darken($btn-primary, 10%);
   }
 }
 
 // Power Optin Button Declaration
 
-.#{$prefix}oil__btn-poi {
+.as-oil__btn-poi {
   @include btn-poi-soi-shared;
   @include btn-poi;
 }
 
 // Site Optin Button Declaration
 
-.#{$prefix}oil__btn-soi {
+.as-oil__btn-soi {
   @include btn-poi-soi-shared;
   @include btn-soi;
 }
 
 // Later Optin Button Declaration
 
-.#{$prefix}oil__btn-loi {
+.as-oil__btn-loi {
   float: right;
   min-height: auto;
   margin: 0.75em 0;
   padding: 4px;
   font-size: 0.875em;
   font-weight: 400;
-  color: $text-color-secondary;
+  color: $text-color-primary;
   text-decoration: none;
   background-color: transparent;
   border: none;
@@ -356,7 +273,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   cursor: pointer;
 
   &:hover {
-    color: darken($text-color-secondary, 10%);
+    color: darken($text-color-primary, 10%);
     background-color: transparent;
   }
 
@@ -374,14 +291,14 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-.#{$prefix}oil__btn-as {
+.as-oil__btn-as {
   float: right;
   min-height: auto;
   margin: 0.75em 0;
   padding: 4px;
   font-size: 14px;
   font-weight: 400;
-  color: $text-color-secondary;
+  color: $text-color-primary;
   text-decoration: none;
   background-color: transparent;
   border: none;
@@ -390,7 +307,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   cursor: pointer;
 
   &:hover {
-    color: darken($text-color-secondary, 10%);
+    color: darken($text-color-primary, 10%);
     background-color: transparent;
   }
 
@@ -415,11 +332,11 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Text styles
 
-.#{$prefix}oil-loi__heading {
+.as-oil-loi__heading {
   margin: 1em 0;
   font-size: 1.25em;
   font-weight: 300;
-  color: $text-color-secondary;
+  color: $text-color-primary;
   line-height: 1.1875;
 
   &:first-of-type {
@@ -432,7 +349,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-.#{$prefix}oil-loi__intro-txt {
+.as-oil-loi__intro-txt {
   margin: 1rem 0;
   font-size: 0.875em;
   font-weight: 400;
@@ -473,33 +390,29 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Loi Power Optin Button Declaration
 
-.#{$prefix}oil-loi__btn-poi {
+.as-oil-loi__btn-poi {
   @include oil-loi-btn-poi-soi-shared;
   @include btn-poi;
 }
 
 // Loi Site Optin Button Declaration
 
-.#{$prefix}oil-loi__btn-soi {
+.as-oil-loi__btn-soi {
   @include oil-loi-btn-poi-soi-shared;
   @include btn-soi;
 }
 
 /**
  * Layout Stuff
- *
  */
-
-.#{$prefix}oil-l-row {
+.as-oil-l-row {
+  display: inline-block;
   margin: 1em 0;
+  min-width: 25%;
+  max-width: 30%;
 
   &:last-of-type {
     margin-bottom: 0;
-  }
-
-  @supports (display: flex) {
-    display: flex;
-    align-content: center;
   }
 
   @include media('<=phone') {
@@ -508,8 +421,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-.#{$prefix}oil-l-row--fixed-width,
-.#{$prefix}oil-l-wrapper-layout-max-width {
+.as-oil-l-row--fixed-width,
+.as-oil-l-wrapper-layout-max-width {
   max-width: $layout-max-width;
   margin: 0 auto;
 
@@ -518,9 +431,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-.#{$prefix}oil-l-item {
+.as-oil-l-item {
   float: left; // Fallback for non flexbox capable browsers
-  margin: 0 0.5em;
 
   @supports (display: flex) {
     float: none;
@@ -541,18 +453,16 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-.#{$prefix}oil-l-item--stretch {
+.as-oil-l-item--stretch {
   @supports (display: flex) {
     flex: 1 0 auto;
   }
 }
 
 /**
- * Close Button
- *
+ * Close Button for later
  */
-
-.#{$prefix}oil-close {
+.as-oil-close {
   position: absolute;
   top: 1em;
   right: 1em;
@@ -565,18 +475,18 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   user-select: none;
 
   &:hover {
-    fill: $text-color-secondary;
+    fill: $text-color-primary;
     opacity: 1;
   }
 }
 
-.#{$prefix}oil-icon-close {
+.as-oil-icon-close {
   display: block;
   width: 0.875em;
   height: 0.875em;
 }
 
-.#{$prefix}slider-wrapper {
+.as-slider-wrapper {
   display: inline-block;
   width: 20px;
   height: 150px;
@@ -584,28 +494,27 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /**
-* NoUiSlider CSS and overrides
+ * NoUiSlider CSS and overrides
  */
-
 @import "../../node_modules/nouislider/distribute/nouislider.css";
 
-.#{$prefix}slider-wrapper {
+.as-slider-wrapper {
   height: 180px;
   margin-top: 20px;
 }
 
-.#{$prefix}slider-desc {
+.as-slider-desc {
   margin-left: 20px;
 }
 
-.#{$prefix}slider-option-title {
+.as-slider-option-title {
   font-size: 1.2em;
   font-weight: 400;
   line-height: 1.4;
-  color: $text-color-secondary;
+  color: $text-color-primary;
 }
 
-.#{$prefix}slider-option-verbose {
+.as-slider-option-verbose {
   font-size: 0.9375em;
   font-weight: 400;
   line-height: 1.4;
@@ -613,11 +522,11 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-bottom: 20px;
 }
 
-.#{$prefix}slider-inactive {
+.as-slider-inactive {
   opacity: 0.4;
 }
 
-.#{$prefix}slider-active {
+.as-slider-active {
   opacity: 1.0;
 }
 

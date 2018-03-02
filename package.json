@@ -5,7 +5,6 @@
   "main": "http_server.js",
   "scripts": {
     "start": "node http_server.js",
-    "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 ",
     "build": "npm run build:clean && npm run build:debug && npm run build:prod && npm run build:docs",
     "build:prod": "cross-env-shell SNAPSHOT=${SNAPSHOT} NODE_ENV=production webpack --config etc/webpack.config.js",
     "build:release": "npm run build:clean && cross-env-shell SNAPSHOT=${SNAPSHOT} NODE_ENV=release webpack --config etc/webpack.config.js && npm run build:docs",
@@ -13,6 +12,7 @@
     "build:dev": "cross-env NODE_ENV=debug webpack --config etc/webpack.config.js",
     "build:debug": "cross-env NODE_ENV=debug webpack --config etc/webpack.config.js",
     "build:watch": "webpack-dev-server --inline --watch --config etc/webpack.config.js",
+    "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 ",
     "browserstack": "bash ./etc/runBrowserstackSeq.sh",
     "browserstack:full": "bash ./etc/runFullBrowserstackSeq.sh",
     "pree2e": "node etc/nightwatch.local.conf.js",

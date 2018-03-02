@@ -1,4 +1,4 @@
-import { OIL_LAYER } from '../constants.js';
+import { OIL_LAYER } from '../test_constants.js';
 
 module.exports = {
   beforeEach: browser => {

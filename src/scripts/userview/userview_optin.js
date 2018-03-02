@@ -3,17 +3,14 @@ import { activatePowerOptInWithRedirect, activatePowerOptInWithIFrame } from './
 import { logInfo, logPreviewInfo } from '../core/core_log.js';
 import { sendEventToHostSite, OilVersion } from '../core/core_utils.js';
 import {
-  EVENT_NAME_OPT_LATER,
   EVENT_NAME_OPT_IN,
   PRIVACY_SETTINGS_MINIMUM_TRACKING,
-  EVENT_NAME_OPT_IGNORE,
   OIL_PAYLOAD_PRIVACY,
   OIL_PAYLOAD_VERSION,
   OIL_PAYLOAD_LOCALE
 } from '../core/core_constants.js';
 import { isPoiActive, isSubscriberSetCookieActive, getLocale } from '../core/core_config.js';
 import { getSoiCookie, setSoiOptIn } from '../core/core_cookies.js';
-import { setOptLater, setOilOptIgnore } from './userview_cookies.js';
 
 /**
  * Log Helper function for checkOptIn
@@ -105,32 +102,3 @@ export function oilOptIn(privacySettings = PRIVACY_SETTINGS_MINIMUM_TRACKING) {
   });
 }
 
-
-/**
- * Oil optLater
- * @return promise with updated cookie value
- */
-export function oilOptLater() {
-  setOptLater(true);
-  // Send event to notify host site
-  sendEventToHostSite(EVENT_NAME_OPT_LATER);
-
-  return new Promise((resolve) => {
-    resolve(true);
-  });
-}
-
-
-/**
- * Oil optClose
- * @return promise with updated cookie value
- */
-export function oilOptIgnore() {
-  setOilOptIgnore(true);
-  // Send event to notify host site
-  sendEventToHostSite(EVENT_NAME_OPT_IGNORE);
-
-  return new Promise((resolve) => {
-    resolve(true);
-  });
-}
