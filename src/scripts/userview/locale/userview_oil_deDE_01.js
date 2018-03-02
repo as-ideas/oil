@@ -14,7 +14,7 @@ window.AS_OIL_LOCALE = {
   [OIL_LABELS.ATTR_LABEL_INTRO]: undefined,
   [OIL_LABELS.ATTR_LABEL_INTRO_START]: 'Wir verwenden <a href="//oil.asideas.de/legal/thirdparties.html" class="as-oil__intro-txt--link" target="_blank">Cookies</a>, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an <a href="//oil.asideas.de/legal/companies.html" class="as-oil__intro-txt--link" target="_blank">Partner</a> zu übertragen.',
   [OIL_LABELS.ATTR_LABEL_INTRO_END]: 'Jetzt Einverständnis erklären:',
-  [OIL_LABELS.ATTR_LABEL_BUTTON_YES_SOI]: 'Jetzt zustimmen',
+  [OIL_LABELS.ATTR_LABEL_BUTTON_YES]: 'Jetzt zustimmen',
   [OIL_LABELS.ATTR_LABEL_BUTTON_NO]: 'Nein, jetzt nicht',
   [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: 'Zurück',
   [OIL_LABELS.ATTR_LABEL_BUTTON_PRIVACY]: 'Mehr erfahren',

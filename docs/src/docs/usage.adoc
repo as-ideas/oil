@@ -110,7 +110,7 @@ This is a full list of configurable options.
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31 | No
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False | No
-| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and display the "opt later" layer or close the layer and store this selection in the oil cookie. | True | No
+| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True | No
 |====
 
 ==== Label Configuration Parameters

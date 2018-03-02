@@ -196,7 +196,7 @@ function injectOilWrapperInDOM(wrapper) {
 function getOilDOMNodes() {
   return {
     oilWrapper: document.querySelectorAll('.as-oil'),
-    btnSoiOptIn: document.querySelectorAll('.as-oil .as-js-optin'),
+    btnOptIn: document.querySelectorAll('.as-oil .as-js-optin'),
     btnPoiOptIn: document.querySelectorAll('.as-oil .as-js-optin-poi'),
     btnOptLater: document.querySelectorAll('.as-oil .as-js-optlater'),
     btnAdvancedSettings: document.querySelectorAll('.as-oil .as-js-advanced-settings'),
@@ -314,13 +314,13 @@ function removeEventListenersToDOMList(listOfDoms, listener) {
  * Add and Remove Handlers to Oil Action Elements
  */
 function addOilHandlers(nodes) {
-  addEventListenersToDOMList(nodes.btnSoiOptIn, handleOptIn);
+  addEventListenersToDOMList(nodes.btnOptIn, handleOptIn);
   addEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 }
 
 function removeOilWrapperAndHandlers(nodes) {
-  removeEventListenersToDOMList(nodes.btnSoiOptIn, handleOptIn);
+  removeEventListenersToDOMList(nodes.btnOptIn, handleOptIn);
   removeEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
   removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 
