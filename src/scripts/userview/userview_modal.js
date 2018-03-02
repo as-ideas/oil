@@ -28,7 +28,7 @@ import { advancedSettingsSnippet } from './view/components/oil.advanced.settings
 import { logInfo, logError } from '../core/core_log.js';
 import { isPersistMinimumTracking } from './userview_config.js';
 import { isSubscriberSetCookieActive } from '../core/core_config.js';
-import { isPoiActive } from '../core/core_config';
+import { getTheme, isPoiActive } from '../core/core_config';
 
 
 // Initialize our Oil wrapper and save it ...
@@ -160,7 +160,7 @@ export function oilShowPreferenceCenter(wrapper = false, preset = PRIVACY_MINIMU
 function defineOilWrapper() {
   let oilWrapper = document.createElement('div');
   // Set some attributes as CSS classes and attributes for testing
-  oilWrapper.setAttribute('class', 'as-oil');
+  oilWrapper.setAttribute('class', `as-oil ${getTheme()}`);
   oilWrapper.setAttribute('data-qa', 'oil-Layer');
   return oilWrapper;
 }

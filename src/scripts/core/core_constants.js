@@ -12,7 +12,9 @@ export const OIL_CONFIG = {
   ATTR_OIL_POI_GROUP_NAME: 'poi_group_name',
   ATTR_ADVANCED_SETTINGS: 'advanced_settings',
   ATTR_PERSIST_MINIMUM_TRACKING: 'persist_min_tracking',
-  ATTR_LOCALE: 'locale'
+  ATTR_LOCALE: 'locale',
+  ATTR_THEME: 'theme'
+
 };
 
 // Main Click events
