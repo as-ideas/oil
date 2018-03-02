@@ -34,11 +34,11 @@ export const oilWrapper = defineOilWrapper();
 
 /**
  * Helper that determines if Oil layer is shown or not...
- * Oil layer is not rendered eg. if user opted in or opted close
+ * Oil layer is not rendered eg. if user opted in
  * @param {*} props
  */
 function shouldRenderOilLayer(props) {
-  return props.optIn === true ? false : true;
+  return props.optIn !== true;
 }
 
 /**
