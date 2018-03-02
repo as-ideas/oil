@@ -1,7 +1,6 @@
 import {
   OIL_LAYER,
-  OIL_YES_BUTTON,
-  OIL_LAYER_FULL,
+  OIL_YES_BUTTON
 } from '../test_constants.js';
 
 const REDIRECT_TIMEOUT = 5000;

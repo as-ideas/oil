@@ -37,8 +37,10 @@ export const oilWrapper = defineOilWrapper();
  * Oil layer is not rendered eg. if user opted in or opted close
  * @param {*} props
  */
+
+//ToDo: check if all clear here
 function shouldRenderOilLayer(props) {
-  return props.optIn === true ? false : props.optIgnore !== true;
+  return props.optIn === true ? false : '';
 }
 
 /**
@@ -198,7 +200,6 @@ function getOilDOMNodes() {
     btnPoiOptIn: document.querySelectorAll('.as-oil .as-js-optin-poi'),
     btnOptLater: document.querySelectorAll('.as-oil .as-js-optlater'),
     btnAdvancedSettings: document.querySelectorAll('.as-oil .as-js-advanced-settings'),
-    btnClose: document.querySelectorAll('.as-oil .as-js-optignore'),
     btnBack: document.querySelectorAll('.as-oil .as-js-oilback')
   }
 }
