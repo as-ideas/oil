@@ -25,21 +25,12 @@ import { advancedSettingsSnippet } from './view/components/oil.advanced.settings
 import { logInfo, logError } from '../core/core_log.js';
 import { isPersistMinimumTracking } from './userview_config.js';
 import { isSubscriberSetCookieActive } from '../core/core_config.js';
-import { isPoiActive } from '../core/core_config';
+import { getTheme, isPoiActive } from '../core/core_config';
 
 
 // Initialize our Oil wrapper and save it ...
 
-export const oilWrapper = defineOilWrapper();
-
-/**
- * Helper that determines if Oil layer is shown or not...
- * Oil layer is not rendered eg. if user opted in
- * @param {*} props
- */
-function shouldRenderOilLayer(props) {
-  return props.optIn !== true;
-}
+export const oilWrapper = defineOilWrapper;
 
 /**
  * Utility function for forEach safety
@@ -57,18 +48,28 @@ export function forEach(array, callback, scope) {
 /**
  * Oil Main Render Function:
  */
-export function renderOil(wrapper, props) {
-  if (wrapper && shouldRenderOilLayer(props)) {
+export function renderOil(props) {
+  if (shouldRenderOilLayer(props)) {
     if (props.noCookie) {
-      renderOilContentToWrapper(wrapper, oilNoCookiesTemplate());
+      renderOilContentToWrapper(oilNoCookiesTemplate());
     } else if (props.advancedSettings) {
-      renderOilContentToWrapper(wrapper, oilAdvancedSettingsTemplate());
+      renderOilContentToWrapper(oilAdvancedSettingsTemplate());
     } else {
-      renderOilContentToWrapper(wrapper, oilDefaultTemplate());
+      renderOilContentToWrapper(oilDefaultTemplate());
     }
   } else {
     removeOilWrapperFromDOM();
   }
+}
+
+
+/**
+ * Helper that determines if Oil layer is shown or not...
+ * Oil layer is not rendered eg. if user opted in
+ * @param {*} props
+ */
+function shouldRenderOilLayer(props) {
+  return props.optIn !== true;
 }
 
 function interpretSliderValue(value) {
@@ -86,11 +87,11 @@ function interpretSliderValue(value) {
   }
 }
 
-
-export function oilShowPreferenceCenter(wrapper = false, preset = PRIVACY_MINIMUM_TRACKING) {
+export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
+  let wrapper = document.querySelector('.as-oil');
   let entryNode = document.querySelector('#oil-preference-center');
   if (wrapper) {
-    renderOil(wrapper, {advancedSettings: true});
+    renderOil({advancedSettings: true});
   } else if (entryNode) {
     entryNode.innerHTML = advancedSettingsSnippet();
   } else {
@@ -121,7 +122,6 @@ export function oilShowPreferenceCenter(wrapper = false, preset = PRIVACY_MINIMU
   let essential = document.getElementById('as-slider-essential-title');
   let functional = document.getElementById('as-slider-functional-title');
   let advertising = document.getElementById('as-slider-advertising-title');
-
   rangeSlider.noUiSlider.on('update', function (params) {
     let currentSelection = params[0];
     let result = interpretSliderValue(currentSelection);
@@ -155,7 +155,7 @@ export function oilShowPreferenceCenter(wrapper = false, preset = PRIVACY_MINIMU
 function defineOilWrapper() {
   let oilWrapper = document.createElement('div');
   // Set some attributes as CSS classes and attributes for testing
-  oilWrapper.setAttribute('class', 'as-oil');
+  oilWrapper.setAttribute('class', `as-oil ${getTheme()}`);
   oilWrapper.setAttribute('data-qa', 'oil-Layer');
   return oilWrapper;
 }
@@ -164,7 +164,8 @@ function defineOilWrapper() {
  * Define Content of our Oil Wrapper
  * Sets HTML based on props ...
  */
-function renderOilContentToWrapper(wrapper, content) {
+function renderOilContentToWrapper(content) {
+  let wrapper = oilWrapper();
   wrapper.innerHTML = content;
   injectOilWrapperInDOM(wrapper);
 }
@@ -184,7 +185,6 @@ function injectOilWrapperInDOM(wrapper) {
   document.body.insertBefore(wrapper, document.body.firstElementChild);
   addOilHandlers(getOilDOMNodes());
 }
-
 
 /**
  * Small Utility Function to retrieve our Oil Wrapper and Action Elements,
@@ -210,19 +210,14 @@ function getRangeSliderValue() {
   return PRIVACY_FULL_TRACKING;
 }
 
-/**
- * Handler Functions for our Oil Action Elements
- *
- */
-
 function handleBackToMainDialog() {
   logInfo('Handling Back Button');
-  renderOil(oilWrapper, {});
+  renderOil({});
   sendEventToHostSite(EVENT_NAME_BACK_TO_MAIN);
 }
 
 function handleAdvancedSettings() {
-  oilShowPreferenceCenter(oilWrapper, PRIVACY_MINIMUM_TRACKING);
+  oilShowPreferenceCenter(PRIVACY_MINIMUM_TRACKING);
   sendEventToHostSite(EVENT_NAME_ADVANCED_SETTINGS);
 }
 
@@ -255,7 +250,7 @@ export function handleSoiOptIn() {
   trackPrivacySetting(privacySetting);
   if (privacySetting !== PRIVACY_MINIMUM_TRACKING || isPersistMinimumTracking()) {
     oilOptIn(convertPrivacySettingsToCookieValue(privacySetting)).then((cookieOptIn) => {
-      renderOil(oilWrapper, {optIn: cookieOptIn});
+      renderOil({optIn: cookieOptIn});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES) {
         sendEventToHostSite(EVENT_NAME_SOI_OPT_IN);
       }
@@ -271,7 +266,7 @@ export function handlePoiOptIn() {
   trackPrivacySetting(privacySetting);
   if (privacySetting !== PRIVACY_MINIMUM_TRACKING || isPersistMinimumTracking()) {
     oilPowerOptIn(convertPrivacySettingsToCookieValue(privacySetting), !isSubscriberSetCookieActive()).then(() => {
-      renderOil(oilWrapper, {optIn: true});
+      renderOil({optIn: true});
       if (isPoiActive()) {
         sendEventToHostSite(EVENT_NAME_POI_OPT_IN);
       }

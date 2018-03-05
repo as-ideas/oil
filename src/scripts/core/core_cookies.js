@@ -63,7 +63,7 @@ function getDomainCookieConfig() {
       'opt_in': false,
       'timestamp': getClientTimestamp(),
       'version': OilVersion.get(),
-      'locale' : getLocale(),
+      'locale': getLocale(),
       'privacy': PRIVACY_MINIMUM_TRACKING
     }
   };
@@ -75,7 +75,7 @@ function getOilDomainCookie() {
 
 // PUBLIC INTERFACE
 export function getOilCookie(cookieConfig) {
-  if( isCookie(cookieConfig.name) &&
+  if (isCookie(cookieConfig.name) &&
     isCookieValid(cookieConfig.name, Object.keys(cookieConfig.default_content))) {
     return Cookie.getJSON(cookieConfig.name);
   }

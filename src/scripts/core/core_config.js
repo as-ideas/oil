@@ -101,6 +101,10 @@ export function getLocale() {
   return getConfigValue(OIL_CONFIG.ATTR_LOCALE, 'deDE_01');
 }
 
+export function getTheme() {
+  return getConfigValue(OIL_CONFIG.ATTR_THEME, 'light');
+}
+
 
 /**
  * Get the hub iFrame URL with protocol prefix for the current location
