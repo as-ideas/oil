@@ -167,8 +167,8 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .as-oil__intro-txt {
   display: inline-block;
-  min-width: 70%;
-  max-width: 70%;
+  min-width: 75%;
+  max-width: 75%;
   margin: 1.3em 0;
   font-size: 0.9375em;
   font-weight: 400;
@@ -194,7 +194,16 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 /**
  * Button Styles
+ *
  */
+
+@mixin oil-loi-btn-poi-soi-shared {
+  @include stack-items-remove-horizontal-margins;
+  @include btn-poi-soi-shared;
+  min-height: 40px;
+  margin: 0.5em 0;
+}
+
 @mixin btn-poi-soi-shared {
   min-width: 200px;
   min-height: 42px;
@@ -239,6 +248,37 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: darken($btn-primary-text-color, 5%);
     background-color: darken($btn-primary, 10%);
   }
+}
+
+@mixin oil-loi-btn-poi {
+  @include btn-poi;
+}
+
+@mixin oil-loi-btn-soi {
+  @include btn-soi;
+}
+
+// Loi Power Optin Button Declaration
+
+.as-oil-loi__btn-poi {
+  @include oil-loi-btn-poi-soi-shared;
+  @include btn-poi;
+}
+
+// Loi Site Optin Button Declaration
+
+.as-oil-loi__btn-soi {
+  @include oil-loi-btn-poi-soi-shared;
+  @include btn-soi;
+}
+
+// The container for alle the buttons
+.as-oil-l-buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  float: right;
+  padding-top: 30px;
 }
 
 // Power Optin Button Declaration
@@ -367,49 +407,13 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /**
- * Button Styles
- *
- */
-
-// Mixins
-
-@mixin oil-loi-btn-poi-soi-shared {
-  @include stack-items-remove-horizontal-margins;
-  @include btn-poi-soi-shared;
-  min-height: 40px;
-  margin: 0.5em 0;
-}
-
-@mixin oil-loi-btn-poi {
-  @include btn-poi;
-}
-
-@mixin oil-loi-btn-soi {
-  @include btn-soi;
-}
-
-// Loi Power Optin Button Declaration
-
-.as-oil-loi__btn-poi {
-  @include oil-loi-btn-poi-soi-shared;
-  @include btn-poi;
-}
-
-// Loi Site Optin Button Declaration
-
-.as-oil-loi__btn-soi {
-  @include oil-loi-btn-poi-soi-shared;
-  @include btn-soi;
-}
-
-/**
  * Layout Stuff
  */
 .as-oil-l-row {
   display: inline-block;
   margin: 1em 0;
-  min-width: 25%;
-  max-width: 30%;
+  min-width: 20%;
+  //max-width: 25%;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -424,6 +428,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 .as-oil-l-row--fixed-width,
 .as-oil-l-wrapper-layout-max-width {
   max-width: $layout-max-width;
+  position: relative;
   margin: 0 auto;
 
   @include media('>phone', '<desktop') {
@@ -432,7 +437,9 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .as-oil-l-item {
-  float: left; // Fallback for non flexbox capable browsers
+  float: right; // Fallback for non flexbox capable browsers
+  clear: both; // Fallback for non flexbox capable browsers
+  text-align: right;
 
   @supports (display: flex) {
     float: none;
@@ -486,30 +493,47 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   height: 0.875em;
 }
 
-.as-slider-wrapper {
-  display: inline-block;
-  width: 20px;
-  height: 150px;
-  padding: 0;
-}
-
 /**
  * NoUiSlider CSS and overrides
  */
 @import "../../node_modules/nouislider/distribute/nouislider.css";
 
 .as-slider-wrapper {
-  height: 180px;
+  display: inline-block;
+  padding: 0;
   margin-top: 20px;
+  position: absolute;
+  height: auto;
+  width: 10px;
+
+  top: 2px;
+  bottom: 40px;
+}
+
+.as-oil-l-cpc {
+  position: relative;
+  display: inline-block;
+  min-width: 50%;
+  max-width: 80%;
+  margin: 0.6rem 0;
+}
+
+.noUi-vertical .noUi-handle {
+  left: -11px;
+  width: 30px;
+  height: 30px;
+  border-radius: 16px;
 }
 
 .as-slider-desc {
-  margin-left: 20px;
+  margin-left: 40px;
+  display: inline-block;
+  max-width: 85%;
 }
 
 .as-slider-option-title {
-  font-size: 1.2em;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 700;
   line-height: 1.4;
   color: $text-color-primary;
 }
@@ -523,6 +547,10 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .as-slider-inactive {
+  opacity: 1.0;
+}
+
+.as-slider-active ~ .as-slider-inactive {
   opacity: 0.4;
 }
 

@@ -108,7 +108,7 @@ export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
   if (soiPrivacy) {
     currentPrivacySetting = soiPrivacy.oiid;
   }
-  console.info('as-slider-range', rangeSlider);
+
   noUiSlider.create(rangeSlider, {
     start: currentPrivacySetting,
     step: 1,
@@ -122,9 +122,9 @@ export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
   let essential = document.getElementById('as-slider-essential-title');
   let functional = document.getElementById('as-slider-functional-title');
   let advertising = document.getElementById('as-slider-advertising-title');
-
   rangeSlider.noUiSlider.on('update', function (params) {
     let currentSelection = params[0];
+
     let result = interpretSliderValue(currentSelection);
 
     switch (result) {
@@ -218,7 +218,7 @@ function handleBackToMainDialog() {
 }
 
 function handleAdvancedSettings() {
-  oilShowPreferenceCenter(oilWrapper(), PRIVACY_MINIMUM_TRACKING);
+  oilShowPreferenceCenter(PRIVACY_MINIMUM_TRACKING);
   sendEventToHostSite(EVENT_NAME_ADVANCED_SETTINGS);
 }
 
