@@ -50,16 +50,16 @@ export const DATA_CONTEXT_YES_POI = 'YESPOI';
 export const DATA_CONTEXT_ADVANCED_SETTINGS = 'ADVANCEDSETTINGS';
 export const DATA_CONTEXT_BACK = 'BACK';
 
-const PRIVACY_SETTING_ID              = 'oiid';
+const PRIVACY_SETTING_ID = 'oiid';
 export const PRIVACY_MINIMUM_TRACKING = 0;
 export const PRIVACY_FUNCTIONAL_TRACKING = 1;
 export const PRIVACY_FULL_TRACKING = 2;
 
-export const PRIVACY_SETTING_ESSENTIAL       = 'esse';
-export const PRIVACY_SETTING_ANALYTICS       = 'analy';
-export const PRIVACY_SETTING_SOCIAL_CONNECT  = 'soci';
-export const PRIVACY_SETTING_ADS_BASE        = 'adsbase';
-export const PRIVACY_SETTING_ADS_BEHAVIOUR   = 'adsbehav';
+export const PRIVACY_SETTING_ESSENTIAL = 'esse';
+export const PRIVACY_SETTING_ANALYTICS = 'analy';
+export const PRIVACY_SETTING_SOCIAL_CONNECT = 'soci';
+export const PRIVACY_SETTING_ADS_BASE = 'adsbase';
+export const PRIVACY_SETTING_ADS_BEHAVIOUR = 'adsbehav';
 
 export const PRIVACY_SETTINGS_FULL_TRACKING = {
   [PRIVACY_SETTING_ID]: PRIVACY_FULL_TRACKING,

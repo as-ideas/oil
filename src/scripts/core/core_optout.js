@@ -11,16 +11,16 @@ import { removeSubscriberCookies } from './core_cookies.js';
  * @return none
  */
 function receiveOptOutMessage(event) {
-    if (event && event.data && typeof(event.data.indexOf) !== 'undefined') {
-      if (event.data.indexOf(EVENT_NAME_OPT_OUT_TRIGGER) !== -1) {
-        logInfo('OptOut Received.');
-        // Update Oil cookie
-        removeSubscriberCookies();
-        // delete POI too if exists
-        logInfo('deActivatePowerOptIn');
-        deActivatePowerOptIn();
-      }
+  if (event && event.data && typeof(event.data.indexOf) !== 'undefined') {
+    if (event.data.indexOf(EVENT_NAME_OPT_OUT_TRIGGER) !== -1) {
+      logInfo('OptOut Received.');
+      // Update Oil cookie
+      removeSubscriberCookies();
+      // delete POI too if exists
+      logInfo('deActivatePowerOptIn');
+      deActivatePowerOptIn();
     }
+  }
 }
 
 /**

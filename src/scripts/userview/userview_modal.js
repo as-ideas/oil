@@ -124,7 +124,6 @@ export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
   let advertising = document.getElementById('as-slider-advertising-title');
   rangeSlider.noUiSlider.on('update', function (params) {
     let currentSelection = params[0];
-
     let result = interpretSliderValue(currentSelection);
 
     switch (result) {

@@ -139,7 +139,6 @@ export function removeSubscriberCookies() {
 export function isBrowserCookieEnabled() {
   Cookie.set('oil_cookie_exp', 'cookiedata');
   let result = isCookie('oil_cookie_exp');
-  console.info('isCookie(\'oil_cookie_exp\')', isCookie('oil_cookie_exp'));
   Cookie.remove('oil_cookie_exp');
   return result;
 }
