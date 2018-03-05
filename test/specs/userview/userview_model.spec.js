@@ -53,12 +53,6 @@ describe('the userview modal aka the oil layer wrapper', () => {
     expect(formatHtml(document.querySelector('.as-oil'))).toEqual(formatHtml(readFixture('gold-master/no-cookie.html')));
   });
 
-  it('should renderOil with OPT-LATER as LATER template', () => {
-    loadFixture('config/given.config.example.labels.html');
-    renderOil({optIn: false, optLater: true});
-    expect(formatHtml(document.querySelector('.as-oil'))).toEqual(formatHtml(readFixture('gold-master/later.html')));
-  });
-
   it('should renderOil with ADVANCED-SETTINGS as CPC template', () => {
     loadFixture('config/given.config.example.labels.html');
     renderOil({optIn: false, advancedSettings: true});

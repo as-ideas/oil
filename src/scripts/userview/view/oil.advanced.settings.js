@@ -9,10 +9,10 @@ import {
  * OIL SOI will be only shown, when there is no POI on the advanced settings
  * Returned element is used to ignore Oil completely
  */
-const SOIButtonSnippet = () => {
+const OptInButtonSnippet = () => {
   return ` <div class="as-oil-l-item">
             <button class="as-oil__btn-soi as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
-                ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES_SOI)}
+                ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES)}
             </button>
         </div>
       `;
@@ -30,7 +30,7 @@ export function oilAdvancedSettingsTemplate() {
             </p>
             ${advancedSettingsSnippet()}
             <div class="as-oil-l-row as-oil-l-buttons">
-                ${SOIButtonSnippet()}
+                ${OptInButtonSnippet()}
                 <div class="as-oil-l-item as-oil-l-item--stretch">
                   <button class="as-oil__btn-loi as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-NotNowButton">
                       ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}

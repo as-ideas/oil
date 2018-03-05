@@ -1,10 +1,6 @@
 import { OIL_CONFIG } from '../core/core_constants.js';
 import { getConfigValue } from '../core/core_config.js';
 
-export function isOilIgnore() {
-  return getConfigValue(OIL_CONFIG.ATTR_OIL_IGNORE, false);
-}
-
 export function isPersistMinimumTracking() {
   return getConfigValue(OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING, true);
 }

@@ -1,5 +1,4 @@
 import {setSoiOptIn, getSoiCookie} from '../../src/scripts/core/core_cookies.js';
-import {setOptLater, setOilOptIgnore} from '../../src/scripts/userview/userview_cookies.js';
 import {getPoiCookie, setPoiOptIn} from '../../src/scripts/hub/hub_cookies.js';
 import {OilVersion} from '../../src/scripts/core/core_utils.js';
 import {OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION, OIL_PAYLOAD_LOCALE} from '../../src/scripts/core/core_constants.js'
@@ -122,24 +121,6 @@ describe('cookies', () => {
     setPoiOptIn('lisasimpson');
     let resultCookie = JSON.parse(getCookie('lisasimpson_oil_data'));
     expect(resultCookie.power_opt_in).toBe(true);
-  });
-
-  it('should set opt_later correctly', () => {
-    setOptLater(true);
-    let resultCookie = JSON.parse(getCookie('oil_data_session'));
-    expect(resultCookie.opt_later).toBe(true);
-    setOptLater(false);
-    resultCookie = JSON.parse(getCookie('oil_data_session'));
-    expect(resultCookie.opt_later).toBe(false);
-  });
-
-  it('should set opt_ignore correctly', () => {
-    setOilOptIgnore(true);
-    let resultCookie = JSON.parse(getCookie('oil_data_session'));
-    expect(resultCookie.opt_ignore).toBe(true);
-    setOilOptIgnore(false);
-    resultCookie = JSON.parse(getCookie('oil_data_session'));
-    expect(resultCookie.opt_ignore).toBe(false);
   });
 
 });

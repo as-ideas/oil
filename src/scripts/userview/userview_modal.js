@@ -12,16 +12,13 @@ import {
   EVENT_NAME_ADVANCED_SETTINGS,
   EVENT_NAME_SOI_OPT_IN,
   EVENT_NAME_POI_OPT_IN,
-  EVENT_NAME_SOI_OPT_IN_WHILE_LATER,
-  EVENT_NAME_POI_OPT_IN_WHILE_LATER,
   EVENT_NAME_AS_SELECTED_MINIMUM,
   EVENT_NAME_AS_SELECTED_FUNCTIONAL,
   EVENT_NAME_AS_SELECTED_FULL
 } from '../core/core_constants.js';
-import { oilOptIn, oilPowerOptIn, oilOptLater, oilOptIgnore } from './userview_optin.js';
+import { oilOptIn, oilPowerOptIn } from './userview_optin.js';
 import { deActivatePowerOptIn } from '../core/core_poi.js';
 import { oilDefaultTemplate } from './view/oil.default.js';
-import { oilOptLaterTemplate } from './view/oil.opt.later.js';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
 import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
@@ -32,6 +29,7 @@ import { getTheme, isPoiActive } from '../core/core_config';
 
 
 // Initialize our Oil wrapper and save it ...
+
 export const oilWrapper = defineOilWrapper;
 
 /**
@@ -54,8 +52,6 @@ export function renderOil(props) {
   if (shouldRenderOilLayer(props)) {
     if (props.noCookie) {
       renderOilContentToWrapper(oilNoCookiesTemplate());
-    } else if (props.optLater) {
-      renderOilContentToWrapper(oilOptLaterTemplate());
     } else if (props.advancedSettings) {
       renderOilContentToWrapper(oilAdvancedSettingsTemplate());
     } else {
@@ -69,11 +65,11 @@ export function renderOil(props) {
 
 /**
  * Helper that determines if Oil layer is shown or not...
- * Oil layer is not rendered eg. if user opted in or opted close
+ * Oil layer is not rendered eg. if user opted in
  * @param {*} props
  */
 function shouldRenderOilLayer(props) {
-  return props.optIn === true ? false : props.optIgnore !== true;
+  return props.optIn !== true;
 }
 
 function interpretSliderValue(value) {
@@ -199,11 +195,10 @@ function injectOilWrapperInDOM(wrapper) {
 function getOilDOMNodes() {
   return {
     oilWrapper: document.querySelectorAll('.as-oil'),
-    btnSoiOptIn: document.querySelectorAll('.as-oil .as-js-optin'),
+    btnOptIn: document.querySelectorAll('.as-oil .as-js-optin'),
     btnPoiOptIn: document.querySelectorAll('.as-oil .as-js-optin-poi'),
     btnOptLater: document.querySelectorAll('.as-oil .as-js-optlater'),
     btnAdvancedSettings: document.querySelectorAll('.as-oil .as-js-advanced-settings'),
-    btnClose: document.querySelectorAll('.as-oil .as-js-optignore'),
     btnBack: document.querySelectorAll('.as-oil .as-js-oilback')
   }
 }
@@ -214,17 +209,6 @@ function getRangeSliderValue() {
     return interpretSliderValue(rangeSlider.noUiSlider.get());
   }
   return PRIVACY_FULL_TRACKING;
-}
-
-/**
- * Handler Functions for our Oil Action Elements
- *
- */
-function handleOptLater() {
-  logInfo('Handling OptLater');
-  oilOptLater().then((cookieOptLater) => {
-    renderOil({optLater: cookieOptLater});
-  });
 }
 
 function handleBackToMainDialog() {
@@ -270,13 +254,10 @@ export function handleSoiOptIn() {
       renderOil({optIn: cookieOptIn});
       if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES) {
         sendEventToHostSite(EVENT_NAME_SOI_OPT_IN);
-      } else if (this) {
-        sendEventToHostSite(EVENT_NAME_SOI_OPT_IN_WHILE_LATER);
       }
     });
   } else {
     removeSubscriberCookies();
-    handleOptLater();
   }
 }
 
@@ -289,21 +270,12 @@ export function handlePoiOptIn() {
       renderOil({optIn: true});
       if (isPoiActive()) {
         sendEventToHostSite(EVENT_NAME_POI_OPT_IN);
-      } else if (this) {
-        sendEventToHostSite(EVENT_NAME_POI_OPT_IN_WHILE_LATER);
       }
     });
   } else {
     removeSubscriberCookies();
     deActivatePowerOptIn();
-    handleOptLater();
   }
-}
-
-export function handleOilIgnore() {
-  oilOptIgnore().then((cookieOptIgnore) => {
-    renderOil({optIgnore: cookieOptIgnore});
-  });
 }
 
 /**
@@ -336,18 +308,14 @@ function removeEventListenersToDOMList(listOfDoms, listener) {
  * Add and Remove Handlers to Oil Action Elements
  */
 function addOilHandlers(nodes) {
-  addEventListenersToDOMList(nodes.btnSoiOptIn, handleOptIn);
-  addEventListenersToDOMList(nodes.btnOptLater, handleOptLater);
+  addEventListenersToDOMList(nodes.btnOptIn, handleOptIn);
   addEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
-  addEventListenersToDOMList(nodes.btnClose, handleOilIgnore);
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 }
 
 function removeOilWrapperAndHandlers(nodes) {
-  removeEventListenersToDOMList(nodes.btnSoiOptIn, handleOptIn);
-  removeEventListenersToDOMList(nodes.btnOptLater, handleOptLater);
+  removeEventListenersToDOMList(nodes.btnOptIn, handleOptIn);
   removeEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
-  removeEventListenersToDOMList(nodes.btnClose, handleOilIgnore);
   removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
 
   if (nodes.oilWrapper) {

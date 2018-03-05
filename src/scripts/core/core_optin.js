@@ -1,7 +1,7 @@
 import { verifyPowerOptIn } from './core_poi.js';
-import { logInfo, logPreviewInfo } from './core_log.js';
+import { logPreviewInfo } from './core_log.js';
 import { isSubscriberSetCookieActive } from './core_config.js';
-import { getSoiCookie, setSoiOptIn, getOilSessionCookie } from './core_cookies.js';
+import { getSoiCookie, setSoiOptIn} from './core_cookies.js';
 
 /**
  * Log Helper function for checkOptIn
@@ -39,18 +39,5 @@ export function checkOptIn() {
       resolve(resultOptIn);
     });
   });
-}
-
-export function hasOptedLater( ) {
-  let cookie = getOilSessionCookie();
-  logInfo('Current Oil Session Cookie: ', cookie);
-  return cookie.opt_later;
-}
-
-
-export function hasOptedIgnore() {
-  let cookie = getOilSessionCookie();
-  logInfo('Current Oil Session Cookie: ', cookie);
-  return cookie.opt_ignore;
 }
 

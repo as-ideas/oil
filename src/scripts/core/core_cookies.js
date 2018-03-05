@@ -69,16 +69,6 @@ function getDomainCookieConfig() {
   };
 }
 
-export function getOilSessionCookieConfig() {
-  return {
-    name: OIL_SESSION_COOKIE_NAME,
-    default_content: {
-      'opt_later': false,
-      'opt_ignore': false
-    }
-  };
-}
-
 function getOilDomainCookie() {
   return getOilCookie(getDomainCookieConfig());
 }
@@ -101,10 +91,6 @@ export function setSoiOptIn(privacySettings) {
   cookie.version = OilVersion.get();
   cookie.locale = getLocale();
   setDomainCookie(getDomainCookieConfig().name, cookie, getDomainCookieConfig().expires);
-}
-
-export function getOilSessionCookie() {
-  return getOilCookie(getOilSessionCookieConfig());
 }
 
 export function getSoiCookie() {

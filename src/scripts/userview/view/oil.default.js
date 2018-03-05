@@ -1,4 +1,4 @@
-import { DATA_CONTEXT_YES, DATA_CONTEXT_LATER, DATA_CONTEXT_ADVANCED_SETTINGS } from '../../core/core_constants.js';
+import { DATA_CONTEXT_YES, DATA_CONTEXT_ADVANCED_SETTINGS } from '../../core/core_constants.js';
 import { privacyPageSnippet } from './components/oil.privacy.page';
 import { OIL_LABELS } from '../userview_constants.js'
 import {
@@ -14,19 +14,6 @@ const OilAdvancedSettings = (advancedSettings) => {
     `
         <button class="as-oil__btn-as as-js-advanced-settings" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
             ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS)}
-        </button>
-      `
-  ) : '';
-};
-
-/**
- * OIL Later Button
- */
-const OilLaterButton = (advancedSettings) => {
-  return advancedSettings !== true ? (
-    `
-        <button class="as-oil__btn-loi as-js-optlater" data-context="${DATA_CONTEXT_LATER}" data-qa="oil-NotNowButton">
-            ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_NO)}
         </button>
       `
   ) : '';
@@ -54,11 +41,10 @@ export function oilDefaultTemplate() {
             <div class="as-oil-l-row as-oil-l-buttons">
                 <div class="as-oil-l-item">
                     <button class="as-oil__btn-soi as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
-                        ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES_SOI)}
+                        ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES)}
                     </button>
                 </div>
                 <div class="as-oil-l-item as-oil-l-item--stretch">
-                    ${OilLaterButton(isAdvancedSettings())}
                     ${OilAdvancedSettings(isAdvancedSettings())}
                 </div>
             </div>
