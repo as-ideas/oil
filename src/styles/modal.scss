@@ -558,3 +558,32 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   opacity: 1.0;
 }
 
+/**
+ * POI Group list
+ */
+.as-oil-poi-group-list-wrapper {
+  .as-oil-poi-group-list {
+    overflow: auto;
+    overflow-y: scroll;
+    max-height: 200px;
+
+    @include media('<=phone') {
+      max-height: 140px;
+    }
+  }
+
+  .as-js-oilback {
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    &:after {
+      margin-left: 4px;
+      font-size: 17px;
+      font-weight: 600;
+      content: '×';
+      color: #3b7be2
+    }
+  }
+}
