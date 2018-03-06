@@ -1,7 +1,7 @@
 // Define media queries,
 // this must be set before media queries are imported
 $breakpoints: (
-  'phone': 580px,
+  'phone': 600px,
   'tablet': 768px,
   'desktop': 1024px
 ) !default;
@@ -168,6 +168,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0.5em 0;
     font-size: 1em;
     line-height: 1.3333;
+    text-align: center;
   }
 }
 
@@ -175,14 +176,15 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   display: inline-block;
   min-width: 75%;
   max-width: 75%;
-  margin: 1.3em 0;
   font-size: 0.9375em;
   font-weight: 400;
   line-height: 1.4;
 
   @include media('<=phone') {
     margin: 0.5em 0;
-    font-size: 0.75em;
+    min-width: 100%;
+    max-width: 100%;
+
   }
 }
 
@@ -203,7 +205,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @mixin btn-poi-soi-shared {
-  min-width: 200px;
+  min-width: 160px;
   min-height: 42px;
   margin: 0;
   padding: 0.5em 1em;
@@ -217,14 +219,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   @include media('<=phone') {
     width: 100%;
     min-width: auto;
-    min-height: 40px;
     padding: 0;
-    font-size: 0.8175em;
-  }
-
-  @include media('>phone', '<desktop') {
-    min-width: 160px;
-    min-height: 40px;
   }
 }
 
@@ -270,11 +265,10 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // The container for alle the buttons
 .as-oil-l-buttons {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  float: right;
-  padding-top: 30px;
+  @include media('>phone', '<desktop') {
+    // We are vertically aligning this btn by using margins, which is a bit dirty
+    max-width: 24%;
+  }
 }
 
 // Power Optin Button Declaration
@@ -324,6 +318,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 .as-oil__btn-as {
   float: right;
   min-height: auto;
+  min-width: 135px;
   margin: 0.75em 0;
   padding: 4px;
   font-size: 14px;
@@ -340,14 +335,14 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   @include media('<=phone') {
     float: none;
     width: 100%;
-    margin: 1em 0; // We are vertically aligning this btn by using margins, which is a bit dirty
     font-size: 0.75em;
     border-bottom: none;
+    margin: 0;
+    padding: 0;
   }
 
   @include media('>phone', '<desktop') {
-    // We are vertically aligning this btn by using margins, which is a bit dirty
-    margin: 0.25em 0;
+    float: none;
   }
 }
 
@@ -373,10 +368,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   max-width: $layout-max-width;
   position: relative;
   margin: 0 auto;
-
-  @include media('>phone', '<desktop') {
-    padding-right: 1em; // Make space for our absolute positioned close button
-  }
 }
 
 .as-oil-l-item {
