@@ -1,0 +1,37 @@
+=== Unofficial configuration options
+
+All labels can be overwritten, even the default ones:
+
+[width="100%",options="header", cols="1,3"]
+|====
+|Config Parameter|Default value
+|label_intro| We're using cookies, please confirm.
+|label_button_yes| Yes
+|label_button_no| No
+|label_button_advanced_settings| More information
+|label_advanced_settings_heading| Please select a setting:
+|label_advanced_settings_text| ''
+|label_advanced_settings_essential_text| Essentials
+|label_advanced_settings_essential_verbose| Only essential cookies
+|label_advanced_settings_functional_text| Social
+|label_advanced_settings_functional_verbose| Additional social cookies
+|label_advanced_settings_advertising_text| Ads
+|label_advanced_settings_advertising_verbose| Additional ads cookies
+|label_nocookie_head| No Cookies allowed.
+|label_poi_group_list_heading| Here is a list of company units
+|label_poi_group_list_text| Here is a list of company units
+
+|====
+
+Deprecated label configurations:
+
+[width="100%",options="header", cols="1,3"]
+|====
+|Config Parameter|Default value
+|label_button_yes_soi| Yes
+|label_button_yes_poi| Yes for all
+|label_intro_start| We're using cookies, read
+|label_intro_end| and please confirm.
+|label_button_privacy| more information
+|privacy_page_url| http://my.url/information
+|====

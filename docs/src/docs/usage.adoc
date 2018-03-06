@@ -13,7 +13,7 @@ OIL creates a standard for the OptIn but can't automatically stops your site fro
 ** Use Tealium for all tracking activities
 ** Listen to OIL events for activating non-Tealium tags, after the user opted in.
 
-=== Adding oil.js to your site via Tealium (recommended)
+==== Adding oil.js to your site via Tealium (recommended)
 
 Axel Springer Tealium needs to configure your site inheriting from the predefined lib-dip-optin library profile. Once this is in place you publish those changes in the following way:
 
@@ -26,7 +26,7 @@ image::src/images/tealium-user-profile-extension-view.png[Tealium Client Profile
 
 This needs to be repeated for every new version of OIL. The library profile can't push new code to your website without your action.
 
-=== Adding oil.js to your site via direct integration
+==== Adding oil.js to your site via direct integration
 
 If Tealium can't be used on your site you also can add OIL directly from our CDN.
 
@@ -94,24 +94,7 @@ You need to add the configuration snippet to all pages where OIL is required. Gi
 
 POI can be partitioned in different groups using a prefix or group name. You need to use the same group name as every other unit in your group. This is an optional parameter.
 
-==== Functional Configuration Parameters
-
-This is a full list of configurable options.
-
-[width="100%",options="header", cols="1,3,1,1"]
-|====
-|Config Parameter | Description | Default Setting|POI optional feature
-| locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. | deDE_01 | No
-| preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false |No
-| poi_activate_poi | Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false|Yes
-| poi_hub_origin | The origin of the hub.js installation, if any. | none|Yes
-| poi_hub_path | The path to the hub.html installation on the origin, if any. | none|Yes
-| poi_group_name | POI group name. POI only affects those sites with the same group name (optional). | ''|Yes
-| poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
-| cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31 | No
-| advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False | No
-| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True | No
-|====
+include::usage/functional-configuration.adoc[]
 
 ==== Label Configuration Parameters
 

@@ -1,15 +1,5 @@
 == Development
 
-=== General
-We have unit tests as well as selenium tests. We use jenkins for building, releasing and deploying the software. Tealium Deployment contains a manual step as described below.
-
-Building and Testing:
-
-* npm run build
-* npm run start
-* npm run test
-* npm run e2e
-
 === Quick Links
 Jira: https://id-jira.axelspringer.de/browse/OIL
 
@@ -24,6 +14,8 @@ This is the latest general functional overview over OIL:
 [caption="Oil.js Tealium Deployment"]
 image::src/images/oil-poi-flow.png[Tealium Library Profile]
 
+include::development/styling-guide.adoc[]
+
 === Hub Deployment
 To deploy the hub you need to deploy the project with an index.html loading dist/hub.123.js.
 
@@ -34,62 +26,11 @@ For compatibility with Internet Explorer 9+ you need to add the following header
 include::../../../etc/headerConfig.js[tags=p3p-config]
 ----
 
-=== Tealium Deployment
-For our PoC we decided to use Tealium to deliver our Javascript artefact to client browsers. To achieve this you have to follow some steps:
+include::development/tealium-deployment.adoc[]
 
-As a developer of Oil.js (see image below)
+include::development/unofficial-configuration.adoc[]
 
-* Open your Tealium lib profile and move to extensions
-* Open the predefined Javascript extension "AS Opt-in Overlay"
-* Some forms will show up, paste your code (dist/oil.123.js) in the "configuration" section
-* Save and Publish your Tealium configuration changes in your desired stages (Dev, QA, Prod)
-
-Please note that once published, your code will be delivered to all Tealium clients automatically.
-Tealium clients will be informed of your changes and need to publish/deploy their profile to activate your changes.
-
-[caption="Oil.js Tealium Deployment"]
-image::src/images/tealium-lib-profile-extension-view.png[Tealium Library Profile]
-
-=== Tealium Deployment
-
-Unofficial configuration options.
-
-All labels can be overwritten, even the default ones:
-
-[width="100%",options="header", cols="1,3"]
-|====
-|Config Parameter|Default value
-|label_intro| We're using cookies, please confirm.
-|label_button_yes_soi| Yes
-|label_button_yes_poi| Yes for all
-|label_button_no| No
-|label_button_advanced_settings| More information
-|label_advanced_settings_heading| Please select a setting:
-|label_advanced_settings_text| ''
-|label_advanced_settings_essential_text| Essentials
-|label_advanced_settings_essential_verbose| Only essential cookies
-|label_advanced_settings_functional_text| Social
-|label_advanced_settings_functional_verbose| Additional social cookies
-|label_advanced_settings_advertising_text| Ads
-|label_advanced_settings_advertising_verbose| Additional ads cookies
-|label_nocookie_head| No Cookies allowed.
-|label_nocookie_text| Please allow cookies!
-|====
-
-Deprecated label configurations:
-
-[width="100%",options="header", cols="1,3"]
-|====
-|Config Parameter|Default value
-|label_intro_start| We're using cookies, read
-|label_intro_end| and please confirm.
-|label_button_privacy| more information
-|privacy_page_url| http://my.url/information
-|====
-
-== Design Decisions
-
-=== Cross-Origin Messaging
+=== FYI: Cross-Origin Messaging
 
 The ``postMessage()`` method lifts this restriction by providing a way to securely pass messages across domains. The ``postMessage()`` method accepts two parameters.
 

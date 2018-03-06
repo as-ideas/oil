@@ -1,0 +1,49 @@
+=== Styling guide
+
+You can style the layer with additonal CSS. All OIL styles use the css classes directly, this means the lowest possible css specificity. Here are two examples. The first one is for changing the font and the color. The second is for changing the background color and the shadow.
+
+[source,css]
+----
+div.as-oil {
+  font-family: Arial;
+  color: #bada55;
+}
+----
+
+[source,css]
+----
+div.as-oil-content-overlay {
+  background-color: #ff00ff;
+  box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, 0.2);
+}
+----
+
+Here are the current raw html snippets used for the opt-in layer. You can use these as reference for which classes were used.
+
+==== Opt-In layer
+
+[source,html]
+----
+include::../../../../test/fixtures/gold-master/soi.html[]
+----
+
+==== No-cookie layer
+
+[source,html]
+----
+include::../../../../test/fixtures/gold-master/no-cookie.html[]
+----
+
+==== POI group list
+
+[source,html]
+----
+include::../../../../test/fixtures/gold-master/company-list.html[]
+----
+
+==== Advanced Settings (CPC, Cookie Preference Center)
+
+[source,html]
+----
+include::../../../../test/fixtures/gold-master/cpc.html[]
+----
