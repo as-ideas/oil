@@ -2,7 +2,6 @@
 // this must be set before media queries are imported
 $breakpoints: (
   'phone': 600px,
-  'tablet': 768px,
   'desktop': 1024px
 ) !default;
 
@@ -146,10 +145,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   @include media('<=phone') {
     padding: 1em;
-  }
-
-  @include media('>phone', '<desktop') {
-    padding: 1.5em 3em;
   }
 }
 
