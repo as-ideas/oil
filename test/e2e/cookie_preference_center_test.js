@@ -15,8 +15,5 @@ module.exports = {
   }
 
 
-  // missing tests:
-  // CPC tests
-  // no cookie test?
-  //
+
 };
