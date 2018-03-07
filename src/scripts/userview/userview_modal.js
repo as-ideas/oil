@@ -88,6 +88,7 @@ function interpretSliderValue(value) {
   }
 }
 
+// FIXME no unit test (or should not be exported)
 export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
   let wrapper = document.querySelector('.as-oil');
   let entryNode = document.querySelector('#oil-preference-center');
@@ -254,6 +255,7 @@ function trackPrivacySetting(privacySetting) {
   }
 }
 
+// FIXME no unit test
 export function handleOptIn() {
   if (isPoiActive()) {
     handlePoiOptIn();
@@ -262,6 +264,7 @@ export function handleOptIn() {
   }
 }
 
+// FIXME no unit test (or should not be exported)
 export function handleSoiOptIn() {
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
@@ -278,6 +281,7 @@ export function handleSoiOptIn() {
   }
 }
 
+// FIXME no unit test (or should not be exported)
 export function handlePoiOptIn() {
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);

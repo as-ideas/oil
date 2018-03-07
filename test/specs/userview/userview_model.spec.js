@@ -1,5 +1,5 @@
 import { forEach, oilWrapper } from '../../../src/scripts/userview/userview_modal.js';
-import { loadFixture, readFixture } from '../../utils';
+import { formatHtml, loadFixture, readFixture, removeOilLayerAndConfig } from '../../utils';
 import { resetConfiguration } from '../../../src/scripts/core/core_config';
 import { renderOil } from '../../../src/scripts/userview/userview_modal';
 
@@ -58,30 +58,4 @@ describe('the userview modal aka the oil layer wrapper', () => {
     renderOil({optIn: false, advancedSettings: true});
     expect(formatHtml(document.querySelector('.as-oil'))).toEqual(formatHtml(readFixture('gold-master/cpc.html')));
   });
-
-  function formatHtml(element) {
-    if (typeof  element !== 'string') {
-      element = element.outerHTML;
-    }
-    return element
-      .trim()
-      .split('\n')
-      .reduce((prev, next) => {
-        if (next) {
-          prev += next.trim();
-        }
-        return prev;
-      }, '');
-
-  }
-
-  function removeOilLayerAndConfig() {
-    window.AS_OIL_LOCALE = undefined;
-    forEach(document.querySelectorAll('#oil-configuration'), (domNode) => {
-      domNode.parentElement.removeChild(domNode);
-    });
-    forEach(document.querySelectorAll('.as-oil'), (domNode) => {
-      domNode.parentElement.removeChild(domNode);
-    });
-  }
 });
