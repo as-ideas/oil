@@ -32,7 +32,7 @@ export function oilAdvancedSettingsTemplate() {
             <div class="as-oil-l-row as-oil-l-buttons">
                 ${OptInButtonSnippet()}
                 <div class="as-oil-l-item as-oil-l-item--stretch">
-                  <button class="as-oil__btn-loi as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-NotNowButton">
+                  <button class="as-oil__btn-loi as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
                       ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}
                   </button>
                 </div>

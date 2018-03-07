@@ -154,7 +154,6 @@ function oilShowCompanyList() {
       renderOilContentToWrapper(poiGroupList.oilCompanyListTemplate(poiGroupList.companyList));
     })
     .catch((e) => {
-      console.error('AAAAA!', e);
       logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
     });
 

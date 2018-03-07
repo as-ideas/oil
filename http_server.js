@@ -53,7 +53,7 @@ function basicAuth(req, res, next) {
   let host = req.header("host") || req.header("Host");
   if (!host.startsWith("localhost")) {
     let done = false;
-    let whitelist = ['\/legal', '\/assets', '\/release', '\/demos', '.+\.min\.js', '.+\.chunk\.js', '.+\.bundle\.js', '\/favicon\.ico'];
+    let whitelist = ['\/assets', '\/release', '\/demos', '.+\.min\.js', '.+\.chunk\.js', '.+\.bundle\.js', '\/favicon\.ico'];
     whitelist.forEach(function (regexp) {
       if (req.url.match(regexp)) {
         done = true;

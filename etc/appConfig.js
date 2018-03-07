@@ -133,9 +133,6 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, 'demos/empty.html'),
     to: 'demos/empty.html'
-  }, {
-    from: path.resolve(sourcePath, 'legal'),
-    to: 'legal'
   }],
   mangle: {},
   proxy: {},

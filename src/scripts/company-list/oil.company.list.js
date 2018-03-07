@@ -9,11 +9,9 @@ import { DATA_CONTEXT_BACK } from '../core/core_constants';
  * Returned element is used to ignore Oil completely
  */
 const companyListSnippet = (companyList) => {
-  console.info(companyList);
   let companyListInSpans = companyList.map((element) => {
     return `<div>${element}</div>`;
   });
-  console.info(companyListInSpans);
 
   return `<div class="as-oil-poi-group-list">
            ${companyListInSpans.join('')}
@@ -23,7 +21,7 @@ const companyListSnippet = (companyList) => {
 
 export function oilCompanyListTemplate(companyList) {
   return `
-<div class="as-oil-content-overlay as-oil-poi-group-list-wrapper" data-qa="oil-as-overlay">
+<div class="as-oil-content-overlay as-oil-poi-group-list-wrapper" data-qa="oil-company-list">
         <div class="as-oil-l-wrapper-layout-max-width">
             <div class="as-oil__heading">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_HEADING)}
@@ -32,7 +30,7 @@ export function oilCompanyListTemplate(companyList) {
                 ${getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_TEXT)}
             </p>
             ${companyListSnippet(companyList)}
-            <button class="as-oil__btn-loi as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-NotNowButton">
+            <button class="as-oil__btn-loi as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}
             </button>
         </div>
