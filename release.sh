@@ -12,4 +12,5 @@ cp dist/*.$PACKAGE_VERSION-RELEASE.*.js release/$PACKAGE_VERSION/
 
 echo "Increasing patch version"
 git add *
+git commit -am "Adding new release $PACKAGE_VERSION$SNAPSHOT"
 npm version patch
