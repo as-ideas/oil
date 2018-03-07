@@ -16,7 +16,8 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 ** Firefox 9 - Latest
 ** Safari 6 - Latest
 ** Opera 12
-* Apple and Android Devices
+** Apple iOS 5.1 - Latest
+** Android 4.4.4 - Latest
 * Continously integrated and delivered
 * Modular and maintainable solution
 
