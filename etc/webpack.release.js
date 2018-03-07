@@ -19,7 +19,7 @@ var config = webpackMerge(prodConfig, {
 
   output: {
     // the public path which is used by all System.require
-    publicPath: `//oil.axelspringer.com/release/`,
+    publicPath: `//oil.axelspringer.com/release/${process.env.npm_package_version}/`,
   }
 });
 
