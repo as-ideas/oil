@@ -1,6 +1,6 @@
 import { getLabel } from '../../userview_config.js';
 import { OIL_LABELS } from '../../userview_constants.js'
-import {DATAQA_PRIVACY_PAGE} from '../../../core/core_constants.js';
+import { DATAQA_PRIVACY_PAGE } from '../../../core/core_constants.js';
 
 /**
  * Returns html content for privacy page link

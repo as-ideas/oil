@@ -1,28 +1,21 @@
-/**
- * Define media queries,
- * this must be set before media queries are imported
- */
-
+// Define media queries,
+// this must be set before media queries are imported
 $breakpoints: (
   'phone': 580px,
   'tablet': 768px,
   'desktop': 1024px
 ) !default;
 
-/**
- * Import Media query library
- * Pretty Nice!
- */
-
+// Import Media query library
+// Pretty Nice!
 @import "./node_modules/include-media/dist/_include-media.scss";
 
-/**
- * Config Data
- *
- */
+// Config Data
+$text-color-primary-light: #262626;
+$text-color-primary-dark: #f5f5f5;
 
-$text-color-primary: #262626;
-$background-color: #f9f9f9;
+$background-color-light: #f9f9f9;
+$background-color-dark: #262626;
 
 $btn-primary: rgb(63, 126, 223);
 $btn-primary-text-color: #ffffff;
@@ -41,18 +34,13 @@ $z-index-max: 2147483647;
 
 $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-/**
- * Mixins
- *
- */
+// Mixins
 
-/**
- * Removes margins in stacked items,
- * margin-top is set to 0 for first item, margin-bottom is set to 0 for last item
- * <li>Foo</li>
- * <li>Bar</li>
- * <li>Baz</li>
- */
+// Removes margins in stacked items,
+// margin-top is set to 0 for first item, margin-bottom is set to 0 for last item
+// <li>Foo</li>
+// <li>Bar</li>
+// <li>Baz</li>
 @mixin stack-items-remove-vertical-margins {
   &:first-of-type {
     margin-left: 0;
@@ -97,10 +85,26 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-/**
- * Our OIL Overlay - Wraps all Oil content
- * HINT: Was no height! It's only the wrapper
- */
+
+%button-theme {
+  color: $text-color-primary-light;
+
+  .dark & {
+    color: $text-color-primary-dark;
+    &:hover {
+      color: darken($text-color-primary-dark, 10%);
+    }
+  }
+
+  &:hover {
+    color: darken($text-color-primary-light, 10%);
+    background-color: transparent;
+  }
+}
+
+
+// Our OIL Overlay - Wraps all Oil content
+// HINT: Was no height! It's only the wrapper
 .as-oil {
   @include box-model;
   @include font-smoothing;
@@ -110,7 +114,11 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   left: 0;
   width: 100%;
   font-family: $font-stack;
-  color: $text-color-primary;
+  color: $text-color-primary-light;
+
+  &.dark {
+    color: $text-color-primary-dark;
+  }
 
   // Set font size here as a base for em units, which we'll use, cause' we don't know what base font-size size a host site will use
   font-size: 14px;
@@ -120,10 +128,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-/**
- * Wraps all our Oil content, eg. text and buttons
- */
-
+// Wraps all our Oil content, eg. text and buttons
 .as-oil-content-overlay {
   @include clearfix;
   position: absolute;
@@ -131,9 +136,13 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   bottom: 0;
   left: 0;
   padding: 2em 5em;
-  background-color: $background-color;
-  opacity: 0.96;
+  background-color: $background-color-light;
+  opacity: 0.97;
   box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, 0.2);
+
+  .dark & {
+    background-color: $background-color-dark;
+  }
 
   @include media('<=phone') {
     padding: 1em;
@@ -144,14 +153,11 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-/**
- * Text Styles
- */
+// Text Styles
 .as-oil__heading {
   max-width: 840px;
   font-size: 1.45em;
   font-weight: 600;
-  color: $text-color-primary;
   line-height: 1.15;
 
   &:first-of-type {
@@ -167,13 +173,12 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .as-oil__intro-txt {
   display: inline-block;
-  min-width: 70%;
-  max-width: 70%;
+  min-width: 75%;
+  max-width: 75%;
   margin: 1.3em 0;
   font-size: 0.9375em;
   font-weight: 400;
   line-height: 1.4;
-  color: $text-color-primary;
 
   @include media('<=phone') {
     margin: 0.5em 0;
@@ -184,17 +189,19 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 .as-oil__intro-txt--link {
   padding: 4px 1px 0;
   margin: 0 1px;
-  color: $text-color-primary;
   text-decoration: underline;
 
-  &:hover {
-    color: darken($text-color-primary, 10%);
-  }
+  @extend %button-theme;
 }
 
-/**
- * Button Styles
- */
+// Button Styles
+@mixin oil-loi-btn-poi-soi-shared {
+  @include stack-items-remove-horizontal-margins;
+  @include btn-poi-soi-shared;
+  min-height: 40px;
+  margin: 0.5em 0;
+}
+
 @mixin btn-poi-soi-shared {
   min-width: 200px;
   min-height: 42px;
@@ -241,22 +248,49 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-// Power Optin Button Declaration
+@mixin oil-loi-btn-poi {
+  @include btn-poi;
+}
 
+@mixin oil-loi-btn-soi {
+  @include btn-soi;
+}
+
+// Loi Power Optin Button Declaration
+.as-oil-loi__btn-poi {
+  @include oil-loi-btn-poi-soi-shared;
+  @include btn-poi;
+}
+
+// Loi Site Optin Button Declaration
+.as-oil-loi__btn-soi {
+  @include oil-loi-btn-poi-soi-shared;
+  @include btn-soi;
+}
+
+// The container for alle the buttons
+.as-oil-l-buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  float: right;
+  padding-top: 30px;
+}
+
+// Power Optin Button Declaration
 .as-oil__btn-poi {
   @include btn-poi-soi-shared;
   @include btn-poi;
 }
 
 // Site Optin Button Declaration
-
 .as-oil__btn-soi {
   @include btn-poi-soi-shared;
   @include btn-soi;
 }
 
-// Later Optin Button Declaration
-
+// Back Button
+// ToDo: maybe rename class to back button?
 .as-oil__btn-loi {
   float: right;
   min-height: auto;
@@ -264,7 +298,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 4px;
   font-size: 0.875em;
   font-weight: 400;
-  color: $text-color-primary;
   text-decoration: none;
   background-color: transparent;
   border: none;
@@ -272,10 +305,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   border-radius: 0;
   cursor: pointer;
 
-  &:hover {
-    color: darken($text-color-primary, 10%);
-    background-color: transparent;
-  }
+  @extend %button-theme;
 
   @include media('<=phone') {
     float: none;
@@ -298,7 +328,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 4px;
   font-size: 14px;
   font-weight: 400;
-  color: $text-color-primary;
   text-decoration: none;
   background-color: transparent;
   border: none;
@@ -306,10 +335,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   border-radius: 0;
   cursor: pointer;
 
-  &:hover {
-    color: darken($text-color-primary, 10%);
-    background-color: transparent;
-  }
+  @extend %button-theme;
 
   @include media('<=phone') {
     float: none;
@@ -325,91 +351,12 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-/**
- * Later Optin Overlay LOI
- *
- */
-
-// Text styles
-
-.as-oil-loi__heading {
-  margin: 1em 0;
-  font-size: 1.25em;
-  font-weight: 300;
-  color: $text-color-primary;
-  line-height: 1.1875;
-
-  &:first-of-type {
-    margin-top: 0;
-  }
-
-  @include media('<=phone') {
-    margin: 0.625em 2.25em 0.625em 0; // Make space to the right for our absolute positioned close button
-    font-size: 1.125em;
-  }
-}
-
-.as-oil-loi__intro-txt {
-  margin: 1rem 0;
-  font-size: 0.875em;
-  font-weight: 400;
-  line-height: 1.4;
-  color: $text-color-primary;
-
-  &:first-of-type {
-    margin-top: 0;
-  }
-
-  @include media('<=phone') {
-    margin: 1.5rem 0;
-    font-size: 0.75rem;
-  }
-}
-
-/**
- * Button Styles
- *
- */
-
-// Mixins
-
-@mixin oil-loi-btn-poi-soi-shared {
-  @include stack-items-remove-horizontal-margins;
-  @include btn-poi-soi-shared;
-  min-height: 40px;
-  margin: 0.5em 0;
-}
-
-@mixin oil-loi-btn-poi {
-  @include btn-poi;
-}
-
-@mixin oil-loi-btn-soi {
-  @include btn-soi;
-}
-
-// Loi Power Optin Button Declaration
-
-.as-oil-loi__btn-poi {
-  @include oil-loi-btn-poi-soi-shared;
-  @include btn-poi;
-}
-
-// Loi Site Optin Button Declaration
-
-.as-oil-loi__btn-soi {
-  @include oil-loi-btn-poi-soi-shared;
-  @include btn-soi;
-}
-
-/**
- * Layout Stuff
- */
+// Layout Stuff
 .as-oil-l-row {
   display: inline-block;
   margin: 1em 0;
-  min-width: 25%;
-  max-width: 30%;
+  min-width: 20%;
+  //max-width: 25%;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -424,6 +371,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 .as-oil-l-row--fixed-width,
 .as-oil-l-wrapper-layout-max-width {
   max-width: $layout-max-width;
+  position: relative;
   margin: 0 auto;
 
   @include media('>phone', '<desktop') {
@@ -432,7 +380,9 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .as-oil-l-item {
-  float: left; // Fallback for non flexbox capable browsers
+  float: right; // Fallback for non flexbox capable browsers
+  clear: both; // Fallback for non flexbox capable browsers
+  text-align: right;
 
   @supports (display: flex) {
     float: none;
@@ -459,70 +409,60 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-/**
- * Close Button for later
- */
-.as-oil-close {
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  width: 1.5em;
-  height: 1.5em;
-  padding: 0.25em;
-  fill: rgb(255, 255, 255);
-  opacity: 0.66;
-  cursor: pointer;
-  user-select: none;
-
-  &:hover {
-    fill: $text-color-primary;
-    opacity: 1;
-  }
-}
-
-.as-oil-icon-close {
-  display: block;
-  width: 0.875em;
-  height: 0.875em;
-}
-
-.as-slider-wrapper {
-  display: inline-block;
-  width: 20px;
-  height: 150px;
-  padding: 0;
-}
-
-/**
- * NoUiSlider CSS and overrides
- */
+// NoUiSlider CSS and overrides
 @import "../../node_modules/nouislider/distribute/nouislider.css";
 
 .as-slider-wrapper {
-  height: 180px;
+  display: inline-block;
+  padding: 0;
   margin-top: 20px;
+  position: absolute;
+  height: auto;
+  width: 10px;
+
+  top: 2px;
+  bottom: 40px;
+}
+
+.as-oil-l-cpc {
+  position: relative;
+  display: inline-block;
+  min-width: 50%;
+  max-width: 80%;
+  margin: 0.6rem 0;
+}
+
+.noUi-vertical .noUi-handle {
+  left: -11px;
+  width: 30px;
+  height: 30px;
+  border-radius: 16px;
 }
 
 .as-slider-desc {
-  margin-left: 20px;
+  margin-left: 40px;
+  display: inline-block;
+  max-width: 85%;
 }
 
 .as-slider-option-title {
-  font-size: 1.2em;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 700;
   line-height: 1.4;
-  color: $text-color-primary;
 }
 
 .as-slider-option-verbose {
   font-size: 0.9375em;
   font-weight: 400;
   line-height: 1.4;
-  color: $text-color-primary;
   margin-bottom: 20px;
 }
 
 .as-slider-inactive {
+  opacity: 1.0;
+}
+
+.as-slider-active ~ .as-slider-inactive {
   opacity: 0.4;
 }
 

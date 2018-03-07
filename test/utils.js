@@ -18,3 +18,8 @@ export function deleteAllCookies() {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
   }
 }
+
+export function readFixture(file) {
+  jasmine.getFixtures().fixturesPath = '/base/test/fixtures';
+  return readFixtures(file);
+}
