@@ -33,6 +33,8 @@ const METADATA = webpackMerge(commonConfig.metadata, {
 
 const BUNDLE_VERSION = process.env.npm_package_version + (process.env.SNAPSHOT || '-SNAPSHOT');
 
+console.info('Building BUNDLE_VERSION', BUNDLE_VERSION);
+
 var config = webpackMerge(commonConfig, {
 
   /**
