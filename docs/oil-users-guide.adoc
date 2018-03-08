@@ -5,5 +5,7 @@ image::src/images/oil-asideas.png[]
 ***
 
 include::src/docs/intro.adoc[]
+
 include::src/docs/usage.adoc[]
+
 include::src/docs/appendix.adoc[]

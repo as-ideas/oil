@@ -14,7 +14,8 @@ import {
   EVENT_NAME_POI_OPT_IN,
   EVENT_NAME_AS_SELECTED_MINIMUM,
   EVENT_NAME_AS_SELECTED_FUNCTIONAL,
-  EVENT_NAME_AS_SELECTED_FULL
+  EVENT_NAME_AS_SELECTED_FULL,
+  EVENT_NAME_COMPANY_LIST
 } from '../core/core_constants.js';
 import { oilOptIn, oilPowerOptIn } from './userview_optin.js';
 import { deActivatePowerOptIn } from '../core/core_poi.js';
@@ -25,7 +26,7 @@ import { advancedSettingsSnippet } from './view/components/oil.advanced.settings
 import { logInfo, logError } from '../core/core_log.js';
 import { isPersistMinimumTracking } from './userview_config.js';
 import { isSubscriberSetCookieActive } from '../core/core_config.js';
-import { getTheme, isPoiActive } from '../core/core_config';
+import { getPoiGroupName, getTheme, isPoiActive } from '../core/core_config';
 
 
 // Initialize our Oil wrapper and save it ...
@@ -87,6 +88,7 @@ function interpretSliderValue(value) {
   }
 }
 
+// FIXME no unit test (or should not be exported)
 export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
   let wrapper = document.querySelector('.as-oil');
   let entryNode = document.querySelector('#oil-preference-center');
@@ -147,6 +149,17 @@ export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
   });
 }
 
+function oilShowCompanyList() {
+  System.import(`../company-list/poi-group/poi-group_${getPoiGroupName()}.js`)
+    .then(poiGroupList => {
+      renderOilContentToWrapper(poiGroupList.oilCompanyListTemplate(poiGroupList.companyList));
+    })
+    .catch((e) => {
+      logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
+    });
+
+}
+
 /**
  * Define Oil Wrapper DOM Node
  * @return object DOM element
@@ -197,6 +210,7 @@ function getOilDOMNodes() {
     btnOptIn: document.querySelectorAll('.as-oil .as-js-optin'),
     btnPoiOptIn: document.querySelectorAll('.as-oil .as-js-optin-poi'),
     btnOptLater: document.querySelectorAll('.as-oil .as-js-optlater'),
+    companyList: document.querySelectorAll('.as-oil .as-js-companyList'),
     btnAdvancedSettings: document.querySelectorAll('.as-oil .as-js-advanced-settings'),
     btnBack: document.querySelectorAll('.as-oil .as-js-oilback')
   }
@@ -221,6 +235,11 @@ function handleAdvancedSettings() {
   sendEventToHostSite(EVENT_NAME_ADVANCED_SETTINGS);
 }
 
+function handleCompanyList() {
+  oilShowCompanyList();
+  sendEventToHostSite(EVENT_NAME_COMPANY_LIST);
+}
+
 function trackPrivacySetting(privacySetting) {
   switch (privacySetting) {
     default:
@@ -236,6 +255,7 @@ function trackPrivacySetting(privacySetting) {
   }
 }
 
+// FIXME no unit test
 export function handleOptIn() {
   if (isPoiActive()) {
     handlePoiOptIn();
@@ -244,6 +264,7 @@ export function handleOptIn() {
   }
 }
 
+// FIXME no unit test (or should not be exported)
 export function handleSoiOptIn() {
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
@@ -260,6 +281,7 @@ export function handleSoiOptIn() {
   }
 }
 
+// FIXME no unit test (or should not be exported)
 export function handlePoiOptIn() {
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
@@ -310,12 +332,14 @@ function addOilHandlers(nodes) {
   addEventListenersToDOMList(nodes.btnOptIn, handleOptIn);
   addEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
+  addEventListenersToDOMList(nodes.companyList, handleCompanyList);
 }
 
 function removeOilWrapperAndHandlers(nodes) {
   removeEventListenersToDOMList(nodes.btnOptIn, handleOptIn);
   removeEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
   removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
+  removeEventListenersToDOMList(nodes.companyList, handleCompanyList);
 
   if (nodes.oilWrapper) {
     forEach(nodes.oilWrapper, function (domNode) {

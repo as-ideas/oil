@@ -1,3 +1,5 @@
+import { forEach } from '../src/scripts/userview/userview_modal';
+
 /**
  * Load a jasmine fixture from the given path
  * @param {string} file - filename
@@ -22,4 +24,30 @@ export function deleteAllCookies() {
 export function readFixture(file) {
   jasmine.getFixtures().fixturesPath = '/base/test/fixtures';
   return readFixtures(file);
+}
+
+export function formatHtml(element) {
+  if (typeof  element !== 'string') {
+    element = element.outerHTML;
+  }
+  return element
+    .trim()
+    .split('\n')
+    .reduce((prev, next) => {
+      if (next) {
+        prev += next.trim();
+      }
+      return prev;
+    }, '');
+}
+
+
+export function removeOilLayerAndConfig() {
+  window.AS_OIL_LOCALE = undefined;
+  forEach(document.querySelectorAll('#oil-configuration'), (domNode) => {
+    domNode.parentElement.removeChild(domNode);
+  });
+  forEach(document.querySelectorAll('.as-oil'), (domNode) => {
+    domNode.parentElement.removeChild(domNode);
+  });
 }
