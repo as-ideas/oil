@@ -1,37 +1,4 @@
-// Define media queries,
-// this must be set before media queries are imported
-$breakpoints: (
-  'phone': 600px,
-  'desktop': 1024px
-) !default;
-
-// Import Media query library
-// Pretty Nice!
-@import "./node_modules/include-media/dist/_include-media.scss";
-
-// Config Data
-$text-color-primary-light: #262626;
-$text-color-primary-dark: #f5f5f5;
-
-$background-color-light: #f9f9f9;
-$background-color-dark: #262626;
-
-$btn-primary: rgb(63, 126, 223);
-$btn-primary-text-color: #ffffff;
-
-$btn-secondary: transparent;
-$btn-secondary-text-color: #ffffff;
-
-$layout-max-width: 1280px;
-
-// Our Oil overlay needs to trump every other element, so we need the highest possible z-index
-// Which is the following number: 2147483647 <-- for possible HACKS wie go with a high number
-
-$z-index-max: 2147483647;
-
-// Font stack
-
-$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+@import "./_settings";
 
 // Mixins
 
@@ -84,7 +51,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 %button-theme {
   color: $text-color-primary-light;
 
@@ -101,7 +67,6 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 
-
 // Our OIL Overlay - Wraps all Oil content
 // HINT: Was no height! It's only the wrapper
 .as-oil {
@@ -112,8 +77,10 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   font-family: $font-stack;
   color: $text-color-primary-light;
+  overflow-y: scroll;
 
   &.dark {
     color: $text-color-primary-dark;
@@ -454,34 +421,4 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .as-slider-active {
   opacity: 1.0;
-}
-
-/**
- * POI Group list
- */
-.as-oil-poi-group-list-wrapper {
-  .as-oil-poi-group-list {
-    overflow: auto;
-    overflow-y: scroll;
-    max-height: 200px;
-
-    @include media('<=phone') {
-      max-height: 140px;
-    }
-  }
-
-  .as-js-oilback {
-    border: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    &:after {
-      margin-left: 4px;
-      font-size: 17px;
-      font-weight: 600;
-      content: '×';
-      color: #3b7be2
-    }
-  }
 }
