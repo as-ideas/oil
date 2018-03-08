@@ -17,6 +17,8 @@ image::src/images/oil-asideas.png[]
 
 include::src/docs/intro.adoc[]
 
+include::src/docs/changelog.adoc[]
+
 include::src/docs/usage.adoc[]
 
 include::src/docs/development.adoc[]

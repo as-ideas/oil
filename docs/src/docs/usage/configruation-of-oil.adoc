@@ -1,0 +1,71 @@
+=== Configuring OIL
+
+OIL comes with a wide range of customization features which can be configured via a configuration block. Put the configuration object somewhere in the upper part of your page. Please leave the preview mode false to begin with, if you test on your machine or on a staging system. Preview Mode hides the OIL_Layer except you enable it on your browser session. See the parameter section below for more details.
+
+OIL also comes with a default configuration, that will support Single Opt In with a german standard text and the options to opt in or opt later.
+
+==== SOI configuration
+You need to add the configuration snippet to all pages where OIL is required. This is an example SOI configuration:
+
+[source,json]
+----
+    <script id="oil-configuration" type="application/configuration">
+      {
+        "preview_mode": false,
+        /*
+            Text labels, see Label Keys section below
+        */
+        "label_intro_heading": "Bitte stimmen Sie zu",
+        "locale": "deDE_01"
+      }
+    </script>
+----
+
+==== POI configuration
+You need to add the configuration snippet to all pages where OIL is required. Give extra attention to the configuration, if you want to use POI, which needs the additional POI configuration added and tailored to your situation. Contact us, if you need help. This is an example SOI configuration:
+
+[source,json]
+----
+    <script id="oil-configuration" type="application/configuration">
+      {
+        "preview_mode": false,
+        /*
+            Text labels, see Label Keys section below
+        */
+        "label_intro_heading": "Please confirm",
+        /*
+            POI optional params start here
+        */
+        "poi_activate_poi": true,
+        "poi_hub_origin": "//oil.axelspringer.com",
+        "poi_hub_path": "/hub.html",
+        "poi_subscriber_set_cookie": true,
+        "poi_group_name": "MyGroup"
+        "locale": "deDE_01"
+      }
+    </script>
+----
+
+POI can be partitioned in different groups using a prefix or group name. You need to use the same group name as every other unit in your group. This is an optional parameter.
+
+include::usage/functional-configuration.adoc[]
+
+==== Language configuration
+
+tbd.
+
+==== Label Configuration Parameters
+
+Recommended label configurations.
+Check developer documentation for information to change all labels.
+
+[width="100%",options="header", cols="1,3"]
+|====
+|Config Parameter|Default value
+|label_intro_heading| For the best user experience we need your confirmation
+|====
+
+Example Screenshots:
+
+image::src/images/oil-labels-intro.png[]
+
