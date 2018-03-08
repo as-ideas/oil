@@ -12,8 +12,8 @@ describe('locale deDE_01', () => {
   it('should be loaded by default and set window.AS_OIL_LOCALE with the correct amount of keys', () => {
     loadFixture('config/given.config.html');
     expect(window.AS_OIL_LOCALE).toBeDefined();
-    expect(Object.keys(window.AS_OIL_LOCALE).length).toEqual(18);
-    expect(getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK).length).toBeGreaterThan(0)
+    expect(Object.keys(window.AS_OIL_LOCALE).length).toEqual(20);
+    expect(getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK).length).toBeGreaterThan(0);
     expect(getLabel(OIL_LABELS.ATTR_LABEL_INTRO_HEADING)).toEqual('lisa simpson');
   });
 
