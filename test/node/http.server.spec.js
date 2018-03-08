@@ -139,16 +139,6 @@ const credentials = {
       }, 1000);
   });
 
-  it('should return 200 without credentials on unrestricted route /legal', function (done) {
-    request(app)
-      .get('/legal/companies.html')
-      .set({'host': 'oilsiteN:8080'})
-      .end(function (error, response) {
-        expect(response.statusCode).to.equal(200);
-        done();
-      }, 1000);
-  });
-
   it('should return 200 without credentials on unrestricted route /oil.' + packageJSON.version + '-SNAPSHOT.min.js', function (done) {
     request(app)
       .get('/oil.' + packageJSON.version + '-SNAPSHOT.min.js')

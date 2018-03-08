@@ -9,15 +9,11 @@ export {
 import { OIL_LABELS } from '../userview_constants.js';
 
 window.AS_OIL_LOCALE = {
-  [OIL_LABELS.ATTR_PRIVACY_PAGE_URL]: undefined,
   [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'Um euch die besten Inhalte präsentieren zu können, brauchen wir euer Einverständnis',
-  [OIL_LABELS.ATTR_LABEL_INTRO]: undefined,
-  [OIL_LABELS.ATTR_LABEL_INTRO_START]: 'Wir verwenden <a href="//oil.asideas.de/legal/thirdparties.html" class="as-oil__intro-txt--link" target="_blank">Cookies</a>, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an <a href="#" class="as-oil__intro-txt--link as-js-companyList">Partner</a> zu übertragen.',
-  [OIL_LABELS.ATTR_LABEL_INTRO_END]: 'Jetzt Einverständnis erklären:',
+  [OIL_LABELS.ATTR_LABEL_INTRO]: 'Wir verwenden <a href="//oil.asideas.de/legal/thirdparties.html" class="as-oil__intro-txt--link" target="_blank">Cookies</a>, um unser Angebot zu verbessern und euch maßgeschneiderte Inhalte zu präsentieren. Es ist dafür erforderlich, bei eurem Besuch dem Datenschutz entsprechend bestimmte Informationen zu erheben und ggf. auch an <a href="#" class="as-oil__intro-txt--link as-js-companyList">Partner</a> zu übertragen. Jetzt Einverständnis erklären:',
   [OIL_LABELS.ATTR_LABEL_BUTTON_YES]: 'Jetzt zustimmen',
   [OIL_LABELS.ATTR_LABEL_BUTTON_NO]: 'Nein, jetzt nicht',
   [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: 'Zurück',
-  [OIL_LABELS.ATTR_LABEL_BUTTON_PRIVACY]: 'Mehr erfahren',
   [OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS]: 'Mehr Informationen',
   [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_HEADING]: 'Bitte wähle eine Datenschutzeinstellung aus:',
   [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_TEXT]: '',
