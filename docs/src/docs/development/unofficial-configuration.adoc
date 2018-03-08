@@ -23,7 +23,7 @@ All labels can be overwritten, even the default ones:
 
 |====
 
-Deprecated label configurations:
+=== Deprecated label configurations:
 
 [width="100%",options="header", cols="1,3"]
 |====
