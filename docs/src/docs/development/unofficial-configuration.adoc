@@ -23,7 +23,7 @@ All labels can be overwritten, even the default ones:
 
 |====
 
-Deprecated label configurations:
+=== Deprecated label configurations:
 
 [width="100%",options="header", cols="1,3"]
 |====
@@ -33,5 +33,10 @@ Deprecated label configurations:
 |label_intro_start| We're using cookies, read
 |label_intro_end| and please confirm.
 |label_button_privacy| more information
+|label_later_heading|
+|label_later|
+|label_later_start|
+|label_later_end|
+|label_button_no|
 |privacy_page_url| http://my.url/information
 |====
