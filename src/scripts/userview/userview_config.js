@@ -9,7 +9,7 @@ export function isAdvancedSettings() {
   return getConfigValue(OIL_CONFIG.ATTR_ADVANCED_SETTINGS, false);
 }
 
-// FIXME maymbe we need to reset variables stores to the window?!
+// FIXME maybe we need to reset variables stores to the window?!
 export function getLabel(configName) {
   let defaultLabel = (window.AS_OIL_LOCALE && window.AS_OIL_LOCALE[configName]) ? window.AS_OIL_LOCALE[configName] : '';
   return getConfigValue(configName, defaultLabel);

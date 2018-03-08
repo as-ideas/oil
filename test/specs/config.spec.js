@@ -1,4 +1,4 @@
-import { resetConfiguration, getCookieExpireInDays, getHubOrigin, getHubPath, getHubLocation } from '../../src/scripts/core/core_config.js';
+import { resetConfiguration, getCookieExpireInDays, getHubOrigin, getHubPath, getHubLocation, getLocale } from '../../src/scripts/core/core_config.js';
 import { getLabel } from '../../src/scripts/userview/userview_config.js';
 import { OIL_LABELS } from '../../src/scripts/userview/userview_constants.js';
 import { loadFixture } from '../utils.js';
@@ -35,6 +35,11 @@ describe('configuration', () => {
     expect(getHubOrigin()).toBe('http://oil-integration-cdn.herokuapp.com');
     expect(getHubPath()).toBe('/demos/complete-integration-mypass.html');
     expect(getHubLocation()).toBe('http://oil-integration-cdn.herokuapp.com/demos/complete-integration-mypass.html');
+  });
+
+  it('should be able to read the locale', () => {
+    loadFixture('config/locale.config.html');
+    expect(getLocale()).toBe('absurdistan');
   });
 
 });
