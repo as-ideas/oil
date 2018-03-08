@@ -10,7 +10,7 @@ import { OIL_LABELS } from '../userview_constants.js';
 
 window.AS_OIL_LOCALE = {
   [OIL_LABELS.ATTR_PRIVACY_PAGE_URL]: undefined,
-  [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'We use cookies and other technologies',
+  [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'Bitte stimmen Sie zu',
   [OIL_LABELS.ATTR_LABEL_INTRO]: undefined,
   [OIL_LABELS.ATTR_LABEL_INTRO_START]:'Die Website verwendet Cookies, Web Beacons, JavaScript und ähnliche Technologien. Bitte stimmen Sie zu, dass die <a href="#" class="as-oil__intro-txt--link as-js-companyList">Konzerngesellschaften</a>  der Axel Springer SE und <a href="#" class="as-oil__intro-txt--link">ausgewählte andere Unternehmen</a> für die bedarfsgerechte Gestaltung, für Marktforschung oder für Werbung Nutzungsprofile bei Verwendung von Pseudonymen erstellen und diese an Dritte weitergegeben. Diese Nutzungsprofile dürfen nicht mit Daten über den Träger des Pseudonyms zusammengeführt werden. Detaillierte Informationen und Hinweise zu Ihrem Widerspruchsrecht finden Sie in der <a href="//oil.asideas.de/legal/thirdparties.html" class="as-oil__intro-txt--link" target="_blank">Datenschutzerklärung</a>.',
   [OIL_LABELS.ATTR_LABEL_INTRO_END]: '',
