@@ -6,7 +6,8 @@ import { arrayContains } from './core_utils.js'
 export function isLocaleValid(locale) {
   return arrayContains(
     [
-      'deDE_01'
+      'deDE_01',
+      'enEN_01'
     ],
     locale
   );
