@@ -11,7 +11,7 @@ This is a full list of configurable options.
 | poi_activate_poi | Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false|Yes
 | poi_hub_origin | The origin of the hub.js installation, if any. | none|Yes
 | poi_hub_path | The path to the hub.html installation on the origin, if any. | none|Yes
-| poi_group_name | POI group name. POI only affects those sites with the same group name (optional). | ''|Yes
+| poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). The group name must be valid (existing). | none | Yes
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31 | No
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False | No
