@@ -2,7 +2,7 @@ import { sendEventToHostSite, OilVersion } from './core_utils.js';
 import { registerOptOutListener } from './core_optout.js';
 import { logInfo, logPreviewInfo, logError } from './core_log.js';
 import { checkOptIn } from './core_optin.js';
-import { resetConfiguration, isPreviewMode, getLocale, getPoiGroupName } from './core_config.js';
+import { resetConfiguration, isPreviewMode, getLocale, getPoiGroupName, isPoiActive } from './core_config.js';
 import { isLocaleValid } from './core_locale.js'
 import { isPoiGroupValid} from './core_poi_group.js';
 import {
@@ -35,6 +35,8 @@ export function initOilLayer() {
   let locale = getLocale();
   let poiGroup = getPoiGroupName();
 
+  attachUtilityFunctionsToWindowObject(locale);
+
   /**
    * Early death if the locale is invalid.
    */
@@ -46,12 +48,11 @@ export function initOilLayer() {
   /**
    * Early death if the POI-Group is invalid or not exist.
    */
-  if (!isPoiGroupValid(poiGroup)) {
+  if (isPoiActive() && !isPoiGroupValid(poiGroup)) {
     logError(`The POI-Group ${poiGroup} is not available.`);
     return;
   }
 
-  attachUtilityFunctionsToWindowObject(locale);
   doSetTealiumVariables();
 
   /**
