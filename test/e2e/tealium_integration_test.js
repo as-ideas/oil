@@ -2,6 +2,8 @@ import { OIL_LAYER, OIL_YES_BUTTON } from '../test_constants.js';
 
 
 module.exports = {
+  //ToDo: remove me after fix in JENKINS
+  '@disabled': true,
 
   beforeEach: browser => {
     browser
