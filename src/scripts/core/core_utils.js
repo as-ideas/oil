@@ -108,7 +108,8 @@ export function getClientTimestamp() {
  * @returns {boolean}
  */
 export function arrayContains(array, obj) {
-  for (let i = 0; i < array.length; i++) {
+  let arrayLength = array.length;
+  for (let i = 0; i < arrayLength; i++) {
     if (array[i] === obj) {
       return true;
     }

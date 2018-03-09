@@ -2,8 +2,9 @@ import { sendEventToHostSite, OilVersion } from './core_utils.js';
 import { registerOptOutListener } from './core_optout.js';
 import { logInfo, logPreviewInfo, logError } from './core_log.js';
 import { checkOptIn } from './core_optin.js';
-import { resetConfiguration, isPreviewMode, getLocale } from './core_config.js';
+import { resetConfiguration, isPreviewMode, getLocale, getPoiGroupName } from './core_config.js';
 import { isLocaleValid } from './core_locale.js'
+import { isPoiGroupValid} from './core_poi_group.js';
 import {
   EVENT_NAME_HAS_OPTED_IN,
   EVENT_NAME_NO_COOKIES_ALLOWED,
@@ -32,12 +33,21 @@ export function initOilLayer() {
   }
 
   let locale = getLocale();
+  let poiGroup = getPoiGroupName();
 
   /**
    * Early death if the locale is invalid.
    */
   if (!isLocaleValid(locale)) {
     logError(`The locale ${locale} is not available.`);
+    return;
+  }
+
+  /**
+   * Early death if the POI-Group is invalid or not exist.
+   */
+  if (!isPoiGroupValid(poiGroup)) {
+    logError(`The POI-Group ${poiGroup} is not available.`);
     return;
   }
 
