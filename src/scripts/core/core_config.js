@@ -90,7 +90,7 @@ export function getHubPath() {
 }
 
 export function getPoiGroupName() {
-  return getConfigValue(OIL_CONFIG.ATTR_OIL_POI_GROUP_NAME, 'axelSpringerSe_01');
+  return getConfigValue(OIL_CONFIG.ATTR_OIL_POI_GROUP_NAME, '');
 }
 
 export function getCookieExpireInDays() {
