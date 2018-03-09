@@ -31,6 +31,11 @@ module.exports = {
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
+    filename: 'demos/english-version.html',
+    template: path.resolve(sourcePath, 'demos', 'english-version.html'),
+    chunks: ['oil'],
+    chunksSortMode: 'dependency'
+  }, {
     filename: 'demos/advanced-settings-poi.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings-poi.html'),
     chunks: ['oil'],

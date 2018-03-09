@@ -98,7 +98,7 @@ export function getCookieExpireInDays() {
 }
 
 export function getLocale() {
-  return getConfigValue(OIL_CONFIG.ATTR_LOCALE, 'deDE_01');
+  return getConfigValue(OIL_CONFIG.ATTR_LOCALE, null);
 }
 
 export function getTheme() {

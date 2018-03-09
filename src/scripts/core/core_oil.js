@@ -37,6 +37,11 @@ export function initOilLayer() {
 
   attachUtilityFunctionsToWindowObject(locale);
 
+  if(!locale) {
+    logError('The locale is not set, falling back to deDE_01.');
+    locale = 'deDE_01';
+  }
+
   /**
    * Early death if the locale is invalid.
    */
