@@ -9,7 +9,7 @@ describe('the company list', () => {
     removeOilLayerAndConfig();
   });
 
-  it('should the company list with the given elements', () => {
+  it('should be loaded with the given elements', () => {
     loadFixture('config/given.config.example.labels.html');
     let result = oilCompanyListTemplate(['a', 'b']);
     expect(formatHtml(result)).toEqual(formatHtml(readFixture('gold-master/company-list.html')));
