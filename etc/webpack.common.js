@@ -194,7 +194,7 @@ var config = {
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         }),
 
-        // new webpack.NoEmitOnErrorsPlugin(), 
+        new webpack.NoEmitOnErrorsPlugin(), 
 
         /*
      * Plugin: CopyWebpackPlugin
