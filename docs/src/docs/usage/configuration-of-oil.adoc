@@ -48,11 +48,15 @@ You need to add the configuration snippet to all pages where OIL is required. Gi
 
 POI can be partitioned in different groups using a prefix or group name. You need to use the same group name as every other unit in your group. This is an optional parameter.
 
-include::usage/functional-configuration.adoc[]
+include::functional-configuration.adoc[]
 
 ==== Language configuration
 
-tbd.
+[width="100%",options="header", cols="1,3,1,1"]
+|====
+|Config Parameter | Description | Default Setting| POI optional feature
+| locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. | deDE_01 | No
+|====
 
 ==== Label Configuration Parameters
 

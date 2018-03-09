@@ -44,7 +44,7 @@ Check https://oil.axelspringer.com/ for further updates.
 
 IMPORTANT: Your domain needs to be whitelisted in order to work with OIL (contact us to get whitelisted: Team ANDROID AGASSI <ANDROIDAGASSI@moveoffice.com>)
 
-include::usage/configruation-of-oil.adoc[]
+include::usage/configuration-of-oil.adoc[]
 
 === Listening and interacting with OIL
 

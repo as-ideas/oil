@@ -35,6 +35,6 @@ module.exports = {
       .pause(500)
       .waitForElementNotPresent(OIL_LAYER, 1000)
       .end();
-  },
+  }
 
 };

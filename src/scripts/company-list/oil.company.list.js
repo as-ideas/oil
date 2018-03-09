@@ -20,7 +20,7 @@ const companyListSnippet = (companyList) => {
 };
 
 function attachCssToHtmlAndDocument() {
-  if (window.matchMedia && window.matchMedia("(max-width: 600px)").matches) {
+  if (window.matchMedia && window.matchMedia('(max-width: 600px)').matches) {
     window.oilCache = {
       documentElementStyle: document.documentElement.getAttribute('style'),
       bodyStyle: document.body.getAttribute('style'),
