@@ -11,12 +11,19 @@ import './poi.group.scss';
  */
 const listSnippet = (companyList) => {
   let companyListWrapped = companyList.map((element) => {
-    if (Array.isArray(element)) {
-
+    if (typeof element === 'object') {
       return `<div class="as-oil-third-party-list-element">
+                <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
+                </svg>
+                <svg class='as-oil-icon-minus' style='display: none' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
+                </svg>
                 <div class='as-oil-third-party-name'>${element.name}</div>
-                <div class='as-oil-third-party-description'>${element.description}</div>
-                <div class='as-oil-third-party-link'>${element.link}</div>
+                <div style='display: none'>
+                  <div class='as-oil-third-party-description' >${element.description}</div>
+                  <div class='as-oil-third-party-link'>${element.link}</div>
+                </div>
               </div>`;
     } else {
       return `<div>${element}</div>`;    }
@@ -26,6 +33,15 @@ const listSnippet = (companyList) => {
            ${companyListWrapped.join('')}
           </div>`;
 };
+
+
+function toggleViewElements(element) {
+  if(element.nextSibling.style.display === 'none') {
+    element.nextSibling.style.display = 'block'
+  } else {
+    element.nextSibling.style.display ='none'
+  }
+}
 
 function attachCssToHtmlAndDocument() {
   if (window.matchMedia && window.matchMedia('(max-width: 600px)').matches) {

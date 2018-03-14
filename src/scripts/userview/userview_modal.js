@@ -149,7 +149,7 @@ export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
     }
   });
 }
-
+//ToDo: maybe merge it to one gereric function?
 function oilShowCompanyList() {
   System.import(`../company-list/lists/poi-group_${getPoiGroupName()}.js`)
     .then(poiGroupList => {
@@ -160,7 +160,7 @@ function oilShowCompanyList() {
     });
 
 }
-
+//ToDo: maybe merge it to one gereric function?
 function oilShowThirdPartyList() {
   System.import(`../company-list/lists/poi-3rdParties_${getPoiGroupName()}.js`)
     .then(poiGroupList => {
