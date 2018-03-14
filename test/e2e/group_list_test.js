@@ -7,7 +7,6 @@ import {
   OIL_BACK_BUTTON,
   OIL_LAYER_FULL
 } from '../test_constants.js';
-import {OIL_LAYER_THIRD_PARTY_LIST} from "../test_constants";
 
 module.exports = {
   beforeEach: browser => {
