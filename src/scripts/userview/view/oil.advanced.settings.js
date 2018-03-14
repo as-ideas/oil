@@ -20,7 +20,7 @@ const OptInButtonSnippet = () => {
 
 export function oilAdvancedSettingsTemplate() {
   return `
-<div class="as-oil-content-overlay" data-qa="oil-as-overlay">
+<div id="as-oil-hide-overlay" class="as-oil-content-overlay" data-qa="oil-as-overlay">
         <div class="as-oil-l-wrapper-layout-max-width">
             <div class="as-oil__heading">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_HEADING)}

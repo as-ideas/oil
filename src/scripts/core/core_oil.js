@@ -107,6 +107,10 @@ export function initOilLayer() {
       }
     });
   }
+
+  setTimeout(function(){
+    document.getElementById('as-oil-hide-overlay').className = 'hideOil';
+  }, 60000);
 }
 
 /**
