@@ -351,7 +351,7 @@ function addOilHandlers(nodes) {
   addEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
   addEventListenersToDOMList(nodes.companyList, handleCompanyList);
-  addEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList());
+  addEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
 }
 
 function removeOilWrapperAndHandlers(nodes) {
