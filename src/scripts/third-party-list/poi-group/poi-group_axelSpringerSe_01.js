@@ -3,7 +3,7 @@ export {
   oilThirdPartyListTemplate
 } from '../oil.3rdParties.list';
 
-export const thirdParties = [
+export const thirdPartyList = [
   '@Leisure BR BV',
   'AWIN AG',
   'Axel Springer Mediahouse Berlin GmbH',

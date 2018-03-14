@@ -15,7 +15,8 @@ import {
   EVENT_NAME_AS_SELECTED_MINIMUM,
   EVENT_NAME_AS_SELECTED_FUNCTIONAL,
   EVENT_NAME_AS_SELECTED_FULL,
-  EVENT_NAME_COMPANY_LIST
+  EVENT_NAME_COMPANY_LIST,
+  EVENT_NAME_THIRD_PARTY_LIST
 } from '../core/core_constants.js';
 import { oilOptIn, oilPowerOptIn } from './userview_optin.js';
 import { deActivatePowerOptIn } from '../core/core_poi.js';
@@ -161,9 +162,9 @@ function oilShowCompanyList() {
 }
 
 function oilShowThirdPartyList() {
-  System.import(`../company-list/poi-group/poi-group_${getPoiGroupName()}.js`)
+  System.import(`../third-party-list/poi-group/poi-group_${getPoiGroupName()}.js`)
     .then(poiGroupList => {
-      renderOilContentToWrapper(poiGroupList.oilCompanyListTemplate(poiGroupList.companyList));
+      renderOilContentToWrapper(poiGroupList.oilThirdPartyListTemplate(poiGroupList.thirdPartyList));
     })
     .catch((e) => {
       logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
@@ -254,7 +255,7 @@ function handleCompanyList() {
 
 function handleThirdPartyList() {
   oilShowThirdPartyList();
-  sendEventToHostSite(EVENT_NAME_COMPANY_LIST);
+  sendEventToHostSite(EVENT_NAME_THIRD_PARTY_LIST);
 }
 
 function trackPrivacySetting(privacySetting) {

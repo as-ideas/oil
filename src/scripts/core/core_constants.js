@@ -27,6 +27,7 @@ export const EVENT_NAME_AS_SELECTED_FUNCTIONAL = 'oil_as_selected_functional';
 export const EVENT_NAME_AS_SELECTED_FULL = 'oil_as_selected_full';
 export const EVENT_NAME_ADVANCED_SETTINGS = 'oil_click_advanced_settings';
 export const EVENT_NAME_COMPANY_LIST = 'oil_click_company_list';
+export const EVENT_NAME_THIRD_PARTY_LIST = 'oil_click_company_list';
 export const EVENT_NAME_BACK_TO_MAIN = 'oil_click_back_to_main';
 export const EVENT_NAME_NO_COOKIES_ALLOWED = 'oil_no_cookies_allowed';
 export const EVENT_NAME_OIL_SHOWN = 'oil_shown';
