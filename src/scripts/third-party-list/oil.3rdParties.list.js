@@ -1,8 +1,8 @@
 import {
   getLabel
 } from '../userview/userview_config.js';
-import { OIL_LABELS } from '../userview/userview_constants';
-import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, EVENT_NAME_BACK_TO_MAIN } from '../core/core_constants';
+import {OIL_LABELS} from '../userview/userview_constants';
+import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, EVENT_NAME_BACK_TO_MAIN} from '../core/core_constants';
 import './poi.group.scss';
 
 /**
@@ -11,7 +11,11 @@ import './poi.group.scss';
  */
 const thirdPartyListSnippet = (thirdPartyList) => {
   let thirdPartyListWrapped = thirdPartyList.map((element) => {
-    return `<div>${element}</div>`;
+    return `<div class="as-oil-third-party-list-element">
+              <div class='as-oil-third-party-name'>${element.name}</div>
+              <div class='as-oil-third-party-description'>${element.description}</div>
+              <div class='as-oil-third-party-link'>${element.link}</div>
+            </div>`;
   });
 
   return `<div class="as-oil-poi-group-list">
