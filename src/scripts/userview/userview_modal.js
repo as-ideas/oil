@@ -151,9 +151,9 @@ export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
 }
 
 function oilShowCompanyList() {
-  System.import(`../company-list/poi-group/poi-group_${getPoiGroupName()}.js`)
+  System.import(`../company-list/lists/poi-group_${getPoiGroupName()}.js`)
     .then(poiGroupList => {
-      renderOilContentToWrapper(poiGroupList.oilCompanyListTemplate(poiGroupList.companyList));
+      renderOilContentToWrapper(poiGroupList.oilListTemplate(poiGroupList.companyList));
     })
     .catch((e) => {
       logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
@@ -162,9 +162,9 @@ function oilShowCompanyList() {
 }
 
 function oilShowThirdPartyList() {
-  System.import(`../third-party-list/poi-group/poi-group_${getPoiGroupName()}.js`)
+  System.import(`../company-list/lists/poi-3rdParties_${getPoiGroupName()}.js`)
     .then(poiGroupList => {
-      renderOilContentToWrapper(poiGroupList.oilThirdPartyListTemplate(poiGroupList.thirdPartyList));
+      renderOilContentToWrapper(poiGroupList.oilListTemplate(poiGroupList.thirdPartyList));
     })
     .catch((e) => {
       logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);

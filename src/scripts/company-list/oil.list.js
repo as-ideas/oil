@@ -9,12 +9,20 @@ import './poi.group.scss';
  * OIL SOI will be only shown, when there is no POI on the advanced settings
  * Returned element is used to ignore Oil completely
  */
-const companyListSnippet = (companyList) => {
+const listSnippet = (companyList) => {
   let companyListWrapped = companyList.map((element) => {
-    return `<div>${element}</div>`;
+    if (Array.isArray(element)) {
+
+      return `<div class="as-oil-third-party-list-element">
+                <div class='as-oil-third-party-name'>${element.name}</div>
+                <div class='as-oil-third-party-description'>${element.description}</div>
+                <div class='as-oil-third-party-link'>${element.link}</div>
+              </div>`;
+    } else {
+      return `<div>${element}</div>`;    }
   });
 
-  return `<div class="as-oil-poi-group-list">
+    return `<div class="as-oil-poi-group-list">
            ${companyListWrapped.join('')}
           </div>`;
 };
@@ -70,7 +78,7 @@ function removeCssFromHtmlAndDocument() {
   window.oilCache = undefined;
 }
 
-export function oilCompanyListTemplate(companyList) {
+export function oilListTemplate(companyList) {
   attachCssToHtmlAndDocument();
 
   return `
@@ -82,7 +90,7 @@ export function oilCompanyListTemplate(companyList) {
             <p class="as-oil__intro-txt">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_TEXT)}
             </p>
-            ${companyListSnippet(companyList)}
+            ${listSnippet(companyList)}
             <button class="as-oil__btn-loi as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
                 <span class="as-js-oilback__text">${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}</span>
                 <svg class="as-js-oilback__icon" width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
@@ -97,10 +105,10 @@ export function oilCompanyListTemplate(companyList) {
         <div class="as-oil-l-row as-oil-l-buttons">
             <div class="as-oil-l-item">
                 <button class="as-oil__btn-soi as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
-                    ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES)}
-                </button>
-            </div>
-        </div>
+    ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES)}
+    </button>
     </div>
-`
+    </div>
+    </div>
+      `
 }

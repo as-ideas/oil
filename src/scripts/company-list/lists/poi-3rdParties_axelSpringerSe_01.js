@@ -1,6 +1,6 @@
 export {
-  oilThirdPartyListTemplate
-} from '../oil.3rdParties.list';
+  oilListTemplate
+} from '../oil.list';
 
 export const thirdPartyList = [
   {

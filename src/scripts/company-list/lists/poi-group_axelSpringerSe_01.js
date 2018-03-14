@@ -1,6 +1,6 @@
 export {
-  oilCompanyListTemplate
-} from '../oil.company.list';
+  oilListTemplate
+} from '../oil.list';
 
 export const companyList = [
   '@Leisure BR BV',
