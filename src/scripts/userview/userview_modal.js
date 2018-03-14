@@ -160,6 +160,17 @@ function oilShowCompanyList() {
 
 }
 
+function oilShowThirdPartyList() {
+  System.import(`../company-list/poi-group/poi-group_${getPoiGroupName()}.js`)
+    .then(poiGroupList => {
+      renderOilContentToWrapper(poiGroupList.oilCompanyListTemplate(poiGroupList.companyList));
+    })
+    .catch((e) => {
+      logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
+    });
+
+}
+
 /**
  * Define Oil Wrapper DOM Node
  * @return object DOM element
@@ -211,6 +222,7 @@ function getOilDOMNodes() {
     btnPoiOptIn: document.querySelectorAll('.as-oil .as-js-optin-poi'),
     btnOptLater: document.querySelectorAll('.as-oil .as-js-optlater'),
     companyList: document.querySelectorAll('.as-oil .as-js-companyList'),
+    thirdPartyList: document.querySelectorAll('.as-oil .as-js-thirdPartyList'),
     btnAdvancedSettings: document.querySelectorAll('.as-oil .as-js-advanced-settings'),
     btnBack: document.querySelectorAll('.as-oil .as-js-oilback')
   }
@@ -237,6 +249,11 @@ function handleAdvancedSettings() {
 
 function handleCompanyList() {
   oilShowCompanyList();
+  sendEventToHostSite(EVENT_NAME_COMPANY_LIST);
+}
+
+function handleThirdPartyList() {
+  oilShowThirdPartyList();
   sendEventToHostSite(EVENT_NAME_COMPANY_LIST);
 }
 
@@ -333,6 +350,7 @@ function addOilHandlers(nodes) {
   addEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
   addEventListenersToDOMList(nodes.companyList, handleCompanyList);
+  addEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList());
 }
 
 function removeOilWrapperAndHandlers(nodes) {
@@ -340,6 +358,7 @@ function removeOilWrapperAndHandlers(nodes) {
   removeEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
   removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
   removeEventListenersToDOMList(nodes.companyList, handleCompanyList);
+  removeEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
 
   if (nodes.oilWrapper) {
     forEach(nodes.oilWrapper, function (domNode) {

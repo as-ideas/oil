@@ -5,6 +5,7 @@ export const OIL_LAYER_COMPANY_LIST = '//*[@data-qa="oil-company-list"]';
 export const OIL_BACK_BUTTON = '//*[@data-qa="oil-back-button"]';
 export const OIL_YES_BUTTON = '//*[@data-qa="oil-YesButton"]';
 export const OIL_SHOW_COMPANY_LIST_BUTTON = '.as-js-companyList';
+export const OIL_SHOW_THIRD_PARTY_LIST_BUTTON = '.as-js-thirdPartyList';
 export const HOST_SEND_OPTOUT_BUTTON = '//*[@data-qa="send-opt-out-button"]';
 export const EVENT_NOTIFIER_DIV = '//*[@data-qa="event-notifier-div"]';
 export const PRIVACY_PAGE_URL = '//*[@data-qa="oil-privacy-page"]';
