@@ -1,8 +1,8 @@
 import {
-  getLabel
+    getLabel
 } from '../userview/userview_config.js';
-import { OIL_LABELS } from '../userview/userview_constants';
-import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, EVENT_NAME_BACK_TO_MAIN } from '../core/core_constants';
+import {OIL_LABELS} from '../userview/userview_constants';
+import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, EVENT_NAME_BACK_TO_MAIN} from '../core/core_constants';
 import './poi.group.scss';
 
 /**
@@ -10,93 +10,92 @@ import './poi.group.scss';
  * Returned element is used to ignore Oil completely
  */
 const listSnippet = (companyList) => {
-  let companyListWrapped = companyList.map((element) => {
-    if (typeof element === 'object') {
-      return `<div class="as-oil-third-party-list-element">
+    let companyListWrapped = companyList.map((element) => {
+        if (typeof element === 'object') {
+            return `<div class="as-oil-third-party-list-element">
                 <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
                 </svg>
                 <svg class='as-oil-icon-minus' style='display: none' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
                 </svg>
-                <span class='as-oil-third-party-name' onclick='toggleViewElements()'>${element.name}</span>
+                <span class='as-oil-third-party-name' onclick=${toggleViewElements(this)}>${element.name}</span>
                 <div style='display: none'>
                   <p class='as-oil-third-party-description' >${element.description}</p>
                   <div class='as-oil-third-party-link'>${element.link}</div>
                 </div>
               </div>`;
-    } else {
-      return `<div>${element}</div>`;    }
-  });
-
-    return `<div class="as-oil-poi-group-list">
-           ${companyListWrapped.join('')}
-          </div>`;
+        } else {
+            return `<div>${element}</div>`;
+        }
+    });
+    return `<div class="as-oil-poi-group-list">${companyListWrapped.join('')}</div>`;
 };
 
 function toggleViewElements(element) {
-    if(element.nextSibling.style.display === 'none') {
-        element.nextSibling.style.display = 'block'
-    } else {
-        element.nextSibling.style.display ='none'
-    }
+    console.info('ELEMET', element);
+    // if (element.nextSibling.style.display === 'none') {
+    //     element.nextSibling.style.display = 'block'
+    // } else {
+    //     element.nextSibling.style.display = 'none'
+    //}
 }
 
 function attachCssToHtmlAndDocument() {
-  if (window.matchMedia && window.matchMedia('(max-width: 600px)').matches) {
-    window.oilCache = {
-      documentElementStyle: document.documentElement.getAttribute('style'),
-      bodyStyle: document.body.getAttribute('style'),
-      remove: removeCssFromHtmlAndDocument
-    };
+    if (window.matchMedia && window.matchMedia('(max-width: 600px)').matches) {
+        window.oilCache = {
+            documentElementStyle: document.documentElement.getAttribute('style'),
+            bodyStyle: document.body.getAttribute('style'),
+            remove: removeCssFromHtmlAndDocument
+        };
 
-    const styles = 'overflow: hidden; position: relative; height: 100%;';
-    document.documentElement.setAttribute('style', styles);
-    document.body.setAttribute('style', styles);
+        const styles = 'overflow: hidden; position: relative; height: 100%;';
+        document.documentElement.setAttribute('style', styles);
+        document.body.setAttribute('style', styles);
 
-    attachRemoveListener();
-  }
+        attachRemoveListener();
+    }
 }
 
 function attachRemoveListener() {
-  // Cross browser event handler definition
-  let eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
-  let deventMethod = window.removeEventListener ? 'removeEventListener' : 'detachEvent';
-  let messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
-  let eventer = window[eventMethod];
-  let deventer = window[deventMethod];
+    // Cross browser event handler definition
+    let eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    let deventMethod = window.removeEventListener ? 'removeEventListener' : 'detachEvent';
+    let messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+    let eventer = window[eventMethod];
+    let deventer = window[deventMethod];
 
 
-  // Callback to be executed when event is fired
-  function receiveMessage(event) {
-    function eventDataContains(str) {
-      return JSON.stringify(event.data).indexOf(str) !== -1;
+    // Callback to be executed when event is fired
+    function receiveMessage(event) {
+        function eventDataContains(str) {
+            return JSON.stringify(event.data).indexOf(str) !== -1;
+        }
+
+        if (event && event.data && (eventDataContains(EVENT_NAME_BACK_TO_MAIN))) {
+            removeCssFromHtmlAndDocument();
+            deventer(messageEvent, receiveMessage, false);
+        }
     }
 
-    if (event && event.data && (eventDataContains(EVENT_NAME_BACK_TO_MAIN))) {
-      removeCssFromHtmlAndDocument();
-      deventer(messageEvent, receiveMessage, false);
-    }
-  }
-
-  // Register event handler
-  eventer(messageEvent, receiveMessage, false);
+    // Register event handler
+    eventer(messageEvent, receiveMessage, false);
 }
 
 function removeCssFromHtmlAndDocument() {
-  console.info('removeCssFromHtmlAndDocument');
-  if (window.oilCache) {
-    document.documentElement.setAttribute('style', window.oilCache.documentElementStyle);
-    document.body.setAttribute('style', window.oilCache.bodyStyle);
-  }
+    console.info('removeCssFromHtmlAndDocument');
+    if (window.oilCache) {
+        document.documentElement.setAttribute('style', window.oilCache.documentElementStyle);
+        document.body.setAttribute('style', window.oilCache.bodyStyle);
+    }
 
-  window.oilCache = undefined;
+    window.oilCache = undefined;
 }
 
 export function oilListTemplate(companyList) {
-  attachCssToHtmlAndDocument();
+    attachCssToHtmlAndDocument();
 
-  return `
+    return `
 <div class="as-oil-content-overlay as-oil-poi-group-list-wrapper" data-qa="oil-company-list">
         <div class="as-oil-l-wrapper-layout-max-width">
             <div class="as-oil__heading">
@@ -124,6 +123,5 @@ export function oilListTemplate(companyList) {
     </button>
     </div>
     </div>
-    </div>
-      `
+    </div>`
 }
