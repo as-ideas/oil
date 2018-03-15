@@ -1,6 +1,6 @@
 import { formatHtml, loadFixture, readFixture, removeOilLayerAndConfig } from '../../utils';
 import { resetConfiguration } from '../../../src/scripts/core/core_config';
-import { oilListTemplate } from '../../../src/scripts/company-list/oil.list';
+import { oilListTemplate } from '../../../src/scripts/poi-list/oil.list';
 
 describe('the company list', () => {
 

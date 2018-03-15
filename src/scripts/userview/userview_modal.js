@@ -149,10 +149,9 @@ export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
     }
   });
 }
-//ToDo: maybe merge it to one gereric function?
 function oilShowCompanyList() {
-  System.import(`../company-list/lists/poi-group_${getPoiGroupName()}.js`)
-    .then(poiGroupList => {
+    System.import(`../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
+        .then(poiGroupList => {
       renderOilContentToWrapper(poiGroupList.oilListTemplate(poiGroupList.companyList));
     })
     .catch((e) => {
@@ -160,16 +159,15 @@ function oilShowCompanyList() {
     });
 
 }
-//ToDo: maybe merge it to one gereric function?
+
 function oilShowThirdPartyList() {
-  System.import(`../company-list/lists/poi-3rdParties_${getPoiGroupName()}.js`)
+    System.import(`../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
     .then(poiGroupList => {
       renderOilContentToWrapper(poiGroupList.oilListTemplate(poiGroupList.thirdPartyList));
     })
     .catch((e) => {
       logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
     });
-
 }
 
 /**
