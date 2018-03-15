@@ -2,7 +2,7 @@ import { sendEventToHostSite, OilVersion } from './core_utils.js';
 import { registerOptOutListener } from './core_optout.js';
 import { logInfo, logPreviewInfo, logError } from './core_log.js';
 import { checkOptIn } from './core_optin.js';
-import { resetConfiguration, isPreviewMode, getLocale, getPoiGroupName, isPoiActive } from './core_config.js';
+import { resetConfiguration, isPreviewMode, getLocale, getPoiGroupName, isPoiActive, getTimoutValue } from './core_config.js';
 import { isLocaleValid } from './core_locale.js'
 import { isPoiGroupValid} from './core_poi_group.js';
 import {
@@ -110,7 +110,7 @@ export function initOilLayer() {
 
   setTimeout(function(){
     document.getElementById('as-oil-hide-overlay').className = 'hideOil';
-  }, 60000);
+  }, getTimoutValue());
 }
 
 /**
