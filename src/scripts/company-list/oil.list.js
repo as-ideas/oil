@@ -19,9 +19,9 @@ const listSnippet = (companyList) => {
                 <svg class='as-oil-icon-minus' style='display: none' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
                 </svg>
-                <div class='as-oil-third-party-name'>${element.name}</div>
+                <span class='as-oil-third-party-name' onclick='toggleViewElements()'>${element.name}</span>
                 <div style='display: none'>
-                  <div class='as-oil-third-party-description' >${element.description}</div>
+                  <p class='as-oil-third-party-description' >${element.description}</p>
                   <div class='as-oil-third-party-link'>${element.link}</div>
                 </div>
               </div>`;
@@ -34,13 +34,12 @@ const listSnippet = (companyList) => {
           </div>`;
 };
 
-
 function toggleViewElements(element) {
-  if(element.nextSibling.style.display === 'none') {
-    element.nextSibling.style.display = 'block'
-  } else {
-    element.nextSibling.style.display ='none'
-  }
+    if(element.nextSibling.style.display === 'none') {
+        element.nextSibling.style.display = 'block'
+    } else {
+        element.nextSibling.style.display ='none'
+    }
 }
 
 function attachCssToHtmlAndDocument() {
