@@ -223,6 +223,7 @@ function getOilDOMNodes() {
     companyList: document.querySelectorAll('.as-oil .as-js-companyList'),
     thirdPartyList: document.querySelectorAll('.as-oil .as-js-thirdPartyList'),
     btnAdvancedSettings: document.querySelectorAll('.as-oil .as-js-advanced-settings'),
+    btnTimeoutSettings: document.querySelectorAll('.as-oil .as-js-timeout-settings'),
     btnBack: document.querySelectorAll('.as-oil .as-js-oilback')
   }
 }
@@ -244,6 +245,10 @@ function handleBackToMainDialog() {
 function handleAdvancedSettings() {
   oilShowPreferenceCenter(PRIVACY_MINIMUM_TRACKING);
   sendEventToHostSite(EVENT_NAME_ADVANCED_SETTINGS);
+}
+
+function handleTimeoutSettings() {
+  sendEventToHostSite(EVENT_NAME_TIMEOUT_SETTINGS);
 }
 
 function handleCompanyList() {
@@ -347,6 +352,7 @@ function removeEventListenersToDOMList(listOfDoms, listener) {
 function addOilHandlers(nodes) {
   addEventListenersToDOMList(nodes.btnOptIn, handleOptIn);
   addEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
+  addEventListenersToDOMList(nodes.timeoutSettings, handleTimeoutSettings);
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
   addEventListenersToDOMList(nodes.companyList, handleCompanyList);
   addEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
@@ -355,6 +361,7 @@ function addOilHandlers(nodes) {
 function removeOilWrapperAndHandlers(nodes) {
   removeEventListenersToDOMList(nodes.btnOptIn, handleOptIn);
   removeEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
+  removeEventListenersToDOMList(nodes.timeoutSettings, handleATimeoutSettings);
   removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
   removeEventListenersToDOMList(nodes.companyList, handleCompanyList);
   removeEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
