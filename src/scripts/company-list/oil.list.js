@@ -19,9 +19,9 @@ const listSnippet = (companyList) => {
                 <svg class='as-oil-icon-minus' style='display: none' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
                 </svg>
-                <span class='as-oil-third-party-name' onclick=${toggleViewElements(this)}>${element.name}</span>
+                <span class='as-oil-third-party-name' onclick='toggleViewElements(this)'>${element.name}</span>
                 <div style='display: none'>
-                  <p class='as-oil-third-party-description' >${element.description}</p>
+                <p class='as-oil-third-party-description' >${element.description}</p>
                   <div class='as-oil-third-party-link'>${element.link}</div>
                 </div>
               </div>`;
@@ -33,13 +33,22 @@ const listSnippet = (companyList) => {
 };
 
 function toggleViewElements(element) {
-    console.info('ELEMET', element);
-    // if (element.nextSibling.style.display === 'none') {
-    //     element.nextSibling.style.display = 'block'
-    // } else {
-    //     element.nextSibling.style.display = 'none'
-    //}
+    let icon = element.previousElementSibling;
+
+
+    if (element.nextElementSibling.style.display === 'none') {
+        element.nextElementSibling.style.display = 'block';
+        icon.style.display = 'inline-block';
+        icon.previousElementSibling.style.display = 'none';
+    } else {
+        element.nextElementSibling.style.display = 'none';
+        icon.style.display = 'none';
+        icon.previousElementSibling.style.display = 'inline-block';
+
+    }
 }
+
+window.toggleViewElements = toggleViewElements;
 
 function attachCssToHtmlAndDocument() {
     if (window.matchMedia && window.matchMedia('(max-width: 600px)').matches) {

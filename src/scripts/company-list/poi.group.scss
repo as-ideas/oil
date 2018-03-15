@@ -84,4 +84,23 @@
         font-weight: bold;
         cursor: pointer;
     }
+
+    div{
+        margin-left: 1em;
+    }
+
+    .as-oil-third-party-description {
+        color: $background-color-dark;
+        opacity: .5;
+    }
+
+    .as-oil-third-party-link {
+
+        a {
+            color: #0068ff;
+            font-size: 13px;
+            text-decoration: none;
+
+        }
+    }
 }
