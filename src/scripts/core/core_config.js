@@ -106,7 +106,8 @@ export function getTheme() {
 }
 
 export function getTimoutValue() {
-  return getConfigValue(OIL_CONFIG.ATTR_TIMEOUT_SETTINGS, 5000);
+  console.log('heay');
+  return getConfigValue(OIL_CONFIG.ATTR_TIMEOUT_SETTINGS, 6000);
 }
 
 
