@@ -16,7 +16,8 @@ import {
   EVENT_NAME_AS_SELECTED_FUNCTIONAL,
   EVENT_NAME_AS_SELECTED_FULL,
   EVENT_NAME_COMPANY_LIST,
-  EVENT_NAME_THIRD_PARTY_LIST
+  EVENT_NAME_THIRD_PARTY_LIST,
+  EVENT_NAME_TIMEOUT_SETTINGS
 } from '../core/core_constants.js';
 import { oilOptIn, oilPowerOptIn } from './userview_optin.js';
 import { deActivatePowerOptIn } from '../core/core_poi.js';
@@ -352,6 +353,7 @@ function addOilHandlers(nodes) {
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
   addEventListenersToDOMList(nodes.companyList, handleCompanyList);
   addEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
+//  addEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
 }
 
 function removeOilWrapperAndHandlers(nodes) {
@@ -360,6 +362,7 @@ function removeOilWrapperAndHandlers(nodes) {
   removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
   removeEventListenersToDOMList(nodes.companyList, handleCompanyList);
   removeEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
+  // removeEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
 
   if (nodes.oilWrapper) {
     forEach(nodes.oilWrapper, function (domNode) {
