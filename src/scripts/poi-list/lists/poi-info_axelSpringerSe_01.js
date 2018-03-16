@@ -36,7 +36,7 @@ export const thirdPartyList = [
     {
         'name': 'Contact Impact',
         'description': 'lorem ipsulum',
-        'link': '<a href="http://www.adrolays.com/de/opt-out" target="_blank" title="Hello iam Title">link lorem ipsum<a>'
+        'link': '<a href="http://www.adrolays.com/de/opt-out" target="_blank" title="Hello iam Title">link lorem ipsum</a>'
     }, {
         'name': 'Ad Audience',
         'description': '',
