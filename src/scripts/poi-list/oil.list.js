@@ -107,7 +107,7 @@ function removeCssFromHtmlAndDocument() {
 
 export function oilListTemplate(companyList) {
     attachCssToHtmlAndDocument();
-
+    //ToDo: HEADING / TEXT for 3D Parties
     return `
 <div class="as-oil-content-overlay as-oil-poi-group-list-wrapper" data-qa="oil-company-list">
         <div class="as-oil-l-wrapper-layout-max-width">
