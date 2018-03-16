@@ -22,17 +22,7 @@
     var utag_data = {}
   </script>
 
-  <script type="text/javascript">
-    function getMyOrigin() {
-      if (!window.location.origin) {
-        window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-      }
-      return window.location.origin
-    }
-  </script>
-
-
-<button data-qa="send-opt-out-button" onclick="window.postMessage('oil_optout_trigger', getMyOrigin());">Send Opt-Out-Event</button>
+<button data-qa="send-opt-out-button" onclick="window.AS_OIL.triggerOptOut();">trigger Opt-Out-API</button>
   </body>
 </html>
 
