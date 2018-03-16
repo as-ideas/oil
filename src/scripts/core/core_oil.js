@@ -1,5 +1,5 @@
-import { sendEventToHostSite, OilVersion } from './core_utils.js';
-import { registerOptOutListener } from './core_optout.js';
+import { sendEventToHostSite, OilVersion, setGlobalOilObject } from './core_utils.js';
+import { handleOptOut } from './core_optout.js';
 import { logInfo, logPreviewInfo, logError } from './core_log.js';
 import { checkOptIn } from './core_optin.js';
 import { resetConfiguration, isPreviewMode, getLocale, getPoiGroupName, isPoiActive } from './core_config.js';
@@ -85,7 +85,6 @@ export function initOilLayer() {
      * We read our cookie and get an optin value, true or false
      */
     checkOptIn().then((optin) => {
-      registerOptOutListener();
       /**
        * User has opted in
        */
@@ -114,30 +113,6 @@ export function initOilLayer() {
  */
 // FIXME Needs to be tested and extracted!
 function attachUtilityFunctionsToWindowObject(locale) {
-  window.oilPreviewModeOn = () => {
-    setPreviewCookie();
-    return 'preview mode on';
-  };
-  window.oilPreviewModeOff = () => {
-    removePreviewCookie();
-    return 'preview mode off';
-  };
-  window.oilVerboseModeOn = () => {
-    setVerboseCookie();
-    return 'verbose mode on';
-  };
-  window.oilVerboseModeOff = () => {
-    removeVerboseCookie();
-    return 'verbose mode off';
-  };
-  window.oilReload = () => {
-    resetConfiguration();
-    initOilLayer();
-    return 'OIL reloaded';
-  };
-  window.oilStatus = () => {
-    return getRawSoiCookie();
-  };
 
   function loadLocale(callback) {
     System.import(`../userview/locale/userview_oil_${locale}.js`)
@@ -147,29 +122,63 @@ function attachUtilityFunctionsToWindowObject(locale) {
       });
   }
 
-  window.oilShowPreferenceCenter = () => {
+  setGlobalOilObject('previewModeOn', () => {
+    setPreviewCookie();
+    return 'preview mode on';
+  });
+
+  setGlobalOilObject('previewModeOff', () => {
+    removePreviewCookie();
+    return 'preview mode off';
+  });
+
+  setGlobalOilObject('verboseModeOn', () => {
+    setVerboseCookie();
+    return 'verbose mode on';
+  });
+
+  setGlobalOilObject('verboseModeOff', () => {
+    removeVerboseCookie();
+    return 'verbose mode off';
+  });
+
+  setGlobalOilObject('reload', () => {
+    resetConfiguration();
+    initOilLayer();
+    return 'OIL reloaded';
+  });
+
+  setGlobalOilObject('status', () => {
+    return getRawSoiCookie();
+  });
+
+  setGlobalOilObject('showPreferenceCenter', () => {
     loadLocale(userview_modal => {
       userview_modal.oilShowPreferenceCenter();
     });
-  };
+  });
 
-  window.oilTriggerOptIn = () => {
+  setGlobalOilObject('triggerOptIn', () => {
     loadLocale(userview_modal => {
       userview_modal.handleOptIn();
     });
-  };
+  });
 
-  window.oilTriggerSoiOptIn = () => {
+  setGlobalOilObject('triggerSoiOptIn', () => {
     loadLocale(userview_modal => {
       userview_modal.handleSoiOptIn();
     });
-  };
+  });
 
-  window.oilTriggerPoiOptin = () => {
+  setGlobalOilObject('triggerPoiOptin', () => {
     loadLocale(userview_modal => {
       userview_modal.handlePoiOptIn();
     });
-  };
+  });
+
+  setGlobalOilObject('triggerOptOut', () => {
+    handleOptOut();
+  });
 }
 
 

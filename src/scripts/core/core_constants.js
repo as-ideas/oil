@@ -35,10 +35,6 @@ export const EVENT_NAME_OIL_SHOWN = 'oil_shown';
 // Persisted Status Events (will fire after reload)
 export const EVENT_NAME_HAS_OPTED_IN = 'oil_has_optedin';
 
-// Trigger Events (OIL is listening for them to trigger actions)
-export const EVENT_NAME_OPT_OUT_TRIGGER = 'oil_optout_trigger';
-
-
 export const POI_FALLBACK_NAME = 'fallback';
 export const POI_FALLBACK_GROUP_NAME = 'group_name';
 export const POI_PAYLOAD = 'payload';
@@ -94,3 +90,4 @@ export const OIL_PAYLOAD_PRIVACY = 'p';
 export const OIL_PAYLOAD_VERSION = 'v';
 export const OIL_PAYLOAD_LOCALE = 'l';
 
+export const OIL_GLOBAL_OBJECT_NAME = 'AS_OIL';
