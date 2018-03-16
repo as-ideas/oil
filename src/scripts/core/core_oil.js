@@ -20,6 +20,7 @@ import {
   getRawSoiCookie
 } from './core_cookies.js';
 import { doSetTealiumVariables } from './core_tealium_loading_rules';
+import {EVENT_NAME_TIMEOUT_SETTINGS} from './core_constants';
 
 /**
  * Initialize Oil on Host Site
@@ -109,10 +110,10 @@ export function initOilLayer() {
   }
 
   setTimeout(function(){
-    console.log(getTimoutValue());
-
     if (getTimoutValue() > 0) {
       document.getElementById('as-oil-hide-overlay').className = 'hideOil';
+      sendEventToHostSite(EVENT_NAME_TIMEOUT_SETTINGS);
+
     }
   }, getTimoutValue());
 }
