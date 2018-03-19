@@ -15,10 +15,8 @@ import { setGlobalOilObject } from '../../core/core_utils.js';
 
 export function locale_deDE_01() {
   let locale = {
-    [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'Bitte stimmen Sie zu',
-    [OIL_LABELS.ATTR_LABEL_INTRO]: 'Die Website verwendet Cookies, Web Beacons, JavaScript und ähnliche Technologien. Bitte stimmen Sie zu, dass die <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-companyList">Konzerngesellschaften</a>  der Axel Springer SE und  <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-thirdPartyList">ausgewählte andere Unternehmen</a> für die bedarfsgerechte Gestaltung, für Marktforschung oder für Werbung Nutzungsprofile bei Verwendung von Pseudonymen erstellen und diese an Dritte weitergegeben. Diese Nutzungsprofile dürfen nicht mit Daten über den Träger des Pseudonyms zusammengeführt werden. Detaillierte Informationen und Hinweise zu Ihrem Widerspruchsrecht finden Sie in der Datenschutzerklärung.',
-    [OIL_LABELS.ATTR_LABEL_INTRO_START]: undefined,
-    [OIL_LABELS.ATTR_LABEL_INTRO_END]: undefined,
+    [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'Nutzung von Cookies und anderen Technologien',
+    [OIL_LABELS.ATTR_LABEL_INTRO]: 'Die Website verwendet Cookies, Web Beacons, JavaScript und ähnliche Technologien. Ich willige ein, dass <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-companyList">Unternehmen der Axel Springer SE sowie deren Partner</a> für die bedarfsgerechte Gestaltung, Werbung oder für Marktforschung Nutzungsprofile bei Verwendung von Pseudonymen erstellen und diese an <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-thirdPartyList">Dritte</a> weitergeben dürfen. Diese Nutzungsprofile dürfen nicht mit Daten über den Träger des Pseudonyms zusammengeführt werden. Detaillierte Informationen und Hinweise zu Ihrem Widerspruchsrecht finden Sie in der Datenschutzerklärung.',
     [OIL_LABELS.ATTR_LABEL_BUTTON_YES]: 'OK',
     [OIL_LABELS.ATTR_LABEL_BUTTON_NO]: 'Nein, jetzt nicht',
     [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: 'Zurück',
