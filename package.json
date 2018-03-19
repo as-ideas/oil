@@ -30,7 +30,6 @@
     "changelog:major": "node changelog.js -M",
     "changelog:minor": "node changelog.js -m",
     "changelog:path": "node changelog.js -p"
-
   },
   "dependencies": {
     "compression": "1.7.2",

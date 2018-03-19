@@ -1,4 +1,4 @@
-#### 1.0.29 (2018-03-14)
+#### 1.0.29 (2018-03-19)
 
 ##### Chores
 
@@ -97,6 +97,7 @@
 
 ##### Other Changes
 
+* **no-ticket:**  added first draft automatically changelog ([b887e008](https://github.com/as-ideas/oil/commit/b887e008605afa3bf4b165a450eb097a59cbfb0b))
 *  Commiting new build/version ([e55508dc](https://github.com/as-ideas/oil/commit/e55508dcabcb9cd61406b18b70e071c94798edc9))
 *  Commiting new build/version ([6f41d6bb](https://github.com/as-ideas/oil/commit/6f41d6bb915eb22555e548876c323044acb2770e))
 *  Commiting new build/version ([e14e19eb](https://github.com/as-ideas/oil/commit/e14e19ebfc94eecafa58909fb9fed3fc3ea2b2e1))
