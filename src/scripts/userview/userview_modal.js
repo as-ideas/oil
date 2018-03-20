@@ -360,7 +360,6 @@ function addOilHandlers(nodes) {
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
   addEventListenersToDOMList(nodes.companyList, handleCompanyList);
   addEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
-//  addEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
 }
 
 function removeOilWrapperAndHandlers(nodes) {
@@ -369,7 +368,6 @@ function removeOilWrapperAndHandlers(nodes) {
   removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
   removeEventListenersToDOMList(nodes.companyList, handleCompanyList);
   removeEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
-  // removeEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
 
   if (nodes.oilWrapper) {
     forEach(nodes.oilWrapper, function (domNode) {
