@@ -115,6 +115,11 @@ module.exports = {
     template: path.resolve(sourcePath, 'demos', 'tealium-integration-test.html'),
     chunks: [],
     chunksSortMode: 'dependency'
+  }, {
+    filename: 'demos/auto-hide.html',
+    template: path.resolve(sourcePath, 'demos', 'auto-hide.html'),
+    chunks: ['oil'],
+    chunksSortMode: 'dependency'
   }],
   entry: {
     'hub': path.resolve(sourcePath, 'hub.js'),

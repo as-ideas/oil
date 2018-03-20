@@ -82,7 +82,7 @@ export function oilListTemplate(companyList) {
   attachCssToHtmlAndDocument();
 
   return `
-<div id="as-oil-hide-overlay" class="as-oil-content-overlay as-oil-poi-group-list-wrapper" data-qa="oil-company-list">
+<div class="as-oil-content-overlay as-oil-poi-group-list-wrapper" data-qa="oil-company-list">
         <div class="as-oil-l-wrapper-layout-max-width">
             <div class="as-oil__heading">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_HEADING)}

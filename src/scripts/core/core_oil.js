@@ -2,7 +2,7 @@ import { sendEventToHostSite, OilVersion, setGlobalOilObject } from './core_util
 import { handleOptOut } from './core_optout.js';
 import { logInfo, logPreviewInfo, logError } from './core_log.js';
 import { checkOptIn } from './core_optin.js';
-import { resetConfiguration, isPreviewMode, getLocale, getPoiGroupName, isPoiActive, getTimoutValue } from './core_config.js';
+import { resetConfiguration, isPreviewMode, getLocale, getPoiGroupName, isPoiActive } from './core_config.js';
 import { isLocaleValid } from './core_locale.js'
 import { isPoiGroupValid} from './core_poi_group.js';
 import {
@@ -20,7 +20,6 @@ import {
   getRawSoiCookie
 } from './core_cookies.js';
 import { doSetTealiumVariables } from './core_tealium_loading_rules';
-import {EVENT_NAME_TIMEOUT_SETTINGS} from './core_constants';
 
 /**
  * Initialize Oil on Host Site
@@ -107,14 +106,6 @@ export function initOilLayer() {
       }
     });
   }
-
-  setTimeout(function(){
-    if (getTimoutValue() > 0) {
-      document.getElementById('as-oil-hide-overlay').className = 'hideOil';
-      sendEventToHostSite(EVENT_NAME_TIMEOUT_SETTINGS);
-
-    }
-  }, getTimoutValue());
 }
 
 /**

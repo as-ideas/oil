@@ -105,11 +105,6 @@ export function getTheme() {
   return getConfigValue(OIL_CONFIG.ATTR_THEME, 'light');
 }
 
-export function getTimoutValue() {
-  return getConfigValue(OIL_CONFIG.ATTR_TIMEOUT_SETTINGS, 60000);
-}
-
-
 /**
  * Get the hub iFrame URL with protocol prefix for the current location
  * @returns {string, null} complete iframe orgin

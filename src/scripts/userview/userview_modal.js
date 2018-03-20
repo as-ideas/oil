@@ -17,7 +17,7 @@ import {
   EVENT_NAME_AS_SELECTED_FULL,
   EVENT_NAME_COMPANY_LIST,
   EVENT_NAME_THIRD_PARTY_LIST,
-  EVENT_NAME_TIMEOUT_SETTINGS
+  EVENT_NAME_TIMEOUT
 } from '../core/core_constants.js';
 import { oilOptIn, oilPowerOptIn } from './userview_optin.js';
 import { deActivatePowerOptIn } from '../core/core_poi.js';
@@ -26,7 +26,7 @@ import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
 import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
 import { logInfo, logError } from '../core/core_log.js';
-import { isPersistMinimumTracking } from './userview_config.js';
+import { isPersistMinimumTracking, getTimeOutValue } from './userview_config.js';
 import { isSubscriberSetCookieActive } from '../core/core_config.js';
 import { getPoiGroupName, getTheme, isPoiActive } from '../core/core_config';
 
@@ -53,6 +53,15 @@ export function forEach(array, callback, scope) {
  */
 export function renderOil(props) {
   if (shouldRenderOilLayer(props)) {
+
+    if (getTimeOutValue() > 0) {
+      logInfo('OIL will auto-hide in', getTimeOutValue(), 'seconds.');
+      setTimeout(function(){
+        removeOilWrapperFromDOM();
+        sendEventToHostSite(EVENT_NAME_TIMEOUT);
+      }, getTimeOutValue() * 1000);
+    }
+
     if (props.noCookie) {
       renderOilContentToWrapper(oilNoCookiesTemplate());
     } else if (props.advancedSettings) {

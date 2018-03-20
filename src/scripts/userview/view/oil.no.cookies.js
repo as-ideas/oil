@@ -5,7 +5,7 @@ import {
 
 export function oilNoCookiesTemplate() {
   return `
-    <div id="as-oil-hide-overlay" class="as-oil-content-overlay oil-nocookies" data-qa="oil-nocookies">
+    <div class="as-oil-content-overlay oil-nocookies" data-qa="oil-nocookies">
         <div class="as-oil-l-wrapper-layout-max-width">
             <div class="as-oil__heading">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_NO_COOKIES_HEADING)}
