@@ -10,8 +10,8 @@ import { setGlobalOilObject, getGlobalOilObject } from '../core/core_utils.js';
  * OIL SOI will be only shown, when there is no POI on the advanced settings
  * Returned element is used to ignore Oil completely
  */
-const listSnippet = (companyList) => {
-    let companyListWrapped = companyList.map((element) => {
+const listSnippet = (list) => {
+    let listWrapped = list.map((element) => {
         if (typeof element === 'object') {
             return `<div class="as-oil-third-party-list-element">
                 <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +30,7 @@ const listSnippet = (companyList) => {
             return `<div>${element}</div>`;
         }
     });
-    return `<div class="as-oil-poi-group-list">${companyListWrapped.join('')}</div>`;
+    return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
 };
 
 function toggleViewElements(element) {
@@ -105,11 +105,10 @@ function removeCssFromHtmlAndDocument() {
     setGlobalOilObject('oilCache', undefined);
 }
 
-export function oilListTemplate(companyList) {
+export function oilListTemplate(list) {
     attachCssToHtmlAndDocument();
-    //ToDo: HEADING / TEXT for 3D Parties
     return `
-<div class="as-oil-content-overlay as-oil-poi-group-list-wrapper" data-qa="oil-company-list">
+<div class="as-oil-content-overlay as-oil-poi-group-list-wrapper" data-qa="oil-poi-list">
         <div class="as-oil-l-wrapper-layout-max-width">
             <div class="as-oil__heading">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_HEADING)}
@@ -117,7 +116,7 @@ export function oilListTemplate(companyList) {
             <p class="as-oil__intro-txt">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_TEXT)}
             </p>
-            ${listSnippet(companyList)}
+            ${listSnippet(list)}
             <button class="as-oil__btn-loi as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
                 <span class="as-js-oilback__text">${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}</span>
                 <svg class="as-js-oilback__icon" width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">

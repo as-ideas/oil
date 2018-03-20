@@ -7,7 +7,8 @@ export function isLocaleValid(locale) {
   return arrayContains(
     [
       'deDE_01',
-      'enEN_01'
+      'enEN_01',
+      'plPL_01'
     ],
     locale
   );
