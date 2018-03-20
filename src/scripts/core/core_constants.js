@@ -12,7 +12,8 @@ export const OIL_CONFIG = {
   ATTR_ADVANCED_SETTINGS: 'advanced_settings',
   ATTR_PERSIST_MINIMUM_TRACKING: 'persist_min_tracking',
   ATTR_LOCALE: 'locale',
-  ATTR_THEME: 'theme'
+  ATTR_THEME: 'theme',
+  ATTR_TIMEOUT: 'timeout'
 
 };
 
@@ -26,6 +27,7 @@ export const EVENT_NAME_AS_SELECTED_MINIMUM = 'oil_as_selected_minimum';
 export const EVENT_NAME_AS_SELECTED_FUNCTIONAL = 'oil_as_selected_functional';
 export const EVENT_NAME_AS_SELECTED_FULL = 'oil_as_selected_full';
 export const EVENT_NAME_ADVANCED_SETTINGS = 'oil_click_advanced_settings';
+export const EVENT_NAME_TIMEOUT = 'oil_hide_layer';
 export const EVENT_NAME_COMPANY_LIST = 'oil_click_company_list';
 export const EVENT_NAME_THIRD_PARTY_LIST = 'oil_click_company_list';
 export const EVENT_NAME_BACK_TO_MAIN = 'oil_click_back_to_main';

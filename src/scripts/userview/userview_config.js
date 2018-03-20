@@ -10,6 +10,10 @@ export function isAdvancedSettings() {
   return getConfigValue(OIL_CONFIG.ATTR_ADVANCED_SETTINGS, false);
 }
 
+export function getTimeOutValue() {
+  return getConfigValue(OIL_CONFIG.ATTR_TIMEOUT, -1);
+}
+
 export function getLabel(configName) {
   let defaultLocale = getGlobalOilObject('LOCALE');
   let defaultLabel = (defaultLocale && defaultLocale[configName]) ? defaultLocale[configName] : '';

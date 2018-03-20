@@ -105,7 +105,6 @@ export function getTheme() {
   return getConfigValue(OIL_CONFIG.ATTR_THEME, 'light');
 }
 
-
 /**
  * Get the hub iFrame URL with protocol prefix for the current location
  * @returns {string, null} complete iframe orgin
