@@ -2,25 +2,26 @@ import {
     getLabel
 } from '../userview/userview_config.js';
 import {OIL_LABELS} from '../userview/userview_constants';
-import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, EVENT_NAME_BACK_TO_MAIN} from '../core/core_constants';
+import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, EVENT_NAME_BACK_TO_MAIN, OIL_GLOBAL_OBJECT_NAME} from '../core/core_constants';
 import './poi.group.scss';
+import { setGlobalOilObject, getGlobalOilObject } from '../core/core_utils.js';
 
 /**
  * OIL SOI will be only shown, when there is no POI on the advanced settings
  * Returned element is used to ignore Oil completely
  */
-const listSnippet = (companyList) => {
-    let companyListWrapped = companyList.map((element) => {
+const listSnippet = (list) => {
+    let listWrapped = list.map((element) => {
         if (typeof element === 'object') {
             return `<div class="as-oil-third-party-list-element">
                 <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
                 </svg>
-                <svg class='as-oil-icon-minus' style='display: none' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <svg class='as-oil-icon-minus' style='display: none;' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
                 </svg>
-                <span class='as-oil-third-party-name' onclick='toggleViewElements(this)'>${element.name}</span>
-                <div style='display: none'>
+                <span class='as-oil-third-party-name' onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>${element.name}</span>
+                <div class='as-oil-third-party-toggle-part' style='display: none;'>
                 <p class='as-oil-third-party-description' >${element.description}</p>
                   <div class='as-oil-third-party-link'>${element.link}</div>
                 </div>
@@ -29,34 +30,37 @@ const listSnippet = (companyList) => {
             return `<div>${element}</div>`;
         }
     });
-    return `<div class="as-oil-poi-group-list">${companyListWrapped.join('')}</div>`;
+    return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
 };
 
 function toggleViewElements(element) {
-    let icon = element.previousElementSibling;
+    let iconMinus = element.previousElementSibling;
+    let iconPlus = element.previousElementSibling.previousElementSibling;
+    let descriptionPart = element.nextElementSibling;
 
+    const styleDisplayInlineBlock = 'display: inline-block; animation: fadein 0.5s';
+    const styleDisplayNone = 'display: none';
 
-    if (element.nextElementSibling.style.display === 'none') {
-        element.nextElementSibling.style.display = 'block';
-        icon.style.display = 'inline-block';
-        icon.previousElementSibling.style.display = 'none';
+    if (descriptionPart.style.display === 'none') {
+        descriptionPart.setAttribute('style', 'display: block; animation: fadein 0.5s');
+        iconMinus.setAttribute('style', styleDisplayInlineBlock);
+        iconPlus.setAttribute('style', styleDisplayNone);
     } else {
-        element.nextElementSibling.style.display = 'none';
-        icon.style.display = 'none';
-        icon.previousElementSibling.style.display = 'inline-block';
-
+        descriptionPart.setAttribute('style', styleDisplayNone);
+        iconMinus.setAttribute('style', styleDisplayNone);
+        iconPlus.setAttribute('style', styleDisplayInlineBlock);
     }
 }
 
-window.toggleViewElements = toggleViewElements;
+setGlobalOilObject('_toggleViewElements',toggleViewElements);
 
 function attachCssToHtmlAndDocument() {
     if (window.matchMedia && window.matchMedia('(max-width: 600px)').matches) {
-        window.oilCache = {
-            documentElementStyle: document.documentElement.getAttribute('style'),
-            bodyStyle: document.body.getAttribute('style'),
-            remove: removeCssFromHtmlAndDocument
-        };
+        setGlobalOilObject('oilCache', {
+          documentElementStyle: document.documentElement.getAttribute('style'),
+          bodyStyle: document.body.getAttribute('style'),
+          remove: removeCssFromHtmlAndDocument
+        });
 
         const styles = 'overflow: hidden; position: relative; height: 100%;';
         document.documentElement.setAttribute('style', styles);
@@ -92,20 +96,19 @@ function attachRemoveListener() {
 }
 
 function removeCssFromHtmlAndDocument() {
-    console.info('removeCssFromHtmlAndDocument');
-    if (window.oilCache) {
-        document.documentElement.setAttribute('style', window.oilCache.documentElementStyle);
-        document.body.setAttribute('style', window.oilCache.bodyStyle);
+    let oilCache = getGlobalOilObject('oilCache');
+    if (oilCache) {
+        document.documentElement.setAttribute('style', oilCache.documentElementStyle);
+        document.body.setAttribute('style', oilCache.bodyStyle);
     }
 
-    window.oilCache = undefined;
+    setGlobalOilObject('oilCache', undefined);
 }
 
-export function oilListTemplate(companyList) {
+export function oilListTemplate(list) {
     attachCssToHtmlAndDocument();
-
     return `
-<div class="as-oil-content-overlay as-oil-poi-group-list-wrapper" data-qa="oil-company-list">
+<div class="as-oil-content-overlay as-oil-poi-group-list-wrapper" data-qa="oil-poi-list">
         <div class="as-oil-l-wrapper-layout-max-width">
             <div class="as-oil__heading">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_HEADING)}
@@ -113,7 +116,7 @@ export function oilListTemplate(companyList) {
             <p class="as-oil__intro-txt">
                 ${getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_TEXT)}
             </p>
-            ${listSnippet(companyList)}
+            ${listSnippet(list)}
             <button class="as-oil__btn-loi as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
                 <span class="as-js-oilback__text">${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}</span>
                 <svg class="as-js-oilback__icon" width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">

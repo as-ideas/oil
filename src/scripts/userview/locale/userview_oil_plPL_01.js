@@ -15,8 +15,8 @@ import { setGlobalOilObject } from '../../core/core_utils.js';
 
 export function locale_deDE_01() {
   let locale = {
-    [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'Nutzung von Cookies und anderen Technologien',
-    [OIL_LABELS.ATTR_LABEL_INTRO]: 'Die Website verwendet Cookies, Web Beacons, JavaScript und ähnliche Technologien. Ich willige ein, dass <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-companyList">Unternehmen der Axel Springer SE sowie deren Partner</a> für die bedarfsgerechte Gestaltung, Werbung oder für Marktforschung Nutzungsprofile bei Verwendung von Pseudonymen erstellen und diese an <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-thirdPartyList">Dritte</a> weitergeben dürfen. Diese Nutzungsprofile dürfen nicht mit Daten über den Träger des Pseudonyms zusammengeführt werden. Detaillierte Informationen und Hinweise zu Ihrem Widerspruchsrecht finden Sie in der Datenschutzerklärung.',
+    [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'Polityka cookie',
+    [OIL_LABELS.ATTR_LABEL_INTRO]: 'Na naszej stronie używamy technologii takich jak pliki cookie do zbierania i przetwarzania danych osobowych w celu personalizowania treści i reklam oraz analizowania ruchu na stronach. Dostęp do informacji o korzystaniu przez użytkowników z naszej strony mają także <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-companyList">podmioty powiązane</a> oraz <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-thirdPartyList">nasi zaufani partnerzy</a>, którzy również wykorzystują technologie takie jak pliki cookie do zbierania i przetwarzania danych osobowych w celu personalizowania treści i reklam, oraz analizowania ruchu na naszych stronach i w Internecie. Zobacz informacje o naszych zaufanych partnerach i zbieraniu przez nich tych danych.',
     [OIL_LABELS.ATTR_LABEL_BUTTON_YES]: 'OK',
     [OIL_LABELS.ATTR_LABEL_BUTTON_NO]: 'Nein, jetzt nicht',
     [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: 'Zurück',

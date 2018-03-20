@@ -41,3 +41,10 @@ NODE_DEBUG=oil-debug npm run ...
 ## Documentation
 
 see http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+
+
+## Changelog
+
+see CHANGELOG.md
+
+tool: https://github.com/lob/generate-changelog

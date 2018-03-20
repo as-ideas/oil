@@ -5,7 +5,7 @@
   "main": "http_server.js",
   "scripts": {
     "start": "node http_server.js",
-    "build": "npm run build:clean && npm run build:debug && npm run build:prod && npm run build:docs",
+    "build": "npm run build:clean && npm run build:debug && npm run build:prod && npm run build:docs && npm run changelog:major",
     "build:prod": "cross-env-shell SNAPSHOT=${SNAPSHOT} NODE_ENV=production webpack --config etc/webpack.config.js",
     "build:release": "npm run build:clean && cross-env-shell SNAPSHOT=${SNAPSHOT} NODE_ENV=release webpack --config etc/webpack.config.js && npm run build:docs",
     "build:clean": "npm run check && rimraf dist/*",
@@ -26,7 +26,10 @@
     "eslint": "eslint \"src/*.js\" && eslint \"src/scripts/*.js\" && eslint \"etc/*\" && eslint \"test/specs/**/*.js\" && eslint \"test/e2e/**/*.js\"",
     "check": "npm run eslint && nsp check",
     "postinstall": "npm run build",
-    "build:docs": "node docs/asciidoc.js"
+    "build:docs": "node docs/asciidoc.js",
+    "changelog:major": "node changelog.js -M",
+    "changelog:minor": "node changelog.js -m",
+    "changelog:path": "node changelog.js -p"
   },
   "dependencies": {
     "compression": "1.7.2",
@@ -34,6 +37,7 @@
     "fresh": "0.5.2",
     "js-cookie": "2.1.4",
     "nouislider": "11.0.3",
+    "npm": "^5.7.1",
     "serve-index": "1.9.1",
     "serve-static": "1.13.2",
     "webpack2-polyfill-plugin": "0.0.2"
@@ -66,6 +70,7 @@
     "exports-loader": "0.6.3",
     "expose-loader": "0.7.1",
     "file-loader": "0.9.0",
+    "generate-changelog": "1.7.0",
     "glob": "7.1.2",
     "html-webpack-plugin": "2.22.0",
     "imports-loader": "0.6.5",

@@ -71,11 +71,6 @@ module.exports = {
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
-    filename: 'demos/direct-integration-opt-later-event-test.html',
-    template: path.resolve(sourcePath, 'demos', 'direct-integration-opt-later-event-test.html'),
-    chunks: ['oil'],
-    chunksSortMode: 'dependency'
-  }, {
     filename: 'demos/direct-integration-opt-out-event-test.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration-opt-out-event-test.html'),
     chunks: ['oil'],

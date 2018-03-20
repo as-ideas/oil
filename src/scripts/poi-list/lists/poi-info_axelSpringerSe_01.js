@@ -35,51 +35,51 @@ export const companyList = [
 export const thirdPartyList = [
     {
         'name': 'Contact Impact',
-        'description': 'lorem ipsulum',
-        'link': '<a href="http://www.adrolays.com/de/opt-out" target="_blank" title="Hello iam Title">link lorem ipsum<a>'
+        'description': '',
+        'link': '<a href="http://www.adrolays.com/de/opt-out" target="_blank" title="">http://www.adrolays.com/de/opt-out</a>'
     }, {
         'name': 'Ad Audience',
         'description': '',
-        'link': 'http://www.adaudience.de/datenschutz/'
+        'link': '<a href="http://www.adaudience.de/datenschutz/" target="_blank" title="">http://www.adaudience.de/datenschutz/</a>'
     }, {
         'name': 'Amazon',
         'description': '',
-        'link': 'http://www.amazon.de/gp/dra/info'
+        'link': '<a href="http://www.amazon.de/gp/dra/info" target="_blank" title="">http://www.amazon.de/gp/dra/info</a>'
     }, {
         'name': 'Audience Science',
         'description': '',
-        'link': 'http://www.audiencescience.com/de/privacy'
+        'link': '<a href="http://www.audiencescience.com/de/privacy" target="_blank" title="">http://www.audiencescience.com/de/privacy</a>'
     }, {
         'name': 'Criteo',
         'description': '',
-        'link': 'http://www.criteo.com/de/privacy/'
+        'link': '<a href="http://www.criteo.com/de/privacy/" target="_blank" title="">http://www.criteo.com/de/privacy/</a>'
     }, {
         'name': 'Emetriq',
         'description': '',
-        'link': 'https://www.emetriq.com/opt-out'
+        'link': '<a href="https://www.emetriq.com/opt-out" target="_blank" title="">https://www.emetriq.com/opt-out</a>'
     }, {
         'name': '1plusx',
         'description': '',
-        'link': 'http://1plusx.com/privacy-policy/'
+        'link': '<a href="http://1plusx.com/privacy-policy/" target="_blank" title="">http://1plusx.com/privacy-policy/</a>'
     }, {
         'name': 'Nugg.ad',
         'description': '',
-        'link': 'http://mtm.nuggad.net/'
+        'link': '<a href="http://mtm.nuggad.net/" target="_blank" title="">http://mtm.nuggad.net/</a>'
     }, {
         'name': 'Vibrant Media',
         'description': '',
-        'link': 'https://www.vibrantmedia.com/privacy-policy/'
+        'link': '<a href="https://www.vibrantmedia.com/privacy-policy/" target="_blank" title="">https://www.vibrantmedia.com/privacy-policy/</a>'
     }, {
         'name': 'Xplosion',
         'description': '',
-        'link': 'https://www.xplosion.de/opt-out.php'
+        'link': '<a href="https://www.xplosion.de/opt-out.php" target="_blank" title="">https://www.xplosion.de/opt-out.php</a>'
     }, {
         'name': 'Yieldlab',
         'description': '',
-        'link': 'http://www.yieldlab.de/privacy/'
+        'link': '<a href="http://www.yieldlab.de/privacy/" target="_blank" title="">http://www.yieldlab.de/privacy/</a>'
     }, {
         'name': 'AppNexus',
         'description': '',
-        'link': 'https://www.appnexus.com/en/company/platform-privacy-policy-de1#choices'
+        'link': '<a href="https://www.appnexus.com/en/company/platform-privacy-policy-de1#choices" target="_blank" title="">https://www.appnexus.com/en/company/platform-privacy-policy-de1#choices</a>'
     }
 ];

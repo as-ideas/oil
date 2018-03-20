@@ -56,14 +56,14 @@ The preview mode is useful for testing OIL in a live environment without making 
 The preview mode is turned off by default, meaning OIL will be available to all your users. If you turn the preview mode on (please see configuration), OIL won't be shown at first, but can be enabled for your current session on the browser's console:
 [source,javascript]
 ----
-window.oilPreviewModeOn();
+window.AS_OIL.previewModeOn();
 ----
 
 and turned off again
 
 [source,javascript]
 ----
-window.oilPreviewModeOff();
+window.AS_OIL.previewModeOff();
 ----
 
 When Preview mode is turned on useful debug information will be seen on the browser console. See also "Verbose Logging" below for more detailed logging.
@@ -74,9 +74,9 @@ In a production build OIL will show no logs, except in preview_mode or verbose m
 Run the following commands on the console of your browser to switch verbose logging on and off:
 [source,javascript]
 ----
-window.oilVerboseModeOn();
+window.AS_OIL.verboseModeOn();
 
-window.oilVerboseModeOff();
+window.AS_OIL.verboseModeOff();
 ----
 
 Debug mode can be turned on at any time, whereas the similar "preview_mode" can only be enabled in the configuration, please see above.
@@ -84,6 +84,16 @@ Debug mode can be turned on at any time, whereas the similar "preview_mode" can 
 Start debugging with figuring out which config was actually parsed, by looking at the "Got the following parsed config" message.
 
 Please note that verbose logging can only be activated for your browser, all other users wont see those logs.
+
+==== OIL API
+
+[width="100%",options="header", cols="1,3"]
+|====
+| API Call | Description
+|window.AS_OIL.triggerOptIn(); | The user will opted in. It's the same behaviour as when the user is clicking Accept on the layer.
+|window.AS_OIL.triggerOptOut(); | OIL will remove all cookies if triggered and therefor opt out the user of everything, even POI.
+|window.AS_OIL.reload(); | OIL will reload the configuration from the hosts website.
+|====
 
 ==== OIL Events
 
@@ -129,13 +139,6 @@ OIL is currently emitting the following events:
 | oil_shown| When oil is shown
 |====
 
-OIL is currently listening to the following events:
-[width="100%",options="header", cols="1,3"]
-|====
-| Event name | Description
-|oil_optout_trigger | Contrary this event is listened to by OIL and will remove all cookies if triggered and therefor opt_out.
-|====
-
 ==== OIL CPC API
 
 You can add an integrated version of the OIL Cookie Preference Center to your page to give the user the chance to reverse his initial selection.
@@ -145,7 +148,7 @@ For this include a div with the id below in your page:
 ----
 <div id="oil-preference-center"></div>
 ----
-To insert the OIL CPC in the prepared div, which you included in your page: window.oilShowPreferenceCenter(); Create a SAVE Button with one of the two possible actions: window.oilTriggerPoiOptin(); or window.oilTriggerSoiOptIn();
+To insert the OIL CPC in the prepared div, which you included in your page: window.AS_OIL.showPreferenceCenter(); Create a SAVE Button with one of the two possible actions: window.oilTriggerPoiOptin(); or window.oilTriggerSoiOptIn();
 
 The inserted CPC will show the users current setting when inserted. Make sure OIL is part of the page to make this work.
 
@@ -154,9 +157,9 @@ These are all CPC API definitions:
 [width="100%",options="header", cols="1,3"]
 |====
 | Function Name | Description
-| window.oilShowPreferenceCenter() | inserts the CPC into the predefined div with the id #oil-preference-center into the host site
-| window.oilTriggerSoiOptIn() | will trigger the CPC SOI optin (can also result in an optout)
-| window.oilTriggerPoiOptin() | will trigger the CPC POI optin (can also result in an optout)
+| window.AS_OIL.showPreferenceCenter() | inserts the CPC into the predefined div with the id #oil-preference-center into the host site
+| window.AS_OIL.triggerSoiOptIn() | will trigger the CPC SOI optin (can also result in an optout)
+| window.AS_OIL.triggerPoiOptin() | will trigger the CPC POI optin (can also result in an optout)
 |====
 
 ==== Tracking and Google Analytics Events
