@@ -35,12 +35,12 @@ export function initOilLayer() {
   let locale = getLocale();
   let poiGroup = getPoiGroupName();
 
-  attachUtilityFunctionsToWindowObject(locale);
-
   if(!locale) {
     logError('The locale is not set, falling back to deDE_01.');
     locale = 'deDE_01';
   }
+
+  attachUtilityFunctionsToWindowObject(locale);
 
   /**
    * Early death if the locale is invalid.
