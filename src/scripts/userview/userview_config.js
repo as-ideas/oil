@@ -11,7 +11,7 @@ export function isAdvancedSettings() {
 }
 
 export function getTimeOutValue() {
-  return getConfigValue(OIL_CONFIG.ATTR_TIMEOUT, -1);
+  return getConfigValue(OIL_CONFIG.ATTR_TIMEOUT, 60);
 }
 
 export function getLabel(configName) {
