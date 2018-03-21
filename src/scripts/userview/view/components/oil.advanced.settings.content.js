@@ -8,7 +8,7 @@ import { OIL_LABELS } from '../../userview_constants.js'
  */
 export const advancedSettingsSnippet = () => {
   return `
-          <div class="as-oil-l-row as-oil-l-cpc">
+          <div data-qa="cpc-snippet" class="as-oil-l-row as-oil-l-cpc">
             <div id="as-slider-range" class="as-slider-wrapper" data-qa="oil-as-slider"></div>
             <div class="as-slider-desc">
               <div id="as-slider-essential-title" class="as-slider-inactive ">

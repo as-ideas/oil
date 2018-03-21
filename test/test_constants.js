@@ -13,3 +13,6 @@ export const PRIVACY_PAGE_URL = '//*[@data-qa="oil-privacy-page"]';
 export const OIL_ADVANCED_SETTINGS = '//*[@data-qa="oil-AdvancedSettingsButton"]';
 export const OIL_ADVANCED_SETTINGS_WRAPPER = '//*[@data-qa="oil-as-overlay"]';
 export const OIL_ADVANCED_SETTINGS_SLIDER = '//*[@data-qa="oil-as-slider"]';
+export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_SHOW_PREF= '//*[@data-qa="show-pref-button"]';
+export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_TRIGGER_OPTIN = '//*[@data-qa="trigger-optin"]';
+export const OIL_ADVANCED_SETTINGS_SNIPPET = '//*[@data-qa="cpc-snippet"]';
