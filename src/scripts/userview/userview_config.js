@@ -14,6 +14,10 @@ export function getTimeOutValue() {
   return getConfigValue(OIL_CONFIG.ATTR_TIMEOUT, 60);
 }
 
+export function getTheme() {
+  return getConfigValue(OIL_CONFIG.ATTR_THEME, 'light');
+}
+
 export function getLabel(configName) {
   let defaultLocale = getGlobalOilObject('LOCALE');
   let defaultLabel = (defaultLocale && defaultLocale[configName]) ? defaultLocale[configName] : '';
