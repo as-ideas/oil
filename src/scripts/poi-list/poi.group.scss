@@ -7,6 +7,7 @@
     @include media('<=phone') {
         position: relative;
         width: initial;
+        min-height: 300px;
         z-index: 100;
         margin: 50vh 5px 50px;
         padding: 16px 12px;
@@ -57,7 +58,7 @@
         margin-right: 6px;
     }
 
-    .as-oil-l-buttons {
+    .as-oil-l-buttons-light {
         @include media('>phone') {
             float: right;
         }
@@ -70,6 +71,22 @@
             position: fixed;
             bottom: 0;
             left: 0;
+        }
+    }
+
+    .as-oil-l-buttons-dark {
+        @include media('>phone') {
+          float: right;
+        }
+
+        @include media('<=phone') {
+          display: initial;
+          background: $background-color-dark;
+          box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
+          padding: 8px;
+          position: fixed;
+          bottom: 0;
+          left: 0;
         }
     }
 }

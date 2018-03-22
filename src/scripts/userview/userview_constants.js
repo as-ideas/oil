@@ -11,6 +11,8 @@ export const OIL_LABELS = {
   ATTR_LABEL_ADVANCED_SETTINGS_TEXT: 'label_advanced_settings_text',
   ATTR_LABEL_POI_GROUP_LIST_HEADING: 'label_poi_group_list_heading',
   ATTR_LABEL_POI_GROUP_LIST_TEXT: 'label_poi_group_list_text',
+  ATTR_LABEL_THIRD_PARTY_LIST_HEADING: 'label_thirdparty_list_heading',
+  ATTR_LABEL_THIRD_PARTY_LIST_TEXT: 'label_thirdparty_list_text',
   ATTR_LABEL_ADVANCED_SETTINGS_ESSENTIAL_TEXT: 'label_advanced_settings_essential_text',
   ATTR_LABEL_ADVANCED_SETTINGS_ESSENTIAL_VERBOSE: 'label_advanced_settings_essential_verbose',
   ATTR_LABEL_ADVANCED_SETTINGS_FUNCTIONAL_TEXT: 'label_advanced_settings_functional_text',

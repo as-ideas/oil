@@ -14,7 +14,7 @@ describe('locale', () => {
     loadFixture('config/given.config.html');
     locale_deDE_01();
     expect(window.AS_OIL.LOCALE).toBeDefined();
-    expect(Object.keys(window.AS_OIL.LOCALE).length).toEqual(18);
+    expect(Object.keys(window.AS_OIL.LOCALE).length).toEqual(20);
     expect(getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK).length).toBeGreaterThan(0);
     expect(getLabel(OIL_LABELS.ATTR_LABEL_INTRO_HEADING)).toEqual('lisa simpson');
   });
@@ -23,7 +23,7 @@ describe('locale', () => {
     loadFixture('config/given.config.html');
     locale_enEN_01();
     expect(window.AS_OIL.LOCALE).toBeDefined();
-    expect(Object.keys(window.AS_OIL.LOCALE).length).toEqual(18);
+    expect(Object.keys(window.AS_OIL.LOCALE).length).toEqual(20);
     expect(getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK).length).toBeGreaterThan(0);
     expect(getLabel(OIL_LABELS.ATTR_LABEL_INTRO_HEADING)).toEqual('lisa simpson');
   });

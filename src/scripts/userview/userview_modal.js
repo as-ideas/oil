@@ -26,14 +26,26 @@ import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
 import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
 import { logInfo, logError } from '../core/core_log.js';
-import { isPersistMinimumTracking, getTimeOutValue } from './userview_config.js';
+import { isPersistMinimumTracking, getTimeOutValue, getTheme } from './userview_config.js';
 import { isSubscriberSetCookieActive } from '../core/core_config.js';
-import { getPoiGroupName, getTheme, isPoiActive } from '../core/core_config';
+import { getPoiGroupName, isPoiActive } from '../core/core_config';
 
 
 // Initialize our Oil wrapper and save it ...
 
 export const oilWrapper = defineOilWrapper;
+let hasRunningTimeout = false;
+
+function startTimeOut() {
+  if (!hasRunningTimeout && getTimeOutValue() > 0) {
+    logInfo('OIL will auto-hide in', getTimeOutValue(), 'seconds.');
+    setTimeout(function(){
+      removeOilWrapperFromDOM();
+      sendEventToHostSite(EVENT_NAME_TIMEOUT);
+    }, getTimeOutValue() * 1000);
+    hasRunningTimeout = true;
+  }
+}
 
 /**
  * Utility function for forEach safety
@@ -53,15 +65,7 @@ export function forEach(array, callback, scope) {
  */
 export function renderOil(props) {
   if (shouldRenderOilLayer(props)) {
-
-    if (getTimeOutValue() > 0) {
-      logInfo('OIL will auto-hide in', getTimeOutValue(), 'seconds.');
-      setTimeout(function(){
-        removeOilWrapperFromDOM();
-        sendEventToHostSite(EVENT_NAME_TIMEOUT);
-      }, getTimeOutValue() * 1000);
-    }
-
+    startTimeOut();
     if (props.noCookie) {
       renderOilContentToWrapper(oilNoCookiesTemplate());
     } else if (props.advancedSettings) {
@@ -73,7 +77,6 @@ export function renderOil(props) {
     removeOilWrapperFromDOM();
   }
 }
-
 
 /**
  * Helper that determines if Oil layer is shown or not...
@@ -161,8 +164,8 @@ export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
 }
 function oilShowCompanyList() {
     System.import(`../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
-        .then(poiGroupList => {
-      renderOilContentToWrapper(poiGroupList.oilListTemplate(poiGroupList.companyList));
+        .then(poiList => {
+      renderOilContentToWrapper(poiList.oilGroupListTemplate(poiList.companyList));
     })
     .catch((e) => {
       logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
@@ -172,8 +175,8 @@ function oilShowCompanyList() {
 
 function oilShowThirdPartyList() {
     System.import(`../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
-    .then(poiGroupList => {
-      renderOilContentToWrapper(poiGroupList.oilListTemplate(poiGroupList.thirdPartyList));
+    .then(poiList => {
+      renderOilContentToWrapper(poiList.oilThirdPartyListTemplate(poiList.thirdPartyList));
     })
     .catch((e) => {
       logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
@@ -184,7 +187,6 @@ function oilShowThirdPartyList() {
  * Define Oil Wrapper DOM Node
  * @return object DOM element
  */
-
 function defineOilWrapper() {
   let oilWrapper = document.createElement('div');
   // Set some attributes as CSS classes and attributes for testing
