@@ -5,7 +5,7 @@ npm i
 PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')
 
 echo "Building release" $PACKAGE_VERSION$SNAPSHOT
-export SNAPSHOT="-RELEASE";npm run build:prod
+export SNAPSHOT="-RELEASE";npm run build:release
 
 echo "Copying to release directory"
 mkdir release/$PACKAGE_VERSION
