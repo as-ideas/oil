@@ -14,8 +14,6 @@ This is the latest general functional overview over OIL:
 [caption="Oil.js Tealium Deployment"]
 image::src/images/oil-poi-flow.png[Tealium Library Profile]
 
-include::development/styling-guide.adoc[]
-
 === Hub Deployment
 To deploy the hub you need to deploy the project with an index.html loading dist/hub.123.js.
 

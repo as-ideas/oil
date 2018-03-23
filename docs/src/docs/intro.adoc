@@ -5,7 +5,7 @@
 The OIL project aims for a stable cross-company solution for the challenges the GDPR and new EU ePrivacy Regulation will pose to our business.
 
 * Data privacy opt-in overlay for all users of services offered by various Axel Springer brands and/or units
-* Local opt-in (called Site Opt In, SOI) as well as group-based cross-company opt-in (called Power Opt-In, POI)
+* Local opt-in (called "Site Opt-In", SOI) as well as group-based cross-company opt-in (called "Power Opt-In", POI)
 * Integration and hosting on Tealium with the option to run it standalone.
 
 === Technical Quality Goals
@@ -40,9 +40,9 @@ Tealium | Michael Sievers, AS Digital|
 
 According the proposal of the Commission, the European Parliament, and the Council of Ministers, websites will be required to prompt users with a menu of privacy options when they are visited for the first time.[1]
 
-The Opt In Layer (OIL) is our solution for these requirements consisting of two parts:
+The Opt-In Layer (OIL) is our solution for these requirements consisting of two parts:
 
-* A **subscriber** part, which adds the OptIn Layer to the host pages DOM and asks the user to opt in.
+* A **subscriber** part, which adds the opt-in Layer to the host pages DOM and asks the user to opt-in.
 * A **hub** part, which acts as a registry site for POI on a domain hosted by Ideas Engineering. This is optional and only needed for POI functionality.
 
 Opt-In Information is stored in a first party cookie in the users browser and communicated in a general way to the host site and Tealium. For Power-Opt-In there is also a 3rd party cookie stored on a second domain to share information between sites. The OIL Layer currently does not have a central database.

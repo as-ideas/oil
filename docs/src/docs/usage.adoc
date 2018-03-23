@@ -42,7 +42,7 @@ Please make sure you're working with the latest version available.
 
 Check https://oil.axelspringer.com/ for further updates.
 
-IMPORTANT: Your domain needs to be whitelisted in order to work with OIL (contact us to get whitelisted: OIL Support <oil-support@axelspringer.com>)
+IMPORTANT: Your domain needs to be whitelisted in order to work with OIL (contact us to get whitelisted: OIL Support <oil-support@axelsproinger>)
 
 include::usage/configuration-of-oil.adoc[]
 
@@ -127,11 +127,11 @@ OIL is currently emitting the following events:
 [width="100%",options="header", cols="1,3"]
 |====
 | Event name | Description
-| oil_optin_done | When a users selects opt in.
-| oil_soi_optin_done | When a users selects opt in via SOI.
-| oil_as_selected_minimum| When a users selected minimum cookies before clicking opt in.
-| oil_as_selected_functional| When a users selected functional cookies before clicking opt in.
-| oil_as_selected_full| When a user selected full cookies before clicking opt in or didn't bother for advanced settings.
+| oil_optin_done | When a users selects opt-in.
+| oil_soi_optin_done | When a users selects opt-in via SOI.
+| oil_as_selected_minimum| When a users selected minimum cookies before clicking opt-in.
+| oil_as_selected_functional| When a users selected functional cookies before clicking opt-in.
+| oil_as_selected_full| When a user selected full cookies before clicking opt-in or didn't bother for advanced settings.
 | oil_click_advanced_settings| When a users clicks the advanced settings button/link.
 | oil_click_back_to_main| When a user clicks the back link from the advanced settings page.
 | oil_no_cookies_allowed| When a users has no cookies allowed and the no cookies layer is displayed
@@ -141,29 +141,43 @@ OIL is currently emitting the following events:
 
 ==== OIL CPC API
 
-You can add an integrated version of the OIL Cookie Preference Center to your page to give the user the chance to reverse his initial selection.
+You can add an integrated version of the OIL Cookie Preference Center to your page to give the user the chance to reverse his initial selection (or even Opt-Out).
 
 For this include a div with the id below in your page:
 [source,html]
 ----
 <div id="oil-preference-center"></div>
 ----
-To insert the OIL CPC in the prepared div, which you included in your page: window.AS_OIL.showPreferenceCenter(); Create a SAVE Button with one of the two possible actions: window.oilTriggerPoiOptin(); or window.oilTriggerSoiOptIn();
+To insert the OIL CPC in the prepared div, which you included in your page, execute this javascript snippet:
+[source,javascript]
+----
+window.AS_OIL.showPreferenceCenter();
+----
 
-The inserted CPC will show the users current setting when inserted. Make sure OIL is part of the page to make this work.
+For the action element to save the current setting there are three API endpoints:
 
-These are all CPC API definitions:
+[source,javascript]
+----
+window.oilTriggerOptin();
+window.oilTriggerSoiOptIn();
+window.oilTriggerPoiOptin();
+----
+
+The inserted CPC will show the users current setting when inserted. Make sure OIL is part of the page first to make this work.
+
+CPC API definition:
 
 [width="100%",options="header", cols="1,3"]
 |====
 | Function Name | Description
 | window.AS_OIL.showPreferenceCenter() | inserts the CPC into the predefined div with the id #oil-preference-center into the host site
-| window.AS_OIL.triggerSoiOptIn() | will trigger the CPC SOI optin (can also result in an optout)
-| window.AS_OIL.triggerPoiOptin() | will trigger the CPC POI optin (can also result in an optout)
+| window.AS_OIL.triggerOptIn() | will trigger the generic opt-in (can also result in an opt-out)
+| window.AS_OIL.triggerSoiOptIn() | will trigger the CPC SOI opt-in (can also result in an opt-out)
+| window.AS_OIL.triggerPoiOptin() | will trigger the CPC POI opt-in (can also result in an opt-out)
 |====
 
 ==== Tracking and Google Analytics Events
-If you want to use Google Analytics with OIL you can use the new OIL Events (see above) instead and proxy them to your specific GA installation.
+The previous Google Analytics integration was removed from OIL to decrease the OIL file size. If you want to use Google Analytics with OIL you can use the new OIL Events (see above) instead and proxy them to your specific GA installation.
 This makes OIL load quicker and gives more freedom how the tracking takes place.
 
 This is an example script to subscribe to the event 'oil_optin_done' and forward it to Google Analytics. You might need to tweak it to your environment and needs.
