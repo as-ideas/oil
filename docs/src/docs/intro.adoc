@@ -2,10 +2,10 @@
 
 === About oil.js
 
-The OIL project aims for a stable cross-company solution for the challenges the new EU ePrivacy Regulation will pose to our business.
+The OIL project aims for a stable cross-company solution for the challenges the GDPR and new EU ePrivacy Regulation will pose to our business.
 
 * Data privacy opt-in overlay for all users of services offered by various Axel Springer brands and/or units
-* Local opt-in (called Site Opt In, SOI) as well as group-based cross-company opt-in (called Power Opt In, POI)
+* Local opt-in (called Site Opt In, SOI) as well as group-based cross-company opt-in (called Power Opt-In, POI)
 * Integration and hosting on Tealium with the option to run it standalone.
 
 === Technical Quality Goals
@@ -26,28 +26,26 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 [options="header",cols="1,2"]
 |===
 |Role/Name|Contact|
-Business Owner | Johannes Fenner, CDP Konzernentwicklung |
-Legal Affairs | Susanne Stollhoff, Rechtsabteilung |
+Business Owner | Johannes Fenner, CDP |
+Legal Affairs | Susanne Stollhoff, Dr. Olaf Koch |
 Product Owner | Antonino Tumminelli, AS Ideas Engineering |
 UX | Özden Gelgec, AS Ideas Engineering |
 UX | Andreas Wagner, AS Ideas Engineering |
 Developer | Sebastian Waschnick, AS Ideas Engineering |
 Developer | Marcel Bankmann, AS Ideas Engineering |
 Tealium | Michael Sievers, AS Digital|
-Former Business Owner | André Petzold, Konzernentwicklung |
-Former Product Owner | Michiel Slot, AS Ideas Engineering |
 |===
 
 === Solution Strategy
 
-According the proposal of the Commission, the European Parliament, and the Council of Ministers, web browsers (and similar software) will be required to prompt users with a menu of privacy options when they are installed for the first time.[1]
+According the proposal of the Commission, the European Parliament, and the Council of Ministers, websites will be required to prompt users with a menu of privacy options when they are visited for the first time.[1]
 
-So solve this issue the Opt In Layer (OIL) offers a standard to implement these requirements. Therefore the solution consists of two parts:
+The Opt In Layer (OIL) is our solution for these requirements consisting of two parts:
 
 * A **subscriber** part, which adds the OptIn Layer to the host pages DOM and asks the user to opt in.
-* A **hub** part, which acts as a registry site for POI on a domain hosted by AS Ideas. This is optional and only needed for POI functionality.
+* A **hub** part, which acts as a registry site for POI on a domain hosted by Ideas Engineering. This is optional and only needed for POI functionality.
 
-Opt-In Information is stored in a first party cookie in the users browser and communicated in a general way to the host site and Tealium. For Power-Opt-In theres also a 3rd party cookie stored on a second domain to share information between sites. The OIL Layer currently does not have a central database.
+Opt-In Information is stored in a first party cookie in the users browser and communicated in a general way to the host site and Tealium. For Power-Opt-In there is also a 3rd party cookie stored on a second domain to share information between sites. The OIL Layer currently does not have a central database.
 
 === Why is there no native app support?
 

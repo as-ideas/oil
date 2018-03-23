@@ -2,7 +2,7 @@
 
 OIL comes with a wide range of customization features which can be configured via a configuration block. Put the configuration object somewhere in the upper part of your page. Please leave the preview mode false to begin with, if you test on your machine or on a staging system. Preview Mode hides the OIL_Layer except you enable it on your browser session. See the parameter section below for more details.
 
-OIL also comes with a default configuration, that will support Single Opt In with a german standard text and the options to opt in or opt later.
+OIL also comes with a default configuration, that will support Single Opt In with a German standard text and the options to opt in or opt later.
 
 ==== SOI configuration
 You need to add the configuration snippet to all pages where OIL is required. This is an example SOI configuration:
@@ -69,7 +69,7 @@ Check developer documentation for information to change all labels.
 |label_intro_heading| For the best user experience we need your confirmation
 |====
 
-Example Screenshots:
+Example Screenshot:
 
 image::src/images/oil-labels-intro.png[]
 

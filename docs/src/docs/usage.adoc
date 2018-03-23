@@ -7,7 +7,7 @@ Setting up OIL on your page consists of the following steps:
 ** Add the oil.js javascript snippet to your page
 ** Add a configuration block to your pages DOM
 
-OIL creates a standard for the OptIn but can't automatically stops your site from tracking your users. So to actually make your page respond to optins you also need to to the following.
+OIL creates a standard for the Opt-In but can't automatically stop your site from tracking your users. So to actually make your page respond to opt-ins you also need to do the following.
 
 ** Make sure your page doesn't track the user in its default state.
 ** Use Tealium for all tracking activities
@@ -42,7 +42,7 @@ Please make sure you're working with the latest version available.
 
 Check https://oil.axelspringer.com/ for further updates.
 
-IMPORTANT: Your domain needs to be whitelisted in order to work with OIL (contact us to get whitelisted: Team ANDROID AGASSI <ANDROIDAGASSI@moveoffice.com>)
+IMPORTANT: Your domain needs to be whitelisted in order to work with OIL (contact us to get whitelisted: OIL Support <oil-support@axelspringer.com>)
 
 include::usage/configuration-of-oil.adoc[]
 
@@ -163,7 +163,7 @@ These are all CPC API definitions:
 |====
 
 ==== Tracking and Google Analytics Events
-The previous Google Analytics integration was removed from OIL to decrease the OIL file size. If you want to use Google Analytics with OIL you can use the new OIL Events (see above) instead and proxy them to your specific GA installation.
+If you want to use Google Analytics with OIL you can use the new OIL Events (see above) instead and proxy them to your specific GA installation.
 This makes OIL load quicker and gives more freedom how the tracking takes place.
 
 This is an example script to subscribe to the event 'oil_optin_done' and forward it to Google Analytics. You might need to tweak it to your environment and needs.

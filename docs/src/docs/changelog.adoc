@@ -1,7 +1,5 @@
 == Changelog
 
-=== Changelog
-
 [source,md]
 ----
 include::../../../CHANGELOG.md[]

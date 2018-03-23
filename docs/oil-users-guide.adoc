@@ -12,7 +12,7 @@
 :docinfodir: src/meta
 :source-highlighter: highlightjs
 
-image::src/images/oil-asideas.png[]
+image::src/images/oillogo.jpg[]
 // horizontal line
 ***
 
