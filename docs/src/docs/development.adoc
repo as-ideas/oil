@@ -7,17 +7,10 @@ Jenkins: https://kube-jenkins.ipool.asideas.de/view/OIL%20Project/
 
 Overview: http://oil.axelspringer.com
 
-=== OIL Flow
-
-This is the latest general functional overview over OIL:
-
-[caption="Oil.js Tealium Deployment"]
-image::src/images/oil-poi-flow.png[Tealium Library Profile]
-
 === Hub Deployment
-To deploy the hub you need to deploy the project with an index.html loading dist/hub.123.js.
+To deploy the hub you need to deploy the project with an index.html loading the hub.[version].min.js
 
-For compatibility with Internet Explorer 9+ you need to add the following header to the server response to allow 3rd party cookies for POI. It's needed in SOI only mode.
+For compatibility with Internet Explorer 9+ you need to add the following header to the server response to allow 3rd party cookies for POI.
 
 [source,json]
 ----

@@ -21,8 +21,6 @@ include::src/docs/usage.adoc[]
 
 include::src/docs/development.adoc[]
 
-include::src/docs/changelog.adoc[]
-
 include::src/docs/appendix.adoc[]
 
 

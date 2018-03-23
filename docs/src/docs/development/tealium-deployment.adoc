@@ -5,8 +5,8 @@ As a developer of Oil.js (see image below)
 
 * Open your Tealium lib profile and move to extensions
 * Open the predefined Javascript extension "AS Opt-in Overlay"
-* Some forms will show up, paste your code (dist/oil.123.js) in the "configuration" section
-* Save and Publish your Tealium configuration changes in your desired stages (Dev, QA, Prod)
+* Some forms will show up, paste your code (release/oil.[version].min.js) in the "configuration" section
+* Save and publish your Tealium configuration changes to your desired stages (Dev, QA, Prod)
 
 Please note that once published, your code will be delivered to all Tealium clients automatically.
 Tealium clients will be informed of your changes and need to publish/deploy their profile to activate your changes.
