@@ -2,19 +2,19 @@
 
 This is a full list of configurable options.
 
-[width="100%",options="header", cols="1,3,1,1"]
+[width="100%",options="header", cols="1,3,1"]
 |====
-|Config Parameter | Description | Default Setting|POI optional feature
-| locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. | deDE_01 | No
-| preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false |No
-| theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light' | No
-| poi_activate_poi | Activates or disactivates Power Opt In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false|Yes
-| poi_hub_origin | The origin of the hub.js installation, if any. | none|Yes
-| poi_hub_path | The path to the hub.html installation on the origin, if any. | none|Yes
-| poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). The group name must be valid (existing). | none | Yes
-| poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true|Yes
-| cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31 | No
-| timeout | Value in seconds until the opt in layer will be automatically hidden. 0 or lower deactivates auto-hide. | -1 | No
-| advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False | No
-| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True | No
+| Config Parameter | Description | Default Setting
+| locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. | deDE_01
+| preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
+| theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
+| poi_activate_poi | Activates or disactivates Power Opt-In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false
+| poi_hub_origin | The origin of the hub.js installation, if any. | none
+| poi_hub_path | The path to the hub.html installation on the origin, if any. | none
+| poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). The group name must be valid (existing). | none
+| poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
+| cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31
+| timeout | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
+| advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False
+| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True
 |====

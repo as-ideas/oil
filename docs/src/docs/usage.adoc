@@ -7,15 +7,15 @@ Setting up OIL on your page consists of the following steps:
 ** Add the oil.js javascript snippet to your page
 ** Add a configuration block to your pages DOM
 
-OIL creates a standard for the OptIn but can't automatically stops your site from tracking your users. So to actually make your page respond to optins you also need to to the following.
+OIL creates a standard for the Opt-In but can't automatically stop your site from tracking your users. So to actually make your page respond to opt-ins you also need to do the following.
 
 ** Make sure your page doesn't track the user in its default state.
-** Use Tealium for all tracking activities
-** Listen to OIL events for activating non-Tealium tags, after the user opted in.
+** Use Tealium for all tracking activities and use the loading rules we provide
+** Listen to OIL events for loading non-Tealium tags, after the user opted in.
 
 ==== Adding oil.js to your site via Tealium (recommended)
 
-Axel Springer Tealium needs to configure your site inheriting from the predefined lib-dip-optin library profile. Once this is in place you publish those changes in the following way:
+Axel Springer Tealium needs to configure your site to inherit the predefined lib-dip-optin library profile. Once this is in place you publish those changes in the following way:
 
 * Open your Tealium profile and go to "extensions"
 * Find the entry for "AS Opt-in Overlay", you'll be noticed of a change to this extension
@@ -31,7 +31,7 @@ This needs to be repeated for every new version of OIL. The library profile can'
 If Tealium can't be used on your site you also can add OIL directly from our CDN.
 
 Example:
-[source, javascript]
+[source, html]
 ----
 <script type="text/javascript" src="https://oil.axelspringer.com/release/oil.1.0.7.min.js"></script>
 ----
@@ -40,50 +40,42 @@ Updated versions of the script will be deployed using a different filename hence
 
 Please make sure you're working with the latest version available.
 
-Check https://oil.axelspringer.com/ for further updates.
+Please check https://oil.axelspringer.com/ for further updates.
 
-IMPORTANT: Your domain needs to be whitelisted in order to work with OIL (contact us to get whitelisted: Team ANDROID AGASSI <ANDROIDAGASSI@moveoffice.com>)
+IMPORTANT: Your domain needs to be whitelisted in order to work with OIL (contact us to get whitelisted: OIL Support <oil-support@axelspringer.com>)
 
 include::usage/configuration-of-oil.adoc[]
 
 === Listening and interacting with OIL
 
-Set aside the configuration the host site can communicate with the OIL layer within a running site and react to its status. Also a implementing developer can debug the layer using the console logs the OIL layer can create.
+In addition to the configuration the host site can communicate with the OIL layer using its API. OIL, in its default state, never emits console errors.
+To get a full log and all errors you can enable the verbose mode. For test deployments and A/B testing OIL supports a preview mode.
 
 ==== Test Deployment and Preview Mode
 The preview mode is useful for testing OIL in a live environment without making it available to your end-users.
 
-The preview mode is turned off by default, meaning OIL will be available to all your users. If you turn the preview mode on (please see configuration), OIL won't be shown at first, but can be enabled for your current session on the browser's console:
+The preview mode is turned off by default, meaning OIL will be available to all your users. If you turn the preview mode on (please see configuration section), OIL won't be shown at first, but can be enabled for your current session on the browser's console:
 [source,javascript]
 ----
 window.AS_OIL.previewModeOn();
-----
-
-and turned off again
-
-[source,javascript]
-----
 window.AS_OIL.previewModeOff();
 ----
 
-When Preview mode is turned on useful debug information will be seen on the browser console. See also "Verbose Logging" below for more detailed logging.
+When preview mode is turned on some debug information will be seen on the browser console. See also "Verbose Logging" below for more detailed logging.
 
 ==== OIL Verbose Logging
-In a production build OIL will show no logs, except in preview_mode or verbose mode.
+OIL will show no logs, except in preview mode or verbose mode.
 
 Run the following commands on the console of your browser to switch verbose logging on and off:
 [source,javascript]
 ----
 window.AS_OIL.verboseModeOn();
-
 window.AS_OIL.verboseModeOff();
 ----
 
-Debug mode can be turned on at any time, whereas the similar "preview_mode" can only be enabled in the configuration, please see above.
+Debug mode can be turned on at any time, whereas the similar preview mode can only be enabled in the configuration, please see above.
 
-Start debugging with figuring out which config was actually parsed, by looking at the "Got the following parsed config" message.
-
-Please note that verbose logging can only be activated for your browser, all other users wont see those logs.
+Please note that verbose logging can only be activated for your own browser, all other users won't see those logs.
 
 ==== OIL API
 
@@ -91,8 +83,9 @@ Please note that verbose logging can only be activated for your browser, all oth
 |====
 | API Call | Description
 |window.AS_OIL.triggerOptIn(); | The user will opted in. It's the same behaviour as when the user is clicking Accept on the layer.
-|window.AS_OIL.triggerOptOut(); | OIL will remove all cookies if triggered and therefor opt out the user of everything, even POI.
-|window.AS_OIL.reload(); | OIL will reload the configuration from the hosts website.
+|window.AS_OIL.triggerOptOut(); | OIL will remove all cookies if triggered and therefore opt-out the user of everything, even POI.
+|window.AS_OIL.reload(); | OIL will reload the configuration from the host's website.
+|window.AS_OIL.showPreferenceCenter(); | OIL will inject the Cookie Preference Center into your website. Please see "OIL CPC API" section.
 |====
 
 ==== OIL Events
@@ -127,44 +120,55 @@ OIL is currently emitting the following events:
 [width="100%",options="header", cols="1,3"]
 |====
 | Event name | Description
-| oil_optin_done | When a users selects opt in.
-| oil_soi_optin_done | When a users selects opt in via SOI.
-| oil_as_selected_minimum| When a users selected minimum cookies before clicking opt in.
-| oil_as_selected_functional| When a users selected functional cookies before clicking opt in.
-| oil_as_selected_full| When a user selected full cookies before clicking opt in or didn't bother for advanced settings.
+| oil_optin_done | When a users selects opt-in.
+| oil_as_selected_minimum| When a users selected minimum cookies before clicking opt-in.
+| oil_as_selected_functional| When a users selected functional cookies before clicking opt-in.
+| oil_as_selected_full| When a user selected full cookies before clicking opt-in or didn't bother for advanced settings.
 | oil_click_advanced_settings| When a users clicks the advanced settings button/link.
 | oil_click_back_to_main| When a user clicks the back link from the advanced settings page.
 | oil_no_cookies_allowed| When a users has no cookies allowed and the no cookies layer is displayed
 | oil_has_optedin| On every page reload, when the user has opted_in previously (OIL should be hidden)
 | oil_shown| When oil is shown
+| oil_hide_layer| When oil gets automatically hidden
+| oil_click_thirdparty_list| When a user clicks the third party list link
+| oil_click_company_list| When a user clicks the company list link
 |====
 
 ==== OIL CPC API
 
-You can add an integrated version of the OIL Cookie Preference Center to your page to give the user the chance to reverse his initial selection.
+You can add an integrated version of the OIL Cookie Preference Center to your page to give the user the chance to reverse his initial selection (or even Opt-Out).
 
 For this include a div with the id below in your page:
 [source,html]
 ----
 <div id="oil-preference-center"></div>
 ----
-To insert the OIL CPC in the prepared div, which you included in your page: window.AS_OIL.showPreferenceCenter(); Create a SAVE Button with one of the two possible actions: window.oilTriggerPoiOptin(); or window.oilTriggerSoiOptIn();
+To insert the OIL CPC in the prepared div, which you included in your page, execute this javascript snippet:
+[source,javascript]
+----
+window.AS_OIL.showPreferenceCenter();
+----
 
-The inserted CPC will show the users current setting when inserted. Make sure OIL is part of the page to make this work.
+For the action element to save the current setting there is an API endpoint:
 
-These are all CPC API definitions:
+[source,javascript]
+----
+window.oilTriggerOptin();
+----
+
+The inserted CPC will show the users current setting when inserted. Make sure OIL is part of the page first to make this work.
+
+CPC API definition:
 
 [width="100%",options="header", cols="1,3"]
 |====
 | Function Name | Description
 | window.AS_OIL.showPreferenceCenter() | inserts the CPC into the predefined div with the id #oil-preference-center into the host site
-| window.AS_OIL.triggerSoiOptIn() | will trigger the CPC SOI optin (can also result in an optout)
-| window.AS_OIL.triggerPoiOptin() | will trigger the CPC POI optin (can also result in an optout)
+| window.AS_OIL.triggerOptIn() | will trigger the generic opt-in (can also result in an opt-out)
 |====
 
 ==== Tracking and Google Analytics Events
-The previous Google Analytics integration was removed from OIL to decrease the OIL file size. If you want to use Google Analytics with OIL you can use the new OIL Events (see above) instead and proxy them to your specific GA installation.
-This makes OIL load quicker and gives more freedom how the tracking takes place.
+If you want to use Google Analytics with OIL you can use OIL Events (see above) and proxy them to your specific GA installation.
 
 This is an example script to subscribe to the event 'oil_optin_done' and forward it to Google Analytics. You might need to tweak it to your environment and needs.
 [source,javascript]

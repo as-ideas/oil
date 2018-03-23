@@ -1,6 +1,6 @@
 === Styling guide
 
-You can style the layer with additonal CSS. All OIL styles use the css classes directly, this means the lowest possible css specificity. Here are two examples. The first one is for changing the font and the color. The second is for changing the background color and the shadow.
+You can style the layer with additional CSS. All OIL styles use the css classes directly, this means the lowest possible css specificity. Here are two examples. The first one is for changing the font and the color. The second is for changing the background color and the shadow.
 
 [source,css]
 ----

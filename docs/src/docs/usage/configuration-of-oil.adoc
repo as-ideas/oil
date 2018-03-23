@@ -1,8 +1,8 @@
 === Configuring OIL
 
-OIL comes with a wide range of customization features which can be configured via a configuration block. Put the configuration object somewhere in the upper part of your page. Please leave the preview mode false to begin with, if you test on your machine or on a staging system. Preview Mode hides the OIL_Layer except you enable it on your browser session. See the parameter section below for more details.
+OIL comes with a wide range of customisation features which can be configured via a configuration block. Put the configuration object somewhere in the upper part of your page. Please disable the preview mode for the first production test. The preview mode hides the OIL layer except you enable it on your browser session. See the parameter section below for more details.
 
-OIL also comes with a default configuration, that will support Single Opt In with a german standard text and the options to opt in or opt later.
+OIL also comes with a default configuration, that will support Single Opt-In with a German standard text.
 
 ==== SOI configuration
 You need to add the configuration snippet to all pages where OIL is required. This is an example SOI configuration:
@@ -15,14 +15,14 @@ You need to add the configuration snippet to all pages where OIL is required. Th
         /*
             Text labels, see Label Keys section below
         */
-        "label_intro_heading": "Bitte stimmen Sie zu",
-        "locale": "deDE_01"
+        "label_intro_heading": "Please confirm",
+        "locale": "enEN_01"
       }
     </script>
 ----
 
 ==== POI configuration
-You need to add the configuration snippet to all pages where OIL is required. Give extra attention to the configuration, if you want to use POI, which needs the additional POI configuration added and tailored to your situation. Contact us, if you need help. This is an example SOI configuration:
+You need to add the configuration snippet to all pages where OIL is required. Give extra attention to the configuration, if you want to use POI, which needs the additional POI configuration added and tailored to your situation. Contact us, if you need help. This is an example POI configuration:
 
 [source,json]
 ----
@@ -40,22 +40,23 @@ You need to add the configuration snippet to all pages where OIL is required. Gi
         "poi_hub_origin": "//oil.axelspringer.com",
         "poi_hub_path": "/hub.html",
         "poi_subscriber_set_cookie": true,
-        "poi_group_name": "MyGroup"
-        "locale": "deDE_01"
+        "poi_group_name": "MyGroupName"
+        "locale": "enEN_01"
       }
     </script>
 ----
 
-POI can be partitioned in different groups using a prefix or group name. You need to use the same group name as every other unit in your group. This is an optional parameter.
+POI can be partitioned in different groups using a prefix or group name. You need to use the same group name as every other unit in your group. This is not an optional parameter.
+Only group names configured by Axel Springer are allowed.
 
 include::functional-configuration.adoc[]
 
 ==== Language configuration
 
-[width="100%",options="header", cols="1,3,1,1"]
+[width="100%",options="header", cols="1,3,1"]
 |====
-|Config Parameter | Description | Default Setting| POI optional feature
-| locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. | deDE_01 | No
+|Config Parameter | Description | Default Setting
+| locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. | deDE_01
 |====
 
 ==== Label Configuration Parameters
@@ -66,10 +67,10 @@ Check developer documentation for information to change all labels.
 [width="100%",options="header", cols="1,3"]
 |====
 |Config Parameter|Default value
-|label_intro_heading| For the best user experience we need your confirmation
+|label_intro_heading| We use cookies and other technologies
 |====
 
-Example Screenshots:
+Example Screenshot:
 
 image::src/images/oil-labels-intro.png[]
 
