@@ -47,12 +47,12 @@ function toggleViewElements(element) {
 
     if (descriptionPart.style.display === 'none') {
         descriptionPart.setAttribute('style', 'display: block; animation: fadein 0.5s');
-        iconMinus.setAttribute('style', styleDisplayInlineBlock);
-        iconPlus.setAttribute('style', styleDisplayNone);
+        iconPlus.setAttribute('style', styleDisplayInlineBlock);
+        iconMinus.setAttribute('style', styleDisplayNone);
     } else {
         descriptionPart.setAttribute('style', styleDisplayNone);
-        iconMinus.setAttribute('style', styleDisplayNone);
-        iconPlus.setAttribute('style', styleDisplayInlineBlock);
+        iconPlus.setAttribute('style', styleDisplayNone);
+        iconMinus.setAttribute('style', styleDisplayInlineBlock);
     }
 }
 
