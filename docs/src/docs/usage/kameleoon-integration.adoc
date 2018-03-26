@@ -55,9 +55,10 @@ insert a customized version of this script:
 </script>
 ----
 
-==== Label Configuration Options
+==== Full Label Configuration
 
-All labels can be overwritten, even the default ones, in the OIL configuration block (see chapter "OIL configuration") as follows:
+Even though OIL is supposed to come with legal texts that shouldnt be altered, except the main heading, for testing purposes all labels can
+be overwritten, even the default ones, in the OIL configuration block (see chapter "OIL configuration") as follows:
 
 [width="100%",options="header", cols="1,3"]
 |====
@@ -82,6 +83,14 @@ All labels can be overwritten, even the default ones, in the OIL configuration b
 |label_thirdparty_list_heading| Third Parties
 |label_thirdparty_list_text| Here is a list of third parties
 |====
+
+IMPORTANT: If you want to reference the company or third party list from your custom text you need to add the links inline and set the right css classes.
+
+[source,html]
+----
+<a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-companyList">CompanyListLink</a>
+<a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-thirdPartyList">ThirdPartys</a>
+----
 
 include::../development/styling-guide.adoc[]
 
