@@ -2,9 +2,8 @@ import {
     getLabel,
     getTheme
 } from '../userview/userview_config.js';
-import { logInfo } from '../core/core_log.js'
 import {OIL_LABELS} from '../userview/userview_constants';
-import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, EVENT_NAME_BACK_TO_MAIN, OIL_GLOBAL_OBJECT_NAME} from '../core/core_constants';
+import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME} from '../core/core_constants';
 import './poi.group.scss';
 import { setGlobalOilObject, getGlobalOilObject } from '../core/core_utils.js';
 
@@ -89,7 +88,7 @@ function attachRemoveListener() {
             return JSON.stringify(event.data).indexOf(str) !== -1;
         }
 
-        if (event && event.data && (eventDataContains(EVENT_NAME_BACK_TO_MAIN))) {
+        if (event && event.data && (eventDataContains('oil_'))) {
             removeCssFromHtmlAndDocument();
             deventer(messageEvent, receiveMessage, false);
         }
@@ -112,6 +111,7 @@ function removeCssFromHtmlAndDocument() {
 function oilListTemplate(list, heading, text) {
     attachCssToHtmlAndDocument();
     return `
+<div class="as-oil-fixed">
 <div class="as-oil-content-overlay as-oil-poi-group-list-wrapper" data-qa="oil-poi-list">
         <div class="as-oil-l-wrapper-layout-max-width">
             <div class="as-oil__heading">
@@ -139,7 +139,9 @@ function oilListTemplate(list, heading, text) {
     </button>
     </div>
     </div>
-    </div>`
+    </div>
+</div>
+`
 }
 
 export function oilGroupListTemplate(list) {
