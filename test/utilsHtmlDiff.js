@@ -79,13 +79,3 @@ function getDiffText(diff, options) {
 
   return output;
 }
-
-export function removeOilLayerAndConfig() {
-  window.AS_OIL_LOCALE = undefined;
-  forEach(document.querySelectorAll('#oil-configuration'), (domNode) => {
-    domNode.parentElement.removeChild(domNode);
-  });
-  forEach(document.querySelectorAll('.as-oil'), (domNode) => {
-    domNode.parentElement.removeChild(domNode);
-  });
-}
