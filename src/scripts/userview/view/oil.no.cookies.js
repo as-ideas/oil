@@ -1,4 +1,4 @@
-import { OIL_LABELS } from '../userview_constants.js'
+import {OIL_LABELS} from '../userview_constants.js'
 import {
   getLabel
 } from './../userview_config.js';

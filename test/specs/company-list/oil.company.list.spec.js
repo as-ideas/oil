@@ -1,7 +1,7 @@
-import { loadFixture, readFixture, removeOilLayerAndConfig } from '../../utils';
-import { resetConfiguration } from '../../../src/scripts/core/core_config';
-import { oilGroupListTemplate } from '../../../src/scripts/poi-list/oil.list';
-import { customMatchers } from '../../utilsHtmlDiff';
+import {loadFixture, readFixture, removeOilLayerAndConfig} from '../../utils';
+import {resetConfiguration} from '../../../src/scripts/core/core_config';
+import {oilGroupListTemplate} from '../../../src/scripts/poi-list/oil.list';
+import {customMatchers} from '../../utilsHtmlDiff';
 
 describe('the company list', () => {
 

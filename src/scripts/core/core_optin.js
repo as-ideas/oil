@@ -1,7 +1,7 @@
-import { verifyPowerOptIn } from './core_poi.js';
-import { logPreviewInfo } from './core_log.js';
-import { isSubscriberSetCookieActive } from './core_config.js';
-import { getSoiCookie, setSoiOptIn } from './core_cookies.js';
+import {verifyPowerOptIn} from './core_poi.js';
+import {logPreviewInfo} from './core_log.js';
+import {isSubscriberSetCookieActive} from './core_config.js';
+import {getSoiCookie, setSoiOptIn} from './core_cookies.js';
 
 /**
  * Log Helper function for checkOptIn

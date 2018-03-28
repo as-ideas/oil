@@ -1,4 +1,4 @@
-import { initOilHub } from './scripts/hub/hub_oil.js';
+import {initOilHub} from './scripts/hub/hub_oil.js';
 
 (function () {
   let locationString = '';

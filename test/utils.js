@@ -1,4 +1,4 @@
-import { forEach } from '../src/scripts/userview/userview_modal';
+import {forEach} from '../src/scripts/userview/userview_modal';
 
 /**
  * Load a jasmine fixture from the given path

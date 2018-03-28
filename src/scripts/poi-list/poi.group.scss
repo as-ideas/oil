@@ -4,127 +4,130 @@
  * POI Group list
  */
 .as-oil-poi-group-list-wrapper {
+  @include media('<=phone') {
+    position: relative;
+    width: initial;
+    min-height: 300px;
+    z-index: 100;
+    margin: 50vh 5px 50px;
+    padding: 16px 12px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: #fafafa;
+    -webkit-box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
+
+    .as-oil__heading, .as-oil__intro-txt {
+      text-align: left;
+    }
+  }
+
+  .as-oil-poi-group-list {
+    @include media('>phone') {
+      overflow: auto;
+      overflow-y: scroll;
+      max-height: 200px;
+    }
+  }
+
+  .as-js-oilback {
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+
     @include media('<=phone') {
-        position: relative;
-        width: initial;
-        min-height: 300px;
-        z-index: 100;
-        margin: 50vh 5px 50px;
-        padding: 16px 12px;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-        background-color: #fafafa;
-        -webkit-box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
-        box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
+      float: right;
+      text-align: right;
+      vertical-align: center;
+      margin: 0;
+      padding: 0;
 
-        .as-oil__heading, .as-oil__intro-txt {
-            text-align: left;
-        }
+      .as-js-oilback__text {
+        visibility: hidden;
+      }
+    }
+    @include media('>phone') {
+      display: flex;
+      align-items: center;
     }
 
-    .as-oil-poi-group-list {
-        @include media('>phone') {
-            overflow: auto;
-            overflow-y: scroll;
-            max-height: 200px;
-        }
+  }
+
+  .as-js-oilback__text {
+    margin-right: 6px;
+  }
+
+  .as-oil-l-buttons-light {
+    @include media('>phone') {
+      float: right;
     }
 
-    .as-js-oilback {
-        border: none;
-        position: absolute;
-        top: 0;
-        right: 0;
+    @include media('<=phone') {
+      display: initial;
+      background: $background-color-light;
+      box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
+      padding: 8px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+  }
 
-        @include media('<=phone') {
-            float: right;
-            text-align: right;
-            vertical-align: center;
-            margin: 0;
-            padding: 0;
-
-            .as-js-oilback__text {
-                visibility: hidden;
-            }
-        }
-        @include media('>phone') {
-            display: flex;
-            align-items: center;
-        }
-
+  .as-oil-l-buttons-dark {
+    @include media('>phone') {
+      float: right;
     }
 
-    .as-js-oilback__text {
-        margin-right: 6px;
+    @include media('<=phone') {
+      display: initial;
+      background: $background-color-dark;
+      box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
+      padding: 8px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
     }
-
-    .as-oil-l-buttons-light {
-        @include media('>phone') {
-            float: right;
-        }
-
-        @include media('<=phone') {
-            display: initial;
-            background: $background-color-light;
-            box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
-            padding: 8px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-        }
-    }
-
-    .as-oil-l-buttons-dark {
-        @include media('>phone') {
-          float: right;
-        }
-
-        @include media('<=phone') {
-          display: initial;
-          background: $background-color-dark;
-          box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
-          padding: 8px;
-          position: fixed;
-          bottom: 0;
-          left: 0;
-        }
-    }
+  }
 }
-
 
 //third party cookie
 .as-oil-third-party-list-element {
-    border-bottom: 1px #d8d8d8 solid;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
-    max-width: 600px;
+  border-bottom: 1px #d8d8d8 solid;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  max-width: 600px;
 
-    .as-oil-third-party-toggle-part {
-        margin-left: 16px;
+  .as-oil-third-party-toggle-part {
+    margin-left: 16px;
+  }
+
+  .as-oil-third-party-name {
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .as-oil-third-party-description {
+    color: $background-color-dark;
+    font-size: 12px;
+    opacity: .5;
+  }
+
+  .as-oil-third-party-link {
+    a {
+      color: #0068ff;
+      font-size: 12px;
+      text-decoration: none;
+
     }
-
-    .as-oil-third-party-name {
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    .as-oil-third-party-description {
-        color: $background-color-dark;
-        font-size: 12px;
-        opacity: .5;
-    }
-
-    .as-oil-third-party-link {
-        a {
-            color: #0068ff;
-            font-size: 12px;
-            text-decoration: none;
-
-        }
-    }
+  }
 }
 
 @keyframes fadein {
-    from {opacity: 0;}
-    to {opacity: 1}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1
+  }
 }

@@ -1,7 +1,7 @@
-import { POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME, POI_PAYLOAD } from '../core/core_constants.js';
-import { getHubLocation, getPoiGroupName, isPoiActive } from '../core/core_config.js';
-import { init, sendEventToFrame } from '../core/core_poi.js';
-import { getOrigin } from '../core/core_utils.js';
+import {POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME, POI_PAYLOAD} from '../core/core_constants.js';
+import {getHubLocation, getPoiGroupName, isPoiActive} from '../core/core_config.js';
+import {init, sendEventToFrame} from '../core/core_poi.js';
+import {getOrigin} from '../core/core_utils.js';
 
 /**
  * Activate Power Opt IN with the use of an iframe

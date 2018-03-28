@@ -2,10 +2,10 @@ import {
   getLabel,
   getTheme
 } from '../userview/userview_config.js';
-import { OIL_LABELS } from '../userview/userview_constants';
-import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../core/core_constants';
+import {OIL_LABELS} from '../userview/userview_constants';
+import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME} from '../core/core_constants';
 import './poi.group.scss';
-import { setGlobalOilObject, getGlobalOilObject } from '../core/core_utils.js';
+import {setGlobalOilObject, getGlobalOilObject} from '../core/core_utils.js';
 
 /**
  * OIL SOI will be only shown, when there is no POI on the advanced settings

@@ -1,7 +1,7 @@
-import { OIL_CONFIG } from './core_constants.js';
-import { isPoiActive, getHubLocation, getHubOrigin, getPoiGroupName } from './core_config.js';
-import { getOrigin, registerMessageListener, removeMessageListener } from './core_utils.js';
-import { logError, logInfo } from './core_log.js';
+import {OIL_CONFIG} from './core_constants.js';
+import {isPoiActive, getHubLocation, getHubOrigin, getPoiGroupName} from './core_config.js';
+import {getOrigin, registerMessageListener, removeMessageListener} from './core_utils.js';
+import {logError, logInfo} from './core_log.js';
 
 // Timeout after which promises should return
 const TIMEOUT = 500;

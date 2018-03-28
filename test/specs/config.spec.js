@@ -1,7 +1,14 @@
-import { resetConfiguration, getCookieExpireInDays, getHubOrigin, getHubPath, getHubLocation, getLocale } from '../../src/scripts/core/core_config.js';
-import { getLabel } from '../../src/scripts/userview/userview_config.js';
-import { OIL_LABELS } from '../../src/scripts/userview/userview_constants.js';
-import { loadFixture } from '../utils.js';
+import {
+  resetConfiguration,
+  getCookieExpireInDays,
+  getHubOrigin,
+  getHubPath,
+  getHubLocation,
+  getLocale
+} from '../../src/scripts/core/core_config.js';
+import {getLabel} from '../../src/scripts/userview/userview_config.js';
+import {OIL_LABELS} from '../../src/scripts/userview/userview_constants.js';
+import {loadFixture} from '../utils.js';
 
 describe('configuration', () => {
 

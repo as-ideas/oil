@@ -6,8 +6,8 @@ export {
   handlePoiOptIn,
   oilWrapper
 } from '../userview_modal.js';
-import { OIL_LABELS } from '../userview_constants.js';
-import { setGlobalOilObject } from '../../core/core_utils.js';
+import {OIL_LABELS} from '../userview_constants.js';
+import {setGlobalOilObject} from '../../core/core_utils.js';
 
 (function () {
   locale_enEN_01();

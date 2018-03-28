@@ -1,6 +1,6 @@
-import { deActivatePowerOptIn } from './core_poi.js';
-import { logInfo } from './core_log.js';
-import { removeSubscriberCookies } from './core_cookies.js';
+import {deActivatePowerOptIn} from './core_poi.js';
+import {logInfo} from './core_log.js';
+import {removeSubscriberCookies} from './core_cookies.js';
 
 /**
  * Opt-Out Handler

@@ -1,4 +1,4 @@
-import { forEach } from '../src/scripts/userview/userview_modal';
+import {forEach} from '../src/scripts/userview/userview_modal';
 
 let HtmlDiffer = require('html-differ').HtmlDiffer;
 let htmlDiffer = new HtmlDiffer();
@@ -30,7 +30,7 @@ function inverseGreen(text) {
   return '\x1b[42m' + text + '\x1b[0m';
 }
 
-function inverseRed(text) {
+function inverseRed(text) {s
   return '\x1b[41m' + text + '\x1b[0m';
 }
 
