@@ -1,13 +1,13 @@
-import { getCookieExpireInDays } from '../core/core_config.js'
-import { getClientTimestamp } from '../core/core_utils.js';
+import {getCookieExpireInDays} from '../core/core_config.js'
+import {getClientTimestamp} from '../core/core_utils.js';
 import {
   PRIVACY_MINIMUM_TRACKING,
   OIL_PAYLOAD_PRIVACY,
   OIL_PAYLOAD_VERSION,
   OIL_PAYLOAD_LOCALE
 } from '../core/core_constants.js';
-import { getOilCookie, setDomainCookie } from '../core/core_cookies.js';
-import { logInfo } from '../core/core_log.js';
+import {getOilCookie, setDomainCookie} from '../core/core_cookies.js';
+import {logInfo} from '../core/core_log.js';
 
 const OIL_HUB_DOMAIN_COOKIE_NAME = 'oil_data';
 const OIL_HUB_UNKNOWN_VALUE = 'unknown';

@@ -1,5 +1,5 @@
-import { logInfo } from './core_log.js';
-import { OIL_GLOBAL_OBJECT_NAME } from './core_constants.js';
+import {logInfo} from './core_log.js';
+import {OIL_GLOBAL_OBJECT_NAME} from './core_constants.js';
 
 /**
  * Check if environment is set to production
@@ -125,10 +125,10 @@ export function arrayContains(array, obj) {
  * @param object
  */
 export function setGlobalOilObject(name, object) {
-    if(!window[OIL_GLOBAL_OBJECT_NAME]) {
-        window[OIL_GLOBAL_OBJECT_NAME] = {};
-    }
-    window[OIL_GLOBAL_OBJECT_NAME][name] = object;
+  if (!window[OIL_GLOBAL_OBJECT_NAME]) {
+    window[OIL_GLOBAL_OBJECT_NAME] = {};
+  }
+  window[OIL_GLOBAL_OBJECT_NAME][name] = object;
 }
 
 /**
@@ -138,8 +138,8 @@ export function setGlobalOilObject(name, object) {
  * @returns {*}
  */
 export function getGlobalOilObject(name) {
-    if(!window[OIL_GLOBAL_OBJECT_NAME]) {
-        return undefined;
-    }
-    return window[OIL_GLOBAL_OBJECT_NAME][name];
+  if (!window[OIL_GLOBAL_OBJECT_NAME]) {
+    return undefined;
+  }
+  return window[OIL_GLOBAL_OBJECT_NAME][name];
 }

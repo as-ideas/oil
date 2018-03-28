@@ -1,4 +1,4 @@
-import { getSoiCookie } from '../core/core_cookies.js';
+import {getSoiCookie} from '../core/core_cookies.js';
 import {
   PRIVACY_MINIMUM_TRACKING,
   PRIVACY_FUNCTIONAL_TRACKING,

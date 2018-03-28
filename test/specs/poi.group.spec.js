@@ -1,6 +1,7 @@
-import { resetConfiguration } from '../../src/scripts/core/core_config.js';
-import { loadFixture } from '../utils.js';
+import {resetConfiguration} from '../../src/scripts/core/core_config.js';
+import {loadFixture} from '../utils.js';
 import '../../src/scripts/userview/locale/userview_oil_deDE_01.js'
+
 describe('POI-Group axelSpringerSe_01', () => {
 
   beforeEach(() => {

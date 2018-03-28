@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie';
 import * as HubAPI from '../../src/scripts/hub/hub_oil.js';
-import { deleteAllCookies } from '../utils.js';
-import { resetConfiguration } from '../../src/scripts/core/core_config.js';
+import {deleteAllCookies} from '../utils.js';
+import {resetConfiguration} from '../../src/scripts/core/core_config.js';
 
 describe('the hub.js', () => {
 
@@ -9,7 +9,7 @@ describe('the hub.js', () => {
     NAME: 'oil_data'
   };
 
-  describe('in event mode', function() {
+  describe('in event mode', function () {
     beforeEach(() => {
       resetConfiguration();
       HubAPI.initOilHub('');
@@ -26,7 +26,12 @@ describe('the hub.js', () => {
     });
 
     it('should write a cookie with group_name', (done) => {
-      postMessage({event: 'oil-poi-activate', origin: 'origin', group_name: 'lisasimpson', hostconfig: {'cookie_expires_in_days': 31}}, '*');
+      postMessage({
+        event: 'oil-poi-activate',
+        origin: 'origin',
+        group_name: 'lisasimpson',
+        hostconfig: {'cookie_expires_in_days': 31}
+      }, '*');
       setTimeout(() => {
         let cookie = Cookie.getJSON('lisasimpson_' + OIL_COOKIE.NAME);
         expect(cookie).toBeDefined();
@@ -36,15 +41,15 @@ describe('the hub.js', () => {
 
   });
 
-  describe('in redirect mode', function() {
-
+  describe('in redirect mode', function () {
     beforeEach(() => {
-      spyOn(HubAPI, 'redirectBack').and.callFake(function () {});
+      spyOn(HubAPI, 'redirectBack').and.callFake(function () {
+      });
       resetConfiguration();
       deleteAllCookies();
     });
 
-    it('should write a cookie with group name', function(done) {
+    it('should write a cookie with group name', function (done) {
       HubAPI.initOilHub('hub.html?fallback=1&group_name=bartsimpson');
 
       setTimeout(() => {
@@ -54,7 +59,7 @@ describe('the hub.js', () => {
         done();
       });
 
-      it('should write a cookie with default name', function(done) {
+      it('should write a cookie with default name', function (done) {
         HubAPI.initOilHub('hub.html?fallback=1');
 
         setTimeout(() => {

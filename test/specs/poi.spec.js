@@ -1,7 +1,7 @@
 import * as PoiAPICore from '../../src/scripts/core/core_poi.js';
 import * as PoiAPIUserview from '../../src/scripts/userview/userview_poi.js';
-import { loadFixture, deleteAllCookies } from '../utils.js';
-import { resetConfiguration } from '../../src/scripts/core/core_config.js';
+import {loadFixture, deleteAllCookies} from '../utils.js';
+import {resetConfiguration} from '../../src/scripts/core/core_config.js';
 
 describe('poi', () => {
 
@@ -55,7 +55,9 @@ describe('poi', () => {
 
   it('should redirect to the right hub without groupname', () => {
     let redirectionTarget = '';
-    spyOn(PoiAPIUserview, 'redirectToLocation').and.callFake(function (location) { redirectionTarget = location; });
+    spyOn(PoiAPIUserview, 'redirectToLocation').and.callFake(function (location) {
+      redirectionTarget = location;
+    });
     PoiAPIUserview.activatePowerOptInWithRedirect({});
     expect(redirectionTarget).not.toContain('group_name');
   });

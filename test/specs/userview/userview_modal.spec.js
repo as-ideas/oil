@@ -1,7 +1,7 @@
-import { forEach, oilWrapper } from '../../../src/scripts/userview/userview_modal.js';
-import { formatHtml, loadFixture, readFixture, removeOilLayerAndConfig } from '../../utils';
-import { resetConfiguration } from '../../../src/scripts/core/core_config';
-import { renderOil } from '../../../src/scripts/userview/userview_modal';
+import {forEach, oilWrapper} from '../../../src/scripts/userview/userview_modal.js';
+import {formatHtml, loadFixture, readFixture, removeOilLayerAndConfig} from '../../utils';
+import {resetConfiguration} from '../../../src/scripts/core/core_config';
+import {renderOil} from '../../../src/scripts/userview/userview_modal';
 
 describe('the userview modal aka the oil layer wrapper', () => {
 

@@ -1,4 +1,4 @@
-import { arrayContains } from './core_utils.js'
+import {arrayContains} from './core_utils.js'
 
 /**
  * This checks whether the locale is expected or not.

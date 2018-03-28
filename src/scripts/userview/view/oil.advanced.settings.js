@@ -1,6 +1,6 @@
-import { advancedSettingsSnippet } from './components/oil.advanced.settings.content';
-import { DATA_CONTEXT_YES, DATA_CONTEXT_BACK } from '../../core/core_constants.js';
-import { OIL_LABELS } from '../userview_constants.js'
+import {advancedSettingsSnippet} from './components/oil.advanced.settings.content';
+import {DATA_CONTEXT_YES, DATA_CONTEXT_BACK} from '../../core/core_constants.js';
+import {OIL_LABELS} from '../userview_constants.js'
 import {
   getLabel
 } from '../userview_config.js';

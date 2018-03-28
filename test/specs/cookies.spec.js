@@ -27,11 +27,11 @@ describe('cookies', () => {
     let currentFakeTime = 1;
     let testVersion = 'test-version1';
 
-    spyOn(Date, 'now').and.callFake(function() {
+    spyOn(Date, 'now').and.callFake(function () {
       return currentFakeTime;
     });
 
-    spyOn(OilVersion, 'get').and.callFake(function() {
+    spyOn(OilVersion, 'get').and.callFake(function () {
       return testVersion;
     });
 
@@ -67,11 +67,11 @@ describe('cookies', () => {
       [OIL_PAYLOAD_LOCALE]: 'test_locale1'
     };
 
-    spyOn(Date, 'now').and.callFake(function() {
+    spyOn(Date, 'now').and.callFake(function () {
       return currentFakeTime;
     });
 
-    spyOn(OilVersion, 'get').and.callFake(function() {
+    spyOn(OilVersion, 'get').and.callFake(function () {
       return testVersion;
     });
 

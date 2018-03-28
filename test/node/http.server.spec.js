@@ -8,11 +8,11 @@ let expect = chai.expect;
 let packageJSON = require('../../package.json');
 
 const credentials = {
-  user : 'oiluser',
-  password : 'ePrivacy'
+  user: 'oiluser',
+  password: 'ePrivacy'
 };
 
-  describe('nodejs http server', () => {
+describe('nodejs http server', () => {
 
   beforeEach(() => {
 
@@ -170,36 +170,36 @@ const credentials = {
       }, 1000);
   });
 
-    it('should return 200 with credentials on restricted route /examples', function (done) {
-      request(app)
-        .get('/examples')
-        .set({'host': 'oilsiteN:8080'})
-        .auth(credentials.user, credentials.password)
-        .end(function (error, response) {
-          expect(response.statusCode).to.equal(200);
-          done();
-        }, 1000);
-    });
+  it('should return 200 with credentials on restricted route /examples', function (done) {
+    request(app)
+      .get('/examples')
+      .set({'host': 'oilsiteN:8080'})
+      .auth(credentials.user, credentials.password)
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(200);
+        done();
+      }, 1000);
+  });
 
-    it('should return 200 with credentials on restricted route /index.html', function (done) {
-      request(app)
-        .get('/index.html')
-        .set({'host': 'oilsiteN:8080'})
-        .auth(credentials.user, credentials.password)
-        .end(function (error, response) {
-          expect(response.statusCode).to.equal(200);
-          done();
-        }, 1000);
-    });
+  it('should return 200 with credentials on restricted route /index.html', function (done) {
+    request(app)
+      .get('/index.html')
+      .set({'host': 'oilsiteN:8080'})
+      .auth(credentials.user, credentials.password)
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(200);
+        done();
+      }, 1000);
+  });
 
-    it('should return 200 with credentials on restricted route /', function (done) {
-      request(app)
-        .get('/')
-        .set({'host': 'oilsiteN:8080'})
-        .auth(credentials.user, credentials.password)
-        .end(function (error, response) {
-          expect(response.statusCode).to.equal(200);
-          done();
-        }, 1000);
-    });
+  it('should return 200 with credentials on restricted route /', function (done) {
+    request(app)
+      .get('/')
+      .set({'host': 'oilsiteN:8080'})
+      .auth(credentials.user, credentials.password)
+      .end(function (error, response) {
+        expect(response.statusCode).to.equal(200);
+        done();
+      }, 1000);
+  });
 });
