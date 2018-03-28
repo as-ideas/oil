@@ -58,4 +58,10 @@ describe('the userview modal aka the oil layer wrapper', () => {
     renderOil({optIn: false, advancedSettings: true});
     expect(formatHtml(document.querySelector('.as-oil'))).toEqual(formatHtml(readFixture('gold-master/cpc.html')));
   });
+
+  it('should insert Preference Center into host site', () => {
+    loadFixture('config/given.config.example.labels.html');
+    renderOil({optIn: false, advancedSettings: true});
+    expect(formatHtml(document.querySelector('.as-oil'))).toEqual(formatHtml(readFixture('gold-master/cpc.html')));
+  });
 });
