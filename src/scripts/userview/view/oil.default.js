@@ -1,6 +1,6 @@
-import { DATA_CONTEXT_YES, DATA_CONTEXT_ADVANCED_SETTINGS } from '../../core/core_constants.js';
-import { privacyPageSnippet } from './components/oil.privacy.page';
-import { OIL_LABELS } from '../userview_constants.js'
+import {DATA_CONTEXT_YES, DATA_CONTEXT_ADVANCED_SETTINGS} from '../../core/core_constants.js';
+import {privacyPageSnippet} from './components/oil.privacy.page';
+import {OIL_LABELS} from '../userview_constants.js'
 import {
   getLabel,
   isAdvancedSettings

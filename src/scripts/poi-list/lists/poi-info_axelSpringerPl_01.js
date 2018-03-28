@@ -10,5 +10,4 @@ export const companyList = [
   'YOURCAREERGROUP GmbH'
 ];
 
-export const thirdPartyList = [
-];
+export const thirdPartyList = [];

@@ -1,4 +1,4 @@
-import { getSoiCookie } from './core_cookies';
+import {getSoiCookie} from './core_cookies';
 
 const LOADING_RULE_ALL = '_dip_oil_consent_all';
 const LOADING_RULE_ESSENTIAL = '_dip_oil_consent_essential';

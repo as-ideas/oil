@@ -1,9 +1,9 @@
-import { resetConfiguration } from '../../src/scripts/core/core_config.js';
-import { loadFixture } from '../utils.js';
-import { getLabel } from '../../src/scripts/userview/userview_config.js';
-import { OIL_LABELS } from '../../src/scripts/userview/userview_constants.js';
-import { locale_deDE_01 } from '../../src/scripts/userview/locale/userview_oil_deDE_01.js';
-import { locale_enEN_01 } from '../../src/scripts/userview/locale/userview_oil_enEN_01.js';
+import {resetConfiguration} from '../../src/scripts/core/core_config.js';
+import {loadFixture} from '../utils.js';
+import {getLabel} from '../../src/scripts/userview/userview_config.js';
+import {OIL_LABELS} from '../../src/scripts/userview/userview_constants.js';
+import {locale_deDE_01} from '../../src/scripts/userview/locale/userview_oil_deDE_01.js';
+import {locale_enEN_01} from '../../src/scripts/userview/locale/userview_oil_enEN_01.js';
 
 describe('locale', () => {
   beforeEach(() => {

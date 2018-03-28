@@ -6,8 +6,8 @@ export {
   handlePoiOptIn,
   oilWrapper
 } from '../userview_modal.js';
-import { OIL_LABELS } from '../userview_constants.js';
-import { setGlobalOilObject } from '../../core/core_utils.js';
+import {OIL_LABELS} from '../userview_constants.js';
+import {setGlobalOilObject} from '../../core/core_utils.js';
 
 (function () {
   locale_enEN_01();
@@ -16,7 +16,7 @@ import { setGlobalOilObject } from '../../core/core_utils.js';
 export function locale_enEN_01() {
   let locale = {
     [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'We use cookies and other technologies',
-    [OIL_LABELS.ATTR_LABEL_INTRO]: 'The website uses cookies, web beacons, JavaScript and similar technologies. I agree that <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-companyList">companies belonging to Axel Springer SE</a> and <a href="//oil.asideas.de/legal/thirdparties.html" target="_blank" class="as-oil__intro-txt--link as-js-companyList">trusted partners</a> generate pseudonymous user profiles for adapting the website to the user, for market research and for advertising. The generated data can also be shared with third parties while the user profiles cannot be combined with personal data. Detailed information, also on the right to withdraw consent, can be found in the website\'s privacy policy.',
+    [OIL_LABELS.ATTR_LABEL_INTRO]: 'The website uses cookies, web beacons, JavaScript and similar technologies. I agree that <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-companyList">companies belonging to Axel Springer SE</a> and <a href="javascript:void(0)" target="_blank" class="as-oil__intro-txt--link as-js-thirdPartyList">trusted partners</a> generate pseudonymous user profiles for adapting the website to the user, for market research and for advertising. The generated data can also be shared with third parties while the user profiles cannot be combined with personal data. Detailed information, also on the right to withdraw consent, can be found in the website\'s privacy policy.',
     [OIL_LABELS.ATTR_LABEL_BUTTON_YES]: 'OK',
     [OIL_LABELS.ATTR_LABEL_BUTTON_NO]: 'NO, ',
     [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: 'Back',

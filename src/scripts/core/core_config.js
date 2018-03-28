@@ -1,5 +1,5 @@
-import { OIL_CONFIG } from './core_constants.js';
-import { logInfo, logError } from './core_log.js';
+import {OIL_CONFIG} from './core_constants.js';
+import {logInfo, logError} from './core_log.js';
 
 let cachedConfig = null;
 

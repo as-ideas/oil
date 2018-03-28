@@ -1,7 +1,7 @@
-import { doSetTealiumVariables } from '../../src/scripts/core/core_tealium_loading_rules';
-import { setSoiOptIn } from '../../src/scripts/core/core_cookies';
-import { EVENT_NAME_OPT_IN, PRIVACY_SETTINGS_FULL_TRACKING } from '../../src/scripts/core/core_constants';
-import { getOrigin } from '../../src/scripts/core/core_utils';
+import {doSetTealiumVariables} from '../../src/scripts/core/core_tealium_loading_rules';
+import {setSoiOptIn} from '../../src/scripts/core/core_cookies';
+import {EVENT_NAME_OPT_IN, PRIVACY_SETTINGS_FULL_TRACKING} from '../../src/scripts/core/core_constants';
+import {getOrigin} from '../../src/scripts/core/core_utils';
 
 describe('the tealium loading rules', () => {
   beforeEach(() => {
@@ -182,7 +182,8 @@ describe('the tealium loading rules', () => {
         _dip_oil_consent_ads_base: 0,
         _dip_oil_consent_ads_behaviour: 0
       });
-      window.utag.view = () => {};
+      window.utag.view = () => {
+      };
       done();
     };
 
@@ -203,7 +204,8 @@ describe('the tealium loading rules', () => {
         _dip_oil_consent_ads_base: 1,
         _dip_oil_consent_ads_behaviour: 1
       });
-      window.utag.view = () => {};
+      window.utag.view = () => {
+      };
       done();
     };
 

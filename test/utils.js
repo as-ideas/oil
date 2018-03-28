@@ -1,4 +1,4 @@
-import { forEach } from '../src/scripts/userview/userview_modal';
+import {forEach} from '../src/scripts/userview/userview_modal';
 
 /**
  * Load a jasmine fixture from the given path
@@ -40,7 +40,6 @@ export function formatHtml(element) {
       return prev;
     }, '');
 }
-
 
 export function removeOilLayerAndConfig() {
   window.AS_OIL_LOCALE = undefined;
