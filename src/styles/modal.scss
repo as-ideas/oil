@@ -92,15 +92,16 @@
   }
 }
 
-.as-oil-fixed {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  overflow-y: scroll;
+@include media('<=phone') {
+  .as-oil-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+  }
 }
-
 // Wraps all our Oil content, eg. text and buttons
 .as-oil-content-overlay {
   @include clearfix;
