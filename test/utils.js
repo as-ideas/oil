@@ -41,7 +41,6 @@ export function formatHtml(element) {
     }, '');
 }
 
-
 export function removeOilLayerAndConfig() {
   window.AS_OIL_LOCALE = undefined;
   forEach(document.querySelectorAll('#oil-configuration'), (domNode) => {
