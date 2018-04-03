@@ -1,5 +1,3 @@
-import {forEach} from '../src/scripts/userview/userview_modal';
-
 let HtmlDiffer = require('html-differ').HtmlDiffer;
 let htmlDiffer = new HtmlDiffer();
 let pretty = require('pretty');
@@ -18,7 +16,6 @@ export let customMatchers = {
           let diffText = getDiffText(diff, {charsAroundDiff: 2});
 
           result.message = inverseGreen('+ expected') + '\n' + inverseRed('- actual') + '\n' + diffText;
-          // console.info(result.message);
         }
         return result;
       }
@@ -30,7 +27,7 @@ function inverseGreen(text) {
   return '\x1b[42m' + text + '\x1b[0m';
 }
 
-function inverseRed(text) {s
+function inverseRed(text) {
   return '\x1b[41m' + text + '\x1b[0m';
 }
 

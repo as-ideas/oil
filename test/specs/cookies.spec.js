@@ -1,5 +1,6 @@
 import {setSoiOptIn, getSoiCookie} from '../../src/scripts/core/core_cookies.js';
 import {getPoiCookie, setPoiOptIn} from '../../src/scripts/hub/hub_cookies.js';
+import {deleteAllCookies} from '../utils.js';
 import {OilVersion} from '../../src/scripts/core/core_utils.js';
 import {OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION, OIL_PAYLOAD_LOCALE} from '../../src/scripts/core/core_constants.js'
 
@@ -136,20 +137,4 @@ function getCookie(sKey) {
     return null;
   }
   return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
-}
-
-/**
- * Remove all cookies
- *
- * @returns void
- */
-function deleteAllCookies() {
-  let cookies = document.cookie.split(';');
-
-  for (let i = 0; i < cookies.length; i++) {
-    let cookie = cookies[i];
-    let eqPos = cookie.indexOf('=');
-    let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
-  }
 }

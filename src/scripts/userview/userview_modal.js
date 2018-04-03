@@ -7,7 +7,6 @@ import {
   PRIVACY_MINIMUM_TRACKING,
   PRIVACY_FUNCTIONAL_TRACKING,
   PRIVACY_FULL_TRACKING,
-  DATA_CONTEXT_YES,
   EVENT_NAME_BACK_TO_MAIN,
   EVENT_NAME_ADVANCED_SETTINGS,
   EVENT_NAME_SOI_OPT_IN,
@@ -102,7 +101,6 @@ function interpretSliderValue(value) {
   }
 }
 
-// FIXME no unit test (or should not be exported)
 export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
   let wrapper = document.querySelector('.as-oil');
   let entryNode = document.querySelector('#oil-preference-center');
@@ -138,29 +136,34 @@ export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
   let essential = document.getElementById('as-slider-essential-title');
   let functional = document.getElementById('as-slider-functional-title');
   let advertising = document.getElementById('as-slider-advertising-title');
+  highlightSliderSetting(essential, functional, advertising, currentPrivacySetting);
+
   rangeSlider.noUiSlider.on('update', function (params) {
     let currentSelection = params[0];
     let result = interpretSliderValue(currentSelection);
-
-    switch (result) {
-      case PRIVACY_MINIMUM_TRACKING:
-      default:
-        essential.setAttribute('class', 'as-slider-active');
-        functional.setAttribute('class', 'as-slider-inactive');
-        advertising.setAttribute('class', 'as-slider-inactive');
-        break;
-      case PRIVACY_FUNCTIONAL_TRACKING:
-        essential.setAttribute('class', 'as-slider-inactive');
-        functional.setAttribute('class', 'as-slider-active');
-        advertising.setAttribute('class', 'as-slider-inactive');
-        break;
-      case PRIVACY_FULL_TRACKING:
-        essential.setAttribute('class', 'as-slider-inactive');
-        functional.setAttribute('class', 'as-slider-inactive');
-        advertising.setAttribute('class', 'as-slider-active');
-        break;
-    }
+    highlightSliderSetting(essential, functional, advertising, result);
   });
+}
+
+function highlightSliderSetting(essential, functional, advertising, privacySetting) {
+  switch (privacySetting) {
+    case PRIVACY_MINIMUM_TRACKING:
+    default:
+      essential.setAttribute('class', 'as-slider-active');
+      functional.setAttribute('class', 'as-slider-inactive');
+      advertising.setAttribute('class', 'as-slider-inactive');
+      break;
+    case PRIVACY_FUNCTIONAL_TRACKING:
+      essential.setAttribute('class', 'as-slider-inactive');
+      functional.setAttribute('class', 'as-slider-active');
+      advertising.setAttribute('class', 'as-slider-inactive');
+      break;
+    case PRIVACY_FULL_TRACKING:
+      essential.setAttribute('class', 'as-slider-inactive');
+      functional.setAttribute('class', 'as-slider-inactive');
+      advertising.setAttribute('class', 'as-slider-active');
+      break;
+  }
 }
 
 function oilShowCompanyList() {
@@ -284,7 +287,6 @@ function trackPrivacySetting(privacySetting) {
   }
 }
 
-// FIXME no unit test
 export function handleOptIn() {
   if (isPoiActive()) {
     handlePoiOptIn();
@@ -293,24 +295,20 @@ export function handleOptIn() {
   }
 }
 
-// FIXME no unit test (or should not be exported)
 export function handleSoiOptIn() {
   let privacySetting = getRangeSliderValue();
-  logInfo('Handling POI with settings: ', privacySetting);
+  logInfo('Handling SOI with settings: ', privacySetting);
   trackPrivacySetting(privacySetting);
   if (privacySetting !== PRIVACY_MINIMUM_TRACKING || isPersistMinimumTracking()) {
     oilOptIn(convertPrivacySettingsToCookieValue(privacySetting)).then((cookieOptIn) => {
       renderOil({optIn: cookieOptIn});
-      if (this && this.getAttribute('data-context') === DATA_CONTEXT_YES) {
-        sendEventToHostSite(EVENT_NAME_SOI_OPT_IN);
-      }
+      sendEventToHostSite(EVENT_NAME_SOI_OPT_IN);
     });
   } else {
     removeSubscriberCookies();
   }
 }
 
-// FIXME no unit test (or should not be exported)
 export function handlePoiOptIn() {
   let privacySetting = getRangeSliderValue();
   logInfo('Handling POI with settings: ', privacySetting);
