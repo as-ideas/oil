@@ -1,8 +1,8 @@
 import '../../styles/modal.scss';
 import noUiSlider from 'nouislider';
-import {sendEventToHostSite} from '../core/core_utils.js';
-import {removeSubscriberCookies} from '../core/core_cookies.js';
-import {convertPrivacySettingsToCookieValue, getSoiPrivacy} from './userview_cookies.js';
+import { sendEventToHostSite } from '../core/core_utils.js';
+import { removeSubscriberCookies } from '../core/core_cookies.js';
+import { convertPrivacySettingsToCookieValue, getSoiPrivacy } from './userview_cookies.js';
 import {
   PRIVACY_MINIMUM_TRACKING,
   PRIVACY_FUNCTIONAL_TRACKING,
@@ -19,31 +19,37 @@ import {
   EVENT_NAME_THIRD_PARTY_LIST,
   EVENT_NAME_TIMEOUT
 } from '../core/core_constants.js';
-import {oilOptIn, oilPowerOptIn} from './userview_optin.js';
-import {deActivatePowerOptIn} from '../core/core_poi.js';
-import {oilDefaultTemplate} from './view/oil.default.js';
-import {oilNoCookiesTemplate} from './view/oil.no.cookies.js';
-import {oilAdvancedSettingsTemplate} from './view/oil.advanced.settings.js';
-import {advancedSettingsSnippet} from './view/components/oil.advanced.settings.content';
-import {logInfo, logError} from '../core/core_log.js';
-import {isPersistMinimumTracking, getTimeOutValue, getTheme} from './userview_config.js';
-import {isSubscriberSetCookieActive} from '../core/core_config.js';
-import {getPoiGroupName, isPoiActive} from '../core/core_config';
+import { oilOptIn, oilPowerOptIn } from './userview_optin.js';
+import { deActivatePowerOptIn } from '../core/core_poi.js';
+import { oilDefaultTemplate } from './view/oil.default.js';
+import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
+import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
+import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
+import { logInfo, logError } from '../core/core_log.js';
+import { isPersistMinimumTracking, getTimeOutValue, getTheme } from './userview_config.js';
+import { isSubscriberSetCookieActive } from '../core/core_config.js';
+import { getPoiGroupName, isPoiActive } from '../core/core_config';
 
 
 // Initialize our Oil wrapper and save it ...
 
 export const oilWrapper = defineOilWrapper;
-let hasRunningTimeout = false;
+export let hasRunningTimeout;
 
 function startTimeOut() {
   if (!hasRunningTimeout && getTimeOutValue() > 0) {
     logInfo('OIL will auto-hide in', getTimeOutValue(), 'seconds.');
-    setTimeout(function () {
+    hasRunningTimeout = setTimeout(function () {
       removeOilWrapperFromDOM();
       sendEventToHostSite(EVENT_NAME_TIMEOUT);
     }, getTimeOutValue() * 1000);
-    hasRunningTimeout = true;
+  }
+}
+
+export function stopTimeOut() {
+  if (hasRunningTimeout) {
+    clearTimeout(hasRunningTimeout);
+    hasRunningTimeout = undefined;
   }
 }
 
@@ -65,12 +71,12 @@ export function forEach(array, callback, scope) {
  */
 export function renderOil(props) {
   if (shouldRenderOilLayer(props)) {
-    startTimeOut();
     if (props.noCookie) {
       renderOilContentToWrapper(oilNoCookiesTemplate());
     } else if (props.advancedSettings) {
       renderOilContentToWrapper(oilAdvancedSettingsTemplate());
     } else {
+      startTimeOut();
       renderOilContentToWrapper(oilDefaultTemplate());
     }
   } else {
@@ -250,21 +256,28 @@ function getRangeSliderValue() {
 
 function handleBackToMainDialog() {
   logInfo('Handling Back Button');
+  stopTimeOut();
   renderOil({});
   sendEventToHostSite(EVENT_NAME_BACK_TO_MAIN);
 }
 
 function handleAdvancedSettings() {
+  logInfo('Handling Show Advanced Settings');
+  stopTimeOut();
   oilShowPreferenceCenter(PRIVACY_MINIMUM_TRACKING);
   sendEventToHostSite(EVENT_NAME_ADVANCED_SETTINGS);
 }
 
 function handleCompanyList() {
+  logInfo('Handling Show Company List');
+  stopTimeOut();
   oilShowCompanyList();
   sendEventToHostSite(EVENT_NAME_COMPANY_LIST);
 }
 
 function handleThirdPartyList() {
+  logInfo('Handling Show Third Party List');
+  stopTimeOut();
   oilShowThirdPartyList();
   sendEventToHostSite(EVENT_NAME_THIRD_PARTY_LIST);
 }

@@ -1,13 +1,14 @@
-import {forEach, oilWrapper} from '../../../src/scripts/userview/userview_modal.js';
-import {formatHtml, loadFixture, readFixture, removeOilLayerAndConfig} from '../../utils';
-import {resetConfiguration} from '../../../src/scripts/core/core_config';
-import {renderOil} from '../../../src/scripts/userview/userview_modal';
+import { forEach, oilWrapper } from '../../../src/scripts/userview/userview_modal.js';
+import { formatHtml, loadFixture, readFixture, removeOilLayerAndConfig } from '../../utils';
+import { resetConfiguration } from '../../../src/scripts/core/core_config';
+import { hasRunningTimeout, renderOil, stopTimeOut } from '../../../src/scripts/userview/userview_modal';
 
 describe('the userview modal aka the oil layer wrapper', () => {
 
   beforeEach(() => {
     resetConfiguration();
     removeOilLayerAndConfig();
+    stopTimeOut();
   });
 
   it('should have an functioning forEach replacement', () => {
@@ -33,29 +34,48 @@ describe('the userview modal aka the oil layer wrapper', () => {
 
   it('should NOT renderOil with OPTIN YES', () => {
     renderOil({optIn: true});
+
     expect(document.querySelector('.as-oil')).toBeNull();
+    expectTimeoutNotStarted();
   });
 
   it('should NOT renderOil with OPTIN FALSE and OPT-IGNORE: TRUE', () => {
     renderOil({optIn: true, optIgnore: true});
+
     expect(document.querySelector('.as-oil')).toBeNull();
+    expectTimeoutNotStarted();
   });
 
   it('should renderOil with NO OPTIN as DEFAULT TEMPLATE', () => {
     loadFixture('config/given.config.example.labels.html');
     renderOil({optIn: false});
+
     expect(formatHtml(document.querySelector('.as-oil'))).toEqual(formatHtml(readFixture('gold-master/soi.html')));
+    expectTimeoutStarted();
   });
 
   it('should renderOil with NO COOKIE as NO COOKIE template', () => {
     loadFixture('config/given.config.example.labels.html');
     renderOil({optIn: false, noCookie: true});
+
     expect(formatHtml(document.querySelector('.as-oil'))).toEqual(formatHtml(readFixture('gold-master/no-cookie.html')));
+    expectTimeoutNotStarted();
   });
 
   it('should renderOil with ADVANCED-SETTINGS as CPC template', () => {
     loadFixture('config/given.config.example.labels.html');
     renderOil({optIn: false, advancedSettings: true});
+
     expect(formatHtml(document.querySelector('.as-oil'))).toEqual(formatHtml(readFixture('gold-master/cpc.html')));
+    expectTimeoutNotStarted();
   });
+
+  function expectTimeoutNotStarted() {
+    expect(hasRunningTimeout).toBeUndefined();
+  }
+
+  function expectTimeoutStarted() {
+    expect(hasRunningTimeout).toBeDefined();
+  }
+
 });
