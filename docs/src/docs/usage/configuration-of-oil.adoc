@@ -74,3 +74,11 @@ Example Screenshot:
 
 image::src/images/oil-labels-intro.png[]
 
+==== Auto-Hiding the layer (timeout)
+
+If you do not interact with the Opt-In Layer, it will autohide after a fixed time. If you want to disable the feature, you need to edit the <<config-timeout,configuration>> and the set the value to 0 or -1. If you click on any navigation link in the Opt-In Layer the timeout will be canceled. The default timeout is:
+
+[source,json]
+----
+include::../../../../src/scripts/userview/userview_config.js[tags=config-timeout]
+----

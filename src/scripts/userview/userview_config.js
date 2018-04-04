@@ -2,6 +2,10 @@ import {OIL_CONFIG} from '../core/core_constants.js';
 import {getConfigValue} from '../core/core_config.js';
 import {getGlobalOilObject} from '../core/core_utils.js';
 
+// tag::config-timeout[]
+const defaultTimeoutInSeconds = 60;
+// end::config-timeout[]
+
 export function isPersistMinimumTracking() {
   return getConfigValue(OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING, true);
 }
@@ -11,7 +15,7 @@ export function isAdvancedSettings() {
 }
 
 export function getTimeOutValue() {
-  return getConfigValue(OIL_CONFIG.ATTR_TIMEOUT, 60);
+  return getConfigValue(OIL_CONFIG.ATTR_TIMEOUT, defaultTimeoutInSeconds);
 }
 
 export function getTheme() {

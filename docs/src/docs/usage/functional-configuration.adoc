@@ -14,7 +14,7 @@ This is a full list of configurable options.
 | poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). The group name must be valid (existing). | none
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31
-| timeout | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
+| [[config-timeout]]timeout | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True
 |====
