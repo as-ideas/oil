@@ -33,7 +33,7 @@ UX | Özden Gelgec, AS Ideas Engineering |
 UX | Andreas Wagner, AS Ideas Engineering |
 Developer | Sebastian Waschnick, AS Ideas Engineering |
 Developer | Marcel Bankmann, AS Ideas Engineering |
-Tealium | Michael Sievers, AS Digital|
+Tealium | Michael Sievers, CDP|
 |===
 
 === Solution Strategy
