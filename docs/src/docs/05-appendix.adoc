@@ -11,3 +11,12 @@
 | Hub | __POI__ is implemented via an iframe solution that points to a hub site that acts as a third party cookie storage. Technically, the hub consists of an html and js.
 | Subscriber | A site that subscribes to a POI hub
 |===
+
+=== Supported Languages
+
+{SUPPORTED_LANGUAGE}
+
+=== Supported POI Groups
+
+{SUPPORTED_POI_GROUPS}
+
