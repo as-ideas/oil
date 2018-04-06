@@ -9,16 +9,14 @@ You need to add the configuration snippet to all pages where OIL is required. Th
 
 [source,json]
 ----
-    <script id="oil-configuration" type="application/configuration">
-      {
-        "preview_mode": false,
-        /*
-            Text labels, see Label Keys section below
-        */
-        "label_intro_heading": "Please confirm",
-        "locale": "enEN_01"
-      }
-    </script>
+<!-- Text labels, see Label Keys section below -->
+<script id="oil-configuration" type="application/configuration">
+  {
+    "preview_mode": false,
+    "label_intro_heading": "Please confirm",
+    "locale": "enEN_01"
+  }
+</script>
 ----
 
 ==== POI configuration
@@ -26,24 +24,24 @@ You need to add the configuration snippet to all pages where OIL is required. Gi
 
 [source,json]
 ----
-    <script id="oil-configuration" type="application/configuration">
-      {
-        "preview_mode": false,
-        /*
-            Text labels, see Label Keys section below
-        */
-        "label_intro_heading": "Please confirm",
-        /*
-            POI optional params start here
-        */
-        "poi_activate_poi": true,
-        "poi_hub_origin": "//oil.axelspringer.com",
-        "poi_hub_path": "/hub.html",
-        "poi_subscriber_set_cookie": true,
-        "poi_group_name": "MyGroupName"
-        "locale": "enEN_01"
-      }
-    </script>
+<script id="oil-configuration" type="application/configuration">
+  {
+    "preview_mode": false,
+    /*
+        Text labels, see Label Keys section below
+    */
+    "label_intro_heading": "Please confirm",
+    /*
+        POI optional params start here
+    */
+    "poi_activate_poi": true,
+    "poi_hub_origin": "//oil.axelspringer.com",
+    "poi_hub_path": "/hub.html",
+    "poi_subscriber_set_cookie": true,
+    "poi_group_name": "MyGroupName"
+    "locale": "enEN_01"
+  }
+</script>
 ----
 
 POI can be partitioned in different groups using a prefix or group name. You need to use the same group name as every other unit in your group. This is not an optional parameter.

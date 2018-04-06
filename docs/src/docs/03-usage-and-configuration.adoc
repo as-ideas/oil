@@ -30,10 +30,10 @@ This needs to be repeated for every new version of OIL. The library profile can'
 
 If Tealium can't be used on your site you also can add OIL directly from our CDN.
 
-Example:
+Example (replace with the latest version):
 [source, html]
 ----
-<script type="text/javascript" src="https://oil.axelspringer.com/release/oil.1.0.7.min.js"></script>
+<script type="text/javascript" src="https://oil.axelspringer.com/release/VERSION/oil.VERSION-RELEASE.min.js"></script>
 ----
 
 Updated versions of the script will be deployed using a different filename hence we'll never alter an existing version.

@@ -78,7 +78,7 @@ export function isSubscriberSetCookieActive() {
  * @returns {string, null} domain iframe orgin
  */
 export function getHubOrigin() {
-  let origin = getConfigValue(OIL_CONFIG.ATTR_HUB_ORIGIN, '');
+  let origin = getConfigValue(OIL_CONFIG.ATTR_HUB_ORIGIN, '//oil.axelspringer.com');
   if (origin) {
     return origin.indexOf('http') !== -1 ? origin : location.protocol + origin;
   }
@@ -86,7 +86,7 @@ export function getHubOrigin() {
 }
 
 export function getHubPath() {
-  return getConfigValue(OIL_CONFIG.ATTR_HUB_PATH, '');
+  return getConfigValue(OIL_CONFIG.ATTR_HUB_PATH, '/hub.html');
 }
 
 export function getPoiGroupName() {
