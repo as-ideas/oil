@@ -1,5 +1,8 @@
 == Introduction
 
+Version: {version}
+
+
 === About oil.js
 
 The OIL project aims for a stable cross-company solution for the challenges the GDPR and new EU ePrivacy Regulation will pose to our business.

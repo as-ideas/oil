@@ -38,9 +38,16 @@ Example:
 
 Updated versions of the script will be deployed using a different filename hence we'll never alter an existing version.
 
-Please make sure you're working with the latest version available.
+Please make sure you're working with the *latest version* available.
 
-Please check https://oil.axelspringer.com/ for further updates.
+Please check https://oil.axelspringer.com/release for further updates. Choose the latest version or the version fitting to this documentation. Normalley there will be multiple files:
+
+* oil.1.0.34-RELEASE.min.js - *This is the file you will need to reference in your website*
+* hub.1.0.34-RELEASE.min.js
+* Chunks, beginning with numbers - they will ne loaded asynchronously and you don't need to do anything with them.
+** 0.1.0.34-RELEASE.chunk.js
+** X.1.0.34-RELEASE.chunk.js
+
 
 IMPORTANT: Your domain needs to be whitelisted in order to work with OIL (contact us to get whitelisted: OIL Support <oil-support@axelspringer.com>)
 

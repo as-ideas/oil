@@ -10,6 +10,7 @@ export SNAPSHOT="-RELEASE";npm run build:release
 echo "Copying to release directory"
 mkdir release/$PACKAGE_VERSION
 cp dist/*.$PACKAGE_VERSION-RELEASE.*.js release/$PACKAGE_VERSION/
+cp -r dist/docs release/$PACKAGE_VERSION/
 
 echo "Increasing patch version"
 git add *

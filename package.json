@@ -10,6 +10,7 @@
     "build:release": "npm run build:clean && cross-env-shell SNAPSHOT=${SNAPSHOT} NODE_ENV=release webpack --config etc/webpack.config.js && npm run build:docs",
     "build:clean": "npm run check && rimraf dist/*",
     "build:dev": "cross-env NODE_ENV=debug webpack --config etc/webpack.config.js",
+    "build:docs": "node docs/asciidoc.js",
     "build:debug": "cross-env NODE_ENV=debug webpack --config etc/webpack.config.js",
     "build:watch": "webpack-dev-server --inline --watch --config etc/webpack.config.js",
     "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 ",
@@ -26,7 +27,6 @@
     "eslint": "eslint \"src/*.js\" && eslint \"src/scripts/*.js\" && eslint \"etc/*\" && eslint \"test/specs/**/*.js\" && eslint \"test/e2e/**/*.js\"",
     "check": "npm run eslint && nsp check",
     "postinstall": "npm run build",
-    "build:docs": "node docs/asciidoc.js",
     "changelog:major": "node changelog.js -M",
     "changelog:minor": "node changelog.js -m",
     "changelog:path": "node changelog.js -p"

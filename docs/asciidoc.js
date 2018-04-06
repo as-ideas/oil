@@ -7,6 +7,8 @@ if (!fs.existsSync(base_dir.concat('/dist/docs/'))){
   fs.mkdirSync(base_dir.concat('/dist/docs/'));
 }
 
+const BUNDLE_VERSION = process.env.npm_package_version + (process.env.SNAPSHOT || '-SNAPSHOT');
+
 glob('docs/*.adoc', function (err, files) {
   files.forEach(function (file) {
     asciiDoctor.convertFile(file, {
@@ -14,7 +16,10 @@ glob('docs/*.adoc', function (err, files) {
       'header_footer': true,
       'safe': 'unsafe',
       'to_dir': base_dir.concat('/dist/docs/'),
-      'base_dir': base_dir.concat('/docs/')
+      'base_dir': base_dir.concat('/docs/'),
+      'attributes': {
+        'version': BUNDLE_VERSION
+      }
     });
   });
 });

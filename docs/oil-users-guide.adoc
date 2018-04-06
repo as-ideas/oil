@@ -16,8 +16,10 @@ image::src/images/oillogo.png[]
 // horizontal line
 ***
 
-include::src/docs/intro.adoc[]
+include::src/docs/01-intro.adoc[]
 
-include::src/docs/usage.adoc[]
+include::src/docs/02-quickstart.adoc[]
 
-include::src/docs/appendix.adoc[]
+include::src/docs/03-usage-and-configuration.adoc[]
+
+include::src/docs/05-appendix.adoc[]
