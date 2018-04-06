@@ -9,6 +9,7 @@ if (!fs.existsSync(base_dir.concat('/dist/docs/'))) {
 }
 
 const BUNDLE_VERSION = process.env.npm_package_version + (process.env.SNAPSHOT || '-SNAPSHOT');
+const BUNDLE_VERSION_RAW = process.env.npm_package_version;
 const SUPPORTED_LANGUAGE = getSupportedLanguagesFromDir();
 const SUPPORTED_POI_GROUPS = getSupportedPoiGroupsFromDir();
 
@@ -22,6 +23,7 @@ glob('docs/*.adoc', function (err, files) {
       'base_dir': base_dir.concat('/docs/'),
       'attributes': {
         'version': BUNDLE_VERSION,
+        'version_raw': BUNDLE_VERSION_RAW,
         'SUPPORTED_LANGUAGE': SUPPORTED_LANGUAGE,
         'SUPPORTED_POI_GROUPS': SUPPORTED_POI_GROUPS
       }
