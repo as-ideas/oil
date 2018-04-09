@@ -89,6 +89,7 @@ export const PRIVACY_SETTINGS_MINIMUM_TRACKING = {
 
 export const OIL_PAYLOAD_PRIVACY = 'p';
 export const OIL_PAYLOAD_VERSION = 'v';
-export const OIL_PAYLOAD_LOCALE = 'l';
+export const OIL_PAYLOAD_LOCALE_VARIANT_NAME = 'lvn';
+export const OIL_PAYLOAD_LOCALE_VARIANT_VERSION = 'lvv';
 
 export const OIL_GLOBAL_OBJECT_NAME = 'AS_OIL';

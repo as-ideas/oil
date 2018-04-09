@@ -143,3 +143,35 @@ export function getGlobalOilObject(name) {
   }
   return window[OIL_GLOBAL_OBJECT_NAME][name];
 }
+
+/**
+ * Gets the version of current locale (variant) or 0 if there is none.
+ *
+ * @returns {number}
+ */
+export function getLocaleVariantVersion() {
+  let defaultLocale = getGlobalOilObject('LOCALE');
+  return (defaultLocale && defaultLocale.version) ? defaultLocale.version : 0;
+}
+
+/**
+ * Fetches JSON data from web service addressed by given url.
+ *
+ * @param url the url of the web service.
+ * @returns {Promise<any>}
+ */
+export function fetchData(url) {
+  return new Promise((resolve, reject) => {
+    let request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.onload = function () {
+      if (request.status === 200) {
+        resolve(JSON.parse(request.responseText));
+      } else {
+        let errorResponse = JSON.parse(request.responseText);
+        reject(new Error(errorResponse.error_message));
+      }
+    };
+    request.send();
+  });
+}

@@ -1,6 +1,6 @@
 import {getCookieExpireInDays} from '../core/core_config.js'
 import {getClientTimestamp} from '../core/core_utils.js';
-import {OIL_PAYLOAD_LOCALE, OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION, PRIVACY_MINIMUM_TRACKING} from '../core/core_constants.js';
+import {OIL_PAYLOAD_LOCALE_VARIANT_NAME, OIL_PAYLOAD_LOCALE_VARIANT_VERSION, OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION, PRIVACY_MINIMUM_TRACKING} from '../core/core_constants.js';
 import {getOilCookie, setDomainCookie} from '../core/core_cookies.js';
 import {logInfo} from '../core/core_log.js';
 
@@ -53,9 +53,16 @@ function getVersionFromPayload(payload) {
   return OIL_HUB_UNKNOWN_VALUE;
 }
 
-function getLocaleFromPayload(payload) {
-  if (payload && payload[OIL_PAYLOAD_LOCALE]) {
-    return payload[OIL_PAYLOAD_LOCALE];
+function getLocaleVariantNameFromPayload(payload) {
+  if (payload && payload[OIL_PAYLOAD_LOCALE_VARIANT_NAME]) {
+    return payload[OIL_PAYLOAD_LOCALE_VARIANT_NAME];
+  }
+  return OIL_HUB_UNKNOWN_VALUE;
+}
+
+function getLocaleVariantVersionFromPayload(payload) {
+  if (payload && payload[OIL_PAYLOAD_LOCALE_VARIANT_VERSION]) {
+    return payload[OIL_PAYLOAD_LOCALE_VARIANT_VERSION];
   }
   return OIL_HUB_UNKNOWN_VALUE;
 }
@@ -72,15 +79,14 @@ export function getPoiCookie(groupName = '') {
 export function setPoiOptIn(groupName = '', payload) {
   let privacySettings = getPrivacySettingsFromPayload(payload);
   let oilVersion = getVersionFromPayload(payload);
-  let locale = getLocaleFromPayload(payload);
-
   let cookie = getOilHubDomainCookie(groupName);
   let cookieConfig = getHubDomainCookieConfig(groupName);
+
   cookie.power_opt_in = true;
   cookie.privacy = privacySettings;
   cookie.timestamp = getClientTimestamp();
   cookie.version = oilVersion;
-  // TODO add localeVersion; change locale in cookie to localeVariantName
-  cookie.locale = locale;
+  cookie.localeVariantName = getLocaleVariantNameFromPayload(payload);
+  cookie.localeVariantVersion = getLocaleVariantVersionFromPayload(payload);
   setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires);
 }
