@@ -1,11 +1,6 @@
 import {getCookieExpireInDays} from '../core/core_config.js'
 import {getClientTimestamp} from '../core/core_utils.js';
-import {
-  PRIVACY_MINIMUM_TRACKING,
-  OIL_PAYLOAD_PRIVACY,
-  OIL_PAYLOAD_VERSION,
-  OIL_PAYLOAD_LOCALE
-} from '../core/core_constants.js';
+import {OIL_PAYLOAD_LOCALE, OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION, PRIVACY_MINIMUM_TRACKING} from '../core/core_constants.js';
 import {getOilCookie, setDomainCookie} from '../core/core_cookies.js';
 import {logInfo} from '../core/core_log.js';
 
@@ -85,6 +80,7 @@ export function setPoiOptIn(groupName = '', payload) {
   cookie.privacy = privacySettings;
   cookie.timestamp = getClientTimestamp();
   cookie.version = oilVersion;
+  // TODO add localeVersion; change locale in cookie to localeVariantName
   cookie.locale = locale;
   setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires);
 }

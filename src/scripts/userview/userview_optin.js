@@ -1,15 +1,9 @@
 import {verifyPowerOptIn} from '../core/core_poi.js';
-import {activatePowerOptInWithRedirect, activatePowerOptInWithIFrame} from './userview_poi.js';
+import {activatePowerOptInWithIFrame, activatePowerOptInWithRedirect} from './userview_poi.js';
 import {logInfo, logPreviewInfo} from '../core/core_log.js';
-import {sendEventToHostSite, OilVersion} from '../core/core_utils.js';
-import {
-  EVENT_NAME_OPT_IN,
-  PRIVACY_SETTINGS_MINIMUM_TRACKING,
-  OIL_PAYLOAD_PRIVACY,
-  OIL_PAYLOAD_VERSION,
-  OIL_PAYLOAD_LOCALE
-} from '../core/core_constants.js';
-import {isPoiActive, isSubscriberSetCookieActive, getLocale} from '../core/core_config.js';
+import {OilVersion, sendEventToHostSite} from '../core/core_utils.js';
+import {EVENT_NAME_OPT_IN, OIL_PAYLOAD_LOCALE, OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION, PRIVACY_SETTINGS_MINIMUM_TRACKING} from '../core/core_constants.js';
+import {getLocaleVariantName, isPoiActive, isSubscriberSetCookieActive} from '../core/core_config.js';
 import {getSoiCookie, setSoiOptIn} from '../core/core_cookies.js';
 
 /**
@@ -65,7 +59,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
     let payload = {
       [OIL_PAYLOAD_PRIVACY]: privacySettings,
       [OIL_PAYLOAD_VERSION]: OilVersion.get(),
-      [OIL_PAYLOAD_LOCALE]: getLocale()
+      [OIL_PAYLOAD_LOCALE]: getLocaleVariantName()
     };
 
     if (isPoiActive()) {

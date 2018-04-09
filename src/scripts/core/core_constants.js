@@ -13,8 +13,8 @@ export const OIL_CONFIG = {
   ATTR_PERSIST_MINIMUM_TRACKING: 'persist_min_tracking',
   ATTR_LOCALE: 'locale',
   ATTR_THEME: 'theme',
-  ATTR_TIMEOUT: 'timeout'
-
+  ATTR_TIMEOUT: 'timeout',
+  ATTR_OIL_BACKEND_URL: 'oilBackendUrl'
 };
 
 // Main Click events

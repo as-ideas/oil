@@ -1,5 +1,5 @@
 import {OIL_CONFIG} from './core_constants.js';
-import {logInfo, logError} from './core_log.js';
+import {logError, logInfo} from './core_log.js';
 
 let cachedConfig = null;
 
@@ -89,6 +89,10 @@ export function getHubPath() {
   return getConfigValue(OIL_CONFIG.ATTR_HUB_PATH, '/hub.html');
 }
 
+export function getOilBackendUrl() {
+  return getConfigValue(OIL_CONFIG.ATTR_OIL_BACKEND_URL, 'https://oil-backend.herokuapp.com/oil')
+}
+
 export function getPoiGroupName() {
   return getConfigValue(OIL_CONFIG.ATTR_POI_GROUP_NAME, '');
 }
@@ -97,7 +101,7 @@ export function getCookieExpireInDays() {
   return getConfigValue(OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS, 31);
 }
 
-export function getLocale() {
+export function getLocaleVariantName() {
   return getConfigValue(OIL_CONFIG.ATTR_LOCALE, null);
 }
 
