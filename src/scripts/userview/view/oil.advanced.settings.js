@@ -1,43 +1,90 @@
-import {advancedSettingsSnippet} from './components/oil.advanced.settings.content';
-import {DATA_CONTEXT_YES, DATA_CONTEXT_BACK} from '../../core/core_constants.js';
-import {OIL_LABELS} from '../userview_constants.js'
+import { DATA_CONTEXT_YES, DATA_CONTEXT_BACK } from '../../core/core_constants.js';
+import { OIL_LABELS } from '../userview_constants.js'
 import {
   getLabel
 } from '../userview_config.js';
+import { getTheme } from '../userview_config';
 
-/**
- * OIL SOI will be only shown, when there is no POI on the advanced settings
- * Returned element is used to ignore Oil completely
- */
-const OptInButtonSnippet = () => {
-  return ` <div class="as-oil-l-item">
-            <button class="as-oil__btn-soi as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
-                ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES)}
-            </button>
+
+const PurposeContainerSnippet = ({header, text, value}) => {
+  return `
+<div class="as-oil-cpc__purpose">
+    <div class="as-oil-cpc__purpose-container">
+        <div class="as-oil-cpc__purpose-header">${header}</div>
+        <div class="as-oil-cpc__purpose-text">${text}</div>
+        
+        <div class="as-oil-cpc__switch-wrapper">
+        <div class="as-oil-cpc__switch">
+            <input id="${value}" type="checkbox" />
+            <span class="as-oil-cpc__slider" />
         </div>
-      `;
+        </div>
+    </div>
+</div>`
+};
+
+const BackButtonSnippet = () => {
+  return `
+<button class="as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
+                <span class="as-js-oilback__text">
+                  ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}
+                </span>
+    <svg class="as-js-oilback__icon" width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" fill-rule="evenodd">
+            <circle fill="#757575" cx="11" cy="11" r="11"/>
+            <path d="M15.592 14.217a.334.334 0 0 1 .098.245c0 .098-.033.18-.098.246l-.928.908a.303.303 0 0 1-.22.098.33.33 0 0 1-.244-.098L11 12.4l-3.2 3.216a.303.303 0 0 1-.22.098.33.33 0 0 1-.244-.098l-.928-.908a.334.334 0 0 1-.098-.246c0-.098.033-.18.098-.245L9.632 11 6.408 7.808c-.163-.164-.163-.327 0-.491l.904-.933a.473.473 0 0 1 .244-.098.33.33 0 0 1 .244.098L11 9.576l3.2-3.192a.473.473 0 0 1 .244-.098.33.33 0 0 1 .244.098l.904.933c.163.164.163.32 0 .466l-3.224 3.192 3.224 3.242z"
+                  fill="#FFF" opacity=".88"/>
+        </g>
+    </svg>
+</button>
+`
+};
+
+const ContentSnippet = () => {
+  return `
+<div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
+    <div class="as-oil-cpc__left">
+        <div class="as-oil-cpc__category-link as-oil-cpc__category-link--active">Purposes</div>
+        <div class="as-oil-cpc__category-link">Features</div>
+    </div>
+    <div class="as-oil-cpc__middle">
+        <div class="as-oil-cpc__row-btn-all">
+            <span class="as-oil__btn-deactivate-all as-oil__btn-grey">Deactivate All</span>
+            <span class="as-oil__btn-activate-all as-oil__btn-blue">Activate All</span>
+        </div>
+        <div class="as-oil-cpc__row-title">
+            Purposes
+        </div>
+        <div>
+          ${PurposeContainerSnippet({header: 'header', text: 'text', value: 'value'})}
+        </div>
+    </div>
+    <div class="as-oil-cpc__right">
+     <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
+      <div class="as-oil-l-item">
+        <button class="as-oil__btn-optin as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
+          ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES)}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>`;
 };
 
 export function oilAdvancedSettingsTemplate() {
   return `
-<div class="as-oil-content-overlay" data-qa="oil-as-overlay">
-        <div class="as-oil-l-wrapper-layout-max-width">
-            <div class="as-oil__heading">
-                ${getLabel(OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_HEADING)}
-            </div>
-            <p class="as-oil__intro-txt">
-                ${getLabel(OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_TEXT)}
-            </p>
-            ${advancedSettingsSnippet()}
-            <div class="as-oil-l-row as-oil-l-buttons">
-                ${OptInButtonSnippet()}
-                <div class="as-oil-l-item as-oil-l-item--stretch">
-                  <button class="as-oil__btn-loi as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
-                      ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}
-                  </button>
-                </div>
-            </div>
-        </div>
+  <div class="as-oil-content-overlay as-oil-cpc-wrapper" data-qa="oil-poi-list">
+    <div class="as-oil-l-wrapper-layout-max-width">
+      <div class="as-oil__heading">
+        ${getLabel(OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_HEADING)}
+      </div>
+      <p class="as-oil__intro-txt">
+        ${getLabel(OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_TEXT)}
+      </p>
+
+      ${BackButtonSnippet()}
+
+      ${ContentSnippet()}
     </div>
-`
+  </div>`
 }

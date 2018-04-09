@@ -1,0 +1,171 @@
+@import "./_settings";
+
+.as-oil-cpc-wrapper {
+  .as-oil-l-buttons-light {
+    @include media('>phone') {
+      float: right;
+    }
+
+    @include media('<=phone') {
+      display: initial;
+      background: $background-color-light;
+      box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
+      padding: 8px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  .as-oil-l-buttons-dark {
+    @include media('>phone') {
+      float: right;
+    }
+
+    @include media('<=phone') {
+      display: initial;
+      background: $background-color-dark;
+      box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
+      padding: 8px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  .as-oil__heading {
+    margin-left: 200px;
+  }
+
+  .as-oil__intro-txt {
+    margin-left: 200px;
+  }
+}
+
+.as-oil-cpc__content {
+  display: flex;
+}
+
+.as-oil-cpc__left {
+  flex: 0 0 200px;
+  max-width: 200px;
+  display: inline-block;
+  text-align: right;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  margin-bottom: -30px;
+  border-right: 1px solid #ccc;
+}
+
+.as-oil-cpc__middle {
+  flex: 1 1 auto;
+  padding: 24px;
+  display: inline-block;
+
+}
+
+.as-oil-cpc__right {
+  flex: 0 0 200px;
+  display: inline-block;
+  align-self: flex-end;
+}
+
+.as-oil-cpc__row-btn-all {
+  text-align: right;
+}
+
+.as-oil-cpc__row-title {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 20px 8px;
+}
+
+.as-oil-cpc__category-link {
+  padding: 6px 12px;
+}
+
+.as-oil-cpc__category-link--active {
+  border-right: 2px solid #3f7ddf;
+}
+
+.as-oil-cpc__purpose {
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  padding: 24px;
+}
+
+.as-oil-cpc__purpose-container {
+  position: relative;
+}
+
+.as-oil-cpc__purpose-header {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.as-oil-cpc__purpose-text {
+
+}
+
+// CHECKBOX SWITCH WITH SLIDER
+.as-oil-cpc__switch-wrapper {
+  position: absolute;
+  right: 50px;
+  top: 0;
+  float: right;
+}
+
+.as-oil-cpc__switch {
+  position: absolute;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+
+  input {
+    display: none;
+  }
+}
+
+.as-oil-cpc__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.as-oil-cpc__slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .as-oil-cpc__slider {
+  background-color: #3f7ddf;
+}
+
+input:focus + .as-oil-cpc__slider {
+  box-shadow: 0 0 1px #3f7ddf;
+}
+
+input:checked + .as-oil-cpc__slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.as-oil-cpc__switch-label {
+
+}

@@ -30,34 +30,6 @@
     }
   }
 
-  .as-js-oilback {
-    border: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    @include media('<=phone') {
-      float: right;
-      text-align: right;
-      vertical-align: center;
-      margin: 0;
-      padding: 0;
-
-      .as-js-oilback__text {
-        visibility: hidden;
-      }
-    }
-    @include media('>phone') {
-      display: flex;
-      align-items: center;
-    }
-
-  }
-
-  .as-js-oilback__text {
-    margin-right: 6px;
-  }
-
   .as-oil-l-buttons-light {
     @include media('>phone') {
       float: right;

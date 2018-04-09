@@ -1,5 +1,5 @@
 import '../../styles/modal.scss';
-import noUiSlider from 'nouislider';
+import '../../styles/cpc.scss';
 import { sendEventToHostSite } from '../core/core_utils.js';
 import { removeSubscriberCookies } from '../core/core_cookies.js';
 import { convertPrivacySettingsToCookieValue, getSoiPrivacy } from './userview_cookies.js';
@@ -23,7 +23,6 @@ import { deActivatePowerOptIn } from '../core/core_poi.js';
 import { oilDefaultTemplate } from './view/oil.default.js';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
 import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
-import { advancedSettingsSnippet } from './view/components/oil.advanced.settings.content';
 import { logInfo, logError } from '../core/core_log.js';
 import { isPersistMinimumTracking, getTimeOutValue, getTheme } from './userview_config.js';
 import { isSubscriberSetCookieActive } from '../core/core_config.js';
@@ -107,19 +106,19 @@ function interpretSliderValue(value) {
   }
 }
 
+// FIXME
 export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
   let wrapper = document.querySelector('.as-oil');
   let entryNode = document.querySelector('#oil-preference-center');
   if (wrapper) {
     renderOil({advancedSettings: true});
   } else if (entryNode) {
+    // FIXME
     entryNode.innerHTML = advancedSettingsSnippet();
   } else {
     logError('No wrapper for the CPC with the id #oil-preference-center was found.');
     return;
   }
-
-  let rangeSlider = document.getElementById('as-slider-range');
 
   // we take the soi privacy for now as start value, since this should always represent the poi privacy if it was set
   // we need a product decision how to handle this if poi and soi values can differ
@@ -127,48 +126,6 @@ export function oilShowPreferenceCenter(preset = PRIVACY_MINIMUM_TRACKING) {
   let soiPrivacy = getSoiPrivacy();
   if (soiPrivacy) {
     currentPrivacySetting = soiPrivacy.oiid;
-  }
-
-  noUiSlider.create(rangeSlider, {
-    start: currentPrivacySetting,
-    step: 1,
-    orientation: 'vertical',
-    range: {
-      'min': PRIVACY_MINIMUM_TRACKING,
-      'max': PRIVACY_FULL_TRACKING
-    }
-  });
-
-  let essential = document.getElementById('as-slider-essential-title');
-  let functional = document.getElementById('as-slider-functional-title');
-  let advertising = document.getElementById('as-slider-advertising-title');
-  highlightSliderSetting(essential, functional, advertising, currentPrivacySetting);
-
-  rangeSlider.noUiSlider.on('update', function (params) {
-    let currentSelection = params[0];
-    let result = interpretSliderValue(currentSelection);
-    highlightSliderSetting(essential, functional, advertising, result);
-  });
-}
-
-function highlightSliderSetting(essential, functional, advertising, privacySetting) {
-  switch (privacySetting) {
-    case PRIVACY_MINIMUM_TRACKING:
-    default:
-      essential.setAttribute('class', 'as-slider-active');
-      functional.setAttribute('class', 'as-slider-inactive');
-      advertising.setAttribute('class', 'as-slider-inactive');
-      break;
-    case PRIVACY_FUNCTIONAL_TRACKING:
-      essential.setAttribute('class', 'as-slider-inactive');
-      functional.setAttribute('class', 'as-slider-active');
-      advertising.setAttribute('class', 'as-slider-inactive');
-      break;
-    case PRIVACY_FULL_TRACKING:
-      essential.setAttribute('class', 'as-slider-inactive');
-      functional.setAttribute('class', 'as-slider-inactive');
-      advertising.setAttribute('class', 'as-slider-active');
-      break;
   }
 }
 
