@@ -108,6 +108,7 @@
 }
 
 // CHECKBOX SWITCH WITH SLIDER
+$slider-size: 26px;
 .as-oil-cpc__switch {
   position: absolute;
   display: inline-block;
@@ -121,17 +122,15 @@
     display: none;
 
     &:checked + .as-oil-cpc__slider {
-      background-color: #3f7ddf;
+      background-color: $btn-primary;
     }
 
     &:focus + .as-oil-cpc__slider {
-      box-shadow: 0 0 1px #3f7ddf;
+      box-shadow: 0 0 1px $btn-primary;
     }
 
     &:checked + .as-oil-cpc__slider:before {
-      -webkit-transform: translateX(26px);
-      -ms-transform: translateX(26px);
-      transform: translateX(26px);
+      transform: translateX($slider-size);
     }
   }
 }
@@ -143,20 +142,18 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #cccccc;
-  -webkit-transition: .4s;
+  background-color: $slider-background-grey;
   transition: .4s;
   border-radius: 34px;
 
   &:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: $slider-size;
+    width: $slider-size;
     left: 4px;
     bottom: 4px;
     background-color: white;
-    -webkit-transition: .4s;
     transition: .4s;
     border-radius: 50%;
   }
