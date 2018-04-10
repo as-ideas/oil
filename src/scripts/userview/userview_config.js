@@ -1,9 +1,10 @@
-import {OIL_CONFIG} from '../core/core_constants.js';
-import {getConfigValue} from '../core/core_config.js';
-import {getGlobalOilObject} from '../core/core_utils.js';
+import { OIL_CONFIG } from '../core/core_constants.js';
+import { getConfigValue } from '../core/core_config.js';
+import { getGlobalOilObject } from '../core/core_utils.js';
 
 // tag::config-timeout[]
 const defaultTimeoutInSeconds = 60;
+
 // end::config-timeout[]
 
 export function isPersistMinimumTracking() {

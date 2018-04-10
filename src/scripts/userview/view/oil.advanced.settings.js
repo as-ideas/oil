@@ -5,7 +5,6 @@ import {
 } from '../userview_config.js';
 import { getTheme } from '../userview_config';
 
-
 const PurposeContainerSnippet = ({header, text, value}) => {
   return `
 <div class="as-oil-cpc__purpose">
@@ -13,7 +12,7 @@ const PurposeContainerSnippet = ({header, text, value}) => {
         <div class="as-oil-cpc__purpose-header">${header}</div>
         <div class="as-oil-cpc__purpose-text">${text}</div>
         <label class="as-oil-cpc__switch">
-          <!-- ToDo: think about name attribute-->
+          <!-- TODO: think about name attribute-->
             <input id="${value}" type="checkbox" name="oil-cpc-purpose-${header}" value="1"/>
             <span class="as-oil-cpc__slider" />
         </label>
@@ -54,7 +53,46 @@ const ContentSnippet = () => {
             Purposes
         </div>
         <div>
-          ${PurposeContainerSnippet({header: 'header', text: 'text', value: 'value'})}
+  ${PurposeContainerSnippet({
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_DESC),
+    value: 'value'
+  })}
+          
+  ${PurposeContainerSnippet({
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_DESC),
+    value: 'value'
+  })}
+                    
+  ${PurposeContainerSnippet({
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_DESC),
+    value: 'value'
+  })}
+                                                            
+  ${PurposeContainerSnippet({
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_DESC),
+    value: 'value'
+  })}
+                                                                                
+  ${PurposeContainerSnippet({
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_DESC),
+    value: 'value'
+  })}
+                                                                                                    
+                                                                                                                        ${PurposeContainerSnippet({
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_DESC),
+    value: 'value'
+  })}
+                                                                                                                                            ${PurposeContainerSnippet({
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_DESC),
+    value: 'value'
+  })}
         </div>
     </div>
     <div class="as-oil-cpc__right">
@@ -86,3 +124,4 @@ export function oilAdvancedSettingsTemplate() {
     </div>
   </div>`
 }
+

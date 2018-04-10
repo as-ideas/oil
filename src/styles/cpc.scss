@@ -62,6 +62,9 @@
   padding: 24px;
   display: inline-block;
 
+  overflow: scroll;
+  max-height: 500px; /* The Fallback */
+  max-height: 40vh;
 }
 
 .as-oil-cpc__right {
@@ -91,7 +94,8 @@
 .as-oil-cpc__purpose {
   border: 1px solid #eaeaea;
   border-radius: 5px;
-  padding: 24px;
+  padding: 20px;
+  margin: 16px 0;
 }
 
 .as-oil-cpc__purpose-container {
@@ -99,12 +103,20 @@
 }
 
 .as-oil-cpc__purpose-header {
-  font-size: 1.2em;
-  font-weight: 600;
+  font-size: 1.0em;
+  font-weight: 500;
+  margin-bottom: 30px;
 }
 
 .as-oil-cpc__purpose-text {
+  font-size: 0.9em;
+  color: lighten($text-color-primary-light, 30%);
+}
 
+.dark {
+  .as-oil-cpc__purpose-text {
+    color: darken($text-color-primary-dark, 30%);
+  }
 }
 
 // CHECKBOX SWITCH WITH SLIDER

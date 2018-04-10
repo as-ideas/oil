@@ -6,8 +6,8 @@ export {
   handlePoiOptIn,
   oilWrapper
 } from '../userview_modal.js';
-import {OIL_LABELS} from '../userview_constants.js';
-import {setGlobalOilObject} from '../../core/core_utils.js';
+import { OIL_LABELS } from '../userview_constants.js';
+import { setGlobalOilObject } from '../../core/core_utils.js';
 
 (function () {
   locale_deDE_01();
@@ -21,14 +21,22 @@ export function locale_deDE_01() {
     [OIL_LABELS.ATTR_LABEL_BUTTON_NO]: 'Nein, jetzt nicht',
     [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: 'Zurück',
     [OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS]: 'Mehr Informationen',
-    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_HEADING]: 'Bitte wähle eine Datenschutzeinstellung aus:',
-    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_TEXT]: '',
-    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_ESSENTIAL_TEXT]: 'Nur erforderliche Cookies',
-    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_ESSENTIAL_VERBOSE]: 'Diese Cookies sind für die grundlegenden Funktionen der Website erforderlich.',
-    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_FUNCTIONAL_TEXT]: 'Funktionelle Cookies',
-    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_FUNCTIONAL_VERBOSE]: 'Diese Cookies ermöglichen uns die Analyse der Website-Nutzung, damit wir deren Leistung messen und verbessern können.',
-    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_ADVERTISING_TEXT]: 'Marketing-Cookies',
-    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_ADVERTISING_VERBOSE]: 'Diese Cookies werden von Werbeagenturen verwendet, um Ihnen Werbung zu unterbreiten, die für Ihre Interessen relevant ist.',
+    [OIL_LABELS.ATTR_LABEL_CPC_HEADING]: 'Please select a privacy setting:',
+    [OIL_LABELS.ATTR_LABEL_CPC_TEXT]: '',
+    [OIL_LABELS.ATTR_LABEL_CPC_01_TEXT]: 'Accessing a Device',
+    [OIL_LABELS.ATTR_LABEL_CPC_01_DESC]: 'allow storing or accessing information on a user’s device.',
+    [OIL_LABELS.ATTR_LABEL_CPC_02_TEXT]: 'Advertising Personalisation',
+    [OIL_LABELS.ATTR_LABEL_CPC_02_DESC]: 'allow processing of a user’s data to provide and inform personalised advertising (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.',
+    [OIL_LABELS.ATTR_LABEL_CPC_03_TEXT]: 'Analytics',
+    [OIL_LABELS.ATTR_LABEL_CPC_03_DESC]: 'allow processing of a user’s data to deliver content or advertisements and measure the delivery of such content or advertisements, extract insights and generate reports to understand service usage; and/or accessing or storing information on devices for that purpose.',
+    [OIL_LABELS.ATTR_LABEL_CPC_04_TEXT]: 'Content Personalisation',
+    [OIL_LABELS.ATTR_LABEL_CPC_04_DESC]: 'allow processing of a user’s data to provide and inform personalised content (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.',
+    [OIL_LABELS.ATTR_LABEL_CPC_05_TEXT]: 'Matching Data to Offline Sources',
+    [OIL_LABELS.ATTR_LABEL_CPC_05_DESC]: 'combining data from offline sources that were initially collected in other contexts',
+    [OIL_LABELS.ATTR_LABEL_CPC_06_TEXT]: 'Linking Devices',
+    [OIL_LABELS.ATTR_LABEL_CPC_06_DESC]: 'allow processing of a user’s data to connect such user across multiple devices.',
+    [OIL_LABELS.ATTR_LABEL_CPC_07_TEXT]: 'Precise Geographic Location data',
+    [OIL_LABELS.ATTR_LABEL_CPC_07_DESC]: 'allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent',
     [OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_HEADING]: 'Ihre Einwilligung für Konzerngesellschaften',
     [OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_TEXT]: 'Hier ist eine Liste von Konzerngesellschaften:',
     [OIL_LABELS.ATTR_LABEL_THIRD_PARTY_LIST_HEADING]: 'Ihre Einwilligung für die Software von Dritten',
