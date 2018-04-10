@@ -1,8 +1,8 @@
-import {setSoiOptIn, getSoiCookie} from '../../src/scripts/core/core_cookies.js';
+import {getSoiCookie, setSoiOptIn} from '../../src/scripts/core/core_cookies.js';
 import {getPoiCookie, setPoiOptIn} from '../../src/scripts/hub/hub_cookies.js';
 import {deleteAllCookies} from '../utils.js';
 import {OilVersion} from '../../src/scripts/core/core_utils.js';
-import {OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION, OIL_PAYLOAD_LOCALE} from '../../src/scripts/core/core_constants.js'
+import {OIL_PAYLOAD_LOCALE_VARIANT_NAME, OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION} from '../../src/scripts/core/core_constants.js'
 
 describe('cookies', () => {
   beforeEach(() => {
@@ -65,7 +65,7 @@ describe('cookies', () => {
     let payload1 = {
       [OIL_PAYLOAD_PRIVACY]: 'privacy-test1',
       [OIL_PAYLOAD_VERSION]: 'test-version1',
-      [OIL_PAYLOAD_LOCALE]: 'test_locale1'
+      [OIL_PAYLOAD_LOCALE_VARIANT_NAME]: 'test_locale1'
     };
 
     spyOn(Date, 'now').and.callFake(function () {
@@ -90,7 +90,7 @@ describe('cookies', () => {
     let payload2 = {
       [OIL_PAYLOAD_PRIVACY]: 'privacy-test2',
       [OIL_PAYLOAD_VERSION]: 'test-version2',
-      [OIL_PAYLOAD_LOCALE]: 'test_locale2'
+      [OIL_PAYLOAD_LOCALE_VARIANT_NAME]: 'test_locale2'
     };
 
     // set again and check if the values got updated
