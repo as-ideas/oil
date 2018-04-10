@@ -1,5 +1,5 @@
 import {OIL_LABELS} from '../userview_constants';
-import {fetchData, setGlobalOilObject} from '../../core/core_utils.js';
+import {fetchJsonData, setGlobalOilObject} from '../../core/core_utils.js';
 import {getLocaleVariantName, getOilBackendUrl} from '../../core/core_config.js';
 import {logError} from '../../core/core_log';
 
@@ -12,13 +12,10 @@ export {
   oilWrapper
 } from '../userview_modal.js';
 
-(function () {
-  locale();
-}());
-
-export function locale() {
-  fetchData(getOilBackendUrl() + '/api/userViewLocales/' + getLocaleVariantName()).then(response => {
+export function locale(callback) {
+  fetchJsonData(getOilBackendUrl() + '/api/userViewLocales/' + getLocaleVariantName()).then(response => {
     setGlobalOilObject('LOCALE', response);
+    callback();
   }).catch(error => {
     logError(error.message);
     setGlobalOilObject('LOCALE', getDefaultLocale())
@@ -27,9 +24,9 @@ export function locale() {
 
 function getDefaultLocale() {
   return {
-    "localeId": "deDE_01",
-    "version": 0,
-    "texts": {
+    'localeId': 'deDE_01',
+    'version': 0,
+    'texts': {
       [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'Nutzung von Cookies und anderen Technologien',
       [OIL_LABELS.ATTR_LABEL_INTRO]: 'Die Website verwendet Cookies, Web Beacons, JavaScript und ähnliche Technologien. Ich willige ein, dass <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-companyList">Unternehmen der Axel Springer SE sowie deren Partner</a> für die bedarfsgerechte Gestaltung, Werbung oder für Marktforschung Nutzungsprofile bei Verwendung von Pseudonymen erstellen und diese an <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-thirdPartyList">Dritte</a> weitergeben dürfen. Diese Nutzungsprofile dürfen nicht mit Daten über den Träger des Pseudonyms zusammengeführt werden. Detaillierte Informationen und Hinweise zu Ihrem Widerspruchsrecht finden Sie in der Datenschutzerklärung.',
       [OIL_LABELS.ATTR_LABEL_BUTTON_YES]: 'OK',
@@ -49,7 +46,7 @@ function getDefaultLocale() {
       [OIL_LABELS.ATTR_LABEL_THIRD_PARTY_LIST_HEADING]: 'Ihre Einwilligung für die Software von Dritten',
       [OIL_LABELS.ATTR_LABEL_THIRD_PARTY_LIST_TEXT]: '',
       [OIL_LABELS.ATTR_LABEL_NO_COOKIES_HEADING]: 'Um unsere Services bestmöglich erbringen zu können, müssen in deinem Browser Cookies aktiviert sein.',
-      [OIL_LABELS.ATTR_LABEL_NO_COOKIES_TEXT]: 'Bitte aktiviere Cookies in den Einstellungen deines Browsers. So kannst du in <a href="https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en-GB" class="as-oil__intro-txt--link" target="_blank" > Google Chrome </a>oder <a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" class="as-oil__intro-txt--link" target="_blank" > Firefox </a>Cookies aktivieren.'
+      [OIL_LABELS.ATTR_LABEL_NO_COOKIES_TEXT]: 'Bitte aktiviere Cookies in den Einstellungen deines Browsers. So kannst du in <a href="https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en-GB" class="as-oil__intro-txt--link" target="_blank">Google Chrome</a> oder <a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" class="as-oil__intro-txt--link" target="_blank">Firefox</a> Cookies aktivieren.'
     }
   };
 

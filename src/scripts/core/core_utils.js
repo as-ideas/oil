@@ -160,7 +160,7 @@ export function getLocaleVariantVersion() {
  * @param url the url of the web service.
  * @returns {Promise<any>}
  */
-export function fetchData(url) {
+export function fetchJsonData(url) {
   return new Promise((resolve, reject) => {
     let request = new XMLHttpRequest();
     request.open('GET', url);

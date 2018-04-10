@@ -102,7 +102,12 @@ export function getCookieExpireInDays() {
 }
 
 export function getLocaleVariantName() {
-  return getConfigValue(OIL_CONFIG.ATTR_LOCALE, null);
+  let localeVariantName = getConfigValue(OIL_CONFIG.ATTR_LOCALE, null);
+  if (!localeVariantName) {
+    localeVariantName = 'deDE_01';
+    logError(`The locale is not set, falling back to ${localeVariantName}.`);
+  }
+  return localeVariantName;
 }
 
 /**
