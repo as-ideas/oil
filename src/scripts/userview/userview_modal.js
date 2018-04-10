@@ -27,6 +27,7 @@ import { logInfo, logError } from '../core/core_log.js';
 import { isPersistMinimumTracking, getTimeOutValue, getTheme } from './userview_config.js';
 import { isSubscriberSetCookieActive } from '../core/core_config.js';
 import { getPoiGroupName, isPoiActive } from '../core/core_config';
+import { attachCpcHandlers } from './view/oil.advanced.settings';
 
 
 // Initialize our Oil wrapper and save it ...
@@ -176,7 +177,9 @@ function removeOilWrapperFromDOM() {
   let domNodes = getOilDOMNodes();
   // For every render cycle our OIL main DOM node gets removed, in case it already exists in DOM
   if (domNodes.oilWrapper) {
-    removeOilWrapperAndHandlers(domNodes);
+    forEach(domNodes.oilWrapper, function (domNode) {
+      domNode.parentElement.removeChild(domNode);
+    });
   }
 }
 
@@ -310,19 +313,6 @@ function addEventListenersToDOMList(listOfDoms, listener) {
 }
 
 /**
- * removes a listener from all dom nodes in this list
- * @param listOfDoms
- * @param listener
- */
-function removeEventListenersToDOMList(listOfDoms, listener) {
-  if (listOfDoms) {
-    forEach(listOfDoms, function (domNode) {
-      domNode && domNode.removeEventListener('click', listener, false);
-    });
-  }
-}
-
-/**
  * Add and Remove Handlers to Oil Action Elements
  */
 function addOilHandlers(nodes) {
@@ -331,18 +321,5 @@ function addOilHandlers(nodes) {
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
   addEventListenersToDOMList(nodes.companyList, handleCompanyList);
   addEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
-}
-
-function removeOilWrapperAndHandlers(nodes) {
-  removeEventListenersToDOMList(nodes.btnOptIn, handleOptIn);
-  removeEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
-  removeEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
-  removeEventListenersToDOMList(nodes.companyList, handleCompanyList);
-  removeEventListenersToDOMList(nodes.thirdPartyList, handleThirdPartyList);
-
-  if (nodes.oilWrapper) {
-    forEach(nodes.oilWrapper, function (domNode) {
-      domNode.parentElement.removeChild(domNode);
-    });
-  }
+  attachCpcHandlers();
 }

@@ -4,6 +4,7 @@ import {
   getLabel
 } from '../userview_config.js';
 import { getTheme } from '../userview_config';
+import { forEach } from '../userview_modal';
 
 const PurposeContainerSnippet = ({header, text, value}) => {
   return `
@@ -13,7 +14,7 @@ const PurposeContainerSnippet = ({header, text, value}) => {
         <div class="as-oil-cpc__purpose-text">${text}</div>
         <label class="as-oil-cpc__switch">
           <!-- TODO: think about name attribute-->
-            <input id="${value}" type="checkbox" name="oil-cpc-purpose-${header}" value="1"/>
+            <input id="${value}" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-${header}" value="1"/>
             <span class="as-oil-cpc__slider" />
         </label>
     </div>
@@ -46,8 +47,8 @@ const ContentSnippet = () => {
     </div>
     <div class="as-oil-cpc__middle">
         <div class="as-oil-cpc__row-btn-all">
-            <span class="as-oil__btn-deactivate-all as-oil__btn-grey">Deactivate All</span>
-            <span class="as-oil__btn-activate-all as-oil__btn-blue">Activate All</span>
+            <span class="as-js-btn-deactivate-all as-oil__btn-grey">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL)}</span>
+            <span class="as-js-btn-activate-all as-oil__btn-blue">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL)}</span>
         </div>
         <div class="as-oil-cpc__row-title">
             Purposes
@@ -125,3 +126,25 @@ export function oilAdvancedSettingsTemplate() {
   </div>`
 }
 
+export function attachCpcHandlers() {
+  forEach(document.querySelectorAll('.as-js-btn-activate-all'), (domNode) => {
+    domNode && domNode.addEventListener('click', activateAll, false);
+  });
+  forEach(document.querySelectorAll('.as-js-btn-deactivate-all'), (domNode) => {
+    domNode && domNode.addEventListener('click', deactivateAll, false);
+  });
+}
+
+function activateAll() {
+  let elements = document.querySelectorAll('.as-js-purpose-slider');
+  forEach(elements, (domNode) => {
+    domNode && (domNode.checked = true);
+  });
+}
+
+
+function deactivateAll() {
+  forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
+    domNode && (domNode.checked = false);
+  });
+}

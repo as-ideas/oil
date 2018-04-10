@@ -23,6 +23,8 @@ export function locale_deDE_01() {
     [OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS]: 'Mehr Informationen',
     [OIL_LABELS.ATTR_LABEL_CPC_HEADING]: 'Please select a privacy setting:',
     [OIL_LABELS.ATTR_LABEL_CPC_TEXT]: '',
+    [OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL]: 'Activate all',
+    [OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL]: 'Deactivate all',
     [OIL_LABELS.ATTR_LABEL_CPC_01_TEXT]: 'Accessing a Device',
     [OIL_LABELS.ATTR_LABEL_CPC_01_DESC]: 'allow storing or accessing information on a user’s device.',
     [OIL_LABELS.ATTR_LABEL_CPC_02_TEXT]: 'Advertising Personalisation',
