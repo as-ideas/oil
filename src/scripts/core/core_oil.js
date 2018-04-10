@@ -3,7 +3,6 @@ import {handleOptOut} from './core_optout.js';
 import {logError, logInfo, logPreviewInfo} from './core_log.js';
 import {checkOptIn} from './core_optin.js';
 import {getLocaleVariantName, getPoiGroupName, isPoiActive, isPreviewMode, resetConfiguration} from './core_config.js';
-import {isLocaleValid} from './core_locale.js'
 import {isPoiGroupValid} from './core_poi_group.js';
 import {EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN} from './core_constants.js';
 import {getRawSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePreviewCookie, removeVerboseCookie, setPreviewCookie, setVerboseCookie} from './core_cookies.js';
@@ -24,14 +23,6 @@ export function initOilLayer() {
   let poiGroup = getPoiGroupName();
 
   attachUtilityFunctionsToWindowObject(locale);
-
-  /**
-   * Early death if the locale is invalid.
-   */
-  if (!isLocaleValid(locale)) {
-    logError(`The locale ${locale} is not available.`);
-    return;
-  }
 
   /**
    * Early death if the POI-Group is invalid or not exist.

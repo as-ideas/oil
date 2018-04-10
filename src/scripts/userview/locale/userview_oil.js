@@ -17,8 +17,10 @@ export function locale(callback) {
     setGlobalOilObject('LOCALE', response);
     callback();
   }).catch(error => {
-    logError(error.message);
-    setGlobalOilObject('LOCALE', getDefaultLocale())
+    let defaultLocale = getDefaultLocale();
+    setGlobalOilObject('LOCALE', defaultLocale);
+    logError(`OIL backend returned error: ${error}. Falling back to default locale '${defaultLocale.localeId}', version ${defaultLocale.version}!`);
+    callback();
   });
 }
 

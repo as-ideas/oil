@@ -163,13 +163,14 @@ export function getLocaleVariantVersion() {
 export function fetchJsonData(url) {
   return new Promise((resolve, reject) => {
     let request = new XMLHttpRequest();
+    logInfo(`Fetching data from url: ${url}`);
     request.open('GET', url);
     request.onload = function () {
       if (request.status === 200) {
         resolve(JSON.parse(request.responseText));
       } else {
         let errorResponse = JSON.parse(request.responseText);
-        reject(new Error(errorResponse.error_message));
+        reject(new Error(errorResponse.errorMessage));
       }
     };
     request.send();
