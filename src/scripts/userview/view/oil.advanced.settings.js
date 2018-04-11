@@ -15,7 +15,8 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
         <label class="as-oil-cpc__switch">
           <!-- TODO: think about name attribute-->
             <input id="as-js-purpose-slider-${id}" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-${header}" value="${value}"/>
-            <span class="as-oil-cpc__slider" />
+            <span class="as-oil-cpc__status"></span>
+            <span class="as-oil-cpc__slider"></span>
         </label>
     </div>
 </div>`

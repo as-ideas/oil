@@ -1,6 +1,13 @@
 @import "./_settings";
 
 .as-oil-cpc-wrapper {
+
+  &.as-oil-content-overlay {
+    @include media('<=849px') {
+      padding: 2em 1em;
+    }
+  }
+
   .as-oil-l-buttons-light {
     @include media('>phone') {
       float: right;
@@ -33,12 +40,14 @@
     }
   }
 
-  .as-oil__heading {
-    margin-left: 200px;
-  }
-
+  .as-oil__heading,
   .as-oil__intro-txt {
     margin-left: 200px;
+
+    @include media('<=phone') {
+      margin-left: 0;
+      text-align: center;
+    }
   }
 }
 
@@ -55,6 +64,15 @@
   font-size: 1.1em;
   margin-bottom: -30px;
   border-right: 1px solid #ccc;
+
+  @include media('<=849px') {
+    display: none;
+  }
+
+  @include media('<=929px') {
+    flex: 0;
+  }
+
 }
 
 .as-oil-cpc__middle {
@@ -71,10 +89,23 @@
   flex: 0 0 200px;
   display: inline-block;
   align-self: flex-end;
+
+  @include media('<=phone') {
+    flex: 0;
+  }
+
 }
 
 .as-oil-cpc__row-btn-all {
   text-align: right;
+  span {
+    @include media('<=phone') {
+      display: inline-block;
+      width: 49%;
+      text-align: center;
+      padding: 0.5em 1em;
+    }
+  }
 }
 
 .as-oil-cpc__row-title {
@@ -120,31 +151,49 @@
 }
 
 // CHECKBOX SWITCH WITH SLIDER
-$slider-size: 26px;
+$slider-size: 20px;
+$slider-padding: 3px;
 .as-oil-cpc__switch {
   position: absolute;
   display: inline-block;
-  width: 60px;
-  height: 34px;
-  right: 50px;
+  width: 50px;
+  height: 26px;
+  right: 0;
   top: 0;
   float: right;
 
   input {
     display: none;
 
-    &:checked + .as-oil-cpc__slider {
+    &+ .as-oil-cpc__status:after {
+      content: "Off";
+    }
+
+    &:checked ~ .as-oil-cpc__slider {
       background-color: $btn-primary;
     }
 
-    &:focus + .as-oil-cpc__slider {
+    &:checked ~ .as-oil-cpc__status:after {
+      content: "On";
+    }
+
+    &:focus ~ .as-oil-cpc__slider {
       box-shadow: 0 0 1px $btn-primary;
     }
 
-    &:checked + .as-oil-cpc__slider:before {
+    &:checked ~ .as-oil-cpc__slider:before {
       transform: translateX($slider-size);
+      background-color: darken($slider-background-circle, 30%);
     }
   }
+}
+
+.as-oil-cpc__status {
+  position: absolute;
+  top: 5px;
+  left: -($slider-size + 5);
+  color: $btn-primary;
+  font-weight: 500;
 }
 
 .as-oil-cpc__slider {
@@ -156,16 +205,17 @@ $slider-size: 26px;
   bottom: 0;
   background-color: $slider-background-grey;
   transition: .4s;
-  border-radius: 34px;
+  border-radius: 17px;
 
   &:before {
     position: absolute;
     content: "";
     height: $slider-size;
     width: $slider-size;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
+    left: $slider-padding;
+    bottom: $slider-padding;
+    background-color: $slider-background-circle;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
     transition: .4s;
     border-radius: 50%;
   }
