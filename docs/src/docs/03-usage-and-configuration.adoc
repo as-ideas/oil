@@ -128,9 +128,7 @@ OIL is currently emitting the following events:
 |====
 | Event name | Description
 | oil_optin_done | When a users selects opt-in.
-| oil_as_selected_minimum| When a users selected minimum cookies before clicking opt-in.
-| oil_as_selected_functional| When a users selected functional cookies before clicking opt-in.
-| oil_as_selected_full| When a user selected full cookies before clicking opt-in or didn't bother for advanced settings.
+| oil_as_cpc_privacy_selected| When a user used the cpc and clicked opt-in.
 | oil_click_advanced_settings| When a users clicks the advanced settings button/link.
 | oil_click_back_to_main| When a user clicks the back link from the advanced settings page.
 | oil_no_cookies_allowed| When a users has no cookies allowed and the no cookies layer is displayed

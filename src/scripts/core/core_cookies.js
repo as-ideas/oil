@@ -1,8 +1,8 @@
 import Cookie from 'js-cookie';
-import {getCookieExpireInDays, getLocale} from './core_config.js';
-import {PRIVACY_MINIMUM_TRACKING} from './core_constants.js';
-import {OilVersion, getClientTimestamp} from './core_utils.js';
-import {logInfo} from './core_log.js';
+import { getCookieExpireInDays, getLocale } from './core_config.js';
+import { OilVersion, getClientTimestamp } from './core_utils.js';
+import { logInfo } from './core_log.js';
+import { PRIVACY_MINIMUM_TRACKING } from './core_constants';
 
 const COOKIE_PREVIEW_NAME = 'oil_preview';
 const COOKIE_VERBOSE_NAME = 'oil_verbose';

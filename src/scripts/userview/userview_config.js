@@ -7,10 +7,12 @@ const defaultTimeoutInSeconds = 60;
 
 // end::config-timeout[]
 
+// FIXME bad name - isPersistOptOut or similiar
 export function isPersistMinimumTracking() {
   return getConfigValue(OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING, true);
 }
 
+// FIXME bad name - isAdvacedSettingsEnabled
 export function isAdvancedSettings() {
   return getConfigValue(OIL_CONFIG.ATTR_ADVANCED_SETTINGS, false);
 }

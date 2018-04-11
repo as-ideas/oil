@@ -22,10 +22,12 @@ export const EVENT_NAME_OPT_IN = 'oil_optin_done';
 export const EVENT_NAME_SOI_OPT_IN = 'oil_soi_optin_done';
 export const EVENT_NAME_POI_OPT_IN = 'oil_poi_optin_done';
 
+// CPC
+export const PRIVACY_MINIMUM_TRACKING = 0;
+export const PRIVACY_FULL_TRACKING = 1;
+
 // Tracking Events
-export const EVENT_NAME_AS_SELECTED_MINIMUM = 'oil_as_selected_minimum';
-export const EVENT_NAME_AS_SELECTED_FUNCTIONAL = 'oil_as_selected_functional';
-export const EVENT_NAME_AS_SELECTED_FULL = 'oil_as_selected_full';
+export const EVENT_NAME_AS_PRIVACY_SELECTED = 'oil_as_cpc_privacy_selected';
 export const EVENT_NAME_ADVANCED_SETTINGS = 'oil_click_advanced_settings';
 export const EVENT_NAME_TIMEOUT = 'oil_hide_layer';
 export const EVENT_NAME_COMPANY_LIST = 'oil_click_company_list';
@@ -48,44 +50,6 @@ export const DATAQA_PRIVACY_PAGE = 'oil-PrivacyPage';
 export const DATA_CONTEXT_YES = 'YES';
 export const DATA_CONTEXT_ADVANCED_SETTINGS = 'ADVANCEDSETTINGS';
 export const DATA_CONTEXT_BACK = 'BACK';
-
-const PRIVACY_SETTING_ID = 'oiid';
-export const PRIVACY_MINIMUM_TRACKING = 0;
-export const PRIVACY_FUNCTIONAL_TRACKING = 1;
-export const PRIVACY_FULL_TRACKING = 2;
-
-export const PRIVACY_SETTING_ESSENTIAL = 'esse';
-export const PRIVACY_SETTING_ANALYTICS = 'analy';
-export const PRIVACY_SETTING_SOCIAL_CONNECT = 'soci';
-export const PRIVACY_SETTING_ADS_BASE = 'adsbase';
-export const PRIVACY_SETTING_ADS_BEHAVIOUR = 'adsbehav';
-
-export const PRIVACY_SETTINGS_FULL_TRACKING = {
-  [PRIVACY_SETTING_ID]: PRIVACY_FULL_TRACKING,
-  [PRIVACY_SETTING_ESSENTIAL]: 1,
-  [PRIVACY_SETTING_ANALYTICS]: 1,
-  [PRIVACY_SETTING_SOCIAL_CONNECT]: 1,
-  [PRIVACY_SETTING_ADS_BASE]: 1,
-  [PRIVACY_SETTING_ADS_BEHAVIOUR]: 1
-};
-
-export const PRIVACY_SETTINGS_FUNCTIONAL_TRACKING = {
-  [PRIVACY_SETTING_ID]: PRIVACY_FUNCTIONAL_TRACKING,
-  [PRIVACY_SETTING_ESSENTIAL]: 1,
-  [PRIVACY_SETTING_ANALYTICS]: 1,
-  [PRIVACY_SETTING_SOCIAL_CONNECT]: 1,
-  [PRIVACY_SETTING_ADS_BASE]: 0,
-  [PRIVACY_SETTING_ADS_BEHAVIOUR]: 0
-};
-
-export const PRIVACY_SETTINGS_MINIMUM_TRACKING = {
-  [PRIVACY_SETTING_ID]: PRIVACY_MINIMUM_TRACKING,
-  [PRIVACY_SETTING_ESSENTIAL]: 1,
-  [PRIVACY_SETTING_ANALYTICS]: 1,
-  [PRIVACY_SETTING_SOCIAL_CONNECT]: 0,
-  [PRIVACY_SETTING_ADS_BASE]: 0,
-  [PRIVACY_SETTING_ADS_BEHAVIOUR]: 0
-};
 
 export const OIL_PAYLOAD_PRIVACY = 'p';
 export const OIL_PAYLOAD_VERSION = 'v';

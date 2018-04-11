@@ -4,7 +4,6 @@ import {logInfo, logPreviewInfo} from '../core/core_log.js';
 import {sendEventToHostSite, OilVersion} from '../core/core_utils.js';
 import {
   EVENT_NAME_OPT_IN,
-  PRIVACY_SETTINGS_MINIMUM_TRACKING,
   OIL_PAYLOAD_PRIVACY,
   OIL_PAYLOAD_VERSION,
   OIL_PAYLOAD_LOCALE
@@ -92,6 +91,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
  * Oil SOI optIn
  * @return promise with updated cookie value
  */
+// FIXME rework
 export function oilOptIn(privacySettings = PRIVACY_SETTINGS_MINIMUM_TRACKING) {
   setSoiOptIn(privacySettings);
   // Send event to notify host site
