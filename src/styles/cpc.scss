@@ -1,6 +1,13 @@
 @import "./_settings";
 
 .as-oil-cpc-wrapper {
+
+  &.as-oil-content-overlay {
+    @include media('<=849px') {
+      padding: 2em 1em;
+    }
+  }
+
   .as-oil-l-buttons-light {
     @include media('>phone') {
       float: right;
@@ -33,12 +40,14 @@
     }
   }
 
-  .as-oil__heading {
-    margin-left: 200px;
-  }
-
+  .as-oil__heading,
   .as-oil__intro-txt {
     margin-left: 200px;
+
+    @include media('<=phone') {
+      margin-left: 0;
+      text-align: center;
+    }
   }
 }
 
@@ -55,6 +64,15 @@
   font-size: 1.1em;
   margin-bottom: -30px;
   border-right: 1px solid #ccc;
+
+  @include media('<=849px') {
+    display: none;
+  }
+
+  @include media('<=929px') {
+    flex: 0;
+  }
+
 }
 
 .as-oil-cpc__middle {
@@ -71,10 +89,23 @@
   flex: 0 0 200px;
   display: inline-block;
   align-self: flex-end;
+
+  @include media('<=phone') {
+    flex: 0;
+  }
+
 }
 
 .as-oil-cpc__row-btn-all {
   text-align: right;
+  span {
+    @include media('<=phone') {
+      display: inline-block;
+      width: 49%;
+      text-align: center;
+      padding: 0.5em 1em;
+    }
+  }
 }
 
 .as-oil-cpc__row-title {
