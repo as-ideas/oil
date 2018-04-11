@@ -152,6 +152,7 @@ $slider-padding: 3px;
 
     &:checked ~ .as-oil-cpc__slider:before {
       transform: translateX($slider-size);
+      background-color: darken($slider-background-circle, 30%);
     }
   }
 }
@@ -182,8 +183,8 @@ $slider-padding: 3px;
     width: $slider-size;
     left: $slider-padding;
     bottom: $slider-padding;
-    background-color: #767676;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+    background-color: $slider-background-circle;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
     transition: .4s;
     border-radius: 50%;
   }
