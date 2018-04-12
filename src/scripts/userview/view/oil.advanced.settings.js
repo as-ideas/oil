@@ -1,10 +1,10 @@
-import { DATA_CONTEXT_YES, DATA_CONTEXT_BACK } from '../../core/core_constants.js';
-import { OIL_LABELS } from '../userview_constants.js'
+import {DATA_CONTEXT_YES, DATA_CONTEXT_BACK} from '../../core/core_constants.js';
+import {OIL_LABELS} from '../userview_constants.js'
 import {
   getLabel
 } from '../userview_config.js';
-import { getTheme } from '../userview_config';
-import { forEach } from '../userview_modal';
+import {getTheme} from '../userview_config';
+import {forEach} from '../userview_modal';
 
 const PurposeContainerSnippet = ({id, header, text, value}) => {
   return `
@@ -13,12 +13,25 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
         <div class="as-oil-cpc__purpose-header">${header}</div>
         <div class="as-oil-cpc__purpose-text">${text}</div>
         <label class="as-oil-cpc__switch">
-          <!-- TODO: think about name attribute-->
             <input id="as-js-purpose-slider-${id}" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-${header}" value="${value}"/>
             <span class="as-oil-cpc__status"></span>
             <span class="as-oil-cpc__slider"></span>
         </label>
     </div>
+</div>`
+};
+
+const FeatureContainerSnippet = ()=> {
+  return `
+<div class="as-oil-cpc__features">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eum necessitatibus nemo perferendis perspiciatis quasi quis quisquam totam? Consequatur, distinctio dolores ducimus eveniet ex maiores modi perferendis placeat praesentium sit!
+</div>`
+};
+
+const ThirdPartiesSnippet = ()=> {
+  return `
+<div class="as-oil-cpc__thirdparties">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi at distinctio dolor ea enim est et eveniet inventore ipsam minima modi molestias perferendis possimus quod, reprehenderit soluta tempore temporibus.
 </div>`
 };
 
@@ -43,67 +56,86 @@ const ContentSnippet = () => {
   return `
 <div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
     <div class="as-oil-cpc__left">
-        <div class="as-oil-cpc__category-link as-oil-cpc__category-link--active">Purposes</div>
-        <div class="as-oil-cpc__category-link">Features</div>
+    <!--ToDo: need to implement active/not active logic-->
+        <a href="#as-oil-cpc-purposes">
+          <div class="as-oil-cpc__category-link as-oil-cpc__category-link--active">Purposes</div>
+        </a>
+        <a href="#as-oil-cpc-features">
+          <div class="as-oil-cpc__category-link">Features</div>   
+        </a>
+        <a href="#as-oil-cpc-third-parties">
+          <div class="as-oil-cpc__category-link">3rd Parties</div>   
+        </a>
     </div>
     <div class="as-oil-cpc__middle">
         <div class="as-oil-cpc__row-btn-all">
             <span class="as-js-btn-deactivate-all as-oil__btn-grey">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL)}</span>
             <span class="as-js-btn-activate-all as-oil__btn-blue">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL)}</span>
         </div>
-        <div class="as-oil-cpc__row-title">
+        <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
             Purposes
         </div>
-        <div>
-  ${PurposeContainerSnippet({
-    id: '01',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_DESC),
-    value: false
-  })}
-          
-  ${PurposeContainerSnippet({
-    id: '02',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_DESC),
-    value: false
-  })}
-                    
-  ${PurposeContainerSnippet({
-    id: '03',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_DESC),
-    value: false
-  })}
-                                                            
-  ${PurposeContainerSnippet({
-    id: '04',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_DESC),
-    value: false
-  })}
-                                                                                
-  ${PurposeContainerSnippet({
-    id: '05',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_DESC),
-    value: false
-  })}
-                                                                                                    
-                                                                                                                        ${PurposeContainerSnippet({
-    id: '06',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_DESC),
-    value: false
-  })}
-  
-  ${PurposeContainerSnippet({
-    id: '07',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_DESC),
-    value: false
-  })}
+     
+        ${PurposeContainerSnippet({
+          id: '01',
+          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_TEXT),
+          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_DESC),
+          value: false
+        })}
+                
+        ${PurposeContainerSnippet({
+          id: '02',
+          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_TEXT),
+          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_DESC),
+          value: false
+        })}
+                          
+        ${PurposeContainerSnippet({
+          id: '03',
+          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_TEXT),
+          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_DESC),
+          value: false
+        })}
+                                                                  
+        ${PurposeContainerSnippet({
+          id: '04',
+          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_TEXT),
+          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_DESC),
+          value: false
+        })}
+                                                                                      
+        ${PurposeContainerSnippet({
+          id: '05',
+          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_TEXT),
+          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_DESC),
+          value: false
+        })}
+                                                                                                          
+        ${PurposeContainerSnippet({
+          id: '06',
+          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_TEXT),
+          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_DESC),
+          value: false
+        })}
+        
+        ${PurposeContainerSnippet({
+          id: '07',
+          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_TEXT),
+          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_DESC),
+          value: false
+        })}
+ 
+        <div class="as-oil-cpc__row-title" id="as-oil-cpc-features">
+            Features
         </div>
+        
+        ${FeatureContainerSnippet()}
+        
+        <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
+            3rd Parties
+        </div>
+        
+        ${ThirdPartiesSnippet()}
     </div>
     <div class="as-oil-cpc__right">
      <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">

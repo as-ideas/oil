@@ -73,6 +73,15 @@
     flex: 0;
   }
 
+  &:first-child {
+    padding-top: 55px;
+  }
+
+  a {
+    text-decoration: none;
+    color: $text-color-primary-light;
+  }
+
 }
 
 .as-oil-cpc__middle {
