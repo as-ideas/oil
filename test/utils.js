@@ -1,4 +1,5 @@
 import {forEach} from '../src/scripts/userview/userview_modal';
+import { customMatchers } from './utilsHtmlDiff';
 
 /**
  * Load a jasmine fixture from the given path
@@ -39,6 +40,10 @@ export function formatHtml(element) {
       }
       return prev;
     }, '');
+}
+
+export function initCustomYasmineMatchers() {
+  jasmine.addMatchers(customMatchers);
 }
 
 export function removeOilLayerAndConfig() {
