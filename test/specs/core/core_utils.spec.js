@@ -69,7 +69,7 @@ describe('core_utils', () => {
       expect(request.method).toEqual('GET');
 
       request.respondWith({
-        'status': 202,
+        'status': 200,
         'contentType': 'application/json',
         'responseText': JSON.stringify(expectedResponse)
       });

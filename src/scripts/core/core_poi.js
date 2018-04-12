@@ -1,5 +1,5 @@
 import {OIL_CONFIG} from './core_constants.js';
-import {isPoiActive, getHubLocation, getHubOrigin, getPoiGroupName} from './core_config.js';
+import {getHubLocation, getHubOrigin, getPoiGroupName, isPoiActive} from './core_config.js';
 import {getOrigin, registerMessageListener, removeMessageListener} from './core_utils.js';
 import {logError, logInfo} from './core_log.js';
 
@@ -32,7 +32,7 @@ export function addFrame(iframeUrl) {
 /**
  * Initializes the OIL iFrame
  * @function
- * @return promise as object {iframe:Element,config:{}}when iFrame is loaded
+ * @return Promise<any> as object {iframe:Element,config:{}}when iFrame is loaded
  */
 export function init() {
   return new Promise((resolve) => setTimeout(() => {

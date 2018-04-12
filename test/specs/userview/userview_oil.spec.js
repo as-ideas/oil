@@ -3,7 +3,7 @@ import * as CoreUtils from '../../../src/scripts/core/core_utils.js';
 import * as CoreConfig from '../../../src/scripts/core/core_config.js';
 import {OIL_LABELS} from '../../../src/scripts/userview/userview_constants';
 
-describe('locale', () => {
+describe('the locale fetcher for userview modal', () => {
 
   let mockedLocale = {
     'key1': 'text1',
