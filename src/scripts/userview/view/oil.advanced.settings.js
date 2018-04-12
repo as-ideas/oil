@@ -68,10 +68,6 @@ const ContentSnippet = () => {
         </a>
     </div>
     <div class="as-oil-cpc__middle">
-        <div class="as-oil-cpc__row-btn-all">
-            <span class="as-js-btn-deactivate-all as-oil__btn-grey">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL)}</span>
-            <span class="as-js-btn-activate-all as-oil__btn-blue">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL)}</span>
-        </div>
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
             Purposes
         </div>
@@ -154,12 +150,17 @@ export function oilAdvancedSettingsTemplate() {
   <div id="as-oil-cpc" class="as-oil-content-overlay as-oil-cpc-wrapper" data-qa="oil-poi-list">
     <div class="as-oil-l-wrapper-layout-max-width">
       <div class="as-oil__heading">
-        ${getLabel(OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_HEADING)}
+        ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
       </div>
       <p class="as-oil__intro-txt">
-        ${getLabel(OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_TEXT)}
+        ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_TEXT)}
       </p>
-
+      
+      <div class="as-oil-cpc__row-btn-all">
+        <span class="as-js-btn-deactivate-all as-oil__btn-grey">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL)}</span>
+        <span class="as-js-btn-activate-all as-oil__btn-blue">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL)}</span>
+      </div>
+      
       ${BackButtonSnippet()}
 
       ${ContentSnippet()}
