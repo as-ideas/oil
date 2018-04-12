@@ -132,6 +132,16 @@ export function removeSubscriberCookies() {
   Cookie.remove(OIL_SESSION_COOKIE_NAME);
 }
 
+// FIXME write test
+export function removeHubCookie(poiGroup) {
+  removeSubscriberCookies();
+  if(poiGroup) {
+    Cookie.remove(`${poiGroup}_${OIL_DOMAIN_COOKIE_NAME}`);
+  }
+}
+
+
+
 /**
  * Checks weather the browser is able to store cookies
  * @return true or false

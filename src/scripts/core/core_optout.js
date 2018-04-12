@@ -7,6 +7,7 @@ import {removeSubscriberCookies} from './core_cookies.js';
  *
  * @return none
  */
+// FIXME write test
 export function handleOptOut() {
   logInfo('OptOut Received.');
   // Update Oil cookie

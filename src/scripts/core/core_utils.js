@@ -1,5 +1,5 @@
-import {logInfo} from './core_log.js';
-import {OIL_GLOBAL_OBJECT_NAME} from './core_constants.js';
+import { logInfo } from './core_log.js';
+import { OIL_GLOBAL_OBJECT_NAME } from './core_constants.js';
 
 /**
  * Check if environment is set to production

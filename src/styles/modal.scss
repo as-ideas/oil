@@ -213,8 +213,8 @@
   background-color: #eee;
 
   &:hover {
-    color: darken($btn-primary-text-color, 5%);
-    background-color: darken($btn-primary, 10%);
+    color: darken(#aaa, 5%);
+    background-color: darken(#eee, 5%);
   }
 }
 
