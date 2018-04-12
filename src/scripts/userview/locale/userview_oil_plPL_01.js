@@ -18,7 +18,6 @@ export function locale_deDE_01() {
     [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'Polityka cookie',
     [OIL_LABELS.ATTR_LABEL_INTRO]: 'Na naszej stronie używamy technologii takich jak pliki cookie do zbierania i przetwarzania danych osobowych w celu personalizowania treści i reklam oraz analizowania ruchu na stronach. Dostęp do informacji o korzystaniu przez użytkowników z naszej strony mają także <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-companyList">podmioty powiązane</a> oraz <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-thirdPartyList">nasi zaufani partnerzy</a>, którzy również wykorzystują technologie takie jak pliki cookie do zbierania i przetwarzania danych osobowych w celu personalizowania treści i reklam, oraz analizowania ruchu na naszych stronach i w Internecie. Zobacz informacje o naszych zaufanych partnerach i zbieraniu przez nich tych danych.',
     [OIL_LABELS.ATTR_LABEL_BUTTON_YES]: 'OK',
-    [OIL_LABELS.ATTR_LABEL_BUTTON_NO]: 'Nein, jetzt nicht',
     [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: 'Zurück',
     [OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS]: 'Mehr Informationen',
     [OIL_LABELS.ATTR_LABEL_CPC_HEADING]: 'Please select a privacy setting:',

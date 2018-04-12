@@ -94,18 +94,13 @@ function shouldRenderOilLayer(props) {
 // FIXME REWORKING WIP, default should come from CONFIG
 // FIXME do we have enough tests for this?
 export function oilShowPreferenceCenter(preset = PRIVACY_SETTINGS_ALL_FALSE) {
-  let wrapper = document.querySelector('.as-oil');
   let entryNode = document.querySelector('#oil-preference-center');
-  if (wrapper) {
-    renderOil({advancedSettings: true});
-  } else if (entryNode) {
-    // FIXME needs to be added to node and exported
+  if (entryNode) {
+    // FIXME looks bad currently
     entryNode.innerHTML = oilAdvancedSettingsTemplate();
   } else {
-    logError('No wrapper for the CPC with the id #oil-preference-center was found.');
-    return;
+    renderOil({advancedSettings: true});
   }
-
   let currentPrivacySetting = preset;
   let soiPrivacy = getSoiPrivacy();
   if (soiPrivacy) {
@@ -236,8 +231,9 @@ export function handleSoiOptIn() {
   trackPrivacySettings(privacySetting);
 
   if (shouldPrivacySettingBeStored(privacySetting)) {
-    oilOptIn(privacySetting).then((cookieOptIn) => {
-      renderOil({optIn: cookieOptIn});
+    oilOptIn(privacySetting).then(() => {
+      // FIXME should remove Wrapper
+      renderOil({optIn: true});
       sendEventToHostSite(EVENT_NAME_SOI_OPT_IN);
     });
   } else {
@@ -252,6 +248,7 @@ export function handlePoiOptIn() {
 
   if (shouldPrivacySettingBeStored(privacySetting)) {
     oilPowerOptIn(privacySetting, !isSubscriberSetCookieActive()).then(() => {
+      // FIXME should remove Wrapper
       renderOil({optIn: true});
       if (isPoiActive()) {
         sendEventToHostSite(EVENT_NAME_POI_OPT_IN);

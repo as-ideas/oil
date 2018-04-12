@@ -24,13 +24,17 @@ export let customMatchers = {
         let actual = pretty(raw_actual, {ocd: true});
         let expected = pretty(raw_expected, {ocd: true});
 
+        let formattedActual = formatHtml(actual);
+        let formattedExpected = formatHtml(expected);
+
+
         let result = {};
-        result.pass = htmlDiffer.isEqual(formatHtml(actual), formatHtml(expected));
+        result.pass = htmlDiffer.isEqual(formattedActual, formattedExpected);
         if (!result.pass) {
           console.info(inverseGreen('Expected:\n') + expected);
           console.info(inverseRed('Actual:\n') + actual);
 
-          let diff = htmlDiffer.diffHtml(formatHtml(actual), formatHtml(expected));
+          let diff = htmlDiffer.diffHtml(formattedActual, formattedExpected);
           let diffText = getDiffText(diff, {charsAroundDiff: 4});
 
           result.message = inverseGreen('+ expected') + '\n' + inverseRed('- actual') + '\n' + diffText;

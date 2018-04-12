@@ -52,6 +52,7 @@ export function checkOptIn() {
 
 /**
  * Oil optIn power
+ * @param privacySettings
  * @param powerOnly - only set Power Opt In (POI), no local site cookie (SOI)
  * @return Promise with updated cookie value
  */
