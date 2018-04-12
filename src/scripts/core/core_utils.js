@@ -150,8 +150,8 @@ export function getGlobalOilObject(name) {
  * @returns {number}
  */
 export function getLocaleVariantVersion() {
-  let defaultLocale = getGlobalOilObject('LOCALE');
-  return (defaultLocale && defaultLocale.version) ? defaultLocale.version : 0;
+  let locale = getGlobalOilObject('LOCALE');
+  return (locale && locale.version) ? locale.version : 0;
 }
 
 /**
@@ -165,14 +165,22 @@ export function fetchJsonData(url) {
     let request = new XMLHttpRequest();
     logInfo(`Fetching data from url: ${url}`);
     request.open('GET', url);
-    request.onload = function () {
-      if (request.status === 200) {
-        resolve(JSON.parse(request.responseText));
-      } else {
-        let errorResponse = JSON.parse(request.responseText);
-        reject(new Error(errorResponse.errorMessage));
+    request.onreadystatechange = function () {
+      if (request.readyState === this.DONE) {
+        if (request.status === 200) {
+          resolve(JSON.parse(request.responseText));
+        } else {
+          let error;
+          if (request.status !== 0) {
+            let errorResponse = JSON.parse(request.responseText);
+            error = new Error(errorResponse.errorMessage);
+          } else {
+            error = new Error(`Connection error occurred while fetching JSON data from ${url}!`);
+          }
+          reject(error);
+        }
       }
-    };
-    request.send();
+      request.send();
+    }
   });
 }

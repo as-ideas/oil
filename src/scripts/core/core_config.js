@@ -90,7 +90,7 @@ export function getHubPath() {
 }
 
 export function getOilBackendUrl() {
-  return getConfigValue(OIL_CONFIG.ATTR_OIL_BACKEND_URL, 'https://oil-backend.herokuapp.com/oil')
+  return getConfigValue(OIL_CONFIG.ATTR_OIL_BACKEND_URL, 'https://oil-backend.herokuapp.com/oil');
 }
 
 export function getPoiGroupName() {
