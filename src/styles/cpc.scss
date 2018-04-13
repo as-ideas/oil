@@ -233,3 +233,15 @@ $slider-padding: 3px;
     border-radius: 50%;
   }
 }
+
+//dark theme adjustments
+.as-oil {
+  &.dark {
+    .as-oil-cpc__left a {
+      color: $text-color-primary-dark !important;
+    }
+    .as-oil-cpc__purpose {
+      background-color: $cpc-background-dark;
+    }
+  }
+}
