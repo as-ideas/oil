@@ -2,6 +2,10 @@
 
 .as-oil-cpc-wrapper {
 
+  button {
+    cursor: pointer;
+  }
+
   &.as-oil-content-overlay {
     @include media('<=849px') {
       padding: 2em 1em;
@@ -237,7 +241,8 @@ $slider-padding: 3px;
 //dark theme adjustments
 .as-oil {
   &.dark {
-    .as-oil-cpc__left a {
+    .as-oil-cpc__left a,
+    .as-js-oilback__text {
       color: $text-color-primary-dark !important;
     }
     .as-oil-cpc__purpose {
