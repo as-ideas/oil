@@ -74,7 +74,7 @@
   }
 
   &:first-child {
-    padding-top: 55px;
+    padding-top: 40px;
   }
 
   a {
@@ -92,6 +92,10 @@
   overflow: scroll;
   max-height: 500px; /* The Fallback */
   max-height: 40vh;
+
+  @include media('<=phone') {
+    padding: 0;
+  }
 }
 
 .as-oil-cpc__right {
@@ -174,7 +178,7 @@ $slider-padding: 3px;
   input {
     display: none;
 
-    &+ .as-oil-cpc__status:after {
+    & + .as-oil-cpc__status:after {
       content: "Off";
     }
 

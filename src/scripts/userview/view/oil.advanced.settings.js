@@ -21,14 +21,14 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
 </div>`
 };
 
-const FeatureContainerSnippet = ()=> {
+const FeatureContainerSnippet = () => {
   return `
 <div class="as-oil-cpc__features">
   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eum necessitatibus nemo perferendis perspiciatis quasi quis quisquam totam? Consequatur, distinctio dolores ducimus eveniet ex maiores modi perferendis placeat praesentium sit!
 </div>`
 };
 
-const ThirdPartiesSnippet = ()=> {
+const ThirdPartiesSnippet = () => {
   return `
 <div class="as-oil-cpc__thirdparties">
   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi at distinctio dolor ea enim est et eveniet inventore ipsam minima modi molestias perferendis possimus quod, reprehenderit soluta tempore temporibus.
@@ -52,6 +52,15 @@ const BackButtonSnippet = () => {
 `
 };
 
+const ActivateButtonSnippet = () => {
+  return `
+  <div class="as-oil-cpc__row-btn-all">
+        <span class="as-js-btn-deactivate-all as-oil__btn-grey">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL)}</span>
+        <span class="as-js-btn-activate-all as-oil__btn-blue">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL)}</span>
+      </div>
+  `
+};
+
 const ContentSnippet = () => {
   return `
 <div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
@@ -73,53 +82,53 @@ const ContentSnippet = () => {
         </div>
      
         ${PurposeContainerSnippet({
-          id: '01',
-          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_TEXT),
-          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_DESC),
-          value: false
-        })}
+    id: '01',
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_DESC),
+    value: false
+  })}
                 
         ${PurposeContainerSnippet({
-          id: '02',
-          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_TEXT),
-          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_DESC),
-          value: false
-        })}
+    id: '02',
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_DESC),
+    value: false
+  })}
                           
         ${PurposeContainerSnippet({
-          id: '03',
-          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_TEXT),
-          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_DESC),
-          value: false
-        })}
+    id: '03',
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_DESC),
+    value: false
+  })}
                                                                   
         ${PurposeContainerSnippet({
-          id: '04',
-          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_TEXT),
-          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_DESC),
-          value: false
-        })}
+    id: '04',
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_DESC),
+    value: false
+  })}
                                                                                       
         ${PurposeContainerSnippet({
-          id: '05',
-          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_TEXT),
-          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_DESC),
-          value: false
-        })}
+    id: '05',
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_DESC),
+    value: false
+  })}
                                                                                                           
         ${PurposeContainerSnippet({
-          id: '06',
-          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_TEXT),
-          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_DESC),
-          value: false
-        })}
+    id: '06',
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_DESC),
+    value: false
+  })}
         
         ${PurposeContainerSnippet({
-          id: '07',
-          header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_TEXT),
-          text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_DESC),
-          value: false
-        })}
+    id: '07',
+    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_TEXT),
+    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_DESC),
+    value: false
+  })}
  
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-features">
             Features
@@ -155,14 +164,8 @@ export function oilAdvancedSettingsTemplate() {
       <p class="as-oil__intro-txt">
         ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_TEXT)}
       </p>
-      
-      <div class="as-oil-cpc__row-btn-all">
-        <span class="as-js-btn-deactivate-all as-oil__btn-grey">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL)}</span>
-        <span class="as-js-btn-activate-all as-oil__btn-blue">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL)}</span>
-      </div>
-      
+      ${ActivateButtonSnippet()}
       ${BackButtonSnippet()}
-
       ${ContentSnippet()}
     </div>
   </div>`
