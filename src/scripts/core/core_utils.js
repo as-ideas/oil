@@ -180,7 +180,7 @@ export function fetchJsonData(url) {
           reject(error);
         }
       }
-      request.send();
-    }
+    };
+    request.send();
   });
 }
