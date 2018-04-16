@@ -22,7 +22,13 @@ $btn-primary-text-color: #ffffff;
 $btn-secondary: transparent;
 $btn-secondary-text-color: #ffffff;
 
+$slider-background-grey: #eaeaea;
+$slider-background-circle: #767676;
+
 $layout-max-width: 1280px;
+
+$cpc-background-dark: #383737;
+
 
 // Our Oil overlay needs to trump every other element, so we need the highest possible z-index
 // Which is the following number: 2147483647 <-- for possible HACKS wie go with a high number

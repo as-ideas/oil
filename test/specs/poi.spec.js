@@ -1,9 +1,9 @@
 import * as PoiAPICore from '../../src/scripts/core/core_poi.js';
 import * as PoiAPIUserview from '../../src/scripts/userview/userview_poi.js';
-import {loadFixture, deleteAllCookies} from '../utils.js';
-import {resetConfiguration} from '../../src/scripts/core/core_config.js';
+import { loadFixture, deleteAllCookies } from '../utils.js';
+import { resetConfiguration } from '../../src/scripts/core/core_config.js';
 
-describe('poi', () => {
+describe('Power Opt-IN (POI)', () => {
 
   let originalTimeout;
 
@@ -24,13 +24,17 @@ describe('poi', () => {
   });
 
   it('should disable POI by default', (done) => {
-    loadFixture('poi/poi.config-error.html');
+    loadFixture('poi/poi.no-config.html');
 
-    PoiAPIUserview.activatePowerOptInWithIFrame({}).then(() => PoiAPICore.verifyPowerOptIn().then((optin) => {
-        expect(optin.power_opt_in).toBe(false);
-        done();
+    PoiAPIUserview.activatePowerOptInWithIFrame({})
+      .then(() => {
+        PoiAPICore.verifyPowerOptIn()
+          .then((optin) => {
+            expect(optin.power_opt_in).toBe(false);
+            done();
+          })
       })
-    );
+    ;
   });
 
   it('should disable POI on config error', (done) => {

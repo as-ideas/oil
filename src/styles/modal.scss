@@ -175,7 +175,7 @@
   margin: 0.5em 0;
 }
 
-@mixin btn-poi-soi-shared {
+@mixin btn-shared {
   min-width: 160px;
   min-height: 42px;
   margin: 0;
@@ -194,7 +194,9 @@
   }
 }
 
-@mixin btn-poi {
+@mixin btn-blue {
+  @include btn-shared;
+
   color: $btn-primary-text-color;
   background-color: $btn-primary;
 
@@ -204,34 +206,16 @@
   }
 }
 
-@mixin btn-soi {
-  color: $btn-primary-text-color;
-  background-color: $btn-primary;
+@mixin btn-grey {
+  @include btn-shared;
+
+  color: #aaa;
+  background-color: #eee;
 
   &:hover {
-    color: darken($btn-primary-text-color, 5%);
-    background-color: darken($btn-primary, 10%);
+    color: darken(#aaa, 5%);
+    background-color: darken(#eee, 5%);
   }
-}
-
-@mixin oil-loi-btn-poi {
-  @include btn-poi;
-}
-
-@mixin oil-loi-btn-soi {
-  @include btn-soi;
-}
-
-// Loi Power Optin Button Declaration
-.as-oil-loi__btn-poi {
-  @include oil-loi-btn-poi-soi-shared;
-  @include btn-poi;
-}
-
-// Loi Site Optin Button Declaration
-.as-oil-loi__btn-soi {
-  @include oil-loi-btn-poi-soi-shared;
-  @include btn-soi;
 }
 
 // The container for alle the buttons
@@ -242,51 +226,50 @@
   }
 }
 
-// Power Optin Button Declaration
-.as-oil__btn-poi {
-  @include btn-poi-soi-shared;
-  @include btn-poi;
+.as-oil__btn-optin {
+  @include btn-blue;
 }
 
-// Site Optin Button Declaration
-.as-oil__btn-soi {
-  @include btn-poi-soi-shared;
-  @include btn-soi;
+.as-oil__btn-blue {
+  @include btn-blue;
 }
 
-// Back Button
-// ToDo: maybe rename class to back button?
-.as-oil__btn-loi {
-  float: right;
-  min-height: auto;
-  margin: 0.75em 0;
-  padding: 4px;
-  font-size: 0.875em;
-  font-weight: 400;
-  text-decoration: none;
-  background-color: transparent;
+.as-oil__btn-grey {
+  @include btn-grey;
+}
+
+// FIXME
+// BACK Button <-- DONT STYLE JS classes!!!
+.as-js-oilback {
   border: none;
-  border-bottom: 1px solid;
-  border-radius: 0;
-  cursor: pointer;
-
-  @extend %button-theme;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
 
   @include media('<=phone') {
-    float: none;
-    width: 100%;
-    margin: 1em 0; // We are vertically aligning this btn by using margins, which is a bit dirty
-    font-size: 0.75em;
-    border-bottom: none;
+    float: right;
+    text-align: right;
+    vertical-align: center;
+    margin: 0;
+    padding: 0;
+
+    .as-js-oilback__text {
+      visibility: hidden;
+    }
+  }
+  @include media('>phone') {
+    display: flex;
+    align-items: center;
   }
 
-  @include media('>phone', '<desktop') {
-    // We are vertically aligning this btn by using margins, which is a bit dirty
-    margin: 0.25em 0;
-  }
 }
 
-.as-oil__btn-as {
+.as-js-oilback__text {
+  margin-right: 6px;
+}
+
+.as-oil__btn-cpc {
   float: right;
   min-height: auto;
   min-width: 135px;
@@ -369,65 +352,4 @@
   @supports (display: flex) {
     flex: 1 0 auto;
   }
-}
-
-// NoUiSlider CSS and overrides
-@import "../../node_modules/nouislider/distribute/nouislider.css";
-
-.as-slider-wrapper {
-  display: inline-block;
-  padding: 0;
-  margin-top: 20px;
-  position: absolute;
-  height: auto;
-  width: 10px;
-
-  top: 2px;
-  bottom: 40px;
-}
-
-.as-oil-l-cpc {
-  position: relative;
-  display: inline-block;
-  min-width: 50%;
-  max-width: 80%;
-  margin: 0.6rem 0;
-}
-
-.noUi-vertical .noUi-handle {
-  left: -11px;
-  width: 30px;
-  height: 30px;
-  border-radius: 16px;
-}
-
-.as-slider-desc {
-  margin-left: 40px;
-  display: inline-block;
-  max-width: 85%;
-}
-
-.as-slider-option-title {
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.as-slider-option-verbose {
-  font-size: 0.9375em;
-  font-weight: 400;
-  line-height: 1.4;
-  margin-bottom: 20px;
-}
-
-.as-slider-inactive {
-  opacity: 1.0;
-}
-
-.as-slider-active ~ .as-slider-inactive {
-  opacity: 0.4;
-}
-
-.as-slider-active {
-  opacity: 1.0;
 }

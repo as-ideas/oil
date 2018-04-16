@@ -3,7 +3,7 @@ import {oilOptIn} from '../../src/scripts/userview/userview_optin.js';
 import {deleteAllCookies} from '../utils.js';
 import {getSoiCookie} from '../../src/scripts/core/core_cookies.js';
 
-describe('optin', () => {
+describe('Opt-In', () => {
 
   beforeEach(() => {
     deleteAllCookies();

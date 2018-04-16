@@ -1,5 +1,6 @@
 import {getSoiCookie} from './core_cookies';
 
+
 const LOADING_RULE_ALL = '_dip_oil_consent_all';
 const LOADING_RULE_ESSENTIAL = '_dip_oil_consent_essential';
 const LOADING_RULE_ANALYTICS = '_dip_oil_consent_analytics';
@@ -23,6 +24,7 @@ const PRIVACY_SETTING_ADS_BEHAVIOUR = 'adsbehav';
  *
  * @param optin - the current cookie value
  */
+// FIXME deprecated
 export function doSetTealiumVariables() {
   attachEventListenerForLoadingRules();
 

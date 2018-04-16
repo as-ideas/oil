@@ -40,7 +40,7 @@ describe('the locale fetcher for userview modal', () => {
       let locale = CoreUtils.setGlobalOilObject.calls.argsFor(0)[1];
       expect(locale).toBeDefined();
       expect(locale.texts).toBeDefined();
-      expect(Object.keys(locale.texts).length).toEqual(19);
+      expect(Object.keys(locale.texts).length).toBeGreaterThan(10);
       expect(locale.texts[OIL_LABELS.ATTR_LABEL_BUTTON_BACK].length).toBeGreaterThan(0);
       expect(locale.texts[OIL_LABELS.ATTR_LABEL_INTRO_HEADING]).toEqual('Nutzung von Cookies und anderen Technologien');
       done();

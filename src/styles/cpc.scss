@@ -1,0 +1,252 @@
+@import "./_settings";
+
+.as-oil-cpc-wrapper {
+
+  button {
+    cursor: pointer;
+  }
+
+  &.as-oil-content-overlay {
+    @include media('<=849px') {
+      padding: 2em 1em;
+    }
+  }
+
+  .as-oil-l-buttons-light {
+    @include media('>phone') {
+      float: right;
+    }
+
+    @include media('<=phone') {
+      display: initial;
+      background: $background-color-light;
+      box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
+      padding: 8px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  .as-oil-l-buttons-dark {
+    @include media('>phone') {
+      float: right;
+    }
+
+    @include media('<=phone') {
+      display: initial;
+      background: $background-color-dark;
+      box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
+      padding: 8px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  .as-oil__heading,
+  .as-oil__intro-txt {
+    margin-left: 200px;
+
+    @include media('<=phone') {
+      margin-left: 0;
+      text-align: center;
+    }
+  }
+}
+
+.as-oil-cpc__content {
+  display: flex;
+}
+
+.as-oil-cpc__left {
+  flex: 0 0 200px;
+  max-width: 200px;
+  display: inline-block;
+  text-align: right;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  margin-bottom: -30px;
+  border-right: 1px solid #ccc;
+
+  @include media('<=849px') {
+    display: none;
+  }
+
+  @include media('<=929px') {
+    flex: 0;
+  }
+
+  &:first-child {
+    padding-top: 40px;
+  }
+
+  a {
+    text-decoration: none;
+    color: $text-color-primary-light;
+  }
+
+}
+
+.as-oil-cpc__middle {
+  flex: 1 1 auto;
+  padding: 24px;
+  display: inline-block;
+
+  overflow: scroll;
+  max-height: 500px; /* The Fallback */
+  max-height: 40vh;
+
+  @include media('<=phone') {
+    padding: 0;
+  }
+}
+
+.as-oil-cpc__right {
+  flex: 0 0 200px;
+  display: inline-block;
+  align-self: flex-end;
+
+  @include media('<=phone') {
+    flex: 0;
+  }
+
+}
+
+.as-oil-cpc__row-btn-all {
+  text-align: right;
+  span {
+    @include media('<=phone') {
+      display: inline-block;
+      width: 49%;
+      text-align: center;
+      padding: 0.5em 1em;
+    }
+  }
+}
+
+.as-oil-cpc__row-title {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 20px 8px;
+}
+
+.as-oil-cpc__category-link {
+  padding: 6px 12px;
+}
+
+.as-oil-cpc__category-link--active {
+  border-right: 2px solid #3f7ddf;
+}
+
+.as-oil-cpc__purpose {
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 16px 0;
+}
+
+.as-oil-cpc__purpose-container {
+  position: relative;
+}
+
+.as-oil-cpc__purpose-header {
+  font-size: 1.0em;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.as-oil-cpc__purpose-text {
+  font-size: 0.9em;
+  color: lighten($text-color-primary-light, 30%);
+}
+
+.dark {
+  .as-oil-cpc__purpose-text {
+    color: darken($text-color-primary-dark, 30%);
+  }
+}
+
+// CHECKBOX SWITCH WITH SLIDER
+$slider-size: 20px;
+$slider-padding: 3px;
+.as-oil-cpc__switch {
+  position: absolute;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  right: 0;
+  top: 0;
+  float: right;
+
+  input {
+    display: none;
+
+    & + .as-oil-cpc__status:after {
+      content: "Off";
+    }
+
+    &:checked ~ .as-oil-cpc__slider {
+      background-color: $btn-primary;
+    }
+
+    &:checked ~ .as-oil-cpc__status:after {
+      content: "On";
+    }
+
+    &:focus ~ .as-oil-cpc__slider {
+      box-shadow: 0 0 1px $btn-primary;
+    }
+
+    &:checked ~ .as-oil-cpc__slider:before {
+      transform: translateX($slider-size);
+      background-color: darken($slider-background-circle, 30%);
+    }
+  }
+}
+
+.as-oil-cpc__status {
+  position: absolute;
+  top: 5px;
+  left: -($slider-size + 5);
+  color: $btn-primary;
+  font-weight: 500;
+}
+
+.as-oil-cpc__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $slider-background-grey;
+  transition: .4s;
+  border-radius: 17px;
+
+  &:before {
+    position: absolute;
+    content: "";
+    height: $slider-size;
+    width: $slider-size;
+    left: $slider-padding;
+    bottom: $slider-padding;
+    background-color: $slider-background-circle;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
+    transition: .4s;
+    border-radius: 50%;
+  }
+}
+
+//dark theme adjustments
+.as-oil {
+  &.dark {
+    .as-oil-cpc__left a,
+    .as-js-oilback__text {
+      color: $text-color-primary-dark !important;
+    }
+    .as-oil-cpc__purpose {
+      background-color: $cpc-background-dark;
+    }
+  }
+}

@@ -6,14 +6,36 @@ export let customMatchers = {
   toEqualWithDiff: function () {
     return {
       compare: function (raw_actual, raw_expected) {
+        if (!raw_actual) {
+          console.error('Actual must not be NULL or UNDEFINDED, it was:', raw_actual);
+          return {pass: false, message: 'Actual must not be NULL or UNDEFINDED'};
+        }
+        if (!raw_expected) {
+          console.error('Expected must not be NULL or UNDEFINDED, it was:', raw_expected);
+          return {pass: false, message: 'Expected must not be NULL or UNDEFINDED'};
+        }
+        if (typeof  raw_actual !== 'string') {
+          raw_actual = raw_actual.outerHTML;
+        }
+        if (typeof  raw_expected !== 'string') {
+          raw_expected = raw_expected.outerHTML;
+        }
+
         let actual = pretty(raw_actual, {ocd: true});
         let expected = pretty(raw_expected, {ocd: true});
 
+        let formattedActual = formatHtml(actual);
+        let formattedExpected = formatHtml(expected);
+
+
         let result = {};
-        result.pass = htmlDiffer.isEqual(actual, expected);
+        result.pass = htmlDiffer.isEqual(formattedActual, formattedExpected);
         if (!result.pass) {
-          let diff = htmlDiffer.diffHtml(actual, expected);
-          let diffText = getDiffText(diff, {charsAroundDiff: 2});
+          console.info(inverseGreen('Expected:\n') + expected);
+          console.info(inverseRed('Actual:\n') + actual);
+
+          let diff = htmlDiffer.diffHtml(formattedActual, formattedExpected);
+          let diffText = getDiffText(diff, {charsAroundDiff: 4});
 
           result.message = inverseGreen('+ expected') + '\n' + inverseRed('- actual') + '\n' + diffText;
         }
@@ -22,6 +44,18 @@ export let customMatchers = {
     }
   }
 };
+
+function formatHtml(element) {
+  return element
+    .trim()
+    .split('\n')
+    .reduce((prev, next) => {
+      if (next) {
+        prev += next.trim();
+      }
+      return prev;
+    }, '');
+}
 
 function inverseGreen(text) {
   return '\x1b[42m' + text + '\x1b[0m';

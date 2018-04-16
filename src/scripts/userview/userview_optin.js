@@ -1,17 +1,17 @@
-import {verifyPowerOptIn} from '../core/core_poi.js';
-import {activatePowerOptInWithIFrame, activatePowerOptInWithRedirect} from './userview_poi.js';
-import {logInfo, logPreviewInfo} from '../core/core_log.js';
-import {getLocaleVariantVersion, OilVersion, sendEventToHostSite} from '../core/core_utils.js';
+import { verifyPowerOptIn } from '../core/core_poi.js';
+import { logInfo, logPreviewInfo } from '../core/core_log.js';
+import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect } from './userview_poi.js';
+import { getLocaleVariantVersion, OilVersion, sendEventToHostSite } from '../core/core_utils.js';
 import {
   EVENT_NAME_OPT_IN,
   OIL_PAYLOAD_LOCALE_VARIANT_NAME,
   OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
   OIL_PAYLOAD_PRIVACY,
-  OIL_PAYLOAD_VERSION,
-  PRIVACY_SETTINGS_MINIMUM_TRACKING
+  OIL_PAYLOAD_VERSION
 } from '../core/core_constants.js';
-import {getLocaleVariantName, isPoiActive, isSubscriberSetCookieActive} from '../core/core_config.js';
-import {getSoiCookie, setSoiOptIn} from '../core/core_cookies.js';
+import { getSoiCookie, setSoiOptIn } from '../core/core_cookies.js';
+import { getLocaleVariantName, isPoiActive, isSubscriberSetCookieActive } from '../core/core_config.js';
+import { PRIVACY_FULL_TRACKING } from '../core/core_constants';
 
 /**
  * Log Helper function for checkOptIn
@@ -94,11 +94,12 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
 
 /**
  * Oil SOI optIn
- * @return Promise<any> with updated cookie value
+ *
+ * @param privacySettings - defaults to '1' for FULL TRACKING
+ * @return {Promise} promise with updated cookie value
  */
-export function oilOptIn(privacySettings = PRIVACY_SETTINGS_MINIMUM_TRACKING) {
+export function oilOptIn(privacySettings = PRIVACY_FULL_TRACKING) {
   setSoiOptIn(privacySettings);
-  // Send event to notify host site
   sendEventToHostSite(EVENT_NAME_OPT_IN);
 
   return new Promise((resolve) => {

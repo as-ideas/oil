@@ -1,8 +1,8 @@
 import Cookie from 'js-cookie';
-import {getCookieExpireInDays, getLocaleVariantName} from './core_config.js';
-import {PRIVACY_MINIMUM_TRACKING} from './core_constants.js';
-import {getClientTimestamp, getLocaleVariantVersion, OilVersion} from './core_utils.js';
-import {logInfo} from './core_log.js';
+import { logInfo } from './core_log.js';
+import { getCookieExpireInDays, getLocaleVariantName } from './core_config.js';
+import { PRIVACY_MINIMUM_TRACKING } from './core_constants.js';
+import { getClientTimestamp, getLocaleVariantVersion, OilVersion } from './core_utils.js';
 
 const COOKIE_PREVIEW_NAME = 'oil_preview';
 const COOKIE_VERBOSE_NAME = 'oil_verbose';
@@ -132,6 +132,15 @@ export function removeSubscriberCookies() {
   Cookie.remove(OIL_DOMAIN_COOKIE_NAME);
   Cookie.remove(OIL_SESSION_COOKIE_NAME);
 }
+
+// FIXME write test
+export function removeHubCookie(poiGroup) {
+  removeSubscriberCookies();
+  if (poiGroup) {
+    Cookie.remove(`${poiGroup}_${OIL_DOMAIN_COOKIE_NAME}`);
+  }
+}
+
 
 /**
  * Checks weather the browser is able to store cookies

@@ -181,6 +181,7 @@ export function verifyPowerOptIn() {
  * @function
  * @return Promise when done
  */
+// FIXME needs testing
 export function deActivatePowerOptIn() {
   logInfo('deActivatePowerOptIn');
 

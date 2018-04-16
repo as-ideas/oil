@@ -36,7 +36,6 @@
     "express": "4.16.2",
     "fresh": "0.5.2",
     "js-cookie": "2.1.4",
-    "nouislider": "11.0.3",
     "npm": "^5.8.0",
     "serve-index": "1.9.1",
     "serve-static": "1.13.2",

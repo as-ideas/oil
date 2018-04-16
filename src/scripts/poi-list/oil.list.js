@@ -2,10 +2,10 @@ import {
   getLabel,
   getTheme
 } from '../userview/userview_config.js';
-import {OIL_LABELS} from '../userview/userview_constants';
-import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME} from '../core/core_constants';
+import { OIL_LABELS } from '../userview/userview_constants';
+import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../core/core_constants';
 import './poi.group.scss';
-import {setGlobalOilObject, getGlobalOilObject} from '../core/core_utils.js';
+import { setGlobalOilObject, getGlobalOilObject } from '../core/core_utils.js';
 
 /**
  * OIL SOI will be only shown, when there is no POI on the advanced settings
@@ -120,7 +120,7 @@ function oilListTemplate(list, heading, text) {
                 ${text} 
             </p>
             ${listSnippet(list)}
-            <button class="as-oil__btn-loi as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
+            <button class="as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
                 <span class="as-js-oilback__text">${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}</span>
                 <svg class="as-js-oilback__icon" width="22" height="22" viewBox="0 0 22 22"
                      xmlns="http://www.w3.org/2000/svg">
@@ -134,7 +134,7 @@ function oilListTemplate(list, heading, text) {
         </div>
         <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
             <div class="as-oil-l-item">
-                <button class="as-oil__btn-soi as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
+                <button class="as-oil__btn-optin as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
                     ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES)}
                 </button>
             </div>

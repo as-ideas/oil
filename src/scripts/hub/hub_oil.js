@@ -1,9 +1,9 @@
-import {logInfo} from '../core/core_log.js';
-import {POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME, POI_PAYLOAD} from '../core/core_constants.js';
-import {removeSubscriberCookies} from '../core/core_cookies.js';
-import {setPoiOptIn, getPoiCookie} from '../hub/hub_cookies.js';
-import {registerMessageListener, removeMessageListener, OilVersion} from '../core/core_utils.js';
-import {getStringParam} from './hub_utils.js';
+import { logInfo } from '../core/core_log.js';
+import { POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME, POI_PAYLOAD } from '../core/core_constants.js';
+import { setPoiOptIn, getPoiCookie } from '../hub/hub_cookies.js';
+import { registerMessageListener, removeMessageListener, OilVersion } from '../core/core_utils.js';
+import { getStringParam } from './hub_utils.js';
+import { removeHubCookie } from '../core/core_cookies';
 
 let initComplete = false;
 
@@ -65,7 +65,7 @@ function handlerFunction(message) {
           break;
         case 'oil-poi-delete':
           logInfo('OIL Hub - remove POI cookie.');
-          removeSubscriberCookies();
+          removeHubCookie(groupName);
           break;
         default:
           break;
