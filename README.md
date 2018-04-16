@@ -23,11 +23,15 @@ npm install
 ### Basic Usage
 
 * Start App locally: `npm start`
-* Running unit-tests: `npm run test`
-* Running end2end-tests locally: Start app in one terminal `npm start` and then in the next terminal `npm run e2e`
 * Creating Docs: `npm run build:docs`
 
+### Testing 
+
+* Running unit-tests: `npm run test`
+* Running end2end-tests locally: Start app in one terminal `npm start` and then in the next terminal `npm run e2e`
+
 ### Advanced Usage
+
 npm run build:release creates an app version that loads its parts
 from oil.axelspringer.com/release/*.min.js
 

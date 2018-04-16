@@ -102,6 +102,7 @@ export function initOilLayer() {
 function attachUtilityFunctionsToWindowObject(locale) {
 
   function loadLocale(callback) {
+    // FIXME only load if it is not loaded yet!!!
     System.import('../userview/locale/userview_oil.js')
       .then(userview_modal => {
         userview_modal.locale(callback);
