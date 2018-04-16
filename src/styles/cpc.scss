@@ -2,6 +2,10 @@
 
 .as-oil-cpc-wrapper {
 
+  button {
+    cursor: pointer;
+  }
+
   &.as-oil-content-overlay {
     @include media('<=849px') {
       padding: 2em 1em;
@@ -73,6 +77,15 @@
     flex: 0;
   }
 
+  &:first-child {
+    padding-top: 40px;
+  }
+
+  a {
+    text-decoration: none;
+    color: $text-color-primary-light;
+  }
+
 }
 
 .as-oil-cpc__middle {
@@ -83,6 +96,10 @@
   overflow: scroll;
   max-height: 500px; /* The Fallback */
   max-height: 40vh;
+
+  @include media('<=phone') {
+    padding: 0;
+  }
 }
 
 .as-oil-cpc__right {
@@ -165,7 +182,7 @@ $slider-padding: 3px;
   input {
     display: none;
 
-    &+ .as-oil-cpc__status:after {
+    & + .as-oil-cpc__status:after {
       content: "Off";
     }
 
@@ -218,5 +235,18 @@ $slider-padding: 3px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
     transition: .4s;
     border-radius: 50%;
+  }
+}
+
+//dark theme adjustments
+.as-oil {
+  &.dark {
+    .as-oil-cpc__left a,
+    .as-js-oilback__text {
+      color: $text-color-primary-dark !important;
+    }
+    .as-oil-cpc__purpose {
+      background-color: $cpc-background-dark;
+    }
   }
 }
