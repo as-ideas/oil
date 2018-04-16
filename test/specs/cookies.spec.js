@@ -1,8 +1,10 @@
-import {setSoiOptIn, getSoiCookie} from '../../src/scripts/core/core_cookies.js';
+import {getSoiCookie, setSoiOptIn} from '../../src/scripts/core/core_cookies.js';
 import {getPoiCookie, setPoiOptIn} from '../../src/scripts/hub/hub_cookies.js';
 import {deleteAllCookies} from '../utils.js';
-import {OilVersion} from '../../src/scripts/core/core_utils.js';
-import {OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION, OIL_PAYLOAD_LOCALE} from '../../src/scripts/core/core_constants.js'
+import {OIL_PAYLOAD_LOCALE_VARIANT_NAME, OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION} from '../../src/scripts/core/core_constants.js'
+import * as CoreConfig from '../../src/scripts/core/core_config.js';
+import * as CoreUtils from '../../src/scripts/core/core_utils.js';
+import {OIL_PAYLOAD_LOCALE_VARIANT_VERSION} from '../../src/scripts/core/core_constants';
 
 describe('cookies', () => {
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('cookies', () => {
   });
 
   it('should store the version of oil in the domain cookie', () => {
-    spyOn(OilVersion, 'get').and.returnValue('test-version');
+    spyOn(CoreUtils.OilVersion, 'get').and.returnValue('test-version');
     let resultCookie = getSoiCookie();
     expect(resultCookie.version).toBe('test-version');
   });
@@ -32,9 +34,14 @@ describe('cookies', () => {
       return currentFakeTime;
     });
 
-    spyOn(OilVersion, 'get').and.callFake(function () {
+    spyOn(CoreUtils.OilVersion, 'get').and.callFake(function () {
       return testVersion;
     });
+
+    let expectedLocaleVariantVersion = 17;
+    let expectedLocaleVariantName = 'enEN_01';
+    spyOn(CoreUtils, 'getLocaleVariantVersion').and.returnValue(expectedLocaleVariantVersion);
+    spyOn(CoreConfig, 'getLocaleVariantName').and.returnValue(expectedLocaleVariantName);
 
     setSoiOptIn('privacy-test1');
 
@@ -44,6 +51,8 @@ describe('cookies', () => {
     expect(resultCookie.opt_in).toBe(true);
     expect(resultCookie.privacy).toBe('privacy-test1');
     expect(resultCookie.timestamp).toBe(1);
+    expect(resultCookie.localeVariantName).toBe(expectedLocaleVariantName);
+    expect(resultCookie.localeVariantVersion).toBe(expectedLocaleVariantVersion);
 
     // set again and check if the values got updated
     currentFakeTime = 2;
@@ -57,7 +66,6 @@ describe('cookies', () => {
     expect(resultCookie.timestamp).toBe(2);
   });
 
-
   it('should fill the power opt-in cookie with the correct values and overwrite', () => {
     let currentFakeTime = 1;
     let testVersion = 'test-version1';
@@ -65,14 +73,15 @@ describe('cookies', () => {
     let payload1 = {
       [OIL_PAYLOAD_PRIVACY]: 'privacy-test1',
       [OIL_PAYLOAD_VERSION]: 'test-version1',
-      [OIL_PAYLOAD_LOCALE]: 'test_locale1'
+      [OIL_PAYLOAD_LOCALE_VARIANT_NAME]: 'test_locale1',
+      [OIL_PAYLOAD_LOCALE_VARIANT_VERSION]: 17
     };
 
     spyOn(Date, 'now').and.callFake(function () {
       return currentFakeTime;
     });
 
-    spyOn(OilVersion, 'get').and.callFake(function () {
+    spyOn(CoreUtils.OilVersion, 'get').and.callFake(function () {
       return testVersion;
     });
 
@@ -83,14 +92,16 @@ describe('cookies', () => {
     expect(resultCookie.version).toBe('test-version1');
     expect(resultCookie.power_opt_in).toBe(true);
     expect(resultCookie.privacy).toBe('privacy-test1');
-    expect(resultCookie.locale).toBe('test_locale1');
+    expect(resultCookie.localeVariantName).toBe('test_locale1');
+    expect(resultCookie.localeVariantVersion).toBe(17);
     expect(resultCookie.timestamp).toBe(1);
 
 
     let payload2 = {
       [OIL_PAYLOAD_PRIVACY]: 'privacy-test2',
       [OIL_PAYLOAD_VERSION]: 'test-version2',
-      [OIL_PAYLOAD_LOCALE]: 'test_locale2'
+      [OIL_PAYLOAD_LOCALE_VARIANT_NAME]: 'test_locale2',
+      [OIL_PAYLOAD_LOCALE_VARIANT_VERSION]: 23
     };
 
     // set again and check if the values got updated
@@ -102,7 +113,8 @@ describe('cookies', () => {
     expect(resultCookie.version).toBe('test-version2');
     expect(resultCookie.power_opt_in).toBe(true);
     expect(resultCookie.privacy).toBe('privacy-test2');
-    expect(resultCookie.locale).toBe('test_locale2');
+    expect(resultCookie.localeVariantName).toBe('test_locale2');
+    expect(resultCookie.localeVariantVersion).toBe(23);
     expect(resultCookie.timestamp).toBe(2);
   });
 

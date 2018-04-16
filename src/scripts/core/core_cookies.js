@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie';
-import {getCookieExpireInDays, getLocale} from './core_config.js';
+import {getCookieExpireInDays, getLocaleVariantName} from './core_config.js';
 import {PRIVACY_MINIMUM_TRACKING} from './core_constants.js';
-import {OilVersion, getClientTimestamp} from './core_utils.js';
+import {getClientTimestamp, getLocaleVariantVersion, OilVersion} from './core_utils.js';
 import {logInfo} from './core_log.js';
 
 const COOKIE_PREVIEW_NAME = 'oil_preview';
@@ -63,7 +63,7 @@ function getDomainCookieConfig() {
       'opt_in': false,
       'timestamp': getClientTimestamp(),
       'version': OilVersion.get(),
-      'locale': getLocale(),
+      'locale': getLocaleVariantName(),
       'privacy': PRIVACY_MINIMUM_TRACKING
     }
   };
@@ -89,7 +89,8 @@ export function setSoiOptIn(privacySettings) {
   cookie.privacy = privacySettings;
   cookie.timestamp = getClientTimestamp();
   cookie.version = OilVersion.get();
-  cookie.locale = getLocale();
+  cookie.localeVariantName = getLocaleVariantName();
+  cookie.localeVariantVersion = getLocaleVariantVersion();
   setDomainCookie(getDomainCookieConfig().name, cookie, getDomainCookieConfig().expires);
 }
 

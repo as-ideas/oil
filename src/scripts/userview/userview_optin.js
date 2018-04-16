@@ -1,15 +1,16 @@
 import {verifyPowerOptIn} from '../core/core_poi.js';
-import {activatePowerOptInWithRedirect, activatePowerOptInWithIFrame} from './userview_poi.js';
+import {activatePowerOptInWithIFrame, activatePowerOptInWithRedirect} from './userview_poi.js';
 import {logInfo, logPreviewInfo} from '../core/core_log.js';
-import {sendEventToHostSite, OilVersion} from '../core/core_utils.js';
+import {getLocaleVariantVersion, OilVersion, sendEventToHostSite} from '../core/core_utils.js';
 import {
   EVENT_NAME_OPT_IN,
-  PRIVACY_SETTINGS_MINIMUM_TRACKING,
+  OIL_PAYLOAD_LOCALE_VARIANT_NAME,
+  OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
   OIL_PAYLOAD_PRIVACY,
   OIL_PAYLOAD_VERSION,
-  OIL_PAYLOAD_LOCALE
+  PRIVACY_SETTINGS_MINIMUM_TRACKING
 } from '../core/core_constants.js';
-import {isPoiActive, isSubscriberSetCookieActive, getLocale} from '../core/core_config.js';
+import {getLocaleVariantName, isPoiActive, isSubscriberSetCookieActive} from '../core/core_config.js';
 import {getSoiCookie, setSoiOptIn} from '../core/core_cookies.js';
 
 /**
@@ -52,6 +53,7 @@ export function checkOptIn() {
 
 /**
  * Oil optIn power
+ * @param privacySettings privacy settings (to be propagated to the hub)
  * @param powerOnly - only set Power Opt In (POI), no local site cookie (SOI)
  * @return Promise with updated cookie value
  */
@@ -65,17 +67,19 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
     let payload = {
       [OIL_PAYLOAD_PRIVACY]: privacySettings,
       [OIL_PAYLOAD_VERSION]: OilVersion.get(),
-      [OIL_PAYLOAD_LOCALE]: getLocale()
+      [OIL_PAYLOAD_LOCALE_VARIANT_NAME]: getLocaleVariantName(),
+      [OIL_PAYLOAD_LOCALE_VARIANT_VERSION]: getLocaleVariantVersion()
     };
 
     if (isPoiActive()) {
       // Update Oil cookie (mypass - POI)
+      // TODO returned promise is ignored - correct?
       activatePowerOptInWithIFrame(payload);
 
       // Check if fallback is needed
       verifyPowerOptIn().then((result) => {
         if (result.power_opt_in === false) {
-          logInfo('iFrame POI didnt work. Trying fallback now.');
+          logInfo('iFrame POI didn\'t work. Trying fallback now.');
           activatePowerOptInWithRedirect(payload);
         }
       });
@@ -90,7 +94,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
 
 /**
  * Oil SOI optIn
- * @return promise with updated cookie value
+ * @return Promise<any> with updated cookie value
  */
 export function oilOptIn(privacySettings = PRIVACY_SETTINGS_MINIMUM_TRACKING) {
   setSoiOptIn(privacySettings);
