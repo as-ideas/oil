@@ -1,26 +1,12 @@
-import { sendEventToHostSite, OilVersion, setGlobalOilObject } from './core_utils.js';
-import { handleOptOut } from './core_optout.js';
-import { logInfo, logPreviewInfo, logError } from './core_log.js';
-import { checkOptIn } from './core_optin.js';
-import { isPoiGroupValid } from './core_poi_group.js';
-import {
-  isPreviewCookieSet,
-  setPreviewCookie,
-  setVerboseCookie,
-  removePreviewCookie,
-  removeVerboseCookie,
-  isBrowserCookieEnabled,
-  getRawSoiCookie
-} from './core_cookies.js';
-import { doSetTealiumVariables } from './core_tealium_loading_rules';
-import {
-  getLocaleVariantName,
-  getPoiGroupName,
-  isPoiActive,
-  isPreviewMode,
-  resetConfiguration
-} from './core_config.js';
-import { EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN } from './core_constants.js';
+import {getGlobalOilObject, OilVersion, sendEventToHostSite, setGlobalOilObject} from './core_utils.js';
+import {handleOptOut} from './core_optout.js';
+import {logError, logInfo, logPreviewInfo} from './core_log.js';
+import {checkOptIn} from './core_optin.js';
+import {isPoiGroupValid} from './core_poi_group.js';
+import {getRawSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePreviewCookie, removeVerboseCookie, setPreviewCookie, setVerboseCookie} from './core_cookies.js';
+import {doSetTealiumVariables} from './core_tealium_loading_rules';
+import {getLocaleVariantName, getPoiGroupName, isPoiActive, isPreviewMode, resetConfiguration} from './core_config.js';
+import {EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN} from './core_constants.js';
 
 /**
  * Initialize Oil on Host Site
@@ -60,7 +46,7 @@ export function initOilLayer() {
       logInfo('This browser doesn\'t allow cookies.');
       System.import('../userview/locale/userview_oil.js')
         .then(userview_modal => {
-          userview_modal.locale(() => userview_modal.renderOil({noCookie: true}));
+          userview_modal.locale(uv_m => uv_m.renderOil({noCookie: true}));
         })
         .catch(() => {
           logError(`${locale} could not be loaded.`);
@@ -85,7 +71,7 @@ export function initOilLayer() {
       else {
         System.import('../userview/locale/userview_oil.js')
           .then(userview_modal => {
-            userview_modal.locale(() => userview_modal.renderOil({optIn: false}));
+            userview_modal.locale(uv_m => uv_m.renderOil({optIn: false}));
           })
           .catch(() => {
             logError(`${locale} could not be loaded.`);
@@ -102,10 +88,14 @@ export function initOilLayer() {
 function attachUtilityFunctionsToWindowObject(locale) {
 
   function loadLocale(callback) {
-    // FIXME only load if it is not loaded yet!!!
     System.import('../userview/locale/userview_oil.js')
       .then(userview_modal => {
-        userview_modal.locale(callback);
+        if (!getGlobalOilObject('LOCALE')) {
+          userview_modal.locale(callback);
+        } else {
+          callback(userview_modal);
+          return;
+        }
       })
       .catch(() => {
         logError(`${locale} could not be loaded.`);
