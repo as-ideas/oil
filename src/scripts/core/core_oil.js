@@ -2,14 +2,7 @@ import { sendEventToHostSite, OilVersion, setGlobalOilObject } from './core_util
 import { handleOptOut } from './core_optout.js';
 import { logInfo, logPreviewInfo, logError } from './core_log.js';
 import { checkOptIn } from './core_optin.js';
-import { resetConfiguration, isPreviewMode, getLocale, getPoiGroupName, isPoiActive } from './core_config.js';
-import { isLocaleValid } from './core_locale.js'
 import { isPoiGroupValid } from './core_poi_group.js';
-import {
-  EVENT_NAME_HAS_OPTED_IN,
-  EVENT_NAME_NO_COOKIES_ALLOWED,
-  EVENT_NAME_OIL_SHOWN
-} from './core_constants.js';
 import {
   isPreviewCookieSet,
   setPreviewCookie,
@@ -20,6 +13,14 @@ import {
   getRawSoiCookie
 } from './core_cookies.js';
 import { doSetTealiumVariables } from './core_tealium_loading_rules';
+import {
+  getLocaleVariantName,
+  getPoiGroupName,
+  isPoiActive,
+  isPreviewMode,
+  resetConfiguration
+} from './core_config.js';
+import { EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN } from './core_constants.js';
 
 /**
  * Initialize Oil on Host Site
@@ -32,23 +33,10 @@ export function initOilLayer() {
     logPreviewInfo('Preview mode not correctly set, please see the documentation on how to set the cookie.');
   }
 
-  let locale = getLocale();
+  let locale = getLocaleVariantName();
   let poiGroup = getPoiGroupName();
 
-  if (!locale) {
-    logError('The locale is not set, falling back to deDE_01.');
-    locale = 'deDE_01';
-  }
-
   attachUtilityFunctionsToWindowObject(locale);
-
-  /**
-   * Early death if the locale is invalid.
-   */
-  if (!isLocaleValid(locale)) {
-    logError(`The locale ${locale} is not available.`);
-    return;
-  }
 
   /**
    * Early death if the POI-Group is invalid or not exist.
@@ -70,9 +58,9 @@ export function initOilLayer() {
      */
     if (!isBrowserCookieEnabled()) {
       logInfo('This browser doesn\'t allow cookies.');
-      System.import(`../userview/locale/userview_oil_${locale}.js`)
+      System.import('../userview/locale/userview_oil.js')
         .then(userview_modal => {
-          userview_modal.renderOil({noCookie: true});
+          userview_modal.locale(() => userview_modal.renderOil({noCookie: true}));
         })
         .catch(() => {
           logError(`${locale} could not be loaded.`);
@@ -95,9 +83,9 @@ export function initOilLayer() {
        * Any other case, when the user didnt decide before and oil needs to be shown:
        */
       else {
-        System.import(`../userview/locale/userview_oil_${locale}.js`)
+        System.import('../userview/locale/userview_oil.js')
           .then(userview_modal => {
-            userview_modal.renderOil({optIn: false});
+            userview_modal.locale(() => userview_modal.renderOil({optIn: false}));
           })
           .catch(() => {
             logError(`${locale} could not be loaded.`);
@@ -114,8 +102,10 @@ export function initOilLayer() {
 function attachUtilityFunctionsToWindowObject(locale) {
 
   function loadLocale(callback) {
-    System.import(`../userview/locale/userview_oil_${locale}.js`)
-      .then(callback)
+    System.import('../userview/locale/userview_oil.js')
+      .then(userview_modal => {
+        userview_modal.locale(callback);
+      })
       .catch(() => {
         logError(`${locale} could not be loaded.`);
       });

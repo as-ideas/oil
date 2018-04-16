@@ -1,8 +1,16 @@
 <div class="as-oil light" data-qa="oil-Layer">
   <div id="as-oil-cpc" class="as-oil-content-overlay as-oil-cpc-wrapper" data-qa="oil-poi-list">
     <div class="as-oil-l-wrapper-layout-max-width">
-      <div class="as-oil__heading"></div>
-      <p class="as-oil__intro-txt"></p>
+      <div class="as-oil__heading">
+        label_cpc_heading
+      </div>
+      <p class="as-oil__intro-txt">
+        label_cpc_text
+      </p>
+      <div class="as-oil-cpc__row-btn-all">
+        <span class="as-js-btn-deactivate-all as-oil__btn-grey">label_cpc_deactivate_all</span>
+        <span class="as-js-btn-activate-all as-oil__btn-blue">label_cpc_activate_all</span>
+      </div>
       <button class="as-js-oilback" data-context="BACK" data-qa="oil-back-button">
         <span class="as-js-oilback__text">
                   label_button_back
@@ -10,124 +18,117 @@
         <svg class="as-js-oilback__icon" width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
           <g fill="none" fill-rule="evenodd">
             <circle fill="#757575" cx="11" cy="11" r="11"></circle>
-            <path
-              d="M15.592 14.217a.334.334 0 0 1 .098.245c0 .098-.033.18-.098.246l-.928.908a.303.303 0 0 1-.22.098.33.33 0 0 1-.244-.098L11 12.4l-3.2 3.216a.303.303 0 0 1-.22.098.33.33 0 0 1-.244-.098l-.928-.908a.334.334 0 0 1-.098-.246c0-.098.033-.18.098-.245L9.632 11 6.408 7.808c-.163-.164-.163-.327 0-.491l.904-.933a.473.473 0 0 1 .244-.098.33.33 0 0 1 .244.098L11 9.576l3.2-3.192a.473.473 0 0 1 .244-.098.33.33 0 0 1 .244.098l.904.933c.163.164.163.32 0 .466l-3.224 3.192 3.224 3.242z"
-              fill="#FFF" opacity=".88"></path>
+            <path d="M15.592 14.217a.334.334 0 0 1 .098.245c0 .098-.033.18-.098.246l-.928.908a.303.303 0 0 1-.22.098.33.33 0 0 1-.244-.098L11 12.4l-3.2 3.216a.303.303 0 0 1-.22.098.33.33 0 0 1-.244-.098l-.928-.908a.334.334 0 0 1-.098-.246c0-.098.033-.18.098-.245L9.632 11 6.408 7.808c-.163-.164-.163-.327 0-.491l.904-.933a.473.473 0 0 1 .244-.098.33.33 0 0 1 .244.098L11 9.576l3.2-3.192a.473.473 0 0 1 .244-.098.33.33 0 0 1 .244.098l.904.933c.163.164.163.32 0 .466l-3.224 3.192 3.224 3.242z"
+                  fill="#FFF" opacity=".88"></path>
           </g>
         </svg>
       </button>
       <div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
         <div class="as-oil-cpc__left">
-          <div class="as-oil-cpc__category-link as-oil-cpc__category-link--active">Purposes</div>
-          <div class="as-oil-cpc__category-link">Features</div>
+
+          <!--ToDo: need to implement active/not active logic-->
+          <a href="#as-oil-cpc-purposes">
+            <div class="as-oil-cpc__category-link as-oil-cpc__category-link--active">Purposes</div>
+          </a>
+          <a href="#as-oil-cpc-features">
+            <div class="as-oil-cpc__category-link">Features</div>
+          </a>
+          <a href="#as-oil-cpc-third-parties">
+            <div class="as-oil-cpc__category-link">3rd Parties</div>
+          </a>
         </div>
         <div class="as-oil-cpc__middle">
-          <div class="as-oil-cpc__row-btn-all">
-            <span class="as-js-btn-deactivate-all as-oil__btn-grey">label_cpc_deactivate_all</span>
-            <span class="as-js-btn-activate-all as-oil__btn-blue">label_cpc_activate_all</span>
-          </div>
-          <div class="as-oil-cpc__row-title">
+          <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
             Purposes
           </div>
-          <div>
-            <div class="as-oil-cpc__purpose">
-              <div class="as-oil-cpc__purpose-container">
-                <div class="as-oil-cpc__purpose-header">label_cpc_purpose_01_text</div>
-                <div class="as-oil-cpc__purpose-text">label_cpc_purpose_01_desc</div>
-                <label class="as-oil-cpc__switch">
-
-                  <!-- TODO: think about name attribute-->
-                  <input id="as-js-purpose-slider-01" class="as-js-purpose-slider" type="checkbox"
-                         name="oil-cpc-purpose-label_cpc_purpose_01_text" value="false">
-                  <span class="as-oil-cpc__status"></span>
-                  <span class="as-oil-cpc__slider"></span>
-                </label>
-              </div>
+          <div class="as-oil-cpc__purpose">
+            <div class="as-oil-cpc__purpose-container">
+              <div class="as-oil-cpc__purpose-header">label_cpc_purpose_01_text</div>
+              <div class="as-oil-cpc__purpose-text">label_cpc_purpose_01_desc</div>
+              <label class="as-oil-cpc__switch">
+                <input id="as-js-purpose-slider-01" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_01_text" value="false">
+                <span class="as-oil-cpc__status"></span>
+                <span class="as-oil-cpc__slider"></span>
+              </label>
             </div>
-            <div class="as-oil-cpc__purpose">
-              <div class="as-oil-cpc__purpose-container">
-                <div class="as-oil-cpc__purpose-header">label_cpc_purpose_02_text</div>
-                <div class="as-oil-cpc__purpose-text">label_cpc_purpose_02_desc</div>
-                <label class="as-oil-cpc__switch">
-
-                  <!-- TODO: think about name attribute-->
-                  <input id="as-js-purpose-slider-02" class="as-js-purpose-slider" type="checkbox"
-                         name="oil-cpc-purpose-label_cpc_purpose_02_text" value="false">
-                  <span class="as-oil-cpc__status"></span>
-                  <span class="as-oil-cpc__slider"></span>
-                </label>
-              </div>
+          </div>
+          <div class="as-oil-cpc__purpose">
+            <div class="as-oil-cpc__purpose-container">
+              <div class="as-oil-cpc__purpose-header">label_cpc_purpose_02_text</div>
+              <div class="as-oil-cpc__purpose-text">label_cpc_purpose_02_desc</div>
+              <label class="as-oil-cpc__switch">
+                <input id="as-js-purpose-slider-02" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_02_text" value="false">
+                <span class="as-oil-cpc__status"></span>
+                <span class="as-oil-cpc__slider"></span>
+              </label>
             </div>
-            <div class="as-oil-cpc__purpose">
-              <div class="as-oil-cpc__purpose-container">
-                <div class="as-oil-cpc__purpose-header">label_cpc_purpose_03_text</div>
-                <div class="as-oil-cpc__purpose-text">label_cpc_purpose_03_desc</div>
-                <label class="as-oil-cpc__switch">
-
-                  <!-- TODO: think about name attribute-->
-                  <input id="as-js-purpose-slider-03" class="as-js-purpose-slider" type="checkbox"
-                         name="oil-cpc-purpose-label_cpc_purpose_03_text" value="false">
-                  <span class="as-oil-cpc__status"></span>
-                  <span class="as-oil-cpc__slider"></span>
-                </label>
-              </div>
+          </div>
+          <div class="as-oil-cpc__purpose">
+            <div class="as-oil-cpc__purpose-container">
+              <div class="as-oil-cpc__purpose-header">label_cpc_purpose_03_text</div>
+              <div class="as-oil-cpc__purpose-text">label_cpc_purpose_03_desc</div>
+              <label class="as-oil-cpc__switch">
+                <input id="as-js-purpose-slider-03" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_03_text" value="false">
+                <span class="as-oil-cpc__status"></span>
+                <span class="as-oil-cpc__slider"></span>
+              </label>
             </div>
-            <div class="as-oil-cpc__purpose">
-              <div class="as-oil-cpc__purpose-container">
-                <div class="as-oil-cpc__purpose-header">label_cpc_purpose_04_text</div>
-                <div class="as-oil-cpc__purpose-text">label_cpc_purpose_04_desc</div>
-                <label class="as-oil-cpc__switch">
-
-                  <!-- TODO: think about name attribute-->
-                  <input id="as-js-purpose-slider-04" class="as-js-purpose-slider" type="checkbox"
-                         name="oil-cpc-purpose-label_cpc_purpose_04_text" value="false">
-                  <span class="as-oil-cpc__status"></span>
-                  <span class="as-oil-cpc__slider"></span>
-                </label>
-              </div>
+          </div>
+          <div class="as-oil-cpc__purpose">
+            <div class="as-oil-cpc__purpose-container">
+              <div class="as-oil-cpc__purpose-header">label_cpc_purpose_04_text</div>
+              <div class="as-oil-cpc__purpose-text">label_cpc_purpose_04_desc</div>
+              <label class="as-oil-cpc__switch">
+                <input id="as-js-purpose-slider-04" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_04_text" value="false">
+                <span class="as-oil-cpc__status"></span>
+                <span class="as-oil-cpc__slider"></span>
+              </label>
             </div>
-            <div class="as-oil-cpc__purpose">
-              <div class="as-oil-cpc__purpose-container">
-                <div class="as-oil-cpc__purpose-header">label_cpc_purpose_05_text</div>
-                <div class="as-oil-cpc__purpose-text">label_cpc_purpose_05_desc</div>
-                <label class="as-oil-cpc__switch">
-
-                  <!-- TODO: think about name attribute-->
-                  <input id="as-js-purpose-slider-05" class="as-js-purpose-slider" type="checkbox"
-                         name="oil-cpc-purpose-label_cpc_purpose_05_text" value="false">
-                  <span class="as-oil-cpc__status"></span>
-                  <span class="as-oil-cpc__slider"></span>
-                </label>
-              </div>
+          </div>
+          <div class="as-oil-cpc__purpose">
+            <div class="as-oil-cpc__purpose-container">
+              <div class="as-oil-cpc__purpose-header">label_cpc_purpose_05_text</div>
+              <div class="as-oil-cpc__purpose-text">label_cpc_purpose_05_desc</div>
+              <label class="as-oil-cpc__switch">
+                <input id="as-js-purpose-slider-05" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_05_text" value="false">
+                <span class="as-oil-cpc__status"></span>
+                <span class="as-oil-cpc__slider"></span>
+              </label>
             </div>
-            <div class="as-oil-cpc__purpose">
-              <div class="as-oil-cpc__purpose-container">
-                <div class="as-oil-cpc__purpose-header">label_cpc_purpose_06_text</div>
-                <div class="as-oil-cpc__purpose-text">label_cpc_purpose_06_desc</div>
-                <label class="as-oil-cpc__switch">
-
-                  <!-- TODO: think about name attribute-->
-                  <input id="as-js-purpose-slider-06" class="as-js-purpose-slider" type="checkbox"
-                         name="oil-cpc-purpose-label_cpc_purpose_06_text" value="false">
-                  <span class="as-oil-cpc__status"></span>
-                  <span class="as-oil-cpc__slider"></span>
-                </label>
-              </div>
+          </div>
+          <div class="as-oil-cpc__purpose">
+            <div class="as-oil-cpc__purpose-container">
+              <div class="as-oil-cpc__purpose-header">label_cpc_purpose_06_text</div>
+              <div class="as-oil-cpc__purpose-text">label_cpc_purpose_06_desc</div>
+              <label class="as-oil-cpc__switch">
+                <input id="as-js-purpose-slider-06" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_06_text" value="false">
+                <span class="as-oil-cpc__status"></span>
+                <span class="as-oil-cpc__slider"></span>
+              </label>
             </div>
-            <div class="as-oil-cpc__purpose">
-              <div class="as-oil-cpc__purpose-container">
-                <div class="as-oil-cpc__purpose-header">label_cpc_purpose_07_text</div>
-                <div class="as-oil-cpc__purpose-text">label_cpc_purpose_07_desc</div>
-                <label class="as-oil-cpc__switch">
-
-                  <!-- TODO: think about name attribute-->
-                  <input id="as-js-purpose-slider-07" class="as-js-purpose-slider" type="checkbox"
-                         name="oil-cpc-purpose-label_cpc_purpose_07_text" value="false">
-                  <span class="as-oil-cpc__status"></span>
-                  <span class="as-oil-cpc__slider"></span>
-                </label>
-              </div>
+          </div>
+          <div class="as-oil-cpc__purpose">
+            <div class="as-oil-cpc__purpose-container">
+              <div class="as-oil-cpc__purpose-header">label_cpc_purpose_07_text</div>
+              <div class="as-oil-cpc__purpose-text">label_cpc_purpose_07_desc</div>
+              <label class="as-oil-cpc__switch">
+                <input id="as-js-purpose-slider-07" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_07_text" value="false">
+                <span class="as-oil-cpc__status"></span>
+                <span class="as-oil-cpc__slider"></span>
+              </label>
             </div>
+          </div>
+          <div class="as-oil-cpc__row-title" id="as-oil-cpc-features">
+            Features
+          </div>
+          <div class="as-oil-cpc__features">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eum necessitatibus nemo perferendis perspiciatis quasi quis quisquam totam? Consequatur, distinctio dolores ducimus eveniet ex maiores modi perferendis placeat praesentium sit!
+          </div>
+          <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
+            3rd Parties
+          </div>
+          <div class="as-oil-cpc__thirdparties">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi at distinctio dolor ea enim est et eveniet inventore ipsam minima modi molestias perferendis possimus quod, reprehenderit soluta tempore temporibus.
           </div>
         </div>
         <div class="as-oil-cpc__right">

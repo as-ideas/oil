@@ -13,8 +13,8 @@ export const OIL_CONFIG = {
   ATTR_PERSIST_MINIMUM_TRACKING: 'persist_min_tracking',
   ATTR_LOCALE: 'locale',
   ATTR_THEME: 'theme',
-  ATTR_TIMEOUT: 'timeout'
-
+  ATTR_TIMEOUT: 'timeout',
+  ATTR_OIL_BACKEND_URL: 'oilBackendUrl'
 };
 
 // Main Click events
@@ -53,6 +53,7 @@ export const DATA_CONTEXT_BACK = 'BACK';
 
 export const OIL_PAYLOAD_PRIVACY = 'p';
 export const OIL_PAYLOAD_VERSION = 'v';
-export const OIL_PAYLOAD_LOCALE = 'l';
+export const OIL_PAYLOAD_LOCALE_VARIANT_NAME = 'lvn';
+export const OIL_PAYLOAD_LOCALE_VARIANT_VERSION = 'lvv';
 
 export const OIL_GLOBAL_OBJECT_NAME = 'AS_OIL';

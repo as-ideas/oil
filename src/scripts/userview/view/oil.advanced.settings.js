@@ -1,10 +1,10 @@
-import {DATA_CONTEXT_YES, DATA_CONTEXT_BACK} from '../../core/core_constants.js';
-import {OIL_LABELS} from '../userview_constants.js'
+import { DATA_CONTEXT_YES, DATA_CONTEXT_BACK } from '../../core/core_constants.js';
+import { OIL_LABELS } from '../userview_constants.js'
 import {
   getLabel
 } from '../userview_config.js';
-import {getTheme} from '../userview_config';
-import {forEach} from '../userview_modal';
+import { getTheme } from '../userview_config';
+import { forEach } from '../userview_modal';
 
 const PurposeContainerSnippet = ({id, header, text, value}) => {
   return `
