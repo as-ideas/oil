@@ -15,6 +15,7 @@ describe('core_oil', () => {
     }
 
     spyOn(CoreUtils, 'setGlobalOilObject');
+
     initOilLayer();
 
     expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledTimes(11);
@@ -45,6 +46,7 @@ describe('core_oil', () => {
     verifyThatGlobalOilObjectIsSet(9, 'triggerPoiOptIn', 'handlePoiOptIn');
 
     verifyThatGlobalOilObjectIsSet(10, 'triggerOptOut', 'handleOptOut');
+
   });
 
 });

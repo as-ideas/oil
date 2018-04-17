@@ -1,4 +1,4 @@
-import {locale} from '../../../src/scripts/userview/locale/userview_oil';
+import * as UserViewOil from '../../../src/scripts/userview/locale/userview_oil';
 import * as CoreUtils from '../../../src/scripts/core/core_utils.js';
 import * as CoreConfig from '../../../src/scripts/core/core_config.js';
 import {OIL_LABELS} from '../../../src/scripts/userview/userview_constants';
@@ -20,7 +20,8 @@ describe('the locale fetcher for userview modal', () => {
       resolve(mockedLocale);
     }));
 
-    locale(() => {
+    UserViewOil.locale(userview_oil => {
+      expect(userview_oil).toBeDefined();
       expect(CoreUtils.fetchJsonData.calls.argsFor(0)[0]).toEqual('https://oil-backend.herokuapp.com/oil/api/userViewLocales/enEN_01');
       expect(CoreUtils.setGlobalOilObject.calls.argsFor(0)[0]).toEqual('LOCALE');
       expect(CoreUtils.setGlobalOilObject.calls.argsFor(0)[1]).toEqual(mockedLocale);
@@ -33,7 +34,8 @@ describe('the locale fetcher for userview modal', () => {
       reject(new Error("something went wrong"));
     }));
 
-    locale(() => {
+    UserViewOil.locale(userview_oil => {
+      expect(userview_oil).toBeDefined();
       expect(CoreUtils.fetchJsonData.calls.argsFor(0)[0]).toEqual('https://oil-backend.herokuapp.com/oil/api/userViewLocales/enEN_01');
       expect(CoreUtils.setGlobalOilObject.calls.argsFor(0)[0]).toEqual('LOCALE');
 
