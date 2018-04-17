@@ -15,12 +15,12 @@ export {
 export function locale(callback) {
   fetchJsonData(getOilBackendUrl() + '/api/userViewLocales/' + getLocaleVariantName()).then(response => {
     setGlobalOilObject('LOCALE', response);
-    callback();
+    callback(this);
   }).catch(error => {
     let defaultLocale = getDefaultLocale();
     setGlobalOilObject('LOCALE', defaultLocale);
     logError(`OIL backend returned error: ${error}. Falling back to default locale '${defaultLocale.localeId}', version ${defaultLocale.version}!`);
-    callback();
+    callback(this);
   });
 }
 
