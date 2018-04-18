@@ -1,4 +1,11 @@
-import { OIL_LAYER, OIL_YES_BUTTON, OIL_ADVANCED_SETTINGS_SLIDER, OIL_ADVANCED_SETTINGS_TEST_BUTTON_SHOW_PREF, OIL_ADVANCED_SETTINGS_TEST_BUTTON_TRIGGER_OPTIN, OIL_ADVANCED_SETTINGS_SNIPPET } from '../test_constants.js';
+import {
+  OIL_LAYER,
+  OIL_YES_BUTTON,
+  OIL_ADVANCED_SETTINGS_TEST_BUTTON_SHOW_PREF,
+  OIL_ADVANCED_SETTINGS_TEST_BUTTON_TRIGGER_OPTIN,
+  OIL_ADVANCED_SETTINGS_SNIPPET
+} from '../test_constants.js';
+import {  } from '../test_constants';
 
 module.exports = {
   beforeEach: browser => {
@@ -27,7 +34,6 @@ module.exports = {
       .waitForElementNotPresent(OIL_ADVANCED_SETTINGS_SNIPPET, 1000)
       .click(OIL_ADVANCED_SETTINGS_TEST_BUTTON_SHOW_PREF)
       .waitForElementVisible(OIL_ADVANCED_SETTINGS_SNIPPET, 1000, false)
-      .waitForElementVisible(OIL_ADVANCED_SETTINGS_SLIDER, 1000, false)
       .click(OIL_ADVANCED_SETTINGS_TEST_BUTTON_TRIGGER_OPTIN)
       .refresh()
       .useCss()

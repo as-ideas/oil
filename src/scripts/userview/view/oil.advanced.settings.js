@@ -156,7 +156,7 @@ const ContentSnippet = () => {
 
 export function oilAdvancedSettingsTemplate() {
   return `
-  <div id="as-oil-cpc" class="as-oil-content-overlay as-oil-cpc-wrapper" data-qa="oil-poi-list">
+  <div id="as-oil-cpc" class="as-oil-content-overlay as-oil-cpc-wrapper" data-qa="oil-cpc-overlay">
     <div class="as-oil-l-wrapper-layout-max-width">
       <div class="as-oil__heading">
         ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
