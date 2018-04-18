@@ -5,6 +5,8 @@ import {
 } from '../userview_config.js';
 import { getTheme } from '../userview_config';
 import { forEach } from '../userview_modal';
+import {getPoiGroupName} from '../../core/core_config';
+import {logError} from '../../core/core_log';
 
 const PurposeContainerSnippet = ({id, header, text, value}) => {
   return `
@@ -18,20 +20,6 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
             <span class="as-oil-cpc__slider"></span>
         </label>
     </div>
-</div>`
-};
-
-const FeatureContainerSnippet = () => {
-  return `
-<div class="as-oil-cpc__features">
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eum necessitatibus nemo perferendis perspiciatis quasi quis quisquam totam? Consequatur, distinctio dolores ducimus eveniet ex maiores modi perferendis placeat praesentium sit!
-</div>`
-};
-
-const ThirdPartiesSnippet = () => {
-  return `
-<div class="as-oil-cpc__thirdparties">
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi at distinctio dolor ea enim est et eveniet inventore ipsam minima modi molestias perferendis possimus quod, reprehenderit soluta tempore temporibus.
 </div>`
 };
 
@@ -68,9 +56,6 @@ const ContentSnippet = () => {
     <!--ToDo: need to implement active/not active logic-->
         <a href="#as-oil-cpc-purposes">
           <div class="as-oil-cpc__category-link as-oil-cpc__category-link--active">Purposes</div>
-        </a>
-        <a href="#as-oil-cpc-features">
-          <div class="as-oil-cpc__category-link">Features</div>   
         </a>
         <a href="#as-oil-cpc-third-parties">
           <div class="as-oil-cpc__category-link">3rd Parties</div>   
@@ -129,18 +114,10 @@ const ContentSnippet = () => {
     text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_DESC),
     value: false
   })}
- 
-        <div class="as-oil-cpc__row-title" id="as-oil-cpc-features">
-            Features
-        </div>
-        
-        ${FeatureContainerSnippet()}
-        
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
             3rd Parties
         </div>
-        
-        ${ThirdPartiesSnippet()}
+       <div id="as-js-third-parties-list"></div>
     </div>
     <div class="as-oil-cpc__right">
      <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
@@ -167,6 +144,7 @@ export function oilAdvancedSettingsTemplate() {
       ${ActivateButtonSnippet()}
       ${BackButtonSnippet()}
       ${ContentSnippet()}
+      ${getOilThirdPartiesList()}  
     </div>
   </div>`
 }
@@ -192,4 +170,16 @@ function deactivateAll() {
   forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
     domNode && (domNode.checked = false);
   });
+}
+
+function getOilThirdPartiesList() {
+  System.import(`../../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
+    .then(poiList => {
+      document.getElementById('as-js-third-parties-list').innerHTML = poiList.listSnippet(poiList.thirdPartyList);
+    })
+    .catch((e) => {
+      logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
+    });
+
+  return '';
 }

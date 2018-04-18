@@ -3,11 +3,11 @@ import {
   oilShowPreferenceCenter,
   stopTimeOut,
 } from '../../../src/scripts/userview/userview_modal.js';
-import { loadFixture, readFixture, removeOilLayerAndConfig, deleteAllCookies } from '../../utils.js';
+import {loadFixture, readFixture, removeOilLayerAndConfig, deleteAllCookies, initCustomYasmineMatchers, waitsForAndRuns} from '../../utils.js';
+import * as OilList from '../../../src/scripts/poi-list/oil.list';
 import * as CoreConfig from '../../../src/scripts/core/core_config.js';
-import { hasRunningTimeout } from '../../../src/scripts/userview/userview_modal';
-import { initCustomYasmineMatchers } from '../../utils';
-import { setSoiOptIn } from '../../../src/scripts/core/core_cookies';
+import {hasRunningTimeout} from '../../../src/scripts/userview/userview_modal';
+import {setSoiOptIn} from '../../../src/scripts/core/core_cookies';
 
 describe('the userview modal aka the oil layer wrapper with CPC', () => {
 
@@ -19,13 +19,21 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
     initCustomYasmineMatchers();
   });
 
-  it('should renderOil with ADVANCED-SETTINGS as CPC template', () => {
-    loadFixture('config/given.config.example.labels.html');
+  it('should renderOil with ADVANCED-SETTINGS as CPC template', (done) => {
 
+    spyOn(OilList, 'listSnippet').and.callThrough();
+    loadFixture('config/given.config.example.labels.html');
     renderOil({optIn: false, advancedSettings: true});
 
-    expect(document.querySelector('.as-oil')).toEqualWithDiff(readFixture('gold-master/cpc.html'));
-    expectTimeoutNotStarted();
+    waitsForAndRuns(function() {
+      return OilList.listSnippet.calls.count() > 0;
+    }, function() {
+      expect(document.querySelector('.as-oil')).toEqualWithDiff(readFixture('gold-master/cpc.html'));
+      expectTimeoutNotStarted();
+      done();
+    }, 2000);
+
+
   });
 
   it('should insert CPC into host site with DEFAULT PRIVACY SETTING', () => {
