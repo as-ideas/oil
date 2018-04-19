@@ -25,7 +25,8 @@ function getHubDomainCookieConfig(groupName) {
       'power_opt_in': false,
       'timestamp': getClientTimestamp(),
       'version': OIL_HUB_UNKNOWN_VALUE, // those values cant be figured out
-      'locale': OIL_HUB_UNKNOWN_VALUE, //  in the hub and come from the sites config
+      'localeVariantName': OIL_HUB_UNKNOWN_VALUE, //  in the hub and come from the sites config
+      'localeVariantVersion': 0, //  in the hub and come from the sites config
       'privacy': PRIVACY_MINIMUM_TRACKING
     }
   };
