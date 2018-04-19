@@ -34,7 +34,7 @@ function getDefaultLocale() {
       [OIL_LABELS.ATTR_LABEL_BUTTON_YES]: 'OK',
       [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: 'Zurück',
       [OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS]: 'Mehr Informationen',
-      [OIL_LABELS.ATTR_LABEL_CPC_HEADING]: 'Ihre Einstellungen für die Verwendung von Cookies und anderen Technologien',
+      [OIL_LABELS.ATTR_LABEL_CPC_HEADING]: 'Ihre Einstellungen für die Verwendung von Cookies und anderen Technologien:',
       [OIL_LABELS.ATTR_LABEL_CPC_TEXT]: 'Bitte wählen Sie, welche Verwendungszweck und Funktionen für Sie aktiviert sind',
       [OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL]: 'Alle aktivieren',
       [OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL]: 'Alle deaktivieren',
