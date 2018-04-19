@@ -1,12 +1,9 @@
-import { DATA_CONTEXT_YES, DATA_CONTEXT_BACK } from '../../core/core_constants.js';
-import { OIL_LABELS } from '../userview_constants.js'
-import {
-  getLabel
-} from '../userview_config.js';
-import { getTheme } from '../userview_config';
-import { forEach } from '../userview_modal';
+import {OIL_LABELS} from '../userview_constants.js'
+import {forEach} from '../userview_modal';
+import {getLabel, getTheme} from '../userview_config.js';
 import {getPoiGroupName} from '../../core/core_config';
 import {logError} from '../../core/core_log';
+import {DATA_CONTEXT_YES, DATA_CONTEXT_BACK} from '../../core/core_constants.js';
 
 const PurposeContainerSnippet = ({id, header, text, value}) => {
   return `
@@ -175,11 +172,10 @@ function deactivateAll() {
 function getOilThirdPartiesList() {
   System.import(`../../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
     .then(poiList => {
-      document.getElementById('as-js-third-parties-list').innerHTML = poiList.listSnippet(poiList.thirdPartyList);
+      document.querySelector('#as-js-third-parties-list').innerHTML = poiList.listSnippet(poiList.thirdPartyList);
     })
     .catch((e) => {
       logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
     });
-
   return '';
 }

@@ -25,9 +25,9 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
     loadFixture('config/given.config.example.labels.html');
     renderOil({optIn: false, advancedSettings: true});
 
-    waitsForAndRuns(function() {
+    waitsForAndRuns(function () {
       return OilList.listSnippet.calls.count() > 0;
-    }, function() {
+    }, function () {
       expect(document.querySelector('.as-oil')).toEqualWithDiff(readFixture('gold-master/cpc.html'));
       expectTimeoutNotStarted();
       done();
