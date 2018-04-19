@@ -47,9 +47,12 @@
   .as-oil__heading,
   .as-oil__intro-txt {
     margin-left: 200px;
+    display: block;
+    max-width: 100%;
 
-    @include media('<=phone') {
+    @include media('<=929px') {
       margin-left: 0;
+      margin-right: 20px;
       text-align: center;
     }
   }
@@ -120,7 +123,7 @@
       display: inline-block;
       width: 49%;
       text-align: center;
-      padding: 0.5em 1em;
+      padding: .7em 1em;
     }
   }
 }
