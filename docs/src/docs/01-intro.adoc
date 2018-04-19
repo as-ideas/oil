@@ -42,12 +42,13 @@ Tealium | Michael Sievers, CDP|
 
 According the proposal of the Commission, the European Parliament, and the Council of Ministers, websites will be required to prompt users with a menu of privacy options when they are visited for the first time.[1]
 
-The Opt-In Layer (OIL) is our solution for these requirements consisting of two parts:
+The Opt-In Layer (OIL) is our solution for these requirements consisting of three parts:
 
 * A **subscriber** part, which adds the opt-in Layer to the host pages DOM and asks the user to opt-in.
 * A **hub** part, which acts as a registry site for POI on a domain hosted by Ideas Engineering. This is optional and only needed for POI functionality.
+* A **backend** part on a domain hosted by Ideas Engineering that provides all the texts and labels shown by the Opt-In Layer. Different languages and variants of these texts and labels are supported.
 
-Opt-In Information is stored in a first party cookie in the users browser and communicated in a general way to the host site and Tealium. For Power-Opt-In there is also a 3rd party cookie stored on a second domain to share information between sites. The OIL Layer currently does not have a central database.
+Opt-In Information is stored in a first party cookie in the user's browser and communicated in a general way to the host site and Tealium. For Power Opt-In there is also a 3rd party cookie stored on a second domain to share information between sites.
 
 === Why is there no native app support?
 

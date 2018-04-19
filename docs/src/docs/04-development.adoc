@@ -19,6 +19,8 @@ include::../../../etc/headerConfig.js[tags=p3p-config]
 
 include::development/tealium-deployment.adoc[]
 
+include::development/locale-configuration.adoc[]
+
 include::development/unofficial-configuration.adoc[]
 
 === FYI: Cross-Origin Messaging

@@ -14,7 +14,13 @@
 
 === Supported Languages
 
-{SUPPORTED_LANGUAGE}
+[options="header",cols="1,2"]
+|===
+| Locale | Description
+| deDE_01 | German
+| enEN_01 | English
+| plPL_01 | Polish
+|===
 
 === Supported POI Groups
 
