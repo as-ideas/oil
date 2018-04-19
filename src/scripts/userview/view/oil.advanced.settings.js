@@ -3,7 +3,11 @@ import {forEach} from '../userview_modal';
 import {getLabel, getTheme} from '../userview_config.js';
 import {getPoiGroupName} from '../../core/core_config';
 import {logError} from '../../core/core_log';
-import {DATA_CONTEXT_YES, DATA_CONTEXT_BACK} from '../../core/core_constants.js';
+import {DATA_CONTEXT_YES, DATA_CONTEXT_BACK, OIL_GLOBAL_OBJECT_NAME} from '../../core/core_constants.js';
+import {setGlobalOilObject} from '../../core/core_utils';
+
+
+const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';
 
 const PurposeContainerSnippet = ({id, header, text, value}) => {
   return `
@@ -50,12 +54,11 @@ const ContentSnippet = () => {
   return `
 <div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
     <div class="as-oil-cpc__left">
-    <!--ToDo: need to implement active/not active logic-->
-        <a href="#as-oil-cpc-purposes">
-          <div class="as-oil-cpc__category-link as-oil-cpc__category-link--active">Purposes</div>
+        <a href="#as-oil-cpc-purposes" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}">
+          Purposes
         </a>
-        <a href="#as-oil-cpc-third-parties">
-          <div class="as-oil-cpc__category-link">3rd Parties</div>   
+        <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
+          3rd Parties  
         </a>
     </div>
     <div class="as-oil-cpc__middle">
@@ -179,3 +182,14 @@ function getOilThirdPartiesList() {
     });
   return '';
 }
+
+function switchLeftMenuClass(element) {
+  let allElementsInMenu = element.parentNode.children;
+
+  forEach(allElementsInMenu, (el) => {
+    el.className = el.className.replace(new RegExp(`\\s?${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}\\s?`, 'g'), '');
+  });
+  element.className += ` ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}`;
+}
+
+setGlobalOilObject('_switchLeftMenuClass', switchLeftMenuClass);
