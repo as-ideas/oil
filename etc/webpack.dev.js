@@ -1,7 +1,3 @@
-/**
- * @author: @mreinhardt
- */
-
 const helpers = require('./helpers');
 const webpack = require('webpack');
 const path = require('path');
@@ -37,6 +33,10 @@ const METADATA = webpackMerge(commonConfig.metadata, {
  */
 var config = webpackMerge(commonConfig, {
 
+  /**
+   * Webpack mode (see https://webpack.js.org/concepts/mode/ for details).
+   */
+  mode: 'development',
 
   /**
    * Developer tool to enhance debugging
@@ -109,7 +109,7 @@ var config = webpackMerge(commonConfig, {
         'HMR': METADATA.HMR
       }
     }),
-    new OpenBrowserPlugin({ url: 'http://localhost:3000/webpack-dev-server/' })
+    new OpenBrowserPlugin({url: 'http://localhost:3000/webpack-dev-server/'})
   ],
 
   /**

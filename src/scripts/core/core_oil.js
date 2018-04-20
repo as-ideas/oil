@@ -44,7 +44,7 @@ export function initOilLayer() {
      */
     if (!isBrowserCookieEnabled()) {
       logInfo('This browser doesn\'t allow cookies.');
-      System.import('../userview/locale/userview_oil.js')
+      import('../userview/locale/userview_oil.js')
         .then(userview_modal => {
           userview_modal.locale(uv_m => uv_m.renderOil({noCookie: true}));
         })
@@ -69,7 +69,7 @@ export function initOilLayer() {
        * Any other case, when the user didnt decide before and oil needs to be shown:
        */
       else {
-        System.import('../userview/locale/userview_oil.js')
+        import('../userview/locale/userview_oil.js')
           .then(userview_modal => {
             userview_modal.locale(uv_m => uv_m.renderOil({optIn: false}));
           })
@@ -88,7 +88,7 @@ export function initOilLayer() {
 function attachUtilityFunctionsToWindowObject(locale) {
 
   function loadLocale(callback) {
-    System.import('../userview/locale/userview_oil.js')
+    import('../userview/locale/userview_oil.js')
       .then(userview_modal => {
         if (!getGlobalOilObject('LOCALE')) {
           userview_modal.locale(callback);

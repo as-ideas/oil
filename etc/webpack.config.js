@@ -1,6 +1,4 @@
-/**
- * @author: @hypery2k
- */
+
 const path = require('path');
 
 switch (process.env.NODE_ENV) {

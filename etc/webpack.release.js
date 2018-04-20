@@ -12,10 +12,14 @@ const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
 const IgnorePlugin = require('webpack/lib/IgnorePlugin');
-const DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
-const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var config = webpackMerge(prodConfig, {
+
+  /**
+   * Webpack mode (see https://webpack.js.org/concepts/mode/ for details).
+   */
+  mode: 'production',
 
   output: {
     // the public path which is used by all System.require

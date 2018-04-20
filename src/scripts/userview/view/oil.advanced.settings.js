@@ -3,7 +3,7 @@ import {forEach} from '../userview_modal';
 import {getLabel, getTheme} from '../userview_config.js';
 import {getPoiGroupName} from '../../core/core_config';
 import {logError} from '../../core/core_log';
-import {DATA_CONTEXT_YES, DATA_CONTEXT_BACK, OIL_GLOBAL_OBJECT_NAME} from '../../core/core_constants.js';
+import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME} from '../../core/core_constants.js';
 import {setGlobalOilObject} from '../../core/core_utils';
 
 
@@ -173,7 +173,7 @@ function deactivateAll() {
 }
 
 function getOilThirdPartiesList() {
-  System.import(`../../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
+  import(`../../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
     .then(poiList => {
       document.querySelector('#as-js-third-parties-list').innerHTML = poiList.listSnippet(poiList.thirdPartyList);
     })
