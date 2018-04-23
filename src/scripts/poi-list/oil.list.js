@@ -11,7 +11,7 @@ import { setGlobalOilObject, getGlobalOilObject } from '../core/core_utils.js';
  * OIL SOI will be only shown, when there is no POI on the advanced settings
  * Returned element is used to ignore Oil completely
  */
-const listSnippet = (list) => {
+export const listSnippet = (list) => {
   let listWrapped = list.map((element) => {
     if (typeof element === 'object') {
       return `<div class="as-oil-third-party-list-element">

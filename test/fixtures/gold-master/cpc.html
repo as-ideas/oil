@@ -25,16 +25,11 @@
       </button>
       <div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
         <div class="as-oil-cpc__left">
-
-          <!--ToDo: need to implement active/not active logic-->
-          <a href="#as-oil-cpc-purposes">
-            <div class="as-oil-cpc__category-link as-oil-cpc__category-link--active">Purposes</div>
+          <a href="#as-oil-cpc-purposes" onclick="AS_OIL._switchLeftMenuClass(this)" class="as-oil-cpc__category-link as-oil-cpc__category-link--active">
+            Purposes
           </a>
-          <a href="#as-oil-cpc-features">
-            <div class="as-oil-cpc__category-link">Features</div>
-          </a>
-          <a href="#as-oil-cpc-third-parties">
-            <div class="as-oil-cpc__category-link">3rd Parties</div>
+          <a href="#as-oil-cpc-third-parties" onclick="AS_OIL._switchLeftMenuClass(this)" class="as-oil-cpc__category-link">
+            3rd Parties
           </a>
         </div>
         <div class="as-oil-cpc__middle">
@@ -118,17 +113,216 @@
               </label>
             </div>
           </div>
-          <div class="as-oil-cpc__row-title" id="as-oil-cpc-features">
-            Features
-          </div>
-          <div class="as-oil-cpc__features">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eum necessitatibus nemo perferendis perspiciatis quasi quis quisquam totam? Consequatur, distinctio dolores ducimus eveniet ex maiores modi perferendis placeat praesentium sit!
-          </div>
           <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
             3rd Parties
           </div>
-          <div class="as-oil-cpc__thirdparties">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi at distinctio dolor ea enim est et eveniet inventore ipsam minima modi molestias perferendis possimus quod, reprehenderit soluta tempore temporibus.
+          <div id="as-js-third-parties-list">
+            <div class="as-oil-poi-group-list">
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">Contact Impact</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="http://www.adrolays.com/de/opt-out" target="_blank" title="">http://www.adrolays.com/de/opt-out</a>
+                  </div>
+                </div>
+              </div>
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">Ad Audience</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="http://www.adaudience.de/datenschutz/" target="_blank" title="">http://www.adaudience.de/datenschutz/</a>
+                  </div>
+                </div>
+              </div>
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">Amazon</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="http://www.amazon.de/gp/dra/info" target="_blank" title="">http://www.amazon.de/gp/dra/info</a>
+                  </div>
+                </div>
+              </div>
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">Audience Science</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="http://www.audiencescience.com/de/privacy" target="_blank" title="">http://www.audiencescience.com/de/privacy</a>
+                  </div>
+                </div>
+              </div>
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">Criteo</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="http://www.criteo.com/de/privacy/" target="_blank" title="">http://www.criteo.com/de/privacy/</a>
+                  </div>
+                </div>
+              </div>
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">Emetriq</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="https://www.emetriq.com/opt-out" target="_blank" title="">https://www.emetriq.com/opt-out</a>
+                  </div>
+                </div>
+              </div>
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">1plusx</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="http://1plusx.com/privacy-policy/" target="_blank" title="">http://1plusx.com/privacy-policy/</a>
+                  </div>
+                </div>
+              </div>
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">Nugg.ad</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="http://mtm.nuggad.net/" target="_blank" title="">http://mtm.nuggad.net/</a>
+                  </div>
+                </div>
+              </div>
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">Vibrant Media</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="https://www.vibrantmedia.com/privacy-policy/" target="_blank" title="">https://www.vibrantmedia.com/privacy-policy/</a>
+                  </div>
+                </div>
+              </div>
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">Xplosion</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="https://www.xplosion.de/opt-out.php" target="_blank" title="">https://www.xplosion.de/opt-out.php</a>
+                  </div>
+                </div>
+              </div>
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">Yieldlab</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="http://www.yieldlab.de/privacy/" target="_blank" title="">http://www.yieldlab.de/privacy/</a>
+                  </div>
+                </div>
+              </div>
+              <div class="as-oil-third-party-list-element">
+                <span onclick="AS_OIL._toggleViewElements(this)">
+                    <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+                    </svg>
+                    <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+                    </svg>
+                    <span class="as-oil-third-party-name">AppNexus</span>
+                </span>
+                <div class="as-oil-third-party-toggle-part" style="display: none;">
+                  <p class="as-oil-third-party-description"></p>
+                  <div class="as-oil-third-party-link">
+                    <a href="https://www.appnexus.com/en/company/platform-privacy-policy-de1#choices" target="_blank" title="">https://www.appnexus.com/en/company/platform-privacy-policy-de1#choices</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="as-oil-cpc__right">
