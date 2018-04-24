@@ -58,16 +58,16 @@ describe('the hub.js', () => {
         expect(HubAPI.redirectBack).toHaveBeenCalled();
         done();
       });
+    });
 
-      it('should write a cookie with default name', function (done) {
-        HubAPI.initOilHub('hub.html?fallback=1');
+    it('should write a cookie with default name', function (done) {
+      HubAPI.initOilHub('hub.html?fallback=1');
 
-        setTimeout(() => {
-          let cookie = Cookie.getJSON(OIL_COOKIE.NAME);
-          expect(cookie).toBeDefined();
-          expect(HubAPI.redirectBack).toHaveBeenCalled();
-          done();
-        });
+      setTimeout(() => {
+        let cookie = Cookie.getJSON(OIL_COOKIE.NAME);
+        expect(cookie).toBeDefined();
+        expect(HubAPI.redirectBack).toHaveBeenCalled();
+        done();
       });
     });
   });
