@@ -9,11 +9,7 @@ const appConfig = helpers.getAppConfig();
 /**
  * Webpack Plugins
  */
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
-const IgnorePlugin = require('webpack/lib/IgnorePlugin');
-const LoaderOptionsPlugin = webpack.LoaderOptionsPlugin;
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 
@@ -34,7 +30,7 @@ const BUNDLE_VERSION = process.env.npm_package_version + (process.env.SNAPSHOT |
 
 console.info('Building BUNDLE_VERSION', BUNDLE_VERSION);
 
-var config = webpackMerge(commonConfig, {
+const config = webpackMerge(commonConfig, {
 
   /**
    * Webpack mode (see https://webpack.js.org/concepts/mode/ for details).
@@ -160,7 +156,7 @@ var config = webpackMerge(commonConfig, {
         sourceMap: false,
         beautify: false,
         compress: {
-          screw_ie8: true,
+          ie8: true,
           passes: 3
         },
         parse: {

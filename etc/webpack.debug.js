@@ -1,20 +1,9 @@
 const helpers = require('./helpers');
 const util = require('util');
 const debugLog = util.debuglog('oil-debug');
-const webpack = require('webpack');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
 const appConfig = helpers.getAppConfig();
-
-/**
- * Webpack Plugins
- */
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
-const DefinePlugin = require('webpack/lib/DefinePlugin');
-const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
-const IgnorePlugin = require('webpack/lib/IgnorePlugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
 
 /**
  * Webpack Constants
@@ -29,7 +18,7 @@ const METADATA = webpackMerge(commonConfig.metadata, {
   HMR: false
 });
 
-var config = webpackMerge(commonConfig, {
+let config = webpackMerge(commonConfig, {
 
   /**
    * Webpack mode (see https://webpack.js.org/concepts/mode/ for details).

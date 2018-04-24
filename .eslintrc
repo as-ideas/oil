@@ -4,22 +4,18 @@ plugins: [
   "import",
   "es6-recommended",
   "jasmine",
-  "jasmine-jquery"
 ]
 
 parserOptions: {
   ecmaVersion: 6,
   sourceType: "module",
-  allowImportExportEverywhere: true
+  allowImportExportEverywhere: true,
+  ecmaFeatures: {
+    modules: true,
+    jsx: true
+  }
 }
 
-ecmaFeatures:
-  modules: true
-  jsx: true
-
-extends: [
-  "plugin:jasmine-jquery/recommended"
-]
 
 env:
   amd: true
@@ -68,7 +64,7 @@ rules:
   # Best Practices
   accessor-pairs: 2
   block-scoped-var: 0
-  complexity: [2, 8]
+  complexity: [2, 9]
   consistent-return: 0
   curly: 0
   default-case: 0

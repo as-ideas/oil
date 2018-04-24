@@ -12,7 +12,6 @@ debugLog('Using following appConfig:', appConfig);
  */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const Webpack2Polyfill = require("webpack2-polyfill-plugin");
 
 /*
  * Webpack Constants
@@ -177,15 +176,6 @@ var config = {
    * See: http://webpack.github.io/docs/configuration.html#plugins
    */
   plugins: [
-
-    new webpack.ProvidePlugin(appConfig.globals || {
-      PouchDB: "pouchdb",
-      jquery: "jQuery",
-      "windows.jQuery": "jquery"
-    }),
-
-    new Webpack2Polyfill(),
-
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
@@ -236,5 +226,4 @@ for (var indexConfig of appConfig.indexFiles) {
 if (appConfig.additionalWebpackOptions) {
   config = webpackMerge(config, appConfig.additionalWebpackOptions);
 }
-debugLog('Using following webpack common config:', config);
 module.exports = config;

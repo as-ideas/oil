@@ -1,5 +1,4 @@
 const helpers = require('./helpers');
-const webpack = require('webpack');
 const util = require('util');
 const debugLog = util.debuglog('oil-debug');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
@@ -23,8 +22,7 @@ const ENV = process.env.ENV || process.env.NODE_ENV || 'test';
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-
-var config = webpackMerge(commonConfig, {
+let config = webpackMerge(commonConfig, {
 
   /**
    * Webpack mode (see https://webpack.js.org/concepts/mode/ for details).
