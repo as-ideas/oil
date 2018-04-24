@@ -1,3 +1,5 @@
+parser: "babel-eslint"
+
 plugins: [
   "import",
   "es6-recommended",
@@ -8,6 +10,7 @@ plugins: [
 parserOptions: {
   ecmaVersion: 6,
   sourceType: "module",
+  allowImportExportEverywhere: true
 }
 
 ecmaFeatures:
@@ -29,8 +32,8 @@ env:
 # http://eslint.org/docs/rules/
 rules:
   import/no-unresolved: [2, {commonjs: true, amd: true}]
-  import/named: 2
-  import/namespace: 2
+  import/named: 1
+  import/namespace: 1
   import/default: 2
   import/export: 2
   # Possible Errors
