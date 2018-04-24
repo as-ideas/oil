@@ -4,7 +4,7 @@ import {logError, logInfo, logPreviewInfo} from './core_log.js';
 import {checkOptIn} from './core_optin.js';
 import {isPoiGroupValid} from './core_poi_group.js';
 import {getRawSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePreviewCookie, removeVerboseCookie, setPreviewCookie, setVerboseCookie} from './core_cookies.js';
-import {doSetTealiumVariables} from './core_tealium_loading_rules';
+import {doSetTealiumVariables} from './core_tealium_loading_rules.js';
 import {getLocaleVariantName, getPoiGroupName, isPoiActive, isPreviewMode, resetConfiguration} from './core_config.js';
 import {EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN} from './core_constants.js';
 

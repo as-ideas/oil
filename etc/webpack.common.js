@@ -112,6 +112,7 @@ var config = {
        * See: https://github.com/webpack/json-loader
        */
       {
+        type: 'javascript/auto',
         test: /\.json$/,
         loader: 'json-loader'
       }, {

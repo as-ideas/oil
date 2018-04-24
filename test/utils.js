@@ -1,5 +1,5 @@
-import {forEach} from '../src/scripts/userview/userview_modal';
-import { customMatchers } from './utilsHtmlDiff';
+import {forEach} from '../src/scripts/userview/userview_modal.js';
+import { customMatchers } from './utilsHtmlDiff.js';
 
 /**
  * Load a jasmine fixture from the given path

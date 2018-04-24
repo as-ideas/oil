@@ -20,9 +20,9 @@ import {logError, logInfo} from '../core/core_log.js';
 import {getTheme, getTimeOutValue, isPersistMinimumTracking} from './userview_config.js';
 import {isSubscriberSetCookieActive} from '../core/core_config.js';
 import {getPoiGroupName, isPoiActive} from '../core/core_config';
-import {attachCpcHandlers} from './view/oil.advanced.settings';
-import {applyPrivacySettings, getPrivacySettings, getSoiPrivacy, PRIVACY_SETTINGS_ALL_FALSE} from './userview_privacy';
-import {EVENT_NAME_AS_PRIVACY_SELECTED, PRIVACY_MINIMUM_TRACKING} from '../core/core_constants';
+import {attachCpcHandlers} from './view/oil.advanced.settings.js';
+import {applyPrivacySettings, getPrivacySettings, getSoiPrivacy, PRIVACY_SETTINGS_ALL_FALSE} from './userview_privacy.js';
+import {EVENT_NAME_AS_PRIVACY_SELECTED, PRIVACY_MINIMUM_TRACKING} from '../core/core_constants.js';
 
 
 // Initialize our Oil wrapper and save it ...

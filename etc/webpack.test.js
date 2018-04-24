@@ -27,7 +27,7 @@ let config = webpackMerge(commonConfig, {
   /**
    * Webpack mode (see https://webpack.js.org/concepts/mode/ for details).
    */
-  mode: 'production',
+  mode: 'development',
 
   /**
    * Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
@@ -100,7 +100,8 @@ let config = webpackMerge(commonConfig, {
       'process.env': {
         'ENV': JSON.stringify(ENV),
         'NODE_ENV': JSON.stringify(ENV),
-        'HMR': false
+        'HMR': false,
+        'PORT': 3000
       },
       'APP_CONFIG': JSON.stringify(appConfig)
     })
