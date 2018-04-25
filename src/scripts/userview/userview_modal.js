@@ -1,32 +1,28 @@
 import '../../styles/modal.scss';
 import '../../styles/cpc.scss';
-import { sendEventToHostSite } from '../core/core_utils.js';
-import { removeSubscriberCookies } from '../core/core_cookies.js';
+import {sendEventToHostSite} from '../core/core_utils.js';
+import {removeSubscriberCookies} from '../core/core_cookies.js';
 import {
-  EVENT_NAME_BACK_TO_MAIN,
   EVENT_NAME_ADVANCED_SETTINGS,
-  EVENT_NAME_SOI_OPT_IN,
-  EVENT_NAME_POI_OPT_IN,
+  EVENT_NAME_BACK_TO_MAIN,
   EVENT_NAME_COMPANY_LIST,
+  EVENT_NAME_POI_OPT_IN,
+  EVENT_NAME_SOI_OPT_IN,
   EVENT_NAME_THIRD_PARTY_LIST,
   EVENT_NAME_TIMEOUT
 } from '../core/core_constants.js';
-import { oilOptIn, oilPowerOptIn } from './userview_optin.js';
-import { deActivatePowerOptIn } from '../core/core_poi.js';
-import { oilDefaultTemplate } from './view/oil.default.js';
-import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
-import { oilAdvancedSettingsTemplate } from './view/oil.advanced.settings.js';
-import { logInfo, logError } from '../core/core_log.js';
-import { isPersistMinimumTracking, getTimeOutValue, getTheme } from './userview_config.js';
-import { isSubscriberSetCookieActive } from '../core/core_config.js';
-import { getPoiGroupName, isPoiActive } from '../core/core_config';
-import { attachCpcHandlers } from './view/oil.advanced.settings';
-import {
-  applyPrivacySettings,
-  getPrivacySettings, getSoiPrivacy,
-  PRIVACY_SETTINGS_ALL_FALSE
-} from './userview_privacy';
-import { EVENT_NAME_AS_PRIVACY_SELECTED, PRIVACY_MINIMUM_TRACKING } from '../core/core_constants';
+import {oilOptIn, oilPowerOptIn} from './userview_optin.js';
+import {deActivatePowerOptIn} from '../core/core_poi.js';
+import {oilDefaultTemplate} from './view/oil.default.js';
+import {oilNoCookiesTemplate} from './view/oil.no.cookies.js';
+import {oilAdvancedSettingsTemplate} from './view/oil.advanced.settings.js';
+import {logError, logInfo} from '../core/core_log.js';
+import {getTheme, getTimeOutValue, isPersistMinimumTracking} from './userview_config.js';
+import {isSubscriberSetCookieActive} from '../core/core_config.js';
+import {getPoiGroupName, isPoiActive} from '../core/core_config';
+import {attachCpcHandlers} from './view/oil.advanced.settings.js';
+import {applyPrivacySettings, getPrivacySettings, getSoiPrivacy, PRIVACY_SETTINGS_ALL_FALSE} from './userview_privacy.js';
+import {EVENT_NAME_AS_PRIVACY_SELECTED, PRIVACY_MINIMUM_TRACKING} from '../core/core_constants.js';
 
 
 // Initialize our Oil wrapper and save it ...
@@ -110,7 +106,7 @@ export function oilShowPreferenceCenter(preset = PRIVACY_SETTINGS_ALL_FALSE) {
 }
 
 function oilShowCompanyList() {
-  System.import(`../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
+  import(`../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
     .then(poiList => {
       renderOilContentToWrapper(poiList.oilGroupListTemplate(poiList.companyList));
     })
@@ -121,7 +117,7 @@ function oilShowCompanyList() {
 }
 
 function oilShowThirdPartyList() {
-  System.import(`../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
+  import(`../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
     .then(poiList => {
       renderOilContentToWrapper(poiList.oilThirdPartyListTemplate(poiList.thirdPartyList));
     })

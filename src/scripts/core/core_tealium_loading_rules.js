@@ -1,4 +1,4 @@
-import {getSoiCookie} from './core_cookies';
+import {getSoiCookie} from './core_cookies.js';
 
 
 const LOADING_RULE_ALL = '_dip_oil_consent_all';

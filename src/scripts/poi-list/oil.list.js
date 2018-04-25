@@ -2,8 +2,8 @@ import {
   getLabel,
   getTheme
 } from '../userview/userview_config.js';
-import { OIL_LABELS } from '../userview/userview_constants';
-import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../core/core_constants';
+import { OIL_LABELS } from '../userview/userview_constants.js';
+import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../core/core_constants.js';
 import './poi.group.scss';
 import { setGlobalOilObject, getGlobalOilObject } from '../core/core_utils.js';
 
