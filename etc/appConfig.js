@@ -127,7 +127,8 @@ module.exports = {
   }],
   entry: {
     'hub': path.resolve(sourcePath, 'hub.js'),
-    'oil': path.resolve(sourcePath, 'oil.js')
+    'oil': path.resolve(sourcePath, 'oil.js'),
+    'oilstub': path.resolve(sourcePath, 'oilstub.js')
   },
   copy: [{
     from: path.resolve(sourcePath, 'assets'),
