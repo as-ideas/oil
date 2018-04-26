@@ -8,9 +8,6 @@ describe('oil stub', () => {
     window.__cmp.config.storeConsentGlobally = false;
   });
 
-  afterEach(() => {
-  });
-
   it('should define __cmp() function', () => {
     expect(window.__cmp).toBeDefined();
   });
