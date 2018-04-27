@@ -7,6 +7,8 @@ import {
 } from '../test_constants.js';
 
 module.exports = {
+  '@disabled': false,
+
   beforeEach: browser => {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')

@@ -1,6 +1,7 @@
 import {OIL_ADVANCED_SETTINGS, OIL_LAYER, OIL_YES_BUTTON} from '../test_constants';
 
 module.exports = {
+  '@disabled': false,
   tags: ['locale'],
   beforeEach: browser => {
     browser

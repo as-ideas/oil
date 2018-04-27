@@ -8,6 +8,7 @@ const ASSERT_TIMEOUT = 2000;
 const PAGE_INIT_TIMEOUT = 20000;
 
 module.exports = {
+  '@disabled': false,
   beforeEach: browser => {
     // wait for site hosts
     browser
