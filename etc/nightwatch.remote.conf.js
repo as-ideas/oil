@@ -16,7 +16,7 @@ nightwatch_config = {
 
   common_capabilities: {
     'browserstack.user': 'asideas1',
-    'browserstack.key': 'r7VdBAeqfwx3o3Drqg81'
+    'browserstack.key': 'rB4U5YVGsGryCXscMsKQ'
   },
 
   // get new configs from https://www.browserstack.com/automate/node

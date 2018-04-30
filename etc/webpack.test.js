@@ -1,9 +1,4 @@
-/**
- * @author: @mreinhardt
- */
-
 const helpers = require('./helpers');
-const webpack = require('webpack');
 const util = require('util');
 const debugLog = util.debuglog('oil-debug');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
@@ -27,85 +22,90 @@ const ENV = process.env.ENV || process.env.NODE_ENV || 'test';
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
+let config = webpackMerge(commonConfig, {
 
-var config = webpackMerge(commonConfig, {
+  /**
+   * Webpack mode (see https://webpack.js.org/concepts/mode/ for details).
+   */
+  mode: 'development',
 
-    /**
-     * Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
-     *
-     * Do not change, leave as is or it wont work.
-     * See: https://github.com/webpack/karma-webpack#source-maps
-     */
-    devtool: 'inline-source-map',
+  /**
+   * Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
+   *
+   * Do not change, leave as is or it wont work.
+   * See: https://github.com/webpack/karma-webpack#source-maps
+   */
+  devtool: 'inline-source-map',
 
-    /**
-     * Options affecting the normal modules.
-     *
-     * See: http://webpack.github.io/docs/configuration.html#module
-     */
-    module: {
-
-        /**
-         * An array of applied pre and post loaders.
-         *
-         * See: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
-         */
-
-        rules: [
-            // PRE-LOADERS
-            /**
-             * Instruments JS files with Istanbul for subsequent code coverage reporting.
-             * Instrument only testing sources.
-             *
-             * See: https://github.com/deepsweet/istanbul-instrumenter-loader
-             */
-            {
-                test: /\.(js|ts)$/,
-                loader: 'istanbul-instrumenter-loader',
-                include: [
-                    appConfig.srcPath,
-                    appConfig.testPath
-                ],
-                exclude: [
-                    /\.(e2e|spec)\.ts$/,
-                    /node_modules/
-                ],
-                enforce: 'pre'
-            }
-        ]
-    },
+  /**
+   * Options affecting the normal modules.
+   *
+   * See: http://webpack.github.io/docs/configuration.html#module
+   */
+  module: {
 
     /**
-     * Add additional plugins to the compiler.
+     * An array of applied pre and post loaders.
      *
-     * See: http://webpack.github.io/docs/configuration.html#plugins
+     * See: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
      */
-    plugins: [
-        new SourceMapDevToolPlugin({
-            filename: null, // if no value is provided the sourcemap is inlined
-            test: /\.(ts|js)($|\?)/i // process .js and .ts files only
-        }),
-        new LoaderOptionsPlugin({
-            test: /\.ts/i,
-            options: {
-                tslint: {
-                    enforce: 'pre',
-                    emitErrors: true,
-                    failOnHint: false
-                }
-            }
-        }),
-        new DefinePlugin({
-            'ENV': JSON.stringify(ENV),
-            'HMR': false,
-            'process.env': {
-                'ENV': JSON.stringify(ENV),
-                'NODE_ENV': JSON.stringify(ENV),
-                'HMR': false
-            },
-            'APP_CONFIG': JSON.stringify(appConfig)
-        })
+
+    rules: [
+      // PRE-LOADERS
+      /**
+       * Instruments JS files with Istanbul for subsequent code coverage reporting.
+       * Instrument only testing sources.
+       *
+       * See: https://github.com/deepsweet/istanbul-instrumenter-loader
+       */
+      {
+        test: /\.(js|ts)$/,
+        loader: 'istanbul-instrumenter-loader',
+        include: [
+          appConfig.srcPath,
+          appConfig.testPath
+        ],
+        exclude: [
+          /\.(e2e|spec)\.ts$/,
+          /node_modules/
+        ],
+        enforce: 'pre'
+      }
     ]
+  },
+
+  /**
+   * Add additional plugins to the compiler.
+   *
+   * See: http://webpack.github.io/docs/configuration.html#plugins
+   */
+  plugins: [
+    new SourceMapDevToolPlugin({
+      filename: null, // if no value is provided the sourcemap is inlined
+      test: /\.(ts|js)($|\?)/i // process .js and .ts files only
+    }),
+    new LoaderOptionsPlugin({
+      test: /\.ts/i,
+      options: {
+        tslint: {
+          enforce: 'pre',
+          emitErrors: true,
+          failOnHint: false
+        }
+      }
+    }),
+    new DefinePlugin({
+      'ENV': JSON.stringify(ENV),
+      'HMR': false,
+      'process.env': {
+        'ENV': JSON.stringify(ENV),
+        'NODE_ENV': JSON.stringify(ENV),
+        'HMR': false,
+        'PORT': 3000
+      },
+      'APP_CONFIG': JSON.stringify(appConfig)
+    })
+  ]
 });
 
 debugLog('Using following webpack test config:', config);

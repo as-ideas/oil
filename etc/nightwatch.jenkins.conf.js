@@ -33,14 +33,11 @@ module.exports = {
     "chrome": {
       "desiredCapabilities": {
         "browserName": "chrome",
-        "javascriptEnabled": true
+        "javascriptEnabled": true,
+        "chromeOptions" : {
+          "args" : ["headless"]
+        }
       },
-    },
-    "phantomjs": {
-      "desiredCapabilities": {
-        "browserName": "phantomjs",
-        "javascriptEnabled": true
-      }
     }
   }
 };

@@ -1,26 +1,12 @@
-import { getGlobalOilObject, OilVersion, sendEventToHostSite, setGlobalOilObject } from './core_utils.js';
-import { handleOptOut } from './core_optout.js';
-import { logError, logInfo, logPreviewInfo } from './core_log.js';
-import { checkOptIn } from './core_optin.js';
-import { isPoiGroupValid } from './core_poi_group.js';
-import {
-  getRawSoiCookie,
-  isBrowserCookieEnabled,
-  isPreviewCookieSet,
-  removePreviewCookie,
-  removeVerboseCookie,
-  setPreviewCookie,
-  setVerboseCookie
-} from './core_cookies.js';
-import { doSetTealiumVariables } from './core_tealium_loading_rules';
-import {
-  getLocaleVariantName,
-  getPoiGroupName,
-  isPoiActive,
-  isPreviewMode,
-  resetConfiguration
-} from './core_config.js';
-import { EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN } from './core_constants.js';
+import {getGlobalOilObject, OilVersion, sendEventToHostSite, setGlobalOilObject} from './core_utils.js';
+import {handleOptOut} from './core_optout.js';
+import {logError, logInfo, logPreviewInfo} from './core_log.js';
+import {checkOptIn} from './core_optin.js';
+import {isPoiGroupValid} from './core_poi_group.js';
+import {getRawSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePreviewCookie, removeVerboseCookie, setPreviewCookie, setVerboseCookie} from './core_cookies.js';
+import {doSetTealiumVariables} from './core_tealium_loading_rules.js';
+import {getLocaleVariantName, getPoiGroupName, isPoiActive, isPreviewMode, resetConfiguration} from './core_config.js';
+import {EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN} from './core_constants.js';
 
 /**
  * Initialize Oil on Host Site
@@ -58,7 +44,7 @@ export function initOilLayer() {
      */
     if (!isBrowserCookieEnabled()) {
       logInfo('This browser doesn\'t allow cookies.');
-      System.import('../userview/locale/userview_oil.js')
+      import('../userview/locale/userview_oil.js')
         .then(userview_modal => {
           userview_modal.locale(uv_m => uv_m.renderOil({noCookie: true}));
         })
@@ -83,7 +69,7 @@ export function initOilLayer() {
        * Any other case, when the user didnt decide before and oil needs to be shown:
        */
       else {
-        System.import('../userview/locale/userview_oil.js')
+        import('../userview/locale/userview_oil.js')
           .then(userview_modal => {
             userview_modal.locale(uv_m => uv_m.renderOil({optIn: false}));
           })
@@ -102,7 +88,7 @@ export function initOilLayer() {
 function attachUtilityFunctionsToWindowObject(locale) {
 
   function loadLocale(callback) {
-    System.import('../userview/locale/userview_oil.js')
+    import('../userview/locale/userview_oil.js')
       .then(userview_modal => {
         if (!getGlobalOilObject('LOCALE')) {
           userview_modal.locale(callback);

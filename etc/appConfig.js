@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 
 const sourcePath = 'src';
 const testPath = 'test';
@@ -16,7 +16,6 @@ module.exports = {
   },
   templatesPath: 'templates',
   distPath: outputPath,
-  globals: {},
   chunks: {
     name: ['polyfills'].reverse()
   },

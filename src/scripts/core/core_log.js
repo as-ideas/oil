@@ -1,4 +1,4 @@
-import {isDev} from './core_utils';
+import {isDev} from './core_utils.js';
 import {isVerboseCookieSet, isPreviewCookieSet} from './core_cookies.js'
 import {isPreviewMode} from './core_config.js'
 

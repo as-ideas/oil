@@ -1,22 +1,21 @@
+parser: "babel-eslint"
+
 plugins: [
   "import",
   "es6-recommended",
   "jasmine",
-  "jasmine-jquery"
 ]
 
 parserOptions: {
   ecmaVersion: 6,
-  sourceType: "module"
+  sourceType: "module",
+  allowImportExportEverywhere: true,
+  ecmaFeatures: {
+    modules: true,
+    jsx: true
+  }
 }
 
-ecmaFeatures:
-  modules: true
-  jsx: true
-
-extends: [
-  "plugin:jasmine-jquery/recommended"
-]
 
 env:
   amd: true
@@ -29,8 +28,8 @@ env:
 # http://eslint.org/docs/rules/
 rules:
   import/no-unresolved: [2, {commonjs: true, amd: true}]
-  import/named: 2
-  import/namespace: 2
+  import/named: 1
+  import/namespace: 1
   import/default: 2
   import/export: 2
   # Possible Errors
@@ -65,7 +64,7 @@ rules:
   # Best Practices
   accessor-pairs: 2
   block-scoped-var: 0
-  complexity: [2, 8]
+  complexity: [2, 9]
   consistent-return: 0
   curly: 0
   default-case: 0

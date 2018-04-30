@@ -4,7 +4,7 @@ import {deleteAllCookies} from '../utils.js';
 import {OIL_PAYLOAD_LOCALE_VARIANT_NAME, OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION} from '../../src/scripts/core/core_constants.js'
 import * as CoreConfig from '../../src/scripts/core/core_config.js';
 import * as CoreUtils from '../../src/scripts/core/core_utils.js';
-import {OIL_PAYLOAD_LOCALE_VARIANT_VERSION} from '../../src/scripts/core/core_constants';
+import {OIL_PAYLOAD_LOCALE_VARIANT_VERSION} from '../../src/scripts/core/core_constants.js';
 
 describe('cookies', () => {
   beforeEach(() => {
@@ -14,7 +14,7 @@ describe('cookies', () => {
   afterEach(() => {
   });
 
-  it('shouldnt return the version of oil in the hub domain cookie, when never set', () => {
+  it('shouldn\'t return the version of oil in the hub domain cookie, when never set', () => {
     let resultCookie = getPoiCookie();
     expect(resultCookie.version).toBe('unknown');
 

@@ -11,7 +11,7 @@ import {
 } from '../core/core_constants.js';
 import { getSoiCookie, setSoiOptIn } from '../core/core_cookies.js';
 import { getLocaleVariantName, isPoiActive, isSubscriberSetCookieActive } from '../core/core_config.js';
-import { PRIVACY_FULL_TRACKING } from '../core/core_constants';
+import { PRIVACY_FULL_TRACKING } from '../core/core_constants.js';
 
 /**
  * Log Helper function for checkOptIn

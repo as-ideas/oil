@@ -1,4 +1,4 @@
-require('babel-register')();
+require('babel-register');
 const BINPATH = './node_modules/nightwatch/bin/';
 
 // we use a nightwatch.remote.conf.js file so we can include comments and helper functions
@@ -33,9 +33,11 @@ module.exports = {
     "chrome": {
       "desiredCapabilities": {
         "browserName": "chrome",
-        "javascriptEnabled": true
-      },
-    },
+        "javascriptEnabled": true,
+        "chromeOptions" : {
+          "args" : ["headless"]
+        }
+    }},
     "safari": {
       "desiredCapabilities": {
         "browserName": "safari",

@@ -39,6 +39,7 @@ describe('core_utils', () => {
   });
 
   it('should return default version if locale does not exist', () => {
+    setGlobalOilObject('LOCALE', null);
     expect(getLocaleVariantVersion()).toBe(0);
   });
 
