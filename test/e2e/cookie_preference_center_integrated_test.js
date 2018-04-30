@@ -8,6 +8,8 @@ import {
 import {  } from '../test_constants';
 
 module.exports = {
+  '@disabled': false,
+
   beforeEach: browser => {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-poi-integrated.html')

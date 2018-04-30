@@ -1,6 +1,7 @@
 import { OIL_LAYER } from '../test_constants.js';
 
 module.exports = {
+  '@disabled': false,
   beforeEach: browser => {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/direct-integration-preview-mode.html')
