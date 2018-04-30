@@ -1,4 +1,4 @@
-= OIL Documentation
+= Internal Developer Guide - OIL Documentation
 :toc: left
 :toclevels: 4
 :toc-title: OIL Documentation
@@ -16,6 +16,5 @@ image::src/images/oillogo.png[]
 // horizontal line
 ***
 
-## DEPRECATED
+include::src/docs/04-development.adoc[]
 
-Use https://oil.axelspringer.com/docs/documentation.html[the user guide]
