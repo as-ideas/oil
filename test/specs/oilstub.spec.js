@@ -5,7 +5,6 @@ describe('oil stub', () => {
     if (window.__cmp) {
       window.__cmp.commandQueue.length = 0;
     }
-    window.__cmp.config.storeConsentGlobally = false;
   });
 
   it('should define __cmp() function', () => {
@@ -13,19 +12,9 @@ describe('oil stub', () => {
   });
 
   it('should define __cmp() function that can handle ping request', (done) => {
-
     window.__cmp('ping', null, (pingArgs) => {
       expect(pingArgs).toBeDefined();
       expect(pingArgs.gdprAppliesGlobally).toEqual(false);
-      expect(pingArgs.cmpLoaded).toEqual(false);
-      done();
-    });
-
-    window.__cmp.config.storeConsentGlobally = true;
-
-    window.__cmp('ping', null, (pingArgs) => {
-      expect(pingArgs).toBeDefined();
-      expect(pingArgs.gdprAppliesGlobally).toEqual(true);
       expect(pingArgs.cmpLoaded).toEqual(false);
       done();
     });

@@ -1,6 +1,8 @@
 (function (window, document) {
   if (!window.__cmp) {
     window.__cmp = (function () {
+
+      // Define stub's postMessage handler for cross-origin iframe requests
       let listen = window.attachEvent || window.addEventListener;
       listen('message', function (event) {
         window.__cmp.receiveMessage(event);
@@ -21,12 +23,13 @@
       // }
       // addLocatorFrame();
 
+      // Define command queue and stub function
       let commandQueue = [];
       let cmp = function (command, parameter, callback) {
         if (command === 'ping') {
           if (callback) {
             return callback({
-              gdprAppliesGlobally: !!(window.__cmp && window.__cmp.config && window.__cmp.config.storeConsentGlobally),
+              gdprAppliesGlobally: false,
               cmpLoaded: false
             });
           }
@@ -40,6 +43,7 @@
       };
       cmp.commandQueue = commandQueue;
 
+      // Define postMessage handling invoked by handler from above
       cmp.receiveMessage = function (event) {
         let data = event && event.data && event.data.__cmpCall;
         if (data) {
@@ -50,11 +54,6 @@
             event: event
           });
         }
-      };
-
-      cmp.config = {
-        // Modify config values here
-        storeConsentGlobally: false
       };
 
       return cmp;
