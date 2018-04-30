@@ -228,6 +228,17 @@ export function handleOptIn() {
   } else {
     handleSoiOptIn();
   }
+  animateOptInButton();
+}
+
+function animateOptInButton() {
+  let optInButton = document.querySelector('.as-js-optin');
+  if (optInButton) {
+    optInButton.className += ' as-js-clicked';
+    window.setTimeout(() => {
+      optInButton.className = optInButton.className.replace(' as-js-clicked', '');
+    }, 1200);
+  }
 }
 
 export function handleSoiOptIn() {

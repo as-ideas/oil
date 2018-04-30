@@ -1,10 +1,10 @@
-import {OIL_LABELS} from '../userview_constants.js'
-import {forEach} from '../userview_modal';
-import {getLabel, getTheme} from '../userview_config.js';
-import {getPoiGroupName} from '../../core/core_config';
-import {logError} from '../../core/core_log';
-import {DATA_CONTEXT_YES, DATA_CONTEXT_BACK, OIL_GLOBAL_OBJECT_NAME} from '../../core/core_constants.js';
-import {setGlobalOilObject} from '../../core/core_utils';
+import { OIL_LABELS } from '../userview_constants.js'
+import { forEach } from '../userview_modal';
+import { getLabel, getTheme } from '../userview_config.js';
+import { getPoiGroupName } from '../../core/core_config';
+import { logError } from '../../core/core_log';
+import { DATA_CONTEXT_YES, DATA_CONTEXT_BACK, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
+import { setGlobalOilObject } from '../../core/core_utils';
 
 
 const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';
@@ -132,7 +132,7 @@ const ContentSnippet = () => {
 };
 
 export function oilAdvancedSettingsInlineTemplate() {
-  return `<div class="as-oil-l-wrapper-layout-max-width">
+  return `<div class="as-oil-l-wrapper-layout-max-width as-oil-cpc-wrapper">
     <div class="as-oil__heading">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
     </div>
@@ -148,7 +148,7 @@ export function oilAdvancedSettingsInlineTemplate() {
 
 export function oilAdvancedSettingsTemplate() {
   return `
-  <div id="as-oil-cpc" class="as-oil-content-overlay as-oil-cpc-wrapper" data-qa="oil-cpc-overlay">
+  <div id="as-oil-cpc" class="as-oil-content-overlay" data-qa="oil-cpc-overlay">
     ${oilAdvancedSettingsInlineTemplate()}
   </div>`
 }

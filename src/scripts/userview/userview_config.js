@@ -28,5 +28,5 @@ export function getTheme() {
 export function getLabel(configName) {
   let defaultLocale = getGlobalOilObject('LOCALE');
   let defaultLabel = (defaultLocale && defaultLocale.texts[configName]) ? defaultLocale.texts[configName] : '';
-  return getConfigValue(configName, defaultLabel);
+  return getConfigValue(configName, defaultLabel ? defaultLabel : configName);
 }
