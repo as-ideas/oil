@@ -63,4 +63,12 @@ describe('oil stub', () => {
       done();
     }, 2000);
   });
+
+  it('should add cmpLocator iframe', () => {
+    let frames = document.getElementsByName('__cmpLocator');
+    expect(frames.length).toEqual(1);
+    expect(frames[0].style.display).toEqual('none');
+    expect(frames[0].parentElement.nodeName).toEqual('BODY');
+  });
+
 });

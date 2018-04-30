@@ -2,26 +2,33 @@
   if (!window.__cmp) {
     window.__cmp = (function () {
 
-      // Define stub's postMessage handler for cross-origin iframe requests
-      let listen = window.attachEvent || window.addEventListener;
-      listen('message', function (event) {
-        window.__cmp.receiveMessage(event);
-      }, false);
+      function definePostMessageHandlerForIframes() {
+        let listen = window.attachEvent || window.addEventListener;
+        listen('message', function (event) {
+          window.__cmp.receiveMessage(event);
+        }, false);
+      }
 
-      // TODO: understand what this is for
-      // function addLocatorFrame() {
-      //   if (!window.frames['__cmpLocator']) {
-      //     if (document.body) {
-      //       let frame = document.createElement('iframe');
-      //       frame.style.display = 'none';
-      //       frame.name = '__cmpLocator';
-      //       document.body.appendChild(frame);
-      //     } else {
-      //       setTimeout(addLocatorFrame, 5);
-      //     }
-      //   }
-      // }
-      // addLocatorFrame();
+      definePostMessageHandlerForIframes();
+
+      function addCmpLocatorIframe() {
+        function doesCmpLocatorIframeExist() {
+          return document.getElementsByName('__cmpLocator').length > 0;
+        }
+
+        if (!doesCmpLocatorIframeExist()) {
+          if (document.body) {
+            let frame = document.createElement('iframe');
+            frame.style.display = 'none';
+            frame.name = '__cmpLocator';
+            document.body.appendChild(frame);
+          } else {
+            setTimeout(addCmpLocatorIframe, 5);
+          }
+        }
+      }
+
+      addCmpLocatorIframe();
 
       // Define command queue and stub function
       let commandQueue = [];
