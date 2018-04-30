@@ -15,14 +15,31 @@
     "poi_group_name": "insiderInc_01",
     "locale": "enEN_01"
   }
+
   </script>
   <script type="text/javascript" src="//oil.axelspringer.com/release/1.0.34/oil.1.0.34-RELEASE.min.js"></script>
 
   <script>
-
+    (function () {
+      if (!$) {
+        let d = document, s = d.createElement('script');
+        s.id = 'jquery-js';
+        s.src = '//axelspringerideas-de.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      if (!document.getElementById('disqus-js')) {
+        (function () { // DON'T EDIT BELOW THIS LINE
+          let d = document, s = d.createElement('script');
+          s.id = 'disqus-js';
+          s.src = '//axelspringerideas-de.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+    })();
   </script>
 </head>
 
-<body class="has-big-bad-background">
-</body>
+<body class="has-big-bad-background"></body>
 </html>
