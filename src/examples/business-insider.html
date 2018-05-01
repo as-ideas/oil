@@ -4,26 +4,14 @@
     <meta charset="utf-8"/>
     <title>OIL - Aktuelles</title>
     <style>
+        body {
+            margin: 0;
+            background-color: #A2A2A2;
+            min-height: 200vh;
+        }
+
         .has-big-bad-background {
             background: url('../../assets/images/bi-uk.png') top center no-repeat;
-        }
-
-        .fon-nav {
-            z-index: 2147483647;
-        }
-
-        .fon-icon-menu:before {
-            content: none !important;
-        }
-
-        #as-oil-dev-kit__trigger {
-            height: 50px;
-            width: 50px;
-
-            background-repeat: no-repeat;
-            background-size: 70%;
-            background-position: 50%;
-            background-image: url('data:image/png;base64,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');
         }
     </style>
 
@@ -32,79 +20,10 @@
     "activate_poi": true,
     "poi_group_name": "insiderInc_01",
     "locale": "enEN_01"
-
-
-
+    }
     </script>
     <script type="text/javascript" src="//oil.axelspringer.com/release/1.0.34/oil.1.0.34-RELEASE.min.js"></script>
 
-    <script>
-        (function () {
-            let isAllPluginsLoaded = false;
-
-            function loadJquery() {
-                if (!isJqueryAvailable()) {
-                    let d = document, s = d.createElement('script');
-                    s.id = 'jquery-js';
-                    s.src = '//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js';
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                }
-            }
-
-            function loadJqueryPlugins() {
-                console.info('Try to load FooNav...');
-                if (isJqueryAvailable()) {
-                    if (!document.getElementById('slidereveal-js')) {
-                        let d = document, s = d.createElement('script');
-                        s.id = 'slidereveal-js';
-                        s.onload = initNavbar;
-                        s.src = '//cdnjs.cloudflare.com/ajax/libs/slideReveal/1.1.2/jquery.slidereveal.min.js';
-                        s.setAttribute('data-timestamp', +new Date());
-                        (d.head || d.body).appendChild(s);
-
-                        let css = "";
-                        s = d.createElement('style');
-                        s.type = 'text/css';
-                        if (s.styleSheet) {
-                            s.styleSheet.cssText = css;
-                        } else {
-                            s.appendChild(document.createTextNode(css));
-                        }
-                        (d.head || d.body).appendChild(s);
-
-                    }
-                    console.info('FooNav loaded.');
-                } else {
-                    window.setTimeout(function () {
-                        loadJqueryPlugins();
-                    }, 250);
-                }
-            }
-
-            function isJqueryAvailable() {
-                return !(typeof jQuery === 'undefined');
-            }
-
-
-            function initNavbar() {
-                let element1 = "<div id='as-oil-dev-kit__slider'>Hello World!!</div>";
-                let element2 = "<div id='as-oil-dev-kit__trigger'>Trigger</div>";
-
-                $("body").append(element1);
-                $("body").append(element2);
-
-                $('#as-oil-dev-kit__slider').slideReveal({
-                    trigger: $("#as-oil-dev-kit__trigger")
-                });
-
-                console.info('OIL-DEV-KIT initialized.');
-            }
-
-            loadJquery();
-            loadJqueryPlugins();
-        })();
-    </script>
 </head>
 
 <body class="has-big-bad-background"></body>
