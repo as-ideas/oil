@@ -1,10 +1,12 @@
 import {waitsForAndRuns} from '../utils.js';
 
 describe('oil stub', () => {
+
   beforeEach(() => {
     if (window.__cmp) {
-      window.__cmp.commandQueue.length = 0;
+      window.__cmp.commandCollection.length = 0;
     }
+    window['AS_OIL'] = undefined;
   });
 
   it('should define __cmp() function', () => {
@@ -28,12 +30,23 @@ describe('oil stub', () => {
 
     window.__cmp(expectedCommand, expectedParameters, expectedCallback);
 
-    expect(window.__cmp.commandQueue).toBeDefined();
-    expect(window.__cmp.commandQueue.length).toBe(1);
-    expect(window.__cmp.commandQueue[0]).toBeDefined();
-    expect(window.__cmp.commandQueue[0].command).toBe(expectedCommand);
-    expect(window.__cmp.commandQueue[0].parameter).toBe(expectedParameters);
-    expect(window.__cmp.commandQueue[0].callback).toBe(expectedCallback);
+    expect(window.__cmp.commandCollection).toBeDefined();
+    expect(window.__cmp.commandCollection.length).toBe(1);
+    expect(window.__cmp.commandCollection[0]).toBeDefined();
+    expect(window.__cmp.commandCollection[0].command).toBe(expectedCommand);
+    expect(window.__cmp.commandCollection[0].parameter).toBe(expectedParameters);
+    expect(window.__cmp.commandCollection[0].callback).toBe(expectedCallback);
+  });
+
+  it('should define __cmp() function that invokes command collection execution if oil layer is loaded', (done) => {
+    window['AS_OIL'] = {};
+    window['AS_OIL']['commandCollectionExecutor'] = () => {
+      expect(window.__cmp.commandCollection).toBeDefined();
+      expect(window.__cmp.commandCollection.length).toBe(1);
+      done();
+    };
+    window.__cmp('aCallThatIsNotPing', {key: 'value'}, () => {
+    });
   });
 
   it('should register eventHandler for __cmpCall messages', (done) => {
@@ -51,15 +64,15 @@ describe('oil stub', () => {
     window.dispatchEvent(event);
 
     waitsForAndRuns(() => {
-      return window.__cmp.receiveMessage.calls.count() > 0 && window.__cmp.commandQueue.length > 0;
+      return window.__cmp.receiveMessage.calls.count() > 0 && window.__cmp.commandCollection.length > 0;
     }, () => {
-      expect(window.__cmp.commandQueue).toBeDefined();
-      expect(window.__cmp.commandQueue.length).toBe(1);
-      expect(window.__cmp.commandQueue[0]).toBeDefined();
-      expect(window.__cmp.commandQueue[0].callId).toBe(eventData.__cmpCall.callId);
-      expect(window.__cmp.commandQueue[0].command).toBe(eventData.__cmpCall.command);
-      expect(window.__cmp.commandQueue[0].parameter).toBe(eventData.__cmpCall.parameter);
-      expect(window.__cmp.commandQueue[0].event).toBe(event);
+      expect(window.__cmp.commandCollection).toBeDefined();
+      expect(window.__cmp.commandCollection.length).toBe(1);
+      expect(window.__cmp.commandCollection[0]).toBeDefined();
+      expect(window.__cmp.commandCollection[0].callId).toBe(eventData.__cmpCall.callId);
+      expect(window.__cmp.commandCollection[0].command).toBe(eventData.__cmpCall.command);
+      expect(window.__cmp.commandCollection[0].parameter).toBe(eventData.__cmpCall.parameter);
+      expect(window.__cmp.commandCollection[0].event).toBe(event);
       done();
     }, 2000);
   });

@@ -1,5 +1,5 @@
-import { logInfo } from './core_log.js';
-import { OIL_GLOBAL_OBJECT_NAME } from './core_constants.js';
+import {logInfo} from './core_log.js';
+import {OIL_GLOBAL_OBJECT_NAME} from './core_constants.js';
 
 /**
  * Check if environment is set to production
@@ -152,6 +152,13 @@ export function getGlobalOilObject(name) {
 export function getLocaleVariantVersion() {
   let locale = getGlobalOilObject('LOCALE');
   return (locale && locale.version) ? locale.version : 0;
+}
+
+/**
+ * Gets the command collection from window object.
+ */
+export function getCommandCollection() {
+  return window.__cmp ? window.__cmp.commandCollection : undefined;
 }
 
 /**

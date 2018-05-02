@@ -1,3 +1,4 @@
+// TODO extract content of this function to another function for better testability!
 (function (window, document) {
   if (!window.__cmp) {
     window.__cmp = (function () {
@@ -9,14 +10,8 @@
         }, false);
       }
 
-      definePostMessageHandlerForIframes();
-
       function addCmpLocatorIframe() {
-        function doesCmpLocatorIframeExist() {
-          return document.getElementsByName('__cmpLocator').length > 0;
-        }
-
-        if (!doesCmpLocatorIframeExist()) {
+        if (!(document.getElementsByName('__cmpLocator').length > 0)) {
           if (document.body) {
             let frame = document.createElement('iframe');
             frame.style.display = 'none';
@@ -28,42 +23,59 @@
         }
       }
 
-      addCmpLocatorIframe();
+      function handlePing(pingCallback) {
+        if (pingCallback) {
+          pingCallback({
+            gdprAppliesGlobally: false,
+            cmpLoaded: isOilAlreadyLoaded()
+          });
+        }
+      }
 
-      // Define command queue and stub function
-      let commandQueue = [];
-      let cmp = function (command, parameter, callback) {
-        if (command === 'ping') {
-          if (callback) {
-            return callback({
-              gdprAppliesGlobally: false,
-              cmpLoaded: false
+      function isOilAlreadyLoaded() {
+        return !!(window['AS_OIL'] && window['AS_OIL']['commandCollectionExecutor']);
+      }
+
+      function defineCmp() {
+        return function (command, parameter, callback) {
+          if (command === 'ping') {
+            handlePing(callback);
+          } else {
+            commandCollection.push({
+              command: command,
+              parameter: parameter,
+              callback: callback
+            });
+            if (isOilAlreadyLoaded()) {
+              window['AS_OIL']['commandCollectionExecutor']();
+            }
+          }
+        }
+      }
+
+      function defineMessageHandler() {
+        return function (event) {
+          let data = event && event.data && event.data.__cmpCall;
+          if (data) {
+            commandCollection.push({
+              callId: data.callId,
+              command: data.command,
+              parameter: data.parameter,
+              event: event
             });
           }
-        } else {
-          commandQueue.push({
-            command: command,
-            parameter: parameter,
-            callback: callback
-          });
-        }
-      };
-      cmp.commandQueue = commandQueue;
+        };
+      }
 
-      // Define postMessage handling invoked by handler from above
-      cmp.receiveMessage = function (event) {
-        let data = event && event.data && event.data.__cmpCall;
-        if (data) {
-          commandQueue.push({
-            callId: data.callId,
-            command: data.command,
-            parameter: data.parameter,
-            event: event
-          });
-        }
-      };
+      definePostMessageHandlerForIframes();
+      addCmpLocatorIframe();
 
+      let commandCollection = [];
+      let cmp = defineCmp();
+      cmp.commandCollection = commandCollection;
+      cmp.receiveMessage = defineMessageHandler();
       return cmp;
     }());
   }
 }(window, document));
+

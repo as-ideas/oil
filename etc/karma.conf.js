@@ -59,10 +59,14 @@ module.exports = function (config) {
     ],
 
     reporters: [
-      'progress',
+      'spec',
       'junit',
       'kjhtml'
     ],
+
+    specReporter: {
+      suppressPassed: true
+    },
 
     junitReporter: JUNIT,
 

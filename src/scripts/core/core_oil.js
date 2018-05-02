@@ -7,6 +7,7 @@ import {getRawSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePrevi
 import {doSetTealiumVariables} from './core_tealium_loading_rules.js';
 import {getLocaleVariantName, getPoiGroupName, isPoiActive, isPreviewMode, resetConfiguration} from './core_config.js';
 import {EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN} from './core_constants.js';
+import {executeCommandCollection} from './core_command_collection';
 
 /**
  * Initialize Oil on Host Site
@@ -59,19 +60,21 @@ export function initOilLayer() {
      * We read our cookie and get an optin value, true or false
      */
     checkOptIn().then((optin) => {
-      /**
-       * User has opted in
-       */
       if (optin) {
+        /**
+         * User has opted in
+         */
         sendEventToHostSite(EVENT_NAME_HAS_OPTED_IN);
-      }
-      /**
-       * Any other case, when the user didnt decide before and oil needs to be shown:
-       */
-      else {
+        executeCommandCollection();
+        attachCommandCollectionFunctionToWindowObject();
+      } else {
+        /**
+         * Any other case, when the user didn't decide before and oil needs to be shown:
+         */
         import('../userview/locale/userview_oil.js')
           .then(userview_modal => {
             userview_modal.locale(uv_m => uv_m.renderOil({optIn: false}));
+            attachCommandCollectionFunctionToWindowObject();
           })
           .catch(() => {
             logError(`${locale} could not be loaded.`);
@@ -82,19 +85,22 @@ export function initOilLayer() {
   }
 }
 
+function attachCommandCollectionFunctionToWindowObject() {
+  setGlobalOilObject('commandCollectionExecutor', executeCommandCollection);
+}
+
 /**
  * Attach Utility Functions to window Object, so users of oil can use it.
  */
 function attachUtilityFunctionsToWindowObject(locale) {
 
-  function loadLocale(callback) {
+  function loadLocale(callbackMethod) {
     import('../userview/locale/userview_oil.js')
       .then(userview_modal => {
         if (!getGlobalOilObject('LOCALE')) {
-          userview_modal.locale(callback);
+          userview_modal.locale(callbackMethod);
         } else {
-          callback(userview_modal);
-          return;
+          callbackMethod(userview_modal);
         }
       })
       .catch(() => {
