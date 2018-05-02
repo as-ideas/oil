@@ -20,7 +20,7 @@ import {logError, logInfo} from '../core/core_log.js';
 import {getTheme, getTimeOutValue, isPersistMinimumTracking} from './userview_config.js';
 import {isSubscriberSetCookieActive} from '../core/core_config.js';
 import {getPoiGroupName, isPoiActive} from '../core/core_config';
-import {attachCpcHandlers} from './view/oil.advanced.settings.js';
+import {attachCpcHandlers,oilAdvancedSettingsInlineTemplate} from './view/oil.advanced.settings.js';
 import {applyPrivacySettings, getPrivacySettings, getSoiPrivacy, PRIVACY_SETTINGS_ALL_FALSE} from './userview_privacy.js';
 import {EVENT_NAME_AS_PRIVACY_SELECTED, PRIVACY_MINIMUM_TRACKING} from '../core/core_constants.js';
 
@@ -90,13 +90,18 @@ function shouldRenderOilLayer(props) {
 // FIXME REWORKING WIP, default should come from CONFIG
 // FIXME do we have enough tests for this?
 export function oilShowPreferenceCenter(preset = PRIVACY_SETTINGS_ALL_FALSE) {
+  let wrapper = document.querySelector('.as-oil');
   let entryNode = document.querySelector('#oil-preference-center');
-  if (entryNode) {
-    // FIXME looks bad currently
-    entryNode.innerHTML = oilAdvancedSettingsTemplate();
-  } else {
+  if (wrapper) {
     renderOil({advancedSettings: true});
+  } else if (entryNode) {
+    entryNode.innerHTML = oilAdvancedSettingsInlineTemplate();
+    addOilHandlers(getOilDOMNodes());
+  } else {
+    logError('No wrapper for the CPC with the id #oil-preference-center was found.');
+    return;
   }
+
   let currentPrivacySetting = preset;
   let soiPrivacy = getSoiPrivacy();
   if (soiPrivacy) {
@@ -174,13 +179,13 @@ function injectOilWrapperInDOM(wrapper) {
 function getOilDOMNodes() {
   return {
     oilWrapper: document.querySelectorAll('.as-oil'),
-    btnOptIn: document.querySelectorAll('.as-oil .as-js-optin'),
-    btnPoiOptIn: document.querySelectorAll('.as-oil .as-js-optin-poi'),
-    btnOptLater: document.querySelectorAll('.as-oil .as-js-optlater'),
-    companyList: document.querySelectorAll('.as-oil .as-js-companyList'),
-    thirdPartyList: document.querySelectorAll('.as-oil .as-js-thirdPartyList'),
-    btnAdvancedSettings: document.querySelectorAll('.as-oil .as-js-advanced-settings'),
-    btnBack: document.querySelectorAll('.as-oil .as-js-oilback')
+    btnOptIn: document.querySelectorAll('.as-js-optin'),
+    btnPoiOptIn: document.querySelectorAll('.as-js-optin-poi'),
+    btnOptLater: document.querySelectorAll('.as-js-optlater'),
+    companyList: document.querySelectorAll('.as-js-companyList'),
+    thirdPartyList: document.querySelectorAll('.as-js-thirdPartyList'),
+    btnAdvancedSettings: document.querySelectorAll('.as-js-advanced-settings'),
+    btnBack: document.querySelectorAll('.as-js-oilback')
   }
 }
 
@@ -218,6 +223,17 @@ export function handleOptIn() {
     handlePoiOptIn();
   } else {
     handleSoiOptIn();
+  }
+  animateOptInButton();
+}
+
+function animateOptInButton() {
+  let optInButton = document.querySelector('.as-js-optin');
+  if (optInButton) {
+    optInButton.className += ' as-js-clicked';
+    window.setTimeout(() => {
+      optInButton.className = optInButton.className.replace(' as-js-clicked', '');
+    }, 1200);
   }
 }
 

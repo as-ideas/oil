@@ -228,6 +228,11 @@
 
 .as-oil__btn-optin {
   @include btn-blue;
+  transition: opacity 0.8s ease 0s;
+
+  &.as-js-clicked {
+    opacity: 0.3;
+  }
 }
 
 .as-oil__btn-blue {

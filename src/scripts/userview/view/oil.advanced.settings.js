@@ -61,7 +61,7 @@ const ContentSnippet = () => {
           3rd Parties  
         </a>
     </div>
-    <div class="as-oil-cpc__middle">
+    <div class="as-oil-cpc__middle as-js-purposes">
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
             Purposes
         </div>
@@ -131,21 +131,25 @@ const ContentSnippet = () => {
 </div>`;
 };
 
+export function oilAdvancedSettingsInlineTemplate() {
+  return `<div class="as-oil-l-wrapper-layout-max-width as-oil-cpc-wrapper">
+    <div class="as-oil__heading">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
+    </div>
+    <p class="as-oil__intro-txt">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_TEXT)}
+    </p>
+    ${ActivateButtonSnippet()}
+    ${BackButtonSnippet()}
+    ${ContentSnippet()}
+    ${getOilThirdPartiesList()}  
+  </div>`
+}
+
 export function oilAdvancedSettingsTemplate() {
   return `
-  <div id="as-oil-cpc" class="as-oil-content-overlay as-oil-cpc-wrapper" data-qa="oil-cpc-overlay">
-    <div class="as-oil-l-wrapper-layout-max-width">
-      <div class="as-oil__heading">
-        ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
-      </div>
-      <p class="as-oil__intro-txt">
-        ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_TEXT)}
-      </p>
-      ${ActivateButtonSnippet()}
-      ${BackButtonSnippet()}
-      ${ContentSnippet()}
-      ${getOilThirdPartiesList()}  
-    </div>
+  <div id="as-oil-cpc" class="as-oil-content-overlay" data-qa="oil-cpc-overlay">
+    ${oilAdvancedSettingsInlineTemplate()}
   </div>`
 }
 

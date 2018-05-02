@@ -41,8 +41,8 @@ function getConfiguration() {
 /**
  * Returns a config value or its given default value if not existing in users configuration.
  *
- * @param name
- * @param defaultValue
+ * @param {string} name in form of the key of the config value
+ * @param {string} defaultValue as fallback if there is no value found for the key (name)
  * @returns {*}
  */
 export function getConfigValue(name, defaultValue) {
