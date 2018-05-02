@@ -83,6 +83,9 @@ export function registerMessageListener(callback) {
 export let OilVersion = {
   get: () => {
     return `${process.env.OIL_VERSION}`;
+  },
+  getLatestReleaseVersion: () => {
+    return `${process.env.LATEST_RELEAS_VERSION}`;
   }
 };
 

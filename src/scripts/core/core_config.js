@@ -1,5 +1,6 @@
-import { OIL_CONFIG } from './core_constants.js';
-import { logError, logInfo } from './core_log.js';
+import {OIL_CONFIG} from './core_constants.js';
+import {logError, logInfo} from './core_log.js';
+import { OilVersion } from './core_utils';
 
 let cachedConfig = null;
 
@@ -86,7 +87,7 @@ export function getHubOrigin() {
 }
 
 export function getHubPath() {
-  return getConfigValue(OIL_CONFIG.ATTR_HUB_PATH, '/hub.html');
+  return getConfigValue(OIL_CONFIG.ATTR_HUB_PATH, `/release/${OilVersion.getLatestReleaseVersion()}/hub.html`);
 }
 
 export function getOilBackendUrl() {
