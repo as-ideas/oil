@@ -11,7 +11,7 @@ describe('command collection executor', () => {
 
     executeCommandCollection();
     waitsForAndRuns(
-      () => CoreLog.logError.calls && CoreLog.logError.calls.count() > 0,
+      wasErrorLogged(),
       () => {
         expect(CoreLog.logError).toHaveBeenCalledWith('Unexpectedly no command collection found!');
         done();
@@ -25,7 +25,7 @@ describe('command collection executor', () => {
 
     executeCommandCollection();
     waitsForAndRuns(
-      () => CoreLog.logError.calls && CoreLog.logError.calls.count() > 0,
+      wasErrorLogged(),
       () => {
         expect(CoreLog.logError).toHaveBeenCalledTimes(1);
         expect(CoreLog.logError.calls.argsFor(0)[0]).toContain("Invalid CMP command");
@@ -45,7 +45,7 @@ describe('command collection executor', () => {
 
     executeCommandCollection();
     waitsForAndRuns(
-      () => CoreLog.logError.calls && CoreLog.logError.calls.count() > 0,
+      wasErrorLogged(),
       () => {
         expect(CoreLog.logError).toHaveBeenCalledTimes(1);
         expect(CoreLog.logError.calls.argsFor(0)[0]).toContain("Invalid command entry");
@@ -165,6 +165,10 @@ describe('command collection executor', () => {
         callId: commandCallId
       }
     };
+  }
+
+  function wasErrorLogged() {
+    return () => CoreLog.logError.calls && CoreLog.logError.calls.count() > 0;
   }
 
 });

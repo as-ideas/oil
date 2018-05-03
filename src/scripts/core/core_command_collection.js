@@ -5,7 +5,8 @@ export function executeCommandCollection() {
   let commandCollection = getCommandCollection();
 
   if (commandCollection) {
-    for (let i = 0; i < commandCollection.length; i++) {
+    let commandCollectionLength = commandCollection.length;
+    for (let i = 0; i < commandCollectionLength; i++) {
       let commandEntry = commandCollection[i];
       processCommand(commandEntry.command, commandEntry.parameter).then(
         (result) => {
