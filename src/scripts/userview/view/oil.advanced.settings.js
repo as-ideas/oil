@@ -5,6 +5,7 @@ import {getPoiGroupName} from '../../core/core_config.js';
 import {logError} from '../../core/core_log.js';
 import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME} from '../../core/core_constants.js';
 import {setGlobalOilObject} from '../../core/core_utils.js';
+import {getPurposeList} from '../../core/core_vendor_information.js';
 
 
 const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';
@@ -50,6 +51,15 @@ const ActivateButtonSnippet = () => {
   `
 };
 
+const buildPurposeEntries = (list) => {
+  return list.map(element => PurposeContainerSnippet({
+    id: element.id,
+    header: getLabel(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_TEXT`]),
+    text: getLabel(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_DESC`]),
+    value: false
+  })).join('');
+};
+
 const ContentSnippet = () => {
   return `
 <div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
@@ -65,55 +75,7 @@ const ContentSnippet = () => {
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
             Purposes
         </div>
-     
-        ${PurposeContainerSnippet({
-    id: '01',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_01_DESC),
-    value: false
-  })}
-                
-        ${PurposeContainerSnippet({
-    id: '02',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_02_DESC),
-    value: false
-  })}
-                          
-        ${PurposeContainerSnippet({
-    id: '03',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_03_DESC),
-    value: false
-  })}
-                                                                  
-        ${PurposeContainerSnippet({
-    id: '04',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_04_DESC),
-    value: false
-  })}
-                                                                                      
-        ${PurposeContainerSnippet({
-    id: '05',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_05_DESC),
-    value: false
-  })}
-                                                                                                          
-        ${PurposeContainerSnippet({
-    id: '06',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_06_DESC),
-    value: false
-  })}
-        
-        ${PurposeContainerSnippet({
-    id: '07',
-    header: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_TEXT),
-    text: getLabel(OIL_LABELS.ATTR_LABEL_CPC_07_DESC),
-    value: false
-  })}
+        ${buildPurposeEntries(getPurposeList())}
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
             3rd Parties
         </div>
