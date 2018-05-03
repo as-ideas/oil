@@ -17,11 +17,10 @@ import {oilOptIn, oilPowerOptIn} from './userview_optin.js';
 import {deActivatePowerOptIn} from '../core/core_poi.js';
 import {oilDefaultTemplate} from './view/oil.default.js';
 import {oilNoCookiesTemplate} from './view/oil.no.cookies.js';
-import {attachCpcHandlers, oilAdvancedSettingsTemplate} from './view/oil.advanced.settings.js';
+import {attachCpcHandlers, oilAdvancedSettingsInlineTemplate, oilAdvancedSettingsTemplate} from './view/oil.advanced.settings.js';
 import {logError, logInfo} from '../core/core_log.js';
 import {getTheme, getTimeOutValue, isPersistMinimumTracking} from './userview_config.js';
-import {isSubscriberSetCookieActive, getPoiGroupName, isPoiActive} from '../core/core_config.js';
-import {attachCpcHandlers} from './view/oil.advanced.settings.js';
+import {getPoiGroupName, isPoiActive, isSubscriberSetCookieActive} from '../core/core_config.js';
 import {applyPrivacySettings, getPrivacySettings, getSoiPrivacy, PRIVACY_SETTINGS_ALL_FALSE} from './userview_privacy.js';
 import {getGlobalOilObject} from '../core/core_utils';
 

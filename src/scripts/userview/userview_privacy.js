@@ -1,7 +1,7 @@
-import { getSoiCookie } from '../core/core_cookies.js';
-import { PRIVACY_FULL_TRACKING } from '../core/core_constants';
-import { logInfo } from '../core/core_log';
-import { forEach } from './userview_modal';
+import {getSoiCookie} from '../core/core_cookies.js';
+import {PRIVACY_FULL_TRACKING} from '../core/core_constants';
+import {logInfo} from '../core/core_log';
+import {forEach} from './userview_modal';
 
 export const PRIVACY_SETTINGS_ALL_FALSE = {
   '01': false,
