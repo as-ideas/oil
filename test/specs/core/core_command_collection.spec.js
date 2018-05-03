@@ -5,20 +5,6 @@ import {waitsForAndRuns} from '../../utils';
 
 describe('command collection executor', () => {
 
-  it('should log error if no command collection exists', (done) => {
-    spyOn(CoreUtils, 'getCommandCollection').and.returnValue(undefined);
-    spyOn(CoreLog, 'logError').and.callThrough();
-
-    executeCommandCollection();
-    waitsForAndRuns(
-      wasErrorLogged(),
-      () => {
-        expect(CoreLog.logError).toHaveBeenCalledWith('Unexpectedly no command collection found!');
-        done();
-      },
-      2000);
-  });
-
   it('should log error if command collection contains invalid command that is not a function', (done) => {
     spyOn(CoreUtils, 'getCommandCollection').and.returnValue(['thisIsNotAFunction']);
     spyOn(CoreLog, 'logError').and.callThrough();

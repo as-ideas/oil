@@ -22,8 +22,6 @@ export function executeCommandCollection() {
         },
         (error) => logError(error));
     }
-  } else {
-    logError('Unexpectedly no command collection found!');
   }
 }
 
