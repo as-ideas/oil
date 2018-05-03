@@ -1,5 +1,6 @@
 import {logError, logInfo} from './core_log';
 import {getCommandCollection} from './core_utils';
+import {getVendorConsentData} from './core_consents';
 
 export function executeCommandCollection() {
   let commandCollection = getCommandCollection();
@@ -48,12 +49,10 @@ function createResultMessage(result, commandEntry) {
 }
 
 function getVendorConsents(vendorIds) {
-  // TODO implement vendor consents retrieval here
-  return {};
+  return getVendorConsentData(vendorIds);
 }
 
-function getConsentData(consentStringVersion, callback = () => {
-}) {
+function getConsentData(consentStringVersion) {
   // TODO create vendor cookie value here
   return '';
 }
