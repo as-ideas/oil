@@ -49,8 +49,8 @@ export function initOilLayer() {
         .then(userview_modal => {
           userview_modal.locale(uv_m => uv_m.renderOil({noCookie: true}));
         })
-        .catch(() => {
-          logError(`${locale} could not be loaded.`);
+        .catch((e) => {
+          logError(`${locale} could not be loaded.`, e);
         });
       sendEventToHostSite(EVENT_NAME_NO_COOKIES_ALLOWED);
       return;
@@ -76,8 +76,8 @@ export function initOilLayer() {
             userview_modal.locale(uv_m => uv_m.renderOil({optIn: false}));
             attachCommandCollectionFunctionToWindowObject();
           })
-          .catch(() => {
-            logError(`${locale} could not be loaded.`);
+          .catch((e) => {
+            logError(`${locale} could not be loaded.`, e);
           });
         sendEventToHostSite(EVENT_NAME_OIL_SHOWN);
       }
@@ -103,8 +103,8 @@ function attachUtilityFunctionsToWindowObject(locale) {
           callbackMethod(userview_modal);
         }
       })
-      .catch(() => {
-        logError(`${locale} could not be loaded.`);
+      .catch((e) => {
+        logError(`${locale} could not be loaded.`, e);
       });
   }
 
