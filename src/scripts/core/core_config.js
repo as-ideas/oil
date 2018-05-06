@@ -1,6 +1,6 @@
 import {OIL_CONFIG} from './core_constants.js';
 import {logError, logInfo} from './core_log.js';
-import { OilVersion } from './core_utils';
+import {OilVersion} from './core_utils';
 
 let cachedConfig = null;
 

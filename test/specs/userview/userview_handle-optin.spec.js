@@ -1,7 +1,5 @@
-import {
-  handleOptIn,
-} from '../../../src/scripts/userview/userview_modal.js';
-import { loadFixture, removeOilLayerAndConfig, deleteAllCookies } from '../../utils.js';
+import {handleOptIn,} from '../../../src/scripts/userview/userview_modal.js';
+import {deleteAllCookies, loadFixture, removeOilLayerAndConfig} from '../../utils.js';
 import * as CoreConfig from '../../../src/scripts/core/core_config.js';
 import * as UserviewConfig from '../../../src/scripts/userview/userview_config.js';
 import * as UserViewPrivacy from '../../../src/scripts/userview/userview_privacy.js';
@@ -9,11 +7,7 @@ import * as CoreUtils from '../../../src/scripts/core/core_utils.js';
 import * as UserviewOptIn from '../../../src/scripts/userview/userview_optin.js'
 import * as CorePoi from '../../../src/scripts/core/core_poi.js';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies.js';
-import {
-  EVENT_NAME_POI_OPT_IN,
-  EVENT_NAME_SOI_OPT_IN, PRIVACY_FULL_TRACKING,
-  PRIVACY_MINIMUM_TRACKING
-} from '../../../src/scripts/core/core_constants';
+import {EVENT_NAME_POI_OPT_IN, EVENT_NAME_SOI_OPT_IN, PRIVACY_FULL_TRACKING, PRIVACY_MINIMUM_TRACKING} from '../../../src/scripts/core/core_constants';
 
 describe('the userview modal handles optin clicks on', () => {
 
@@ -21,6 +15,7 @@ describe('the userview modal handles optin clicks on', () => {
     deleteAllCookies();
     CoreConfig.resetConfiguration();
     removeOilLayerAndConfig();
+    CoreUtils.setGlobalOilObject('commandCollectionExecutor', undefined);
   });
 
   describe('SOI', () => {
@@ -63,6 +58,16 @@ describe('the userview modal handles optin clicks on', () => {
 
       expect(UserviewOptIn.oilOptIn).toHaveBeenCalledTimes(0);
       expect(CoreCookies.removeSubscriberCookies).toHaveBeenCalled();
+    });
+
+    it('should execute command collection executor', (done) => {
+      spyOn(CoreUtils, 'getGlobalOilObject').and.callThrough();
+
+      CoreUtils.setGlobalOilObject('commandCollectionExecutor', () => {
+        expect(CoreUtils.getGlobalOilObject).toHaveBeenCalledWith('commandCollectionExecutor');
+        done();
+      });
+      handleOptIn();
     });
   });
 
@@ -109,6 +114,18 @@ describe('the userview modal handles optin clicks on', () => {
       expect(CoreCookies.removeSubscriberCookies).toHaveBeenCalled();
       expect(CorePoi.deActivatePowerOptIn).toHaveBeenCalled();
     });
+
+    it('should execute command collection executor', (done) => {
+      loadFixture('poi/poi.default.html');
+      spyOn(CoreUtils, 'getGlobalOilObject').and.callThrough();
+
+      CoreUtils.setGlobalOilObject('commandCollectionExecutor', () => {
+        expect(CoreUtils.getGlobalOilObject).toHaveBeenCalledWith('commandCollectionExecutor');
+        done();
+      });
+      handleOptIn();
+    });
+
   });
 
   function mockPowerOptInAndSingleOptIn() {
