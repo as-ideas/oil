@@ -27,6 +27,7 @@ const METADATA = webpackMerge(commonConfig.metadata, {
 });
 
 const BUNDLE_VERSION = process.env.npm_package_version + (process.env.SNAPSHOT || '-SNAPSHOT');
+const LATEST_RELEAS_VERSION = process.env.npm_package_version;
 
 console.info('Building BUNDLE_VERSION', BUNDLE_VERSION);
 
@@ -121,7 +122,8 @@ const config = webpackMerge(commonConfig, {
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.OIL_VERSION': JSON.stringify(BUNDLE_VERSION)
+      'process.env.OIL_VERSION': JSON.stringify(BUNDLE_VERSION),
+      'process.env.LATEST_RELEAS_VERSION': JSON.stringify(LATEST_RELEAS_VERSION)
     }),
 
     /**

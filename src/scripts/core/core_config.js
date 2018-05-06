@@ -1,5 +1,6 @@
 import {OIL_CONFIG} from './core_constants.js';
 import {logError, logInfo} from './core_log.js';
+import { OilVersion } from './core_utils';
 
 let cachedConfig = null;
 
@@ -40,8 +41,8 @@ function getConfiguration() {
 /**
  * Returns a config value or its given default value if not existing in users configuration.
  *
- * @param name
- * @param defaultValue
+ * @param {string} name in form of the key of the config value
+ * @param {string} defaultValue as fallback if there is no value found for the key (name)
  * @returns {*}
  */
 export function getConfigValue(name, defaultValue) {
@@ -86,7 +87,7 @@ export function getHubOrigin() {
 }
 
 export function getHubPath() {
-  return getConfigValue(OIL_CONFIG.ATTR_HUB_PATH, '/hub.html');
+  return getConfigValue(OIL_CONFIG.ATTR_HUB_PATH, `/release/${OilVersion.getLatestReleaseVersion()}/hub.html`);
 }
 
 export function getOilBackendUrl() {

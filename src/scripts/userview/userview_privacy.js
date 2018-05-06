@@ -1,5 +1,7 @@
 import { getSoiCookie } from '../core/core_cookies.js';
 import { PRIVACY_FULL_TRACKING } from '../core/core_constants';
+import { logInfo } from '../core/core_log';
+import { forEach } from './userview_modal';
 
 export const PRIVACY_SETTINGS_ALL_FALSE = {
   '01': false,
@@ -26,7 +28,7 @@ export function getSoiPrivacy() {
  *  "{}": if there are multiple checkboxes
  */
 export function getPrivacySettings() {
-  if (document.getElementById('as-oil-cpc')) {
+  if (document.querySelector('.as-js-purpose-slider')) {
     return {
       '01': document.getElementById('as-js-purpose-slider-01').checked,
       '02': document.getElementById('as-js-purpose-slider-02').checked,
@@ -41,6 +43,8 @@ export function getPrivacySettings() {
 }
 
 export function applyPrivacySettings(privacySetting) {
+  logInfo('Apply privacy settings from cookie', privacySetting);
+
   document.getElementById('as-js-purpose-slider-01').checked = privacySetting['01'];
   document.getElementById('as-js-purpose-slider-02').checked = privacySetting['02'];
   document.getElementById('as-js-purpose-slider-03').checked = privacySetting['03'];
@@ -48,5 +52,17 @@ export function applyPrivacySettings(privacySetting) {
   document.getElementById('as-js-purpose-slider-05').checked = privacySetting['05'];
   document.getElementById('as-js-purpose-slider-06').checked = privacySetting['06'];
   document.getElementById('as-js-purpose-slider-07').checked = privacySetting['07'];
+
+  if (privacySetting === 1) {
+    forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
+      domNode && (domNode.checked = true);
+    });
+  }
+
+  if (privacySetting === 0) {
+    forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
+      domNode && (domNode.checked = false);
+    });
+  }
 }
 

@@ -43,7 +43,7 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      { pattern: '**/*.html', included: false }
+      {pattern: '**/*.html', included: false}
     ],
 
     // list of files / patterns to exclude
@@ -69,9 +69,9 @@ module.exports = function (config) {
     coverageReporter: {
       dir: '../target/coverage/',
       reporters: [
-        { type: 'text-summary' },
-        { type: 'json' },
-        { type: 'html' }
+        {type: 'text-summary'},
+        {type: 'json'},
+        {type: 'html'}
       ]
     },
 
@@ -114,10 +114,16 @@ module.exports = function (config) {
     '/scripts/': 'http://localhost:' + config.port + '/base/src/scripts/'
   };
 
+  // Check webpack entry points
+  // ...skip demos && dev kit
+  function isFileIncluded(key) {
+    return (key.indexOf('demos/') === -1)
+      && (key.indexOf('oildevkit') === -1);
+  }
+
   for (var key in appConfig.entry) {
     if (key) {
-      // skip demos
-      if (key.indexOf('demos/') === -1) {
+      if (isFileIncluded(key)) {
         config.files.push(appConfig.entry[key]);
         config.preprocessors[appConfig.entry[key]] = ['webpack', 'sourcemap'];
       }
@@ -136,7 +142,7 @@ module.exports = function (config) {
       value: object
     });
   }
-  config.files.push({ pattern: testSpecs, watched: false });
+  config.files.push({pattern: testSpecs, watched: false});
   config.preprocessors[testSpecs] = ['webpack', 'sourcemap'];
 
   debugLog('Using following karma config:', config);
