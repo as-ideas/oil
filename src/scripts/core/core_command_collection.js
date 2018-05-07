@@ -2,6 +2,28 @@ import {logError, logInfo} from './core_log';
 import {getCommandCollection} from './core_utils';
 import {getVendorConsentData} from './core_consents';
 
+const commands = {
+  getVendorConsents: (vendorIds) => {
+    return getVendorConsentData(vendorIds);
+  },
+
+  getConsentData: (consentStringVersion) => {
+    // TODO create vendor cookie value here
+    return '';
+  },
+
+  getPublisherConsents: (purposeIds) => {
+    // This method is not implemented yet.
+    return undefined;
+  },
+
+  getVendorList: (vendorListVersion) => {
+    // This method is not implemented yet.
+    return undefined;
+  }
+
+};
+
 export function executeCommandCollection() {
   let commandCollection = getCommandCollection();
 
@@ -27,9 +49,9 @@ export function executeCommandCollection() {
 
 function processCommand(command, parameter, callback) {
   return new Promise((resolve, reject) => {
-    if (typeof command === 'function') {
+    if (typeof(commands[command]) === 'function') {
       logInfo(`Processing command "${command}" with parameters "${parameter}"`);
-      return resolve(command(parameter, callback));
+      return resolve(commands[command](parameter, callback));
     } else {
       return reject(`Invalid CMP command "${command}"`);
     }
@@ -44,23 +66,4 @@ function createResultMessage(result, commandEntry) {
       callId: commandEntry.callId
     }
   };
-}
-
-function getVendorConsents(vendorIds) {
-  return getVendorConsentData(vendorIds);
-}
-
-function getConsentData(consentStringVersion) {
-  // TODO create vendor cookie value here
-  return '';
-}
-
-function getPublisherConsents(purposeIds) {
-  // This method is not implemented yet.
-  return undefined;
-}
-
-function getVendorList(vendorListVersion) {
-  // This method is not implemented yet.
-  return undefined;
 }

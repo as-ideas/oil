@@ -1,10 +1,11 @@
 import {getSoiCookie} from './core_cookies';
 import {getPurposeList} from './core_vendor_information';
-import {encodeCookieValue, encodeIntToBits} from './core_utils';
+
+const {ConsentString} = require('consent-string');
 
 export function getVendorConsentData(vendorIds) {
   return {
-    metadata: encodeCookieValue(buildMetaData()),
+    metadata: buildMetaData(),
     gdprApplies: true,
     hasGlobalScope: false,
     purposeConsents: buildPurposeConsents(),
@@ -35,6 +36,8 @@ function buildVendorConsents(vendorIds) {
   let numberOfVendors = vendorIds.length;
   let vendorConsents = {};
 
+  // TODO return false for all invalid vendor ids (that are not in global vendor list) - we need the global vendor list for that
+  // TODO return consent status for _all_ vendor ids if given 'vendorIds' parameter is null or empty - we need the global vendor list for that
   for (let i = 0; i < numberOfVendors; i++) {
     vendorConsents[vendorIds[i]] = soiCookie.opt_in;
   }
@@ -43,14 +46,20 @@ function buildVendorConsents(vendorIds) {
 
 function buildMetaData() {
   let soiCookie = getSoiCookie();
-  let cookieVersionAsBitString = encodeIntToBits(1, 6);
-  let creationTimeAsBitString = encodeIntToBits(Math.round(soiCookie.timestamp / 100), 36); // TODO where do we get the creation time from?
-  let lastUpdateTimeAsBitString = encodeIntToBits(Math.round(soiCookie.timestamp / 100), 36);
-  let cmpIdAsBitString = encodeIntToBits(1, 12); // TODO what is our CMP Id?
-  let cmpVersionAsBitString = encodeIntToBits(1, 6); // TODO We need a numeric OIL version here.
-  let consentScreenAsBitString = encodeIntToBits(1, 6);
-  let vendorListVersionAsBitString = encodeIntToBits(1, 12); // TODO Currently, we don't get the vendor list dynamically!
+  let consentData = new ConsentString();
 
-  return `${cookieVersionAsBitString}${creationTimeAsBitString}${lastUpdateTimeAsBitString}${cmpIdAsBitString}${cmpVersionAsBitString}${consentScreenAsBitString}${vendorListVersionAsBitString}`;
+  consentData.setCmpId(1);
+  consentData.setCmpVersion(1);
+  consentData.setConsentScreen(1);
+  consentData.setConsentLanguage(soiCookie.localeVariantName.substring(0, 2));
+  // TODO this is dummy code - set the vendor list retrieved from IAB here
+  consentData.setGlobalVendorList({
+    vendorListVersion: 1,
+    purposes: getPurposeList(),
+    vendors: []
+  });
+  consentData.created = new Date(soiCookie.timestamp);
+  consentData.setPurposesAllowed([1, 2, 3, 4, 5]);
+  return consentData.getConsentString();
 }
 
