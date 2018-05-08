@@ -1,4 +1,3 @@
-require("babel-polyfill");
 const webpack = require('webpack');
 const util = require('util');
 const debugLog = util.debuglog('oil-debug');

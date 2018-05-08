@@ -1,5 +1,4 @@
 const path = require('path');
-
 const sourcePath = 'src';
 const testPath = 'test';
 const docsPath = 'docs';
@@ -126,11 +125,10 @@ module.exports = {
     chunksSortMode: 'dependency'
   }],
   entry: {
-    'babel-polyfill': ['babel-polyfill'],
-    'hub': path.resolve(sourcePath, 'hub.js'),
-    'oil': path.resolve(sourcePath, 'oil.js'),
-    'oildevkit': path.resolve(sourcePath, 'scripts/dev-kit/dev-kit.js'),
-    'oilstub':  path.resolve(sourcePath, 'oilstub.js')
+    'hub': ['babel-polyfill', path.resolve(sourcePath, 'hub.js')],
+    'oil': ['babel-polyfill', path.resolve(sourcePath, 'oil.js')],
+    'oildevkit': ['babel-polyfill', path.resolve(sourcePath, 'scripts/dev-kit/dev-kit.js')],
+    'oilstub': ['babel-polyfill', path.resolve(sourcePath, 'oilstub.js')]
   },
   copy: [{
     from: path.resolve(sourcePath, 'assets'),
