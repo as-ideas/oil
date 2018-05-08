@@ -126,10 +126,11 @@ module.exports = {
     chunksSortMode: 'dependency'
   }],
   entry: {
+    'babel-polyfill': ['babel-polyfill'],
     'hub': path.resolve(sourcePath, 'hub.js'),
     'oil': path.resolve(sourcePath, 'oil.js'),
     'oildevkit': path.resolve(sourcePath, 'scripts/dev-kit/dev-kit.js'),
-    'oilstub': path.resolve(sourcePath, 'oilstub.js')
+    'oilstub':  path.resolve(sourcePath, 'oilstub.js')
   },
   copy: [{
     from: path.resolve(sourcePath, 'assets'),

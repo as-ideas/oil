@@ -1,3 +1,4 @@
+require("babel-polyfill");
 const webpack = require('webpack');
 const util = require('util');
 const debugLog = util.debuglog('oil-debug');
@@ -191,7 +192,7 @@ var config = {
      *
      * See: https://www.npmjs.com/package/copy-webpack-plugin
      */
-    new CopyWebpackPlugin(appConfig.copy),
+    new CopyWebpackPlugin(appConfig.copy)
 
   ],
 
