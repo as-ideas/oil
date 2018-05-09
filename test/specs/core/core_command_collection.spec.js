@@ -2,6 +2,7 @@ import {executeCommandCollection} from '../../../src/scripts/core/core_command_c
 import * as CoreLog from '../../../src/scripts/core/core_log';
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as CoreConsents from '../../../src/scripts/core/core_consents';
+import {getVendorConsentData} from '../../../src/scripts/core/core_consents';
 import {waitsForAndRuns} from '../../utils';
 
 describe('command collection executor', () => {
@@ -27,6 +28,7 @@ describe('command collection executor', () => {
       parameter: "aParameter"
     }]);
     spyOn(CoreLog, 'logError').and.callThrough();
+    spyOn(CoreConsents, 'getVendorConsentData').and.returnValue('aResult');
 
     executeCommandCollection();
     waitsForAndRuns(
@@ -40,82 +42,79 @@ describe('command collection executor', () => {
   });
 
   it('should process command "getVendorConsents" with callback', (done) => {
-    const commandParameter = 'aParameter';
-    const commandResult = 'aResult';
-
-    spyOn(CoreConsents, 'getVendorConsentData').and.returnValue(commandResult);
-
-    let callbackToBeInvoked = (result, success) => {
-      expect(CoreConsents.getVendorConsentData).toHaveBeenCalledWith(commandParameter);
-      expect(result).toEqual(commandResult);
-      expect(success).toBeTruthy();
-      done();
-    };
-    spyOn(CoreUtils, 'getCommandCollection').and.returnValue(givenCommandEntryWithCallback('getVendorConsents', commandParameter, callbackToBeInvoked));
-
-    executeCommandCollection();
+    verifyInvocationOfCommandWithCallback('getVendorConsents', CoreConsents.getVendorConsentData, 'aResult', done);
   });
 
   it('should process command "getVendorConsents" with callback and return error status', (done) => {
-    const commandParameter = 'aParameter';
-
-    spyOn(CoreConsents, 'getVendorConsentData');
-
-    let callbackToBeInvoked = (result, success) => {
-      expect(CoreConsents.getVendorConsentData).toHaveBeenCalledWith(commandParameter);
-      expect(result).toEqual(undefined);
-      expect(success).toBeFalsy();
-      done();
-    };
-    spyOn(CoreUtils, 'getCommandCollection').and.returnValue(givenCommandEntryWithCallback('getVendorConsents', commandParameter, callbackToBeInvoked));
-
-    executeCommandCollection();
+    verifyInvocationOfCommandWithCallback('getVendorConsents', CoreConsents.getVendorConsentData, undefined, done);
   });
 
   it('should process command "getVendorConsents" from message event', (done) => {
-    const commandParameter = 'aParameter';
-    const commandResult = 'aResult';
-    const commandCallId = 'aCallId';
-    const commandEventOrigin = 'http://this.is.an.origin.de';
-    let postMessageSpy = jasmine.createSpy('postMessage');
-
-    spyOn(CoreUtils, 'getCommandCollection').and.returnValue(givenCommandEntryWithEvent('getVendorConsents', commandParameter, commandCallId, commandEventOrigin, postMessageSpy));
-    spyOn(CoreConsents, 'getVendorConsentData').and.returnValue(commandResult);
-
-    executeCommandCollection();
-
-    waitsForAndRuns(
-      () => postMessageSpy.calls && postMessageSpy.calls.count() > 0,
-      () => {
-        expect(CoreConsents.getVendorConsentData).toHaveBeenCalledWith(commandParameter);
-        expect(postMessageSpy).toHaveBeenCalledWith(givenExpectedResultMessage(commandResult, true, commandCallId), commandEventOrigin);
-        done();
-      },
-      2000
-    )
+    verifyInvocationOfCommandWithCallId('getVendorConsents', CoreConsents.getVendorConsentData, 'aResult', done);
   });
 
   it('should process command "getVendorConsents" from message event and send error status', (done) => {
+    verifyInvocationOfCommandWithCallId('getVendorConsents', CoreConsents.getVendorConsentData, undefined, done);
+  });
+
+  it('should process command "getConsentData" with callback', (done) => {
+    verifyInvocationOfCommandWithCallback('getConsentData', CoreConsents.getConsentDataString, 'aResult', done);
+  });
+
+  it('should process command "getVendorConsents" with callback and return error status', (done) => {
+    verifyInvocationOfCommandWithCallback('getConsentData', CoreConsents.getConsentDataString, undefined, done);
+  });
+
+  it('should process command "getVendorConsents" from message event', (done) => {
+    verifyInvocationOfCommandWithCallId('getConsentData', CoreConsents.getConsentDataString, 'aResult', done);
+  });
+
+  it('should process command "getVendorConsents" from message event and send error status', (done) => {
+    verifyInvocationOfCommandWithCallId('getConsentData', CoreConsents.getConsentDataString, undefined, done);
+  });
+
+  function verifyInvocationOfCommandWithCallback(command, expectedFunction, expectedResult, done) {
+    const commandParameter = 'aParameter';
+
+    spyOn(CoreConsents, expectedFunction.name).and.returnValue(expectedResult);
+
+    let callbackToBeInvoked = (result, success) => {
+      expect(CoreConsents[expectedFunction.name]).toHaveBeenCalledWith(commandParameter);
+      expect(result).toEqual(expectedResult);
+      if (typeof expectedResult !== 'undefined') {
+        expect(success).toBeTruthy();
+      } else {
+        expect(success).toBeFalsy();
+      }
+      done();
+    };
+    spyOn(CoreUtils, 'getCommandCollection').and.returnValue(givenCommandEntryWithCallback(command, commandParameter, callbackToBeInvoked));
+
+    executeCommandCollection();
+  }
+
+  function verifyInvocationOfCommandWithCallId(command, expectedFunction, expectedResult, done) {
     const commandParameter = 'aParameter';
     const commandCallId = 'aCallId';
     const commandEventOrigin = 'http://this.is.an.origin.de';
     let postMessageSpy = jasmine.createSpy('postMessage');
 
-    spyOn(CoreUtils, 'getCommandCollection').and.returnValue(givenCommandEntryWithEvent('getVendorConsents', commandParameter, commandCallId, commandEventOrigin, postMessageSpy));
-    spyOn(CoreConsents, 'getVendorConsentData');
+    spyOn(CoreUtils, 'getCommandCollection').and.returnValue(givenCommandEntryWithEvent(command, commandParameter, commandCallId, commandEventOrigin, postMessageSpy));
+    spyOn(CoreConsents, expectedFunction.name).and.returnValue(expectedResult);
 
     executeCommandCollection();
 
     waitsForAndRuns(
       () => postMessageSpy.calls && postMessageSpy.calls.count() > 0,
       () => {
-        expect(CoreConsents.getVendorConsentData).toHaveBeenCalledWith(commandParameter);
-        expect(postMessageSpy).toHaveBeenCalledWith(givenExpectedResultMessage(undefined, false, commandCallId), commandEventOrigin);
+        expect(CoreConsents[expectedFunction.name]).toHaveBeenCalledWith(commandParameter);
+        expect(postMessageSpy).toHaveBeenCalledWith(givenExpectedResultMessage(expectedResult, typeof expectedResult !== 'undefined', commandCallId), commandEventOrigin);
         done();
       },
       2000
-    )
-  });
+    );
+  }
+
   function givenCommandEntryWithCallback(commandToBeExecuted, commandParameter, callbackToBeInvoked) {
     return [{
       command: commandToBeExecuted,

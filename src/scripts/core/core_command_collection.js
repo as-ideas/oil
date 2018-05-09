@@ -1,6 +1,6 @@
 import {logError, logInfo} from './core_log';
 import {getCommandCollection} from './core_utils';
-import {getVendorConsentData} from './core_consents';
+import {getConsentDataString, getVendorConsentData} from './core_consents';
 
 const commands = {
   getVendorConsents: (vendorIds) => {
@@ -8,8 +8,7 @@ const commands = {
   },
 
   getConsentData: (consentStringVersion) => {
-    // TODO create vendor cookie value here
-    return '';
+    return getConsentDataString(consentStringVersion);
   },
 
   getPublisherConsents: (purposeIds) => {

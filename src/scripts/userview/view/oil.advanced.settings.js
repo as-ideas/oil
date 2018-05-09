@@ -5,7 +5,7 @@ import {getPoiGroupName} from '../../core/core_config.js';
 import {logError} from '../../core/core_log.js';
 import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME} from '../../core/core_constants.js';
 import {setGlobalOilObject} from '../../core/core_utils.js';
-import {getPurposeList} from '../../core/core_vendor_information.js';
+import {getPurposes} from '../../core/core_vendor_information.js';
 
 
 const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';
@@ -75,7 +75,7 @@ const ContentSnippet = () => {
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
             Purposes
         </div>
-        ${buildPurposeEntries(getPurposeList())}
+        ${buildPurposeEntries(getPurposes())}
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
             3rd Parties
         </div>

@@ -1,6 +1,6 @@
 import {waitsForAndRuns} from '../utils.js';
 
-xdescribe('oil stub', () => {
+describe('oil stub', () => {
 
   beforeEach(() => {
     if (window.__cmp) {

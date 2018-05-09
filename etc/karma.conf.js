@@ -43,8 +43,7 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: '**/*.html', included: false},
-      'node_modules/babel-polyfill/dist/polyfill.js'
+      {pattern: '**/*.html', included: false}
     ],
 
     // list of files / patterns to exclude
@@ -129,16 +128,7 @@ module.exports = function (config) {
   for (var key in appConfig.entry) {
     if (key) {
       if (isFileIncluded(key)) {
-        if (Array.isArray(appConfig.entry[key])) {
-          for (let i = 0; i < appConfig.entry[key].length; i++) {
-            if (appConfig.entry[key][i].indexOf('/') === 0) {
-              config.files.push(appConfig.entry[key][i]);
-              break;
-            }
-          }
-        } else {
-          config.files.push(appConfig.entry[key]);
-        }
+        config.files.push(appConfig.entry[key]);
         config.preprocessors[appConfig.entry[key]] = ['webpack', 'sourcemap'];
       }
     }
