@@ -32,6 +32,7 @@
     "changelog:path": "node changelog.js -p"
   },
   "dependencies": {
+    "cli-table": "0.3.1",
     "compression": "1.7.2",
     "consent-string": "1.2.1",
     "express": "4.16.2",
