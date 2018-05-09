@@ -5,7 +5,7 @@
   "main": "http_server.js",
   "scripts": {
     "start": "node http_server.js",
-    "build": "npm run build:clean && npm run build:debug && npm run build:prod && npm run build:docs",
+    "build": "npm run build:clean && npm run build:debug && npm run build:prod && npm run build:docs && node etc/file_stats.js",
     "build:prod": "cross-env-shell SNAPSHOT=${SNAPSHOT} NODE_ENV=production webpack --config etc/webpack.config.js",
     "build:release": "npm run build:clean && cross-env-shell SNAPSHOT=${SNAPSHOT} NODE_ENV=release webpack --config etc/webpack.config.js && npm run build:docs",
     "build:clean": "npm run check && rimraf dist/*",
@@ -32,7 +32,6 @@
     "changelog:path": "node changelog.js -p"
   },
   "dependencies": {
-    "cli-table": "^0.3.1",
     "compression": "1.7.2",
     "express": "4.16.2",
     "fresh": "0.5.2",
@@ -51,6 +50,7 @@
     "babel-register": "6.26.0",
     "banner-webpack-plugin": "0.2.3",
     "chai": "4.1.2",
+    "cli-table": "0.3.1",
     "compass-mixins": "0.12.10",
     "conventional-changelog-cli": "1.3.22",
     "copy-webpack-plugin": "4.5.1",
