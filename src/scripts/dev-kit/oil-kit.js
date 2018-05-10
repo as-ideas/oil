@@ -19,8 +19,18 @@ export function readOilConfig() {
   return {};
 }
 
-export function readOilVersion() {
+export function loadOilJs() {
+  
+}
 
+export function readOilVersion() {
+  let oilTag = document.querySelector("script[src*='oil.1']");
+  if (oilTag) {
+    let myRegexp = /oil.([0-9.]*)-/gm;
+    let match = myRegexp.exec(oilTag.src);
+    return match[1]; // first group, index 0 is the full match
+  }
+  return undefined;
 }
 
 export const cmp = {

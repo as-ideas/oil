@@ -2,7 +2,7 @@ import './dev-kit.scss';
 import {sidebareTemplate} from './sidebar';
 import {showModal} from './modal';
 import Cookie from 'js-cookie';
-import {isJqueryAvailable, loadJS, loadModules} from "./script-loader";
+import {isJqueryAvailable, loadJS, loadModules} from './script-loader';
 
 (function () {
   loadModules();
@@ -21,7 +21,6 @@ import {isJqueryAvailable, loadJS, loadModules} from "./script-loader";
       (currentState.oilVerbose) ? btnVerbose.className = 'btn btn-enabled' : btnVerbose.className = 'btn btn-disabled';
       (currentState.oilPreview) ? btnPreview.className = 'btn btn-enabled' : btnPreview.className = 'btn btn-disabled';
 
-      // document.querySelectorAll("script[src*='oil.1']")
 
     }, 300);
   }
