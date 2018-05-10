@@ -7,8 +7,9 @@
     "start": "node http_server.js",
     "build": "npm run build:clean && npm run build:debug && npm run build:prod && npm run build:docs && node etc/file_stats.js",
     "build:prod": "cross-env-shell SNAPSHOT=${SNAPSHOT} NODE_ENV=production webpack --config etc/webpack.config.js",
-    "build:release": "npm run build:clean && cross-env-shell SNAPSHOT=${SNAPSHOT} NODE_ENV=release webpack --config etc/webpack.config.js && npm run build:docs",
-    "build:clean": "npm run check && rimraf dist/*",
+    "build:release": "npm run build:clean && npm run build:check && cross-env-shell SNAPSHOT=${SNAPSHOT} NODE_ENV=release webpack --config etc/webpack.config.js && npm run build:docs",
+    "build:check": "npm run eslint",
+    "build:clean": "rimraf dist/*",
     "build:dev": "cross-env NODE_ENV=debug webpack --config etc/webpack.config.js",
     "build:docs": "node docs/asciidoc.js",
     "build:debug": "cross-env NODE_ENV=debug webpack --config etc/webpack.config.js ",
@@ -33,10 +34,11 @@
   },
   "dependencies": {
     "compression": "1.7.2",
+    "consent-string": "1.2.1",
     "express": "4.16.2",
     "fresh": "0.5.2",
     "js-cookie": "2.1.4",
-    "npm": "^5.8.0",
+    "npm": "6.0.0",
     "serve-index": "1.9.1",
     "serve-static": "1.13.2"
   },
@@ -108,7 +110,7 @@
     "style-loader": "0.21.0",
     "supertest": "3.0.0",
     "to-string-loader": "1.1.5",
-    "webpack": "4.6.0",
+    "webpack": "4.8.1",
     "webpack-cli": "2.0.15",
     "webpack-dev-server": "3.1.3",
     "webpack-md5-hash": "0.0.6",
@@ -126,6 +128,6 @@
   "engine-strict": true,
   "engines": {
     "node": ">= 8.8 <9",
-    "npm": ">= 5.8"
+    "npm": ">= 6.0"
   }
 }

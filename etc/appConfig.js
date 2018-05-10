@@ -1,5 +1,4 @@
 const path = require('path');
-
 const sourcePath = 'src';
 const testPath = 'test';
 const docsPath = 'docs';

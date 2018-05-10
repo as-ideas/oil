@@ -1,3 +1,8 @@
+export const OIL_SPEC = {
+  CMP_ID: 1,
+  CMP_VERSION: 1
+};
+
 export const OIL_CONFIG = {
   ATTR_ACTIVATE_POI: 'poi_activate_poi',
   ATTR_HUB_ORIGIN: 'poi_hub_origin',
