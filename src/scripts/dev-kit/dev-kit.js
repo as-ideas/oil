@@ -1,100 +1,11 @@
 import './dev-kit.scss';
 import {sidebareTemplate} from './sidebar';
 import {showModal} from './modal';
+import Cookie from 'js-cookie';
+import {isJqueryAvailable, loadJS, loadModules} from "./script-loader";
 
 (function () {
-  function loadJquery() {
-    if (!isJqueryAvailable()) {
-      let d = document, s = d.createElement('script');
-      s.id = 'jquery-js';
-      s.src = '//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  }
-
-  function loadJqueryPlugins() {
-    console.info('Try to load FooNav...');
-    if (isJqueryAvailable()) {
-      if (!document.getElementById('slidereveal-js')) {
-        // SLIDE-REVEAL
-        let d = document, s = d.createElement('script');
-        s.id = 'slidereveal-js';
-        s.onload = initNavbar;
-        s.src = '//cdnjs.cloudflare.com/ajax/libs/slideReveal/1.1.2/jquery.slidereveal.min.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-
-        // MODAL JS
-        s = d.createElement('script');
-        s.id = 'modal-js';
-        s.src = '//cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.19.3/sweetalert2.all.min.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-
-        // DROPDOWN CSS
-        // s = d.createElement('link');
-        // s.href = '//cdnjs.cloudflare.com/ajax/libs/jquery-dropdown/2.0.3/jquery.dropdown.min.css';
-        // s.rel = 'stylesheet';
-
-        // OUR CSS
-        // let css = '';
-        // s = d.createElement('style');
-        // s.type = 'text/css';
-        // if (s.styleSheet) {
-        //     s.styleSheet.cssText = css;
-        // } else {
-        //     s.appendChild(document.createTextNode(css));
-        // }
-        // (d.head || d.body).appendChild(s);
-
-      }
-      console.info('JqueryPlugins loaded.');
-    } else {
-      window.setTimeout(function () {
-        loadJqueryPlugins();
-      }, 250);
-    }
-  }
-
-  function isJqueryAvailable() {
-    return !(typeof jQuery === 'undefined');
-  }
-
-  function getCurrentState() {
-    let oilData = getCookie('oil_data');
-    let oilVerbose = getCookie('oil_verbose');
-    let oilPreview = getCookie('oil_preview');
-    return {
-      oilData: oilData ? JSON.parse(oilData) : {},
-      oilVerbose: oilVerbose ? oilVerbose : false,
-      oilPreview: oilPreview ? oilPreview : false
-    }
-  }
-
-  function getCookie(cname) {
-    let name = cname + '=';
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) === ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) === 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return '';
-  }
-
-  function readConfig() {
-    let configElement = document.querySelector('script[type="application/configuration"]#oil-configuration');
-    if (configElement && configElement.text) {
-      return JSON.parse(configElement.text);
-    }
-    return {};
-  }
+  loadModules();
 
   function refreshSlider(slider, trigger) {
     window.setTimeout(function () {
@@ -221,7 +132,4 @@ import {showModal} from './modal';
 
     console.info('OIL-DEV-KIT initialized.');
   }
-
-  loadJquery();
-  loadJqueryPlugins();
 }());

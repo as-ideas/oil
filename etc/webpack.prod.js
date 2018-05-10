@@ -123,7 +123,7 @@ const config = webpackMerge(commonConfig, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.OIL_VERSION': JSON.stringify(BUNDLE_VERSION),
-      'process.env.LATEST_RELEASE_VERSION': JSON.stringify(LATEST_RELEAS_VERSION)
+      'process.env.LATEST_RELEASE_VERSION': JSON.stringify(LATEST_RELEASE_VERSION)
     }),
 
     /**
