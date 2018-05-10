@@ -4,25 +4,25 @@ import {sendEventToHostSite} from '../core/core_utils.js';
 import {removeSubscriberCookies} from '../core/core_cookies.js';
 import {
   EVENT_NAME_ADVANCED_SETTINGS,
+  EVENT_NAME_AS_PRIVACY_SELECTED,
   EVENT_NAME_BACK_TO_MAIN,
   EVENT_NAME_COMPANY_LIST,
   EVENT_NAME_POI_OPT_IN,
   EVENT_NAME_SOI_OPT_IN,
   EVENT_NAME_THIRD_PARTY_LIST,
-  EVENT_NAME_TIMEOUT
+  EVENT_NAME_TIMEOUT,
+  PRIVACY_MINIMUM_TRACKING
 } from '../core/core_constants.js';
 import {oilOptIn, oilPowerOptIn} from './userview_optin.js';
 import {deActivatePowerOptIn} from '../core/core_poi.js';
 import {oilDefaultTemplate} from './view/oil.default.js';
 import {oilNoCookiesTemplate} from './view/oil.no.cookies.js';
-import {oilAdvancedSettingsTemplate} from './view/oil.advanced.settings.js';
+import {attachCpcHandlers, oilAdvancedSettingsInlineTemplate, oilAdvancedSettingsTemplate} from './view/oil.advanced.settings.js';
 import {logError, logInfo} from '../core/core_log.js';
 import {getTheme, getTimeOutValue, isPersistMinimumTracking} from './userview_config.js';
-import {isSubscriberSetCookieActive} from '../core/core_config.js';
-import {getPoiGroupName, isPoiActive} from '../core/core_config';
-import {attachCpcHandlers,oilAdvancedSettingsInlineTemplate} from './view/oil.advanced.settings.js';
+import {getPoiGroupName, isPoiActive, isSubscriberSetCookieActive} from '../core/core_config.js';
 import {applyPrivacySettings, getPrivacySettings, getSoiPrivacy, PRIVACY_SETTINGS_ALL_FALSE} from './userview_privacy.js';
-import {EVENT_NAME_AS_PRIVACY_SELECTED, PRIVACY_MINIMUM_TRACKING} from '../core/core_constants.js';
+import {getGlobalOilObject} from '../core/core_utils';
 
 
 // Initialize our Oil wrapper and save it ...
@@ -225,6 +225,11 @@ export function handleOptIn() {
     handleSoiOptIn();
   }
   animateOptInButton();
+
+  let commandCollectionExecutor = getGlobalOilObject('commandCollectionExecutor');
+  if (commandCollectionExecutor) {
+    commandCollectionExecutor();
+  }
 }
 
 function animateOptInButton() {
