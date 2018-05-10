@@ -191,7 +191,7 @@ var config = {
      *
      * See: https://www.npmjs.com/package/copy-webpack-plugin
      */
-    new CopyWebpackPlugin(appConfig.copy),
+    new CopyWebpackPlugin(appConfig.copy)
 
   ],
 

@@ -1,12 +1,14 @@
 import {getGlobalOilObject, getLocaleVariantVersion, setGlobalOilObject} from '../../../src/scripts/core/core_utils.js';
-import {fetchJsonData} from '../../../src/scripts/core/core_utils';
+import {decodeBitsToInt, encodeIabCookieValue, encodeIntToBitString, fetchJsonData} from '../../../src/scripts/core/core_utils';
 
 require('jasmine-ajax');
+
 
 describe('core_utils', () => {
 
   afterEach(() => {
     setGlobalOilObject('LOCALE', undefined);
+
   });
 
   it('should set a global variable correctly', () => {

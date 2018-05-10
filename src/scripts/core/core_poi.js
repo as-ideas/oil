@@ -140,7 +140,7 @@ function readConfigFromFrame(origin) {
 /**
  * Read config for Power Opt IN from hidden iframe
  * @function
- * @return promise with result (is true if POI ist set, otherwise false)
+ * @return Promise<any> with result (is true if POI ist set, otherwise false)
  */
 export function verifyPowerOptIn() {
   return new Promise((resolve) => {
