@@ -27,6 +27,8 @@ export function initOilLayer() {
 
   /**
    * Early death if the POI-Group is invalid or not exist.
+   *
+   * FIXME needs to check if advanced settings are enabled -> currently also loads group info
    */
   if (isPoiActive() && !isPoiGroupValid(poiGroup)) {
     logError(`The POI-Group ${poiGroup} is not available.`);
