@@ -1,5 +1,5 @@
 import './dev-kit.scss';
-import {sidebareTemplate} from './sidebar';
+import {initNavbar, sidebareTemplate} from './sidebar';
 import {showModal} from './modal';
 
 export function loadModules() {

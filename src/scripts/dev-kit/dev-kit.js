@@ -1,31 +1,28 @@
 import './dev-kit.scss';
-import {sidebareTemplate} from './sidebar';
+import {refreshSlider, sidebareTemplate} from './sidebar';
 import {showModal} from './modal';
 import Cookie from 'js-cookie';
 import {isJqueryAvailable, loadJS, loadModules} from './script-loader';
+import {getCurrentState, readOilConfig} from './oil-kit';
 
 (function () {
   loadModules();
 
-  function refreshSlider(slider, trigger) {
-    window.setTimeout(function () {
-      let currentState = getCurrentState();
-      $('#as-oil-dev-kit__state-pre').text(JSON.stringify(currentState, null, 1));
-      $('#as-oil-dev-kit__config-pre').text(JSON.stringify(readConfig(), 1));
-
-      let btnOil = document.getElementById('as-oil-dev-kit__btn-oil');
-      let btnVerbose = document.getElementById('as-oil-dev-kit__btn-verbose');
-      let btnPreview = document.getElementById('as-oil-dev-kit__btn-preview');
-
-      (AS_OIL) ? btnOil.className = 'btn btn-enabled' : btnOil.className = 'btn btn-disabled';
-      (currentState.oilVerbose) ? btnVerbose.className = 'btn btn-enabled' : btnVerbose.className = 'btn btn-disabled';
-      (currentState.oilPreview) ? btnPreview.className = 'btn btn-enabled' : btnPreview.className = 'btn btn-disabled';
-
-
-    }, 300);
-  }
-
   window.AS_OIL_DEV_KIT = {
+    showConfig: function () {
+      let exampleScriptTag = '<script id="oil-configuration" type="application/configuration">\n'
+        + '{\n'
+        + '  "poi_group_name": "axelSpringerSe_01"\n'
+        + '}\n'
+        + '</script>';
+
+      let desc = 'OIL comes with a wide range of customisation features which can be configured via a configuration block. Put the configuration object somewhere in the upper part of your page. Please disable the preview mode for the first production test. The preview mode hides the OIL layer except you enable it on your browser session. See the parameter section below for more details.<br><br>'
+        + 'OIL also comes with a default configuration, that will support Single Opt-In with a German standard text.'
+        + '<pre class="modal-pre">' + escapeHtml(exampleScriptTag) + '</pre>'
+        + '<br><br>Current configuration:';
+      showModal('Current OIL Config', desc, JSON.stringify(readOilConfig(), null, 1));
+
+    },
     previewModeOn: function () {
       AS_OIL.previewModeOn();
       refreshSlider();
@@ -115,20 +112,12 @@ import {isJqueryAvailable, loadJS, loadModules} from './script-loader';
     }
   };
 
-  function initNavbar() {
-    let element1 = sidebareTemplate();
-    let element2 = '<div id="as-oil-dev-kit__trigger"></div>';
-
-    $('body').append(element1);
-    $('body').append(element2);
-
-    $('#as-oil-dev-kit__slider').slideReveal({
-      trigger: $('#as-oil-dev-kit__trigger'),
-      position: 'left',
-      show: refreshSlider,
-      width: 350
-    });
-
-    console.info('OIL-DEV-KIT initialized.');
+  function escapeHtml(unsafe) {
+    return unsafe
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
   }
 }());

@@ -1,4 +1,5 @@
-import Cookie from "js-cookie";
+import Cookie from 'js-cookie';
+import {loadJS} from './script-loader';
 
 export function getCurrentState() {
   let oilData = Cookie.get('oil_data');
@@ -20,11 +21,11 @@ export function readOilConfig() {
 }
 
 export function loadOilJs() {
-  
+  loadJS('oil-js', '//oil-integration-cdn.herokuapp.com/release/1.0.34/oil.1.0.34-RELEASE.min.js')
 }
 
 export function readOilVersion() {
-  let oilTag = document.querySelector("script[src*='oil.1']");
+  let oilTag = document.querySelector('script[src*="oil.1"]');
   if (oilTag) {
     let myRegexp = /oil.([0-9.]*)-/gm;
     let match = myRegexp.exec(oilTag.src);
@@ -34,6 +35,6 @@ export function readOilVersion() {
 }
 
 export const cmp = {
-  getVendorsConsent: () => __cmp('getVendorsConsent', null, (result) => console.info(result)),
+  getVendorsConsent: () => __cmp('getVendorsConsent', null, (result) => console.info(result))
 
 };
