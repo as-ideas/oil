@@ -177,7 +177,6 @@ var config = {
    * See: http://webpack.github.io/docs/configuration.html#plugins
    */
   plugins: [
-    // new Webpack2Polyfill(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
