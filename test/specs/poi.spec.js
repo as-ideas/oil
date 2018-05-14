@@ -38,7 +38,7 @@ describe('Power Opt-IN (POI)', () => {
   });
 
   it('should disable POI on config error', (done) => {
-    loadFixture('poi/poi.wrong-iframe.html');
+    loadFixture('poi/poi.wrong-iframe-url.html');
     PoiAPIUserview.activatePowerOptInWithIFrame({}).then(() => PoiAPICore.verifyPowerOptIn().then((optin) => {
         expect(optin.power_opt_in).toBe(false);
         done();

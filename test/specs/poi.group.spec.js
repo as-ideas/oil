@@ -7,9 +7,9 @@ describe('POI-Group axelSpringerSe_01', () => {
     resetConfiguration();
   });
 
-  //ToDo: tbd test for default POI-Group...maybe more
-  xit('should be loaded by default', () => {
-    loadFixture('config/empty.config.html');
-  });
+  // TODO: tbd test for default POI-Group...maybe more
+  // xit('should be loaded by default', () => {
+  //   loadFixture('config/empty.config.html');
+  // });
 
 });

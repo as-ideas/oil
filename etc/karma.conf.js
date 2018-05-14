@@ -19,6 +19,9 @@ const templatesPath = appConfig.templatesPath;
 
 const JUNIT = appConfig.junit;
 
+const puppeteer = require('puppeteer');
+process.env.CHROME_BIN = puppeteer.executablePath();
+
 //delete webpackConfig.entry;
 
 module.exports = function (config) {
@@ -55,7 +58,7 @@ module.exports = function (config) {
     // Start these browsers, currently available:
     // Chrome, ChromeCanary, Firefox, Opera, Safari (only Mac), PhantomJS, IE (only Windows)
     browsers: [
-      'PhantomJS'
+      'ChromeHeadless'
     ],
 
     reporters: [

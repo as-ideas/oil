@@ -1,4 +1,4 @@
-import {forEach} from '../src/scripts/userview/userview_modal.js';
+import { forEach } from '../src/scripts/userview/userview_modal.js';
 import { customMatchers } from './utilsHtmlDiff.js';
 
 /**
@@ -8,7 +8,7 @@ import { customMatchers } from './utilsHtmlDiff.js';
  */
 export function loadFixture(file) {
   jasmine.getFixtures().fixturesPath = '/base/test/fixtures';
-  loadFixtures(file);
+  window.loadFixtures(file);
 }
 
 export function deleteAllCookies() {
@@ -24,7 +24,7 @@ export function deleteAllCookies() {
 
 export function readFixture(file) {
   jasmine.getFixtures().fixturesPath = '/base/test/fixtures';
-  return readFixtures(file);
+  return window.readFixtures(file);
 }
 
 export function formatHtml(element) {
@@ -58,7 +58,7 @@ export function removeOilLayerAndConfig() {
 
 export function waitsForAndRuns(escapeFunction, runFunction, escapeTime) {
   // check the escapeFunction every millisecond so as soon as it is met we can escape the function
-  let interval = setInterval(function() {
+  let interval = setInterval(function () {
     if (escapeFunction()) {
       clearMe();
       runFunction();
@@ -67,13 +67,13 @@ export function waitsForAndRuns(escapeFunction, runFunction, escapeTime) {
 
   // in case we never reach the escapeFunction, we will time out
   // at the escapeTime
-  let timeOut = setTimeout(function() {
+  let timeOut = setTimeout(function () {
     clearMe();
     runFunction();
   }, escapeTime);
 
   // clear the interval and the timeout
-  function clearMe(){
+  function clearMe() {
     clearInterval(interval);
     clearTimeout(timeOut);
   }

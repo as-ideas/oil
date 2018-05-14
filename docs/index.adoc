@@ -20,6 +20,10 @@ include::src/docs/01-intro.adoc[]
 
 include::src/docs/02-quickstart.adoc[]
 
-include::src/docs/03-usage-and-configuration.adoc[]
+include::src/docs/03-integration-and-configuration.adoc[]
 
-include::src/docs/05-appendix.adoc[]
+include::src/docs/04-oil-api.adoc[]
+
+include::src/docs/05-customisation.adoc[]
+
+include::src/docs/07-appendix.adoc[]
