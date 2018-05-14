@@ -1,4 +1,4 @@
-== Development
+== Development (internal developer guide)
 
 === Quick Links
 Jira: https://id-jira.axelspringer.de/browse/OIL
