@@ -85,7 +85,7 @@ export let OilVersion = {
     return `${process.env.OIL_VERSION}`;
   },
   getLatestReleaseVersion: () => {
-    return `${process.env.LATEST_RELEAS_VERSION}`;
+    return `${process.env.LATEST_RELEASE_VERSION}`;
   }
 };
 

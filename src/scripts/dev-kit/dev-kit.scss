@@ -1,9 +1,49 @@
+.as-oil {
+  z-index: 2147483630 !important;
+}
+
+.as-oil-dev-kit {
+  a {
+    color: white;
+    font-size: 10px;
+  }
+
+  .btn {
+    font-size: 12px;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 2px 10px;
+    margin: 4px;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  .btn-enabled {
+    background-color: #008db6;
+    color: white;
+
+    i:before {
+      content: "✓";
+    }
+  }
+
+  .btn-disabled {
+    background-color: #dfdfdf;
+    color: #545454;
+
+    i:before {
+      content: "✗";
+    }
+  }
+}
 
 #as-oil-dev-kit__trigger {
   height: 50px;
   width: 50px;
   position: fixed;
-  z-index: 2147483647;
+  z-index: 2147483640;
   right: 0;
   top: 25px;
 
@@ -15,30 +55,56 @@
   box-shadow: -2px 2px 2px rgba(50, 50, 50, .3);
 }
 
+.swal2-container {
+  z-index: 2147483641 !important;
+}
+
 #as-oil-dev-kit__slider {
   padding: 12px;
   background-color: #1c1817;
   color: white;
-  z-index: 2147483647;
+  z-index: 2147483640;
   overflow: scroll;
 
   .as-oil-dev-kit__slider-inner {
     padding-bottom: 70px;
   }
+
 }
 
 .as-oil-dev-kit__button-wrapper {
   display: flex;
   flex-wrap: wrap;
+
+  h6 {
+    flex: 1 1 100%;
+  }
 }
 
 .as-oil-dev-kit__button {
+  font-size: 12px;
   flex: 1 1 40%;
   text-align: center;
   margin: auto;
-  padding: 4px;
+  padding: 5px;
   margin-top: 6px;
-  margin-right: 2px;
+  margin-right: 5px;
+  border-radius: 4px;
   background-color: #363432;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+hr.modal-hr {
+  border-color: #d0d0d054 !important;
+  margin: 12px 2px;
+  border-bottom: none;
+}
+
+div.modal-header-text {
+  text-align: left;
+}
+
+pre.modal-pre {
+  text-align: left;
+  background: #ececec;
+  padding: 12px 12px;
 }
