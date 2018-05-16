@@ -11,7 +11,7 @@ export function initNavbar() {
     trigger: $('#as-oil-dev-kit__trigger'),
     position: 'left',
     show: refreshSliderFnc,
-    width: 360
+    width: 430
   });
 
   console.info('OIL-DEV-KIT initialized.');
@@ -41,7 +41,10 @@ let refreshSliderFnc = function (slider, trigger) {
       btnOil.className = 'btn btn-enabled';
     } else {
       btnOil.className = 'btn btn-disabled';
-      btnOil.onclick = loadOilJs;
+      btnOil.onclick = () => {
+        loadOilJs();
+        window.setTimeout(refreshSlider, 1000);
+      };
     }
 
     if (currentState.oilVerbose) {

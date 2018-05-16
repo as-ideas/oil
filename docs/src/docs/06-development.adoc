@@ -7,16 +7,6 @@ Jenkins: https://kube-jenkins.ipool.asideas.de/view/OIL%20Project/
 
 Overview: http://oil.axelspringer.com
 
-=== OIL SDK
-
-This is a like a drop-in to add a small sdk to any site, which has oil included.
-
-Add this to your favorites and open the link on the website you want it to be included:
-
-[source,javascript]
-----
-
-----
 
 === Hub Deployment
 To deploy the hub you need to deploy the project with an index.html loading the hub.[version].min.js

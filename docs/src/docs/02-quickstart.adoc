@@ -16,3 +16,5 @@
 
 * <<styling-guide,Style>> your layer according to your style guide
 * If needed: Create your own <<supported-languages,language pack>> and create your own <<supported-poi-groups,POI group>> (currently only possible by mail to the developers, a UI is currently worked on)
+
+include::02-quickstart/dev-kit.adoc[]

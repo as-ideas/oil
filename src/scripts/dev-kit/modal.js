@@ -2,8 +2,8 @@ export function showModal(title, headerText, contentText) {
 
 
   let text = '<hr class="modal-hr">'
-  + `<div class="modal-header-text">${headerText}</div>`
-  + (!contentText) ? '' : `<pre class="modal-pre">${contentText}</pre>`
+    + `<div class="modal-header-text">${headerText}</div>`
+    + ((contentText) ? `<pre class="modal-pre">${contentText}</pre>` : '')
     + '<hr class="modal-hr">';
 
   window.swal({
