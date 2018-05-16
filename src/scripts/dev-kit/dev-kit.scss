@@ -3,6 +3,8 @@
 }
 
 .as-oil-dev-kit {
+  font-family: Arial, serif !important;
+
   a {
     color: white;
     font-size: 10px;
@@ -105,6 +107,7 @@ div.modal-header-text {
 
 pre.modal-pre {
   text-align: left;
+  color: black;
   background: #ececec;
   padding: 12px 12px;
 }
