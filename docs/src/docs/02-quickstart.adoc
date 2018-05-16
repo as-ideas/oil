@@ -1,6 +1,15 @@
 == Quickstart
 
-* Add OIL to your website, with a tag manager like <<adding-oil-js-to-your-site-via-tealium-recommended,tealium>> or <<adding-oil-js-to-your-site-via-direct-integration,directly>> as a tag
+* Add OIL to your website, with a tag manager like <<adding-oil-js-to-your-site-via-tealium-recommended,tealium>> or <<adding-oil-js-to-your-site-via-direct-integration,directly>> as a tag, for exampel:
+
+[source, html, subs="attributes"]
+----
+&lt;script>
+include::../../../dist/oilstub.{version}.min.js[]
+&lt;/script>
+&lt;script type="text/javascript" src="https://oil.axelspringer.com/release/{version_raw}/oil.{version}.min.js">&lt;/script>
+----
+
 * Add your <<configuring-oil,configuration>> tag, for example:
 
 [source,json]

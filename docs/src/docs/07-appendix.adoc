@@ -6,8 +6,8 @@
 |===
 | Term | Explanation
 | OIL | Stands for opt-in Layer and besides the fact that it stand for the name of the product it is often used to refer to the UI layer shown on the page.
-| Site Opt-In (SOI) | The __Site Opt-In__  stores a user's opt-in permit for the current site only.
-| Power Opt-In (POI)  | The __Power Opt-In__ functionality stores the opt-in permit for multiple Axel Springer websites. This allows users to only give their opt-in permit for many websites at once. __POI__ is implemented via an iframe solution, see also __Hub__ .
+| Site Opt-In (SOI) | The __Site Opt-In__  stores a user's opt-in permit for the current site only. Also known as domain opt-in.
+| Power Opt-In (POI)  | The __Power Opt-In__ functionality stores the opt-in permit for multiple Axel Springer websites. This allows users to only give their opt-in permit for many websites at once. __POI__ is implemented via an iframe solution, see also __Hub__ . Also known as group opt-in.
 | Hub | __POI__ is implemented via an iframe solution that points to a hub site that acts as a third party cookie storage. Technically, the hub consists of an html and js.
 | Subscriber | A site that subscribes to a POI hub
 |===

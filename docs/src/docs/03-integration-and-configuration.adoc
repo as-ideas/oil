@@ -33,6 +33,9 @@ If Tealium can't be used on your site you also can add OIL directly from our CDN
 Example (replace with the latest version):
 [source, html, subs="attributes"]
 ----
+&lt;script>
+include::../../../dist/oilstub.{version}.min.js[]
+&lt;/script>
 &lt;script type="text/javascript" src="https://oil.axelspringer.com/release/{version_raw}/oil.{version}.min.js">&lt;/script>
 ----
 
