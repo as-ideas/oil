@@ -87,28 +87,39 @@ import {getCurrentState, readOilConfig} from './oil-kit';
 
     },
     // CMP CALLS
-    getVendorsConsent: function () {
+    getVendorConsents: function () {
       // TODO CMP CALL
-      __cmp('getVendorsConsent', null, (result) => console.info(result));
-      refreshSlider();
-      showModal('getVendorsConsent', 'The getVendorsConsent() method returns the consent by purpose and by vendor as well as a flag indicating if the GDPR applies to the current user. <br><br>Here is what the Didomi CMP returned just now for that function (it should match the consents table and change when you updates your consents):', '');
+      __cmp('getVendorConsents', null, (result) => {
+        refreshSlider();
+        showModal('getVendorConsents', 'The getVendorConsents() method returns the consent by purpose and by vendor as well as a flag indicating if the GDPR applies to the current user. <br><br>Here is what the Didomi CMP returned just now for that function (it should match the consents table and change when you updates your consents):', JSON.stringify(result, null, 2));
+      });
+
 
     },
     getConsentData: function () {
       // TODO CMP CALL
-      refreshSlider();
-      showModal('getConsentData', 'The getConsentData() method returns the consent string which encodes all the consent information (by vendor and by purpose) as well as a flag indicating if the GDPR applies to the current user. <br><br>' +
-        'This  should match the consents table and change when you updates your consents:', '');
+      __cmp('getConsentData', null, (result) => {
+        refreshSlider();
+        showModal('getConsentData', 'The getConsentData() method returns the consent string which encodes all the consent information (by vendor and by purpose) as well as a flag indicating if the GDPR applies to the current user. <br><br>' +
+          'This  should match the consents table and change when you updates your consents:', JSON.stringify(result, null, 2));
+      });
+
     },
     ping: function () {
       // TODO CMP CALL
-      refreshSlider();
-      showModal('ping', 'The ping() is used by vendors to know if the CMP is loaded yet and if the website has decided to apply GDPR globally to all users or only to EU-based users.', '');
+      __cmp('ping', null, (result) => {
+        refreshSlider();
+        showModal('ping', 'The ping() is used by vendors to know if the CMP is loaded yet and if the website has decided to apply GDPR globally to all users or only to EU-based users.', JSON.stringify(result, null, 2));
+      });
+
     },
     getVendorList: function () {
       // TODO CMP CALL
-      refreshSlider();
-      showModal('getVendorList', 'The getVendorList() returns the Global Vendor List hosted by the IAB. That list includes all the purposes that are part of the framework, the vendors that support it as well as a list of the consent purposes that each vendor requires. The list is used by CMP to determine what information they need to who the user and what consents to collect.', '');
+      __cmp('getVendorList', null, (result) => {
+        refreshSlider();
+        showModal('getVendorList', 'The getVendorList() returns the Global Vendor List hosted by the IAB. That list includes all the purposes that are part of the framework, the vendors that support it as well as a list of the consent purposes that each vendor requires. The list is used by CMP to determine what information they need to who the user and what consents to collect.', JSON.stringify(result, null, 2));
+      });
+
     }
   };
 
