@@ -4,6 +4,7 @@ const express = require('express');
 const serveStatic = require('serve-static');
 const compression = require('compression');
 const serveIndex = require('serve-index');
+const url = require('url');
 
 // import CORS config
 const headerConfig = require('./etc/headerConfig');
@@ -15,23 +16,27 @@ let CACHE_DURATION = '10m';
 let DOCUMENT_ROOT = __dirname + '/dist';
 
 let domainWhitelist = function (req, res, next) {
-  let host = req.header("host") || req.header("Host");
-  if (isHostInWhitelist(host)) {
+  let host = req.header("Referer") || req.header("referer");
+  if (host && isHostInWhitelist(host)) {
     next();
   } else {
     res
       .status(403)
-      .send('Host not allowed! Please contact administrator.');
+      .send('Host from referer not allowed! Please contact administrator.');
   }
 };
 
-function isHostInWhitelist(host) {
+function isHostInWhitelist(referer) {
+  let host = url.parse(referer).host;
+
   let split = host.split('.');
   let length = split.length;
   if (length >= 2) {
     let domainNameWithEnding = split[length - 2] + '.' + split[length - 1];
+    console.info('domainNameWithEnding', domainNameWithEnding);
     return whitelist.whitelist.includes(domainNameWithEnding);
-  } else if (host.startsWith("localhost") || host.startsWith("oilsite") || host.startsWith("oilcdn")) {
+  }
+  else if (host.startsWith("localhost") || host.startsWith("oilsite") || host.startsWith("oilcdn")) {
     return true;
   }
   return false;
