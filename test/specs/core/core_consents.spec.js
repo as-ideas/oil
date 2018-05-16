@@ -224,6 +224,22 @@ describe('consents', () => {
       spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(GLOBAL_VENDOR_LIST.purposes);
     });
 
+    it('should get consent data string with null as ConsentStringVersion', () => {
+      const EXPECTED_TIMESTAMP = Math.round(Date.now() / 100) * 100; // accuracy: deciseconds only
+
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        privacy: 1,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01',
+        localeVariantVersion: 1,
+        timestamp: EXPECTED_TIMESTAMP
+      });
+
+      let result = getConsentDataString(null);
+      expect(result).toBeDefined();
+    });
+
     it('should get consent data string with correct meta data', () => {
       const EXPECTED_TIMESTAMP = Math.round(Date.now() / 100) * 100; // accuracy: deciseconds only
 

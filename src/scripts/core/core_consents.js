@@ -60,11 +60,18 @@ function buildVendorConsents(requestedVendorIds) {
   return vendorConsents;
 }
 
-function buildConsentString(consentStringVersionString = '1') {
+function buildConsentString(consentStringVersionString) {
+  if (!consentStringVersionString) {
+    consentStringVersionString = 1;
+  }
+
   let consentData = new ConsentString();
   let consentStringVersion = parseInt(consentStringVersionString, 10);
-
+  console.info('consentStringVersionString', consentStringVersionString);
+  console.info('consentStringVersion', consentStringVersion);
+  console.info('consentData', consentData);
   if (!isNaN(consentStringVersion) && consentStringVersion <= consentData.getVersion()) {
+
     let soiCookie = getSoiCookie();
     consentData.setCmpId(OIL_SPEC.CMP_ID);
     consentData.setCmpVersion(OIL_SPEC.CMP_VERSION);

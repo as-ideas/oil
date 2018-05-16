@@ -21,7 +21,10 @@ export function readOilConfig() {
 }
 
 export function loadOilJs() {
-  loadJS('oil-js', '//oil-integration-cdn.herokuapp.com/release/1.0.34/oil.1.0.34-RELEASE.min.js')
+  loadJS('oil-stub-js', '//oil-integration-cdn.herokuapp.com/oilstub.1.0.35-SNAPSHOT.min.js', () => {
+    loadJS('oil-js', '//oil-integration-cdn.herokuapp.com/oil.1.0.35-SNAPSHOT.min.js');
+  });
+
 }
 
 export function readOilVersion() {
