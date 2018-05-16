@@ -41,10 +41,7 @@ let refreshSliderFnc = function (slider, trigger) {
       btnOil.className = 'btn btn-enabled';
     } else {
       btnOil.className = 'btn btn-disabled';
-      btnOil.onclick = () => {
-        loadOilJs();
-        window.setTimeout(refreshSlider, 1000);
-      };
+      btnOil.onclick = loadOilJs;
     }
 
     if (currentState.oilVerbose) {

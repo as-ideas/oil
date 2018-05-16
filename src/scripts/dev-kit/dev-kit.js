@@ -16,6 +16,7 @@ import {getCurrentState, readOilConfig} from './oil-kit';
         + '}\n'
         + '</script>';
 
+
       let desc = 'OIL comes with a wide range of customisation features which can be configured via a configuration block. Put the configuration object somewhere in the upper part of your page. Please disable the preview mode for the first production test. The preview mode hides the OIL layer except you enable it on your browser session. See the parameter section below for more details.<br><br>'
         + 'OIL also comes with a default configuration, that will support Single Opt-In with a German standard text.'
         + '<pre class="modal-pre">' + escapeHtml(exampleScriptTag) + '</pre>'
