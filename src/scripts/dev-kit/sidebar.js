@@ -37,7 +37,7 @@ let refreshSliderFnc = function (slider, trigger) {
     let btnVerbose = document.getElementById('as-oil-dev-kit__btn-verbose');
     let btnPreview = document.getElementById('as-oil-dev-kit__btn-preview');
 
-    if (AS_OIL) {
+    if (window.AS_OIL) {
       btnOil.className = 'btn btn-enabled';
     } else {
       btnOil.className = 'btn btn-disabled';
