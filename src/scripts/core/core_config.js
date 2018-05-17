@@ -1,6 +1,6 @@
-import {OIL_CONFIG} from './core_constants.js';
-import {logError, logInfo} from './core_log.js';
-import {OilVersion} from './core_utils';
+import { OIL_CONFIG } from './core_constants.js';
+import { logError, logInfo } from './core_log.js';
+import { isObject, OilVersion, setGlobalOilObject } from './core_utils';
 
 let cachedConfig = null;
 
@@ -34,9 +34,28 @@ function getConfiguration() {
       logInfo('Using default config');
     }
     cachedConfig = readConfiguration(configurationElement);
+    parseLocaleAndServerUrl(cachedConfig);
   }
   return cachedConfig;
 }
+
+/**
+ * 1) Extracts the locale from the config. The locale can be a string to use with the language backend
+ * or it can be an object containing all labels
+ *
+ * 2) Sets the publicPath for async loading from Webpack
+ *
+ * @param cachedConfig
+ */
+function parseLocaleAndServerUrl(cachedConfig) {
+  if (isObject(cachedConfig.locale)) {
+    setGlobalOilObject('LOCALE', cachedConfig.locale);
+  }
+  if (cachedConfig.publicPath) {
+    window.__webpack_public_path__ = cachedConfig.publicPath;
+  }
+}
+
 
 /**
  * Returns a config value or its given default value if not existing in users configuration.

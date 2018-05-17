@@ -1,7 +1,8 @@
-import {OIL_LABELS} from '../userview_constants';
-import {fetchJsonData, setGlobalOilObject} from '../../core/core_utils.js';
-import {getLocaleVariantName, getOilBackendUrl} from '../../core/core_config.js';
-import {logError} from '../../core/core_log';
+import { OIL_LABELS } from '../userview_constants';
+import { fetchJsonData, setGlobalOilObject } from '../../core/core_utils.js';
+import { getLocaleVariantName, getOilBackendUrl } from '../../core/core_config.js';
+import { logError } from '../../core/core_log';
+import { getGlobalOilObject } from '../../core/core_utils';
 
 export {
   renderOil,
@@ -13,15 +14,22 @@ export {
 } from '../userview_modal.js';
 
 export function locale(callback) {
-  fetchJsonData(getOilBackendUrl() + '/api/userViewLocales/' + getLocaleVariantName()).then(response => {
-    setGlobalOilObject('LOCALE', response);
-    callback(this);
-  }).catch(error => {
-    let defaultLocale = getDefaultLocale();
-    setGlobalOilObject('LOCALE', defaultLocale);
-    logError(`OIL backend returned error: ${error}. Falling back to default locale '${defaultLocale.localeId}', version ${defaultLocale.version}!`);
-    callback(this);
-  });
+  // FIXME write test for this
+  if (getGlobalOilObject('LOCALE')) {
+    return callback(this);
+  } else {
+    fetchJsonData(getOilBackendUrl() + '/api/userViewLocales/' + getLocaleVariantName())
+      .then(response => {
+        setGlobalOilObject('LOCALE', response);
+        callback(this);
+      })
+      .catch(error => {
+        let defaultLocale = getDefaultLocale();
+        setGlobalOilObject('LOCALE', defaultLocale);
+        logError(`OIL backend returned error: ${error}. Falling back to default locale '${defaultLocale.localeId}', version ${defaultLocale.version}!`);
+        callback(this);
+      });
+  }
 }
 
 function getDefaultLocale() {

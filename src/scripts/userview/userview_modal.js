@@ -22,7 +22,7 @@ import {logError, logInfo} from '../core/core_log.js';
 import {getTheme, getTimeOutValue, isPersistMinimumTracking} from './userview_config.js';
 import {getPoiGroupName, isPoiActive, isSubscriberSetCookieActive} from '../core/core_config.js';
 import {applyPrivacySettings, getPrivacySettings, getSoiPrivacy, PRIVACY_SETTINGS_ALL_FALSE} from './userview_privacy.js';
-import {getGlobalOilObject} from '../core/core_utils';
+import { getGlobalOilObject, isObject } from '../core/core_utils';
 
 
 // Initialize our Oil wrapper and save it ...
@@ -281,10 +281,6 @@ function trackPrivacySettings(privacySetting) {
   if (isObject(privacySetting)) {
     sendEventToHostSite(EVENT_NAME_AS_PRIVACY_SELECTED);
   }
-}
-
-function isObject(o) {
-  return o instanceof Object && o.constructor === Object;
 }
 
 function shouldPrivacySettingBeStored(privacySetting) {
