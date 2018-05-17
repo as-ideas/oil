@@ -10,6 +10,8 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 * Local opt-in (called "Site Opt-In", SOI) as well as group-based cross-company opt-in (called "Power Opt-In", POI)
 * Integration and hosting on Tealium with the option to run it standalone.
 
+The Opt-In Layer (OIL) is an offical link:http://advertisingconsent.eu/iab-europe-transparency-consent-framework-list-of-registered-cmps/[Consent Management Provider (CMP)] after the IAB Europe "Transparency & Consent Framework".
+
 === Technical Quality Goals
 
 * OIL will be held compatible with the latest official browser releases, going back to the latest version as listed below and tested on broad range of browsers using Browserstack.com:
@@ -23,19 +25,41 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 * Continously integrated and delivered
 * Modular and maintainable solution
 
+=== Features
+
+* Customisable UI and text with audit-proof versioning
+* Fully configurable (cookie categories, timeouts, ...)
+* Easy AB-Testing with extensive events for each user interaction
+* AB-Tested in different brand specific designs with 250k unique users
+* Supports IAB Europe Standard and additionally custom calls
+* Supports Group-Opt-In
+* Works with 99,9% of all browsers (in Germany) & Works with all devices and all resolutions
+* Optimised for high performance and low latency (build to be loaded first)
+* OpenSource
+* Tested in the cloud on all possible devices
+* Tealium integration and additional features via Tealium like reporting
+* Redirect-Fallback for some older browsers and even for disabled 3rd party cookies in Safari
+* High quality code with high test coverage and static code analysis
+* Loads with low latency and asynchronously for different parts
+* Happy path loads only 10.5k (subject to change and further optimization) of gzipped JavaScript
+* Easy to implement with open documentation and examples, including dev kit
+* With SaaS: Domain White Listing against unauthorized usage
+
 === Team & Stakeholders
 
 [options="header",cols="1,2"]
 |===
 |Role/Name|Contact|
 Business Owner | Johannes Fenner, CDP |
-Legal Affairs | Susanne Stollhoff, Dr. Olaf Koch |
+Legal Affairs | Susanne Stollhoff, Dr. Olaf Koglin |
 Product Owner | Antonino Tumminelli, AS Ideas Engineering |
 UX | Özden Gelgec, AS Ideas Engineering |
 UX | Andreas Wagner, AS Ideas Engineering |
 Developer | Sebastian Waschnick, AS Ideas Engineering |
 Developer | Marcel Bankmann, AS Ideas Engineering |
-Tealium | Michael Sievers, CDP|
+Developer | Alexander Glintschert, AS Ideas Engineering |
+Developer | Dmitri Awerkov-Schäfer, AS Ideas Engineering |
+Tealium Consulting | Michael Sievers, CDP|
 |===
 
 === Solution Strategy

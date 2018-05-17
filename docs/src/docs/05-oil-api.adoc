@@ -1,11 +1,9 @@
 == OIL API
 
-=== Listening and interacting with OIL
-
 In addition to the configuration the host site can communicate with the OIL layer using its API. OIL, in its default state, never emits console errors.
 To get a full log and all errors you can enable the verbose mode. For test deployments and A/B testing OIL supports a preview mode.
 
-==== Test Deployment and Preview Mode
+=== Test Deployment and Preview Mode
 The preview mode is useful for testing OIL in a live environment without making it available to your end-users.
 
 The preview mode is turned off by default, meaning OIL will be available to all your users. If you turn the preview mode on (please see configuration section), OIL won't be shown at first, but can be enabled for your current session on the browser's console:
@@ -17,7 +15,7 @@ window.AS_OIL.previewModeOff();
 
 When preview mode is turned on some debug information will be seen on the browser console. See also "Verbose Logging" below for more detailed logging.
 
-==== OIL Verbose Logging
+=== OIL Verbose Logging
 OIL will show no logs, except in preview mode or verbose mode.
 
 Run the following commands on the console of your browser to switch verbose logging on and off:
@@ -31,7 +29,7 @@ Debug mode can be turned on at any time, whereas the similar preview mode can on
 
 Please note that verbose logging can only be activated for your own browser, all other users won't see those logs.
 
-==== OIL API
+=== OIL JS-Calls
 
 [width="100%",options="header", cols="1,3"]
 |====
@@ -42,7 +40,7 @@ Please note that verbose logging can only be activated for your own browser, all
 |window.AS_OIL.showPreferenceCenter(); | OIL will inject the Cookie Preference Center into your website. Please see "OIL CPC API" section.
 |====
 
-==== OIL Events
+=== OIL Events
 
 #2. Register an event handler with a callback to be executed when OIL fires the opt-in event or the user has opted in on an earlier occasion and revisits the page.
 [source,javascript]
@@ -86,7 +84,7 @@ OIL is currently emitting the following events:
 | oil_click_company_list| When a user clicks the company list link
 |====
 
-==== OIL CPC API
+=== OIL CPC API
 
 You can add an integrated version of the OIL Cookie Preference Center to your page to give the user the chance to reverse his initial selection (or even Opt-Out).
 
@@ -119,7 +117,7 @@ CPC API definition:
 | window.AS_OIL.triggerOptIn() | will trigger the generic opt-in (can also result in an opt-out)
 |====
 
-==== Tracking and Google Analytics Events
+=== Tracking and Google Analytics Events
 If you want to use Google Analytics with OIL you can use OIL Events (see above) and proxy them to your specific GA installation.
 
 This is an example script to subscribe to the event 'oil_optin_done' and forward it to Google Analytics. You might need to tweak it to your environment and needs.

@@ -1,0 +1,50 @@
+== IAB Europe "Transparency & Consent Framework"
+
+The link:https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework[IAB specification] explains how a vendor should communicate with a CMP to gather consent information before running any data processing. That API is a set of JavaScript functions. You can find more at the official website http://advertisingconsent.eu/
+
+The consent string is the central part of the IAB framework: it encodes all the consent information for the user, by purpose and by vendor.
+
+=== JS-API
+
+This API has to support the following functionality. All methods are strings and can be called over the window.__cmp function.
+
+[source, html, subs="attributes"]
+----
+&lt;script type="text/javascript">
+__cmp('getVendorConsents', null, (result) => console.info(result));
+&lt;/script>
+----
+
+==== getVendorConsents
+*Parameter:* vendorIds (Uint16Array)
+
+*Callback signature:* Callback( VendorConsents object, success: boolean)
+
+The vendorIds array contains the vendor ids (as identified in the Global Vendor List) for which consent is being requested. If vendorIds is null or empty, the operation will return consent status for all vendors in the vendor list. The callback function will be called with a VendorConsents object as the parameter. If vendorIds is provided and not empty, then VendorConsents.vendorConsents will only included IDs from vendorIds, The callback is called only after consent is obtained from the UI or existing cookies.
+The consent will be returned false ("No Consent") for any invalid vendorId. The boolean success parameter passed to the callback indicates whether the call to getVendorConsents() was successful.
+
+==== getConsentData
+*Parameter:* consentStringVersion (string)
+
+*Callback signature:* Callback(VendorConsentData object, success: boolean)
+
+If consentStringVersion is provided, then fetch that version if available (else returns null). If consentStringVersion is null, then the latest supported version of the consent string is returned. The callback is called only after consent is obtained from the UI or existing cookies. The boolean success parameter passed to the callback indicates whether the call to getConsentData() was successful.
+
+==== ping
+*Callback signature:* Callback(PingReturn object, success: boolean)
+
+The "ping" command invokes the callback immediately with information about whether the main CMP script has loaded yet and if GDPR has been configured for all users or just EU users. (This requires this command's implementation and this configuration to be in the stub).
+
+==== Optional call: getPublisherConsents
+*Parameter:* purposeIds: Uint16Array
+
+*Callback signature:* Callback( PublisherConsents object, success: boolean)
+
+The purposeIds lists the purpose ids the publisher is requesting consent for. If this array is null or empty, it will default to all configured purposes. PurposeId's 1-24 indicate standard purposes, while 25-88 indicate custom (publisher-configured) purposes. The callback function will be called with a PublisherConsents object as the parameter. The purpose ids would be set by the publisher using a CMP-defined initialization function. The callback is called only after consent is obtained from the UI or existing cookies. The boolean success parameter passed to the callback indicates whether the call to getPublisherConsents() was successful.
+
+==== Optional call: getVendorList
+*Parameter:* vendorListVersion (scalar)
+
+*Callback signature:* Callback(GlobalVendorList object, success:boolean)
+
+The callback function will be called with the GlobalVendorList parameter being the vendor list object of the requested version. If the vendorListVersion is null, the vendor list for the VendorListVersion in the current consent string is returned. If no consent string value is currently set, the latest version of the vendor list is returned. If the vendorListVersion value is ?LATEST?, the latest version available is returned. If the vendorListVersion is invalid, the callback function will be called with 'null' as the first argument and false as the success argument. The boolean success parameter passed to the callback indicates whether the call to getVendorList() was successful.

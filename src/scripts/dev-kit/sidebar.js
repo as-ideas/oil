@@ -11,7 +11,7 @@ export function initNavbar() {
     trigger: $('#as-oil-dev-kit__trigger'),
     position: 'left',
     show: refreshSliderFnc,
-    width: 360
+    width: 430
   });
 
   console.info('OIL-DEV-KIT initialized.');
@@ -104,9 +104,10 @@ export function sidebareTemplate() {
 
         <div class="as-oil-dev-kit__button-wrapper">
             <h6>CMP-API (aka Transparency & Consent Framework)</h6>
-            <div class="as-oil-dev-kit__button" onclick="AS_OIL_DEV_KIT.getVendorsConsent()">getVendorsConsent</div>
             <div class="as-oil-dev-kit__button" onclick="AS_OIL_DEV_KIT.getConsentData()">getConsentData</div>
+            <div class="as-oil-dev-kit__button" onclick="AS_OIL_DEV_KIT.getVendorConsents()">getVendorConsents</div>
             <div class="as-oil-dev-kit__button" onclick="AS_OIL_DEV_KIT.ping()">ping</div>
+            <h6>Optional calls</h6>
             <div class="as-oil-dev-kit__button" onclick="AS_OIL_DEV_KIT.getVendorList()">getVendorList</div>
         </div>
 

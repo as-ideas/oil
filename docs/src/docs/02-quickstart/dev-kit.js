@@ -1,0 +1,1 @@
+javascript:(function () {let d = document, s = d.createElement('script');s.id = 'oil-dev-kit-js';s.src = '//oil-integration-cdn.herokuapp.com/oildevkit.1.0.35-SNAPSHOT.min.js';(d.head || d.body).appendChild(s)}());
