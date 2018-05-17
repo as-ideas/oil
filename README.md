@@ -3,8 +3,8 @@
 
 
 ## Build Monitoring (works currently only from internal network)
+
 [![Build Status](https://jenkins.ipool.asideas.de/buildStatus/icon?job=OIL-build)](https://jenkins.ipool.asideas.de/job/OIL-build/)
-https://github.com/moment/moment/blob/develop/LICENSE
 
 [![GPL2 License][license-image]][license-url] 
 
@@ -106,3 +106,10 @@ see http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
 see CHANGELOG.md
 
 tool: https://github.com/lob/generate-changelog
+
+## License
+
+oil.js is freely distributable under the terms of the [GPL v2.0](https://github.com/as-ideas/oil/blob/master/LICENSE).
+
+[license-image]: https://img.shields.io/badge/license-GPLv2-blue.svg?style=flat
+[license-url]: LICENSE
