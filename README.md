@@ -1,6 +1,6 @@
 # oil.js - Open Source Opt-In Layer
 
-
+![](/src/assets/images/landing_page/logo_github.png)
 
 ## Build Monitoring (works currently only from internal network)
 
