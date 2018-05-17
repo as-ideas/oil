@@ -35,6 +35,6 @@ export function readOilVersion() {
 }
 
 export const cmp = {
-  getVendorsConsent: () => __cmp('getVendorsConsent', null, (result) => console.info(result))
+  getVendorsConsent: () => window.__cmp('getVendorsConsent', null, (result) => console.info(result))
 
 };

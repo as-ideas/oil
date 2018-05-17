@@ -1,4 +1,4 @@
-import {getCurrentState, loadOilJs, readOilConfig, readOilVersion} from './oil-kit';
+import {getCurrentState, loadOilJs, readOilVersion} from './oil-kit';
 
 export function initNavbar() {
   let element1 = sidebareTemplate();
@@ -16,18 +16,19 @@ export function initNavbar() {
 
   console.info('OIL-DEV-KIT initialized.');
 
-  AS_OIL_DEV_KIT.toogleVerbose = function toogleVerbose() {
-    (getCurrentState().oilVerbose) ? AS_OIL.verboseModeOff() : AS_OIL.verboseModeOn();
+  window.AS_OIL_DEV_KIT.toogleVerbose = function toogleVerbose() {
+    (getCurrentState().oilVerbose) ? window.AS_OIL.verboseModeOff() : window.AS_OIL.verboseModeOn();
     refreshSliderFnc();
   };
 
-  AS_OIL_DEV_KIT.tooglePreview = function tooglePreview() {
-    (getCurrentState().oilPreview) ? AS_OIL.previewModeOff() : AS_OIL.previewModeOn();
+  window.AS_OIL_DEV_KIT.tooglePreview = function tooglePreview() {
+    (getCurrentState().oilPreview) ? window.AS_OIL.previewModeOff() : window.AS_OIL.previewModeOn();
     refreshSliderFnc();
   }
 }
 
-let refreshSliderFnc = function (slider, trigger) {
+// HINT: has arguements (slider, trigger)
+let refreshSliderFnc = function () {
   window.setTimeout(function () {
     let currentState = getCurrentState();
     $('#as-oil-dev-kit__state-pre').text(JSON.stringify(currentState, null, 1));
@@ -37,7 +38,7 @@ let refreshSliderFnc = function (slider, trigger) {
     let btnVerbose = document.getElementById('as-oil-dev-kit__btn-verbose');
     let btnPreview = document.getElementById('as-oil-dev-kit__btn-preview');
 
-    if (AS_OIL) {
+    if (window.AS_OIL) {
       btnOil.className = 'btn btn-enabled';
     } else {
       btnOil.className = 'btn btn-disabled';

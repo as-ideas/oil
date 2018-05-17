@@ -36,7 +36,7 @@ describe('core_oil', () => {
     verifyThatGlobalOilObjectIsSet(4, 'reload', 'resetConfiguration');
     verifyThatGlobalOilObjectIsSet(4, 'reload', 'initOilLayer');
 
-    verifyThatGlobalOilObjectIsSet(5, 'status', 'getRawSoiCookie');
+    verifyThatGlobalOilObjectIsSet(5, 'status', 'getSoiCookie');
 
     verifyThatGlobalOilObjectIsSet(6, 'showPreferenceCenter', 'loadLocale');
     verifyThatGlobalOilObjectIsSet(6, 'showPreferenceCenter', 'oilShowPreferenceCenter');
