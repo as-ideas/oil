@@ -56,6 +56,10 @@ export function removeOilLayerAndConfig() {
   });
 }
 
+export function waitForElementToDisplay(selector, callback) {
+  waitsForAndRuns(() => document.querySelector(selector), callback, 200);
+}
+
 export function waitsForAndRuns(escapeFunction, runFunction, escapeTime) {
   // check the escapeFunction every millisecond so as soon as it is met we can escape the function
   let interval = setInterval(function () {
