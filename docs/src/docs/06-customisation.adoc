@@ -94,7 +94,7 @@ IMPORTANT: If you want to reference the company or third party list from your cu
 <a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-thirdPartyList">ThirdPartys</a>
 ----
 
-include::../development/styling-guide.adoc[]
+include::06-customisation/styling-guide.adoc[]
 
 ==== "Thank you" Screen
 If you are performing A/B tests on the OIL Layer while not having the tracking disabled technically, we recommend to

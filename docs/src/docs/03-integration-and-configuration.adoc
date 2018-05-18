@@ -123,6 +123,7 @@ This is a full list of configurable options.
 | [[config-timeout]]timeout | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True
+| iabVendorListUrl | tbd | {embedded vendorlist}
 | oilBackendUrl | (deprecated) The backend from where OIL can load locale-versions | https://oil-backend.herokuapp.com/oil
 |====
 
@@ -156,7 +157,7 @@ If you do not interact with the Opt-In Layer, it will autohide after a fixed tim
 
 [source,json]
 ----
-include::../../../../src/scripts/userview/userview_config.js[tags=config-timeout]
+include::../../../src/scripts/userview/userview_config.js[tags=config-timeout]
 ----
 
 

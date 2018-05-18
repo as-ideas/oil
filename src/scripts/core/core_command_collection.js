@@ -1,6 +1,7 @@
-import {logError, logInfo} from './core_log';
-import {getCommandCollection} from './core_utils';
-import {getConsentDataString, getVendorConsentData} from './core_consents';
+import { logError, logInfo } from './core_log';
+import { getCommandCollection } from './core_utils';
+import { getConsentDataString, getVendorConsentData } from './core_consents';
+import { loadVendorList } from './core_vendor_information';
 
 const commands = {
   getVendorConsents: (vendorIds) => {
@@ -23,6 +24,7 @@ const commands = {
 
 };
 
+
 export function executeCommandCollection() {
   let commandCollection = getCommandCollection();
 
@@ -30,20 +32,28 @@ export function executeCommandCollection() {
     let commandCollectionLength = commandCollection.length;
     for (let i = 0; i < commandCollectionLength; i++) {
       let commandEntry = commandCollection[i];
-      processCommand(commandEntry.command, commandEntry.parameter).then(
-        (result) => {
-          if (commandEntry.callback) {
-            commandEntry.callback(result, (typeof result !== 'undefined'));
-          } else if (commandEntry.callId) {
-            let resultMessage = createResultMessage(result, commandEntry);
-            commandEntry.event.source.postMessage(resultMessage, commandEntry.event.origin);
-          } else {
-            logError(`Invalid command entry '${JSON.stringify(commandEntry)}' found!`);
-          }
-        },
-        (error) => logError(error));
+      loadVendorList()
+        .then(() => {
+          processCommandEntry(commandEntry);
+        })
+        .catch((error) => logError(error));
     }
   }
+}
+
+function processCommandEntry(commandEntry) {
+  processCommand(commandEntry.command, commandEntry.parameter)
+    .then((result) => {
+        if (commandEntry.callback) {
+          commandEntry.callback(result, (typeof result !== 'undefined'));
+        } else if (commandEntry.callId) {
+          let resultMessage = createResultMessage(result, commandEntry);
+          commandEntry.event.source.postMessage(resultMessage, commandEntry.event.origin);
+        } else {
+          logError(`Invalid command entry '${JSON.stringify(commandEntry)}' found!`);
+        }
+      },
+      (error) => logError(error));
 }
 
 function processCommand(command, parameter, callback) {
