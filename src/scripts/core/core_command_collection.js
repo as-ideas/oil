@@ -1,7 +1,7 @@
 import { logError, logInfo } from './core_log';
 import { getCommandCollection } from './core_utils';
 import { getConsentDataString, getVendorConsentData } from './core_consents';
-import { loadVendorList } from './core_vendor_information';
+import { getVendorList, loadVendorList } from './core_vendor_information';
 
 const commands = {
   getVendorConsents: (vendorIds) => {
@@ -19,7 +19,7 @@ const commands = {
 
   getVendorList: (vendorListVersion) => {
     // This method is not implemented yet.
-    return undefined;
+    return getVendorList();
   }
 
 };

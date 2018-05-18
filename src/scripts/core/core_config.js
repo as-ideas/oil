@@ -54,7 +54,7 @@ function parseLocaleAndServerUrl(cachedConfig) {
     setGlobalOilObject('LOCALE', cachedConfig.locale);
   }
   if (cachedConfig.publicPath) {
-    window.__webpack_public_path__ = cachedConfig.publicPath;
+    __webpack_public_path__ = cachedConfig.publicPath;
   }
 }
 

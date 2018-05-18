@@ -56,7 +56,7 @@ module.exports = {
   }, {
     filename: 'demos/open-source-example.html',
     template: path.resolve(sourcePath, 'demos', 'open-source-example.html'),
-    chunks: ['oil'],
+    chunks: [],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/direct-integration.dark.html',

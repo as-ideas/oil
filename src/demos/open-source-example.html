@@ -19,21 +19,15 @@
       background: url('../assets/images/background-large.png') top center no-repeat;
     }
   </style>
-  <script>
-    /*! 1.0.35-SNAPSHOT */!function(e){var n={};function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="/",t(t.s=366)}({366:function(e,n,t){"use strict";!function(e,n){e.__cmp||(e.__cmp=function(){function t(){return!(!e.AS_OIL||!e.AS_OIL.commandCollectionExecutor)}(e.attachEvent||e.addEventListener)("message",function(n){e.__cmp.receiveMessage(n)},!1),function e(){if(!(n.getElementsByName("__cmpLocator").length>0))if(n.body){var t=n.createElement("iframe");t.style.display="none",t.name="__cmpLocator",n.body.appendChild(t)}else setTimeout(e,5)}();var o=[],r=function(n,r,c){var a;"ping"===n?(a=c)&&a({gdprAppliesGlobally:!1,cmpLoaded:t()}):(o.push({command:n,parameter:r,callback:c}),t()&&e.AS_OIL.commandCollectionExecutor())};return r.commandCollection=o,r.receiveMessage=function(e){var n=e&&e.data&&e.data.__cmpCall;n&&o.push({callId:n.callId,command:n.command,parameter:n.parameter,event:e})},r}())}(window,document)}});
-  </script>
-</head>
-
-<body>
-<div class="has-big-bad-background"></div>
-<script id="oil-configuration" type="application/configuration">
+  <script id="oil-configuration" type="application/configuration">
 {
   "advanced_settings": true,
   "timeout": 0,
+  "publicPath": "//oil-integration-host1.herokuapp.com/1.0.35/",
   "poi_activate_poi": true,
   "poi_group_name": "myPoiGroupForGroupingPois",
-  "poi_hub_origin": "//localhost:3000",
-  "poi_hub_path": "/webpack-dev-server/hub.html",
+  "poi_hub_origin": "//oil-integration-host1.herokuapp.com/",
+  "poi_hub_path": "/release/1.0.35/hub.html",
   "locale": {
     "localeId": "enEN_01",
     "version": 1,
@@ -44,7 +38,7 @@
       "label_button_back": "Back",
       "label_button_advanced_settings": "More information",
       "label_cpc_heading": "Please select a privacy setting:",
-      "label_cpc_text": "cpc_text",
+      "label_cpc_text": "Cookie Preference Center",
       "label_cpc_activate_all": "Activate all",
       "label_cpc_deactivate_all": "Deactivate all",
       "label_cpc_purpose_01_text": "Accessing a Device",
@@ -71,6 +65,15 @@
   }
 }
 </script>
+  <script>
+    /*! 1.0.35-SNAPSHOT */!function(e){var n={};function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="/",t(t.s=366)}({366:function(e,n,t){"use strict";!function(e,n){e.__cmp||(e.__cmp=function(){function t(){return!(!e.AS_OIL||!e.AS_OIL.commandCollectionExecutor)}(e.attachEvent||e.addEventListener)("message",function(n){e.__cmp.receiveMessage(n)},!1),function e(){if(!(n.getElementsByName("__cmpLocator").length>0))if(n.body){var t=n.createElement("iframe");t.style.display="none",t.name="__cmpLocator",n.body.appendChild(t)}else setTimeout(e,5)}();var o=[],r=function(n,r,c){var a;"ping"===n?(a=c)&&a({gdprAppliesGlobally:!1,cmpLoaded:t()}):(o.push({command:n,parameter:r,callback:c}),t()&&e.AS_OIL.commandCollectionExecutor())};return r.commandCollection=o,r.receiveMessage=function(e){var n=e&&e.data&&e.data.__cmpCall;n&&o.push({callId:n.callId,command:n.command,parameter:n.parameter,event:e})},r}())}(window,document)}});
+  </script>
+  <script type="text/javascript" src="//oil-integration-host1.herokuapp.com/release/1.0.36/oil.1.0.36-RELEASE.min.js"></script>
+</head>
+
+<body>
+<div class="has-big-bad-background"></div>
+
 
 <script type="text/javascript">
   var utag_data = {}
