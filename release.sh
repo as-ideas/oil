@@ -22,4 +22,4 @@ echo "\n### Increasing patch version"
 git add *
 git commit -am "Adding new release $PACKAGE_VERSION$SNAPSHOT" --no-edit
 git tag -a $PACKAGE_VERSION
-npm version patch
+git npm version patch
