@@ -1,5 +1,7 @@
 let whitelist = [
+  "axelspringer.com",
   "finanzen.net",
+  "bild.de",
   "welt.de",
   "herokuapp.com",
   "geld-anlegen.de",
