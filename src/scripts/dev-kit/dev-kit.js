@@ -1,9 +1,8 @@
 import './dev-kit.scss';
-import {refreshSlider, sidebareTemplate} from './sidebar';
-import {showModal} from './modal';
-import Cookie from 'js-cookie';
-import {isJqueryAvailable, loadJS, loadModules} from './script-loader';
-import {getCurrentState, readOilConfig} from './oil-kit';
+import { refreshSlider } from './sidebar';
+import { showModal } from './modal';
+import { loadModules } from './script-loader';
+import { readOilConfig } from './oil-kit';
 
 (function () {
   loadModules();
@@ -25,64 +24,64 @@ import {getCurrentState, readOilConfig} from './oil-kit';
 
     },
     previewModeOn: function () {
-      AS_OIL.previewModeOn();
+      window.AS_OIL.previewModeOn();
       refreshSlider();
       showModal('previewModeOn', 'Sets the "preview enable cookie" in your browser. The preview mode is useful for testing OIL in a live environment without making it available to your end-users. The <b>preview mode is turned off by default</b>, meaning OIL will be available to all your users. If you <b>turn the preview mode on in the configuration of OIL</b>, OIL won’t be shown at first, but can be enabled for your current session on the browser’s console. When preview mode is turned on some debug information will be seen on the browser console. See also "Verbose Logging" below for more detailed logging.', '');
     },
     previewModeOff: function () {
-      AS_OIL.previewModeOff();
+      window.AS_OIL.previewModeOff();
       refreshSlider();
       showModal('previewModeOff', 'Deletes the "preview enable cookie" in your browser. The preview mode is useful for testing OIL in a live environment without making it available to your end-users. The preview mode is turned off by default, meaning OIL will be available to all your users. If you turn the preview mode on (please see configuration section), OIL won’t be shown at first, but can be enabled for your current session on the browser’s console When preview mode is turned on some debug information will be seen on the browser console. See also "Verbose Logging" below for more detailed logging.', '');
 
     },
     verboseModeOn: function () {
-      AS_OIL.verboseModeOn();
+      window.AS_OIL.verboseModeOn();
       refreshSlider();
       showModal('verboseModeOn', 'Sets the "verbose mode enable cookie" in your browser.OIL will show no logs, except in preview mode or verbose mode.\n' +
         'Verbose mode (as kind of debog mode) can be turned on at any time, whereas the similar preview mode can only be enabled in the configuration.\n' +
         'Please note that verbose logging can only be activated for your own browser, all other users won’t see those logs.', '');
     },
     verboseModeOff: function () {
-      AS_OIL.verboseModeOff();
+      window.AS_OIL.verboseModeOff();
       refreshSlider();
       showModal('verboseModeOff', 'Deletes the "verbose mode enable cookie" in your browser.OIL will show no logs, except in preview mode or verbose mode.\n' +
         'Verbose mode (as kind of debog mode) can be turned on at any time, whereas the similar preview mode can only be enabled in the configuration.\n' +
         'Please note that verbose logging can only be activated for your own browser, all other users won’t see those logs.', '');
     },
     reload: function () {
-      AS_OIL.reload();
+      window.AS_OIL.reload();
       refreshSlider();
       showModal('reload', 'OIL will reload the configuration from the host’s website. This is like a full reload of OIL.js', '');
 
     },
     showPreferenceCenter: function () {
-      AS_OIL.showPreferenceCenter();
+      window.AS_OIL.showPreferenceCenter();
       refreshSlider();
       showModal('reload', 'OIL will inject the Cookie Preference Center into your website. Please see "OIL CPC API" section in the configuration. This call is meant to inline the CPC into a part of your own website.', '');
 
     },
     status: function () {
-      AS_OIL.status();
+      window.AS_OIL.status();
       refreshSlider();
-      showModal('status', 'Returns the value, stored of the cookie, or the default, eg. the current status of OIL', JSON.stringify(AS_OIL.status(), null, 2));
+      showModal('status', 'Returns the value, stored of the cookie, or the default, eg. the current status of OIL', JSON.stringify(window.AS_OIL.status(), null, 2));
     },
     triggerOptIn: function () {
-      AS_OIL.triggerOptIn();
+      window.AS_OIL.triggerOptIn();
       refreshSlider();
       showModal('triggerOptIn', 'The user will opted in. It’s the same behaviour as when the user is clicking Accept on the layer. It respects the configuration of OIL (eg. is POI enabled?)', '');
     },
     triggerSoiOptIn: function () {
-      AS_OIL.triggerSoiOptIn();
+      window.AS_OIL.triggerSoiOptIn();
       refreshSlider();
       showModal('triggerSoiOptIn', 'The user will opted in. It’s the same behaviour as when the user is clicking Accept on the layer. Forces SOI without regard of the configuration.', '');
     },
     triggerPoiOptIn: function () {
-      AS_OIL.triggerPoiOptIn();
+      window.AS_OIL.triggerPoiOptIn();
       refreshSlider();
       showModal('triggerPoiOptIn', 'The user will opted in. It’s the same behaviour as when the user is clicking Accept on the layer. Forces POI without regard of the configuration.', '');
     },
     triggerOptOut: function () {
-      AS_OIL.triggerOptOut();
+      window.AS_OIL.triggerOptOut();
       refreshSlider();
       showModal('triggerOptOut', 'OIL will remove all cookies if triggered and therefore opt-out the user of everything, even POI.', '');
 
@@ -90,7 +89,7 @@ import {getCurrentState, readOilConfig} from './oil-kit';
     // CMP CALLS
     getVendorConsents: function () {
       // TODO CMP CALL
-      __cmp('getVendorConsents', null, (result) => {
+      window.__cmp('getVendorConsents', null, (result) => {
         refreshSlider();
         showModal('getVendorConsents', 'The getVendorConsents() method returns the consent by purpose and by vendor as well as a flag indicating if the GDPR applies to the current user. <br><br>Here is what the Didomi CMP returned just now for that function (it should match the consents table and change when you updates your consents):', JSON.stringify(result, null, 2));
       });

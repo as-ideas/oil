@@ -1,6 +1,5 @@
 import './dev-kit.scss';
-import {initNavbar, sidebareTemplate} from './sidebar';
-import {showModal} from './modal';
+import {initNavbar} from './sidebar';
 
 export function loadModules() {
   if (!isJqueryAvailable()) {

@@ -1,23 +1,17 @@
-import {getSoiCookie} from './core_cookies.js';
+import { getSoiCookie } from './core_cookies.js';
 
 
-const LOADING_RULE_ALL = '_dip_oil_consent_all';
-const LOADING_RULE_ESSENTIAL = '_dip_oil_consent_essential';
-const LOADING_RULE_ANALYTICS = '_dip_oil_consent_analytics';
-const LOADING_RULE_SOCIAL_CONNECT = '_dip_oil_consent_social_connect';
-const LOADING_RULE_ADS_BASE = '_dip_oil_consent_ads_base';
-const LOADING_RULE_ADS_BEHAVIOUR = '_dip_oil_consent_ads_behaviour';
-
-const PRIVACY_SETTING_ESSENTIAL = 'esse';
-const PRIVACY_SETTING_ANALYTICS = 'analy';
-const PRIVACY_SETTING_SOCIAL_CONNECT = 'soci';
-const PRIVACY_SETTING_ADS_BASE = 'adsbase';
-const PRIVACY_SETTING_ADS_BEHAVIOUR = 'adsbehav';
+const LOADING_RULE_ALL = '_dip_oil_purpose_all';
+const LOADING_RULE_PURPOSE_01 = '_dip_oil_purpose_01';
+const LOADING_RULE_PURPOSE_02 = '_dip_oil_purpose_02';
+const LOADING_RULE_PURPOSE_03 = '_dip_oil_purpose_03';
+const LOADING_RULE_PURPOSE_04 = '_dip_oil_purpose_04';
+const LOADING_RULE_PURPOSE_05 = '_dip_oil_purpose_05';
 
 /**
  * Sets the tealium variables for the loading rules.
  * Only works, when there was already an optin. Otherwise
- * tealium will need to be notifyt to re-evaluate the
+ * tealium will need to be notified to re-evaluate the
  * loading rules
  *
  * HINT: utag_data = UDO, Universal Data Objectm
@@ -26,21 +20,19 @@ const PRIVACY_SETTING_ADS_BEHAVIOUR = 'adsbehav';
  */
 // FIXME deprecated
 export function doSetTealiumVariables() {
-  attachEventListenerForLoadingRules();
-
   if (window && window.utag) {
+    attachEventListenerForLoadingRules();
     checkUtagDataExists();
 
     let ud = window.utag_data;
     let privacy = getSoiCookie().privacy;
     if (privacy) {
-      ud[LOADING_RULE_ESSENTIAL] = privacy[PRIVACY_SETTING_ESSENTIAL] === 1 ? 1 : 0;
-      ud[LOADING_RULE_ANALYTICS] = privacy[PRIVACY_SETTING_ANALYTICS] === 1 ? 1 : 0;
-      ud[LOADING_RULE_SOCIAL_CONNECT] = privacy[PRIVACY_SETTING_SOCIAL_CONNECT] === 1 ? 1 : 0;
-      ud[LOADING_RULE_ADS_BASE] = privacy[PRIVACY_SETTING_ADS_BASE] === 1 ? 1 : 0;
-      ud[LOADING_RULE_ADS_BEHAVIOUR] = privacy[PRIVACY_SETTING_ADS_BEHAVIOUR] === 1 ? 1 : 0;
-
-      calculateLoadingRuleAll(ud);
+      if (privacy === 1) {
+        ud[LOADING_RULE_ALL] = 1;
+      } else {
+        calculateLoadingRules(ud, privacy);
+        calculateLoadingRuleAll(ud);
+      }
     } else {
       setAllLoadingRulesToFalse(ud);
     }
@@ -53,22 +45,31 @@ function checkUtagDataExists() {
   }
 }
 
+function calculateLoadingRules(ud, privacy) {
+  ud[LOADING_RULE_PURPOSE_01] = privacy['1'] === 1 ? 1 : 0;
+  ud[LOADING_RULE_PURPOSE_02] = privacy['2'] === 1 ? 1 : 0;
+  ud[LOADING_RULE_PURPOSE_03] = privacy['3'] === 1 ? 1 : 0;
+  ud[LOADING_RULE_PURPOSE_04] = privacy['4'] === 1 ? 1 : 0;
+  ud[LOADING_RULE_PURPOSE_05] = privacy['5'] === 1 ? 1 : 0;
+}
+
+
 function calculateLoadingRuleAll(ud) {
   ud[LOADING_RULE_ALL] =
-    (ud[LOADING_RULE_ESSENTIAL] === 1 &&
-      ud[LOADING_RULE_ANALYTICS] === 1 &&
-      ud[LOADING_RULE_SOCIAL_CONNECT] === 1 &&
-      ud[LOADING_RULE_ADS_BASE] === 1 &&
-      ud[LOADING_RULE_ADS_BEHAVIOUR] === 1) ? 1 : 0;
+    (ud[LOADING_RULE_PURPOSE_01] === 1 &&
+      ud[LOADING_RULE_PURPOSE_02] === 1 &&
+      ud[LOADING_RULE_PURPOSE_03] === 1 &&
+      ud[LOADING_RULE_PURPOSE_04] === 1 &&
+      ud[LOADING_RULE_PURPOSE_05] === 1) ? 1 : 0;
 }
 
 function setAllLoadingRulesToFalse(ud) {
   ud[LOADING_RULE_ALL] = 0;
-  ud[LOADING_RULE_ESSENTIAL] = 0;
-  ud[LOADING_RULE_ANALYTICS] = 0;
-  ud[LOADING_RULE_SOCIAL_CONNECT] = 0;
-  ud[LOADING_RULE_ADS_BASE] = 0;
-  ud[LOADING_RULE_ADS_BEHAVIOUR] = 0;
+  ud[LOADING_RULE_PURPOSE_01] = 0;
+  ud[LOADING_RULE_PURPOSE_02] = 0;
+  ud[LOADING_RULE_PURPOSE_03] = 0;
+  ud[LOADING_RULE_PURPOSE_04] = 0;
+  ud[LOADING_RULE_PURPOSE_05] = 0;
 }
 
 
@@ -102,11 +103,11 @@ function reEvaluateTealiumLoadingRules() {
   if (ud) {
     let payload = {
       [LOADING_RULE_ALL]: ud[LOADING_RULE_ALL],
-      [LOADING_RULE_ESSENTIAL]: ud[LOADING_RULE_ESSENTIAL],
-      [LOADING_RULE_ANALYTICS]: ud[LOADING_RULE_ANALYTICS],
-      [LOADING_RULE_SOCIAL_CONNECT]: ud[LOADING_RULE_SOCIAL_CONNECT],
-      [LOADING_RULE_ADS_BASE]: ud[LOADING_RULE_ADS_BASE],
-      [LOADING_RULE_ADS_BEHAVIOUR]: ud[LOADING_RULE_ADS_BEHAVIOUR]
+      [LOADING_RULE_PURPOSE_01]: ud[LOADING_RULE_PURPOSE_01],
+      [LOADING_RULE_PURPOSE_02]: ud[LOADING_RULE_PURPOSE_02],
+      [LOADING_RULE_PURPOSE_03]: ud[LOADING_RULE_PURPOSE_03],
+      [LOADING_RULE_PURPOSE_04]: ud[LOADING_RULE_PURPOSE_04],
+      [LOADING_RULE_PURPOSE_05]: ud[LOADING_RULE_PURPOSE_05]
     };
     window.utag.view(payload);
   }

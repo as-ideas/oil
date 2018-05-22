@@ -2,7 +2,7 @@ import {getGlobalOilObject, OilVersion, sendEventToHostSite, setGlobalOilObject}
 import {handleOptOut} from './core_optout.js';
 import {logError, logInfo, logPreviewInfo} from './core_log.js';
 import {checkOptIn} from './core_optin.js';
-import {getRawSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePreviewCookie, removeVerboseCookie, setPreviewCookie, setVerboseCookie} from './core_cookies.js';
+import {getSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePreviewCookie, removeVerboseCookie, setPreviewCookie, setVerboseCookie} from './core_cookies.js';
 import {doSetTealiumVariables} from './core_tealium_loading_rules.js';
 import {getLocaleVariantName, isPreviewMode, resetConfiguration} from './core_config.js';
 import {EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN} from './core_constants.js';
@@ -125,7 +125,7 @@ function attachUtilityFunctionsToWindowObject(locale) {
   });
 
   setGlobalOilObject('status', () => {
-    return getRawSoiCookie();
+    return getSoiCookie();
   });
 
   setGlobalOilObject('showPreferenceCenter', () => {
