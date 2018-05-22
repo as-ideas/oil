@@ -21,7 +21,9 @@ export const OIL_CONFIG = {
   ATTR_THEME: 'theme',
   ATTR_TIMEOUT: 'timeout',
   ATTR_OIL_BACKEND_URL: 'oilBackendUrl',
-  ATTR_IAB_VENDOR_LIST_URL: 'iabVendorListUrl'
+  ATTR_IAB_VENDOR_LIST_URL: 'iabVendorListUrl',
+  ATTR_IAB_VENDOR_BLACKLIST: 'iabVendorBlacklist',
+  ATTR_IAB_VENDOR_WHITELIST: 'iabVendorWhitelist'
 };
 
 // Main Click events
