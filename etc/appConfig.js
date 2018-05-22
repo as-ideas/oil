@@ -54,6 +54,11 @@ module.exports = {
     chunks: ['oil', 'oildevkit'],
     chunksSortMode: 'dependency'
   }, {
+    filename: 'demos/open-source-example.html',
+    template: path.resolve(sourcePath, 'demos', 'open-source-example.html'),
+    chunks: [],
+    chunksSortMode: 'dependency'
+  }, {
     filename: 'demos/direct-integration.dark.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration-dark.html'),
     chunks: ['oil'],
@@ -139,6 +144,9 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, 'examples'),
     to: 'examples'
+  }, {
+    from: path.resolve(sourcePath, 'poi-lists'),
+    to: 'poi-lists'
   }, {
     from: path.resolve(sourcePath, '../release'),
     to: 'release'

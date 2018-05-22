@@ -1,7 +1,8 @@
-import {getSoiCookie} from '../core/core_cookies.js';
-import {PRIVACY_FULL_TRACKING} from '../core/core_constants';
-import {logInfo} from '../core/core_log';
-import {forEach} from './userview_modal';
+import { getSoiCookie } from '../core/core_cookies.js';
+import { PRIVACY_FULL_TRACKING } from '../core/core_constants';
+import { logInfo } from '../core/core_log';
+import { forEach } from './userview_modal';
+import { getPurposes } from '../core/core_vendor_information';
 
 export const PRIVACY_SETTINGS_ALL_FALSE = {
   '1': false,
@@ -45,13 +46,9 @@ export function getPrivacySettings() {
 export function applyPrivacySettings(privacySetting) {
   logInfo('Apply privacy settings from cookie', privacySetting);
 
-  document.querySelector('#as-js-purpose-slider-1').checked = privacySetting['1'];
-  document.querySelector('#as-js-purpose-slider-2').checked = privacySetting['2'];
-  document.querySelector('#as-js-purpose-slider-3').checked = privacySetting['3'];
-  document.querySelector('#as-js-purpose-slider-4').checked = privacySetting['4'];
-  document.querySelector('#as-js-purpose-slider-5').checked = privacySetting['5'];
-  document.querySelector('#as-js-purpose-slider-6').checked = privacySetting['6'];
-  document.querySelector('#as-js-purpose-slider-7').checked = privacySetting['7'];
+  for (let i = 1; i <= getPurposes().length; i++) {
+    document.querySelector(`#as-js-purpose-slider-${i}`).checked = privacySetting[`${i}`];
+  }
 
   if (privacySetting === 1) {
     forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {

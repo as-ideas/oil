@@ -1,7 +1,15 @@
 {
   "name": "oil",
-  "version": "1.0.35",
-  "description": "Module for Axel Springer Oil",
+  "version": "1.1.0",
+  "description": "Module for Axel Springer oil.js (Opt-In Layer)",
+  "keywords": [
+    "IAB Europe",
+    "CMP",
+    "Opt-In",
+    "Consent"
+  ],
+  "author": "Axel Springer Ideas Engineering GmbH",
+  "license": "GPL-2.0",
   "main": "http_server.js",
   "scripts": {
     "start": "node http_server.js",
@@ -75,6 +83,7 @@
     "file-loader": "1.1.11",
     "generate-changelog": "1.7.1",
     "glob": "7.1.2",
+    "gzipme": "^0.1.1",
     "html-differ": "1.3.4",
     "html-webpack-plugin": "3.2.0",
     "imports-loader": "0.8.0",
@@ -123,13 +132,10 @@
     "webpack-visualizer-plugin": "0.1.11"
   },
   "peerDependencies": {},
-  "keywords": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/as-ideas/oil.git"
   },
-  "author": "Axel Springer Ideas Engineering GmbH",
-  "license": "UNLICENSED",
   "engine-strict": true,
   "engines": {
     "node": ">= 8.8 <9",

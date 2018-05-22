@@ -1,7 +1,8 @@
-import {getConsentDataString, getVendorConsentData} from '../../../src/scripts/core/core_consents';
+import { getConsentDataString, getVendorConsentData } from '../../../src/scripts/core/core_consents';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
-import {OIL_SPEC} from '../../../src/scripts/core/core_constants';
+import { OIL_SPEC } from '../../../src/scripts/core/core_constants';
+import { loadVendorList } from '../../../src/scripts/core/core_vendor_information';
 
 const {ConsentString} = require('consent-string');
 
@@ -12,6 +13,8 @@ describe('consents', () => {
     const VALID_VENDOR_ID_1 = 8;
     const VALID_VENDOR_ID_2 = 12;
     const INVALID_VENDOR_ID = 20;
+
+    loadVendorList();
 
     const GLOBAL_VENDORS_ARRAY = [
       {

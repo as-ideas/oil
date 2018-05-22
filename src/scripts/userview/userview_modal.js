@@ -1,7 +1,7 @@
 import '../../styles/modal.scss';
 import '../../styles/cpc.scss';
-import {sendEventToHostSite} from '../core/core_utils.js';
-import {removeSubscriberCookies} from '../core/core_cookies.js';
+import { sendEventToHostSite } from '../core/core_utils.js';
+import { removeSubscriberCookies } from '../core/core_cookies.js';
 import {
   EVENT_NAME_ADVANCED_SETTINGS,
   EVENT_NAME_AS_PRIVACY_SELECTED,
@@ -13,16 +13,26 @@ import {
   EVENT_NAME_TIMEOUT,
   PRIVACY_MINIMUM_TRACKING
 } from '../core/core_constants.js';
-import {oilOptIn, oilPowerOptIn} from './userview_optin.js';
-import {deActivatePowerOptIn} from '../core/core_poi.js';
-import {oilDefaultTemplate} from './view/oil.default.js';
-import {oilNoCookiesTemplate} from './view/oil.no.cookies.js';
-import {attachCpcHandlers, oilAdvancedSettingsInlineTemplate, oilAdvancedSettingsTemplate} from './view/oil.advanced.settings.js';
-import {logError, logInfo} from '../core/core_log.js';
-import {getTheme, getTimeOutValue, isPersistMinimumTracking} from './userview_config.js';
-import {getPoiGroupName, isPoiActive, isSubscriberSetCookieActive} from '../core/core_config.js';
-import {applyPrivacySettings, getPrivacySettings, getSoiPrivacy, PRIVACY_SETTINGS_ALL_FALSE} from './userview_privacy.js';
-import {getGlobalOilObject} from '../core/core_utils';
+import { oilOptIn, oilPowerOptIn } from './userview_optin.js';
+import { deActivatePowerOptIn } from '../core/core_poi.js';
+import { oilDefaultTemplate } from './view/oil.default.js';
+import { oilNoCookiesTemplate } from './view/oil.no.cookies.js';
+import {
+  attachCpcHandlers,
+  oilAdvancedSettingsInlineTemplate,
+  oilAdvancedSettingsTemplate
+} from './view/oil.advanced.settings.js';
+import { logError, logInfo } from '../core/core_log.js';
+import { getTheme, getTimeOutValue, isPersistMinimumTracking } from './userview_config.js';
+import { getPoiGroupName, isPoiActive, isSubscriberSetCookieActive } from '../core/core_config.js';
+import {
+  applyPrivacySettings,
+  getPrivacySettings,
+  getSoiPrivacy,
+  PRIVACY_SETTINGS_ALL_FALSE
+} from './userview_privacy.js';
+import { getGlobalOilObject, isObject } from '../core/core_utils';
+import { loadVendorList } from '../core/core_vendor_information';
 
 
 // Initialize our Oil wrapper and save it ...
@@ -90,44 +100,51 @@ function shouldRenderOilLayer(props) {
 // FIXME REWORKING WIP, default should come from CONFIG
 // FIXME do we have enough tests for this?
 export function oilShowPreferenceCenter(preset = PRIVACY_SETTINGS_ALL_FALSE) {
-  let wrapper = document.querySelector('.as-oil');
-  let entryNode = document.querySelector('#oil-preference-center');
-  if (wrapper) {
-    renderOil({advancedSettings: true});
-  } else if (entryNode) {
-    entryNode.innerHTML = oilAdvancedSettingsInlineTemplate();
-    addOilHandlers(getOilDOMNodes());
-  } else {
-    logError('No wrapper for the CPC with the id #oil-preference-center was found.');
-    return;
-  }
+  // We need the PowerGroupUi-Stuff for the CPC
+  import('../poi-list/poi-info.js');
 
-  let currentPrivacySetting = preset;
-  let soiPrivacy = getSoiPrivacy();
-  if (soiPrivacy) {
-    currentPrivacySetting = soiPrivacy;
-  }
-  applyPrivacySettings(currentPrivacySetting);
+  // We need to make sure the vendorlist is loaded before showing the cpc
+  loadVendorList()
+    .then(() => {
+      let wrapper = document.querySelector('.as-oil');
+      let entryNode = document.querySelector('#oil-preference-center');
+      if (wrapper) {
+        renderOil({advancedSettings: true});
+      } else if (entryNode) {
+        entryNode.innerHTML = oilAdvancedSettingsInlineTemplate();
+        addOilHandlers(getOilDOMNodes());
+      } else {
+        logError('No wrapper for the CPC with the id #oil-preference-center was found.');
+        return;
+      }
+
+      let currentPrivacySetting = preset;
+      let soiPrivacy = getSoiPrivacy();
+      if (soiPrivacy) {
+        currentPrivacySetting = soiPrivacy;
+      }
+      applyPrivacySettings(currentPrivacySetting);
+    })
+    .catch((error) => logError(error));
 }
 
 function oilShowCompanyList() {
-  import(`../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
+  import('../poi-list/poi-info.js')
     .then(poiList => {
-      renderOilContentToWrapper(poiList.oilGroupListTemplate(poiList.companyList));
+      poiList.renderOilGroupListTemplate(renderOilContentToWrapper);
     })
     .catch((e) => {
-      logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
+      logError('Error on oilShowCompanyList.', e);
     });
-
 }
 
 function oilShowThirdPartyList() {
-  import(`../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
+  import('../poi-list/poi-info.js')
     .then(poiList => {
-      renderOilContentToWrapper(poiList.oilThirdPartyListTemplate(poiList.thirdPartyList));
+      poiList.renderOilThirdPartyListTemplate(renderOilContentToWrapper);
     })
     .catch((e) => {
-      logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
+      logError('Error on oilShowThirdPartyList.', e);
     });
 }
 
@@ -281,10 +298,6 @@ function trackPrivacySettings(privacySetting) {
   if (isObject(privacySetting)) {
     sendEventToHostSite(EVENT_NAME_AS_PRIVACY_SELECTED);
   }
-}
-
-function isObject(o) {
-  return o instanceof Object && o.constructor === Object;
 }
 
 function shouldPrivacySettingBeStored(privacySetting) {

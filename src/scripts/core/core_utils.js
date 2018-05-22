@@ -1,5 +1,5 @@
-import {logInfo} from './core_log.js';
-import {OIL_GLOBAL_OBJECT_NAME} from './core_constants.js';
+import { logInfo } from './core_log.js';
+import { OIL_GLOBAL_OBJECT_NAME } from './core_constants.js';
 
 /**
  * Check if environment is set to production
@@ -193,4 +193,8 @@ export function fetchJsonData(url) {
     };
     request.send();
   });
+}
+
+export function isObject(o) {
+  return o instanceof Object && o.constructor === Object;
 }
