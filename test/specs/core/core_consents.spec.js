@@ -1,5 +1,6 @@
-import { getConsentDataString, getVendorConsentData } from '../../../src/scripts/core/core_consents';
+import { getConsentDataString, getVendorConsentData, getLimitedVendorIds } from '../../../src/scripts/core/core_consents';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
+import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import { OIL_SPEC } from '../../../src/scripts/core/core_constants';
 import { loadVendorList } from '../../../src/scripts/core/core_vendor_information';
@@ -382,6 +383,49 @@ describe('consents', () => {
 
       let result = getConsentDataString("99999");
       expect(result).not.toBeDefined();
+    });
+
+  });
+
+  describe('getLimitedVendorIds', function() {
+    
+    loadVendorList();
+
+    const GLOBAL_VENDORS_ARRAY = [{
+        id: 1
+      },
+      {
+        id: 2
+      },
+      {
+        id: 3
+      },
+      {
+        id: 12
+      },
+      {
+        id: 15
+      }];
+
+    beforeEach(() => {
+      spyOn(CoreVendorInformation, 'getVendors').and.returnValue(GLOBAL_VENDORS_ARRAY);
+    })
+
+    it('should return all vendors when whitelist and blacklist empty or null', function() {
+      let result = getLimitedVendorIds();
+      expect(result.length).toEqual(5);
+    });
+
+    it('should return vendor ids from global config whitelist', function() {
+      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([2,3,15])
+      let result = getLimitedVendorIds();
+      expect(result.toString()).toEqual("2,3,15");
+    });
+
+    it('should return all vendor ids expect the ones in global config blacklist', function() {
+      spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([2,15])
+      let result = getLimitedVendorIds();
+      expect(result.toString()).toEqual("1,3,12");
     });
 
   });

@@ -1,6 +1,7 @@
 import {getSoiCookie} from './core_cookies';
 import {getPurposes, getVendorList, getVendors} from './core_vendor_information';
 import {OIL_SPEC} from './core_constants';
+import {getIabVendorBlacklist, getIabVendorWhitelist} from './core_config';
 
 const {ConsentString} = require('consent-string');
 
@@ -45,7 +46,7 @@ function buildPurposeConsents() {
 
 function buildVendorConsents(requestedVendorIds) {
   let soiCookie = getSoiCookie();
-  let validVendorIds = getAllVendorIds();
+  let validVendorIds = getLimitedVendorIds();
   let vendorConsents = {};
 
   // TODO OIL-115 CMP: Blacklist/Whitelist for vendors
@@ -81,7 +82,7 @@ function buildConsentString(consentStringVersionString) {
     consentData.setPurposesAllowed(getPurposesWithConsent(soiCookie));
     if (soiCookie.opt_in) {
       // TODO OIL-115 CMP: Blacklist/Whitelist for vendors
-      consentData.setVendorsAllowed(getAllVendorIds());
+      consentData.setVendorsAllowed(getLimitedVendorIds());
     }
     return consentData.getConsentString();
   }
@@ -94,6 +95,24 @@ function getPurposesWithConsent(soiCookie) {
   } else {
     return privacy === 1 ? getPurposes().map(({id}) => id) : [];
   }
+}
+
+export function getLimitedVendorIds() {
+  let limited = getVendors();
+  const whitelist = getIabVendorWhitelist();
+  const blacklist = getIabVendorBlacklist();
+  
+  if (whitelist && whitelist.length > 0) {
+    limited = getVendors().filter((vendor) => {
+      return whitelist.indexOf(vendor.id) > -1;
+    })
+  } else if(blacklist && blacklist.length > 0) {
+    limited = getVendors().filter((vendor) => {
+      return blacklist.indexOf(vendor.id) === -1;
+    });
+  }
+
+  return limited.map(({id}) => id);
 }
 
 function getAllVendorIds() {
