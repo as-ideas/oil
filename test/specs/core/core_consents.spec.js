@@ -388,7 +388,7 @@ describe('consents', () => {
   });
 
   describe('getLimitedVendorIds', function() {
-    
+
     loadVendorList();
 
     const GLOBAL_VENDORS_ARRAY = [{
