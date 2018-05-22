@@ -1,6 +1,6 @@
 import { logError, logInfo } from './core_log';
 import { getCommandCollection } from './core_utils';
-import { getConsentDataString, getVendorConsentData } from './core_consents';
+import { getConsentDataString, getVendorConsentData, getPublisherConsentData } from './core_consents';
 import { getVendorList, loadVendorList } from './core_vendor_information';
 
 const commands = {
@@ -12,10 +12,8 @@ const commands = {
     return getConsentDataString(consentStringVersion);
   },
 
-  // TODO OIL-91 T&CF: Optionale Call getPublisherConsents
   getPublisherConsents: (purposeIds) => {
-    // This method is not implemented yet.
-    return undefined;
+    return getPublisherConsentData(purposeIds);
   },
 
   getVendorList: (vendorListVersion) => {
