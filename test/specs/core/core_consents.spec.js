@@ -83,7 +83,7 @@ describe('consents', () => {
       spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
         opt_in: true,
         privacy: EXPECTED_CONSENT_VALUE,
-        version: 'aVersion',
+        version: 'aVersion', 
         localeVariantName: 'deDE_01',
         localeVariantVersion: 1,
         timestamp: Date.now()
@@ -238,6 +238,27 @@ describe('consents', () => {
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(true);
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(false);
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toEqual(true);
+    });
+
+    it('should create proper consent string for whitelisted elements', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        privacy: 1,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01',
+        localeVariantVersion: 1,
+        timestamp: 100000
+      });
+
+      spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([VALID_VENDOR_ID_3, VALID_VENDOR_ID_1])
+      let vendorConsentData = getVendorConsentData();
+      let consentData = new ConsentString(vendorConsentData.metadata);
+      expect(consentData.allowedVendorIds).toEqual([VALID_VENDOR_ID_2]);
+
+      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([VALID_VENDOR_ID_3, VALID_VENDOR_ID_1])
+      vendorConsentData = getVendorConsentData();
+      consentData = new ConsentString(vendorConsentData.metadata);
+      expect(consentData.allowedVendorIds).toEqual([VALID_VENDOR_ID_1, VALID_VENDOR_ID_3]);
     });
 
   });
