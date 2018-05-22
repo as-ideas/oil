@@ -1,4 +1,5 @@
 import {getSoiCookie} from './core_cookies';
+import {getCustomPurposes} from './core_config';
 import {getPurposes, getVendorList, getVendors} from './core_vendor_information';
 import {OIL_SPEC} from './core_constants';
 
@@ -9,7 +10,7 @@ export function getVendorConsentData(vendorIds) {
     metadata: buildConsentString(),
     gdprApplies: true,
     hasGlobalScope: false,
-    purposeConsents: buildPurposeConsents(),
+    purposeConsents: buildPurposeConsents(getPurposes()),
     vendorConsents: buildVendorConsents(vendorIds)
   };
 }
@@ -26,14 +27,23 @@ export function getConsentDataString(consentStringVersion) {
   }
 }
 
-function buildPurposeConsents() {
+export function getPublisherConsentData(purposeIds) {
+  return {
+    metadata: buildConsentString(),
+    gdprApplies: true,
+    hasGlobalScope: false,
+    standardPurposeConsents: buildPurposeConsents(getPurposes()),
+    customPurposeConsents: buildPurposeConsents(getCustomPurposes())
+  }
+}
+
+function buildPurposeConsents(purposes = []) {
   let soiCookie = getSoiCookie();
   let privacy = soiCookie.privacy;
 
   if (typeof privacy === 'object') {
     return soiCookie.privacy;
   } else {
-    let purposes = getPurposes();
     let purposeConsents = {};
 
     purposes.forEach(purpose => {
@@ -99,4 +109,3 @@ function getPurposesWithConsent(soiCookie) {
 function getAllVendorIds() {
   return getVendors().map(({id}) => id);
 }
-
