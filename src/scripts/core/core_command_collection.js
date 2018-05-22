@@ -12,6 +12,7 @@ const commands = {
     return getConsentDataString(consentStringVersion);
   },
 
+  // TODO OIL-91 T&CF: Optionale Call getPublisherConsents
   getPublisherConsents: (purposeIds) => {
     // This method is not implemented yet.
     return undefined;

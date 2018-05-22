@@ -48,6 +48,7 @@ function buildVendorConsents(requestedVendorIds) {
   let validVendorIds = getAllVendorIds();
   let vendorConsents = {};
 
+  // TODO OIL-115 CMP: Blacklist/Whitelist for vendors
   if (requestedVendorIds && requestedVendorIds.length) {
     requestedVendorIds.forEach(vendorId => {
       vendorConsents[vendorId] = validVendorIds.indexOf(vendorId) !== -1 && soiCookie.opt_in;
@@ -79,6 +80,7 @@ function buildConsentString(consentStringVersionString) {
     consentData.created = new Date(soiCookie.timestamp);
     consentData.setPurposesAllowed(getPurposesWithConsent(soiCookie));
     if (soiCookie.opt_in) {
+      // TODO OIL-115 CMP: Blacklist/Whitelist for vendors
       consentData.setVendorsAllowed(getAllVendorIds());
     }
     return consentData.getConsentString();
