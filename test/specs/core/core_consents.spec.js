@@ -221,7 +221,7 @@ describe('consents', () => {
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toEqual(false);
     });
 
-    it('should only consider whitelist', function() {
+    it('should only consider vendor ids in whitelist', function() {
       spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
         opt_in: true,
         privacy: 1,
