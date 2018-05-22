@@ -45,20 +45,14 @@ function buildPurposeConsents() {
 }
 
 function buildVendorConsents(requestedVendorIds) {
-  let soiCookie = getSoiCookie();
-  let validVendorIds = getLimitedVendorIds();
+  const opt_in = getSoiCookie().opt_in;
+  let vendorIds = (requestedVendorIds && requestedVendorIds.length) ? requestedVendorIds : getAllVendorIds();
   let vendorConsents = {};
-
-  // TODO OIL-115 CMP: Blacklist/Whitelist for vendors
-  if (requestedVendorIds && requestedVendorIds.length) {
-    requestedVendorIds.forEach(vendorId => {
-      vendorConsents[vendorId] = validVendorIds.indexOf(vendorId) !== -1 && soiCookie.opt_in;
-    });
-  } else {
-    validVendorIds.forEach(vendorId => {
-      vendorConsents[vendorId] = soiCookie.opt_in;
-    });
-  }
+  const validVendorIds = getLimitedVendorIds();
+  
+  vendorIds.forEach(vendorId => {
+    vendorConsents[vendorId] = validVendorIds.indexOf(vendorId) !== -1 && opt_in;
+  });
   return vendorConsents;
 }
 
