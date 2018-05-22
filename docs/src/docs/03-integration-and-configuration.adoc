@@ -125,6 +125,8 @@ This is a full list of configurable options.
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True
 | iabVendorListUrl | tbd | {embedded vendorlist}
 | oilBackendUrl | (deprecated) The backend from where OIL can load locale-versions | https://oil-backend.herokuapp.com/oil
+| iabVendorWhitelist | Array of vendor IDs to allow | None
+| iabVendorBlacklist | Array of vendor IDs to exclude | None
 |====
 
 

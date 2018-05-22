@@ -97,6 +97,8 @@ And you need your custom configuration:
 | [[config-timeout]]timeout | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True
+| iabVendorWhitelist | Array of vendor IDs to allow | None
+| iabVendorBlacklist | Array of vendor IDs to exclude | None
 
 ## Labels
 
