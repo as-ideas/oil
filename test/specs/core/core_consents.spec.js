@@ -83,7 +83,7 @@ describe('consents', () => {
       spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
         opt_in: true,
         privacy: EXPECTED_CONSENT_VALUE,
-        version: 'aVersion', 
+        version: 'aVersion',
         localeVariantName: 'deDE_01',
         localeVariantVersion: 1,
         timestamp: Date.now()
