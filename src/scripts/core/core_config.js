@@ -119,6 +119,14 @@ export function getIabVendorListUrl() {
   return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_LIST_URL, undefined);
 }
 
+export function getIabVendorBlacklist() {
+  return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_BLACKLIST, undefined);
+}
+
+export function getIabVendorWhitelist() {
+  return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_WHITELIST, undefined);
+}
+
 export function getPoiGroupName() {
   return getConfigValue(OIL_CONFIG.ATTR_POI_GROUP_NAME, 'default');
 }
