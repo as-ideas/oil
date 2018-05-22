@@ -81,7 +81,6 @@ function buildConsentString(consentStringVersionString) {
     consentData.created = new Date(soiCookie.timestamp);
     consentData.setPurposesAllowed(getPurposesWithConsent(soiCookie));
     if (soiCookie.opt_in) {
-      // TODO OIL-115 CMP: Blacklist/Whitelist for vendors
       consentData.setVendorsAllowed(getLimitedVendorIds());
     }
     return consentData.getConsentString();
