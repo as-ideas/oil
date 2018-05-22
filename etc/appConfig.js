@@ -53,6 +53,11 @@ module.exports = {
     template: path.resolve(sourcePath, 'demos', 'direct-integration.html'),
     chunks: ['oil', 'oildevkit'],
     chunksSortMode: 'dependency'
+  },, {
+    filename: 'demos/direct-integration-custom-purposes.html',
+    template: path.resolve(sourcePath, 'demos', 'direct-integration-custom-purposes.html'),
+    chunks: ['oil', 'oildevkit'],
+    chunksSortMode: 'dependency'
   }, {
     filename: 'demos/open-source-example.html',
     template: path.resolve(sourcePath, 'demos', 'open-source-example.html'),

@@ -93,8 +93,13 @@ import { readOilConfig } from './oil-kit';
         refreshSlider();
         showModal('getVendorConsents', 'The getVendorConsents() method returns the consent by purpose and by vendor as well as a flag indicating if the GDPR applies to the current user. <br><br>Here is what the Didomi CMP returned just now for that function (it should match the consents table and change when you updates your consents):', JSON.stringify(result, null, 2));
       });
-
-
+    },
+    getPublisherConsents: function () {
+      // TODO CMP CALL
+      window.__cmp('getPublisherConsents', null, (result) => {
+        refreshSlider();
+        showModal('getPublisherConsents', 'The getPublisherConsents() method returns custom and standard purposes', JSON.stringify(result, null, 2));
+      });
     },
     getConsentData: function () {
       // TODO CMP CALL

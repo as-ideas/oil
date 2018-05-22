@@ -109,6 +109,7 @@ export function sidebareTemplate() {
             <div class="as-oil-dev-kit__button" onclick="AS_OIL_DEV_KIT.ping()">ping</div>
             <h6>Optional calls</h6>
             <div class="as-oil-dev-kit__button" onclick="AS_OIL_DEV_KIT.getVendorList()">getVendorList</div>
+            <div class="as-oil-dev-kit__button" onclick="AS_OIL_DEV_KIT.getPublisherConsents()">getPublisherConsents</div>
         </div>
 
     </div>
