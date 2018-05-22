@@ -101,10 +101,6 @@ export function getSoiCookie() {
   return cookie;
 }
 
-export function getRawSoiCookie() {
-  return Cookie.getJSON('oil_data');
-}
-
 export function setPreviewCookie() {
   setSessionCookie(COOKIE_PREVIEW_NAME, 'true');
 }

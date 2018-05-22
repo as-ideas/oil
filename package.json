@@ -9,7 +9,7 @@
     "Consent"
   ],
   "author": "Axel Springer Ideas Engineering GmbH",
-  "license": "gpl-2.0",
+  "license": "GPL-2.0",
   "main": "http_server.js",
   "scripts": {
     "start": "node http_server.js",
