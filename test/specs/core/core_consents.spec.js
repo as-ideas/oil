@@ -1,5 +1,6 @@
-import { getConsentDataString, getVendorConsentData } from '../../../src/scripts/core/core_consents';
+import { getConsentDataString, getVendorConsentData, getPublisherConsentData } from '../../../src/scripts/core/core_consents';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
+import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import { OIL_SPEC } from '../../../src/scripts/core/core_constants';
 import { loadVendorList } from '../../../src/scripts/core/core_vendor_information';
@@ -384,6 +385,38 @@ describe('consents', () => {
       expect(result).not.toBeDefined();
     });
 
+  });
+
+  describe('getPublisherConsentData', () => {
+
+    const CUSTOM_PURPOSE_ARRAY = [{
+      "id": 25,
+      "name": "Foo",
+      "description": "Bar!"
+    },{
+      "id": 26,
+      "name": "Bar",
+      "description": "Baz Lorem Ipsum"
+    },];
+
+    it('should return default info object', function() {
+      spyOn(CoreConfig, 'getCustomPurposes').and.returnValue(CUSTOM_PURPOSE_ARRAY);
+
+      let result = getPublisherConsentData();
+
+      expect(result.metadata).toBeDefined();
+      expect(result.gdprApplies).toBeTruthy();
+      expect(result.hasGlobalScope).toEqual(false);
+      expect(result.standardPurposeConsents).toBeDefined();
+      expect(result.customPurposeConsents).toBeDefined();
+
+      expect(result.standardPurposeConsents.length).toEqual(5);
+      expect(result.customPurposeConsents.length).toEqual(2);
+    });
+
+    it('should return info object with only purposes defined in purposeIds parameter', function() {
+      
+    });
   });
 });
 

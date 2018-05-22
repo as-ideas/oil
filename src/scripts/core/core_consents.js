@@ -32,12 +32,12 @@ export function getPublisherConsentData(purposeIds) {
     metadata: buildConsentString(),
     gdprApplies: true,
     hasGlobalScope: false,
-    standardPurposeConsents: buildPurposeConsents(getPurposes()),
-    customPurposeConsents: buildPurposeConsents(getCustomPurposes())
+    standardPurposeConsents: buildPurposeConsents(getPurposes(), purposeIds),
+    customPurposeConsents: buildPurposeConsents(getCustomPurposes(), purposeIds)
   }
 }
 
-function buildPurposeConsents(purposes = []) {
+function buildPurposeConsents(purposes, limitedPurposeIds) {
   let soiCookie = getSoiCookie();
   let privacy = soiCookie.privacy;
 
@@ -47,7 +47,11 @@ function buildPurposeConsents(purposes = []) {
     let purposeConsents = {};
 
     purposes.forEach(purpose => {
-      purposeConsents[purpose.id] = privacy;
+      if (limitedPurposeIds && limitedPurposeIds.indexOf(purpose.id) > -1) {
+        purposeConsents[purpose.id] = privacy;
+      } else if(!limitedPurposeIds || !limitedPurposeIds.length) {
+        purposeConsents[purpose.id] = privacy;
+      }
     });
     return purposeConsents;
   }
