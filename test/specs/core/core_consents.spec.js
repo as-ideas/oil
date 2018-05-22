@@ -412,9 +412,10 @@ describe('consents', () => {
 
       expect(result.standardPurposeConsents.length).toEqual(5);
       expect(result.customPurposeConsents.length).toEqual(2);
+
     });
 
-    it('should return info object with only purposes defined in purposeIds parameter', function() {
+    it('should return info object with only purposes that are inside purposeIds array', function() {
       
     });
   });
