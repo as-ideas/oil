@@ -38,7 +38,7 @@ export function getPublisherConsentData(purposeIds) {
   }
 }
 
-function buildPurposeConsents(purposes, limitedPurposeIds) {
+export function buildPurposeConsents(purposes, limitedPurposeIds) {
   let soiCookie = getSoiCookie();
   let privacy = soiCookie.privacy;
 
@@ -54,6 +54,7 @@ function buildPurposeConsents(purposes, limitedPurposeIds) {
         purposeConsents[purpose.id] = privacy;
       }
     });
+
     return purposeConsents;
   }
 }
