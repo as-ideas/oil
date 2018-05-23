@@ -1,5 +1,6 @@
-import { getConsentDataString, getVendorConsentData } from '../../../src/scripts/core/core_consents';
+import { getConsentDataString, getVendorConsentData, getLimitedVendorIds } from '../../../src/scripts/core/core_consents';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
+import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import { OIL_SPEC } from '../../../src/scripts/core/core_constants';
 import { loadVendorList } from '../../../src/scripts/core/core_vendor_information';
@@ -12,6 +13,7 @@ describe('consents', () => {
 
     const VALID_VENDOR_ID_1 = 8;
     const VALID_VENDOR_ID_2 = 12;
+    const VALID_VENDOR_ID_3 = 32;
     const INVALID_VENDOR_ID = 20;
 
     loadVendorList();
@@ -30,6 +32,14 @@ describe('consents', () => {
         name: 'BeeswaxIO Corporation',
         policyUrl: 'https://www.beeswax.com/privacy.html',
         purposeIds: [1, 3, 5],
+        legIntPurposeIds: [],
+        featureIds: [3]
+      },
+      {
+        id: VALID_VENDOR_ID_3,
+        name: 'FOO',
+        policyUrl: 'https://www.foo.com/bar.html',
+        purposeIds: [1, 2, 3],
         legIntPurposeIds: [],
         featureIds: [3]
       }
@@ -171,9 +181,84 @@ describe('consents', () => {
       expect(vendorConsentData.vendorConsents).toBeDefined();
 
       let vendorIds = Object.keys(vendorConsentData.vendorConsents);
-      expect(vendorIds.length).toEqual(2);
+      expect(vendorIds.length).toEqual(3);
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(EXPECTED_CONSENT_VALUE);
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(EXPECTED_CONSENT_VALUE);
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toEqual(EXPECTED_CONSENT_VALUE);
+    });
+
+    it('should return correct vendor list when whitelist in config', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        privacy: 1,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01',
+        localeVariantVersion: 1,
+        timestamp: Date.now()
+      });
+      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([VALID_VENDOR_ID_1])
+      
+      let vendorConsentData = getVendorConsentData();
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(true);
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(false);
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toEqual(false);
+    });
+
+    it('should return correct vendor list when blacklist in config', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        privacy: 1,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01',
+        localeVariantVersion: 1,
+        timestamp: Date.now()
+      });
+      spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([VALID_VENDOR_ID_1, VALID_VENDOR_ID_3])
+      
+      let vendorConsentData = getVendorConsentData();
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(false);
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(true);
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toEqual(false);
+    });
+
+    it('should only consider vendor ids in whitelist', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        privacy: 1,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01',
+        localeVariantVersion: 1,
+        timestamp: Date.now()
+      });
+
+      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([VALID_VENDOR_ID_3, VALID_VENDOR_ID_1])
+      spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([VALID_VENDOR_ID_3])
+      
+      let vendorConsentData = getVendorConsentData();
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(true);
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(false);
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toEqual(true);
+    });
+
+    it('should create proper consent string for whitelisted elements', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        privacy: 1,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01',
+        localeVariantVersion: 1,
+        timestamp: 100000
+      });
+
+      spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([VALID_VENDOR_ID_3, VALID_VENDOR_ID_1])
+      let vendorConsentData = getVendorConsentData();
+      let consentData = new ConsentString(vendorConsentData.metadata);
+      expect(consentData.allowedVendorIds).toEqual([VALID_VENDOR_ID_2]);
+
+      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([VALID_VENDOR_ID_3, VALID_VENDOR_ID_1])
+      vendorConsentData = getVendorConsentData();
+      consentData = new ConsentString(vendorConsentData.metadata);
+      expect(consentData.allowedVendorIds).toEqual([VALID_VENDOR_ID_1, VALID_VENDOR_ID_3]);
     });
 
   });
@@ -382,6 +467,49 @@ describe('consents', () => {
 
       let result = getConsentDataString("99999");
       expect(result).not.toBeDefined();
+    });
+
+  });
+
+  describe('getLimitedVendorIds', function() {
+
+    loadVendorList();
+
+    const GLOBAL_VENDORS_ARRAY = [{
+        id: 1
+      },
+      {
+        id: 2
+      },
+      {
+        id: 3
+      },
+      {
+        id: 12
+      },
+      {
+        id: 15
+      }];
+
+    beforeEach(() => {
+      spyOn(CoreVendorInformation, 'getVendors').and.returnValue(GLOBAL_VENDORS_ARRAY);
+    })
+
+    it('should return all vendors when whitelist and blacklist empty or null', function() {
+      let result = getLimitedVendorIds();
+      expect(result.length).toEqual(5);
+    });
+
+    it('should return vendor ids from global config whitelist', function() {
+      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([2,3,15])
+      let result = getLimitedVendorIds();
+      expect(result.toString()).toEqual("2,3,15");
+    });
+
+    it('should return all vendor ids expect the ones in global config blacklist', function() {
+      spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([2,15])
+      let result = getLimitedVendorIds();
+      expect(result.toString()).toEqual("1,3,12");
     });
 
   });
