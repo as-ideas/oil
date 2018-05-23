@@ -102,7 +102,6 @@ const ContentSnippet = () => {
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
             Purposes
         </div>
-        <!-- TODO OIL-91 T&CF: Publisher Consents / optionale call getPublisherConsents -->
         ${buildPurposeEntries(getPurposes())}
         ${buildPurposeEntries(getCustomPurposes())}
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
