@@ -1,4 +1,4 @@
-import { OIL_LAYER, OIL_SHOW_COMPANY_LIST_BUTTON } from '../test_constants.js';
+import { OIL_LAYER, OIL_ADVANCED_SETTINGS } from '../test_constants.js';
 
 module.exports = {
   '@disabled': false,
@@ -15,12 +15,14 @@ module.exports = {
       .waitForElementVisible(OIL_LAYER, 2000, false);
   },
 
-  'Opens advanced settings when clicking publisher ID': function (browser) {
+  'Displays custom purposes in list': function (browser) {
     browser
-      .click(OIL_SHOW_COMPANY_LIST_BUTTON)
+      .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
       .useXpath()
-      .waitForElementVisible(OIL_PUBLISHER_DETAILS, 1000)
+      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000)
+      .useXpath()
+      .expect.element("//*[contains(text(), 'Custom Purpose 1')]").to.equal(true)      
       .end();
   },
 
