@@ -7,9 +7,9 @@ Build Monitoring (works currently only from internal network)
 
 [![Build Status](https://jenkins.ipool.asideas.de/buildStatus/icon?job=OIL-build)](https://jenkins.ipool.asideas.de/job/OIL-build/)
 
-[![GPL2 License][license-image]][license-url] 
+[![Latest Release](https://img.shields.io/badge/release-1.1.0-blue.svg)](https://oil.axelspringer.com/release/1.1.0) [![GPL2 License][license-image]][license-url] 
 
-[Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs)
+[Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html)
 
 ## About oil.js
 
@@ -26,13 +26,13 @@ The Opt-In Layer (OIL) is an offical link:http://advertisingconsent.eu/iab-europ
 ## Technical Quality Goals
 
 * OIL will be held compatible with the latest official browser releases, going back to the latest version as listed below and tested on broad range of browsers using Browserstack.com:
-** Chrome 14 - Latest
-** IE 9 - Latest
-** Firefox 9 - Latest
-** Safari 6 - Latest
-** Opera 12
-** Apple iOS 5.1 - Latest
-** Android 4.4.4 - Latest
+    * Chrome 14 - Latest
+    * IE 9 - Latest
+    * Firefox 9 - Latest
+    * Safari 6 - Latest
+    * Opera 12
+    * Apple iOS 5.1 - Latest
+    * Android 4.4.4 - Latest
 * Continously integrated and delivered
 * Modular and maintainable solution
 
@@ -97,6 +97,8 @@ And you need your custom configuration:
 | [[config-timeout]]timeout | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True
+| iabVendorWhitelist | Array of vendor IDs to allow. If it is set, values in `iabVendorBlacklist` are ignored. | None
+| iabVendorBlacklist | Array of vendor IDs to exclude. | None
 
 ## Labels
 
@@ -136,16 +138,7 @@ And you need your custom configuration:
 
 ## Full documentatin example
 
-```javascript
-<script id="oil-configuration" type="application/configuration">
-  {
-    "activate_poi": true,
-    "poi_group_name": "axelSpringerSe_01",
-    "locale": "enEN_01"
-  }
-</script>
-```
-
+tbd.
 
 ## Development
 ### Installation / Build

@@ -21,8 +21,8 @@ export function readOilConfig() {
 }
 
 export function loadOilJs() {
-  loadJS('oil-stub-js', '//oil-integration-cdn.herokuapp.com/oilstub.1.0.35-SNAPSHOT.min.js', () => {
-    loadJS('oil-js', '//oil-integration-cdn.herokuapp.com/oil.1.0.35-SNAPSHOT.min.js', () => {
+  loadJS('oil-stub-js', '//oil.axelspringer.com/latest/oilstub.min.js', () => {
+    loadJS('oil-js', '//oil.axelspringer.com/latest/oil.min.js', () => {
       let btnOil = document.getElementById('as-oil-dev-kit__btn-oil');
       btnOil.className = 'btn btn-enabled';
     });

@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const Table = require('cli-table');
 const gzipme = require('gzipme');
 
@@ -71,12 +71,25 @@ function gzipEverything(filenames) {
       });
     });
   });
+}
+
+function copyScriptsToLatest(filenames) {
+  let dir = './dist/latest';
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+
+  filenames.forEach(file => {
+    let newFile = 'dist/latest/' + (file.replace('dist/', '').replace(/\.1\.[0-9]\.[0-9]\.?-(RELEASE|SNAPSHOT)/gm, ''));
+    fs.copySync(file, newFile);
+  });
 
 }
 
 try {
   let filenames = getFilesInDir(DIR_NAME);
   let scriptnames = filterForScripts(filenames);
+  copyScriptsToLatest(scriptnames);
   let promise = gzipEverything(scriptnames);
 
   promise.then(() => {
