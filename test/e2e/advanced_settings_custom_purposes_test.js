@@ -1,4 +1,4 @@
-import { OIL_LAYER, OIL_ADVANCED_SETTINGS } from '../test_constants.js';
+import { OIL_LAYER, OIL_ADVANCED_SETTINGS, OIL_ADVANCED_SETTINGS_WRAPPER } from '../test_constants.js';
 
 module.exports = {
   '@disabled': false,
@@ -19,11 +19,11 @@ module.exports = {
     browser
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
-      .useXpath()
-      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000)
-      .useXpath()
-      .expect.element("//*[contains(text(), 'Custom Purpose 1')]").to.equal(true)      
-      .end();
+      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
+      .waitForElementVisible('.as-oil-cpc__purpose', 1000)
+      .assert.containsText('.as-oil-cpc__purpose', 'Custom Purpose 1', 'Checking project title is set to nightwatch')
+
+    browser.end();
   },
 
 };
