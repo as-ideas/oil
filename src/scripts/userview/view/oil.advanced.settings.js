@@ -18,7 +18,7 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
         <div class="as-oil-cpc__purpose-header">${header}</div>
         <div class="as-oil-cpc__purpose-text">${text}</div>
         <label class="as-oil-cpc__switch">
-            <input id="as-js-purpose-slider-${id}" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-${header}" value="${value}"/>
+            <input data-id="${id}" id="as-js-purpose-slider-${id}" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-${header}" value="${value}"/>
             <span class="as-oil-cpc__status"></span>
             <span class="as-oil-cpc__slider"></span>
         </label>
@@ -44,8 +44,7 @@ const buildVendorEntries = (vendors) => {
                     <span class='as-oil-third-party-name'>${element.name}</span>
                 </span>
                 <div class='as-oil-third-party-toggle-part' style='display: none;'>
-                <p class='as-oil-third-party-description' >${element.description}</p>
-                  <div class='as-oil-third-party-link'>${element.policyUrl}</div>
+                  <a class='as-oil-third-party-link' href='${element.policyUrl}'>${element.policyUrl}</a>
                 </div>
               </div>`;
   });

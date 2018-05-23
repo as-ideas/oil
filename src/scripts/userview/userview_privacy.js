@@ -31,15 +31,11 @@ export function getSoiPrivacy() {
 // TODO OIL-91 T&CF: Publisher Consents / optionale call getPublisherConsents --> should be dynamic & use custom puposes
 export function getPrivacySettings() {
   if (document.querySelector('.as-js-purpose-slider')) {
-    return {
-      '1': document.querySelector('#as-js-purpose-slider-1').checked,
-      '2': document.querySelector('#as-js-purpose-slider-2').checked,
-      '3': document.querySelector('#as-js-purpose-slider-3').checked,
-      '4': document.querySelector('#as-js-purpose-slider-4').checked,
-      '5': document.querySelector('#as-js-purpose-slider-5').checked,
-      '6': document.querySelector('#as-js-purpose-slider-6').checked,
-      '7': document.querySelector('#as-js-purpose-slider-7').checked
-    }
+    let result = {};
+    forEach(document.querySelectorAll('.as-js-purpose-slider'), (element) => {
+      result[element.dataset.id] = element.checked;
+    }, this);
+    return result;
   }
   return PRIVACY_FULL_TRACKING;
 }

@@ -1,5 +1,5 @@
 import Cookie from 'js-cookie';
-import {loadJS} from './script-loader';
+import { loadJS } from './script-loader';
 
 export function getCurrentState() {
   let oilData = Cookie.get('oil_data');
