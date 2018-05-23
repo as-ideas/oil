@@ -119,9 +119,14 @@
     background-color: $background-color-dark;
   }
 
-  @include media('<=phone') {
-    padding: 1em;
+  .small & {
+    padding: .5em 0 0 0;
   }
+
+  @include media('<=phone') {
+    padding: 1em !important;
+  }
+
 }
 
 // Text Styles
@@ -133,6 +138,10 @@
 
   &:first-of-type {
     margin-top: 0;
+  }
+
+  .small & {
+    display: none;
   }
 
   @include media('<=phone') {
@@ -150,6 +159,10 @@
   font-size: 0.9375em;
   font-weight: 400;
   line-height: 1.4;
+
+  .small & {
+    margin: 0 0 0 1em;
+  }
 
   @include media('<=phone') {
     margin: 0.5em 0;
@@ -186,6 +199,11 @@
   border-radius: 3px;
   outline: none;
   cursor: pointer;
+
+  .small & {
+    min-width: 120px;
+    min-height: 32px;
+  }
 
   @include media('<=phone') {
     width: 100%;
@@ -310,10 +328,14 @@
   display: inline-block;
   margin: 1em 0;
   min-width: 20%;
-  //max-width: 25%;
 
   &:last-of-type {
     margin-bottom: 0;
+  }
+
+  .small & {
+    margin: 0 0 0.5em 0;
+    min-width: 0;
   }
 
   @include media('<=phone') {
