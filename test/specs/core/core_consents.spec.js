@@ -553,6 +553,20 @@ describe('consents', () => {
       expect(result[CUSTOM_PURPOSE_ID_1]).toEqual(1);
       expect(result[CUSTOM_PURPOSE_ID_2]).toEqual(1);
     });
+
+    it('should return cookie.privacy if it is object', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        privacy: {
+          foo: 'bar'
+        },
+        version: 'aVersion',
+        localeVariantName: 'deDE_01'
+      });
+
+      let result = buildPurposeConsents([]);
+      expect(result.foo).toEqual('bar');
+    });
   });
 
   describe('getLimitedVendorIds', function() {
