@@ -314,15 +314,15 @@
         </ul>
 
         <p class="hero-call-to-action">
-          <a href="https://oil.axelspringer.com/docs/oil-users-guide.html" class="btn btn-primary btn-lg"
-             target="_blank" role="button">Learn More <i class="fa fa-chevron-right"></i>
+          <a href="docs/" class="btn btn-primary btn-lg" target="_blank" role="button">Documentation <i
+            class="fa fa-chevron-right"></i>
           </a>
-          <a href="https://oil.axelspringer.com/docs/full-documentation.html" class="btn btn-secondary btn-lg"
-             target="_blank" role="button">Developer Guide <i class="fa fa-chevron-right"></i>
+          <a href="cmp/sandbox/" class="btn btn-secondary btn-lg" target="_blank" role="button">Demo-Sandbox
+            <i class="fa fa-chevron-right"></i>
           </a>
           <a href="release/" target="_blank">Released versions</a>
           <br/>
-          <a href="examples/" target="_blank">Example Pages</a>
+          <a href="demos/" target="_blank">Example Pages</a>
         </p>
       </div>
 
@@ -334,7 +334,7 @@
 
 <div class="full-row">
   <div class="claim-wrapper">
-    <h1 class="logo-claim">Prepares you for ePrivacy</h1>
+    <h1 class="logo-claim">Prepares you for ePrivacy & GDPR</h1>
     <h1 class="logo-claim-2">The "Opt-In Layer" is a JavaScript library for displaying the user consent dialog. It
       offers
       a huge variety of options and helps you to manage your tags.<br/> Best served with <a href="https://tealiumiq.com"
@@ -407,7 +407,7 @@
         Our library was AB-tested with hundreds of thousands of users.
         We used multiple websites from our Axel Springer family to check that everything works,
         as well as create the optimal guidelines for you. We are your experts for Opt-In layers! </p>
-      <a href="examples/" target="_blank">AB-Test examples</a>
+      <!--<a href="examples/" target="_blank">AB-Test examples</a>-->
     </div>
     <div class="col-sm-5 col-sm-pull-7">
       <img class="img-responsive animated wow slideInLeft dropshadow" src="assets/images/landing_page/oil.jpeg"
@@ -419,27 +419,72 @@
 
   <div class="quick-install">
     <h1>OIL.JS QUICK INSTALL</h1>
-    <p>You have two options: Including the JS-Library via our CDN or deploying it with
-      <a href="https://tealiumiq.com" target="_blank">Tealium</a>!
-      For Tealium you only need to include our dip-lib-opt-in profile and you're ready to go.
+    <p>You have multiple options: For our own brands you can just include the JS-Library via our CDN. Otherwise you will
+      need to host
+      the released files on your own infrastructure.
       For direct integration you only need to add our tag: </p>
-    <pre># This will add the layer with default options and default styling to your website
-
-&lt;script type=&quot;text/javascript&quot; src=&quot;//oil.axelspringer.com/release/oil.1.0.13-RELEASE.min.js&quot;&gt;&lt;/script&gt;</pre>
-    <p>And if you want some options:</p>
-    <pre>&lt;script id=&quot;oil-configuration&quot; type=&quot;application/configuration&quot;&gt;
-    {
-        &quot;privacy_page_url&quot;: &quot;http://www.mysite.com/privacy&quot;,
-        &quot;label_intro_heading&quot;: &quot;- You name it! -&quot;,
-        &quot;poi_activate_poi&quot;: true,
-        &quot;poi_hub_origin&quot;: &quot;//oil.axelspringer.com&quot;,
-        &quot;poi_hub_path&quot;: &quot;/hub.html&quot;,
+    <ul>
+      <li>Add the configuration first</li>
+      <li>Add the stub code</li>
+      <li>Add the script with a link to the oil.min.js file</li>
+    </ul>
+    <pre style="white-space: pre;">&lt;script id=&quot;oil-configuration&quot; type=&quot;application/configuration&quot;&gt;
+{
+  &quot;advanced_settings&quot;: true,
+  &quot;timeout&quot;: 0,
+  &quot;publicPath&quot;: &quot;//oil-integration-host1.herokuapp.com/1.0.35/&quot;,
+  &quot;poi_activate_poi&quot;: true,
+  &quot;poi_group_name&quot;: &quot;myPoiGroupForGroupingPois&quot;,
+  &quot;poi_hub_origin&quot;: &quot;//oil-integration-host1.herokuapp.com/&quot;,
+  &quot;poi_hub_path&quot;: &quot;/release/1.0.35/hub.html&quot;,
+  &quot;locale&quot;: {
+    &quot;localeId&quot;: &quot;enEN_01&quot;,
+    &quot;version&quot;: 1,
+    &quot;texts&quot;: {
+      &quot;label_intro_heading&quot;: &quot;We use cookies and other technologies&quot;,
+      &quot;label_intro&quot;: &quot;The website uses cookies, web beacons, JavaScript and similar technologies. I agree that &lt;a href=\&quot;javascript:void(0)\&quot; class=\&quot;as-oil__intro-txt--link as-js-companyList\&quot;&gt;companies belonging to Axel Springer SE&lt;/a&gt; and &lt;a href=\&quot;javascript:void(0)\&quot; class=\&quot;as-oil__intro-txt--link as-js-thirdPartyList\&quot;&gt;trusted partners&lt;/a&gt; generate pseudonymous user profiles for adapting the website to the user, for market research and for advertising. The generated data can also be shared with third parties while the user profiles cannot be combined with personal data. Detailed information, also on the right to withdraw consent, can be found in the website&#39;s privacy policy.&quot;,
+      &quot;label_button_yes&quot;: &quot;OK&quot;,
+      &quot;label_button_back&quot;: &quot;Back&quot;,
+      &quot;label_button_advanced_settings&quot;: &quot;More information&quot;,
+      &quot;label_cpc_heading&quot;: &quot;Please select a privacy setting:&quot;,
+      &quot;label_cpc_text&quot;: &quot;Cookie Preference Center&quot;,
+      &quot;label_cpc_activate_all&quot;: &quot;Activate all&quot;,
+      &quot;label_cpc_deactivate_all&quot;: &quot;Deactivate all&quot;,
+      &quot;label_cpc_purpose_01_text&quot;: &quot;Accessing a Device&quot;,
+      &quot;label_cpc_purpose_01_desc&quot;: &quot;Allow storing or accessing information on a user’s device.&quot;,
+      &quot;label_cpc_purpose_02_text&quot;: &quot;Advertising Personalisation&quot;,
+      &quot;label_cpc_purpose_02_desc&quot;: &quot;Allow processing of a user’s data to provide and inform personalised advertising (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.&quot;,
+      &quot;label_cpc_purpose_03_text&quot;: &quot;Analytics&quot;,
+      &quot;label_cpc_purpose_03_desc&quot;: &quot;Allow processing of a user’s data to deliver content or advertisements and measure the delivery of such content or advertisements, extract insights and generate reports to understand service usage; and/or accessing or storing information on devices for that purpose.&quot;,
+      &quot;label_cpc_purpose_04_text&quot;: &quot;Content Personalisation&quot;,
+      &quot;label_cpc_purpose_04_desc&quot;: &quot;Allow processing of a user’s data to provide and inform personalised content (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.&quot;,
+      &quot;label_cpc_purpose_05_text&quot;: &quot;Matching Data to Offline Sources&quot;,
+      &quot;label_cpc_purpose_05_desc&quot;: &quot;Combining data from offline sources that were initially collected in other contexts&quot;,
+      &quot;label_cpc_purpose_06_text&quot;: &quot;Linking Devices&quot;,
+      &quot;label_cpc_purpose_06_desc&quot;: &quot;Allow processing of a user’s data to connect such user across multiple devices.&quot;,
+      &quot;label_cpc_purpose_07_text&quot;: &quot;Precise Geographic Location data&quot;,
+      &quot;label_cpc_purpose_07_desc&quot;: &quot;Allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent&quot;,
+      &quot;label_poi_group_list_heading&quot;: &quot;Your consent for companies of the group&quot;,
+      &quot;label_poi_group_list_text&quot;: &quot;Here is a list of companies of the group:&quot;,
+      &quot;label_thirdparty_list_heading&quot;: &quot;Your consent for third party software&quot;,
+      &quot;label_thirdparty_list_text&quot;: &quot;&quot;,
+      &quot;label_nocookie_head&quot;: &quot;In order to be able to provide our services in the best possible way, cookies must be activated in your browser.&quot;,
+      &quot;label_nocookie_text&quot;: &quot;Please activate Cookies in the properties of your Browsers. So you can do it in &lt;a href=\&quot;https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&amp;hl=en-GB\&quot; class=\&quot;as-oil__intro-txt--link\&quot; target=\&quot;_blank\&quot;&gt;Google Chrome&lt;/a&gt; or &lt;a href=\&quot;https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer\&quot; class=\&quot;as-oil__intro-txt--link\&quot; target=\&quot;_blank\&quot;&gt;Firefox&lt;/a&gt;.&quot;
     }
+  }
+}
 &lt;/script&gt;</pre>
-    <a class="btn btn-primary btn-lg" href="http://oil.axelspringer.com/docs/oil-users-guide.html">
+    <pre>&lt;script&gt;
+!function(e){var n={};function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.r=function(e){Object.defineProperty(e,&quot;__esModule&quot;,{value:!0})},t.n=function(e){var n=e&amp;&amp;e.__esModule?function(){return e.default}:function(){return e};return t.d(n,&quot;a&quot;,n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p=&quot;/&quot;,t(t.s=365)}({365:function(e,n,t){&quot;use strict&quot;;!function(e,n){e.__cmp||(e.__cmp=function(){function t(){return!(!e.AS_OIL||!e.AS_OIL.commandCollectionExecutor)}(e.attachEvent||e.addEventListener)(&quot;message&quot;,function(n){e.__cmp.receiveMessage(n)},!1),function e(){if(!(n.getElementsByName(&quot;__cmpLocator&quot;).length&gt;0))if(n.body){var t=n.createElement(&quot;iframe&quot;);t.style.display=&quot;none&quot;,t.name=&quot;__cmpLocator&quot;,n.body.appendChild(t)}else setTimeout(e,5)}();var o=[],r=function(n,r,c){var a;&quot;ping&quot;===n?(a=c)&amp;&amp;a({gdprAppliesGlobally:!1,cmpLoaded:t()}):(o.push({command:n,parameter:r,callback:c}),t()&amp;&amp;e.AS_OIL.commandCollectionExecutor())};return r.commandCollection=o,r.receiveMessage=function(e){var n=e&amp;&amp;e.data&amp;&amp;e.data.__cmpCall;n&amp;&amp;o.push({callId:n.callId,command:n.command,parameter:n.parameter,event:e})},r}())}(window,document)}});
+&lt;/script&gt;
+    </pre>
+    <pre>
+      &lt;script type=&quot;text/javascript&quot; src=&quot;https://oil.axelspringer.com/release/1.1.1/oil.1.1.1-SNAPSHOT.min.js&quot;&gt;&lt;/script&gt;
+    </pre>
+    <a class="btn btn-primary btn-lg" href="docs/#quickstart">
       <i class="fa fa-bolt" aria-hidden="true"></i> READ QUICKSTART GUIDE
     </a>
-    <a class="btn btn-primary btn-lg" href="http://oil.axelspringer.com/docs/oil-users-guide.html#_soi_configuration">
+    <a class="btn btn-primary btn-lg" href="docs/#configuring-oil">
       <i class="fa fa-gear" aria-hidden="true"></i> GET TO KNOW THE CONFIGURATION
     </a>
   </div>
@@ -524,10 +569,9 @@
       <a href="https://career.axelspringer.com/jobangebote/#ideas|engineering"
          title="Careers at Axel Springer Ideas Engineering" target="_blank">Careers</a>
       |
-      <a href="http://oil.axelspringer.com/docs/oil-users-guide.html" target="_blank"
-         title="OIL Documentation">Documentation</a>
+      <a href="docs/" target="_blank" title="OIL Documentation">Documentation</a>
       |
-      <a href="https://oil.axelspringer.com" target="_blank" title="OIL Examples">Examples</a>
+      <a href="demos/" target="_blank" title="OIL Examples">Examples</a>
     </p>
     <p class="footer-menu">
       <a href="https://kube-jenkins.ipool.asideas.de/view/OIL%20Project/" target="_blank">Build Server</a>
@@ -536,7 +580,7 @@
         Wiki
       </a>
       |
-      <a href="https://as-wiki.axelspringer.de/display/IDEASINNO/OIL+with+Tealium+guide" target="_blank">Tealium
+      <a href="https://github.com/as-ideas/oil" target="_blank">Github
         guide</a>
     </p>
   </div>
