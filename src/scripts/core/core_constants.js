@@ -22,6 +22,7 @@ export const OIL_CONFIG = {
   ATTR_TIMEOUT: 'timeout',
   ATTR_OIL_BACKEND_URL: 'oilBackendUrl',
   ATTR_IAB_VENDOR_LIST_URL: 'iabVendorListUrl',
+  ATTR_CUSTOM_PURPOSES: 'customPurposes',
   ATTR_IAB_VENDOR_BLACKLIST: 'iabVendorBlacklist',
   ATTR_IAB_VENDOR_WHITELIST: 'iabVendorWhitelist'
 };

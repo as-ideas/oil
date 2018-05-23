@@ -1,4 +1,5 @@
 import {getSoiCookie} from './core_cookies';
+import {getCustomPurposes} from './core_config';
 import {getPurposes, getVendorList, getVendors} from './core_vendor_information';
 import {OIL_SPEC} from './core_constants';
 import {getIabVendorBlacklist, getIabVendorWhitelist} from './core_config';
@@ -10,7 +11,7 @@ export function getVendorConsentData(vendorIds) {
     metadata: buildConsentString(),
     gdprApplies: true,
     hasGlobalScope: false,
-    purposeConsents: buildPurposeConsents(),
+    purposeConsents: buildPurposeConsents(getPurposes()),
     vendorConsents: buildVendorConsents(vendorIds)
   };
 }
@@ -27,19 +28,33 @@ export function getConsentDataString(consentStringVersion) {
   }
 }
 
-function buildPurposeConsents() {
+export function getPublisherConsentData(purposeIds) {
+  return {
+    metadata: buildConsentString(),
+    gdprApplies: true,
+    hasGlobalScope: false,
+    standardPurposeConsents: buildPurposeConsents(getPurposes(), purposeIds),
+    customPurposeConsents: buildPurposeConsents(getCustomPurposes(), purposeIds)
+  }
+}
+
+export function buildPurposeConsents(purposes, limitedPurposeIds) {
   let soiCookie = getSoiCookie();
   let privacy = soiCookie.privacy;
 
   if (typeof privacy === 'object') {
     return soiCookie.privacy;
   } else {
-    let purposes = getPurposes();
     let purposeConsents = {};
 
     purposes.forEach(purpose => {
-      purposeConsents[purpose.id] = privacy;
+      if (limitedPurposeIds && limitedPurposeIds.indexOf(purpose.id) > -1) {
+        purposeConsents[purpose.id] = privacy;
+      } else if(!limitedPurposeIds || !limitedPurposeIds.length) {
+        purposeConsents[purpose.id] = privacy;
+      }
     });
+
     return purposeConsents;
   }
 }
@@ -111,4 +126,3 @@ export function getLimitedVendorIds() {
 function getAllVendorIds() {
   return getVendors().map(({id}) => id);
 }
-

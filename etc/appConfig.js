@@ -29,6 +29,11 @@ module.exports = {
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
+    filename: 'demos/advanced-settings-custom-purposes.html',
+    template: path.resolve(sourcePath, 'demos', 'advanced-settings-custom-purposes.html'),
+    chunks: ['oilstub' ,'oil', 'oildevkit'],
+    chunksSortMode: 'dependency'
+  }, {
     filename: 'demos/english-version.html',
     template: path.resolve(sourcePath, 'demos', 'english-version.html'),
     chunks: ['oil'],

@@ -99,6 +99,7 @@ And you need your custom configuration:
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True
 | iabVendorWhitelist | Array of vendor IDs to allow. If it is set, values in `iabVendorBlacklist` are ignored. | None
 | iabVendorBlacklist | Array of vendor IDs to exclude. | None
+| customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
 
 ## Labels
 

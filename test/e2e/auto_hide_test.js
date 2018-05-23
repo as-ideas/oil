@@ -18,7 +18,7 @@ module.exports = {
       .waitForElementVisible(OIL_LAYER, 2000, false);
   },
 
-  'OIL Layer should be auto-hided after the correct amount of time': function (browser) {
+  'OIL Layer should be auto-hidden after the correct amount of time': function (browser) {
     browser
       .pause(500)
       .waitForElementVisible(OIL_LAYER, 500, false)

@@ -1,4 +1,4 @@
-import { getConsentDataString, getVendorConsentData, getLimitedVendorIds } from '../../../src/scripts/core/core_consents';
+import { getConsentDataString, getVendorConsentData, buildPurposeConsents, getPublisherConsentData, getLimitedVendorIds } from '../../../src/scripts/core/core_consents';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
@@ -8,6 +8,36 @@ import { loadVendorList } from '../../../src/scripts/core/core_vendor_informatio
 const {ConsentString} = require('consent-string');
 
 describe('consents', () => {
+
+  const PURPOSE_ID_1 = 1;
+  const PURPOSE_ID_2 = 2;
+  const CUSTOM_PURPOSE_ID_1 = 25;
+  const CUSTOM_PURPOSE_ID_2 = 26;
+
+  const PURPOSES_ARRAY = [
+    {
+      id: PURPOSE_ID_1,
+      name: 'Information storage and access',
+      description: 'The storage of information, or access to information that is already stored, on your device such as advertising identifiers, device identifiers, cookies, and similar technologies.'
+    },
+    {
+      id: PURPOSE_ID_2,
+      name: 'Personalisation',
+      description: 'The collection and processing of information about your use of this service to subsequently personalise advertising and/or content for you in other contexts, such as on other websites or apps, over time. Typically, the content of the site or app is used to make inferences about your interests, which inform future selection of advertising and/or content.'
+    }
+  ];
+
+  const CUSTOM_PURPOSES_ARRAY = [
+    {
+      "id": CUSTOM_PURPOSE_ID_1,
+      "name": "Foo",
+      "description": "Bar!"
+    },{
+      "id": CUSTOM_PURPOSE_ID_2,
+      "name": "Bar",
+      "description": "Baz Lorem Ipsum"
+    }
+  ];
 
   describe('getVendorConsentData', () => {
 
@@ -265,26 +295,13 @@ describe('consents', () => {
 
   describe('getConsentDataString', () => {
 
-    const PURPOSE_ID_1 = 1;
-    const PURPOSE_ID_2 = 2;
     const VENDOR_ID_1 = 8;
     const VENDOR_ID_2 = 12;
 
     const GLOBAL_VENDOR_LIST = {
       vendorListVersion: 16,
       lastUpdated: '2018-05-08T15:59:02Z',
-      purposes: [
-        {
-          id: PURPOSE_ID_1,
-          name: 'Information storage and access',
-          description: 'The storage of information, or access to information that is already stored, on your device such as advertising identifiers, device identifiers, cookies, and similar technologies.'
-        },
-        {
-          id: PURPOSE_ID_2,
-          name: 'Personalisation',
-          description: 'The collection and processing of information about your use of this service to subsequently personalise advertising and/or content for you in other contexts, such as on other websites or apps, over time. Typically, the content of the site or app is used to make inferences about your interests, which inform future selection of advertising and/or content.'
-        }
-      ],
+      purposes: PURPOSES_ARRAY,
       vendors: [
         {
           id: VENDOR_ID_1,
@@ -469,6 +486,100 @@ describe('consents', () => {
       expect(result).not.toBeDefined();
     });
 
+  });
+
+  describe('getPublisherConsentData', () => {
+    it('should return default info object', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        privacy: 1,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01',
+        localeVariantVersion: 1,
+        timestamp: Date.now()
+      });
+      spyOn(CoreConfig, 'getCustomPurposes').and.returnValue(CUSTOM_PURPOSES_ARRAY);
+      spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(PURPOSES_ARRAY);
+
+      let result = getPublisherConsentData();
+
+      expect(result.metadata).toBeDefined();
+      expect(result.gdprApplies).toBeTruthy();
+      expect(result.hasGlobalScope).toEqual(false);
+      expect(result.standardPurposeConsents).toBeDefined();
+      expect(result.customPurposeConsents).toBeDefined();
+
+      expect(result.standardPurposeConsents[PURPOSE_ID_1]).toEqual(1);
+      expect(result.standardPurposeConsents[PURPOSE_ID_2]).toEqual(1);
+      expect(result.standardPurposeConsents[CUSTOM_PURPOSE_ID_1]).toBeFalsy();
+      expect(result.customPurposeConsents[CUSTOM_PURPOSE_ID_1]).toEqual(1);
+      expect(result.customPurposeConsents[CUSTOM_PURPOSE_ID_2]).toEqual(1);
+      expect(result.customPurposeConsents[PURPOSE_ID_1]).toBeFalsy();
+    });
+
+    it('should return info object with only purposes that are inside purposeIds array', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        privacy: 1,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01',
+        localeVariantVersion: 1,
+        timestamp: Date.now()
+      });
+      spyOn(CoreConfig, 'getCustomPurposes').and.returnValue(CUSTOM_PURPOSES_ARRAY);
+      let result = getPublisherConsentData([PURPOSE_ID_1,CUSTOM_PURPOSE_ID_1]);
+
+      expect(result.standardPurposeConsents[PURPOSE_ID_1]).toEqual(1);
+      expect(result.standardPurposeConsents[PURPOSE_ID_2]).toBeFalsy();
+      expect(result.customPurposeConsents[CUSTOM_PURPOSE_ID_1]).toEqual(1);
+      expect(result.customPurposeConsents[CUSTOM_PURPOSE_ID_2]).toBeFalsy();
+    });
+  });
+
+  describe('buildPurposeConsents', function() {
+    it('should return correct consent object', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        privacy: 1,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01'
+      });
+
+      let result = buildPurposeConsents(PURPOSES_ARRAY);
+      expect(result[PURPOSE_ID_1]).toEqual(1);
+      expect(result[PURPOSE_ID_2]).toEqual(1);
+
+      result = buildPurposeConsents(CUSTOM_PURPOSES_ARRAY);
+      expect(result[CUSTOM_PURPOSE_ID_1]).toEqual(1);
+      expect(result[CUSTOM_PURPOSE_ID_2]).toEqual(1);
+    });
+
+    it('should return 0 for each purpose when privacy=0', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: false,
+        privacy: 0,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01'
+      });
+
+      let result = buildPurposeConsents(PURPOSES_ARRAY);
+      expect(result[PURPOSE_ID_1]).toEqual(0);
+      expect(result[PURPOSE_ID_2]).toEqual(0);
+    });
+
+    it('should return cookie.privacy if it is object', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        privacy: {
+          foo: 'bar'
+        },
+        version: 'aVersion',
+        localeVariantName: 'deDE_01'
+      });
+
+      let result = buildPurposeConsents([]);
+      expect(result.foo).toEqual('bar');
+    });
   });
 
   describe('getLimitedVendorIds', function() {
