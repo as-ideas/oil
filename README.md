@@ -9,7 +9,7 @@ Build Monitoring (works currently only from internal network)
 
 [![GPL2 License][license-image]][license-url] 
 
-[Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs)
+[Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html)
 
 ## About oil.js
 
@@ -26,13 +26,13 @@ The Opt-In Layer (OIL) is an offical link:http://advertisingconsent.eu/iab-europ
 ## Technical Quality Goals
 
 * OIL will be held compatible with the latest official browser releases, going back to the latest version as listed below and tested on broad range of browsers using Browserstack.com:
-** Chrome 14 - Latest
-** IE 9 - Latest
-** Firefox 9 - Latest
-** Safari 6 - Latest
-** Opera 12
-** Apple iOS 5.1 - Latest
-** Android 4.4.4 - Latest
+    * Chrome 14 - Latest
+    * IE 9 - Latest
+    * Firefox 9 - Latest
+    * Safari 6 - Latest
+    * Opera 12
+    * Apple iOS 5.1 - Latest
+    * Android 4.4.4 - Latest
 * Continously integrated and delivered
 * Modular and maintainable solution
 
@@ -136,16 +136,7 @@ And you need your custom configuration:
 
 ## Full documentatin example
 
-```javascript
-<script id="oil-configuration" type="application/configuration">
-  {
-    "activate_poi": true,
-    "poi_group_name": "axelSpringerSe_01",
-    "locale": "enEN_01"
-  }
-</script>
-```
-
+tbd.
 
 ## Development
 ### Installation / Build
