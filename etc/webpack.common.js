@@ -168,7 +168,7 @@ var config = {
   },
 
   output: {
-    publicPath: '/'
+    jsonpFunction: 'webpackJsonp'
   },
 
   /*
