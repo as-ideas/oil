@@ -41,13 +41,14 @@
           if (command === 'ping') {
             handlePing(callback);
           } else {
-            commandCollection.push({
+            let commandEntry = {
               command: command,
               parameter: parameter,
               callback: callback
-            });
+            };
+            commandCollection.push(commandEntry);
             if (isOilAlreadyLoaded()) {
-              window['AS_OIL']['commandCollectionExecutor']();
+              window['AS_OIL']['commandCollectionExecutor'](commandEntry);
             }
           }
         }
