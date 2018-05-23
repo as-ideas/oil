@@ -78,19 +78,11 @@
     cursor: pointer;
   }
 
-  .as-oil-third-party-description {
+  .as-oil-third-party-link {
     color: $background-color-dark;
     font-size: 12px;
     opacity: .5;
-  }
-
-  .as-oil-third-party-link {
-    a {
-      color: #0068ff;
-      font-size: 12px;
-      text-decoration: none;
-
-    }
+    text-decoration: none;
   }
 }
 
