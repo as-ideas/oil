@@ -1,4 +1,4 @@
-import { OIL_LAYER, OIL_ADVANCED_SETTINGS, OIL_ADVANCED_SETTINGS_WRAPPER } from '../test_constants.js';
+import { OIL_LAYER, OIL_ADVANCED_SETTINGS, OIL_ADVANCED_SETTINGS_WRAPPER, OIL_CUSTOM_PURPOSE_SLIDER } from '../test_constants.js';
 
 module.exports = {
   '@disabled': false,
@@ -20,11 +20,10 @@ module.exports = {
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
       .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
+      .pause(100)
+      .waitForElementPresent(OIL_CUSTOM_PURPOSE_SLIDER, 100, false)
       .pause(200)
-      .assert.containsText('html', 'Custom Purpose 1', 'Checking custom purpose #1s title is in html')
-      .assert.containsText('html', 'Lorem2!', 'Checking custom purpose #2s description is in html')
-
-    browser.end();
+      .end()
   },
 
 };
