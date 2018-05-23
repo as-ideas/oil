@@ -22,6 +22,7 @@ module.exports = {
       .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
       .pause(100)
       .waitForElementPresent(OIL_CUSTOM_PURPOSE_SLIDER, 100, false)
+      .assert.containsText('html', 'Custom Purpose 1', 'Checking custom purpose title')
       .pause(200)
       .end()
   },
