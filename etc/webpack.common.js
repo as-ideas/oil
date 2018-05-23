@@ -168,7 +168,8 @@ var config = {
   },
 
   output: {
-    publicPath: '/'
+    publicPath: '/',
+    jsonpFunction: 'oilJsonp'
   },
 
   /*

@@ -150,6 +150,27 @@ This code will listen to OIL events to show another window after the user finish
 }());
 ----
 
+=== Adding Scripts programmatically
 
+==== Adding oil.js configuration
+[source,javascript]
+----
+var oldScript = document.getElementById('oil-configuration');
+if (oldScript) {
+  oldScript.parentNode.removeChild(oldScript);
+}
+
+var config = {
+  preview_mode: true
+};
+var head = document.getElementsByTagName('head')[0];
+var script = document.createElement('script');
+
+script.id = 'oil-configuration';
+script.type = 'application/configuration';
+script.text = JSON.stringify(config);
+
+head.appendChild(script);
+----
 
 
