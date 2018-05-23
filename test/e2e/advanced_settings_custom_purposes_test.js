@@ -20,8 +20,9 @@ module.exports = {
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
       .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
-      .waitForElementVisible('.as-oil-cpc__purpose', 1000)
-      .assert.containsText('.as-oil-cpc__purpose', 'Custom Purpose 1', 'Checking project title is set to nightwatch')
+      .pause(200)
+      .assert.containsText('html', 'Custom Purpose 1', 'Checking custom purpose #1s title is in html')
+      .assert.containsText('html', 'Lorem2!', 'Checking custom purpose #2s description is in html')
 
     browser.end();
   },
