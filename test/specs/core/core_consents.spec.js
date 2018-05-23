@@ -554,6 +554,19 @@ describe('consents', () => {
       expect(result[CUSTOM_PURPOSE_ID_2]).toEqual(1);
     });
 
+    it('should return 0 for each purpose when privacy=0', function() {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: false,
+        privacy: 0,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01'
+      });
+
+      let result = buildPurposeConsents(PURPOSES_ARRAY);
+      expect(result[PURPOSE_ID_1]).toEqual(0);
+      expect(result[PURPOSE_ID_2]).toEqual(0);
+    });
+
     it('should return cookie.privacy if it is object', function() {
       spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
         opt_in: true,
