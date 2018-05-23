@@ -44,8 +44,7 @@ const buildVendorEntries = (vendors) => {
                     <span class='as-oil-third-party-name'>${element.name}</span>
                 </span>
                 <div class='as-oil-third-party-toggle-part' style='display: none;'>
-                <p class='as-oil-third-party-description' >${element.description}</p>
-                  <div class='as-oil-third-party-link'>${element.policyUrl}</div>
+                  <a class='as-oil-third-party-link' href='${element.policyUrl}'>${element.policyUrl}</a>
                 </div>
               </div>`;
   });
