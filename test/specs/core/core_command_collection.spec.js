@@ -73,6 +73,36 @@ describe('command collection executor', () => {
     verifyInvocationOfCommandWithCallId('getConsentData', CoreConsents.getConsentDataString, undefined, done);
   });
 
+  it('should process single command if command entry is given as parameter', (done) => {
+    const commandParameter = 'aParameter';
+    const commandToBeExecuted = 'getVendorConsents';
+    const expectedFunction = CoreConsents.getVendorConsentData;
+    const expectedResult = 'aResult';
+
+    let notInvokedCallback = () => {
+      fail();
+    };
+    spyOn(CoreUtils, 'getCommandCollection').and.returnValue(givenCommandEntryWithCallback(commandToBeExecuted, commandParameter, notInvokedCallback));
+
+    spyOn(CoreConsents, expectedFunction.name).and.returnValue(expectedResult);
+    let callbackToBeInvoked = (result, success) => {
+      expect(CoreConsents[expectedFunction.name]).toHaveBeenCalledWith(commandParameter);
+      expect(result).toEqual(expectedResult);
+      if (typeof expectedResult !== 'undefined') {
+        expect(success).toBeTruthy();
+      } else {
+        expect(success).toBeFalsy();
+      }
+      done();
+    };
+
+    executeCommandCollection({
+      command: commandToBeExecuted,
+      parameter: commandParameter,
+      callback: callbackToBeInvoked,
+    });
+  });
+
   function verifyInvocationOfCommandWithCallback(command, expectedFunction, expectedResult, done) {
     const commandParameter = 'aParameter';
 

@@ -24,42 +24,46 @@ const commands = {
 };
 
 
-export function executeCommandCollection() {
-  let commandCollection = getCommandCollection();
+export function executeCommandCollection(commandEntry) {
+  if (typeof commandEntry !== 'undefined') {
+    processCommandEntry(commandEntry);
+  } else {
+    let commandCollection = getCommandCollection();
 
-  if (commandCollection) {
-    let commandCollectionLength = commandCollection.length;
-    for (let i = 0; i < commandCollectionLength; i++) {
-      let commandEntry = commandCollection[i];
-      loadVendorList()
-        .then(() => {
-          processCommandEntry(commandEntry);
-        })
-        .catch((error) => logError(error));
+    if (commandCollection) {
+      let commandCollectionLength = commandCollection.length;
+      for (let i = 0; i < commandCollectionLength; i++) {
+        let commandEntry = commandCollection[i];
+        processCommandEntry(commandEntry);
+      }
     }
   }
 }
 
 function processCommandEntry(commandEntry) {
-  processCommand(commandEntry.command, commandEntry.parameter)
-    .then((result) => {
-        if (commandEntry.callback) {
-          commandEntry.callback(result, (typeof result !== 'undefined'));
-        } else if (commandEntry.callId) {
-          let resultMessage = createResultMessage(result, commandEntry);
-          commandEntry.event.source.postMessage(resultMessage, commandEntry.event.origin);
-        } else {
-          logError(`Invalid command entry '${JSON.stringify(commandEntry)}' found!`);
-        }
-      },
-      (error) => logError(error));
+  loadVendorList()
+    .then(() => {
+      processCommand(commandEntry.command, commandEntry.parameter)
+        .then((result) => {
+            if (commandEntry.callback) {
+              commandEntry.callback(result, (typeof result !== 'undefined'));
+            } else if (commandEntry.callId) {
+              let resultMessage = createResultMessage(result, commandEntry);
+              commandEntry.event.source.postMessage(resultMessage, commandEntry.event.origin);
+            } else {
+              logError(`Invalid command entry '${JSON.stringify(commandEntry)}' found!`);
+            }
+          },
+          (error) => logError(error));
+    })
+    .catch((error) => logError(error));
 }
 
-function processCommand(command, parameter, callback) {
+function processCommand(command, parameter) {
   return new Promise((resolve, reject) => {
     if (typeof(commands[command]) === 'function') {
       logInfo(`Processing command "${command}" with parameters "${parameter}"`);
-      return resolve(commands[command](parameter, callback));
+      return resolve(commands[command](parameter));
     } else {
       return reject(`Invalid CMP command "${command}"`);
     }
