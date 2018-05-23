@@ -23,7 +23,8 @@ export const OIL_CONFIG = {
   ATTR_OIL_BACKEND_URL: 'oilBackendUrl',
   ATTR_IAB_VENDOR_LIST_URL: 'iabVendorListUrl',
   ATTR_IAB_VENDOR_BLACKLIST: 'iabVendorBlacklist',
-  ATTR_IAB_VENDOR_WHITELIST: 'iabVendorWhitelist'
+  ATTR_IAB_VENDOR_WHITELIST: 'iabVendorWhitelist',
+  ATTR_DEFAULT_TO_OPTIN: 'default_to_optin'
 };
 
 // Main Click events

@@ -165,3 +165,7 @@ export function getHubLocation() {
 export function resetConfiguration() {
   cachedConfig = null;
 }
+
+export function getDefaultToOptin() {
+  return getConfigValue(OIL_CONFIG.ATTR_DEFAULT_TO_OPTIN, undefined);
+}
