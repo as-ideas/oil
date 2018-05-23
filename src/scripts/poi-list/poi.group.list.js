@@ -10,7 +10,7 @@ export function getGroupList() {
     if (cachedGroupList) {
       resolve(cachedGroupList);
     } else {
-      fetchJsonData(window.__webpack_public_path__ + '/poi-lists/' + groupName + '.json')
+      fetchJsonData(__webpack_public_path__ + '/poi-lists/' + groupName + '.json')
         .then(response => {
           cachedGroupList = response;
           resolve(cachedGroupList);
