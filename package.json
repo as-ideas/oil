@@ -110,7 +110,7 @@
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "3.0.0",
     "mocha": "3.5.0",
-    "nightwatch": "0.9.20",
+    "nightwatch": "0.9.21",
     "nightwatch-html-reporter": "2.0.5",
     "node-sass": "4.8.3",
     "open-browser-webpack-plugin": "0.0.5",
