@@ -1,6 +1,7 @@
 import {getSoiCookie} from './core_cookies';
 import {getPurposes, getVendorList, getVendors} from './core_vendor_information';
 import {OIL_SPEC} from './core_constants';
+import {getIabVendorBlacklist, getIabVendorWhitelist} from './core_config';
 
 const {ConsentString} = require('consent-string');
 
@@ -44,20 +45,14 @@ function buildPurposeConsents() {
 }
 
 function buildVendorConsents(requestedVendorIds) {
-  let soiCookie = getSoiCookie();
-  let validVendorIds = getAllVendorIds();
+  const opt_in = getSoiCookie().opt_in;
+  let vendorIds = (requestedVendorIds && requestedVendorIds.length) ? requestedVendorIds : getAllVendorIds();
   let vendorConsents = {};
-
-  // TODO OIL-115 CMP: Blacklist/Whitelist for vendors
-  if (requestedVendorIds && requestedVendorIds.length) {
-    requestedVendorIds.forEach(vendorId => {
-      vendorConsents[vendorId] = validVendorIds.indexOf(vendorId) !== -1 && soiCookie.opt_in;
-    });
-  } else {
-    validVendorIds.forEach(vendorId => {
-      vendorConsents[vendorId] = soiCookie.opt_in;
-    });
-  }
+  const validVendorIds = getLimitedVendorIds();
+  
+  vendorIds.forEach(vendorId => {
+    vendorConsents[vendorId] = validVendorIds.indexOf(vendorId) !== -1 && opt_in;
+  });
   return vendorConsents;
 }
 
@@ -80,8 +75,7 @@ function buildConsentString(consentStringVersionString) {
     consentData.created = new Date(soiCookie.timestamp);
     consentData.setPurposesAllowed(getPurposesWithConsent(soiCookie));
     if (soiCookie.opt_in) {
-      // TODO OIL-115 CMP: Blacklist/Whitelist for vendors
-      consentData.setVendorsAllowed(getAllVendorIds());
+      consentData.setVendorsAllowed(getLimitedVendorIds());
     }
     return consentData.getConsentString();
   }
@@ -94,6 +88,24 @@ function getPurposesWithConsent(soiCookie) {
   } else {
     return privacy === 1 ? getPurposes().map(({id}) => id) : [];
   }
+}
+
+export function getLimitedVendorIds() {
+  let limited = getVendors();
+  const whitelist = getIabVendorWhitelist();
+  const blacklist = getIabVendorBlacklist();
+  
+  if (whitelist && whitelist.length > 0) {
+    limited = getVendors().filter((vendor) => {
+      return whitelist.indexOf(vendor.id) > -1;
+    })
+  } else if(blacklist && blacklist.length > 0) {
+    limited = getVendors().filter((vendor) => {
+      return blacklist.indexOf(vendor.id) === -1;
+    });
+  }
+
+  return limited.map(({id}) => id);
 }
 
 function getAllVendorIds() {
