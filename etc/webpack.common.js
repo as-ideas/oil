@@ -168,7 +168,8 @@ var config = {
   },
 
   output: {
-    jsonpFunction: 'webpackJsonp'
+    publicPath: '/',
+    jsonpFunction: 'oilJsonp'
   },
 
   /*
