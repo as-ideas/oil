@@ -167,5 +167,5 @@ export function resetConfiguration() {
 }
 
 export function getDefaultToOptin() {
-  return getConfigValue(OIL_CONFIG.ATTR_DEFAULT_TO_OPTIN, undefined);
+  return getConfigValue(OIL_CONFIG.ATTR_DEFAULT_TO_OPTIN, false);
 }

@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
 import {logInfo} from './core_log.js';
-import {getCookieExpireInDays, getLocaleVariantName} from './core_config.js';
+import {getCookieExpireInDays, getLocaleVariantName, getDefaultToOptin} from './core_config.js';
 import {PRIVACY_MINIMUM_TRACKING} from './core_constants.js';
 import {getClientTimestamp, getLocaleVariantVersion, OilVersion} from './core_utils.js';
 
@@ -60,7 +60,7 @@ function getDomainCookieConfig() {
     name: OIL_DOMAIN_COOKIE_NAME,
     expires: getCookieExpireInDays(),
     default_content: {
-      'opt_in': false,
+      'opt_in': getDefaultToOptin(),
       'timestamp': getClientTimestamp(),
       'version': OilVersion.get(),
       'localeVariantName': getLocaleVariantName(),
