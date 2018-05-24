@@ -59,32 +59,6 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
     expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(false);
   });
 
-  it('should insert CPC into host site with GIVEN PRIVACY SETTING', (done) => {
-    loadFixture('html/integrated-cpc.html');
-
-    oilShowPreferenceCenter({
-      '1': false,
-      '2': true,
-      '3': true,
-      '4': true,
-      '5': true,
-      '6': true,
-      '7': true
-    });
-
-    waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
-      expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
-      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(true);
-      done();
-    });
-
-
-  });
-
   it('should insert CPC into host site with STORED PRIVACY SETTING (from cookie)', (done) => {
     renderOil({optIn: false});
     setSoiOptIn({
@@ -128,20 +102,16 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
 
   });
 
-  it('should show CPC in layer with GIVEN PRIVACY SETTING', (done) => {
+  it('should show CPC in layer with PRIVACY SETTING from config', (done) => {
     renderOil({optIn: false});
 
-    oilShowPreferenceCenter({
-      '1': false,
-      '2': true,
-      '3': true,
-      '4': true,
-      '5': true
-    });
+    spyOn(CoreConfig, 'getAdvancedSettingsPurposesDefault').and.returnValue(true);
+
+    oilShowPreferenceCenter();
 
     waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
       expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
+      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(true);
       expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
       expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
       expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
