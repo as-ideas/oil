@@ -97,8 +97,6 @@ function shouldRenderOilLayer(props) {
   return props.optIn !== true;
 }
 
-// FIXME REWORKING WIP, default should come from CONFIG
-// FIXME do we have enough tests for this?
 export function oilShowPreferenceCenter() {
   // We need the PowerGroupUi-Stuff for the CPC
   import('../poi-list/poi-info.js');
