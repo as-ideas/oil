@@ -3,7 +3,7 @@
 
 # oil.js - Open Source Opt-In Layer
 
-Build Monitoring (works currently only from internal network)
+Currently in *beta* until 18.06.2018. 
 
 [![Build Status](https://jenkins.ipool.asideas.de/buildStatus/icon?job=OIL-build)](https://jenkins.ipool.asideas.de/job/OIL-build/)
 
