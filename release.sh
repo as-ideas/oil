@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 echo "\n### Installing dependencies"
-npm i
+npm i || exit 1
+npm run build || exit 1
 
 PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')
 
 echo "\n### Building release" $PACKAGE_VERSION$SNAPSHOT
-export SNAPSHOT="-RELEASE";npm run build:release
+export SNAPSHOT="-RELEASE";npm run build:release || exit 1
 
 echo "\n### Copying to release directory"
 mkdir release/$PACKAGE_VERSION
