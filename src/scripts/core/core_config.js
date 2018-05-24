@@ -178,3 +178,7 @@ export function getCustomPurposes() {
 export function getAdvancedSettingsPurposesDefault() {
   return getConfigValue(OIL_CONFIG.ATTR_ADVANCED_SETTINGS_PURPOSES_DEFAULT, false);
 }
+
+export function getDefaultToOptin() {
+  return getConfigValue(OIL_CONFIG.ATTR_DEFAULT_TO_OPTIN, false);
+}

@@ -26,6 +26,7 @@ export const OIL_CONFIG = {
   ATTR_IAB_VENDOR_BLACKLIST: 'iabVendorBlacklist',
   ATTR_IAB_VENDOR_WHITELIST: 'iabVendorWhitelist',
   ATTR_ADVANCED_SETTINGS_PURPOSES_DEFAULT: 'advanced_settings_purposes_default'
+  ATTR_DEFAULT_TO_OPTIN: 'default_to_optin'
 };
 
 // Main Click events

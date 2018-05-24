@@ -6,8 +6,8 @@ import { logError } from './core_log';
 import { fetchJsonData, setGlobalOilObject } from './core_utils';
 
 const defaultVendorList = {
-  vendorListVersion: 20,
-  lastUpdated: '2018-05-15T16:43:19Z',
+  vendorListVersion: 27,
+  lastUpdated: '2018-05-23T16:00:15Z',
   purposes: [
     {
       id: 1,
@@ -196,11 +196,12 @@ const defaultVendorList = {
       name: 'BidTheatre AB',
       policyUrl: 'https://www.bidtheatre.com/privacy-policy',
       purposeIds: [
+        2
+      ],
+      legIntPurposeIds: [
         1,
-        2,
         3
       ],
-      legIntPurposeIds: [],
       featureIds: [
         2,
         3
@@ -673,6 +674,7 @@ const defaultVendorList = {
       name: 'ShareThis, Inc.',
       policyUrl: 'http://www.sharethis.com/privacy/',
       purposeIds: [
+        2,
         3,
         4
       ],
@@ -774,7 +776,10 @@ const defaultVendorList = {
       policyUrl: 'http://justpremium.com/privacy-policy/',
       purposeIds: [
         1,
-        3
+        2,
+        3,
+        4,
+        5
       ],
       legIntPurposeIds: [],
       featureIds: []
@@ -863,9 +868,10 @@ const defaultVendorList = {
       id: 23,
       name: 'Amobee, Inc. ',
       policyUrl: 'https://www.amobee.com/trust/privacy-guidelines',
-      purposeIds: [],
+      purposeIds: [
+        1
+      ],
       legIntPurposeIds: [
-        1,
         2,
         3,
         4,
@@ -984,7 +990,9 @@ const defaultVendorList = {
       legIntPurposeIds: [
         5
       ],
-      featureIds: []
+      featureIds: [
+        2
+      ]
     },
     {
       id: 66,
@@ -1295,12 +1303,10 @@ const defaultVendorList = {
       policyUrl: 'http://www.slimcutmedia.com/privacy-policy/',
       purposeIds: [
         1,
-        2,
-        3,
-        4
+        2
       ],
       legIntPurposeIds: [
-        5
+        3
       ],
       featureIds: []
     },
@@ -1376,7 +1382,7 @@ const defaultVendorList = {
     {
       id: 97,
       name: 'LiveRamp, Inc.',
-      policyUrl: 'liveramp.com/privacy/',
+      policyUrl: 'www.liveramp.com/service-privacy-policy/',
       purposeIds: [
         1,
         2,
@@ -1459,7 +1465,7 @@ const defaultVendorList = {
     },
     {
       id: 136,
-      name: 'Ströer SSP GmbH',
+      name: 'Str\\u00f6er SSP GmbH',
       policyUrl: 'https://www.stroeer.de/fileadmin/user_upload/Datenschutz.pdf',
       purposeIds: [],
       legIntPurposeIds: [
@@ -1546,7 +1552,7 @@ const defaultVendorList = {
     {
       id: 101,
       name: 'MiQ',
-      policyUrl: 'http://mediaiqdigital.com/wp-content/uploads/2018/03/EU-Non-EU-Privacy-Notice-2603181.pdf',
+      policyUrl: 'http://wearemiq.com/privacy-policy/',
       purposeIds: [
         1,
         2,
@@ -1627,7 +1633,9 @@ const defaultVendorList = {
       purposeIds: [
         1
       ],
-      legIntPurposeIds: [],
+      legIntPurposeIds: [
+        3
+      ],
       featureIds: []
     },
     {
@@ -1759,10 +1767,11 @@ const defaultVendorList = {
         1,
         2,
         3,
-        4,
         5
       ],
-      legIntPurposeIds: [],
+      legIntPurposeIds: [
+        4
+      ],
       featureIds: [
         1
       ]
@@ -1835,12 +1844,10 @@ const defaultVendorList = {
       id: 78,
       name: 'Flashtalking, Inc.',
       policyUrl: 'http://www.flashtalking.com/privacypolicy/',
-      purposeIds: [],
-      legIntPurposeIds: [
-        1,
-        2,
-        3
+      purposeIds: [
+        1
       ],
+      legIntPurposeIds: [],
       featureIds: []
     },
     {
@@ -1992,6 +1999,1330 @@ const defaultVendorList = {
         5
       ],
       featureIds: []
+    },
+    {
+      id: 141,
+      name: '1020, Inc. dba Placecast and Ericsson Emodo',
+      policyUrl: 'https://www.ericsson-emodo.com/privacy-policy/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4
+      ],
+      legIntPurposeIds: [
+        5
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 142,
+      name: 'Media.net Advertising FZ-LLC',
+      policyUrl: 'https://www.media.net/en/privacy-policy',
+      purposeIds: [
+        1,
+        2
+      ],
+      legIntPurposeIds: [
+        3,
+        5
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 209,
+      name: 'Delta Projects AB',
+      policyUrl: 'http://www.deltaprojects.com/data-collection-policy/',
+      purposeIds: [
+        1
+      ],
+      legIntPurposeIds: [
+        2,
+        3,
+        5
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 195,
+      name: 'advanced store GmbH',
+      policyUrl: 'http://www.advanced-store.com/de/datenschutz/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 197,
+      name: 'Switch Concepts Limited',
+      policyUrl: 'https://www.switchconcepts.com/privacy-policy',
+      purposeIds: [
+        1,
+        3,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: []
+    },
+    {
+      id: 190,
+      name: 'video intelligence AG',
+      policyUrl: 'https://www.vi.ai/privacy-policy/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: []
+    },
+    {
+      id: 84,
+      name: 'Semasio GmbH',
+      policyUrl: 'http://www.semasio.com/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 65,
+      name: 'Location Sciences AI Ltd',
+      policyUrl: 'https://www.locationsciences.ai/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        3,
+        5
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 210,
+      name: 'Zemanta, Inc.',
+      policyUrl: 'http://www.zemanta.com/legal/privacy',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1
+      ]
+    },
+    {
+      id: 200,
+      name: 'Tapjoy, Inc.',
+      policyUrl: 'https://www.tapjoy.com/legal/#privacy-policy',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 188,
+      name: 'Sellpoints Inc.',
+      policyUrl: 'https://retargeter.com/service-privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 217,
+      name: '2KDirect, Inc. (dba iPromote)',
+      policyUrl: 'https://www.ipromote.com/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        3
+      ],
+      featureIds: []
+    },
+    {
+      id: 156,
+      name: 'Centro, Inc.',
+      policyUrl: 'https://www.centro.net/privacy-policy/',
+      purposeIds: [
+        1
+      ],
+      legIntPurposeIds: [
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        1
+      ]
+    },
+    {
+      id: 194,
+      name: 'Rezonence Limited',
+      policyUrl: 'https://rezonence.com/privacy-policy/',
+      purposeIds: [
+        3,
+        5
+      ],
+      legIntPurposeIds: [
+        1
+      ],
+      featureIds: []
+    },
+    {
+      id: 226,
+      name: 'Publicis Media GmbH',
+      policyUrl: 'https://www.publicismedia.de/datenschutz/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        1
+      ]
+    },
+    {
+      id: 198,
+      name: 'SYNC',
+      policyUrl: 'https://redirect.sync.tv/privacy/',
+      purposeIds: [
+        1,
+        3
+      ],
+      legIntPurposeIds: [],
+      featureIds: []
+    },
+    {
+      id: 227,
+      name: 'ORTEC B.V.',
+      policyUrl: 'https://www.ortecadscience.com/privacy-policy/',
+      purposeIds: [
+        2
+      ],
+      legIntPurposeIds: [
+        1,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 225,
+      name: 'Ligatus GmbH',
+      policyUrl: 'https://www.ligatus.com/en/privacy-policy',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        5
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 205,
+      name: 'Adssets AB',
+      policyUrl: 'http://adssets.com/policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        3,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 179,
+      name: 'Collective Europe Ltd.',
+      policyUrl: 'https://www.timeincuk.com/privacy/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 31,
+      name: 'Ogury Ltd.',
+      policyUrl: 'https://www.ogury.com/privacy/',
+      purposeIds: [
+        1,
+        2,
+        3
+      ],
+      legIntPurposeIds: [
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 92,
+      name: '1plusX AG',
+      policyUrl: 'https://www.1plusx.com/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 155,
+      name: 'AntVoice',
+      policyUrl: 'https://www.antvoice.com/en/privacypolicy/',
+      purposeIds: [
+        1,
+        2,
+        3
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        2
+      ]
+    },
+    {
+      id: 115,
+      name: 'smartclip Holding AG',
+      policyUrl: 'http://privacy-portal.smartclip.net/',
+      purposeIds: [
+        1
+      ],
+      legIntPurposeIds: [
+        2,
+        3,
+        5
+      ],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 126,
+      name: 'DoubleVerify Inc.\\u200b',
+      policyUrl: 'https://www.doubleverify.com/privacy/',
+      purposeIds: [
+        1,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: []
+    },
+    {
+      id: 193,
+      name: 'Mediasmart Mobile S.L.',
+      policyUrl: 'http://mediasmart.io/privacy/',
+      purposeIds: [
+        1,
+        3
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 245,
+      name: 'IgnitionOne',
+      policyUrl: 'https://www.ignitionone.com/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        1,
+        2
+      ]
+    },
+    {
+      id: 213,
+      name: 'emetriq GmbH',
+      policyUrl: 'https://www.emetriq.com/datenschutz/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        5
+      ],
+      featureIds: [
+        1,
+        2
+      ]
+    },
+    {
+      id: 244,
+      name: 'Leadplace - Temelio',
+      policyUrl: 'https://temelio.com/vie-privee',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1,
+        2
+      ]
+    },
+    {
+      id: 224,
+      name: 'adrule GmbH',
+      policyUrl: 'https://www.adrule.net/de/datenschutz/',
+      purposeIds: [
+        2,
+        4
+      ],
+      legIntPurposeIds: [
+        1,
+        3,
+        5
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 174,
+      name: 'A Million Ads Limited',
+      policyUrl: 'https://www.amillionads.com/privacy-policy',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        3
+      ],
+      featureIds: []
+    },
+    {
+      id: 192,
+      name: 'remerge GmbH',
+      policyUrl: 'https://remerge.io/privacy-policy.html',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: []
+    },
+    {
+      id: 232,
+      name: 'Rockerbox, Inc',
+      policyUrl: 'http://rockerbox.com/privacy',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        3,
+        5
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 256,
+      name: 'Bounce Exchange, Inc',
+      policyUrl: 'https://www.bouncex.com/privacy/',
+      purposeIds: [
+        1
+      ],
+      legIntPurposeIds: [
+        2,
+        4,
+        5
+      ],
+      featureIds: [
+        1,
+        2
+      ]
+    },
+    {
+      id: 234,
+      name: 'Zebestof',
+      policyUrl: 'http://www.zebestof.com/en/about-us-2/privacy-en/',
+      purposeIds: [
+        1,
+        2,
+        3
+      ],
+      legIntPurposeIds: [
+        5
+      ],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 246,
+      name: 'Smartology Limited',
+      policyUrl: 'https://www.smartology.net/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 241,
+      name: 'OneTag Ltd',
+      policyUrl: 'https://www.onetag.net/privacy/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4
+      ],
+      legIntPurposeIds: [
+        5
+      ],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 254,
+      name: 'LiquidM Technology GmbH',
+      policyUrl: 'https://liquidm.com/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        5
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 215,
+      name: 'ARMIS SAS',
+      policyUrl: 'http://armis.tech/infos-cookies/',
+      purposeIds: [
+        1,
+        2
+      ],
+      legIntPurposeIds: [
+        3
+      ],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 167,
+      name: 'Audiens S.r.l.',
+      policyUrl: 'http://www.audiens.com/privacy',
+      purposeIds: [
+        1,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 240,
+      name: '7Hops.com Inc. (ZergNet)',
+      policyUrl: 'zergnet.com/privacy',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        4,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 235,
+      name: 'Bucksense Inc',
+      policyUrl: 'http://www.bucksense.com/platform-privacy-policy/',
+      purposeIds: [
+        1
+      ],
+      legIntPurposeIds: [
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        2,
+        3
+      ]
+    },
+    {
+      id: 185,
+      name: 'Bidtellect, Inc',
+      policyUrl: 'https://www.bidtellect.com/privacy-policy/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1,
+        2
+      ]
+    },
+    {
+      id: 258,
+      name: 'Adello Group AG',
+      policyUrl: 'https://www.adello.com/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        5
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 169,
+      name: 'RTK.IO, Inc',
+      policyUrl: 'http://www.rtk.io/privacy.html',
+      purposeIds: [
+        1,
+        4
+      ],
+      legIntPurposeIds: [
+        2,
+        3,
+        5
+      ],
+      featureIds: [
+        1,
+        3
+      ]
+    },
+    {
+      id: 208,
+      name: 'Spotad',
+      policyUrl: 'http://www.spotad.co/privacy-policy/',
+      purposeIds: [
+        2,
+        3
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 211,
+      name: 'AdTheorent, LLC',
+      policyUrl: 'http://adtheorent.com/privacy-policy',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1
+      ],
+      featureIds: []
+    },
+    {
+      id: 229,
+      name: 'Digitize New Media Ltd',
+      policyUrl: 'http://www.digitize.ie/online-privacy',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 273,
+      name: 'Bannerflow AB',
+      policyUrl: 'bannerflow.com/privacy',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        3
+      ],
+      featureIds: []
+    },
+    {
+      id: 104,
+      name: 'Sonobi, Inc',
+      policyUrl: 'http://sonobi.com/privacy-policy/',
+      purposeIds: [
+        1,
+        2
+      ],
+      legIntPurposeIds: [
+        3
+      ],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 162,
+      name: 'Unruly Group Ltd',
+      policyUrl: 'https://unruly.co/privacy/',
+      purposeIds: [
+        2
+      ],
+      legIntPurposeIds: [
+        1,
+        3,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 249,
+      name: 'Spolecznosci Sp. z o.o. Sp. k.',
+      policyUrl: 'https://www.spolecznosci.pl/polityka-prywatnosci',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        2,
+        3
+      ]
+    },
+    {
+      id: 113,
+      name: 'iotec global Ltd.',
+      policyUrl: 'https://www.iotecglobal.com/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 125,
+      name: 'Research Now Group, Inc',
+      policyUrl: 'https://www.valuedopinions.co.uk/privacy',
+      purposeIds: [
+        1,
+        3,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: []
+    },
+    {
+      id: 170,
+      name: 'Goodway Group, Inc.',
+      policyUrl: 'https://goodwaygroup.com/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 160,
+      name: 'Netsprint SA',
+      policyUrl: 'http://spoldzielnia.nsaudience.pl/opt-out/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 189,
+      name: 'Intowow Innovation Ltd.',
+      policyUrl: 'http://www.intowow.com/privacy/',
+      purposeIds: [
+        1,
+        3
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 279,
+      name: 'Mirando GmbH &amp; Co KG',
+      policyUrl: 'https://wwwmirando.de/datenschutz/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 269,
+      name: 'Sanoma Media Finland',
+      policyUrl: 'https://sanoma.fi/tietoa-meista/tietosuoja/',
+      purposeIds: [
+        1,
+        2,
+        3
+      ],
+      legIntPurposeIds: [
+        4,
+        5
+      ],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 276,
+      name: 'Viralize SRL',
+      policyUrl: 'https://viralize.com/privacy-policy',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 87,
+      name: 'Genius Sports Media Limited',
+      policyUrl: 'http://www.geniussports.com/privacy-policy/',
+      purposeIds: [
+        2,
+        4
+      ],
+      legIntPurposeIds: [
+        1,
+        3,
+        5
+      ],
+      featureIds: [
+        2,
+        3
+      ]
+    },
+    {
+      id: 182,
+      name: 'Collective, Inc. dba Visto',
+      policyUrl: 'https://www.vistohub.com/privacy-policy/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 255,
+      name: 'Onnetwork Sp. z o.o.',
+      policyUrl: 'https://www.onnetwork.tv/pp_services.php',
+      purposeIds: [
+        2,
+        3,
+        5
+      ],
+      legIntPurposeIds: [
+        1
+      ],
+      featureIds: []
+    },
+    {
+      id: 203,
+      name: 'Revcontent, LLC',
+      policyUrl: 'https://faq.revcontent.com/customer/en/portal/articles/2703838-revcontent-s-privacy-and-cookie-policy',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 260,
+      name: 'RockYou, Inc.',
+      policyUrl: 'https://rockyou.com/privacy-policy/',
+      purposeIds: [
+        3
+      ],
+      legIntPurposeIds: [
+        1,
+        2,
+        5
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 237,
+      name: 'LKQD, a division of Nexstar Digital, LLC.',
+      policyUrl: 'http://www.lkqd.com/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        2,
+        3
+      ]
+    },
+    {
+      id: 274,
+      name: 'Golden Bees',
+      policyUrl: 'http://goldenbees.fr/notre-politique-de-confidentialite/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: []
+    },
+    {
+      id: 280,
+      name: 'Spot.IM Ltd.',
+      policyUrl: 'http://spot.im/privacy',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 239,
+      name: 'Triton Digital Canada Inc.',
+      policyUrl: 'https://www.tritondigital.com/privacy-policies',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        3,
+        4,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 177,
+      name: 'plista GmbH',
+      policyUrl: 'https://www.plista.com/about/privacy/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4
+      ],
+      legIntPurposeIds: [
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 201,
+      name: 'TimeOne',
+      policyUrl: 'https://www.timeonegroup.com/en/privacy-policies/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        2
+      ]
+    },
+    {
+      id: 150,
+      name: 'Inskin Media LTD',
+      policyUrl: 'http://www.inskinmedia.com/privacy-policy.html',
+      purposeIds: [
+        3
+      ],
+      legIntPurposeIds: [
+        1
+      ],
+      featureIds: []
+    },
+    {
+      id: 252,
+      name: 'Jaduda GmbH',
+      policyUrl: 'https://www.jadudamobile.com/datenschutzerklaerung/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 248,
+      name: 'Converge-Digital',
+      policyUrl: 'https://converge-digital.com/privacy-policy/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        3,
+        4,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 161,
+      name: 'Smadex SL',
+      policyUrl: 'http://smadex.com/end-user-privacy-policy/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 285,
+      name: 'Comcast International France SAS',
+      policyUrl: 'freewheel.tv/privacy-policy',
+      purposeIds: [
+        1
+      ],
+      legIntPurposeIds: [],
+      featureIds: []
+    },
+    {
+      id: 228,
+      name: 'McCann Discipline LTD',
+      policyUrl: 'https://www.primis.tech/wp-content/uploads/2018/02/primisPrivacyPolicy2018.pdf',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        3,
+        4,
+        5
+      ],
+      featureIds: []
+    },
+    {
+      id: 299,
+      name: 'AdClear GmbH',
+      policyUrl: 'https://www.adclear.de/datenschutzerklaerung/',
+      purposeIds: [],
+      legIntPurposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      featureIds: [
+        1,
+        2
+      ]
+    },
+    {
+      id: 277,
+      name: 'Codewise Sp. z o.o. Sp. k',
+      policyUrl: 'https://voluumdsp.com/end-user-privacy-policy/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4
+      ],
+      legIntPurposeIds: [
+        5
+      ],
+      featureIds: [
+        1,
+        2
+      ]
+    },
+    {
+      id: 259,
+      name: 'ADYOULIKE SA',
+      policyUrl: 'https://www.adyoulike.com/privacy_policy.php',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4
+      ],
+      legIntPurposeIds: [],
+      featureIds: []
+    },
+    {
+      id: 289,
+      name: 'mobalo GmbH',
+      policyUrl: 'https://www.mobalo.com/datenschutz/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        3
+      ]
+    },
+    {
+      id: 272,
+      name: 'A.Mob',
+      policyUrl: 'https://adotmob.com/privacy.html',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 230,
+      name: 'Steel House, Inc.',
+      policyUrl: 'https://steelhouse.com/privacy-policy/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: []
+    },
+    {
+      id: 253,
+      name: 'Improve Digital International BV',
+      policyUrl: 'https://www.improvedigital.com/platform-privacy-policy',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        2,
+        3
+      ]
+    },
+    {
+      id: 304,
+      name: 'On Device Research Limited',
+      policyUrl: 'https://s.on-device.com/privacyPolicy',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      id: 314,
+      name: 'Keymantics',
+      policyUrl: 'https://www.keymantics.com/assets/privacy-policy.pdf',
+      purposeIds: [
+        1,
+        2,
+        3
+      ],
+      legIntPurposeIds: [],
+      featureIds: []
+    },
+    {
+      id: 257,
+      name: 'TOUCHVIBES',
+      policyUrl: 'http://www.r-target.com/privacy',
+      purposeIds: [
+        1
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        1,
+        2
+      ]
+    },
+    {
+      id: 317,
+      name: 'mainADV Srl',
+      policyUrl: 'http://www.mainad.com/privacy-policy/',
+      purposeIds: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      legIntPurposeIds: [],
+      featureIds: [
+        2,
+        3
+      ]
     }
   ]
 };
@@ -2007,21 +3338,28 @@ export function loadVendorList() {
       let iabVendorListUrl = getIabVendorListUrl();
       if (!iabVendorListUrl) {
         cachedVendorList = defaultVendorList;
+        sortVendors(cachedVendorList);
         resolve(cachedVendorList);
       } else {
         fetchJsonData(iabVendorListUrl)
           .then(response => {
             cachedVendorList = response;
+            sortVendors(cachedVendorList);
             resolve(cachedVendorList);
           })
           .catch(error => {
             cachedVendorList = defaultVendorList;
-            logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendorlist!`);
+            sortVendors(cachedVendorList);
+            logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
             resolve(cachedVendorList);
           });
       }
     }
   });
+}
+
+function sortVendors(vendorList) {
+  vendorList.vendors = vendorList.vendors.sort((leftVendor, rightVendor) => leftVendor.id - rightVendor.id);
 }
 
 /**
