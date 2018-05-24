@@ -11,6 +11,7 @@ import {
   EVENT_NAME_SOI_OPT_IN,
   EVENT_NAME_THIRD_PARTY_LIST,
   EVENT_NAME_TIMEOUT,
+  PRIVACY_FULL_TRACKING,
   PRIVACY_MINIMUM_TRACKING
 } from '../core/core_constants.js';
 import { oilOptIn, oilPowerOptIn } from './userview_optin.js';
@@ -24,12 +25,11 @@ import {
 } from './view/oil.advanced.settings.js';
 import { logError, logInfo } from '../core/core_log.js';
 import { getTheme, getTimeOutValue, isPersistMinimumTracking } from './userview_config.js';
-import { getPoiGroupName, isPoiActive, isSubscriberSetCookieActive } from '../core/core_config.js';
+import { getPoiGroupName, isPoiActive, isSubscriberSetCookieActive, getAdvancedSettingsPurposesDefault } from '../core/core_config.js';
 import {
   applyPrivacySettings,
   getPrivacySettings,
-  getSoiPrivacy,
-  PRIVACY_SETTINGS_ALL_FALSE
+  getSoiPrivacy
 } from './userview_privacy.js';
 import { getGlobalOilObject, isObject } from '../core/core_utils';
 import { loadVendorList } from '../core/core_vendor_information';
@@ -99,7 +99,7 @@ function shouldRenderOilLayer(props) {
 
 // FIXME REWORKING WIP, default should come from CONFIG
 // FIXME do we have enough tests for this?
-export function oilShowPreferenceCenter(preset = PRIVACY_SETTINGS_ALL_FALSE) {
+export function oilShowPreferenceCenter() {
   // We need the PowerGroupUi-Stuff for the CPC
   import('../poi-list/poi-info.js');
 
@@ -118,12 +118,8 @@ export function oilShowPreferenceCenter(preset = PRIVACY_SETTINGS_ALL_FALSE) {
         return;
       }
 
-      let currentPrivacySetting = preset;
-      let soiPrivacy = getSoiPrivacy();
-      if (soiPrivacy) {
-        currentPrivacySetting = soiPrivacy;
-      }
-      applyPrivacySettings(currentPrivacySetting);
+      const currentPrivacySettings = getSoiPrivacy() || (getAdvancedSettingsPurposesDefault() ? PRIVACY_FULL_TRACKING : PRIVACY_MINIMUM_TRACKING);
+      applyPrivacySettings(currentPrivacySettings);
     })
     .catch((error) => logError(error));
 }
@@ -216,8 +212,7 @@ function handleBackToMainDialog() {
 function handleAdvancedSettings() {
   logInfo('Handling Show Advanced Settings');
   stopTimeOut();
-  // FIXME should be configured or loaded from the stored settings
-  oilShowPreferenceCenter(PRIVACY_SETTINGS_ALL_FALSE);
+  oilShowPreferenceCenter();
   sendEventToHostSite(EVENT_NAME_ADVANCED_SETTINGS);
 }
 
