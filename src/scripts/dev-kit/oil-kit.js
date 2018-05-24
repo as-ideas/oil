@@ -21,6 +21,21 @@ export function readOilConfig() {
 }
 
 export function loadOilJs() {
+  let oldScript = document.getElementById('oil-configuration');
+  if (!oldScript) {
+    let config = {
+      publicPath: '//oil.axelspringer.com/latest/'
+    };
+    let head = document.getElementsByTagName('head')[0];
+    let script = document.createElement('script');
+
+    script.id = 'oil-configuration';
+    script.type = 'application/configuration';
+    script.text = JSON.stringify(config);
+
+    head.appendChild(script);
+  }
+
   loadJS('oil-stub-js', '//oil.axelspringer.com/latest/oilstub.min.js', () => {
     loadJS('oil-js', '//oil.axelspringer.com/latest/oil.min.js', () => {
       let btnOil = document.getElementById('as-oil-dev-kit__btn-oil');
