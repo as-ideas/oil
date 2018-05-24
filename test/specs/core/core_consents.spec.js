@@ -130,6 +130,55 @@ describe('consents', () => {
       });
     });
 
+    it('should create vendor consent data with correct purpose consents if privacy in cookie is 1', () => {
+      const EXPECTED_CONSENT_VALUE = 1;
+
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: false,
+        privacy: 1,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01',
+        localeVariantVersion: 1,
+        timestamp: Date.now()
+      });
+
+      let vendorConsentData = getVendorConsentData([1, 2]);
+      expect(vendorConsentData).toBeDefined();
+      expect(vendorConsentData.purposeConsents).toBeDefined();
+
+      let purposeIds = Object.keys(vendorConsentData.purposeConsents);
+      expect(purposeIds.length).toEqual(CoreVendorInformation.getPurposes().length);
+      purposeIds.forEach(purposeId => {
+        expect(vendorConsentData.purposeConsents[purposeId]).toEqual(EXPECTED_CONSENT_VALUE);
+      });
+    });
+
+    it('should create vendor consent data with correct purpose consents if privacy is object', () => {
+      const GIVEN_CONSENT   = 1;
+      const REVOKED_CONSENT = 2;
+
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: false,
+        privacy: {
+          [GIVEN_CONSENT]: 1,
+          [REVOKED_CONSENT]: 0
+        },
+        version: 'aVersion',
+        localeVariantName: 'deDE_01',
+        localeVariantVersion: 1,
+        timestamp: Date.now()
+      });
+
+      let vendorConsentData = getVendorConsentData([1, 2]);
+      expect(vendorConsentData).toBeDefined();
+      expect(vendorConsentData.purposeConsents).toBeDefined();
+
+      let purposeIds = Object.keys(vendorConsentData.purposeConsents);
+      expect(purposeIds.length).toEqual(2);
+      expect(vendorConsentData.purposeConsents[GIVEN_CONSENT]).toEqual(1)
+      expect(vendorConsentData.purposeConsents[REVOKED_CONSENT]).toEqual(0)
+    });
+
     it('should create vendor consent data with correct purpose consents if single consents for purposes are given', () => {
       const EXPECTED_CONSENT_VALUE1 = true;
       const EXPECTED_CONSENT_VALUE2 = false;
@@ -443,7 +492,7 @@ describe('consents', () => {
     it('should create vendor consent data without vendor consents for revoked consent', () => {
       spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
         opt_in: false,
-        privacy: 1,
+        privacy: 0,
         version: 'aVersion',
         localeVariantName: 'deDE_01',
         localeVariantVersion: 1,
@@ -456,6 +505,24 @@ describe('consents', () => {
       let consentData = new ConsentString(result.consentData);
       expect(consentData).toBeDefined();
       expect(consentData.getVendorsAllowed().length).toEqual(0);
+    });
+
+    it('should create vendor consent data with vendor consents when privacy is 1 even for revoked consent', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: false,
+        privacy: 1,
+        version: 'aVersion',
+        localeVariantName: 'deDE_01',
+        localeVariantVersion: 1,
+        timestamp: Date.now()
+      });
+
+      let result = getConsentDataString();
+      expect(result).toBeDefined();
+
+      let consentData = new ConsentString(result.consentData);
+      expect(consentData).toBeDefined();
+      expect(consentData.getVendorsAllowed().length).toEqual(2);
     });
 
     it('should not create vendor consent data if invalid consent string version is requested', () => {
