@@ -54,42 +54,12 @@ let additionalHeaders = function (req, res, next) {
   next();
 };
 
-function basicAuth(req, res, next) {
-  let host = req.header("host") || req.header("Host");
-  if (!host.startsWith("localhost")) {
-    let done = false;
-    let whitelist = ['\/hub.html', '\/assets', '\/release', '\/demos', '.+\.min\.js', '.+\.chunk\.js', '.+\.bundle\.js', '\/favicon\.ico'];
-    whitelist.forEach(function (regexp) {
-      if (req.url.match(regexp)) {
-        done = true;
-      }
-    });
-
-    if (!done) {
-      const auth = {login: 'oiluser', password: 'ePrivacy'};
-      const b64auth = (req.headers.authorization || '').split(' ')[1] || '';
-      const [login, password] = new Buffer(b64auth, 'base64').toString().split(':');
-
-      // Verify login and password are set and correct
-      if (!login || !password || login !== auth.login || password !== auth.password) {
-        res.set('WWW-Authenticate', 'Basic realm="OIL Project"');
-        res.status(401).send('401 Authentication required.');
-        return;
-      }
-    }
-  }
-
-  next();
-}
-
 /*
  * start server
  */
 
 let app = express();
 app.use(domainWhitelist);
-
-app.all('*', basicAuth);
 
 app.use(additionalHeaders);
 

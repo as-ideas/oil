@@ -13,6 +13,7 @@ describe('the locale fetcher for userview modal', () => {
   beforeEach(() => {
     spyOn(CoreConfig, 'getLocaleVariantName').and.returnValue('enEN_01');
     spyOn(CoreUtils, 'setGlobalOilObject');
+    spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(undefined);
   });
 
   it('should load requested locale from backend by default and set it as global oil object', (done) => {

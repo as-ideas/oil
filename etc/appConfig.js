@@ -29,6 +29,11 @@ module.exports = {
     chunks: ['oil'],
     chunksSortMode: 'dependency'
   }, {
+    filename: 'demos/advanced-settings-custom-purposes.html',
+    template: path.resolve(sourcePath, 'demos', 'advanced-settings-custom-purposes.html'),
+    chunks: ['oilstub' ,'oil', 'oildevkit'],
+    chunksSortMode: 'dependency'
+  }, {
     filename: 'demos/english-version.html',
     template: path.resolve(sourcePath, 'demos', 'english-version.html'),
     chunks: ['oil'],
@@ -52,6 +57,11 @@ module.exports = {
     filename: 'demos/direct-integration.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration.html'),
     chunks: ['oil', 'oildevkit'],
+    chunksSortMode: 'dependency'
+  }, {
+    filename: 'demos/open-source-example.html',
+    template: path.resolve(sourcePath, 'demos', 'open-source-example.html'),
+    chunks: [],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/direct-integration.dark.html',
@@ -123,6 +133,11 @@ module.exports = {
     template: path.resolve(sourcePath, 'demos', 'auto-hide.html'),
     chunks: ['oil'],
     chunksSortMode: 'dependency'
+  }, {
+    filename: 'demos/small-design.html',
+    template: path.resolve(sourcePath, 'demos', 'small-design.html'),
+    chunks: ['oil'],
+    chunksSortMode: 'dependency'
   }],
   entry: {
     'hub': path.resolve(sourcePath, 'hub.js'),
@@ -139,6 +154,9 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, 'examples'),
     to: 'examples'
+  }, {
+    from: path.resolve(sourcePath, 'poi-lists'),
+    to: 'poi-lists'
   }, {
     from: path.resolve(sourcePath, '../release'),
     to: 'release'

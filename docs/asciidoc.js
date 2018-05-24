@@ -39,9 +39,9 @@ function getSupportedLanguagesFromDir() {
 }
 
 function getSupportedPoiGroupsFromDir() {
-  return getFilenames(base_dir.concat('/src/scripts/poi-list/lists/'))
+  return getFilenames(base_dir.concat('/src/poi-lists/'))
     .map((item) => {
-      return ('<li>' + item + '</li>').replace('poi-info_', '').replace('.js', '');
+      return ('<li>' + item + '</li>').replace('.json', '').replace('.js', '');
     }).join(' ');
 }
 

@@ -51,13 +51,15 @@ The Opt-In Layer (OIL) is an offical link:http://advertisingconsent.eu/iab-europ
 |===
 |Role/Name|Contact|
 Business Owner | Johannes Fenner, CDP |
-Legal Affairs | Susanne Stollhoff, Dr. Olaf Koch |
+Legal Affairs | Susanne Stollhoff, Dr. Olaf Koglin |
 Product Owner | Antonino Tumminelli, AS Ideas Engineering |
 UX | Özden Gelgec, AS Ideas Engineering |
 UX | Andreas Wagner, AS Ideas Engineering |
 Developer | Sebastian Waschnick, AS Ideas Engineering |
 Developer | Marcel Bankmann, AS Ideas Engineering |
-Tealium | Michael Sievers, CDP|
+Developer | Alexander Glintschert, AS Ideas Engineering |
+Developer | Dmitri Awerkov-Schäfer, AS Ideas Engineering |
+Tealium Consulting | Michael Sievers, CDP|
 |===
 
 === Solution Strategy

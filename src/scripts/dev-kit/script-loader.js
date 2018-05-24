@@ -1,6 +1,5 @@
 import './dev-kit.scss';
-import {initNavbar, sidebareTemplate} from './sidebar';
-import {showModal} from './modal';
+import { initNavbar } from './sidebar';
 
 export function loadModules() {
   if (!isJqueryAvailable()) {
@@ -16,14 +15,16 @@ export function loadModules() {
 }
 
 export function loadJS(id, link, onload) {
-  let d = document, s = d.createElement('script');
-  s.id = id;
-  if (onload) {
-    s.onload = onload;
+  if (!document.getElementById(id)) {
+    let d = document, s = d.createElement('script');
+    s.id = id;
+    if (onload) {
+      s.onload = onload;
+    }
+    s.src = link;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
   }
-  s.src = link;
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
 }
 
 export function isJqueryAvailable() {

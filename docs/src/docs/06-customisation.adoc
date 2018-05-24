@@ -1,0 +1,176 @@
+== Customisation
+
+=== Supported A/B Testing with us
+If you want to optimize and test your OIL installation with our Kameleoon A/B testing, you also need to include the right kameleoon script into your website, which will alter the optics and behaviour of OIL according to the test and your specific environment.
+
+An example link would look like:
+[source,html]
+----
+<script type="text/javascript" src="//static-bp.kameleoon.com/css/customers/xxxxxxxxxxx/0/kameleoon.js"></script>
+----
+
+Instead of xxxxxxxxxxx the right hash needs to be present, so Kameleoon knows which website it deals with. When we setup OIL A/B testing on your page this hash needs to be generated within Kameleoon.
+
+=== Your own A/B Testing
+
+For setting up A/B testing in your own environment, the following information could come handy.
+
+==== Enabling OIL for a specific variant only
+For testing you can also use the preview mode to disable OIL by default and enable it in certain variants.
+
+Add the following standard configuration to your website, which will disable OIL by default:
+[source,json]
+----
+<script id="oil-configuration" type="application/configuration">
+  {
+    "preview_mode": true,
+  }
+</script>
+----
+
+For enabling it in a variant you need to replace the configuration and trigger OIL to reload it. As part of your variant
+insert a customized version of this script:
+[source,javascript]
+----
+<script type="text/javascript">
+    (function () {
+        var config = {
+            "preview_mode": false,
+            "label_intro_heading": "Please confirm!",
+            "label_button_yes": "Of course"
+        };
+        var oldScript = document.getElementById('oil-configuration');
+        if (oldScript) {
+            oldScript.parentNode.removeChild(oldScript);
+        }
+
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+
+        script.id = 'oil-configuration';
+        script.type = 'application/configuration';
+        script.text = JSON.stringify(config);
+
+        head.appendChild(script);
+        window.AS_OIL.reload();
+    }());
+</script>
+----
+
+==== Full Label Configuration
+
+Even though OIL is supposed to come with legal texts that shouldnt be altered, except the main heading, for testing purposes all labels can
+be overwritten, even the default ones, in the OIL configuration block (see chapter "OIL configuration") as follows:
+
+[width="100%",options="header", cols="1,3"]
+|====
+|Config Parameter| Example Value
+|label_intro_heading| We use cookies and other technologies
+|label_intro| We're using cookies, please confirm!
+|label_button_yes| Yes
+|label_button_back| Back
+|label_button_advanced_settings| More information
+|label_advanced_settings_heading| Cookie Preference Center
+|label_advanced_settings_text| Please select a setting:
+|label_advanced_settings_essential_text| Essentials
+|label_advanced_settings_essential_verbose| Only essential cookies
+|label_advanced_settings_functional_text| Social
+|label_advanced_settings_functional_verbose| Additional social cookies
+|label_advanced_settings_advertising_text| Ads
+|label_advanced_settings_advertising_verbose| Additional ads cookies
+|label_nocookie_head| No Cookies allowed.
+|label_nocookie_text| Please enable cookies!
+|label_poi_group_list_heading| Company units
+|label_poi_group_list_text| Here is a list of company units
+|label_thirdparty_list_heading| Third Parties
+|label_thirdparty_list_text| Here is a list of third parties
+|====
+
+IMPORTANT: If you want to reference the company or third party list from your custom text you need to add the links inline and set the right css classes.
+
+[source,html]
+----
+<a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-companyList">CompanyListLink</a>
+<a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-thirdPartyList">ThirdPartys</a>
+----
+
+include::06-customisation/styling-guide.adoc[]
+
+==== "Thank you" Screen
+If you are performing A/B tests on the OIL Layer while not having the tracking disabled technically, we recommend to
+additionally insert this customized "Thank you"-Layer javascript code your website.
+
+This code will listen to OIL events to show another window after the user finished the conversion process explaining the nature of the test.
+
+[source,javascript]
+----
+(function () {
+
+    // Cross browser event handler definition
+    var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+    var eventer = window[eventMethod];
+
+    // Callback to be executed when event is fired
+    function receiveMessage(event) {
+        function eventDataContains(str) {
+            return JSON.stringify(event.data).indexOf(str) !== -1;
+        }
+
+        if (event && event.data && (eventDataContains('oil_opt'))) {
+            var htmlCode = '<div class="as-oil-content-overlay">'
+                + '<div class="as-oil-l-wrapper-layout-max-width">'
+                + '<div class="as-oil__heading">'
+                + 'Thank you for your feedback!'
+                + '</div>'
+                + '<p class="as-oil__intro-txt">'
+                + 'We as a company take your privacy very seriously. In order to learn your expectations we '
+                + 'currently conduct this survey. Thank you for your understanding!'
+                + '</p>'
+                + '<div class="as-oil-l-row as-oil-l-buttons">'
+                + '<div class="as-oil-l-item">'
+                + '<button class="as-oil__btn-soi as-js-optin as-close-ty-button" onclick="closeOil()">'
+                + 'Close'
+                + '</button>'
+                + '</div>'
+                + '</div>'
+                + '</div>'
+                + '</div>';
+
+            var thankYouNode = document.createElement('div');
+            thankYouNode.id = "as-oil-thank-you";
+            thankYouNode.innerHTML = htmlCode;
+            thankYouNode.setAttribute('class', 'as-oil');
+            document.body.appendChild(thankYouNode);
+        }
+    }
+
+    // Register event handler
+    eventer(messageEvent, receiveMessage, false);
+}());
+----
+
+=== Adding Scripts programmatically
+
+==== Adding oil.js configuration
+[source,javascript]
+----
+var oldScript = document.getElementById('oil-configuration');
+if (oldScript) {
+  oldScript.parentNode.removeChild(oldScript);
+}
+
+var config = {
+  preview_mode: true
+};
+var head = document.getElementsByTagName('head')[0];
+var script = document.createElement('script');
+
+script.id = 'oil-configuration';
+script.type = 'application/configuration';
+script.text = JSON.stringify(config);
+
+head.appendChild(script);
+----
+
+

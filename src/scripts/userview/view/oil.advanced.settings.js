@@ -1,11 +1,12 @@
-import {OIL_LABELS} from '../userview_constants.js'
-import {forEach} from '../userview_modal.js';
-import {getLabel, getTheme} from '../userview_config.js';
-import {getPoiGroupName} from '../../core/core_config.js';
-import {logError} from '../../core/core_log.js';
-import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME} from '../../core/core_constants.js';
-import {setGlobalOilObject} from '../../core/core_utils.js';
-import {getPurposes} from '../../core/core_vendor_information.js';
+import { OIL_LABELS } from '../userview_constants.js'
+import { forEach } from '../userview_modal.js';
+import { getLabel, getTheme } from '../userview_config.js';
+import { getPoiGroupName, getCustomPurposes } from '../../core/core_config.js';
+import { logError } from '../../core/core_log.js';
+import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
+import { setGlobalOilObject } from '../../core/core_utils.js';
+import { getPurposes } from '../../core/core_vendor_information.js';
+import { getVendorList, getVendors, loadVendorList } from '../../core/core_vendor_information';
 
 
 const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';
@@ -17,12 +18,37 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
         <div class="as-oil-cpc__purpose-header">${header}</div>
         <div class="as-oil-cpc__purpose-text">${text}</div>
         <label class="as-oil-cpc__switch">
-            <input id="as-js-purpose-slider-${id}" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-${header}" value="${value}"/>
+            <input data-id="${id}" id="as-js-purpose-slider-${id}" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-${header}" value="${value}"/>
             <span class="as-oil-cpc__status"></span>
             <span class="as-oil-cpc__slider"></span>
         </label>
     </div>
 </div>`
+};
+
+/**
+ *
+ * @param {[]} vendors, eg. {id:8,name:"Asdf",policyUrl:"https://privacy-policy/",purposeIds:[1,2],legIntPurposeIds:[3],featureIds:[1,2]}
+ * @returns {*}
+ */
+const buildVendorEntries = (vendors) => {
+  let listWrapped = vendors.map((element) => {
+    return `<div class="as-oil-third-party-list-element">
+                <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
+                    <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
+                    </svg>
+                    <svg class='as-oil-icon-minus' style='display: none;' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
+                    </svg>
+                    <span class='as-oil-third-party-name'>${element.name}</span>
+                </span>
+                <div class='as-oil-third-party-toggle-part' style='display: none;'>
+                  <a class='as-oil-third-party-link' href='${element.policyUrl}'>${element.policyUrl}</a>
+                </div>
+              </div>`;
+  });
+  return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
 };
 
 const BackButtonSnippet = () => {
@@ -54,8 +80,8 @@ const ActivateButtonSnippet = () => {
 const buildPurposeEntries = (list) => {
   return list.map(element => PurposeContainerSnippet({
     id: element.id,
-    header: getLabel(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_TEXT`]),
-    text: getLabel(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_DESC`]),
+    header: getLabel(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_TEXT`]) || element.name,
+    text: getLabel(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_DESC`]) || element.description,
     value: false
   })).join('');
 };
@@ -76,10 +102,13 @@ const ContentSnippet = () => {
             Purposes
         </div>
         ${buildPurposeEntries(getPurposes())}
+        ${buildPurposeEntries(getCustomPurposes())}
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
             3rd Parties
         </div>
-       <div id="as-js-third-parties-list"></div>
+       <div id="as-js-third-parties-list">
+         ${buildVendorEntries(getVendors())}
+       </div>
     </div>
     <div class="as-oil-cpc__right">
      <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
@@ -104,7 +133,6 @@ export function oilAdvancedSettingsInlineTemplate() {
     ${ActivateButtonSnippet()}
     ${BackButtonSnippet()}
     ${ContentSnippet()}
-    ${getOilThirdPartiesList()}  
   </div>`
 }
 
@@ -136,17 +164,6 @@ function deactivateAll() {
   forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
     domNode && (domNode.checked = false);
   });
-}
-
-function getOilThirdPartiesList() {
-  import(`../../poi-list/lists/poi-info_${getPoiGroupName()}.js`)
-    .then(poiList => {
-      document.querySelector('#as-js-third-parties-list').innerHTML = poiList.listSnippet(poiList.thirdPartyList);
-    })
-    .catch((e) => {
-      logError(`POI 'group ${getPoiGroupName()}' could not be loaded.`, e);
-    });
-  return '';
 }
 
 function switchLeftMenuClass(element) {

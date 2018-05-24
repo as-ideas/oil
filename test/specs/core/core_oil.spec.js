@@ -36,7 +36,7 @@ describe('core_oil', () => {
     verifyThatGlobalOilObjectIsSet(4, 'reload', 'resetConfiguration');
     verifyThatGlobalOilObjectIsSet(4, 'reload', 'initOilLayer');
 
-    verifyThatGlobalOilObjectIsSet(5, 'status', 'getRawSoiCookie');
+    verifyThatGlobalOilObjectIsSet(5, 'status', 'getSoiCookie');
 
     verifyThatGlobalOilObjectIsSet(6, 'showPreferenceCenter', 'loadLocale');
     verifyThatGlobalOilObjectIsSet(6, 'showPreferenceCenter', 'oilShowPreferenceCenter');
@@ -68,8 +68,7 @@ describe('core_oil', () => {
     }, 2000);
   });
 
-  // FIXME @alex can't fix it, pls help
-  xit('should not execute command collection and attach command collection execution to window object if optin is not provided', (done) => {
+  it('should not execute command collection and attach command collection execution to window object if optin is not provided', (done) => {
     let executeCommandCollectionSpy = spyOn(CoreCommandCollection, 'executeCommandCollection').and.callThrough();
     spyOn(CoreOptIn, 'checkOptIn').and.returnValue(Promise.resolve(false));
     spyOn(CoreUtils, 'setGlobalOilObject');

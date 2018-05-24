@@ -6,6 +6,30 @@ import { OIL_LABELS } from '../userview/userview_constants.js';
 import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../core/core_constants.js';
 import './poi.group.scss';
 import { setGlobalOilObject, getGlobalOilObject } from '../core/core_utils.js';
+import { getGroupList } from './poi.group.list';
+import { getVendorList, loadVendorList } from '../core/core_vendor_information';
+
+export function renderOilGroupListTemplate(renderMethod) {
+  getGroupList()
+    .then((groupList) => {
+      renderMethod(oilGroupListTemplate(groupList))
+    });
+}
+
+export function renderOilThirdPartyListTemplate(renderMethod) {
+  loadVendorList()
+    .then((vendorList) => {
+      renderMethod(oilThirdPartyListTemplate(vendorList.vendors))
+    });
+}
+
+export function oilGroupListTemplate(groupList) {
+  return oilListTemplate(groupList, getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_HEADING), getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_TEXT));
+}
+
+export function oilThirdPartyListTemplate(thirdPartyList) {
+  return oilListTemplate(thirdPartyList, getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY_LIST_HEADING), getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY_LIST_TEXT));
+}
 
 /**
  * OIL SOI will be only shown, when there is no POI on the advanced settings
@@ -141,12 +165,4 @@ function oilListTemplate(list, heading, text) {
         </div>
     </div>
 </div>`
-}
-
-export function oilGroupListTemplate(list) {
-  return oilListTemplate(list, getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_HEADING), getLabel(OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_TEXT));
-}
-
-export function oilThirdPartyListTemplate(list) {
-  return oilListTemplate(list, getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY_LIST_HEADING), getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY_LIST_TEXT));
 }

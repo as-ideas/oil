@@ -1,5 +1,5 @@
 import Cookie from 'js-cookie';
-import {loadJS} from './script-loader';
+import { loadJS } from './script-loader';
 
 export function getCurrentState() {
   let oilData = Cookie.get('oil_data');
@@ -21,8 +21,23 @@ export function readOilConfig() {
 }
 
 export function loadOilJs() {
-  loadJS('oil-stub-js', '//oil-integration-cdn.herokuapp.com/oilstub.1.0.35-SNAPSHOT.min.js', () => {
-    loadJS('oil-js', '//oil-integration-cdn.herokuapp.com/oil.1.0.35-SNAPSHOT.min.js', () => {
+  let oldScript = document.getElementById('oil-configuration');
+  if (!oldScript) {
+    let config = {
+      publicPath: '//oil.axelspringer.com/latest/'
+    };
+    let head = document.getElementsByTagName('head')[0];
+    let script = document.createElement('script');
+
+    script.id = 'oil-configuration';
+    script.type = 'application/configuration';
+    script.text = JSON.stringify(config);
+
+    head.appendChild(script);
+  }
+
+  loadJS('oil-stub-js', '//oil.axelspringer.com/latest/oilstub.min.js', () => {
+    loadJS('oil-js', '//oil.axelspringer.com/latest/oil.min.js', () => {
       let btnOil = document.getElementById('as-oil-dev-kit__btn-oil');
       btnOil.className = 'btn btn-enabled';
     });
@@ -42,6 +57,6 @@ export function readOilVersion() {
 }
 
 export const cmp = {
-  getVendorsConsent: () => __cmp('getVendorsConsent', null, (result) => console.info(result))
+  getVendorsConsent: () => window.__cmp('getVendorsConsent', null, (result) => console.info(result))
 
 };

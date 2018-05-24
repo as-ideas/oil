@@ -1,6 +1,8 @@
 import {getSoiCookie} from './core_cookies';
+import {getCustomPurposes} from './core_config';
 import {getPurposes, getVendorList, getVendors} from './core_vendor_information';
 import {OIL_SPEC} from './core_constants';
+import {getIabVendorBlacklist, getIabVendorWhitelist} from './core_config';
 
 const {ConsentString} = require('consent-string');
 
@@ -9,7 +11,7 @@ export function getVendorConsentData(vendorIds) {
     metadata: buildConsentString(),
     gdprApplies: true,
     hasGlobalScope: false,
-    purposeConsents: buildPurposeConsents(),
+    purposeConsents: buildPurposeConsents(getPurposes()),
     vendorConsents: buildVendorConsents(vendorIds)
   };
 }
@@ -26,37 +28,46 @@ export function getConsentDataString(consentStringVersion) {
   }
 }
 
-function buildPurposeConsents() {
+export function getPublisherConsentData(purposeIds) {
+  return {
+    metadata: buildConsentString(),
+    gdprApplies: true,
+    hasGlobalScope: false,
+    standardPurposeConsents: buildPurposeConsents(getPurposes(), purposeIds),
+    customPurposeConsents: buildPurposeConsents(getCustomPurposes(), purposeIds)
+  }
+}
+
+export function buildPurposeConsents(purposes, limitedPurposeIds) {
   let soiCookie = getSoiCookie();
   let privacy = soiCookie.privacy;
 
   if (typeof privacy === 'object') {
     return soiCookie.privacy;
   } else {
-    let purposes = getPurposes();
     let purposeConsents = {};
 
     purposes.forEach(purpose => {
-      purposeConsents[purpose.id] = privacy;
+      if (limitedPurposeIds && limitedPurposeIds.indexOf(purpose.id) > -1) {
+        purposeConsents[purpose.id] = privacy;
+      } else if(!limitedPurposeIds || !limitedPurposeIds.length) {
+        purposeConsents[purpose.id] = privacy;
+      }
     });
+
     return purposeConsents;
   }
 }
 
 function buildVendorConsents(requestedVendorIds) {
-  let soiCookie = getSoiCookie();
-  let validVendorIds = getAllVendorIds();
+  const opt_in = getSoiCookie().opt_in;
+  let vendorIds = (requestedVendorIds && requestedVendorIds.length) ? requestedVendorIds : getAllVendorIds();
   let vendorConsents = {};
-
-  if (requestedVendorIds && requestedVendorIds.length) {
-    requestedVendorIds.forEach(vendorId => {
-      vendorConsents[vendorId] = validVendorIds.indexOf(vendorId) !== -1 && soiCookie.opt_in;
-    });
-  } else {
-    validVendorIds.forEach(vendorId => {
-      vendorConsents[vendorId] = soiCookie.opt_in;
-    });
-  }
+  const validVendorIds = getLimitedVendorIds();
+  
+  vendorIds.forEach(vendorId => {
+    vendorConsents[vendorId] = validVendorIds.indexOf(vendorId) !== -1 && opt_in;
+  });
   return vendorConsents;
 }
 
@@ -79,7 +90,7 @@ function buildConsentString(consentStringVersionString) {
     consentData.created = new Date(soiCookie.timestamp);
     consentData.setPurposesAllowed(getPurposesWithConsent(soiCookie));
     if (soiCookie.opt_in) {
-      consentData.setVendorsAllowed(getAllVendorIds());
+      consentData.setVendorsAllowed(getLimitedVendorIds());
     }
     return consentData.getConsentString();
   }
@@ -94,7 +105,24 @@ function getPurposesWithConsent(soiCookie) {
   }
 }
 
+export function getLimitedVendorIds() {
+  let limited = getVendors();
+  const whitelist = getIabVendorWhitelist();
+  const blacklist = getIabVendorBlacklist();
+  
+  if (whitelist && whitelist.length > 0) {
+    limited = getVendors().filter((vendor) => {
+      return whitelist.indexOf(vendor.id) > -1;
+    })
+  } else if(blacklist && blacklist.length > 0) {
+    limited = getVendors().filter((vendor) => {
+      return blacklist.indexOf(vendor.id) === -1;
+    });
+  }
+
+  return limited.map(({id}) => id);
+}
+
 function getAllVendorIds() {
   return getVendors().map(({id}) => id);
 }
-

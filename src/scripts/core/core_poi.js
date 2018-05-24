@@ -3,6 +3,7 @@ import {getHubLocation, getHubOrigin, getPoiGroupName, isPoiActive} from './core
 import {getOrigin, registerMessageListener, removeMessageListener} from './core_utils.js';
 import {logError, logInfo} from './core_log.js';
 
+
 // Timeout after which promises should return
 const TIMEOUT = 500;
 

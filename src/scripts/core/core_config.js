@@ -1,6 +1,6 @@
-import {OIL_CONFIG} from './core_constants.js';
-import {logError, logInfo} from './core_log.js';
-import {OilVersion} from './core_utils';
+import { OIL_CONFIG } from './core_constants.js';
+import { logError, logInfo } from './core_log.js';
+import { getGlobalOilObject, isObject, OilVersion, setGlobalOilObject } from './core_utils';
 
 let cachedConfig = null;
 
@@ -11,7 +11,7 @@ let cachedConfig = null;
  * @function
  */
 function readConfiguration(configurationElement) {
-  let parsedConfig = null;
+  let parsedConfig = {};
   try {
     if (configurationElement && configurationElement.text) {
       parsedConfig = JSON.parse(configurationElement.text);
@@ -34,9 +34,30 @@ function getConfiguration() {
       logInfo('Using default config');
     }
     cachedConfig = readConfiguration(configurationElement);
+    parseLocaleAndServerUrl(cachedConfig);
   }
   return cachedConfig;
 }
+
+/**
+ * 1) Extracts the locale from the config. The locale can be a string to use with the language backend
+ * or it can be an object containing all labels
+ *
+ * 2) Sets the publicPath for async loading from Webpack
+ * cf. https://webpack.js.org/guides/public-path/
+ *
+ * @param cachedConfig
+ */
+// FIXME needs testing
+function parseLocaleAndServerUrl(cachedConfig) {
+  if (isObject(cachedConfig.locale)) {
+    setGlobalOilObject('LOCALE', cachedConfig.locale);
+  }
+  if (cachedConfig.publicPath) {
+    __webpack_public_path__ = cachedConfig.publicPath;
+  }
+}
+
 
 /**
  * Returns a config value or its given default value if not existing in users configuration.
@@ -94,19 +115,35 @@ export function getOilBackendUrl() {
   return getConfigValue(OIL_CONFIG.ATTR_OIL_BACKEND_URL, 'https://oil-backend.herokuapp.com/oil');
 }
 
+export function getIabVendorListUrl() {
+  return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_LIST_URL, undefined);
+}
+
+export function getIabVendorBlacklist() {
+  return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_BLACKLIST, undefined);
+}
+
+export function getIabVendorWhitelist() {
+  return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_WHITELIST, undefined);
+}
+
 export function getPoiGroupName() {
-  return getConfigValue(OIL_CONFIG.ATTR_POI_GROUP_NAME, '');
+  return getConfigValue(OIL_CONFIG.ATTR_POI_GROUP_NAME, 'default');
 }
 
 export function getCookieExpireInDays() {
   return getConfigValue(OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS, 31);
 }
 
+// FIXME
 export function getLocaleVariantName() {
-  let localeVariantName = getConfigValue(OIL_CONFIG.ATTR_LOCALE, null);
+  let localeVariantName = getConfigValue(OIL_CONFIG.ATTR_LOCALE, undefined);
   if (!localeVariantName) {
-    localeVariantName = 'deDE_01';
+    localeVariantName = 'enEN_01';
     logError(`The locale is not set, falling back to ${localeVariantName}.`);
+  }
+  if (localeVariantName && isObject(localeVariantName)) {
+    return localeVariantName.localeId;
   }
   return localeVariantName;
 }
@@ -127,4 +164,8 @@ export function getHubLocation() {
  */
 export function resetConfiguration() {
   cachedConfig = null;
+}
+
+export function getCustomPurposes() {
+  return getConfigValue(OIL_CONFIG.ATTR_CUSTOM_PURPOSES, []);
 }

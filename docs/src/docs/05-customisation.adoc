@@ -1,6 +1,0 @@
-== Customisation
-
-include::usage/kameleoon-integration.adoc[]
-
-
-
