@@ -60,7 +60,6 @@ export function buildPurposeConsents(purposes, limitedPurposeIds) {
 }
 
 function buildVendorConsents(requestedVendorIds) {
-  // FIXME dom --> TESTs
   const soiCookie = getSoiCookie();
   const opt_in = soiCookie.opt_in || soiCookie.privacy;
   let vendorIds = (requestedVendorIds && requestedVendorIds.length) ? requestedVendorIds : getAllVendorIds();
@@ -91,7 +90,6 @@ function buildConsentString(consentStringVersionString) {
     consentData.setGlobalVendorList(getVendorList());
     consentData.created = new Date(soiCookie.timestamp);
     consentData.setPurposesAllowed(getPurposesWithConsent(soiCookie));
-    // FIXME dom --> TESTs
     if (soiCookie.opt_in || soiCookie.privacy) {
       consentData.setVendorsAllowed(getLimitedVendorIds());
     }

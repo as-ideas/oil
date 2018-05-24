@@ -154,14 +154,14 @@ describe('consents', () => {
     });
 
     it('should create vendor consent data with correct purpose consents if privacy is object', () => {
-      const GIVEN_CONSENT   = 1;
-      const REVOKED_CONSENT = 2;
+      const CONSENT_GIVEN   = 1;
+      const CONSENT_REVOKED = 2;
 
       spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
         opt_in: false,
         privacy: {
-          [GIVEN_CONSENT]: 1,
-          [REVOKED_CONSENT]: 0
+          [CONSENT_GIVEN]: 1,
+          [CONSENT_REVOKED]: 0
         },
         version: 'aVersion',
         localeVariantName: 'deDE_01',
@@ -175,8 +175,8 @@ describe('consents', () => {
 
       let purposeIds = Object.keys(vendorConsentData.purposeConsents);
       expect(purposeIds.length).toEqual(2);
-      expect(vendorConsentData.purposeConsents[GIVEN_CONSENT]).toEqual(1)
-      expect(vendorConsentData.purposeConsents[REVOKED_CONSENT]).toEqual(0)
+      expect(vendorConsentData.purposeConsents[CONSENT_GIVEN]).toEqual(1)
+      expect(vendorConsentData.purposeConsents[CONSENT_REVOKED]).toEqual(0)
     });
 
     it('should create vendor consent data with correct purpose consents if single consents for purposes are given', () => {
