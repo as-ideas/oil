@@ -1,4 +1,4 @@
-import {OIL_ADVANCED_SETTINGS, OIL_LAYER, OIL_YES_BUTTON} from '../test_constants';
+import {OIL_LAYER} from '../test_constants';
 
 module.exports = {
   '@disabled': false,
