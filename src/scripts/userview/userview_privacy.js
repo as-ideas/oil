@@ -28,7 +28,6 @@ export function getSoiPrivacy() {
  *  "1": if all checkboxes are marked or if
  *  "{}": if there are multiple checkboxes
  */
-// TODO OIL-91 T&CF: Publisher Consents / optionale call getPublisherConsents --> should be dynamic & use custom puposes
 export function getPrivacySettings() {
   if (document.querySelector('.as-js-purpose-slider')) {
     let result = {};
@@ -40,7 +39,6 @@ export function getPrivacySettings() {
   return PRIVACY_FULL_TRACKING;
 }
 
-// TODO OIL-91 T&CF: Publisher Consents / optionale call getPublisherConsents --> read custom purposes
 export function applyPrivacySettings(privacySetting) {
   logInfo('Apply privacy settings from cookie', privacySetting);
 

@@ -94,7 +94,7 @@ You need to add the configuration snippet to all pages where OIL is required. Gi
     "poi_hub_origin": "//oil.axelspringer.com",
     "poi_hub_path": "/hub.html",
     "poi_subscriber_set_cookie": true,
-    "poi_group_name": "MyGroupName"
+    "poi_group_name": "MyGroupName",
     "locale": "enEN_01"
   }
 </script>
@@ -127,6 +127,7 @@ This is a full list of configurable options.
 | oilBackendUrl | (deprecated) The backend from where OIL can load locale-versions | https://oil-backend.herokuapp.com/oil
 | iabVendorWhitelist | Array of vendor IDs to allow. If it is set, values in `iabVendorBlacklist` are ignored. | None
 | iabVendorBlacklist | Array of vendor IDs to exclude | None
+| customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
 |====
 
 

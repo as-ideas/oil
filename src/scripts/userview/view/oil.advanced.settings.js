@@ -1,7 +1,7 @@
 import { OIL_LABELS } from '../userview_constants.js'
 import { forEach } from '../userview_modal.js';
 import { getLabel, getTheme } from '../userview_config.js';
-import { getPoiGroupName } from '../../core/core_config.js';
+import { getPoiGroupName, getCustomPurposes } from '../../core/core_config.js';
 import { logError } from '../../core/core_log.js';
 import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
 import { setGlobalOilObject } from '../../core/core_utils.js';
@@ -80,12 +80,11 @@ const ActivateButtonSnippet = () => {
 const buildPurposeEntries = (list) => {
   return list.map(element => PurposeContainerSnippet({
     id: element.id,
-    header: getLabel(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_TEXT`]),
-    text: getLabel(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_DESC`]),
+    header: getLabel(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_TEXT`]) || element.name,
+    text: getLabel(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_DESC`]) || element.description,
     value: false
   })).join('');
 };
-
 
 const ContentSnippet = () => {
   return `
@@ -102,8 +101,8 @@ const ContentSnippet = () => {
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
             Purposes
         </div>
-        <!-- TODO OIL-91 T&CF: Publisher Consents / optionale call getPublisherConsents -->
         ${buildPurposeEntries(getPurposes())}
+        ${buildPurposeEntries(getCustomPurposes())}
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
             3rd Parties
         </div>

@@ -15,3 +15,4 @@ export const OIL_ADVANCED_SETTINGS_WRAPPER = '//*[@data-qa="oil-cpc-overlay"]';
 export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_SHOW_PREF = '//*[@data-qa="show-pref-button"]';
 export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_TRIGGER_OPTIN = '//*[@data-qa="oil-YesButton"]';
 export const OIL_ADVANCED_SETTINGS_SNIPPET = '//*[@data-qa="cpc-snippet"]';
+export const OIL_CUSTOM_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-25"]';
