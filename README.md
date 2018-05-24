@@ -5,7 +5,7 @@
 
 Build Monitoring (works currently only from internal network)
 
-[![Build Status](https://jenkins.ipool.asideas.de/buildStatus/icon?job=OIL-build)](https://jenkins.ipool.asideas.de/job/OIL-build/)
+[![Build Status](https://jenkins.ipool.asideas.de/buildStatus/icon?job=OIL-Build)](https://jenkins.ipool.asideas.de/job/OIL-build/)
 
 [![Latest Release](https://img.shields.io/badge/release-1.1.0-blue.svg)](https://oil.axelspringer.com/release/1.1.0) [![GPL2 License][license-image]][license-url] 
 
