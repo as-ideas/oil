@@ -94,7 +94,7 @@ You need to add the configuration snippet to all pages where OIL is required. Gi
     "poi_hub_origin": "//oil.axelspringer.com",
     "poi_hub_path": "/hub.html",
     "poi_subscriber_set_cookie": true,
-    "poi_group_name": "MyGroupName"
+    "poi_group_name": "MyGroupName",
     "locale": "enEN_01"
   }
 </script>
