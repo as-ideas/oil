@@ -2007,21 +2007,28 @@ export function loadVendorList() {
       let iabVendorListUrl = getIabVendorListUrl();
       if (!iabVendorListUrl) {
         cachedVendorList = defaultVendorList;
+        sortVendors(cachedVendorList);
         resolve(cachedVendorList);
       } else {
         fetchJsonData(iabVendorListUrl)
           .then(response => {
             cachedVendorList = response;
+            sortVendors(cachedVendorList);
             resolve(cachedVendorList);
           })
           .catch(error => {
             cachedVendorList = defaultVendorList;
-            logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendorlist!`);
+            sortVendors(cachedVendorList);
+            logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
             resolve(cachedVendorList);
           });
       }
     }
   });
+}
+
+function sortVendors(vendorList) {
+  vendorList.vendors = vendorList.vendors.sort((leftVendor, rightVendor) => leftVendor.id - rightVendor.id);
 }
 
 /**
