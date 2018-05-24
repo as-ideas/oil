@@ -20,8 +20,8 @@ module.exports = {
   'OIL layer remains hidden when opted in cookie is set': function (browser) {
     browser
       .setCookie({
-        name: "oil_data",
-        value: "{%22opt_in%22:true%2C%22timestamp%22:1527155609513%2C%22version%22:%221.1.1-SNAPSHOT%22%2C%22localeVariantName%22:%22enEN_01%22%2C%22localeVariantVersion%22:1%2C%22privacy%22:1}"
+        name: 'oil_data',
+        value: '{%22opt_in%22:true%2C%22timestamp%22:1527155609513%2C%22version%22:%221.1.1-SNAPSHOT%22%2C%22localeVariantName%22:%22enEN_01%22%2C%22localeVariantVersion%22:1%2C%22privacy%22:1}'
       })
       .url(browser.globals.launch_url_host1 + 'demos/configuration-default-optin.html')
       .useCss().waitForElementVisible('body', 1000, false)
