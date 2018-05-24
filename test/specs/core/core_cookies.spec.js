@@ -1,7 +1,7 @@
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import {getConfigValue} from '../../../src/scripts/core/core_config';
 
-fdescribe('cookies', () => {
+describe('cookies', () => {
 
   describe('getConfigValue', () => {
     
