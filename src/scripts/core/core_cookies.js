@@ -60,14 +60,18 @@ function getDomainCookieConfig() {
     name: OIL_DOMAIN_COOKIE_NAME,
     expires: getCookieExpireInDays(),
     default_content: {
-      'opt_in': getDefaultToOptin(),
+      'opt_in': false,
       'timestamp': getClientTimestamp(),
       'version': OilVersion.get(),
       'localeVariantName': getLocaleVariantName(),
       'localeVariantVersion': getLocaleVariantVersion(),
-      'privacy': PRIVACY_MINIMUM_TRACKING
+      'privacy': getDefaultPrivacy()
     }
   };
+}
+
+function getDefaultPrivacy() {
+  return getDefaultToOptin() ? 1 : PRIVACY_MINIMUM_TRACKING;
 }
 
 function getOilDomainCookie() {
