@@ -1,8 +1,8 @@
-import {getSoiCookie} from './core_cookies';
-import {getCustomPurposes} from './core_config';
-import {getPurposes, getVendorList, getVendors} from './core_vendor_information';
-import {OIL_SPEC} from './core_constants';
-import {getIabVendorBlacklist, getIabVendorWhitelist} from './core_config';
+import { getSoiCookie } from './core_cookies';
+import { getCustomPurposes } from './core_config';
+import { getPurposes, getVendorList, getVendors } from './core_vendor_information';
+import { OIL_SPEC } from './core_constants';
+import { getIabVendorBlacklist, getIabVendorWhitelist } from './core_config';
 
 const {ConsentString} = require('consent-string');
 
@@ -50,7 +50,7 @@ export function buildPurposeConsents(purposes, limitedPurposeIds) {
     purposes.forEach(purpose => {
       if (limitedPurposeIds && limitedPurposeIds.indexOf(purpose.id) > -1) {
         purposeConsents[purpose.id] = privacy;
-      } else if(!limitedPurposeIds || !limitedPurposeIds.length) {
+      } else if (!limitedPurposeIds || !limitedPurposeIds.length) {
         purposeConsents[purpose.id] = privacy;
       }
     });
@@ -60,11 +60,12 @@ export function buildPurposeConsents(purposes, limitedPurposeIds) {
 }
 
 function buildVendorConsents(requestedVendorIds) {
-  const opt_in = getSoiCookie().opt_in;
+  const soiCookie = getSoiCookie();
+  const opt_in = soiCookie.opt_in || soiCookie.privacy;
   let vendorIds = (requestedVendorIds && requestedVendorIds.length) ? requestedVendorIds : getAllVendorIds();
   let vendorConsents = {};
   const validVendorIds = getLimitedVendorIds();
-  
+
   vendorIds.forEach(vendorId => {
     vendorConsents[vendorId] = validVendorIds.indexOf(vendorId) !== -1 && opt_in;
   });
@@ -89,7 +90,7 @@ function buildConsentString(consentStringVersionString) {
     consentData.setGlobalVendorList(getVendorList());
     consentData.created = new Date(soiCookie.timestamp);
     consentData.setPurposesAllowed(getPurposesWithConsent(soiCookie));
-    if (soiCookie.opt_in) {
+    if (soiCookie.opt_in || soiCookie.privacy) {
       consentData.setVendorsAllowed(getLimitedVendorIds());
     }
     return consentData.getConsentString();
@@ -109,12 +110,12 @@ export function getLimitedVendorIds() {
   let limited = getVendors();
   const whitelist = getIabVendorWhitelist();
   const blacklist = getIabVendorBlacklist();
-  
+
   if (whitelist && whitelist.length > 0) {
     limited = getVendors().filter((vendor) => {
       return whitelist.indexOf(vendor.id) > -1;
     })
-  } else if(blacklist && blacklist.length > 0) {
+  } else if (blacklist && blacklist.length > 0) {
     limited = getVendors().filter((vendor) => {
       return blacklist.indexOf(vendor.id) === -1;
     });
