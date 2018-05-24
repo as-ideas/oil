@@ -111,7 +111,6 @@ This is a full list of configurable options.
 |====
 | Config Parameter | Description | Default Setting
 | locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. <<supported-languages,Supported language packs.>> | deDE_01
-| locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. <<supported-languages,Supported language packs.>> | deDE_01
 | publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | //oil.axelspringer.com/release/{version}/`
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
 | poi_activate_poi | Activates or disactivates Power Opt-In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false
@@ -128,6 +127,7 @@ This is a full list of configurable options.
 | iabVendorWhitelist | Array of vendor IDs to allow. If it is set, values in `iabVendorBlacklist` are ignored. | None
 | iabVendorBlacklist | Array of vendor IDs to exclude | None
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
+| default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 |====
 
 
