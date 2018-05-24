@@ -100,6 +100,7 @@ And you need your custom configuration:
 | iabVendorWhitelist | Array of vendor IDs to allow. If it is set, values in `iabVendorBlacklist` are ignored. | None
 | iabVendorBlacklist | Array of vendor IDs to exclude. | None
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
+| default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 
 ## Labels
 
