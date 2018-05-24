@@ -82,6 +82,19 @@ function copyScriptsToLatest(filenames) {
   filenames.forEach(file => {
     let newFile = 'dist/latest/' + (file.replace('dist/', '').replace(/\.1\.[0-9]\.[0-9]\.?-(RELEASE|SNAPSHOT)/gm, ''));
     fs.copySync(file, newFile);
+
+    fs.readFile(newFile, 'utf8', function (err, data) {
+      if (err) {
+        return console.log(err);
+      }
+      let result = data.replace(/\.1\.[0-9]\.[0-9]\.?-(RELEASE|SNAPSHOT)/gm, '');
+
+      fs.writeFile(newFile, result, 'utf8', function (err) {
+        if (err) {
+          return console.log(err);
+        }
+      });
+    });
   });
 
 }
