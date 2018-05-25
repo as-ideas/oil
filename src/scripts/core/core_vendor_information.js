@@ -1,10 +1,8 @@
-// TODO This is the current vendor list (version 20) from https://vendorlist.consensu.org/vendorlist.json.
-// TODO In future, this list will be retrieved from vendorlist.consensu.org - this will provide all purposes (and features) and their titles and descriptions (in different languages)
-import { getConfigValue, getIabVendorListUrl, getLocaleVariantName, getOilBackendUrl } from './core_config';
-import { OIL_CONFIG } from './core_constants';
-import { logError } from './core_log';
-import { fetchJsonData, setGlobalOilObject } from './core_utils';
+import {getIabVendorListUrl} from './core_config';
+import {logError} from './core_log';
+import {fetchJsonData} from './core_utils';
 
+// Note: This is the vendor list (version 27) from https://vendorlist.consensu.org/vendorlist.json.
 const defaultVendorList = {
   vendorListVersion: 27,
   lastUpdated: '2018-05-23T16:00:15Z',
@@ -3396,4 +3394,8 @@ export function getVendorListVersion() {
  */
 export function getVendorList() {
   return cachedVendorList;
+}
+
+export function clearVendorListCache() {
+  cachedVendorList = undefined;
 }
