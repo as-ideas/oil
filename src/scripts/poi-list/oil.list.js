@@ -54,7 +54,7 @@ export const listSnippet = (list) => {
                 </div>
               </div>`;
     } else {
-      return `<div>${element}</div>`;
+      return `<div class="as-oil-poi-group-list-element">${element}</div>`;
     }
   });
   return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;

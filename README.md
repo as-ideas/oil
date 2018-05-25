@@ -173,6 +173,7 @@ There are two kinds of unit tests: For the oil.js itself (``npm run test:unit``)
 ```
 
 * Running end2end-tests locally: Start app in one terminal `npm start` and then in the next terminal `npm run e2e`
+* Running only one test: 
 
 #### Advanced Usage
 

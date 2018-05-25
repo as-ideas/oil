@@ -2,6 +2,7 @@ export const OIL_LAYER = '//*[@data-qa="oil-Layer"]';
 export const OIL_LAYER_FULL = '//*[@data-qa="oil-full"]';
 export const OIL_LAYER_NOCOOKIES_ = '//*[@data-qa="oil-nocookies"]';
 export const OIL_LAYER_POI_LIST = '//*[@data-qa="oil-poi-list"]';
+export const OIL_LAYER_GROUP_LIST_ELEMENT = '.as-oil-poi-group-list-element';
 export const OIL_LAYER_THIRD_PARTY_LIST_ELEMENT = '.as-oil-third-party-list-element';
 export const OIL_BACK_BUTTON = '//*[@data-qa="oil-back-button"]';
 export const OIL_YES_BUTTON = '//*[@data-qa="oil-YesButton"]';
