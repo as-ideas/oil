@@ -46,7 +46,7 @@ function getDefaultLocale() {
       [OIL_LABELS.ATTR_LABEL_CPC_TEXT]: 'Bitte wählen Sie, welche Verwendungszweck und Funktionen für Sie aktiviert sind',
       [OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL]: 'Alle aktivieren',
       [OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL]: 'Alle deaktivieren',
-      [OIL_LABELS.ATTR_LABEL_THIRD_PARTY]: 'Partner',
+      [OIL_LABELS.ATTR_LABEL_THIRD_PARTY]: 'Drittanbieter',
       [OIL_LABELS.ATTR_LABEL_CPC_01_TEXT]: 'Gerätezugriff',
       [OIL_LABELS.ATTR_LABEL_CPC_01_DESC]: 'Speichern von und Zugriff auf Informationen eines Endnutzergeräts.',
       [OIL_LABELS.ATTR_LABEL_CPC_02_TEXT]: 'Personalisierte Werbung',
