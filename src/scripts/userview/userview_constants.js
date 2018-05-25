@@ -9,6 +9,7 @@ export const OIL_LABELS = {
   ATTR_LABEL_BUTTON_ADVANCED_SETTINGS: 'label_button_advanced_settings',
   ATTR_LABEL_POI_GROUP_LIST_HEADING: 'label_poi_group_list_heading',
   ATTR_LABEL_POI_GROUP_LIST_TEXT: 'label_poi_group_list_text',
+  ATTR_LABEL_THIRD_PARTY: 'label_third_party',
   ATTR_LABEL_THIRD_PARTY_LIST_HEADING: 'label_thirdparty_list_heading',
   ATTR_LABEL_THIRD_PARTY_LIST_TEXT: 'label_thirdparty_list_text',
 
@@ -30,7 +31,7 @@ export const OIL_LABELS = {
   ATTR_LABEL_CPC_06_DESC: 'label_cpc_purpose_06_desc',
   ATTR_LABEL_CPC_07_TEXT: 'label_cpc_purpose_07_text',
   ATTR_LABEL_CPC_07_DESC: 'label_cpc_purpose_07_desc',
-
+  ATTR_LABEL_PURPOSE_DESC: 'label_cpc_purpose_desc',
   ATTR_LABEL_NO_COOKIES_HEADING: 'label_nocookie_head',
   ATTR_LABEL_NO_COOKIES_TEXT: 'label_nocookie_text'
 };
