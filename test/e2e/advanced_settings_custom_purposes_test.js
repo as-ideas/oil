@@ -1,4 +1,4 @@
-import { OIL_LAYER, OIL_ADVANCED_SETTINGS, OIL_ADVANCED_SETTINGS_WRAPPER, OIL_CUSTOM_PURPOSE_SLIDER } from '../test_constants.js';
+import {OIL_ADVANCED_SETTINGS, OIL_ADVANCED_SETTINGS_WRAPPER, OIL_CUSTOM_PURPOSE_SLIDER, OIL_LAYER} from '../test_constants.js';
 
 module.exports = {
   '@disabled': false,

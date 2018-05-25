@@ -1,6 +1,6 @@
-import { OIL_CONFIG } from './core_constants.js';
-import { logError, logInfo } from './core_log.js';
-import { getGlobalOilObject, isObject, OilVersion, setGlobalOilObject } from './core_utils';
+import {OIL_CONFIG} from './core_constants.js';
+import {logError, logInfo} from './core_log.js';
+import {isObject, OilVersion, setGlobalOilObject} from './core_utils';
 
 let cachedConfig = null;
 

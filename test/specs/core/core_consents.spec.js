@@ -1,9 +1,9 @@
-import { getConsentDataString, getVendorConsentData, buildPurposeConsents, getPublisherConsentData, getLimitedVendorIds } from '../../../src/scripts/core/core_consents';
+import {buildPurposeConsents, getConsentDataString, getLimitedVendorIds, getPublisherConsentData, getVendorConsentData} from '../../../src/scripts/core/core_consents';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
-import { OIL_SPEC } from '../../../src/scripts/core/core_constants';
-import { loadVendorList } from '../../../src/scripts/core/core_vendor_information';
+import {loadVendorList} from '../../../src/scripts/core/core_vendor_information';
+import {OIL_SPEC} from '../../../src/scripts/core/core_constants';
 
 const {ConsentString} = require('consent-string');
 
@@ -154,7 +154,7 @@ describe('consents', () => {
     });
 
     it('should create vendor consent data with correct purpose consents if privacy is object', () => {
-      const CONSENT_GIVEN   = 1;
+      const CONSENT_GIVEN = 1;
       const CONSENT_REVOKED = 2;
 
       spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
@@ -276,7 +276,7 @@ describe('consents', () => {
         timestamp: Date.now()
       });
       spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([VALID_VENDOR_ID_1])
-      
+
       let vendorConsentData = getVendorConsentData();
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(true);
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(false);
@@ -293,7 +293,7 @@ describe('consents', () => {
         timestamp: Date.now()
       });
       spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([VALID_VENDOR_ID_1, VALID_VENDOR_ID_3])
-      
+
       let vendorConsentData = getVendorConsentData();
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(false);
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(true);
@@ -312,7 +312,7 @@ describe('consents', () => {
 
       spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([VALID_VENDOR_ID_3, VALID_VENDOR_ID_1])
       spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([VALID_VENDOR_ID_3])
-      
+
       let vendorConsentData = getVendorConsentData();
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(true);
       expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(false);

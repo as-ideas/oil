@@ -1,8 +1,7 @@
-import { getSoiCookie } from './core_cookies';
-import { getCustomPurposes } from './core_config';
-import { getPurposes, getVendorList, getVendors } from './core_vendor_information';
-import { OIL_SPEC } from './core_constants';
-import { getIabVendorBlacklist, getIabVendorWhitelist } from './core_config';
+import {getSoiCookie} from './core_cookies';
+import {getCustomPurposes, getIabVendorBlacklist, getIabVendorWhitelist} from './core_config';
+import {getPurposes, getVendorList, getVendors} from './core_vendor_information';
+import {OIL_SPEC} from './core_constants';
 
 const {ConsentString} = require('consent-string');
 

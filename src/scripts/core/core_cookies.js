@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
 import {logInfo} from './core_log.js';
-import {getCookieExpireInDays, getLocaleVariantName, getDefaultToOptin} from './core_config.js';
+import {getCookieExpireInDays, getDefaultToOptin, getLocaleVariantName} from './core_config.js';
 import {PRIVACY_FULL_TRACKING, PRIVACY_MINIMUM_TRACKING} from './core_constants.js';
 import {getClientTimestamp, getLocaleVariantVersion, OilVersion} from './core_utils.js';
 

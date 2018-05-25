@@ -43,7 +43,7 @@ describe('configuration', () => {
     expect(getLocaleVariantName()).toBe('absurdistan');
   });
 
-  it('should set privacy=1 when default_to_optin=true', function() {
+  it('should set privacy=1 when default_to_optin=true', function () {
     loadFixture('config/given.config.with.default.to.optin.html');
     expect(getSoiCookie().privacy).toEqual(1)
   });

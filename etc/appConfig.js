@@ -41,7 +41,7 @@ module.exports = {
   }, {
     filename: 'demos/configuration-default-optin.html',
     template: path.resolve(sourcePath, 'demos', 'configuration-default-optin.html'),
-    chunks: ['oil','oildevkit'],
+    chunks: ['oil', 'oildevkit'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/advanced-settings-e2e-locale.html',
