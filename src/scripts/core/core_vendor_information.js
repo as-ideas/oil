@@ -1463,7 +1463,7 @@ const defaultVendorList = {
     },
     {
       id: 136,
-      name: 'Ströer SSP GmbH',
+      name: 'Str\\u00f6er SSP GmbH',
       policyUrl: 'https://www.stroeer.de/fileadmin/user_upload/Datenschutz.pdf',
       purposeIds: [],
       legIntPurposeIds: [

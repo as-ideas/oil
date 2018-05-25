@@ -18,4 +18,4 @@ image::src/images/oillogo.png[]
 
 ## DEPRECATED
 
-Use https://oil.axelspringer.com/docs/documentation.html[the user guide]
+Use https://oil.axelspringer.com/docs[the user guide]

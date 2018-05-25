@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie';
 import {logInfo} from './core_log.js';
-import {getCookieExpireInDays, getLocaleVariantName} from './core_config.js';
-import {PRIVACY_MINIMUM_TRACKING} from './core_constants.js';
+import {getCookieExpireInDays, getLocaleVariantName, getDefaultToOptin} from './core_config.js';
+import {PRIVACY_FULL_TRACKING, PRIVACY_MINIMUM_TRACKING} from './core_constants.js';
 import {getClientTimestamp, getLocaleVariantVersion, OilVersion} from './core_utils.js';
 
 const COOKIE_PREVIEW_NAME = 'oil_preview';
@@ -65,9 +65,13 @@ function getDomainCookieConfig() {
       'version': OilVersion.get(),
       'localeVariantName': getLocaleVariantName(),
       'localeVariantVersion': getLocaleVariantVersion(),
-      'privacy': PRIVACY_MINIMUM_TRACKING
+      'privacy': getDefaultPrivacy()
     }
   };
+}
+
+function getDefaultPrivacy() {
+  return getDefaultToOptin() ? PRIVACY_FULL_TRACKING : PRIVACY_MINIMUM_TRACKING;
 }
 
 function getOilDomainCookie() {
