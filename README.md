@@ -72,7 +72,7 @@ And you need your custom configuration:
 ```javascript
 <script id="oil-configuration" type="application/configuration">
   {
-    "activate_poi": true,
+    "poi_activate_poi": true,
     "poi_group_name": "axelSpringerSe_01",
     "locale": "enEN_01"
   }
