@@ -11,7 +11,7 @@ Currently in *beta* until 18.06.2018.
 [![GPL2 License][license-image]][license-url] 
 
 
-[Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html)
+[Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html) | [Release Notes](https://github.com/as-ideas/oil/releases)
 
 ## About oil.js
 
