@@ -31,12 +31,17 @@ module.exports = {
   }, {
     filename: 'demos/advanced-settings-custom-purposes.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings-custom-purposes.html'),
-    chunks: ['oilstub' ,'oil', 'oildevkit'],
+    chunks: ['oilstub', 'oil', 'oildevkit'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/english-version.html',
     template: path.resolve(sourcePath, 'demos', 'english-version.html'),
     chunks: ['oil'],
+    chunksSortMode: 'dependency'
+  }, {
+    filename: 'demos/configuration-default-optin.html',
+    template: path.resolve(sourcePath, 'demos', 'configuration-default-optin.html'),
+    chunks: ['oil', 'oildevkit'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/advanced-settings-e2e-locale.html',
@@ -166,6 +171,9 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, 'demos/empty.html'),
     to: 'demos/empty.html'
+  }, {
+    from: path.resolve(sourcePath, 'cmp'),
+    to: 'cmp'
   }],
   mangle: {},
   proxy: {},

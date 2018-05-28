@@ -25,6 +25,6 @@ module.exports = {
       .assert.containsText('html', 'Custom Purpose 1', 'Checking custom purpose title')
       .pause(200)
       .end()
-  },
+  }
 
 };

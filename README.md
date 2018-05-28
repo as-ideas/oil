@@ -7,7 +7,7 @@ Currently in *beta* until 18.06.2018.
 
 [![Build Status](https://jenkins.ipool.asideas.de/buildStatus/icon?job=OIL-build)](https://jenkins.ipool.asideas.de/job/OIL-build/)
 
-[![Latest Release](https://img.shields.io/badge/release-1.1.0-blue.svg)](https://oil.axelspringer.com/release/1.1.0) [![GPL2 License][license-image]][license-url] 
+[![Latest Release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://oil.axelspringer.com/release/) [![GPL2 License][license-image]][license-url] 
 
 [Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html)
 
@@ -72,7 +72,7 @@ And you need your custom configuration:
 ```javascript
 <script id="oil-configuration" type="application/configuration">
   {
-    "activate_poi": true,
+    "poi_activate_poi": true,
     "poi_group_name": "axelSpringerSe_01",
     "locale": "enEN_01"
   }
@@ -100,6 +100,7 @@ And you need your custom configuration:
 | iabVendorWhitelist | Array of vendor IDs to allow. If it is set, values in `iabVendorBlacklist` are ignored. | None
 | iabVendorBlacklist | Array of vendor IDs to exclude. | None
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
+| default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 
 ## Labels
 
@@ -172,6 +173,7 @@ There are two kinds of unit tests: For the oil.js itself (``npm run test:unit``)
 ```
 
 * Running end2end-tests locally: Start app in one terminal `npm start` and then in the next terminal `npm run e2e`
+* Running only one test: 
 
 #### Advanced Usage
 
