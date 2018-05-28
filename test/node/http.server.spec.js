@@ -29,7 +29,7 @@ describe('nodejs http server', () => {
       }, 1000);
   });
 
-  describe('Whitelist', () => {
+  describe('Blacklist', () => {
 
     it('should return 403 without host', function (done) {
       request(app)
@@ -40,27 +40,37 @@ describe('nodejs http server', () => {
         }, 1000);
     });
 
-    it('should return 403 with not whitelisted hosts', function (done) {
+    it('should return 403 for blacklisted host', function (done) {
       request(app)
         .get('/demos/complete-integration-site-a.html')
-        .set({"Referer": "https://www.something.de/"})
+        .set({"Referer": "https://www.malign.site/"})
         .end(function (error, response) {
           expect(response.statusCode).to.equal(403);
           done();
         }, 1000);
     });
 
-    it('should work with whitelisted hosts', function (done) {
+    it('should return 200 with non-blacklisted hosts', function (done) {
       request(app)
         .get('/demos/complete-integration-site-a.html')
-        .set({"Referer": "https://bild.de/"})
+        .set({"Referer": "https://www.something.de/"})
         .end(function (error, response) {
           expect(response.statusCode).to.equal(200);
           done();
         }, 1000);
     });
 
-    it('should work with whitelisted hosts and  be case insensitive', function (done) {
+    it('should return 200 with non-blacklisted hosts', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "https://foo.bar.something.de/"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
+
+    it('should work with non-blacklisted host and be case insensitive', function (done) {
       request(app)
         .get('/demos/complete-integration-site-a.html')
         .set({"referer": "http://finanzen.net"})

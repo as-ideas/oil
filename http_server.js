@@ -8,38 +8,32 @@ const url = require('url');
 
 // import CORS config
 const headerConfig = require('./etc/headerConfig');
-const whitelist = require('./etc/whitelist');
+const blacklist = require('./etc/blacklist');
 // Application setup.
 const port = process.argv[2] || process.env.PORT || 8080;
 
 let CACHE_DURATION = '10m';
 let DOCUMENT_ROOT = __dirname + '/dist';
 
-let domainWhitelist = function (req, res, next) {
-  let host = req.header("Referer") || req.header("referer");
-  if (host && isHostInWhitelist(host)) {
-    next();
-  } else {
+let domainBlacklist = function (req, res, next) {
+  let referer = req.header("Referer") || req.header("referer");
+  if (!referer || isBlacklisted(referer)) {
     res
       .status(403)
       .send('Host from referer not allowed! Please contact administrator.');
+  } else {
+    next();
   }
 };
 
-function isHostInWhitelist(referer) {
-  let host = url.parse(referer).host;
+function isBlacklisted(referer) {
+  const parts = url.parse(referer).host.split(".");
 
-  let split = host.split('.');
-  let length = split.length;
-  if (length >= 2) {
-    let domainNameWithEnding = split[length - 2] + '.' + split[length - 1];
-    console.info('domainNameWithEnding', domainNameWithEnding);
-    return whitelist.whitelist.includes(domainNameWithEnding);
+  if(parts.length > 1) {
+    const domainNameWithEnding = parts.splice(-2).join(".");
+    return blacklist.blacklist.includes(domainNameWithEnding);
   }
-  else if (host.startsWith("localhost") || host.startsWith("oilsite") || host.startsWith("oilcdn")) {
-    return true;
-  }
-  return false;
+  return !parts[0].match(/(oilcdn|oilsite|localhost)/);
 }
 
 let additionalHeaders = function (req, res, next) {
@@ -59,7 +53,7 @@ let additionalHeaders = function (req, res, next) {
  */
 
 let app = express();
-app.use(domainWhitelist);
+app.use(domainBlacklist);
 
 app.use(additionalHeaders);
 
