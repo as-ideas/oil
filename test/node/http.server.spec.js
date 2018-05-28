@@ -50,6 +50,16 @@ describe('nodejs http server', () => {
         }, 1000);
     });
 
+    it('should return 403 for every subdomain of blacklisted host', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "https://foo.bar.baz.malign.site/"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(403);
+          done();
+        }, 1000);
+    });
+
     it('should return 200 with non-blacklisted hosts', function (done) {
       request(app)
         .get('/demos/complete-integration-site-a.html')
@@ -60,7 +70,7 @@ describe('nodejs http server', () => {
         }, 1000);
     });
 
-    it('should return 200 with non-blacklisted hosts', function (done) {
+    it('should return 200 with non-blacklisted host and its subdomains', function (done) {
       request(app)
         .get('/demos/complete-integration-site-a.html')
         .set({"Referer": "https://foo.bar.something.de/"})
@@ -86,6 +96,26 @@ describe('nodejs http server', () => {
         .set({"Referer": "http://localhost:8080"})
         .end(function (error, response) {
           expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
+
+    it('should work with oilsiteN', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "http://oilsiteN:8080"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
+
+    it('should not work with NoilsiteN', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "http://noilsite1:3000/"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(403);
           done();
         }, 1000);
     });
