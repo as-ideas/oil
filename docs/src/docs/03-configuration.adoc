@@ -1,58 +1,6 @@
-== Integration and configuration
-
-=== How to implement OIL on your site
-
-Setting up OIL on your page consists of the following steps:
-
-** Add the oil.js javascript snippet to your page
-** Add a configuration block to your pages DOM
-
-OIL creates a standard for the Opt-In but can't automatically stop your site from tracking your users. So to actually make your page respond to opt-ins you also need to do the following.
-
-** Make sure your page doesn't track the user in its default state.
-** Use Tealium for all tracking activities and use the loading rules we provide
-** Listen to OIL events for loading non-Tealium tags, after the user opted in.
-
-==== Adding oil.js to your site via Tealium (recommended)
-
-Axel Springer Tealium needs to configure your site to inherit the predefined lib-dip-optin library profile. Once this is in place you publish those changes in the following way:
-
-* Open your Tealium profile and go to "extensions"
-* Find the entry for "AS Opt-in Overlay", you'll be noticed of a change to this extension
-* Publish / deploy your profile to activate the changes to Oil.js
-
-[caption="Oil.js Tealium Deployment"]
-image::src/images/tealium-user-profile-extension-view.png[Tealium Client Profile]
-
-This needs to be repeated for every new version of OIL. The library profile can't push new code to your website without your action.
-
-==== Adding oil.js to your site via direct integration
-
-If Tealium can't be used on your site you also can add OIL directly from our CDN.
-
-Example (replace with the latest version):
-[source, html, subs="attributes"]
-----
-&lt;script>
-include::../../../dist/oilstub.{version}.min.js[]
-&lt;/script>
-&lt;script type="text/javascript" src="https://oil.axelspringer.com/release/{version_raw}/oil.{version}.min.js">&lt;/script>
-----
-
-Updated versions of the script will be deployed using a different filename hence we'll never alter an existing version.
-
-Please make sure you're working with the *latest version* available.
-
-Please check https://oil.axelspringer.com/release for further updates. Choose the latest version or the version fitting to this documentation. Normalley there will be multiple files:
-
-* oil.1.0.34-RELEASE.min.js - *This is the file you will need to reference in your website*
-* hub.1.0.34-RELEASE.min.js
-* Chunks, beginning with numbers - they will ne loaded asynchronously and you don't need to do anything with them.
-** 0.1.0.34-RELEASE.chunk.js
-** X.1.0.34-RELEASE.chunk.js
+== Configuration
 
 
-IMPORTANT: Your domain needs to be whitelisted in order to work with OIL (contact us to get whitelisted: OIL Support <oil-support@axelspringer.com>)
 
 === Configuring OIL
 

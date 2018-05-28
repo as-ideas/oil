@@ -1,6 +1,5 @@
-// TODO: Set correct CMP_ID as soon as it is available
 export const OIL_SPEC = {
-  CMP_ID: 1,
+  CMP_ID: 80,
   CMP_VERSION: 1
 };
 

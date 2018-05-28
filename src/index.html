@@ -79,6 +79,22 @@
     letter-spacing: 0.1px;
   }
 
+  .beta-note {
+    display: inline-block;
+    margin: auto;
+    margin-top: 80px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .beta-note .beta-note__claim {
+    font-size: 24px;
+    text-align: center;
+    max-width: 50vw;
+    margin: auto;
+    padding: 12px 30px;
+  }
+
   /* MAIN HERO */
   .fa-ul {
     font-size: 24px;
@@ -257,6 +273,12 @@
       font-weight: 200;
     }
 
+    .beta-note .beta-note__claim {
+      max-width: initial;
+      margin: auto;
+      padding: initial;
+    }
+
     .full-row {
       padding: 50px 20px 5px 20px;
     }
@@ -294,7 +316,7 @@
 
   <div class="claim-wrapper">
     <h1 class="logo-claim">Prepares you for ePrivacy</h1>
-    <h2 class="logo-claim-2">Optimized. Tested. Compatible. Ready to use.</h2>
+    <h2 class="logo-claim-2">Optimized. Tested. Compatible. Beta. Ready to use.</h2>
   </div>
 
   <div class="jumbotron hero">
@@ -327,6 +349,10 @@
       </div>
 
 
+      <div class="beta-note">
+        <h2 class="beta-note__claim">Caution: This is only a beta version. The full release is planned for the
+          18.06.2018</h2>
+      </div>
     </div>
   </div>
 </div>
@@ -334,7 +360,7 @@
 
 <div class="full-row">
   <div class="claim-wrapper">
-    <h1 class="logo-claim">Prepares you for ePrivacy & GDPR</h1>
+    <h1 class="logo-claim">Supports your preparation for GDPR and ePrivacy compliance</h1>
     <h1 class="logo-claim-2">The "Opt-In Layer" is a JavaScript library for displaying the user consent dialog. It
       offers
       a huge variety of options and helps you to manage your tags.<br/> Best served with <a href="https://tealiumiq.com"
@@ -352,11 +378,13 @@
         <span class="text-muted">No worries.</span>
       </h1>
       <p class="lead">
-        We help you with our battle proven and ePrivacy approved solution. You don't know what's required for ePrivacy?
-        No problem. We do.</p>
+        How does the consent given by the end user get forwarded to different vendors? We help you with our battle proven and high
+        quality solution. </p>
       <p class="lead">
-        We looked at every known JS-Tag and categorized them. With the help of any tag manager using OIL.js becomes as
-        easy as adding the library.</p>
+        Oil.js brings you awesome events for every interaction, a fully featured JavaScript API and support for the
+        <a href="http://advertisingconsent.eu/" target="_blank">IAB standard</a>. We not only support the <a
+        href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework" target="_blank">IAB
+        specification</a>, we helped to shape it.</p>
     </div>
     <div class="col-sm-5">
       <img class="img-responsive pull-right animated wow fadeInRight dropshadow"
