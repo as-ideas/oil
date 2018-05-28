@@ -2,11 +2,11 @@ import {
   renderOil,
   oilWrapper,
   stopTimeOut,
-  forEach
+  forEach,
+  hasRunningTimeout
 } from '../../../src/scripts/userview/userview_modal.js';
 import { loadFixture, readFixture, removeOilLayerAndConfig, deleteAllCookies } from '../../utils.js';
 import * as CoreConfig from '../../../src/scripts/core/core_config.js';
-import { hasRunningTimeout } from '../../../src/scripts/userview/userview_modal';
 import { initCustomYasmineMatchers } from '../../utils';
 
 describe('the userview modal aka the oil layer wrapper', () => {

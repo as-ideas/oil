@@ -4,16 +4,6 @@ import { logInfo } from '../core/core_log';
 import { forEach } from './userview_modal';
 import { getPurposes } from '../core/core_vendor_information';
 
-export const PRIVACY_SETTINGS_ALL_FALSE = {
-  '1': false,
-  '2': false,
-  '3': false,
-  '4': false,
-  '5': false,
-  '6': false,
-  '7': false
-};
-
 export function getSoiPrivacy() {
   let cookie = getSoiCookie();
   return cookie.privacy;
@@ -40,7 +30,7 @@ export function getPrivacySettings() {
 }
 
 export function applyPrivacySettings(privacySetting) {
-  logInfo('Apply privacy settings from cookie', privacySetting);
+  logInfo('Applying privacy settings');
 
   for (let i = 1; i <= getPurposes().length; i++) {
     document.querySelector(`#as-js-purpose-slider-${i}`).checked = privacySetting[`${i}`];
@@ -58,4 +48,3 @@ export function applyPrivacySettings(privacySetting) {
     });
   }
 }
-
