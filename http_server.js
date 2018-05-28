@@ -33,7 +33,7 @@ function isBlacklisted(referer) {
     const domainNameWithEnding = parts.splice(-2).join(".");
     return blacklist.blacklist.includes(domainNameWithEnding);
   }
-  return !parts[0].match(/(oilcdn|oilsite|localhost)/);
+  return !parts[0].match(/^(oilcdn|oilsite|localhost)/);
 }
 
 let additionalHeaders = function (req, res, next) {
