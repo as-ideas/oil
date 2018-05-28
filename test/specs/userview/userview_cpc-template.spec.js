@@ -45,18 +45,28 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
 
   });
 
-  // FIXME how to handle with custom vendorlist?!
-  xit('should insert CPC into host site with DEFAULT PRIVACY SETTING', () => {
+  it('should insert CPC into host site with GIVEN PRIVACY SETTING', (done) => {
     loadFixture('html/integrated-cpc.html');
+    setSoiOptIn({
+      '1': false,
+      '2': true,
+      '3': true,
+      '4': true,
+      '5': true
+    });
 
     oilShowPreferenceCenter();
 
-    expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-    expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
-    expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(false);
-    expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(false);
-    expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(false);
-    expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(false);
+    waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
+      expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
+      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
+      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
+      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
+      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
+      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(true);
+      done();
+    });
+
   });
 
   it('should insert CPC into host site with STORED PRIVACY SETTING (from cookie)', (done) => {
