@@ -1,4 +1,6 @@
 language: node_js
 node_js:
-  - "iojs"
   - "7"
+sudo: required
+env:
+    - NODE_ENV=test
