@@ -15,3 +15,5 @@ target/
 *.iml
 oil-michiel.sublime-project
 oil-michiel.sublime-workspace
+
+.coveralls.yml
