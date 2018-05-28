@@ -2,7 +2,7 @@ import { initCustomYasmineMatchers, loadFixture, readFixture, removeOilLayerAndC
 import {resetConfiguration} from '../../../src/scripts/core/core_config';
 import {oilGroupListTemplate} from '../../../src/scripts/poi-list/oil.list';
 
-describe('the company list', () => {
+xdescribe('the company list', () => {
 
   beforeEach(() => {
     resetConfiguration();
