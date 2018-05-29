@@ -120,7 +120,7 @@
   }
 
   .small & {
-    padding: .5em 0 0 0;
+    padding: .5em !important;
   }
 
   @include media('<=phone') {
@@ -162,10 +162,13 @@
 
   .small & {
     margin: 0 0 0 1em;
+    @include media('<=phone') {
+      margin: .5em 0;
+    }
   }
 
   @include media('<=phone') {
-    margin: 0.5em 0;
+    margin: .5em 0;
     min-width: 100%;
     max-width: 100%;
 
@@ -372,6 +375,10 @@
     @include stack-items-remove-horizontal-margins;
     width: 100%;
     margin: 1em 0;
+
+    .small & {
+      margin: 0;
+    }
   }
 }
 
