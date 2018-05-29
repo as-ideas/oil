@@ -1,12 +1,12 @@
 const glob = require('glob');
 const asciiDoctor = require('asciidoctor.js')();
-const fs = require('fs');
+const fs = require('fs-extra');
 const base_dir = require('path').resolve();
 const Path = require('path');
 
-if (!fs.existsSync(base_dir.concat('/dist/docs/'))) {
-  fs.mkdirSync(base_dir.concat('/dist/docs/'));
-}
+fs.ensureDirSync(base_dir.concat('/dist/docs/'));
+
+fs.copySync(base_dir.concat('/docs/last-release'), base_dir.concat('/dist/docs/last-release'));
 
 const BUNDLE_VERSION = process.env.npm_package_version + (process.env.SNAPSHOT || '-SNAPSHOT');
 const BUNDLE_VERSION_RAW = process.env.npm_package_version;
