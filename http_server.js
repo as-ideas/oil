@@ -16,18 +16,21 @@ let CACHE_DURATION = '10m';
 let DOCUMENT_ROOT = __dirname + '/dist';
 
 let domainBlacklist = function (req, res, next) {
-  let referer = req.header("Referer") || req.header("referer");
-  if (!referer || isBlacklisted(referer)) {
+  let referrer = req.header("Referer") || req.header("referer");
+  if (isBlacklisted(referrer)) {
     res
       .status(403)
-      .send('Host from referer not allowed! Please contact administrator.');
+      .send('This referrer has been blacklisted. If you think this message showed up in error, please contact an administrator.');
   } else {
     next();
   }
 };
 
-function isBlacklisted(referer) {
-  const parts = url.parse(referer).host.split(".");
+function isBlacklisted(referrer) {
+  if(!referrer) {
+    return false;
+  }
+  const parts = url.parse(referrer).host.split(".");
 
   if(parts.length > 1) {
     const domainNameWithEnding = parts.splice(-2).join(".");
