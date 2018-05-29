@@ -1,6 +1,9 @@
 language: node_js
 node_js:
-  - "7"
+- '7'
 sudo: required
 env:
-    - NODE_ENV=test
+  matrix:
+  - NODE_ENV=test
+  global:
+    secure: dyau/6U9sked0BLVIxjbTeIXp1Nu37/v0J0nH1fJ5q67ZSJCG1Xg/IbeH+ATuuDDtW4qU4EVWZKTIUuBO54c8CQ5/gewv4JMJPTDBU0DWB2NJhUePsC3r8LeBim+2YFuRHuvw1sF+HSfJ9MFcwARNtsw86uM4hfnPXOWtv2AI3s+H7jw7B+xJaFttBT9gu08NT/hWSz0d57slOi7e0I0vJDLqxWmAAE8sWYcUOWgxaVmlmP+h3E/otI19YHLTU7pHy4U+EDtJb2MzGHJxZofuYcNnfLOzp6nj7qA3v/7hxKAgkdXFoxx6GmwsDMaWwJ/gBGzaBZ7ICzN5SEmDLfwo2VUAyEuxclNWBeXrcgNsLQAGHYMghsVKGPeh/LDcgPrDWzD4fpg6dff7bM7N/1CZ9YkWrIZWIjc+GAde1TS2bB0l/oNhtd8UsONipZPv4VJtameWdWvzN4/MSB9sJbU8wy/P+wWpWNfHpHUdwSoniFHrtJtfghdm5BCtdMRU8BD+pOGXqclc4oq7Nrh7bfzEzoFARLSG3ezHEYLzoFhKEarwW2u1G8ePrt33lLgVluBtfZm9NKA8EpiaSLNqD384OSaVueM+N98lhuczj5gogB3SLnDbwo6ZXjgDK5dNhNQIfvmnGVDqekKkQlLq/mhgEPwUflDav4m4VhuNVhZN1A=
