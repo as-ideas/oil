@@ -14,13 +14,6 @@ nightwatch_config = {
     "port": 80
   },
 
-  common_capabilities: {
-    'browserstack.user': 'asideas1',
-    'browserstack.key': 'rB4U5YVGsGryCXscMsKQ'
-  },
-
-  // get new configs from https://www.browserstack.com/automate/node
-
   test_settings: {
     default: {},
     chrome14: {
@@ -248,9 +241,8 @@ for (let i in nightwatch_config.test_settings) {
   config['selenium_host'] = nightwatch_config.selenium.host;
   config['selenium_port'] = nightwatch_config.selenium.port;
   config['desiredCapabilities'] = config['desiredCapabilities'] || {};
-  for (let j in nightwatch_config.common_capabilities) {
-    config['desiredCapabilities'][j] = config['desiredCapabilities'][j] || nightwatch_config.common_capabilities[j];
-  }
+  config['desiredCapabilities']['browserstack.key'] = process.env.BROWSERSTACK_KEY;
+  config['desiredCapabilities']['browserstack.user'] = process.env.BROWSERSTACK_USER;
 }
 
 module.exports = nightwatch_config;
