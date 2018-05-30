@@ -6,10 +6,12 @@
 Currently in *beta* until 18.06.2018. 
 
 [![Latest Release](https://img.shields.io/github/release/as-ideas/oil.svg)](https://oil.axelspringer.com/release/) 
-[![Build Status](https://jenkins.ipool.asideas.de/buildStatus/icon?job=OIL-build)](https://jenkins.ipool.asideas.de/job/OIL-build/)
+[![Build Status](https://travis-ci.org/as-ideas/oil.svg?branch=master)](https://travis-ci.org/as-ideas/oil)
+[![Coverage Status](https://coveralls.io/repos/github/as-ideas/oil/badge.svg?branch=master)](https://coveralls.io/github/as-ideas/oil?branch=master)
 ![GZIP SIZE](http://img.badgesize.io/https://oil.axelspringer.com/latest/oil.min.js?compression=gzip&style=flat-square)
 [![GPL2 License][license-image]][license-url] 
-
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fas-ideas%2Foil.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fas-ideas%2Foil?ref=badge_shield)
+[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=K0diOE0wb08vMTBzVFNOcFNLQ0NpVTNDdWZOR0JDWStscE84Z1VqOGZUUT0tLU40MEJSQVk3dFJ2RXh1a294S1VJTUE9PQ==--63f8bb4a27933f962a3a17112782edeac545ba77)](https://www.browserstack.com/automate/public-build/K0diOE0wb08vMTBzVFNOcFNLQ0NpVTNDdWZOR0JDWStscE84Z1VqOGZUUT0tLU40MEJSQVk3dFJ2RXh1a294S1VJTUE9PQ==--63f8bb4a27933f962a3a17112782edeac545ba77)
 
 [Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs/last-release) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html) | [Release Notes](https://github.com/as-ideas/oil/releases)
 

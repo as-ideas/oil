@@ -47,6 +47,7 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
 
   it('should insert CPC into host site with GIVEN PRIVACY SETTING', (done) => {
     loadFixture('html/integrated-cpc.html');
+
     setSoiOptIn({
       '1': false,
       '2': true,
@@ -57,7 +58,7 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
 
     oilShowPreferenceCenter();
 
-    waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
+    setTimeout(() => {
       expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
       expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
       expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
@@ -65,7 +66,7 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
       expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
       expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(true);
       done();
-    });
+    }, 10);
 
   });
 

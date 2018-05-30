@@ -46,8 +46,13 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: '**/*.html', included: false}
+      {pattern: '**/*.html', included: false},
+      'dist/oil.bundle.js'
     ],
+
+    preprocessors: {
+      'dist/oil.bundle.js': ['coverage']
+    },
 
     // list of files / patterns to exclude
     exclude: [],
@@ -64,7 +69,9 @@ module.exports = function (config) {
     reporters: [
       'spec',
       'junit',
-      'kjhtml'
+      'kjhtml',
+      'coverage',
+      'coveralls'
     ],
 
     specReporter: {
@@ -74,11 +81,12 @@ module.exports = function (config) {
     junitReporter: JUNIT,
 
     coverageReporter: {
-      dir: '../target/coverage/',
+      dir: 'target/coverage',
       reporters: [
         {type: 'text-summary'},
         {type: 'json'},
-        {type: 'html'}
+        {type: 'html'},
+        {type: 'lcov'}
       ]
     },
 
