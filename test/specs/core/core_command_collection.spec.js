@@ -3,6 +3,7 @@ import * as CoreLog from '../../../src/scripts/core/core_log';
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as CoreConsents from '../../../src/scripts/core/core_consents';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
+import {getVendorList} from '../../../src/scripts/core/core_vendor_information';
 import {getVendorConsentData} from '../../../src/scripts/core/core_consents';
 import {waitsForAndRuns} from '../../utils';
 
@@ -101,8 +102,10 @@ describe('command collection executor', () => {
     verifyInvocationOfCommandWithCallback('getConsentData', CoreConsents.getConsentDataString, 'aResult', done);
   });
 
-  it('should process command "getVendorlist" with callback', (done) => {
-    verifyInvocationOfCommandWithCallback('getVendorlist', CoreVendorInformation.getVendorlist, 'aResult', done);
+  it('should process command "getVendorList" with callback', () => {
+    let ispy = spyOn(CoreVendorInformation, 'getVendorList');
+    getVendorList()
+    expect(ispy).toHaveBeenCalled()
   });
 
   it('should process single command if command entry is given as parameter', (done) => {

@@ -3325,9 +3325,8 @@ const defaultVendorList = {
   ]
 };
 
-let cachedVendorList;
+export let cachedVendorList;
 
-// FIXME write tests
 export function loadVendorList() {
   return new Promise(function (resolve, reject) {
     if (cachedVendorList) {
