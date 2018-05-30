@@ -5,10 +5,6 @@ let reporter = new HtmlReporter({
 });
 
 module.exports = {
-  before: function(done){
-    require('dotenv').config();
-    done();
-  },
   openBrowser: false,
   'launch_url_host1': 'https://oil-integration-host1.herokuapp.com/',
   'launch_url_host2': 'https://oil-integration-host2.herokuapp.com/',
