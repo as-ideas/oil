@@ -17,7 +17,7 @@ let DOCUMENT_ROOT = __dirname + '/dist';
 
 let domainBlacklist = function (req, res, next) {
   let referer = req.header("Referer") || req.header("referer");
-  if (!referer || isBlacklisted(referer)) {
+  if (isBlacklisted(referer)) {
     res
       .status(403)
       .send('Host from referer not allowed! Please contact administrator.');
@@ -27,6 +27,9 @@ let domainBlacklist = function (req, res, next) {
 };
 
 function isBlacklisted(referer) {
+  if(!referer) {
+    return false;
+  }
   const parts = url.parse(referer).host.split(".");
 
   if(parts.length > 1) {

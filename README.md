@@ -178,6 +178,23 @@ There are two kinds of unit tests: For the oil.js itself (``npm run test:unit``)
 * Running end2end-tests locally: Start app in one terminal `npm start` and then in the next terminal `npm run e2e`
 * Running only one test: 
 
+#### Browserstack tests
+
+You can run all E2E tests with different setups using Browserstack. Tests use our remote server at `https://oil-integration-host1.herokuapp.com` where the latest release is deployed to.
+
+To run tests in batch there are two commands, the first one covering a limited but most relevant selection of browsers.
+
+    $ npm run browserstack
+    $ npm run browserstack:full
+
+*Both commands require you to have your Browserstack credentials ready.* You can find them [here](https://www.browserstack.com/accounts/settings).
+
+To test with only a specific browser, do this:
+
+    $ ENV_USER=your-browserstack-user ENV_KEY=your-browserstack-key ./node_modules/.bin/nightwatch -c etc/nightwatch.remote.conf.js -e ff52
+
+The `-e` parameter should contain the id of the test setting to launch with. In this case `ff52`. For all available test settings check the objects inside the file `etc/nightwatch.remote.config.js`
+
 #### Advanced Usage
 
 npm run build:release creates an app version that loads its parts
