@@ -58,7 +58,7 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
 
     oilShowPreferenceCenter();
 
-    setTimeout(() => {
+    waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
       expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
       expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
       expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
