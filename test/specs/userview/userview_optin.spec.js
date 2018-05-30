@@ -1,4 +1,4 @@
-import {checkOptIn, oilOptIn, oilPowerOptIn} from '../../../src/scripts/userview/userview_optin';
+import {oilOptIn, oilPowerOptIn} from '../../../src/scripts/userview/userview_optin';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
@@ -12,88 +12,13 @@ import {
   OIL_PAYLOAD_VERSION
 } from '../../../src/scripts/core/core_constants';
 
-describe('userview optin handler', () => {
+describe('user view opt-in handler', () => {
 
   let privacySettings = {
     'key': 'value'
   };
 
-  describe('opt in checker', () => {
-    beforeEach(() => {
-      spyOn(CoreCookies, 'setSoiOptIn').and.callFake(() => {
-      });
-    });
-
-    it('should set use the power optin for the single optin if single optin is not defined and power optin can be verified', (done) => {
-      let singleOptIn = false;
-      let powerOptIn = true;
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({opt_in: singleOptIn});
-      spyOn(CoreConfig, 'isSubscriberSetCookieActive').and.returnValue(true);
-      spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise(resolve => {
-        resolve({power_opt_in: powerOptIn, privacy: privacySettings});
-      }));
-
-      checkOptIn().then(resultOptIn => {
-        expect(resultOptIn).toBe(powerOptIn);
-        expect(CorePoi.verifyPowerOptIn).toHaveBeenCalled();
-        expect(CoreCookies.setSoiOptIn).toHaveBeenCalledWith(privacySettings);
-        done();
-      });
-    });
-
-    it('should not try to set single optin if power optin cannot be verified', (done) => {
-      let singleOptIn = false;
-      let powerOptIn = false;
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({opt_in: singleOptIn});
-      spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise(resolve => {
-        resolve({power_opt_in: powerOptIn, privacy: privacySettings});
-      }));
-
-      checkOptIn().then(resultOptIn => {
-        expect(resultOptIn).toBe(singleOptIn);
-        expect(CorePoi.verifyPowerOptIn).toHaveBeenCalled();
-        expect(CoreCookies.setSoiOptIn).not.toHaveBeenCalled();
-        done();
-      });
-    });
-
-    it('should not try to set single optin if power optin can be verified but subscriperSetCookie is not active', (done) => {
-      let singleOptIn = false;
-      let powerOptIn = true;
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({opt_in: singleOptIn});
-      spyOn(CoreConfig, 'isSubscriberSetCookieActive').and.returnValue(false);
-      spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise(resolve => {
-        resolve({power_opt_in: powerOptIn, privacy: privacySettings});
-      }));
-
-      checkOptIn().then(resultOptIn => {
-        expect(resultOptIn).toBe(powerOptIn);
-        expect(CorePoi.verifyPowerOptIn).toHaveBeenCalled();
-        expect(CoreCookies.setSoiOptIn).not.toHaveBeenCalled();
-        done();
-      });
-    });
-
-    it('should not try to set single optin if power optin can be verified but single optin is already set', (done) => {
-      let singleOptIn = true;
-      let powerOptIn = true;
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({opt_in: singleOptIn});
-      spyOn(CoreConfig, 'isSubscriberSetCookieActive').and.returnValue(true);
-      spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise(resolve => {
-        resolve({power_opt_in: powerOptIn, privacy: privacySettings});
-      }));
-
-      checkOptIn().then(resultOptIn => {
-        expect(resultOptIn).toBe(powerOptIn);
-        expect(CorePoi.verifyPowerOptIn).toHaveBeenCalled();
-        expect(CoreCookies.setSoiOptIn).not.toHaveBeenCalled();
-        done();
-      });
-    });
-
-  });
-
-  describe('power optin handler', () => {
+  describe('power opt-in handler', () => {
     let expectedLocaleVariantName = 'enEN_01';
     let expectedLocaleVariantVersion = 17;
 
@@ -101,8 +26,7 @@ describe('userview optin handler', () => {
       spyOn(UserViewPoi, 'activatePowerOptInWithIFrame');
       spyOn(UserViewPoi, 'activatePowerOptInWithRedirect');
       spyOn(CoreConfig, 'getLocaleVariantName').and.returnValue(expectedLocaleVariantName);
-      spyOn(CoreCookies, 'setSoiOptIn').and.callFake(() => {
-      });
+      spyOn(CoreCookies, 'setSoiCookie');
       spyOn(CoreUtils, 'getLocaleVariantVersion').and.returnValue(expectedLocaleVariantVersion);
       spyOn(CoreUtils, 'sendEventToHostSite');
     });
@@ -115,21 +39,21 @@ describe('userview optin handler', () => {
       expect(payload[OIL_PAYLOAD_LOCALE_VARIANT_VERSION]).toEqual(expectedLocaleVariantVersion);
     }
 
-    it('should set single optin too if it is not prohibited', (done) => {
+    it('should set single opt-in too if it is not prohibited', (done) => {
       oilPowerOptIn(privacySettings, false).then(() => {
-        expect(CoreCookies.setSoiOptIn).toHaveBeenCalledWith(privacySettings);
+        expect(CoreCookies.setSoiCookie).toHaveBeenCalledWith(privacySettings);
         done();
       });
     });
 
-    it('should not set single optin too if it is prohibited', (done) => {
+    it('should not set single opt-in too if it is prohibited', (done) => {
       oilPowerOptIn(privacySettings, true).then(() => {
-        expect(CoreCookies.setSoiOptIn).not.toHaveBeenCalled();
+        expect(CoreCookies.setSoiCookie).not.toHaveBeenCalled();
         done();
       });
     });
 
-    it('should activate power optin with iframe', (done) => {
+    it('should activate power opt-in with iframe', (done) => {
       spyOn(CoreConfig, 'isPoiActive').and.returnValue(true);
 
       oilPowerOptIn(privacySettings).then(() => {
@@ -143,7 +67,7 @@ describe('userview optin handler', () => {
       });
     });
 
-    it('should activate power optin with redirect if activation with iframe fails', (done) => {
+    it('should activate power opt-in with redirect if activation with iframe fails', (done) => {
       spyOn(CoreConfig, 'isPoiActive').and.returnValue(true);
       spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise(resolve => {
         resolve({power_opt_in: false});
@@ -163,7 +87,7 @@ describe('userview optin handler', () => {
       });
     });
 
-    it('should not activate power optin if power option is not activated', (done) => {
+    it('should not activate power opt-in if power option is not activated', (done) => {
       spyOn(CoreConfig, 'isPoiActive').and.returnValue(false);
       spyOn(CorePoi, 'verifyPowerOptIn');
 
@@ -177,17 +101,16 @@ describe('userview optin handler', () => {
     });
   });
 
-  describe('single optin handler', () => {
+  describe('single opt-in handler', () => {
 
     beforeEach(() => {
       spyOn(CoreUtils, 'sendEventToHostSite');
-      spyOn(CoreCookies, 'setSoiOptIn').and.callFake(() => {
-      });
+      spyOn(CoreCookies, 'setSoiCookie');
     });
 
-    it('should set single optin', (done) => {
+    it('should set single opt-in', (done) => {
       oilOptIn(privacySettings).then(() => {
-        expect(CoreCookies.setSoiOptIn).toHaveBeenCalledWith(privacySettings);
+        expect(CoreCookies.setSoiCookie).toHaveBeenCalledWith(privacySettings);
         expect(CoreUtils.sendEventToHostSite).toHaveBeenCalledWith(EVENT_NAME_OPT_IN);
         done();
       });

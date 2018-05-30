@@ -3,6 +3,9 @@ import {getSoiCookie} from '../../src/scripts/core/core_cookies.js';
 import {getLabel} from '../../src/scripts/userview/userview_config.js';
 import {OIL_LABELS} from '../../src/scripts/userview/userview_constants.js';
 import {loadFixture} from '../utils.js';
+import VENDOR_LIST from '../fixtures/vendorlist/simple_vendor_list'
+import * as CoreVendorInformation from '../../src/scripts/core/core_vendor_information';
+
 
 describe('configuration', () => {
 
@@ -43,9 +46,13 @@ describe('configuration', () => {
     expect(getLocaleVariantName()).toBe('absurdistan');
   });
 
-  it('should set privacy=1 when default_to_optin=true', function() {
+  it('should set consent for all purposes when default_to_optin=true', function () {
+    spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
+    spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
+    spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
+
     loadFixture('config/given.config.with.default.to.optin.html');
-    expect(getSoiCookie().privacy).toEqual(1)
+    expect(getSoiCookie().consentData.getPurposesAllowed().sort()).toEqual([1, 2, 3, 4, 5]);
   });
 
 });

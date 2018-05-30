@@ -3327,9 +3327,8 @@ const defaultVendorList = {
 
 let cachedVendorList;
 
-// FIXME write tests
 export function loadVendorList() {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     if (cachedVendorList) {
       resolve(cachedVendorList);
     } else {
@@ -3361,7 +3360,7 @@ function sortVendors(vendorList) {
 }
 
 /**
- * !!! May produce 'Undefined' exceptions if vendorlist was not loaded before!
+ * !!! May produce 'Undefined' exceptions if vendor list was not loaded before!
  *
  * @returns {*[]|Purpose[]}
  */
@@ -3370,7 +3369,7 @@ export function getPurposes() {
 }
 
 /**
- * !!! May produce 'Undefined' exceptions if vendorlist was not loaded before!
+ * !!! May produce 'Undefined' exceptions if vendor list was not loaded before!
  *
  * @returns {*[]|Vendor[]|optimization.splitChunks.cacheGroups.vendors|{test, priority}}
  */
@@ -3379,7 +3378,7 @@ export function getVendors() {
 }
 
 /**
- * !!! May produce 'Undefined' exceptions if vendorlist was not loaded before!
+ * !!! May produce 'Undefined' exceptions if vendor list was not loaded before!
  *
  * @returns {integer|number|*}
  */
@@ -3388,7 +3387,7 @@ export function getVendorListVersion() {
 }
 
 /**
- * !!! May produce 'Undefined' exceptions if vendorlist was not loaded before!
+ * !!! May produce 'Undefined' exceptions if vendor list was not loaded before!
  *
  * @returns {*}
  */
@@ -3398,4 +3397,8 @@ export function getVendorList() {
 
 export function clearVendorListCache() {
   cachedVendorList = undefined;
+}
+
+export function isVendorListFetched() {
+  return typeof cachedVendorList !== 'undefined';
 }

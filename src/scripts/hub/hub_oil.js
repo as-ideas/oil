@@ -1,9 +1,9 @@
-import { logInfo } from '../core/core_log.js';
-import { POI_FALLBACK_NAME, POI_FALLBACK_GROUP_NAME, POI_PAYLOAD } from '../core/core_constants.js';
-import { setPoiOptIn, getPoiCookie } from '../hub/hub_cookies.js';
-import { registerMessageListener, removeMessageListener, OilVersion } from '../core/core_utils.js';
-import { getStringParam } from './hub_utils.js';
-import { removeHubCookie } from '../core/core_cookies.js';
+import {logInfo} from '../core/core_log.js';
+import {POI_FALLBACK_GROUP_NAME, POI_FALLBACK_NAME, POI_PAYLOAD} from '../core/core_constants.js';
+import {getPoiCookie, setPoiCookie} from '../hub/hub_cookies.js';
+import {OilVersion, registerMessageListener, removeMessageListener} from '../core/core_utils.js';
+import {getStringParam} from './hub_utils.js';
+import {removeHubCookie} from '../core/core_cookies.js';
 
 let initComplete = false;
 
@@ -25,9 +25,8 @@ export function initOilHub(locationString) {
       logInfo('Using payload:', payload);
     }
 
-    setPoiOptIn(groupName, payload);
+    setPoiCookie(groupName, payload);
     exports.redirectBack();
-
   } else {
     if (!initComplete) {
       removeMessageListener(handlerFunction);
@@ -56,7 +55,7 @@ function handlerFunction(message) {
           logInfo('OIL Hub - activating POI ');
           logInfo('Using groupName:', groupName);
           logInfo('Using payload:', payload);
-          setPoiOptIn(groupName, payload);
+          setPoiCookie(groupName, payload);
           break;
         case 'oil-status-read':
           poiOptin = getPoiCookie(groupName);
