@@ -1,13 +1,21 @@
-import {getCookieExpireInDays, getHubLocation, getHubOrigin, getHubPath, getLocaleVariantName, resetConfiguration} from '../../src/scripts/core/core_config.js';
-import {getSoiCookie} from '../../src/scripts/core/core_cookies.js';
-import {getLabel} from '../../src/scripts/userview/userview_config.js';
-import {OIL_LABELS} from '../../src/scripts/userview/userview_constants.js';
-import {loadFixture} from '../utils.js';
+import {
+  getCookieExpireInDays,
+  getHubLocation,
+  getHubOrigin,
+  getHubPath,
+  getLocaleVariantName,
+  resetConfiguration
+} from '../../src/scripts/core/core_config.js';
+import { getSoiCookie } from '../../src/scripts/core/core_cookies.js';
+import { getLabel } from '../../src/scripts/userview/userview_config.js';
+import { OIL_LABELS } from '../../src/scripts/userview/userview_constants.js';
+import { loadFixture, deleteAllCookies } from '../utils.js';
 
 describe('configuration', () => {
 
   beforeEach(() => {
     resetConfiguration();
+    deleteAllCookies();
   });
 
   it('should work with empty config', () => {
@@ -43,7 +51,7 @@ describe('configuration', () => {
     expect(getLocaleVariantName()).toBe('absurdistan');
   });
 
-  it('should set privacy=1 when default_to_optin=true', function() {
+  it('should set privacy=1 when default_to_optin=true', function () {
     loadFixture('config/given.config.with.default.to.optin.html');
     expect(getSoiCookie().privacy).toEqual(1)
   });

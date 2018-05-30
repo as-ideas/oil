@@ -17,7 +17,7 @@ import { hasRunningTimeout } from '../../../src/scripts/userview/userview_modal'
 import { setSoiOptIn } from '../../../src/scripts/core/core_cookies';
 import { waitForElementToDisplay } from '../../utils';
 
-describe('the userview modal aka the oil layer wrapper with CPC', () => {
+xdescribe('the userview modal aka the oil layer wrapper with CPC', () => {
 
   beforeEach(() => {
     deleteAllCookies();
