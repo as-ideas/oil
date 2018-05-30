@@ -5,9 +5,21 @@ module.exports = function (config) {
   baseConfig(config);
   // Override base config
   config.set({
+    preprocessors: {
+      'dist/oil.bundle.js': ['coverage']
+    },
+
+    reporters: [
+      'spec',
+      'junit',
+      'kjhtml',
+      'coverage',
+      'coveralls'
+    ],
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
     singleRun: true,
-    autoWatch: false
+    autoWatch: false,
   });
+  config.files.push('dist/oil.bundle.js');
 };
