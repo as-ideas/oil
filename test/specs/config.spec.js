@@ -1,13 +1,21 @@
-import {getCookieExpireInDays, getHubLocation, getHubOrigin, getHubPath, getLocaleVariantName, resetConfiguration} from '../../src/scripts/core/core_config.js';
-import {getSoiCookie} from '../../src/scripts/core/core_cookies.js';
-import {getLabel} from '../../src/scripts/userview/userview_config.js';
-import {OIL_LABELS} from '../../src/scripts/userview/userview_constants.js';
-import {loadFixture} from '../utils.js';
+import {
+  getCookieExpireInDays,
+  getHubLocation,
+  getHubOrigin,
+  getHubPath,
+  getLocaleVariantName,
+  resetConfiguration
+} from '../../src/scripts/core/core_config.js';
+import { getSoiCookie } from '../../src/scripts/core/core_cookies.js';
+import { getLabel } from '../../src/scripts/userview/userview_config.js';
+import { OIL_LABELS } from '../../src/scripts/userview/userview_constants.js';
+import { loadFixture, deleteAllCookies } from '../utils.js';
 
 describe('configuration', () => {
 
   beforeEach(() => {
     resetConfiguration();
+    deleteAllCookies();
   });
 
   it('should work with empty config', () => {
