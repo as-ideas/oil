@@ -46,13 +46,8 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: '**/*.html', included: false},
-      'dist/oil.bundle.js'
+      {pattern: '**/*.html', included: false}
     ],
-
-    preprocessors: {
-      'dist/oil.bundle.js': ['coverage']
-    },
 
     // list of files / patterns to exclude
     exclude: [],
@@ -69,9 +64,7 @@ module.exports = function (config) {
     reporters: [
       'spec',
       'junit',
-      'kjhtml',
-      'coverage',
-      'coveralls'
+      'kjhtml'
     ],
 
     specReporter: {
