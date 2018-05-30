@@ -1,55 +1,17 @@
-import { verifyPowerOptIn } from '../core/core_poi.js';
-import { logInfo, logPreviewInfo } from '../core/core_log.js';
-import { activatePowerOptInWithIFrame, activatePowerOptInWithRedirect } from './userview_poi.js';
-import { getLocaleVariantVersion, OilVersion, sendEventToHostSite } from '../core/core_utils.js';
+import {verifyPowerOptIn} from '../core/core_poi.js';
+import {logInfo} from '../core/core_log.js';
+import {activatePowerOptInWithIFrame, activatePowerOptInWithRedirect} from './userview_poi.js';
+import {getLocaleVariantVersion, OilVersion, sendEventToHostSite} from '../core/core_utils.js';
 import {
   EVENT_NAME_OPT_IN,
   OIL_PAYLOAD_LOCALE_VARIANT_NAME,
   OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
   OIL_PAYLOAD_PRIVACY,
-  OIL_PAYLOAD_VERSION
+  OIL_PAYLOAD_VERSION,
+  PRIVACY_FULL_TRACKING
 } from '../core/core_constants.js';
-import { getSoiCookie, setSoiOptIn } from '../core/core_cookies.js';
-import { getLocaleVariantName, isPoiActive, isSubscriberSetCookieActive } from '../core/core_config.js';
-import { PRIVACY_FULL_TRACKING } from '../core/core_constants.js';
-
-/**
- * Log Helper function for checkOptIn
- * @param {*} singleOptIn
- * @param {*} powerOptIn
- */
-function logPreviewOptInInfo(singleOptIn, powerOptIn) {
-  if (powerOptIn) {
-    logPreviewInfo('User has given POI permit, OIL not shown.');
-  } else if (singleOptIn) {
-    logPreviewInfo('User has given SOI permit, OIL not shown.');
-  } else {
-    logPreviewInfo('User has not opted in at all, OIL should be shown.');
-  }
-}
-
-/**
- * Check Opt In
- * @return Promise with updated cookie value
- */
-export function checkOptIn() {
-  return new Promise((resolve) => {
-    let soiOptIn = getSoiCookie().opt_in;
-    let resultOptIn = soiOptIn;
-
-    // Verify Power Opt In (will return immediately if not activated), it will overwrite the SOI result only if its positive
-    verifyPowerOptIn().then((powerOptIn) => {
-      logPreviewOptInInfo(soiOptIn, powerOptIn.power_opt_in);
-      if (powerOptIn.power_opt_in) {
-        resultOptIn = powerOptIn.power_opt_in;
-        if (isSubscriberSetCookieActive() && !soiOptIn) {
-          setSoiOptIn(powerOptIn.privacy);
-        }
-      }
-      resolve(resultOptIn);
-    });
-  });
-}
+import {setSoiCookie} from '../core/core_cookies.js';
+import {getLocaleVariantName, isPoiActive} from '../core/core_config.js';
 
 /**
  * Oil optIn power
@@ -60,7 +22,7 @@ export function checkOptIn() {
 export function oilPowerOptIn(privacySettings, powerOnly = false) {
   if (!powerOnly) {
     // Update Oil cookie (site - SOI)
-    setSoiOptIn(privacySettings);
+    setSoiCookie(privacySettings);
   }
 
   return new Promise((resolve) => {
@@ -73,7 +35,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
 
     if (isPoiActive()) {
       // Update Oil cookie (mypass - POI)
-      // TODO returned promise is ignored - correct?
+      // noinspection JSIgnoredPromiseFromCall
       activatePowerOptInWithIFrame(payload);
 
       // Check if fallback is needed
@@ -99,7 +61,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
  * @return {Promise} promise with updated cookie value
  */
 export function oilOptIn(privacySettings = PRIVACY_FULL_TRACKING) {
-  setSoiOptIn(privacySettings);
+  setSoiCookie(privacySettings);
   sendEventToHostSite(EVENT_NAME_OPT_IN);
 
   return new Promise((resolve) => {

@@ -95,7 +95,7 @@ export function sendEventToFrame(eventName, origin, payload = {}) {
  * Read configuration from hidden iframe
  * @param origin - origin url (aka parent)
  * @function
- * @return promise with result of the
+ * @return Promise<any> with result of the
  */
 function readConfigFromFrame(origin) {
   return new Promise((resolve) => {

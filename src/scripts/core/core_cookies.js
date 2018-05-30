@@ -1,8 +1,13 @@
 import Cookie from 'js-cookie';
-import {logInfo} from './core_log.js';
-import {getCookieExpireInDays, getLocaleVariantName, getDefaultToOptin} from './core_config.js';
-import {PRIVACY_FULL_TRACKING, PRIVACY_MINIMUM_TRACKING} from './core_constants.js';
-import {getClientTimestamp, getLocaleVariantVersion, OilVersion} from './core_utils.js';
+import {logError, logInfo} from './core_log';
+import {getCookieExpireInDays, getDefaultToOptin, getLanguage, getLanguageFromLocale, getLocaleVariantName} from './core_config';
+import {getLocaleVariantVersion} from './core_utils.js';
+import {OIL_SPEC} from './core_constants';
+import {getPurposes, getVendorList, isVendorListFetched, loadVendorList} from './core_vendor_information';
+import {getLimitedVendorIds} from './core_consents';
+import {OilVersion} from './core_utils';
+
+const {ConsentString} = require('consent-string');
 
 const COOKIE_PREVIEW_NAME = 'oil_preview';
 const COOKIE_VERBOSE_NAME = 'oil_verbose';
@@ -15,93 +20,61 @@ export function setSessionCookie(name, value) {
 }
 
 export function setDomainCookie(name, value, expires_in_days) {
+  // decoded consent data must not be written to the cookie
+  delete value.consentData;
   Cookie.set(name, value, {expires: expires_in_days});
 }
 
-/**
- * Checks weather a cookie exists
- * @param name {string} Name of cookie
- * @return true or false
- */
-function isCookie(name) {
-  return typeof (Cookie.get(name)) !== 'undefined';
-}
-
-/**
- * Checks if a cookie contains a data object with given keys
- * @param name {string} Name of cookie
- * @param data {array}  Keys of dataobject
- * @returns boolean
- */
-function cookieDataHasKeys(name, data) {
-  if (typeof (name) === 'string' && Array.isArray(data)) {
-    if (isCookie(name)) {
-      const cookieData = Cookie.getJSON(name);
-      return data.every((item) => {
-        return cookieData.hasOwnProperty(item);
-      })
-    }
-  }
-  return false;
-}
-
-/**
- * Checks if a cookie is valid and contains a data object with given keys
- * @param name {string} Name of cookie
- * @param data {array}  Keys of dataobject
- * @returns boolean
- */
-function isCookieValid(name, data) {
-  return cookieDataHasKeys(name, data)
-}
-
-function getDomainCookieConfig() {
-  return {
-    name: OIL_DOMAIN_COOKIE_NAME,
-    expires: getCookieExpireInDays(),
-    default_content: {
-      'opt_in': false,
-      'timestamp': getClientTimestamp(),
-      'version': OilVersion.get(),
-      'localeVariantName': getLocaleVariantName(),
-      'localeVariantVersion': getLocaleVariantVersion(),
-      'privacy': getDefaultPrivacy()
-    }
-  };
-}
-
-function getDefaultPrivacy() {
-  return getDefaultToOptin() ? PRIVACY_FULL_TRACKING : PRIVACY_MINIMUM_TRACKING;
-}
-
-function getOilDomainCookie() {
-  return getOilCookie(getDomainCookieConfig());
-}
-
-// PUBLIC INTERFACE
 export function getOilCookie(cookieConfig) {
-  if (isCookie(cookieConfig.name) &&
-    isCookieValid(cookieConfig.name, Object.keys(cookieConfig.default_content))) {
-    return Cookie.getJSON(cookieConfig.name);
+  if (isCookieValid(cookieConfig.name, Object.keys(cookieConfig.defaultCookieContent))) {
+    let cookieJson = Cookie.getJSON(cookieConfig.name);
+    cookieJson.consentData = new ConsentString(cookieJson.consentString);
+    return cookieJson;
   }
-
-  return cookieConfig.default_content;
+  return cookieConfig.defaultCookieContent;
 }
 
-export function setSoiOptIn(privacySettings) {
-  let cookie = getOilDomainCookie();
-  cookie.opt_in = true;
-  cookie.privacy = privacySettings;
-  cookie.timestamp = getClientTimestamp();
-  cookie.version = OilVersion.get();
-  cookie.localeVariantName = getLocaleVariantName();
-  cookie.localeVariantVersion = getLocaleVariantVersion();
-  setDomainCookie(getDomainCookieConfig().name, cookie, getDomainCookieConfig().expires);
+export function hasOutdatedOilCookie(cookieConfig) {
+  return isCookieValid(cookieConfig.name, cookieConfig.outdated_cookie_content_keys);
+}
+
+export function setSoiCookieWithConsentString(consentString) {
+  let cookieConfig = getOilCookieConfig();
+
+  let cookie = {
+    opt_in: true,
+    version: cookieConfig.defaultCookieContent.version,
+    localeVariantName: cookieConfig.defaultCookieContent.localeVariantName,
+    localeVariantVersion: cookieConfig.defaultCookieContent.localeVariantVersion,
+    consentString: consentString
+  };
+  setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires);
+}
+
+export function setSoiCookie(privacySettings) {
+  return new Promise((resolve, reject) => {
+    loadVendorList().then(() => {
+      let cookieConfig = getOilCookieConfig();
+
+      let cookie = getOilCookie(cookieConfig);
+      updateCookieWithCurrentCmpConfiguration(cookie, cookieConfig);
+      cookie.opt_in = true;
+      cookie.consentData.setPurposesAllowed(getPurposesWithConsent(privacySettings));
+      cookie.consentData.setVendorsAllowed(getLimitedVendorIds());
+      cookie.consentString = cookie.consentData.getConsentString();
+      setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires);
+      resolve();
+    }).catch(error => {
+      logError(error);
+      reject(error);
+    });
+  });
 }
 
 export function getSoiCookie() {
-  let cookie = getOilDomainCookie();
-  logInfo('Current Oil Domain Cookie: ', cookie);
+  let cookieConfig = getOilCookieConfig();
+  let cookie = hasOutdatedOilCookie(cookieConfig) ? transformOutdatedOilCookie(cookieConfig) : getOilCookie(cookieConfig);
+  logInfo('Current Oil data from domain cookie: ', cookie);
   return cookie;
 }
 
@@ -134,7 +107,6 @@ export function removeSubscriberCookies() {
   Cookie.remove(OIL_SESSION_COOKIE_NAME);
 }
 
-// FIXME write test
 export function removeHubCookie(poiGroup) {
   removeSubscriberCookies();
   if (poiGroup) {
@@ -142,10 +114,9 @@ export function removeHubCookie(poiGroup) {
   }
 }
 
-
 /**
  * Checks weather the browser is able to store cookies
- * @return true or false
+ * @return boolean
  */
 export function isBrowserCookieEnabled() {
   Cookie.set('oil_cookie_exp', 'cookiedata');
@@ -155,3 +126,104 @@ export function isBrowserCookieEnabled() {
 }
 
 
+export function getPurposesWithConsent(privacySettings) {
+  if (typeof privacySettings === 'object') {
+    return getPurposes().map(({id}) => id).filter(purposeId => privacySettings[purposeId]);
+  } else {
+    return privacySettings === 1 ? getPurposes().map(({id}) => id) : [];
+  }
+}
+
+function getAllowedPurposesDefault() {
+  return getPurposesWithConsent(getDefaultToOptin() ? 1 : 0);
+}
+
+function getAllowedVendorsDefault() {
+  return getDefaultToOptin() ? getLimitedVendorIds() : [];
+}
+
+/**
+ * Checks weather a cookie exists
+ * @param name {string} Name of cookie
+ * @return boolean
+ */
+function isCookie(name) {
+  return typeof (Cookie.get(name)) !== 'undefined';
+}
+
+/**
+ * Checks if a cookie contains a data object with given keys
+ * @param name {string} Name of cookie
+ * @param data {array}  Keys of data object
+ * @returns boolean
+ */
+function cookieDataHasKeys(name, data) {
+  if (typeof (name) === 'string' && Array.isArray(data)) {
+    if (isCookie(name)) {
+      const cookieData = Cookie.getJSON(name);
+      return data.every(item => item === 'consentData' || cookieData.hasOwnProperty(item))
+    }
+  }
+  return false;
+}
+
+/**
+ * Checks if a cookie is valid and contains a data object with given keys
+ * @param name {string} Name of cookie
+ * @param data {array}  Keys of data object
+ * @returns boolean
+ */
+function isCookieValid(name, data) {
+  return cookieDataHasKeys(name, data)
+}
+
+function getOilCookieConfig() {
+  let consentData = new ConsentString();
+  consentData.setCmpId(OIL_SPEC.CMP_ID);
+  consentData.setCmpVersion(OIL_SPEC.CMP_VERSION);
+  consentData.setConsentScreen(1);
+
+  consentData.setConsentLanguage(getLanguage());
+  consentData.setPurposesAllowed(getAllowedPurposesDefault());
+  consentData.setVendorsAllowed(getAllowedVendorsDefault());
+  if (isVendorListFetched()) {
+    consentData.setGlobalVendorList(getVendorList());
+  }
+
+  return {
+    name: OIL_DOMAIN_COOKIE_NAME,
+    expires: getCookieExpireInDays(),
+    defaultCookieContent: {
+      opt_in: false,
+      version: OilVersion.get(),
+      localeVariantName: getLocaleVariantName(),
+      localeVariantVersion: getLocaleVariantVersion(),
+      consentData: consentData,
+      consentString: '' // consent string is not computed because global vendor list may be missing here
+    },
+    outdated_cookie_content_keys: ['opt_in', 'timestamp', 'version', 'localeVariantName', 'localeVariantVersion', 'privacy']
+  };
+}
+
+function updateCookieWithCurrentCmpConfiguration(cookie, cookieConfig) {
+  cookie.localeVariantName = cookieConfig.defaultCookieContent.localeVariantName;
+  cookie.localeVariantVersion = cookieConfig.defaultCookieContent.localeVariantVersion;
+  cookie.version = cookieConfig.defaultCookieContent.version;
+  cookie.consentData.setGlobalVendorList(getVendorList());
+  cookie.consentData.setConsentLanguage(cookieConfig.defaultCookieContent.consentData.getConsentLanguage());
+  cookie.consentData.setCmpVersion(cookieConfig.defaultCookieContent.consentData.getCmpVersion());
+}
+
+function transformOutdatedOilCookie(cookieConfig) {
+  let cookieJson = Cookie.getJSON(cookieConfig.name);
+
+  let cookie = cookieConfig.defaultCookieContent;
+  cookie.opt_in = cookieJson.opt_in;
+  cookie.version = cookieJson.version;
+  cookie.localeVariantName = cookieJson.localeVariantName;
+  cookie.localeVariantVersion = cookieJson.localeVariantVersion;
+  cookie.consentData.setConsentLanguage(getLanguageFromLocale(cookieJson.localeVariantName));
+  cookie.consentData.setPurposesAllowed(getPurposesWithConsent(cookieJson.privacy));
+  cookie.consentData.setVendorsAllowed(getLimitedVendorIds());
+  return cookie;
+}

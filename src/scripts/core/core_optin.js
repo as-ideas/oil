@@ -1,7 +1,7 @@
 import {verifyPowerOptIn} from './core_poi.js';
 import {logPreviewInfo} from './core_log.js';
 import {isSubscriberSetCookieActive} from './core_config.js';
-import {getSoiCookie, setSoiOptIn} from './core_cookies.js';
+import {getSoiCookie, setSoiCookieWithConsentString} from './core_cookies.js';
 
 /**
  * Log Helper function for checkOptIn
@@ -33,7 +33,7 @@ export function checkOptIn() {
       if (powerOptIn.power_opt_in) {
         resultOptIn = powerOptIn.power_opt_in;
         if (isSubscriberSetCookieActive() && !soiOptIn) {
-          setSoiOptIn(powerOptIn.privacy);
+          setSoiCookieWithConsentString(powerOptIn.consentString);
         }
       }
       resolve(resultOptIn);

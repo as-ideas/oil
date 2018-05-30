@@ -1,6 +1,6 @@
-import { OIL_CONFIG } from './core_constants.js';
-import { logError, logInfo } from './core_log.js';
-import { getGlobalOilObject, isObject, OilVersion, setGlobalOilObject } from './core_utils';
+import {OIL_CONFIG} from './core_constants.js';
+import {logError, logInfo} from './core_log.js';
+import {isObject, OilVersion, setGlobalOilObject} from './core_utils';
 
 let cachedConfig = null;
 
@@ -146,6 +146,14 @@ export function getLocaleVariantName() {
     return localeVariantName.localeId;
   }
   return localeVariantName;
+}
+
+export function getLanguage() {
+  return getLanguageFromLocale(getLocaleVariantName());
+}
+
+export function getLanguageFromLocale(localeVariantName) {
+  return localeVariantName.substring(0, 2);
 }
 
 /**
