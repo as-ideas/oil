@@ -2,6 +2,7 @@ import {executeCommandCollection} from '../../../src/scripts/core/core_command_c
 import * as CoreLog from '../../../src/scripts/core/core_log';
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as CoreConsents from '../../../src/scripts/core/core_consents';
+import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import {getVendorConsentData} from '../../../src/scripts/core/core_consents';
 import {waitsForAndRuns} from '../../utils';
 
@@ -41,36 +42,67 @@ describe('command collection executor', () => {
     );
   });
 
-  it('should process command "getVendorConsents" with callback', (done) => {
-    verifyInvocationOfCommandWithCallback('getVendorConsents', CoreConsents.getVendorConsentData, 'aResult', done);
+  describe('getPublisherConsents', () => {
+
+    it('should process command', (done) => {
+      verifyInvocationOfCommandWithCallback('getPublisherConsents', CoreConsents.getPublisherConsentData, 'aResult', done);
+    });
+
+    it('should process command with callback and return error status', (done) => {
+      verifyInvocationOfCommandWithCallback('getPublisherConsents', CoreConsents.getPublisherConsentData, undefined, done);
+    });
+
+    it('should process command from message event', (done) => {
+      verifyInvocationOfCommandWithCallId('getPublisherConsents', CoreConsents.getPublisherConsentData, 'aResult', done);
+    });
+
+  });
+ 
+  describe('getVendorConsents', () => {
+
+    it('should process command "getVendorConsents" from message event and send error status', (done) => {
+      verifyInvocationOfCommandWithCallId('getVendorConsents', CoreConsents.getVendorConsentData, undefined, done);
+    });
+
+    it('should process command "getVendorConsents" with callback', (done) => {
+      verifyInvocationOfCommandWithCallback('getVendorConsents', CoreConsents.getVendorConsentData, 'aResult', done);
+    });
+
+    it('should process command "getVendorConsents" with callback and return error status', (done) => {
+      verifyInvocationOfCommandWithCallback('getVendorConsents', CoreConsents.getVendorConsentData, undefined, done);
+    });
+
+    it('should process command "getVendorConsents" from message event', (done) => {
+      verifyInvocationOfCommandWithCallId('getVendorConsents', CoreConsents.getVendorConsentData, 'aResult', done);
+    });
+
+    it('should process command "getVendorConsents" from message event and send error status', (done) => {
+      verifyInvocationOfCommandWithCallId('getVendorConsents', CoreConsents.getVendorConsentData, undefined, done);
+    });
+
   });
 
-  it('should process command "getVendorConsents" with callback and return error status', (done) => {
-    verifyInvocationOfCommandWithCallback('getVendorConsents', CoreConsents.getVendorConsentData, undefined, done);
-  });
+  describe('getVendorConsents', function() {
 
-  it('should process command "getVendorConsents" from message event', (done) => {
-    verifyInvocationOfCommandWithCallId('getVendorConsents', CoreConsents.getVendorConsentData, 'aResult', done);
-  });
+    it('should process command "getVendorConsents" with callback and return error status', (done) => {
+      verifyInvocationOfCommandWithCallback('getConsentData', CoreConsents.getConsentDataString, undefined, done);
+    });
 
-  it('should process command "getVendorConsents" from message event and send error status', (done) => {
-    verifyInvocationOfCommandWithCallId('getVendorConsents', CoreConsents.getVendorConsentData, undefined, done);
+    it('should process command "getVendorConsents" from message event', (done) => {
+      verifyInvocationOfCommandWithCallId('getConsentData', CoreConsents.getConsentDataString, 'aResult', done);
+    });
+
+    it('should process command "getVendorConsents" from message event and send error status', (done) => {
+      verifyInvocationOfCommandWithCallId('getConsentData', CoreConsents.getConsentDataString, undefined, done);
+    });
   });
 
   it('should process command "getConsentData" with callback', (done) => {
     verifyInvocationOfCommandWithCallback('getConsentData', CoreConsents.getConsentDataString, 'aResult', done);
   });
 
-  it('should process command "getVendorConsents" with callback and return error status', (done) => {
-    verifyInvocationOfCommandWithCallback('getConsentData', CoreConsents.getConsentDataString, undefined, done);
-  });
-
-  it('should process command "getVendorConsents" from message event', (done) => {
-    verifyInvocationOfCommandWithCallId('getConsentData', CoreConsents.getConsentDataString, 'aResult', done);
-  });
-
-  it('should process command "getVendorConsents" from message event and send error status', (done) => {
-    verifyInvocationOfCommandWithCallId('getConsentData', CoreConsents.getConsentDataString, undefined, done);
+  it('should process command "getVendorlist" with callback', (done) => {
+    verifyInvocationOfCommandWithCallback('getVendorlist', CoreVendorInformation.getVendorlist, 'aResult', done);
   });
 
   it('should process single command if command entry is given as parameter', (done) => {
