@@ -178,6 +178,15 @@ export function getCustomPurposes() {
   return getConfigValue(OIL_CONFIG.ATTR_CUSTOM_PURPOSES, []);
 }
 
+/**
+ * Define whether in the advanced settings window checkboxes
+ * should be activated by default, even when no consent was given
+ * @return {bool, false}
+ */
+export function getAdvancedSettingsPurposesDefault() {
+  return getConfigValue(OIL_CONFIG.ATTR_ADVANCED_SETTINGS_PURPOSES_DEFAULT, false);
+}
+
 export function getDefaultToOptin() {
   return getConfigValue(OIL_CONFIG.ATTR_DEFAULT_TO_OPTIN, false);
 }

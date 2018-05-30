@@ -21,7 +21,7 @@ describe('nodejs http server', () => {
   it('should add P3P headers on every request', function (done) {
     request(app)
       .get('/demos/complete-integration-site-a.html')
-      .set({"host": "finanzen.net"})
+      .set({"Referer": "http://finanzen.net"})
       .end(function (error, response) {
         expect(response.statusCode).to.equal(200);
         expect(response.header.p3p).to.equal('CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
@@ -29,53 +29,105 @@ describe('nodejs http server', () => {
       }, 1000);
   });
 
-  it('should work with whitelisted hosts', function (done) {
-    request(app)
-      .get('/demos/complete-integration-site-a.html')
-      .set({"host": "finanzen.net"})
-      .end(function (error, response) {
-        expect(response.statusCode).to.equal(200);
-        done();
-      }, 1000);
-  });
+  describe('Blacklist', () => {
 
-  it('should work with whitelisted hosts and ignore header case', function (done) {
-    request(app)
-      .get('/demos/complete-integration-site-a.html')
-      .set({"Host": "finanzen.net"})
-      .end(function (error, response) {
-        expect(response.statusCode).to.equal(200);
-        done();
-      }, 1000);
-  });
+    it('should return 200 without host', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
 
-  it('should work with localhost', function (done) {
-    request(app)
-      .get('/demos/complete-integration-site-a.html')
-      .set({"host": "localhost:8080"})
-      .end(function (error, response) {
-        expect(response.statusCode).to.equal(200);
-        done();
-      }, 1000);
-  });
+    it('should return 403 for blacklisted host', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "https://www.malign.site/"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(403);
+          done();
+        }, 1000);
+    });
 
-  it('should work with oilsiteN', function (done) {
-    request(app)
-      .get('/demos/complete-integration-site-a.html')
-      .set({"host": "oilsiteN:8080"})
-      .end(function (error, response) {
-        expect(response.statusCode).to.equal(200);
-        done();
-      }, 1000);
-  });
+    it('should return 403 for every subdomain of blacklisted host', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "https://foo.bar.baz.malign.site/"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(403);
+          done();
+        }, 1000);
+    });
 
-  it('should return 403 with not whitelisted hosts', function (done) {
-    request(app)
-      .get('/demos/complete-integration-site-a.html')
-      .set({"host": "bild.de"})
-      .end(function (error, response) {
-        expect(response.statusCode).to.equal(403);
-        done();
-      }, 1000);
+    it('should return 200 with non-blacklisted hosts', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "https://www.something.de/"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
+
+    it('should return 200 with non-blacklisted host and its subdomains', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "https://foo.bar.something.de/"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
+
+    it('should work with non-blacklisted host and be case insensitive', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"referer": "http://finanzen.net"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
+
+    it('should work with localhost', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "http://localhost:8080"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
+
+    it('should work with oilsiteN', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "http://oilsiteN:8080"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
+
+    it('should not work with NoilsiteN', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "http://noilsite1:3000/"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(403);
+          done();
+        }, 1000);
+    });
+
+    it('should work with oilsiteN', function (done) {
+      request(app)
+        .get('/demos/complete-integration-site-a.html')
+        .set({"Referer": "http://oilsiteN:8080"})
+        .end(function (error, response) {
+          expect(response.statusCode).to.equal(200);
+          done();
+        }, 1000);
+    });
   });
 });

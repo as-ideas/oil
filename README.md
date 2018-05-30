@@ -5,11 +5,15 @@
 
 Currently in *beta* until 18.06.2018. 
 
-[![Build Status](https://jenkins.ipool.asideas.de/buildStatus/icon?job=OIL-build)](https://jenkins.ipool.asideas.de/job/OIL-build/)
+[![Latest Release](https://img.shields.io/github/release/as-ideas/oil.svg)](https://oil.axelspringer.com/release/) 
+[![Build Status](https://travis-ci.org/as-ideas/oil.svg?branch=master)](https://travis-ci.org/as-ideas/oil)
+[![Coverage Status](https://coveralls.io/repos/github/as-ideas/oil/badge.svg?branch=master)](https://coveralls.io/github/as-ideas/oil?branch=master)
+![GZIP SIZE](http://img.badgesize.io/https://oil.axelspringer.com/latest/oil.min.js?compression=gzip&style=flat-square)
+[![GPL2 License][license-image]][license-url] 
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fas-ideas%2Foil.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fas-ideas%2Foil?ref=badge_shield)
+[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=K0diOE0wb08vMTBzVFNOcFNLQ0NpVTNDdWZOR0JDWStscE84Z1VqOGZUUT0tLU40MEJSQVk3dFJ2RXh1a294S1VJTUE9PQ==--63f8bb4a27933f962a3a17112782edeac545ba77)](https://www.browserstack.com/automate/public-build/K0diOE0wb08vMTBzVFNOcFNLQ0NpVTNDdWZOR0JDWStscE84Z1VqOGZUUT0tLU40MEJSQVk3dFJ2RXh1a294S1VJTUE9PQ==--63f8bb4a27933f962a3a17112782edeac545ba77)
 
-[![Latest Release](https://img.shields.io/badge/release-1.1.0-blue.svg)](https://oil.axelspringer.com/release/1.1.0) [![GPL2 License][license-image]][license-url] 
-
-[Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html)
+[Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs/last-release) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html) | [Release Notes](https://github.com/as-ideas/oil/releases)
 
 ## About oil.js
 
@@ -101,6 +105,7 @@ And you need your custom configuration:
 | iabVendorBlacklist | Array of vendor IDs to exclude. | None
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
 | default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
+| advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
 
 ## Labels
 
@@ -173,6 +178,24 @@ There are two kinds of unit tests: For the oil.js itself (``npm run test:unit``)
 ```
 
 * Running end2end-tests locally: Start app in one terminal `npm start` and then in the next terminal `npm run e2e`
+* Running only one test: 
+
+#### Browserstack tests
+
+You can run all E2E tests with different setups using Browserstack. Tests use our remote server at `https://oil-integration-host1.herokuapp.com` where the latest release is deployed to.
+
+To run tests in batch there are two commands, the first one covering a limited but most relevant selection of browsers.
+
+    $ npm run browserstack
+    $ npm run browserstack:full
+
+*Both commands require you to have your Browserstack credentials ready.* You can find them [here](https://www.browserstack.com/accounts/settings).
+
+To test with only a specific browser, do this:
+
+    $ ENV_USER=your-browserstack-user ENV_KEY=your-browserstack-key ./node_modules/.bin/nightwatch -c etc/nightwatch.remote.conf.js -e ff52
+
+The `-e` parameter should contain the id of the test setting to launch with. In this case `ff52`. For all available test settings check the objects inside the file `etc/nightwatch.remote.config.js`
 
 #### Advanced Usage
 

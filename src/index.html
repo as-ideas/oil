@@ -79,6 +79,22 @@
     letter-spacing: 0.1px;
   }
 
+  .beta-note {
+    display: inline-block;
+    margin: auto;
+    margin-top: 80px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .beta-note .beta-note__claim {
+    font-size: 24px;
+    text-align: center;
+    max-width: 50vw;
+    margin: auto;
+    padding: 12px 30px;
+  }
+
   /* MAIN HERO */
   .fa-ul {
     font-size: 24px;
@@ -257,6 +273,12 @@
       font-weight: 200;
     }
 
+    .beta-note .beta-note__claim {
+      max-width: initial;
+      margin: auto;
+      padding: initial;
+    }
+
     .full-row {
       padding: 50px 20px 5px 20px;
     }
@@ -293,8 +315,8 @@
   <div class="logo"></div>
 
   <div class="claim-wrapper">
-    <h1 class="logo-claim">Prepares you for ePrivacy</h1>
-    <h2 class="logo-claim-2">Optimized. Tested. Compatible. Ready to use.</h2>
+    <h1 class="logo-claim">Prepares you for GDPR and ePrivacy</h1>
+    <h2 class="logo-claim-2">Optimized. Tested. Compatible. Beta.</h2>
   </div>
 
   <div class="jumbotron hero">
@@ -327,6 +349,10 @@
       </div>
 
 
+      <div class="beta-note">
+        <h2 class="beta-note__claim">Caution: This is only a beta version. The full release is planned for the
+          18.06.2018</h2>
+      </div>
     </div>
   </div>
 </div>
@@ -334,10 +360,10 @@
 
 <div class="full-row">
   <div class="claim-wrapper">
-    <h1 class="logo-claim">Prepares you for ePrivacy & GDPR</h1>
-    <h1 class="logo-claim-2">The "Opt-In Layer" is a JavaScript library for displaying the user consent dialog. It
+    <h1 class="logo-claim">Supports your preparation for GDPR and ePrivacy compliance</h1>
+    <h1 class="logo-claim-2">The Opt-In and Transparency Layer (OIL) is a JavaScript library for displaying the user consent dialog. It
       offers
-      a huge variety of options and helps you to manage your tags.<br/> Best served with <a href="https://tealiumiq.com"
+      a substantial variety of options and helps you to manage your tags.<br/> Best served with <a href="https://tealiumiq.com"
                                                                                             target="_blank">Tealium</a>!
     </h1>
   </div>
@@ -352,11 +378,13 @@
         <span class="text-muted">No worries.</span>
       </h1>
       <p class="lead">
-        We help you with our battle proven and ePrivacy approved solution. You don't know what's required for ePrivacy?
-        No problem. We do.</p>
+        How does consent, provided by the end user, get forwarded to different vendors? We aim to help you by offering you full access to our userfriendly and high
+        quality solution. </p>
       <p class="lead">
-        We looked at every known JS-Tag and categorized them. With the help of any tag manager using OIL.js becomes as
-        easy as adding the library.</p>
+        OIL.js generates detailed events for every interaction, a fully featured JavaScript API and support for the
+        <a href="http://advertisingconsent.eu/" target="_blank">IAB standard</a>. Besides supporting the <a
+        href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework" target="_blank">IAB
+        specification</a>, we encourage its adoption and advise you to get involved with its development.</p>
     </div>
     <div class="col-sm-5">
       <img class="img-responsive pull-right animated wow fadeInRight dropshadow"
@@ -401,13 +429,12 @@
   <div class="row">
     <div class="col-sm-7 col-sm-push-5 animated wow slideInRight">
       <h1>
-        Oil, no vinegar. <span class="text-muted">See for yourself.</span>
+        OIL, no vinegar. <span class="text-muted">See for yourself.</span>
       </h1>
       <p class="lead">
-        Our library was AB-tested with hundreds of thousands of users.
-        We used multiple websites from our Axel Springer family to check that everything works,
-        as well as create the optimal guidelines for you. We are your experts for Opt-In layers! </p>
-      <!--<a href="examples/" target="_blank">AB-Test examples</a>-->
+        Our library was AB-tested with large amounts of users thus improving the solutions's quality and its documentation.
+        We value your technical feedback and are looking forward to sparing ideas with you. <a href="mailto:oil-support@asideas.de">Contact us</a> and let's improve OIL together!
+         </p>
     </div>
     <div class="col-sm-5 col-sm-pull-7">
       <img class="img-responsive animated wow slideInLeft dropshadow" src="assets/images/landing_page/oil.jpeg"
@@ -464,8 +491,10 @@
       &quot;label_cpc_purpose_06_desc&quot;: &quot;Allow processing of a user’s data to connect such user across multiple devices.&quot;,
       &quot;label_cpc_purpose_07_text&quot;: &quot;Precise Geographic Location data&quot;,
       &quot;label_cpc_purpose_07_desc&quot;: &quot;Allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent&quot;,
+      &quot;label_cpc_purpose_desc&quot;: &quot;Purpose&quot;,
       &quot;label_poi_group_list_heading&quot;: &quot;Your consent for companies of the group&quot;,
       &quot;label_poi_group_list_text&quot;: &quot;Here is a list of companies of the group:&quot;,
+      &quot;label_third_party&quot;: &quot;Third Parties&quot;,
       &quot;label_thirdparty_list_heading&quot;: &quot;Your consent for third party software&quot;,
       &quot;label_thirdparty_list_text&quot;: &quot;&quot;,
       &quot;label_nocookie_head&quot;: &quot;In order to be able to provide our services in the best possible way, cookies must be activated in your browser.&quot;,

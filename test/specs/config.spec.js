@@ -11,6 +11,7 @@ describe('configuration', () => {
 
   beforeEach(() => {
     resetConfiguration();
+    deleteAllCookies();
   });
 
   it('should work with empty config', () => {
