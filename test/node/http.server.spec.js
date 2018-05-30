@@ -31,11 +31,11 @@ describe('nodejs http server', () => {
 
   describe('Blacklist', () => {
 
-    it('should return 200 without host', function (done) {
+    it('should return 403 without host', function (done) {
       request(app)
         .get('/demos/complete-integration-site-a.html')
         .end(function (error, response) {
-          expect(response.statusCode).to.equal(200);
+          expect(response.statusCode).to.equal(403);
           done();
         }, 1000);
     });
