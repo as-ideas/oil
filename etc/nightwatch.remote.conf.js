@@ -15,8 +15,8 @@ nightwatch_config = {
   },
 
   common_capabilities: {
-    'browserstack.user': "${ENV_USER}",
-    'browserstack.key': "${ENV_KEY}"
+    'browserstack.user': 'asideas1',
+    'browserstack.key': 'rB4U5YVGsGryCXscMsKQ'
   },
 
   test_settings: {
