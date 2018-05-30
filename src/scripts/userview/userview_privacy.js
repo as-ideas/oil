@@ -5,7 +5,8 @@ import {forEach} from './userview_modal';
 import {getPurposes} from '../core/core_vendor_information';
 
 export function getSoiConsentData() {
-  return getSoiCookie().consentData;
+  let soiCookie = getSoiCookie();
+  return soiCookie.opt_in ? soiCookie.consentData : undefined;
 }
 
 /**

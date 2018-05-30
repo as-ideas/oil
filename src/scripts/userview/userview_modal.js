@@ -11,7 +11,6 @@ import {
   EVENT_NAME_SOI_OPT_IN,
   EVENT_NAME_THIRD_PARTY_LIST,
   EVENT_NAME_TIMEOUT,
-  PRIVACY_FULL_TRACKING,
   PRIVACY_MINIMUM_TRACKING
 } from '../core/core_constants.js';
 import { oilOptIn, oilPowerOptIn } from './userview_optin.js';
@@ -25,14 +24,14 @@ import {
 } from './view/oil.advanced.settings.js';
 import { logError, logInfo } from '../core/core_log.js';
 import { getTheme, getTimeOutValue, isPersistMinimumTracking } from './userview_config.js';
-import { getPoiGroupName, isPoiActive, isSubscriberSetCookieActive, getAdvancedSettingsPurposesDefault } from '../core/core_config.js';
+import { isPoiActive, isSubscriberSetCookieActive, getAdvancedSettingsPurposesDefault } from '../core/core_config.js';
 import {
   applyPrivacySettings,
   getPrivacySettings,
-  getSoiPrivacy
+  getSoiConsentData
 } from './userview_privacy.js';
 import { getGlobalOilObject, isObject } from '../core/core_utils';
-import { loadVendorList } from '../core/core_vendor_information';
+import {getPurposes, loadVendorList} from '../core/core_vendor_information';
 
 
 // Initialize our Oil wrapper and save it ...
@@ -115,8 +114,14 @@ export function oilShowPreferenceCenter() {
         logError('No wrapper for the CPC with the id #oil-preference-center was found.');
         return;
       }
-      applyPrivacySettings(getSoiConsentData().getPurposesAllowed());
-//      const currentPrivacySettings = getSoiPrivacy() || (getAdvancedSettingsPurposesDefault() ? PRIVACY_FULL_TRACKING : PRIVACY_MINIMUM_TRACKING);
+      let consentData = getSoiConsentData();
+      let currentPrivacySettings;
+      if (consentData) {
+        currentPrivacySettings = consentData.getPurposesAllowed();
+      } else {
+        currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? getPurposes().map(({id}) => id) : [];
+      }
+      applyPrivacySettings(currentPrivacySettings);
     })
     .catch((error) => logError(error));
 }

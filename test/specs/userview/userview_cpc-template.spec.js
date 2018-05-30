@@ -14,8 +14,10 @@ import {
 } from '../../utils.js';
 import * as OilList from '../../../src/scripts/poi-list/oil.list';
 import * as CoreConfig from '../../../src/scripts/core/core_config.js';
-import { hasRunningTimeout } from '../../../src/scripts/userview/userview_modal';
-import { setSoiOptIn } from '../../../src/scripts/core/core_cookies';
+import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
+import {hasRunningTimeout} from '../../../src/scripts/userview/userview_modal';
+import {setSoiCookie} from '../../../src/scripts/core/core_cookies';
+import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list'
 
 describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
@@ -49,26 +51,25 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
   it('should insert CPC into host site with GIVEN PRIVACY SETTING', (done) => {
     loadFixture('html/integrated-cpc.html');
 
-    setSoiOptIn({
+    setSoiCookie({
       '1': false,
       '2': true,
       '3': true,
       '4': true,
       '5': true
+    }).then(() => {
+      oilShowPreferenceCenter();
+
+      waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
+        expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
+        expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
+        expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
+        expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
+        expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
+        expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(true);
+        done();
+      }, 10);
     });
-
-    oilShowPreferenceCenter();
-
-    waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
-      expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
-      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(true);
-      done();
-    }, 10);
-
   });
 
   it('should insert CPC into host site with STORED PRIVACY SETTING (from cookie)', (done) => {

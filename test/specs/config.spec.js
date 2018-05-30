@@ -2,7 +2,7 @@ import {getCookieExpireInDays, getHubLocation, getHubOrigin, getHubPath, getLoca
 import {getSoiCookie} from '../../src/scripts/core/core_cookies.js';
 import {getLabel} from '../../src/scripts/userview/userview_config.js';
 import {OIL_LABELS} from '../../src/scripts/userview/userview_constants.js';
-import {loadFixture} from '../utils.js';
+import {loadFixture, deleteAllCookies} from '../utils.js';
 import VENDOR_LIST from '../fixtures/vendorlist/simple_vendor_list'
 import * as CoreVendorInformation from '../../src/scripts/core/core_vendor_information';
 
