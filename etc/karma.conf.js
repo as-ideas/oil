@@ -66,10 +66,6 @@ module.exports = function (config) {
       'ChromeHeadless'
     ],
 
-    specReporter: {
-      suppressPassed: true
-    },
-
     reporters: [
       'spec',
       'junit',
@@ -77,6 +73,10 @@ module.exports = function (config) {
       'coverage',
       'coveralls'
     ],
+
+    specReporter: {
+      suppressPassed: true
+    },
 
     junitReporter: JUNIT,
 
