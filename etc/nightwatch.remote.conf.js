@@ -112,13 +112,6 @@ nightwatch_config = {
         'os_version': '11.2'
       }
     },
-    iphone7: {
-      desiredCapabilities: {
-        'device': 'iPhone 7',
-        'realMobile': 'true',
-        'os_version': '10.3'
-      }
-    },
     iphone8: {
       desiredCapabilities: {
         'device': 'iPhone 8',
