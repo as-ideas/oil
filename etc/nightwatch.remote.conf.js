@@ -27,17 +27,6 @@ nightwatch_config = {
         'browser_version': '14.0'
       }
     },
-    chrome40: {
-      desiredCapabilities: {
-        'browser': 'Chrome',
-        'browser_version': '40.0'
-      },
-      chromeOptions: {
-        "args": [
-          "window-size=1280,800"
-        ]
-      }
-    },
     chrome57: {
       desiredCapabilities: {
         'browser': 'Chrome',
@@ -48,12 +37,6 @@ nightwatch_config = {
       desiredCapabilities: {
         'browser': 'Chrome',
         'browser_version': '64.0',
-      }
-    },
-    ie8: {
-      desiredCapabilities: {
-        'browser': 'IE',
-        'browser_version': '8.0'
       }
     },
     ie9: {
@@ -86,22 +69,10 @@ nightwatch_config = {
         'browser_version': '16.0'
       }
     },
-    ff9: {
-      desiredCapabilities: {
-        'browser': 'Firefox',
-        'browser_version': '9.0'
-      }
-    },
     ff35: {
       desiredCapabilities: {
         'browser': 'Firefox',
         'browser_version': '35.0'
-      }
-    },
-    ff52: {
-      desiredCapabilities: {
-        'browser': 'Firefox',
-        'browser_version': '52.0'
       }
     },
     ff58quantum: {
@@ -114,18 +85,6 @@ nightwatch_config = {
       desiredCapabilities: {
         'browser': 'Safari',
         'browser_version': '6.0',
-      }
-    },
-    safari71: {
-      desiredCapabilities: {
-        'browser': 'Safari',
-        'browser_version': '7.1'
-      }
-    },
-    safari8: {
-      desiredCapabilities: {
-        'browser': 'Safari',
-        'browser_version': '8.0'
       }
     },
     safari91: {
@@ -146,98 +105,77 @@ nightwatch_config = {
         'browser_version': '12.16',
       }
     },
-    ipad4: {
+    iphoneSE: {
       desiredCapabilities: {
-        'browserName': 'iPad',
-        'platform': 'MAC',
-        'device': 'iPad 4th'
-      }
-    },
-    iPadPro: {
-      desiredCapabilities: {
-        'browserName' : 'iPad',
-        'device' : 'iPad Pro',
-        'realMobile' : 'true',
-        'os_version' : '11.2',
-      }
-    },
-    iphone4S: {
-      desiredCapabilities: {
-        'browserName' : 'iPhone',
-        'platform' : 'MAC',
-        'device' : 'iPhone 4S (6.0)'
-      }
-    },
-    iphone5: {
-      desiredCapabilities: {
-        'browserName': 'iPhone',
-        'platform': 'MAC',
-        'device': 'iPhone 5'
-      }
-    },
-    iphone6: {
-      desiredCapabilities: {
-        'browserName': 'iPhone',
-        'platform': 'MAC',
-        'device': 'iPhone 6'
+        'device': 'iPhone SE',
+        'realMobile': 'true',
+        'os_version': '11.2'
       }
     },
     iphone7: {
       desiredCapabilities: {
-        'browserName' : 'iPhone',
-        'device' : 'iPhone 7',
-        'realMobile' : 'true',
-        'os_version' : '10.3'
+        'device': 'iPhone 7',
+        'realMobile': 'true',
+        'os_version': '10.3'
       }
     },
     iphone8: {
       desiredCapabilities: {
-        'browserName' : 'iPhone',
-        'device' : 'iPhone 8',
-        'realMobile' : 'true',
-        'os_version' : '11.0'
+        'device': 'iPhone 8',
+        'realMobile': 'true',
+        'os_version': '11.0'
+      }
+    },
+    iphone10: {
+      desiredCapabilities: {
+        'device': 'iPhone X',
+        'realMobile': 'true',
+        'os_version': '11.0'
+      }
+    },
+    ipad5: {
+      desiredCapabilities: {
+        'device': 'iPad 5th',
+        'realMobile': 'true',
+        'os_version': '11.0'
+      }
+    },
+    ipadpro: {
+      desiredCapabilities: {
+        'device': 'iPad Pro',
+        'realMobile': 'true',
+        'os_version': '11.2'
       }
     },
     android4: {
       desiredCapabilities: {
-        'browserName' : 'android',
-        'platform' : 'ANDROID',
-        'device' : 'Samsung Galaxy S5 Mini'
-      }
-    },
-    android5: {
-      desiredCapabilities: {
-        'browserName' : 'android',
-        'device' : 'Samsung Galaxy S6',
-        'realMobile' : 'true',
-        'os_version' : '5.0',
+        'device': 'Google Nexus 5',
+        'realMobile': 'true',
+        'os_version': '4.4'
       }
     },
     android6: {
       desiredCapabilities: {
-        'browserName' : 'android',
         'device' : 'Google Nexus 6',
         'realMobile' : 'true',
         'os_version' : '6.0'
       }
     },
-    android7: {
-      desiredCapabilities: {
-        'browserName' : 'android',
-        'device' : 'Samsung Galaxy S8',
-        'realMobile' : 'true',
-        'os_version' : '7.0'
-      }
-    },
     android8: {
       desiredCapabilities: {
-        'browserName' : 'android',
-        'device' : 'Google Pixel',
-        'realMobile' : 'true',
-        'os_version' : '8.0'
-      }
+        'device': 'Google Pixel',
+        'realMobile': 'true',
+        'os_version': '8.0'
+      },
     },
-  },
+    galaxyNote4: {
+      desiredCapabilities: {
+        'device': 'Samsung Galaxy Note 4',
+        'realMobile': 'true',
+        'os_version': '6.0'
+      }
+    }
+  }
 };
 
 // Code to support common capabilites
