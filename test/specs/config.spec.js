@@ -54,7 +54,7 @@ describe('configuration', () => {
   it('should set privacy=1 when default_to_optin=true', function(done) {
     loadFixture('config/given.config.with.default.to.optin.html');
     setTimeout(() => {
-      expect(getSoiCookie().privacy).toEqual(1)
+      expect(getSoiCookie().privacy).toEqual(1);
       done()
     }, 1);    
   });
