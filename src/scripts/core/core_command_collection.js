@@ -17,7 +17,6 @@ const commands = {
   },
 
   getVendorList: (vendorListVersion) => {
-    // This method is not implemented yet.
     return getVendorList();
   }
 
