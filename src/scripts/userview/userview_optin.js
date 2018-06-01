@@ -1,7 +1,7 @@
 import {verifyPowerOptIn} from '../core/core_poi.js';
 import {logInfo} from '../core/core_log.js';
 import {activatePowerOptInWithIFrame, activatePowerOptInWithRedirect} from './userview_poi.js';
-import {getLocaleVariantVersion, OilVersion, sendEventToHostSite} from '../core/core_utils.js';
+import {sendEventToHostSite} from '../core/core_utils.js';
 import {
   EVENT_NAME_OPT_IN,
   OIL_PAYLOAD_LOCALE_VARIANT_NAME,
@@ -11,7 +11,9 @@ import {
   PRIVACY_FULL_TRACKING
 } from '../core/core_constants.js';
 import {setSoiCookie} from '../core/core_cookies.js';
-import {getLocaleVariantName, isPoiActive} from '../core/core_config.js';
+import {isPoiActive} from '../core/core_config.js';
+import {buildSoiCookie} from '../core/core_cookies';
+import {OIL_PAYLOAD_CUSTOM_PURPOSES} from '../core/core_constants';
 
 /**
  * Oil optIn power
@@ -20,36 +22,40 @@ import {getLocaleVariantName, isPoiActive} from '../core/core_config.js';
  * @return Promise with updated cookie value
  */
 export function oilPowerOptIn(privacySettings, powerOnly = false) {
-  if (!powerOnly) {
-    // Update Oil cookie (site - SOI)
-    setSoiCookie(privacySettings);
-  }
-
-  return new Promise((resolve) => {
-    let payload = {
-      [OIL_PAYLOAD_PRIVACY]: privacySettings,
-      [OIL_PAYLOAD_VERSION]: OilVersion.get(),
-      [OIL_PAYLOAD_LOCALE_VARIANT_NAME]: getLocaleVariantName(),
-      [OIL_PAYLOAD_LOCALE_VARIANT_VERSION]: getLocaleVariantVersion()
-    };
-
-    if (isPoiActive()) {
-      // Update Oil cookie (mypass - POI)
-      // noinspection JSIgnoredPromiseFromCall
-      activatePowerOptInWithIFrame(payload);
-
-      // Check if fallback is needed
-      verifyPowerOptIn().then((result) => {
-        if (result.power_opt_in === false) {
-          logInfo('iFrame POI didn\'t work. Trying fallback now.');
-          activatePowerOptInWithRedirect(payload);
-        }
-      });
+  return new Promise((resolve, reject) => {
+    let soiCookiePromise;
+    if (!powerOnly) {
+      // Update Oil cookie (site - SOI)
+      soiCookiePromise = setSoiCookie(privacySettings)
+    } else {
+      soiCookiePromise = buildSoiCookie(privacySettings);
     }
+    soiCookiePromise.then((cookie) => {
+      let payload = {
+        [OIL_PAYLOAD_PRIVACY]: cookie.consentString,
+        [OIL_PAYLOAD_VERSION]: cookie.version,
+        [OIL_PAYLOAD_LOCALE_VARIANT_NAME]: cookie.localeVariantName,
+        [OIL_PAYLOAD_LOCALE_VARIANT_VERSION]: cookie.localeVariantVersion,
+        [OIL_PAYLOAD_CUSTOM_PURPOSES]: cookie.customPurposes
+      };
+      if (isPoiActive()) {
+        // Update Oil cookie (mypass - POI)
+        // noinspection JSIgnoredPromiseFromCall
+        activatePowerOptInWithIFrame(payload);
 
-    // Send event to notify host site
-    sendEventToHostSite(EVENT_NAME_OPT_IN);
-    resolve(true);
+        // Check if fallback is needed
+        verifyPowerOptIn().then((result) => {
+          if (result.power_opt_in === false) {
+            logInfo('iFrame POI didn\'t work. Trying fallback now.');
+            activatePowerOptInWithRedirect(payload);
+          }
+        });
+      }
+
+      // Send event to notify host site
+      sendEventToHostSite(EVENT_NAME_OPT_IN);
+      resolve(true);
+    }).catch(error => reject(error));
   });
 }
 
@@ -61,11 +67,11 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
  * @return {Promise} promise with updated cookie value
  */
 export function oilOptIn(privacySettings = PRIVACY_FULL_TRACKING) {
-  setSoiCookie(privacySettings);
-  sendEventToHostSite(EVENT_NAME_OPT_IN);
-
-  return new Promise((resolve) => {
-    resolve(true);
+  return new Promise((resolve, reject) => {
+    setSoiCookie(privacySettings).then(() => {
+      sendEventToHostSite(EVENT_NAME_OPT_IN);
+      resolve(true);
+    }).catch((error) => reject(error));
   });
 }
 

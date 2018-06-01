@@ -2,7 +2,8 @@ import {
   renderOil,
   oilShowPreferenceCenter,
   stopTimeOut,
-} from '../../../src/scripts/userview/userview_modal.js';
+  hasRunningTimeout
+} from '../../../src/scripts/userview/userview_modal';
 import {
   loadFixture,
   readFixture,
@@ -13,9 +14,8 @@ import {
   waitForElementToDisplay
 } from '../../utils.js';
 import * as OilList from '../../../src/scripts/poi-list/oil.list';
-import * as CoreConfig from '../../../src/scripts/core/core_config.js';
+import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
-import {hasRunningTimeout} from '../../../src/scripts/userview/userview_modal';
 import {setSoiCookie} from '../../../src/scripts/core/core_cookies';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list'
 
@@ -62,11 +62,11 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
       waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
         expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-        expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
-        expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
-        expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
-        expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
-        expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(true);
+        expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeFalsy();
+        expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-3').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-4').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeTruthy();
         done();
       }, 10);
     });
@@ -85,11 +85,11 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
       waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
         expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-        expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(true);
-        expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
-        expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
-        expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
-        expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(false);
+        expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-3').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-4').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeFalsy();
         done();
       });
     });
@@ -102,11 +102,11 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
     waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
       expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
-      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(false);
-      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(false);
-      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(false);
-      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(false);
+      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeFalsy();
+      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeFalsy();
+      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBeFalsy();
+      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBeFalsy();
+      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeFalsy();
       done();
     });
 
@@ -121,11 +121,11 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
     waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
       expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(true);
+      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
+      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
+      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBeTruthy();
+      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBeTruthy();
+      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeTruthy();
       done();
     });
   });
@@ -143,11 +143,11 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
       waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
         expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-        expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(true);
-        expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
-        expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
-        expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
-        expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(false);
+        expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-3').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-4').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeFalsy();
         done();
       });
     });

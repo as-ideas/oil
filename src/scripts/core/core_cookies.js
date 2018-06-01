@@ -1,10 +1,9 @@
 import Cookie from 'js-cookie';
-import {logError, logInfo} from './core_log';
-import {getCookieExpireInDays, getDefaultToOptin, getLanguage, getLanguageFromLocale, getLocaleVariantName} from './core_config';
+import {logInfo} from './core_log';
+import {getCookieExpireInDays, getCustomPurposes, getDefaultToOptin, getLanguage, getLanguageFromLocale, getLocaleVariantName} from './core_config';
 import {getLocaleVariantVersion} from './core_utils.js';
 import {OIL_SPEC} from './core_constants';
-import {getPurposes, getVendorList, isVendorListFetched, loadVendorList} from './core_vendor_information';
-import {getLimitedVendorIds} from './core_consents';
+import {getLimitedVendorIds, getPurposes, getVendorList, loadVendorList} from './core_vendor_information';
 import {OilVersion} from './core_utils';
 
 const {ConsentString} = require('consent-string');
@@ -38,44 +37,60 @@ export function hasOutdatedOilCookie(cookieConfig) {
   return isCookieValid(cookieConfig.name, cookieConfig.outdated_cookie_content_keys);
 }
 
-export function setSoiCookieWithConsentString(consentString) {
-  let cookieConfig = getOilCookieConfig();
-
-  let cookie = {
-    opt_in: true,
-    version: cookieConfig.defaultCookieContent.version,
-    localeVariantName: cookieConfig.defaultCookieContent.localeVariantName,
-    localeVariantVersion: cookieConfig.defaultCookieContent.localeVariantVersion,
-    consentString: consentString
-  };
-  setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires);
-}
-
-export function setSoiCookie(privacySettings) {
-  return new Promise((resolve, reject) => {
-    loadVendorList().then(() => {
-      let cookieConfig = getOilCookieConfig();
-
-      let cookie = getOilCookie(cookieConfig);
-      updateCookieWithCurrentCmpConfiguration(cookie, cookieConfig);
-      cookie.opt_in = true;
-      cookie.consentData.setPurposesAllowed(getPurposesWithConsent(privacySettings));
-      cookie.consentData.setVendorsAllowed(getLimitedVendorIds());
-      cookie.consentString = cookie.consentData.getConsentString();
-      setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires);
-      resolve();
-    }).catch(error => {
-      logError(error);
-      reject(error);
-    });
-  });
-}
-
 export function getSoiCookie() {
   let cookieConfig = getOilCookieConfig();
   let cookie = hasOutdatedOilCookie(cookieConfig) ? transformOutdatedOilCookie(cookieConfig) : getOilCookie(cookieConfig);
   logInfo('Current Oil data from domain cookie: ', cookie);
   return cookie;
+}
+
+export function setSoiCookieWithConsentData(consentData, customPurposes) {
+  return new Promise((resolve, reject) => {
+    loadVendorList().then(() => {
+      let cookieConfig = getOilCookieConfig();
+
+      consentData.setGlobalVendorList(getVendorList());
+      let cookie = {
+        opt_in: true,
+        version: cookieConfig.defaultCookieContent.version,
+        localeVariantName: cookieConfig.defaultCookieContent.localeVariantName,
+        localeVariantVersion: cookieConfig.defaultCookieContent.localeVariantVersion,
+        customPurposes: customPurposes,
+        consentString: consentData.getConsentString()
+      };
+      setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires);
+      resolve(cookie);
+    }).catch(error => reject(error));
+  });
+}
+
+export function buildSoiCookie(privacySettings) {
+  return new Promise((resolve, reject) => {
+    loadVendorList().then(() => {
+      let cookieConfig = getOilCookieConfig();
+      let consentData = cookieConfig.defaultCookieContent.consentData;
+      consentData.setGlobalVendorList(getVendorList());
+      consentData.setPurposesAllowed(getStandardPurposesWithConsent(privacySettings));
+      consentData.setVendorsAllowed(getLimitedVendorIds());
+      resolve({
+        opt_in: true,
+        version: cookieConfig.defaultCookieContent.version,
+        localeVariantName: cookieConfig.defaultCookieContent.localeVariantName,
+        localeVariantVersion: cookieConfig.defaultCookieContent.localeVariantVersion,
+        customPurposes: getCustomPurposesWithConsent(privacySettings),
+        consentString: consentData.getConsentString()
+      });
+    }).catch(error => reject(error));
+  });
+}
+
+export function setSoiCookie(privacySettings) {
+  return new Promise((resolve, reject) => {
+    buildSoiCookie(privacySettings).then((cookie) => {
+      setDomainCookie(OIL_DOMAIN_COOKIE_NAME, cookie, getCookieExpireInDays());
+      resolve(cookie);
+    }).catch(error => reject(error));
+  });
 }
 
 export function setPreviewCookie() {
@@ -125,8 +140,7 @@ export function isBrowserCookieEnabled() {
   return result;
 }
 
-
-export function getPurposesWithConsent(privacySettings) {
+export function getStandardPurposesWithConsent(privacySettings) {
   if (typeof privacySettings === 'object') {
     return getPurposes().map(({id}) => id).filter(purposeId => privacySettings[purposeId]);
   } else {
@@ -134,8 +148,23 @@ export function getPurposesWithConsent(privacySettings) {
   }
 }
 
-function getAllowedPurposesDefault() {
-  return getPurposesWithConsent(getDefaultToOptin() ? 1 : 0);
+export function getCustomPurposesWithConsent(privacySettings, allCustomPurposes) {
+  if (!allCustomPurposes) {
+    allCustomPurposes = getCustomPurposes();
+  }
+  if (typeof privacySettings === 'object') {
+    return allCustomPurposes.map(({id}) => id).filter(purposeId => privacySettings[purposeId]);
+  } else {
+    return privacySettings === 1 ? allCustomPurposes.map(({id}) => id) : [];
+  }
+}
+
+function getAllowedStandardPurposesDefault() {
+  return getDefaultToOptin() ? getPurposes().map(({id}) => id) : [];
+}
+
+function getAllowedCustomPurposesDefault() {
+  return getCustomPurposesWithConsent(getDefaultToOptin() ? 1 : 0);
 }
 
 function getAllowedVendorsDefault() {
@@ -184,12 +213,9 @@ function getOilCookieConfig() {
   consentData.setConsentScreen(1);
 
   consentData.setConsentLanguage(getLanguage());
-  consentData.setPurposesAllowed(getAllowedPurposesDefault());
+  consentData.setPurposesAllowed(getAllowedStandardPurposesDefault());
   consentData.setVendorsAllowed(getAllowedVendorsDefault());
-  if (isVendorListFetched()) {
-    consentData.setGlobalVendorList(getVendorList());
-  }
-
+  consentData.setGlobalVendorList(getVendorList());
   return {
     name: OIL_DOMAIN_COOKIE_NAME,
     expires: getCookieExpireInDays(),
@@ -198,32 +224,27 @@ function getOilCookieConfig() {
       version: OilVersion.get(),
       localeVariantName: getLocaleVariantName(),
       localeVariantVersion: getLocaleVariantVersion(),
+      customPurposes: getAllowedCustomPurposesDefault(),
       consentData: consentData,
-      consentString: '' // consent string is not computed because global vendor list may be missing here
+      consentString: consentData.getConsentString()
     },
     outdated_cookie_content_keys: ['opt_in', 'timestamp', 'version', 'localeVariantName', 'localeVariantVersion', 'privacy']
   };
 }
 
-function updateCookieWithCurrentCmpConfiguration(cookie, cookieConfig) {
-  cookie.localeVariantName = cookieConfig.defaultCookieContent.localeVariantName;
-  cookie.localeVariantVersion = cookieConfig.defaultCookieContent.localeVariantVersion;
-  cookie.version = cookieConfig.defaultCookieContent.version;
-  cookie.consentData.setGlobalVendorList(getVendorList());
-  cookie.consentData.setConsentLanguage(cookieConfig.defaultCookieContent.consentData.getConsentLanguage());
-  cookie.consentData.setCmpVersion(cookieConfig.defaultCookieContent.consentData.getCmpVersion());
-}
-
 function transformOutdatedOilCookie(cookieConfig) {
-  let cookieJson = Cookie.getJSON(cookieConfig.name);
+  let cookieJson = Cookie.getJSON(OIL_DOMAIN_COOKIE_NAME);
 
   let cookie = cookieConfig.defaultCookieContent;
   cookie.opt_in = cookieJson.opt_in;
   cookie.version = cookieJson.version;
   cookie.localeVariantName = cookieJson.localeVariantName;
   cookie.localeVariantVersion = cookieJson.localeVariantVersion;
+  cookie.customPurposes = getCustomPurposesWithConsent(cookieJson.privacy);
   cookie.consentData.setConsentLanguage(getLanguageFromLocale(cookieJson.localeVariantName));
-  cookie.consentData.setPurposesAllowed(getPurposesWithConsent(cookieJson.privacy));
+  cookie.consentData.setPurposesAllowed(getStandardPurposesWithConsent(cookieJson.privacy));
   cookie.consentData.setVendorsAllowed(getLimitedVendorIds());
+  cookie.consentData.setGlobalVendorList(getVendorList());
+  cookie.consentString = cookie.consentData.getConsentString();
   return cookie;
 }

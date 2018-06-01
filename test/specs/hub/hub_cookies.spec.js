@@ -1,7 +1,14 @@
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
 import Cookie from 'js-cookie';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
-import {OIL_PAYLOAD_LOCALE_VARIANT_NAME, OIL_PAYLOAD_LOCALE_VARIANT_VERSION, OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION, OIL_SPEC} from '../../../src/scripts/core/core_constants';
+import {
+  OIL_PAYLOAD_CUSTOM_PURPOSES,
+  OIL_PAYLOAD_LOCALE_VARIANT_NAME,
+  OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
+  OIL_PAYLOAD_PRIVACY,
+  OIL_PAYLOAD_VERSION,
+  OIL_SPEC
+} from '../../../src/scripts/core/core_constants';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import {getPoiCookie, setPoiCookie} from '../../../src/scripts/hub/hub_cookies';
@@ -11,7 +18,6 @@ const {ConsentString} = require('consent-string');
 const LANGUAGE_EN = 'en';
 const LOCALE_VARIANT_EN_NAME = 'enEN_01';
 const LOCALE_VARIANT_EN_VERSION = 2;
-const OTHER_CMP_VERSION = 99999;
 const GROUP_NAME = 'aGroupName';
 const OIL_VERSION = '1.0.0';
 const EXPIRATION_IN_DAYS = 31;
@@ -24,42 +30,28 @@ describe('hub cookies', () => {
 
     beforeEach(() => {
       spyOn(CoreCookies, 'setDomainCookie');
-      spyOn(CoreCookies, 'getPurposesWithConsent').withArgs(PRIVACY).and.returnValue(PURPOSE_LIST);
       spyOn(CoreConfig, 'getCookieExpireInDays').and.returnValue(EXPIRATION_IN_DAYS);
-      spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
-      spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
-      spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
     });
 
-    it('should set poi cookie for payload', (done) => {
+    it('should set poi cookie for payload', () => {
       let payload = givenPayload({
-        privacy: PRIVACY,
+        privacy: 'BOOkmUuOOkmUuBQABBENAR-AAAABgACACA',
         localeVariantName: LOCALE_VARIANT_EN_NAME,
         localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
-        version: OIL_VERSION
+        version: OIL_VERSION,
+        customPurposes: [25, 26]
       });
-      spyOn(CoreCookies, 'getOilCookie').and.returnValue(givenCookie(GROUP_NAME, {
-        power_opt_in: false,
-        version: 'unknown',
-        cmpVersion: OTHER_CMP_VERSION,
+
+      setPoiCookie(GROUP_NAME, payload);
+      expect(CoreCookies.setDomainCookie).toHaveBeenCalled();
+      verifyThatCookieWasSetCorrectly(GROUP_NAME, {
+        version: OIL_VERSION,
+        localeVariantName: LOCALE_VARIANT_EN_NAME,
+        localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
         language: LANGUAGE_EN,
-        localeVariantName: 'unknown',
-        localeVariantVersion: 0,
-        allowedPurposeIds: [],
-        allowedVendorIds: [],
-      }));
-      setPoiCookie(GROUP_NAME, payload).then(() => {
-        expect(CoreCookies.setDomainCookie).toHaveBeenCalled();
-        expect(CoreCookies.getPurposesWithConsent).toHaveBeenCalledWith(PRIVACY);
-        verifyThatCookieWasSetCorrectly(GROUP_NAME, {
-          version: OIL_VERSION,
-          localeVariantName: LOCALE_VARIANT_EN_NAME,
-          localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
-          language: LANGUAGE_EN,
-          allowedPurposeIds: PURPOSE_LIST,
-          allowedVendorIds: [12, 24]
-        });
-        done();
+        allowedPurposeIds: PURPOSE_LIST,
+        allowedVendorIds: [12, 24],
+        customPurposes: [25, 26]
       });
     });
   });
@@ -67,8 +59,9 @@ describe('hub cookies', () => {
   describe('poi cookie retrieval', () => {
 
     beforeEach(() => {
-      spyOn(CoreCookies, 'getPurposesWithConsent').withArgs(PRIVACY).and.returnValue(PURPOSE_LIST);
+      spyOn(CoreCookies, 'getStandardPurposesWithConsent').withArgs(PRIVACY).and.returnValue(PURPOSE_LIST);
       spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
+      spyOn(CoreVendorInformation, 'getLimitedVendorIds').and.returnValue(VENDOR_LIST.vendors.map(({id}) => id));
       spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
       spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
     });
@@ -82,6 +75,7 @@ describe('hub cookies', () => {
         localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
         allowedPurposeIds: [1, 3, 5],
         allowedVendorIds: [12],
+        customPurposes: [25]
       });
       spyOn(CoreCookies, 'getOilCookie').and.returnValue(expectedCookie);
 
@@ -106,13 +100,14 @@ describe('hub cookies', () => {
         localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
         allowedPurposeIds: PURPOSE_LIST,
         allowedVendorIds: [12, 24],
+        customPurposes: []
       };
       let expectedCookie = givenCookie(GROUP_NAME, expectedCookieData);
 
       let retrievedCookie = getPoiCookie(GROUP_NAME);
 
       verifyCookie(retrievedCookie, expectedCookie);
-      expect(CoreCookies.getPurposesWithConsent).toHaveBeenCalledWith(PRIVACY);
+      expect(CoreCookies.getStandardPurposesWithConsent).toHaveBeenCalledWith(PRIVACY);
     });
 
   });
@@ -132,6 +127,7 @@ describe('hub cookies', () => {
       version: cookieData.version,
       localeVariantName: cookieData.localeVariantName,
       localeVariantVersion: cookieData.localeVariantVersion,
+      customPurposes: cookieData.customPurposes,
       consentData: consentData,
       consentString: consentData.getConsentString()
     }
@@ -153,7 +149,8 @@ describe('hub cookies', () => {
       [OIL_PAYLOAD_PRIVACY]: testData.privacy,
       [OIL_PAYLOAD_VERSION]: testData.version,
       [OIL_PAYLOAD_LOCALE_VARIANT_NAME]: testData.localeVariantName,
-      [OIL_PAYLOAD_LOCALE_VARIANT_VERSION]: testData.localeVariantVersion
+      [OIL_PAYLOAD_LOCALE_VARIANT_VERSION]: testData.localeVariantVersion,
+      [OIL_PAYLOAD_CUSTOM_PURPOSES]: testData.customPurposes
     }
   }
 
@@ -179,6 +176,7 @@ describe('hub cookies', () => {
     expect(cookie.version).toEqual(expectations.version);
     expect(cookie.localeVariantName).toEqual(expectations.localeVariantName);
     expect(cookie.localeVariantVersion).toEqual(expectations.localeVariantVersion);
+    expect(cookie.customPurposes).toEqual(expectations.customPurposes);
 
     let consentData = new ConsentString(cookie.consentString);
     let expectedConsentData = givenCookieConsentData(expectations);
@@ -190,6 +188,7 @@ describe('hub cookies', () => {
     expect(cookie.version).toEqual(expectedCookie.version);
     expect(cookie.localeVariantName).toEqual(expectedCookie.localeVariantName);
     expect(cookie.localeVariantVersion).toEqual(expectedCookie.localeVariantVersion);
+    expect(cookie.customPurposes).toEqual(expectedCookie.customPurposes);
     verifyConsentData(cookie.consentData, expectedCookie.consentData);
   }
 

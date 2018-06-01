@@ -63,7 +63,7 @@ function parseLocaleAndServerUrl(cachedConfig) {
  * Returns a config value or its given default value if not existing in users configuration.
  *
  * @param {string} name in form of the key of the config value
- * @param {string} defaultValue as fallback if there is no value found for the key (name)
+ * @param {object} defaultValue as fallback if there is no value found for the key (name)
  * @returns {*}
  */
 export function getConfigValue(name, defaultValue) {
@@ -176,6 +176,10 @@ export function resetConfiguration() {
 
 export function getCustomPurposes() {
   return getConfigValue(OIL_CONFIG.ATTR_CUSTOM_PURPOSES, []);
+}
+
+export function getCustomPurposeIds() {
+  return getCustomPurposes().map(({id}) => id);
 }
 
 /**
