@@ -53,14 +53,14 @@ Only group names configured by Axel Springer are allowed.
 
 ==== Functional Configuration Parameters
 
-This is a full list of configurable options.
+This is a full list of configurable options. *=required
 
 [width="100%",options="header", cols="1,3,1"]
 |====
 | Config Parameter | Description | Default Setting
-| locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. <<supported-languages,Supported language packs.>> | deDE_01
+| locale* | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. <<supported-languages,Supported language packs.>> | none
 | publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | //oil.axelspringer.com/release/{version}/`
-| theme | The theme for the layer. By default there are two themes and size modifier theme, 'dark', 'light' and 'small dark', 'small light' , with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
+| theme | The theme for the layer. By default there are three themes and size modifier themes, `dark`, `light`, `small dark`, `small light` , `mini dark` and `mini light`. Themes currently work only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | light
 | poi_activate_poi | Activates or disactivates Power Opt-In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false
 | poi_hub_origin | The origin of the hub.js installation, if any. | //oil.axelspringer.com
 | poi_hub_path | The path to the hub.html installation on the origin, if any. | /hub.html
@@ -68,13 +68,13 @@ This is a full list of configurable options.
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31
 | [[config-timeout]]timeout | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
-| advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False
-| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True
+| advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | false
+| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | true
 | iabVendorListUrl | tbd | {embedded vendorlist}
 | oilBackendUrl | (deprecated) The backend from where OIL can load locale-versions | https://oil-backend.herokuapp.com/oil
-| iabVendorWhitelist | Array of vendor IDs to allow. If it is set, values in `iabVendorBlacklist` are ignored. | None
+| iabVendorWhitelist | Array of vendor IDs to allow. If it is set, values in `iabVendorBlacklist` are ignored. | none
 | iabVendorBlacklist | Array of vendor IDs to exclude | None
-| customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
+| customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | none
 | default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
 |====
@@ -90,7 +90,8 @@ This is a full list of configurable options.
 
 ==== Label Configuration Parameters
 
-Recommended label configurations.
+The recommended way is to keep the standard locale definitions. For available locales see
+You may override in AS_OIL.LOCALE.
 Check developer documentation for information to change all labels.
 
 [width="100%",options="header", cols="1,3"]
