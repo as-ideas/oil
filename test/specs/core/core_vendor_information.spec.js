@@ -291,5 +291,4 @@ describe('core_vendor_information', () => {
     return JSON.stringify(vendorList) === JSON.stringify(vendorListCopy);
   }
 
-})
-;
+});

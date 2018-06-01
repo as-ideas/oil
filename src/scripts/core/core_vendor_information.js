@@ -9,7 +9,7 @@ export const DEFAULT_VENDOR_LIST = {
   purposeIds: [1, 2, 3, 4, 5]
 };
 
-let cachedVendorList;
+export let cachedVendorList;
 
 export function loadVendorList() {
   return new Promise(function (resolve) {

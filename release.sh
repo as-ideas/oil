@@ -13,6 +13,9 @@ mkdir release/$PACKAGE_VERSION
 cp dist/*.$PACKAGE_VERSION-RELEASE.*.js release/$PACKAGE_VERSION/
 cp -r dist/docs release/$PACKAGE_VERSION/
 
+echo "\n### Copying stats.json"
+cp src/stats.json release/$PACKAGE_VERSION/
+
 echo "\n### Copying and versioning hub.html"
 cp src/hub.html release/$PACKAGE_VERSION/
 HUB_HTML=$(cat release/$PACKAGE_VERSION/hub.html)
