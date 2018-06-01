@@ -1,6 +1,6 @@
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
-import {clearVendorListCache, loadVendorList} from '../../../src/scripts/core/core_vendor_information';
+import {clearVendorListCache, loadVendorList, getVendorList, getVendorListVersion, cachedVendorList} from '../../../src/scripts/core/core_vendor_information';
 
 describe('core_vendor_information', () => {
 
@@ -132,4 +132,21 @@ describe('core_vendor_information', () => {
     // the following comparison method is sufficient because order of elements in compared objects is expected to be the same
     return JSON.stringify(vendorList) === JSON.stringify(vendorListCopy);
   }
+
+  describe('getVendorList', function() {
+
+    it('should return the cachedVendorList', function() {
+      loadVendorList();
+      expect(getVendorList()).toEqual(cachedVendorList);
+    });
+  });
+
+  describe('getVendorListVersion', function() {
+
+    it('should return cachedVendorList.vendorListVersion', function() {
+      loadVendorList();
+      expect(getVendorListVersion()).toEqual(cachedVendorList.vendorListVersion);
+    });
+
+  });
 });
