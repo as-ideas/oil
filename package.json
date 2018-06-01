@@ -43,10 +43,10 @@
   "dependencies": {
     "compression": "1.7.2",
     "consent-string": "1.2.4",
+    "core-js": "^2.5.7",
     "express": "4.16.2",
     "fresh": "0.5.2",
     "js-cookie": "2.1.4",
-    "promise-polyfill": "8.0.0",
     "serve-index": "1.9.1",
     "serve-static": "1.13.2"
   },
