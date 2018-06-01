@@ -79,6 +79,96 @@ This is a full list of configurable options.
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
 |====
 
+===== Blacklisting and Whitelisting
+
+With *iabVendorWhitelist* and *iabVendorBlacklist* you can exclude specific vendors from the consent (blacklist) or include only the ones you want (whitelist). You can only use one method at the time - either whitelist or blacklist.
+
+As an example, the vendorlist may contain vendors with vendor IDs 1 to 10. In the example the user accepts everything, he just pressed "OK". The consent-string would normally contain (by getVendorConsents) this data:
+
+.Default result from getVendorConsents without whitelist/blacklist
+[source,javascript]
+----
+{
+  "metadata": "consent-string",
+  "purposeConsents": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1
+  },
+  "vendorConsents": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": true,
+    "7": true,
+    "8": true,
+    "9": true,
+    "10": true
+  }
+}
+----
+
+*Whitelist*: The whitelist contains IDs 3, 4, 5 in form of the configuration with `"iabVendorWhitelist": [3, 4, 5]`. If the user has given his consent by clicking on "OK" only vendors on the whitelist will be true.
+
+.Result from getVendorConsents with whitelisting vendor IDs 3, 4, 5
+[source,javascript]
+----
+{
+  "metadata": "consent-string",
+  "purposeConsents": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1
+  },
+  "vendorConsents": {
+    "1": false,
+    "2": false,
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": false,
+    "7": false,
+    "8": false,
+    "9": false,
+    "10": false
+  }
+}
+----
+
+*Blacklist*: The blacklist contains IDs 6, 7, 8 in form of the configuration with `"iabVendorBlacklist": [6, 7, 8]`. If the user has given his consent by clicking on "OK" only vendors NOT on the blacklist will be true.
+
+.Result from getVendorConsents with blacklisting vendor IDs 6, 7, 8
+[source,javascript]
+----
+{
+  "metadata": "consent-string",
+  "purposeConsents": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1
+  },
+  "vendorConsents": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": false,
+    "7": false,
+    "8": false,
+    "9": true,
+    "10": true
+  }
+}
+----
 
 ==== Language configuration
 
