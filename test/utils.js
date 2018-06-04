@@ -47,7 +47,7 @@ export function initCustomYasmineMatchers() {
 }
 
 export function removeOilLayerAndConfig() {
-  window.AS_OIL_LOCALE = undefined;
+  window.AS_OIL = undefined;
   forEach(document.querySelectorAll('#oil-configuration'), (domNode) => {
     domNode.parentElement.removeChild(domNode);
   });
