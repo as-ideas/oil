@@ -1,6 +1,6 @@
-import { OIL_CONFIG } from './core_constants.js';
-import { logError, logInfo } from './core_log.js';
-import { isObject, OilVersion, setGlobalOilObject } from './core_utils';
+import {OIL_CONFIG} from './core_constants.js';
+import {logError, logInfo} from './core_log.js';
+import {isObject, OilVersion, setGlobalOilObject} from './core_utils';
 
 let cachedConfig = null;
 
@@ -63,7 +63,7 @@ function parseLocaleAndServerUrl(cachedConfig) {
  * Returns a config value or its given default value if not existing in users configuration.
  *
  * @param {string} name in form of the key of the config value
- * @param {string} defaultValue as fallback if there is no value found for the key (name)
+ * @param {object} defaultValue as fallback if there is no value found for the key (name)
  * @returns {*}
  */
 export function getConfigValue(name, defaultValue) {
@@ -148,6 +148,14 @@ export function getLocaleVariantName() {
   return localeVariantName;
 }
 
+export function getLanguage() {
+  return getLanguageFromLocale(getLocaleVariantName());
+}
+
+export function getLanguageFromLocale(localeVariantName) {
+  return localeVariantName.substring(0, 2);
+}
+
 /**
  * Get the hub iFrame URL with protocol prefix for the current location
  * @returns {string, null} complete iframe orgin
@@ -168,6 +176,10 @@ export function resetConfiguration() {
 
 export function getCustomPurposes() {
   return getConfigValue(OIL_CONFIG.ATTR_CUSTOM_PURPOSES, []);
+}
+
+export function getCustomPurposeIds() {
+  return getCustomPurposes().map(({id}) => id);
 }
 
 /**

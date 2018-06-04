@@ -1,20 +1,43 @@
-import { getConsentDataString, getVendorConsentData, buildPurposeConsents, getPublisherConsentData, getLimitedVendorIds } from '../../../src/scripts/core/core_consents';
+import {getConsentDataString, getPublisherConsentData, getVendorConsentData} from '../../../src/scripts/core/core_consents';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
-import { OIL_SPEC } from '../../../src/scripts/core/core_constants';
-import { loadVendorList } from '../../../src/scripts/core/core_vendor_information';
+import {OIL_SPEC} from '../../../src/scripts/core/core_constants';
 
 const {ConsentString} = require('consent-string');
 
 describe('consents', () => {
 
+  const VERSION = '1.0.0';
+  const LOCALE_VARIANT_DE_NAME = 'deDE_01';
+  const LOCALE_VARIANT_DE_VERSION = 2;
+
+  // CONSENT_STRING value represents
+  // {
+  //   "cookieVersion": 1,
+  //   "created": "2018-06-01T07:26:03.700Z",
+  //   "lastUpdated": "2018-06-01T07:26:03.700Z",
+  //   "cmpId": 80,
+  //   "cmpVersion": 1,
+  //   "consentScreen": 1,
+  //   "consentLanguage": "EN",
+  //   "vendorListVersion": 17,
+  //   "purposeIdBitString": "110110000000000000000000",
+  //   "maxVendorId": 24,
+  //   "isRange": false,
+  //   "vendorIdBitString": "000000000001000000000001"
+  // }
+  // see http://acdn.origin.appnexus.net/cmp/docs/#/tools/vendor-cookie-decoder
+  const CONSENT_STRING = 'BOOqZJ1OOqZJ1BQABBENAR2AAAABgACACA';
+  const TIMESTAMP = Date.parse('2018-06-01T07:26:03.700Z');
+  const VENDOR_LIST_VERSION = 17;
+
   const PURPOSE_ID_1 = 1;
   const PURPOSE_ID_2 = 2;
-  const CUSTOM_PURPOSE_ID_1 = 25;
-  const CUSTOM_PURPOSE_ID_2 = 26;
-
-  const PURPOSES_ARRAY = [
+  const PURPOSE_ID_3 = 3;
+  const PURPOSE_ID_4 = 4;
+  const PURPOSE_ID_5 = 5;
+  const PURPOSES = [
     {
       id: PURPOSE_ID_1,
       name: 'Information storage and access',
@@ -24,672 +47,314 @@ describe('consents', () => {
       id: PURPOSE_ID_2,
       name: 'Personalisation',
       description: 'The collection and processing of information about your use of this service to subsequently personalise advertising and/or content for you in other contexts, such as on other websites or apps, over time. Typically, the content of the site or app is used to make inferences about your interests, which inform future selection of advertising and/or content.'
+    },
+    {
+      'id': PURPOSE_ID_3,
+      'name': 'Ad selection, delivery, reporting',
+      'description': 'The collection of information, and combination with previously collected information, to select and deliver advertisements for you, and to measure the delivery and effectiveness of such advertisements. This includes using previously collected information about your interests to select ads, processing data about what advertisements were shown, how often they were shown, when and where they were shown, and whether you took any action related to the advertisement, including for example clicking an ad or making a purchase. This does not include personalisation, which is the collection and processing of information about your use of this service to subsequently personalise advertising and/or content for you in other contexts, such as websites or apps, over time.'
+    },
+    {
+      'id': PURPOSE_ID_4,
+      'name': 'Content selection, delivery, reporting',
+      'description': 'The collection of information, and combination with previously collected information, to select and deliver content for you, and to measure the delivery and effectiveness of such content. This includes using previously collected information about your interests to select content, processing data about what content was shown, how often or how long it was shown, when and where it was shown, and whether the you took any action related to the content, including for example clicking on content. This does not include personalisation, which is the collection and processing of information about your use of this service to subsequently personalise content and/or advertising for you in other contexts, such as websites or apps, over time.'
+    },
+    {
+      'id': PURPOSE_ID_5,
+      'name': 'Measurement',
+      'description': 'The collection of information about your use of the content, and combination with previously collected information, used to measure, understand, and report on your usage of the service. This does not include personalisation, the collection of information about your use of this service to subsequently personalise content and/or advertising for you in other contexts, i.e. on other service, such as websites or apps, over time.'
     }
   ];
 
-  const CUSTOM_PURPOSES_ARRAY = [
+  const CUSTOM_PURPOSE_ID_1 = 25;
+  const CUSTOM_PURPOSE_ID_2 = 26;
+  const CUSTOM_PURPOSES = [
     {
       "id": CUSTOM_PURPOSE_ID_1,
       "name": "Foo",
       "description": "Bar!"
-    },{
+    }, {
       "id": CUSTOM_PURPOSE_ID_2,
       "name": "Bar",
       "description": "Baz Lorem Ipsum"
     }
   ];
 
-  describe('getVendorConsentData', () => {
+  const VALID_VENDOR_ID_1 = 12;
+  const VALID_VENDOR_ID_2 = 13;
+  const VALID_VENDOR_ID_3 = 24;
+  const INVALID_VENDOR_ID = 100;
+  const VENDORS = [
+    {
+      id: VALID_VENDOR_ID_1,
+      name: 'Emerse Sverige AB',
+      policyUrl: 'https://www.emerse.com/privacy-policy/',
+    },
+    {
+      id: VALID_VENDOR_ID_2,
+      name: 'Sovrn Holdings Inc',
+      policyUrl: 'https://www.sovrn.com/sovrn-privacy',
+    },
+    {
+      id: VALID_VENDOR_ID_3,
+      name: 'BeeswaxIO Corporation',
+      policyUrl: 'https://www.beeswax.com/privacy.html',
+    }
+  ];
 
-    const VALID_VENDOR_ID_1 = 8;
-    const VALID_VENDOR_ID_2 = 12;
-    const VALID_VENDOR_ID_3 = 32;
-    const INVALID_VENDOR_ID = 20;
+  const COOKIE = {
+    opt_in: true,
+    version: VERSION,
+    localeVariantName: LOCALE_VARIANT_DE_NAME,
+    localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
+    customPurposes: [CUSTOM_PURPOSE_ID_1],
+    consentData: new ConsentString(CONSENT_STRING),
+    consentString: CONSENT_STRING
+  };
 
-    loadVendorList();
-
-    const GLOBAL_VENDORS_ARRAY = [
-      {
-        id: VALID_VENDOR_ID_1,
-        name: 'Emerse Sverige AB',
-        policyUrl: 'https://www.emerse.com/privacy-policy/',
-        purposeIds: [1, 2, 4],
-        legIntPurposeIds: [3, 5],
-        featureIds: [1, 2]
-      },
-      {
-        id: VALID_VENDOR_ID_2,
-        name: 'BeeswaxIO Corporation',
-        policyUrl: 'https://www.beeswax.com/privacy.html',
-        purposeIds: [1, 3, 5],
-        legIntPurposeIds: [],
-        featureIds: [3]
-      },
-      {
-        id: VALID_VENDOR_ID_3,
-        name: 'FOO',
-        policyUrl: 'https://www.foo.com/bar.html',
-        purposeIds: [1, 2, 3],
-        legIntPurposeIds: [],
-        featureIds: [3]
-      }
-    ];
-
+  describe('getting vendor consent data', () => {
     beforeEach(() => {
-      spyOn(CoreVendorInformation, 'getVendors').and.returnValue(GLOBAL_VENDORS_ARRAY);
+      spyOn(CoreVendorInformation, 'getLimitedVendorIds').and.returnValue(VENDORS.map(({id}) => id));
+      spyOn(CoreVendorInformation, 'getPurposeIds').and.returnValue(PURPOSES.map(({id}) => id));
     });
 
-    it('should create vendor consent data with correct meta data', () => {
-      const EXPECTED_TIMESTAMP = Math.round(Date.now() / 100) * 100; // accuracy: deciseconds only
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: EXPECTED_TIMESTAMP
-      });
+    it('should return vendor consent data with correct meta data', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue(COOKIE);
 
-      let vendorConsentData = getVendorConsentData([1, 2]);
+      let vendorConsentData = getVendorConsentData();
       expect(vendorConsentData).toBeDefined();
       expect(vendorConsentData.metadata).toBeDefined();
 
-      let metaData = new ConsentString(vendorConsentData.metadata);
-      expect(metaData.getVersion()).toBeDefined();
-      expect(metaData.getCmpId()).toEqual(OIL_SPEC.CMP_ID);
-      expect(metaData.getCmpVersion()).toEqual(OIL_SPEC.CMP_VERSION);
-      expect(metaData.getConsentScreen()).toEqual(1);
-      expect(metaData.getConsentLanguage()).toEqual('de');
-      expect(metaData.getVendorListVersion()).toEqual(CoreVendorInformation.getVendorListVersion());
-      expect(metaData.created.getTime()).toEqual(EXPECTED_TIMESTAMP);
+      let metaData = new ConsentString.decodeMetadataString(vendorConsentData.metadata);
+      expect(metaData.version).toBeDefined();
+      expect(metaData.cmpId).toEqual(OIL_SPEC.CMP_ID);
+      expect(metaData.cmpVersion).toEqual(OIL_SPEC.CMP_VERSION);
+      expect(metaData.consentScreen).toEqual(1);
+      expect(metaData.vendorListVersion).toEqual(VENDOR_LIST_VERSION);
+      expect(metaData.created.getTime()).toEqual(TIMESTAMP);
+      expect(metaData.lastUpdated.getTime()).toEqual(TIMESTAMP);
 
       expect(vendorConsentData.gdprApplies).toBeTruthy();
       expect(vendorConsentData.hasGlobalScope).toBeFalsy();
     });
 
-    it('should create vendor consent data with correct purpose consents if global consent for all purposes is given', () => {
-      const EXPECTED_CONSENT_VALUE = 1;
+    it('should return vendor consent data with correct purpose consents', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue(COOKIE);
 
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: EXPECTED_CONSENT_VALUE,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-
-      let vendorConsentData = getVendorConsentData([1, 2]);
+      let vendorConsentData = getVendorConsentData();
       expect(vendorConsentData).toBeDefined();
       expect(vendorConsentData.purposeConsents).toBeDefined();
 
       let purposeIds = Object.keys(vendorConsentData.purposeConsents);
-      expect(purposeIds.length).toEqual(CoreVendorInformation.getPurposes().length);
-      purposeIds.forEach(purposeId => {
-        expect(vendorConsentData.purposeConsents[purposeId]).toEqual(EXPECTED_CONSENT_VALUE);
-      });
+      expect(purposeIds.length).toEqual(PURPOSES.length);
+      expect(vendorConsentData.purposeConsents[PURPOSE_ID_1]).toBeTruthy();
+      expect(vendorConsentData.purposeConsents[PURPOSE_ID_2]).toBeTruthy();
+      expect(vendorConsentData.purposeConsents[PURPOSE_ID_3]).toBeFalsy();
+      expect(vendorConsentData.purposeConsents[PURPOSE_ID_4]).toBeTruthy();
+      expect(vendorConsentData.purposeConsents[PURPOSE_ID_5]).toBeTruthy();
     });
 
-    it('should create vendor consent data with correct purpose consents if privacy in cookie is 1', () => {
-      const EXPECTED_CONSENT_VALUE = 1;
+    it('should return vendor consent data with correct vendor consents for given vendor id list', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue(COOKIE);
 
+      let requestedVendorIds = [VALID_VENDOR_ID_1, VALID_VENDOR_ID_2, VALID_VENDOR_ID_3, INVALID_VENDOR_ID];
+      let vendorConsentData = getVendorConsentData(requestedVendorIds);
+      expect(vendorConsentData).toBeDefined();
+      expect(vendorConsentData.vendorConsents).toBeDefined();
+
+      let vendorIds = Object.keys(vendorConsentData.vendorConsents);
+      expect(vendorIds.length).toEqual(requestedVendorIds.length);
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toBeTruthy();
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toBeFalsy();
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toBeTruthy();
+      expect(vendorConsentData.vendorConsents[INVALID_VENDOR_ID]).toBeFalsy();
+    });
+
+    it('should return vendor consent data with all vendor consents if no vendor id list is given', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue(COOKIE);
+
+      let vendorConsentData = getVendorConsentData();
+      expect(vendorConsentData).toBeDefined();
+      expect(vendorConsentData.vendorConsents).toBeDefined();
+
+      let vendorIds = Object.keys(vendorConsentData.vendorConsents);
+      expect(vendorIds.length).toEqual(VENDORS.length);
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toBeTruthy();
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toBeFalsy();
+      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toBeTruthy();
+    });
+
+    it('should return nothing if cookie cannot be retrieved', () => {
+      spyOn(CoreCookies, 'getSoiCookie');
+
+      expect(getVendorConsentData()).not.toBeDefined();
+    });
+
+    it('should return nothing if cookie does not contain any consent data', () => {
       spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
         opt_in: false,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
+        version: VERSION,
+        localeVariantName: LOCALE_VARIANT_DE_NAME,
+        localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
+        customPurposes: [CUSTOM_PURPOSE_ID_1]
       });
 
-      let vendorConsentData = getVendorConsentData([1, 2]);
-      expect(vendorConsentData).toBeDefined();
-      expect(vendorConsentData.purposeConsents).toBeDefined();
-
-      let purposeIds = Object.keys(vendorConsentData.purposeConsents);
-      expect(purposeIds.length).toEqual(CoreVendorInformation.getPurposes().length);
-      purposeIds.forEach(purposeId => {
-        expect(vendorConsentData.purposeConsents[purposeId]).toEqual(EXPECTED_CONSENT_VALUE);
-      });
+      expect(getVendorConsentData()).not.toBeDefined();
     });
-
-    it('should create vendor consent data with correct purpose consents if privacy is object', () => {
-      const CONSENT_GIVEN   = 1;
-      const CONSENT_REVOKED = 2;
-
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: false,
-        privacy: {
-          [CONSENT_GIVEN]: 1,
-          [CONSENT_REVOKED]: 0
-        },
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-
-      let vendorConsentData = getVendorConsentData([1, 2]);
-      expect(vendorConsentData).toBeDefined();
-      expect(vendorConsentData.purposeConsents).toBeDefined();
-
-      let purposeIds = Object.keys(vendorConsentData.purposeConsents);
-      expect(purposeIds.length).toEqual(2);
-      expect(vendorConsentData.purposeConsents[CONSENT_GIVEN]).toEqual(1)
-      expect(vendorConsentData.purposeConsents[CONSENT_REVOKED]).toEqual(0)
-    });
-
-    it('should create vendor consent data with correct purpose consents if single consents for purposes are given', () => {
-      const EXPECTED_CONSENT_VALUE1 = true;
-      const EXPECTED_CONSENT_VALUE2 = false;
-
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: {
-          1: EXPECTED_CONSENT_VALUE1,
-          2: EXPECTED_CONSENT_VALUE2
-        },
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-
-      let vendorConsentData = getVendorConsentData([1, 2]);
-      expect(vendorConsentData).toBeDefined();
-      expect(vendorConsentData.purposeConsents).toBeDefined();
-
-      let purposeIds = Object.keys(vendorConsentData.purposeConsents);
-      expect(purposeIds.length).toEqual(2);
-      expect(vendorConsentData.purposeConsents[1]).toEqual(EXPECTED_CONSENT_VALUE1);
-      expect(vendorConsentData.purposeConsents[2]).toEqual(EXPECTED_CONSENT_VALUE2);
-    });
-
-    it('should create vendor consent data with correct vendor consents for given valid vendor id list', () => {
-      const EXPECTED_CONSENT_VALUE = true;
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: EXPECTED_CONSENT_VALUE,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-
-      let vendorConsentData = getVendorConsentData([VALID_VENDOR_ID_1]);
-      expect(vendorConsentData).toBeDefined();
-      expect(vendorConsentData.vendorConsents).toBeDefined();
-
-      let vendorIds = Object.keys(vendorConsentData.vendorConsents);
-      expect(vendorIds.length).toEqual(1);
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(EXPECTED_CONSENT_VALUE);
-    });
-
-    it('should create vendor consent data with correct vendor consents for given vendor id list with invalid vendor id', () => {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-
-      let vendorConsentData = getVendorConsentData([INVALID_VENDOR_ID]);
-      expect(vendorConsentData).toBeDefined();
-      expect(vendorConsentData.vendorConsents).toBeDefined();
-
-      let vendorIds = Object.keys(vendorConsentData.vendorConsents);
-      expect(vendorIds.length).toEqual(1);
-      expect(vendorConsentData.vendorConsents[INVALID_VENDOR_ID]).toEqual(false);
-    });
-
-    it('should create vendor consent data with all vendor consents if no vendor id list is given', () => {
-      const EXPECTED_CONSENT_VALUE = true;
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: EXPECTED_CONSENT_VALUE,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-
-      let vendorConsentData = getVendorConsentData();
-      expect(vendorConsentData).toBeDefined();
-      expect(vendorConsentData.vendorConsents).toBeDefined();
-
-      let vendorIds = Object.keys(vendorConsentData.vendorConsents);
-      expect(vendorIds.length).toEqual(3);
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(EXPECTED_CONSENT_VALUE);
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(EXPECTED_CONSENT_VALUE);
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toEqual(EXPECTED_CONSENT_VALUE);
-    });
-
-    it('should return correct vendor list when whitelist in config', function() {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([VALID_VENDOR_ID_1])
-      
-      let vendorConsentData = getVendorConsentData();
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(true);
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(false);
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toEqual(false);
-    });
-
-    it('should return correct vendor list when blacklist in config', function() {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-      spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([VALID_VENDOR_ID_1, VALID_VENDOR_ID_3])
-      
-      let vendorConsentData = getVendorConsentData();
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(false);
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(true);
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toEqual(false);
-    });
-
-    it('should only consider vendor ids in whitelist', function() {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-
-      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([VALID_VENDOR_ID_3, VALID_VENDOR_ID_1])
-      spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([VALID_VENDOR_ID_3])
-      
-      let vendorConsentData = getVendorConsentData();
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_1]).toEqual(true);
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_2]).toEqual(false);
-      expect(vendorConsentData.vendorConsents[VALID_VENDOR_ID_3]).toEqual(true);
-    });
-
-    it('should create proper consent string for whitelisted elements', function() {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: 100000
-      });
-
-      spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([VALID_VENDOR_ID_3, VALID_VENDOR_ID_1])
-      let vendorConsentData = getVendorConsentData();
-      let consentData = new ConsentString(vendorConsentData.metadata);
-      expect(consentData.allowedVendorIds).toEqual([VALID_VENDOR_ID_2]);
-
-      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([VALID_VENDOR_ID_3, VALID_VENDOR_ID_1])
-      vendorConsentData = getVendorConsentData();
-      consentData = new ConsentString(vendorConsentData.metadata);
-      expect(consentData.allowedVendorIds).toEqual([VALID_VENDOR_ID_1, VALID_VENDOR_ID_3]);
-    });
-
   });
 
-  describe('getConsentDataString', () => {
+  describe('getting consent data string', () => {
 
-    const VENDOR_ID_1 = 8;
-    const VENDOR_ID_2 = 12;
-
-    const GLOBAL_VENDOR_LIST = {
-      vendorListVersion: 16,
-      lastUpdated: '2018-05-08T15:59:02Z',
-      purposes: PURPOSES_ARRAY,
-      vendors: [
-        {
-          id: VENDOR_ID_1,
-          name: 'Emerse Sverige AB',
-          policyUrl: 'https://www.emerse.com/privacy-policy/',
-          purposeIds: [PURPOSE_ID_1, PURPOSE_ID_2],
-          legIntPurposeIds: [],
-          featureIds: []
-        },
-        {
-          id: VENDOR_ID_2,
-          name: 'BeeswaxIO Corporation',
-          policyUrl: 'https://www.beeswax.com/privacy.html',
-          purposeIds: [PURPOSE_ID_1],
-          legIntPurposeIds: [],
-          featureIds: []
-        }
-      ]
-    };
-
-    beforeEach(() => {
-      spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(GLOBAL_VENDOR_LIST);
-      spyOn(CoreVendorInformation, 'getVendors').and.returnValue(GLOBAL_VENDOR_LIST.vendors);
-      spyOn(CoreVendorInformation, 'getVendorListVersion').and.returnValue(GLOBAL_VENDOR_LIST.vendorListVersion);
-      spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(GLOBAL_VENDOR_LIST.purposes);
-    });
-
-    it('should get consent data string with null as ConsentStringVersion', () => {
-      const EXPECTED_TIMESTAMP = Math.round(Date.now() / 100) * 100; // accuracy: deciseconds only
-
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: EXPECTED_TIMESTAMP
-      });
-
-      let result = getConsentDataString(null);
-      expect(result).toBeDefined();
-    });
-
-    it('should get consent data string with correct meta data', () => {
-      const EXPECTED_TIMESTAMP = Math.round(Date.now() / 100) * 100; // accuracy: deciseconds only
-
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: EXPECTED_TIMESTAMP
-      });
+    it('should return consent data string if no consent string version is requested', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue(COOKIE);
 
       let result = getConsentDataString();
-      expect(result).toBeDefined();
+
       expect(result.gdprApplies).toBeTruthy();
       expect(result.hasGlobalScope).toBeFalsy();
-
-      let consentData = new ConsentString(result.consentData);
-      expect(consentData).toBeDefined();
-      expect(consentData.getVersion()).toBeDefined();
-      expect(consentData.getCmpId()).toEqual(OIL_SPEC.CMP_ID);
-      expect(consentData.getCmpVersion()).toEqual(OIL_SPEC.CMP_VERSION);
-      expect(consentData.getConsentScreen()).toEqual(1);
-      expect(consentData.getConsentLanguage()).toEqual('de');
-      expect(consentData.getVendorListVersion()).toEqual(CoreVendorInformation.getVendorListVersion());
-      expect(consentData.created.getTime()).toEqual(EXPECTED_TIMESTAMP);
+      expect(result.consentData).toEqual(CONSENT_STRING);
     });
 
-    it('should get consent data string with correct purpose consents if global consent for all purposes is given', () => {
-      const EXPECTED_CONSENT_VALUE = 1;
+    it('should return consent data string if valid consent string version is requested', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue(COOKIE);
 
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: EXPECTED_CONSENT_VALUE,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
+      let result = getConsentDataString(OIL_SPEC.LATEST_CONSENT_STRING_VERSION);
 
-      let result = getConsentDataString();
-      expect(result).toBeDefined();
-
-      let consentData = new ConsentString(result.consentData);
-      expect(consentData).toBeDefined();
-      expect(consentData.getPurposesAllowed().length).toEqual(2);
-      expect(consentData.getPurposesAllowed()).toContain(PURPOSE_ID_1);
-      expect(consentData.getPurposesAllowed()).toContain(PURPOSE_ID_2);
+      expect(result.gdprApplies).toBeTruthy();
+      expect(result.hasGlobalScope).toBeFalsy();
+      expect(result.consentData).toEqual(CONSENT_STRING);
     });
 
-    it('should consent data string with correct purpose consents if single consents for purposes are given', () => {
-      const EXPECTED_CONSENT_VALUE1 = true;
-      const EXPECTED_CONSENT_VALUE2 = false;
-      const PRIVACY = {};
-
-      PRIVACY[PURPOSE_ID_1] = EXPECTED_CONSENT_VALUE1;
-      PRIVACY[PURPOSE_ID_2] = EXPECTED_CONSENT_VALUE2;
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: PRIVACY,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-
-      let result = getConsentDataString();
-      expect(result).toBeDefined();
-
-      let consentData = new ConsentString(result.consentData);
-      expect(consentData).toBeDefined();
-      expect(consentData.getPurposesAllowed().length).toEqual(1);
-      expect(consentData.getPurposesAllowed()).toContain(PURPOSE_ID_1);
-    });
-
-    it('should create vendor consent data with correct vendor consents for given consent', () => {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-
-      let result = getConsentDataString();
-      expect(result).toBeDefined();
-
-      let consentData = new ConsentString(result.consentData);
-      expect(consentData).toBeDefined();
-      expect(consentData.getVendorsAllowed().length).toEqual(2);
-      expect(consentData.getVendorsAllowed()).toContain(VENDOR_ID_1);
-      expect(consentData.getVendorsAllowed()).toContain(VENDOR_ID_2);
-    });
-
-    it('should create vendor consent data without vendor consents for revoked consent', () => {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: false,
-        privacy: 0,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-
-      let result = getConsentDataString();
-      expect(result).toBeDefined();
-
-      let consentData = new ConsentString(result.consentData);
-      expect(consentData).toBeDefined();
-      expect(consentData.getVendorsAllowed().length).toEqual(0);
-    });
-
-    it('should create vendor consent data with vendor consents when privacy is 1 even for revoked consent', () => {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: false,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-
-      let result = getConsentDataString();
-      expect(result).toBeDefined();
-
-      let consentData = new ConsentString(result.consentData);
-      expect(consentData).toBeDefined();
-      expect(consentData.getVendorsAllowed().length).toEqual(2);
-    });
-
-    it('should not create vendor consent data if invalid consent string version is requested', () => {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
+    it('should return nothing if invalid consent string version is requested', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue(COOKIE);
 
       let result = getConsentDataString("ThisIsNotAValidVersionString");
       expect(result).not.toBeDefined();
     });
 
-    it('should not create vendor consent data if wrong consent string version is requested', () => {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
+    it('should return nothing if wrong consent string version is requested', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue(COOKIE);
 
       let result = getConsentDataString("99999");
       expect(result).not.toBeDefined();
     });
 
+    it('should return nothing if cookie cannot be retrieved', () => {
+      spyOn(CoreCookies, 'getSoiCookie');
+
+      expect(getConsentDataString()).not.toBeDefined();
+    });
+
+    it('should return nothing if cookie does not contain any consent data', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        version: VERSION,
+        localeVariantName: LOCALE_VARIANT_DE_NAME,
+        localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
+        customPurposes: [CUSTOM_PURPOSE_ID_1]
+      });
+
+      expect(getConsentDataString()).not.toBeDefined();
+    });
+
   });
 
-  describe('getPublisherConsentData', () => {
-    it('should return default info object', function() {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-      spyOn(CoreConfig, 'getCustomPurposes').and.returnValue(CUSTOM_PURPOSES_ARRAY);
-      spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(PURPOSES_ARRAY);
-
-      let result = getPublisherConsentData();
-
-      expect(result.metadata).toBeDefined();
-      expect(result.gdprApplies).toBeTruthy();
-      expect(result.hasGlobalScope).toEqual(false);
-      expect(result.standardPurposeConsents).toBeDefined();
-      expect(result.customPurposeConsents).toBeDefined();
-
-      expect(result.standardPurposeConsents[PURPOSE_ID_1]).toEqual(1);
-      expect(result.standardPurposeConsents[PURPOSE_ID_2]).toEqual(1);
-      expect(result.standardPurposeConsents[CUSTOM_PURPOSE_ID_1]).toBeFalsy();
-      expect(result.customPurposeConsents[CUSTOM_PURPOSE_ID_1]).toEqual(1);
-      expect(result.customPurposeConsents[CUSTOM_PURPOSE_ID_2]).toEqual(1);
-      expect(result.customPurposeConsents[PURPOSE_ID_1]).toBeFalsy();
-    });
-
-    it('should return info object with only purposes that are inside purposeIds array', function() {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01',
-        localeVariantVersion: 1,
-        timestamp: Date.now()
-      });
-      spyOn(CoreConfig, 'getCustomPurposes').and.returnValue(CUSTOM_PURPOSES_ARRAY);
-      let result = getPublisherConsentData([PURPOSE_ID_1,CUSTOM_PURPOSE_ID_1]);
-
-      expect(result.standardPurposeConsents[PURPOSE_ID_1]).toEqual(1);
-      expect(result.standardPurposeConsents[PURPOSE_ID_2]).toBeFalsy();
-      expect(result.customPurposeConsents[CUSTOM_PURPOSE_ID_1]).toEqual(1);
-      expect(result.customPurposeConsents[CUSTOM_PURPOSE_ID_2]).toBeFalsy();
-    });
-  });
-
-  describe('buildPurposeConsents', function() {
-    it('should return correct consent object', function() {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: 1,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01'
-      });
-
-      let result = buildPurposeConsents(PURPOSES_ARRAY);
-      expect(result[PURPOSE_ID_1]).toEqual(1);
-      expect(result[PURPOSE_ID_2]).toEqual(1);
-
-      result = buildPurposeConsents(CUSTOM_PURPOSES_ARRAY);
-      expect(result[CUSTOM_PURPOSE_ID_1]).toEqual(1);
-      expect(result[CUSTOM_PURPOSE_ID_2]).toEqual(1);
-    });
-
-    it('should return 0 for each purpose when privacy=0', function() {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: false,
-        privacy: 0,
-        version: 'aVersion',
-        localeVariantName: 'deDE_01'
-      });
-
-      let result = buildPurposeConsents(PURPOSES_ARRAY);
-      expect(result[PURPOSE_ID_1]).toEqual(0);
-      expect(result[PURPOSE_ID_2]).toEqual(0);
-    });
-
-    it('should return cookie.privacy if it is object', function() {
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
-        opt_in: true,
-        privacy: {
-          foo: 'bar'
-        },
-        version: 'aVersion',
-        localeVariantName: 'deDE_01'
-      });
-
-      let result = buildPurposeConsents([]);
-      expect(result.foo).toEqual('bar');
-    });
-  });
-
-  describe('getLimitedVendorIds', function() {
-
-    loadVendorList();
-
-    const GLOBAL_VENDORS_ARRAY = [{
-        id: 1
-      },
-      {
-        id: 2
-      },
-      {
-        id: 3
-      },
-      {
-        id: 12
-      },
-      {
-        id: 15
-      }];
+  describe('getting publisher consent data', () => {
 
     beforeEach(() => {
-      spyOn(CoreVendorInformation, 'getVendors').and.returnValue(GLOBAL_VENDORS_ARRAY);
-    })
-
-    it('should return all vendors when whitelist and blacklist empty or null', function() {
-      let result = getLimitedVendorIds();
-      expect(result.length).toEqual(5);
+      spyOn(CoreConfig, 'getCustomPurposeIds').and.returnValue(CUSTOM_PURPOSES.map(({id}) => id));
+      spyOn(CoreVendorInformation, 'getPurposeIds').and.returnValue(PURPOSES.map(({id}) => id));
     });
 
-    it('should return vendor ids from global config whitelist', function() {
-      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue([2,3,15])
-      let result = getLimitedVendorIds();
-      expect(result.toString()).toEqual("2,3,15");
+    it('should return publisher consent data with correct meta data', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue(COOKIE);
+
+      let publisherConsentData = getPublisherConsentData();
+      expect(publisherConsentData).toBeDefined();
+      expect(publisherConsentData.metadata).toBeDefined();
+
+      let metaData = new ConsentString.decodeMetadataString(publisherConsentData.metadata);
+      expect(metaData.version).toBeDefined();
+      expect(metaData.cmpId).toEqual(OIL_SPEC.CMP_ID);
+      expect(metaData.cmpVersion).toEqual(OIL_SPEC.CMP_VERSION);
+      expect(metaData.consentScreen).toEqual(1);
+      expect(metaData.vendorListVersion).toEqual(VENDOR_LIST_VERSION);
+      expect(metaData.created.getTime()).toEqual(TIMESTAMP);
+      expect(metaData.lastUpdated.getTime()).toEqual(TIMESTAMP);
+
+      expect(publisherConsentData.gdprApplies).toBeTruthy();
+      expect(publisherConsentData.hasGlobalScope).toBeFalsy();
     });
 
-    it('should return all vendor ids expect the ones in global config blacklist', function() {
-      spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue([2,15])
-      let result = getLimitedVendorIds();
-      expect(result.toString()).toEqual("1,3,12");
+    it('should return publisher consent data with correct purpose consents', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue(COOKIE);
+
+      let publisherConsentData = getPublisherConsentData();
+      expect(publisherConsentData).toBeDefined();
+
+      expect(publisherConsentData.standardPurposeConsents).toBeDefined();
+      let standardPurposeIds = Object.keys(publisherConsentData.standardPurposeConsents);
+      expect(standardPurposeIds.length).toEqual(PURPOSES.length);
+      expect(publisherConsentData.standardPurposeConsents[PURPOSE_ID_1]).toBeTruthy();
+      expect(publisherConsentData.standardPurposeConsents[PURPOSE_ID_2]).toBeTruthy();
+      expect(publisherConsentData.standardPurposeConsents[PURPOSE_ID_3]).toBeFalsy();
+      expect(publisherConsentData.standardPurposeConsents[PURPOSE_ID_4]).toBeTruthy();
+      expect(publisherConsentData.standardPurposeConsents[PURPOSE_ID_5]).toBeTruthy();
+
+      expect(publisherConsentData.customPurposeConsents).toBeDefined();
+      let customPurposeIds = Object.keys(publisherConsentData.customPurposeConsents);
+      expect(customPurposeIds.length).toEqual(CUSTOM_PURPOSES.length);
+      expect(publisherConsentData.customPurposeConsents[CUSTOM_PURPOSE_ID_1]).toBeTruthy();
+      expect(publisherConsentData.customPurposeConsents[CUSTOM_PURPOSE_ID_2]).toBeFalsy();
+    });
+
+    it('should return publisher consent data with correct purpose consents for given purpose id list', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue(COOKIE);
+
+      let publisherConsentData = getPublisherConsentData([PURPOSE_ID_1, CUSTOM_PURPOSE_ID_1]);
+
+      expect(publisherConsentData.standardPurposeConsents).toBeDefined();
+      let standardPurposeIds = Object.keys(publisherConsentData.standardPurposeConsents);
+      expect(standardPurposeIds.length).toEqual(1);
+      expect(publisherConsentData.standardPurposeConsents[PURPOSE_ID_1]).toBeTruthy();
+
+      expect(publisherConsentData.customPurposeConsents).toBeDefined();
+      let customPurposeIds = Object.keys(publisherConsentData.customPurposeConsents);
+      expect(customPurposeIds.length).toEqual(1);
+      expect(publisherConsentData.customPurposeConsents[CUSTOM_PURPOSE_ID_1]).toBeTruthy();
+    });
+
+    it('should return nothing if cookie cannot be retrieved', () => {
+      spyOn(CoreCookies, 'getSoiCookie');
+
+      expect(getPublisherConsentData()).not.toBeDefined();
+    });
+
+    it('should return nothing if cookie does not contain any consent data', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: false,
+        version: VERSION,
+        localeVariantName: LOCALE_VARIANT_DE_NAME,
+        localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
+        customPurposes: [CUSTOM_PURPOSE_ID_1]
+      });
+
+      expect(getPublisherConsentData()).not.toBeDefined();
+    });
+
+    it('should return nothing if cookie does not contain any custom purposes data', () => {
+      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({
+        opt_in: true,
+        version: VERSION,
+        localeVariantName: LOCALE_VARIANT_DE_NAME,
+        localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
+        consentData: new ConsentString(CONSENT_STRING),
+        consentString: CONSENT_STRING
+      });
+
+      expect(getPublisherConsentData()).not.toBeDefined();
     });
 
   });
+
 });
 

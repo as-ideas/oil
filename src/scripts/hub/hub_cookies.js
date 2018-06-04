@@ -1,15 +1,57 @@
-import {getCookieExpireInDays} from '../core/core_config.js'
-import {getClientTimestamp} from '../core/core_utils.js';
-import {OIL_PAYLOAD_LOCALE_VARIANT_NAME, OIL_PAYLOAD_LOCALE_VARIANT_VERSION, OIL_PAYLOAD_PRIVACY, OIL_PAYLOAD_VERSION, PRIVACY_MINIMUM_TRACKING} from '../core/core_constants.js';
-import {getOilCookie, setDomainCookie} from '../core/core_cookies.js';
-import {logInfo} from '../core/core_log.js';
+import {
+  OIL_PAYLOAD_CUSTOM_PURPOSES,
+  OIL_PAYLOAD_LOCALE_VARIANT_NAME,
+  OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
+  OIL_PAYLOAD_PRIVACY,
+  OIL_PAYLOAD_VERSION,
+  OIL_SPEC,
+  PRIVACY_MINIMUM_TRACKING
+} from '../core/core_constants';
+import {logInfo} from '../core/core_log';
+import {getCookieExpireInDays, getLanguageFromLocale} from '../core/core_config';
+import {getLimitedVendorIds} from '../core/core_vendor_information';
+import {getOilCookie, getStandardPurposesWithConsent, hasOutdatedOilCookie, setDomainCookie} from '../core/core_cookies';
+import Cookie from 'js-cookie';
+
+const {ConsentString} = require('consent-string');
 
 const OIL_HUB_DOMAIN_COOKIE_NAME = 'oil_data';
 const OIL_HUB_UNKNOWN_VALUE = 'unknown';
 
-/**
- * Internal Methods
- */
+export function getPoiCookie(groupName = '') {
+  let cookieConfig = getHubDomainCookieConfig(groupName);
+  let cookie = hasOutdatedOilCookie(cookieConfig) ? transformOutdatedOilCookie(cookieConfig) : getOilCookie(cookieConfig);
+  logInfo('Oil Hub Domain Cookie: ', cookie);
+  return cookie;
+}
+
+export function setPoiCookie(groupName, payload) {
+  let cookie = {
+    power_opt_in: true,
+    version: getVersionFromPayload(payload),
+    localeVariantName: getLocaleVariantNameFromPayload(payload),
+    localeVariantVersion: getLocaleVariantVersionFromPayload(payload),
+    customPurposes: getCustomPurposesFromPayload(payload),
+    consentString: getConsentStringFromPayload(payload)
+  };
+  setDomainCookie(getOilHubCookieName(groupName), cookie, getCookieExpireInDays());
+}
+
+function transformOutdatedOilCookie(cookieConfig) {
+  let cookieJson = Cookie.getJSON(cookieConfig.name);
+
+  let cookie = cookieConfig.defaultCookieContent;
+  cookie.power_opt_in = cookieJson.power_opt_in;
+  cookie.version = cookieJson.version;
+  cookie.localeVariantName = cookieJson.localeVariantName;
+  cookie.localeVariantVersion = cookieJson.localeVariantVersion;
+  cookie.customPurposes = []; // we do not know custom purposes config in the hub, but old cookies does not encode them
+  cookie.consentData.setConsentLanguage(getLanguageFromLocale(cookieJson.localeVariantName));
+  cookie.consentData.setPurposesAllowed(getStandardPurposesWithConsent(cookieJson.privacy));
+  cookie.consentData.setVendorsAllowed(getLimitedVendorIds());
+  return cookie;
+}
+
 function getOilHubCookieName(groupName) {
   if (groupName) {
     return groupName + '_' + OIL_HUB_DOMAIN_COOKIE_NAME;
@@ -18,33 +60,43 @@ function getOilHubCookieName(groupName) {
 }
 
 function getHubDomainCookieConfig(groupName) {
+  let consentData = new ConsentString();
+  consentData.setCmpId(OIL_SPEC.CMP_ID);
+  consentData.setCmpVersion(OIL_SPEC.CMP_VERSION);
+  consentData.setConsentScreen(1);
+
+  consentData.setConsentLanguage('en'); // this value can't be figured out
+  consentData.setPurposesAllowed([]);
+  consentData.setVendorsAllowed([]);
+
   return {
     name: getOilHubCookieName(groupName),
     expires: getCookieExpireInDays(),
-    default_content: {
-      'power_opt_in': false,
-      'timestamp': getClientTimestamp(),
-      'version': OIL_HUB_UNKNOWN_VALUE, // those values cant be figured out
-      'localeVariantName': OIL_HUB_UNKNOWN_VALUE, //  in the hub and come from the sites config
-      'localeVariantVersion': 0, //  in the hub and come from the sites config
-      'privacy': PRIVACY_MINIMUM_TRACKING
-    }
+    defaultCookieContent: {
+      power_opt_in: false,
+      version: OIL_HUB_UNKNOWN_VALUE, // this value can't be figured out
+      localeVariantName: OIL_HUB_UNKNOWN_VALUE, // this value can't be figured out
+      localeVariantVersion: 0, // this value can't be figured out
+      customPurposes: [],
+      consentData: consentData,
+      consentString: '' // consent string is not computed because global vendor list is not loaded in hub
+    },
+    outdated_cookie_content_keys: ['power_opt_in', 'timestamp', 'version', 'localeVariantName', 'localeVariantVersion', 'privacy']
   };
 }
 
-function getOilHubDomainCookie(groupName) {
-  return getOilCookie(getHubDomainCookieConfig(groupName));
-}
-
-function getPrivacySettingsFromPayload(payload) {
-  if (payload) {
-    if (payload[OIL_PAYLOAD_PRIVACY]) {
-      return payload[OIL_PAYLOAD_PRIVACY];
-    } else { // backwards compatibility, when the payload was only the privacySettings
-      return payload;
-    }
+function getConsentStringFromPayload(payload) {
+  if (payload && payload[OIL_PAYLOAD_PRIVACY]) {
+    return payload[OIL_PAYLOAD_PRIVACY];
   }
   return PRIVACY_MINIMUM_TRACKING;
+}
+
+function getCustomPurposesFromPayload(payload) {
+  if (payload && payload[OIL_PAYLOAD_CUSTOM_PURPOSES]) {
+    return payload[OIL_PAYLOAD_CUSTOM_PURPOSES];
+  }
+  return [];
 }
 
 function getVersionFromPayload(payload) {
@@ -66,28 +118,4 @@ function getLocaleVariantVersionFromPayload(payload) {
     return payload[OIL_PAYLOAD_LOCALE_VARIANT_VERSION];
   }
   return OIL_HUB_UNKNOWN_VALUE;
-}
-
-/**
- * Public Interface
- */
-export function getPoiCookie(groupName = '') {
-  let cookie = getOilHubDomainCookie(groupName);
-  logInfo('Oil Hub Domain Cookie: ', cookie);
-  return cookie;
-}
-
-export function setPoiOptIn(groupName = '', payload) {
-  let privacySettings = getPrivacySettingsFromPayload(payload);
-  let oilVersion = getVersionFromPayload(payload);
-  let cookie = getOilHubDomainCookie(groupName);
-  let cookieConfig = getHubDomainCookieConfig(groupName);
-
-  cookie.power_opt_in = true;
-  cookie.privacy = privacySettings;
-  cookie.timestamp = getClientTimestamp();
-  cookie.version = oilVersion;
-  cookie.localeVariantName = getLocaleVariantNameFromPayload(payload);
-  cookie.localeVariantVersion = getLocaleVariantVersionFromPayload(payload);
-  setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires);
 }

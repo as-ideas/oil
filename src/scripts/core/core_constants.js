@@ -1,6 +1,7 @@
 export const OIL_SPEC = {
   CMP_ID: 80,
-  CMP_VERSION: 1
+  CMP_VERSION: 1,
+  LATEST_CONSENT_STRING_VERSION: 1
 };
 
 export const OIL_CONFIG = {
@@ -66,5 +67,6 @@ export const OIL_PAYLOAD_PRIVACY = 'p';
 export const OIL_PAYLOAD_VERSION = 'v';
 export const OIL_PAYLOAD_LOCALE_VARIANT_NAME = 'lvn';
 export const OIL_PAYLOAD_LOCALE_VARIANT_VERSION = 'lvv';
+export const OIL_PAYLOAD_CUSTOM_PURPOSES = 'cp';
 
 export const OIL_GLOBAL_OBJECT_NAME = 'AS_OIL';

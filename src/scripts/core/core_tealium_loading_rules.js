@@ -1,4 +1,4 @@
-import { getSoiCookie } from './core_cookies.js';
+import {getSoiCookie} from './core_cookies.js';
 
 
 const LOADING_RULE_ALL = '_dip_oil_purpose_all';
@@ -15,8 +15,6 @@ const LOADING_RULE_PURPOSE_05 = '_dip_oil_purpose_05';
  * loading rules
  *
  * HINT: utag_data = UDO, Universal Data Objectm
- *
- * @param optin - the current cookie value
  */
 // FIXME deprecated
 export function doSetTealiumVariables() {
@@ -25,12 +23,13 @@ export function doSetTealiumVariables() {
     checkUtagDataExists();
 
     let ud = window.utag_data;
-    let privacy = getSoiCookie().privacy;
-    if (privacy) {
-      if (privacy === 1) {
+    let consentData = getSoiCookie().consentData;
+    if (consentData) {
+      let allowedPurposes = consentData.getPurposesAllowed();
+      if (allowedPurposes.length === 5) {
         ud[LOADING_RULE_ALL] = 1;
       } else {
-        calculateLoadingRules(ud, privacy);
+        calculateLoadingRules(ud, allowedPurposes);
         calculateLoadingRuleAll(ud);
       }
     } else {
@@ -45,12 +44,12 @@ function checkUtagDataExists() {
   }
 }
 
-function calculateLoadingRules(ud, privacy) {
-  ud[LOADING_RULE_PURPOSE_01] = privacy['1'] === 1 ? 1 : 0;
-  ud[LOADING_RULE_PURPOSE_02] = privacy['2'] === 1 ? 1 : 0;
-  ud[LOADING_RULE_PURPOSE_03] = privacy['3'] === 1 ? 1 : 0;
-  ud[LOADING_RULE_PURPOSE_04] = privacy['4'] === 1 ? 1 : 0;
-  ud[LOADING_RULE_PURPOSE_05] = privacy['5'] === 1 ? 1 : 0;
+function calculateLoadingRules(ud, allowedPurposes) {
+  ud[LOADING_RULE_PURPOSE_01] = allowedPurposes.indexOf(1) !== -1 ? 1 : 0;
+  ud[LOADING_RULE_PURPOSE_02] = allowedPurposes.indexOf(2) !== -1 ? 1 : 0;
+  ud[LOADING_RULE_PURPOSE_03] = allowedPurposes.indexOf(3) !== -1 ? 1 : 0;
+  ud[LOADING_RULE_PURPOSE_04] = allowedPurposes.indexOf(4) !== -1 ? 1 : 0;
+  ud[LOADING_RULE_PURPOSE_05] = allowedPurposes.indexOf(5) !== -1 ? 1 : 0;
 }
 
 

@@ -1,13 +1,10 @@
-import {
-  getLabel,
-  getTheme
-} from '../userview/userview_config.js';
-import { OIL_LABELS } from '../userview/userview_constants.js';
-import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../core/core_constants.js';
+import {getLabel, getTheme} from '../userview/userview_config.js';
+import {OIL_LABELS} from '../userview/userview_constants.js';
+import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME} from '../core/core_constants.js';
 import './poi.group.scss';
-import { setGlobalOilObject, getGlobalOilObject } from '../core/core_utils.js';
-import { getGroupList } from './poi.group.list';
-import { loadVendorList } from '../core/core_vendor_information';
+import {getGlobalOilObject, setGlobalOilObject} from '../core/core_utils.js';
+import {getGroupList} from './poi.group.list';
+import {loadVendorList} from '../core/core_vendor_information';
 
 export function renderOilGroupListTemplate(renderMethod) {
   getGroupList()
