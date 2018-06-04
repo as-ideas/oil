@@ -2,7 +2,8 @@ import {
   renderOil,
   oilShowPreferenceCenter,
   stopTimeOut,
-} from '../../../src/scripts/userview/userview_modal.js';
+  hasRunningTimeout
+} from '../../../src/scripts/userview/userview_modal';
 import {
   loadFixture,
   readFixture,
@@ -13,13 +14,17 @@ import {
   waitForElementToDisplay
 } from '../../utils.js';
 import * as OilList from '../../../src/scripts/poi-list/oil.list';
-import * as CoreConfig from '../../../src/scripts/core/core_config.js';
-import { hasRunningTimeout } from '../../../src/scripts/userview/userview_modal';
-import { setSoiOptIn } from '../../../src/scripts/core/core_cookies';
+import * as CoreConfig from '../../../src/scripts/core/core_config';
+import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
+import {setSoiCookie} from '../../../src/scripts/core/core_cookies';
+import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list'
 
-describe('the userview modal aka the oil layer wrapper with CPC', () => {
+describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   beforeEach(() => {
+    spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
+    spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
+    spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
     deleteAllCookies();
     CoreConfig.resetConfiguration();
     removeOilLayerAndConfig();
@@ -47,52 +52,48 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
   it('should insert CPC into host site with GIVEN PRIVACY SETTING', (done) => {
     loadFixture('html/integrated-cpc.html');
 
-    setSoiOptIn({
+    setSoiCookie({
       '1': false,
       '2': true,
       '3': true,
       '4': true,
       '5': true
+    }).then(() => {
+      oilShowPreferenceCenter();
+
+      waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
+        expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
+        expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeFalsy();
+        expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-3').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-4').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeTruthy();
+        done();
+      }, 10);
     });
-
-    oilShowPreferenceCenter();
-
-    waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc  #as-js-purpose-slider-1', () => {
-      expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
-      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(true);
-      done();
-    }, 10);
-
   });
 
   it('should insert CPC into host site with STORED PRIVACY SETTING (from cookie)', (done) => {
     renderOil({optIn: false});
-    setSoiOptIn({
+    setSoiCookie({
       '1': true,
       '2': true,
       '3': true,
       '4': true,
-      '5': true,
-      '6': true,
-      '7': false
+      '5': false
+    }).then(() => {
+      oilShowPreferenceCenter();
+
+      waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
+        expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
+        expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-3').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-4').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeFalsy();
+        done();
+      });
     });
-
-    oilShowPreferenceCenter();
-
-    waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc #as-js-purpose-slider-1', () => {
-      expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(true);
-      done();
-    });
-
   });
 
   it('should show CPC in layer with DEFAULT PRIVACY SETTING', (done) => {
@@ -102,11 +103,11 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
 
     waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc  #as-js-purpose-slider-1', () => {
       expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(false);
-      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(false);
-      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(false);
-      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(false);
-      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(false);
+      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeFalsy();
+      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeFalsy();
+      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBeFalsy();
+      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBeFalsy();
+      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeFalsy();
       done();
     });
 
@@ -121,37 +122,35 @@ describe('the userview modal aka the oil layer wrapper with CPC', () => {
 
     waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc #as-js-purpose-slider-1', () => {
       expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(true);
+      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
+      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
+      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBeTruthy();
+      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBeTruthy();
+      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeTruthy();
       done();
     });
   });
 
   it('should show CPC in layer with STORED PRIVACY SETTING (from cookie)', (done) => {
     renderOil({optIn: false});
-    setSoiOptIn({
+    setSoiCookie({
       '1': true,
       '2': true,
       '3': true,
       '4': true,
-      '5': true,
-      '6': true,
-      '7': false
-    });
+      '5': false
+    }).then(() => {
+      oilShowPreferenceCenter();
 
-    oilShowPreferenceCenter();
-
-    waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc #as-js-purpose-slider-1', () => {
-      expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
-      expect(document.querySelector('#as-js-purpose-slider-1').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-2').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-3').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-4').checked).toBe(true);
-      expect(document.querySelector('#as-js-purpose-slider-5').checked).toBe(true);
-      done();
+      waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
+        expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
+        expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-3').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-4').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeFalsy();
+        done();
+      });
     });
   });
 
