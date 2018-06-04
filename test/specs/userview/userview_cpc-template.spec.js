@@ -32,22 +32,21 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
     initCustomYasmineMatchers();
   });
 
-  // FIXME how to handle with custom vendorlist?!
-  // xit('should renderOil with ADVANCED-SETTINGS as CPC template', (done) => {
+  it('should renderOil with ADVANCED-SETTINGS as CPC template', (done) => {
 
-  //   spyOn(OilList, 'listSnippet').and.callThrough();
-  //   loadFixture('config/given.config.example.labels.html');
-  //   renderOil({optIn: false, advancedSettings: true});
+    spyOn(OilList, 'listSnippet').and.callThrough();
+    loadFixture('config/given.config.example.labels.html');
+    renderOil({optIn: false, advancedSettings: true});
 
-  //   waitsForAndRuns(function () {
-  //     return OilList.listSnippet.calls.count() > 0;
-  //   }, function () {
-  //     expect(document.querySelector('.as-oil')).toEqualWithDiff(readFixture('gold-master/cpc.html'));
-  //     expectTimeoutNotStarted();
-  //     done();
-  //   }, 2000);
+    waitsForAndRuns(function () {
+      return OilList.listSnippet.calls.count() > 0;
+    }, function () {
+      expect(document.querySelector('.as-oil')).toEqualWithDiff(readFixture('gold-master/cpc.html'));
+      expectTimeoutNotStarted();
+      done();
+    }, 2000);
 
-  // });
+  });
 
   it('should insert CPC into host site with GIVEN PRIVACY SETTING', (done) => {
     loadFixture('html/integrated-cpc.html');
