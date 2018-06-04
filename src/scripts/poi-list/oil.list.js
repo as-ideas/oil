@@ -7,7 +7,7 @@ import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../
 import './poi.group.scss';
 import { setGlobalOilObject, getGlobalOilObject } from '../core/core_utils.js';
 import { getGroupList } from './poi.group.list';
-import { getVendorList, loadVendorList } from '../core/core_vendor_information';
+import { loadVendorList } from '../core/core_vendor_information';
 
 export function renderOilGroupListTemplate(renderMethod) {
   getGroupList()

@@ -16,7 +16,7 @@ const commands = {
     return getPublisherConsentData(purposeIds);
   },
 
-  getVendorList: (vendorListVersion) => {
+  getVendorList: () => {
     return getVendorList();
   }
 
