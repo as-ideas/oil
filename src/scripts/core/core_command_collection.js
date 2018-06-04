@@ -15,7 +15,8 @@ const commands = {
   getPublisherConsents: (purposeIds) => {
     return getPublisherConsentData(purposeIds);
   },
-
+  
+  // FIXME needs support for vendorListVersion
   getVendorList: () => {
     return getVendorList();
   }
