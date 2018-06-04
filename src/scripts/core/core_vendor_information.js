@@ -3328,7 +3328,7 @@ const defaultVendorList = {
 export let cachedVendorList;
 
 export function loadVendorList() {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     if (cachedVendorList) {
       resolve(cachedVendorList);
     } else {

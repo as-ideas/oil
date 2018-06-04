@@ -25,7 +25,7 @@ import {
 } from './view/oil.advanced.settings.js';
 import { logError, logInfo } from '../core/core_log.js';
 import { getTheme, getTimeOutValue, isPersistMinimumTracking } from './userview_config.js';
-import { getPoiGroupName, isPoiActive, isSubscriberSetCookieActive, getAdvancedSettingsPurposesDefault } from '../core/core_config.js';
+import { isPoiActive, isSubscriberSetCookieActive, getAdvancedSettingsPurposesDefault } from '../core/core_config.js';
 import {
   applyPrivacySettings,
   getPrivacySettings,
