@@ -285,7 +285,7 @@ There are two kinds of unit tests: For the oil.js itself (``npm run test:unit``)
 
 #### Browserstack build tests
 
-You can run all E2E tests with different setups using Browserstack. Tests use our *remote* server at `https://oil-integration-host1.herokuapp.com` where the latest release is deployed to.
+You can run all E2E tests with different setups using Browserstack. Tests use our remote server at `https://oil-integration-host1.herokuapp.com` where the latest release is deployed to.
 
 To run tests in batch there are two commands, the first one covering a limited but most relevant selection of browsers.
 
@@ -302,12 +302,16 @@ The `-e` parameter should contain the id of the test setting to launch with. In 
 
 #### Browserstack dev tests
 
-You can run e2e tests against your local http://localhost:8080/ with BrowserStack.
+You can run the tests on your local http://localhost:8080/ in different browsers using BrowserStack.
 To do this, download (BrowserStackLocal)[https://www.browserstack.com/local-testing]. Create a build with `npm run build` and finally start the server with `npm start`. Finally, get your browserstack credentials and run (for chrome57):
 
     $ ENV_USER=your-browserstack-user ENV_KEY=your-browserstack-key ./node_modules/.bin/nightwatch -c etc/nightwatch.localhost-remote.conf.js -e chrome57
 
 For possible test settings see above section.
+
+To run tests in batch trigger this command:
+
+    $ npm run browserstack:remote-localhost
 
 #### Advanced Usage
 

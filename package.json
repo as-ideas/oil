@@ -25,6 +25,7 @@
     "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 ",
     "browserstack": "bash ./etc/runBrowserstackSeq.sh",
     "browserstack:full": "bash ./etc/runFullBrowserstackSeq.sh",
+    "browserstack:remote-localhost": "bash ./etc/runBrowserstackLocal.sh",
     "pree2e": "node etc/nightwatch.local.conf.js",
     "e2e": "mkdir -p target/reports &&./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e chrome",
     "e2esafari": "./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e safari",
