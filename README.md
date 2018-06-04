@@ -31,13 +31,14 @@ The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://
 
 ## Table of Contents
 
-  * [Intro](#about-oiljs)
-  * [Usage](#usage)
-  * [Configuration](#configuration)
-        * [Hosting](#hosting-it-is-recommended-to-host-all-files-on-your-own-webspace-or-cdn!)
-        * [Configuration values](#configuration-values)
-        * [Labels](#labels)
-  * [Development](#development)
+* [Intro](#about-oiljs)
+* [Usage](#usage)
+* [Configuration](#configuration)
+    * [Hosting](#hosting-it-is-recommended-to-host-all-files-on-your-own-webspace-or-cdn)
+    * [Configuration values](#configuration-values)
+    * [Labels](#labels)
+* [Development](#development)
+* [Changelog and releases](https://github.com/as-ideas/oil/releases)
   
 ## Technical Quality Goals
 
@@ -297,8 +298,9 @@ The `-e` parameter should contain the id of the test setting to launch with. In 
 
 #### Advanced Usage
 
-npm run build:release creates an app version that loads its parts
-from oil.axelspringer.com/release/*.min.js
+``npm run build:release`` creates an app version that loads its parts from oil.axelspringer.com/release/*.min.js
+
+The releases are build with a bash script via ``./release.sh``.
 
 This should be used in production.
 
@@ -306,16 +308,13 @@ This should be used in production.
 
 NODE_DEBUG=oil-debug npm run ...
 
-### Documentation
+### Creating and editing documentation
 
-see http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
-
+We are using [AsciiDoc](http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/) to create and edit the documentation. You can find the sources und ``docs/`` and can create the HTML (``dist/docs``) with ``npm run build:docs``.
 
 ### Changelog
 
-see CHANGELOG.md
-
-tool: https://github.com/lob/generate-changelog
+see the [releases](https://github.com/as-ideas/oil/releases) section.
 
 ## License
 
