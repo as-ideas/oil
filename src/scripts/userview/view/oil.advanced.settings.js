@@ -1,11 +1,10 @@
-import {OIL_LABELS} from '../userview_constants.js'
-import {forEach} from '../userview_modal.js';
-import {getLabel, getTheme} from '../userview_config.js';
-import {getCustomPurposes} from '../../core/core_config.js';
-import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME} from '../../core/core_constants.js';
-import {setGlobalOilObject} from '../../core/core_utils.js';
-import {getPurposes} from '../../core/core_vendor_information.js';
-import {getVendors} from '../../core/core_vendor_information';
+import { OIL_LABELS } from '../userview_constants.js'
+import { forEach } from '../userview_modal.js';
+import { getLabel, getTheme } from '../userview_config.js';
+import { getCustomPurposes } from '../../core/core_config.js';
+import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
+import { setGlobalOilObject } from '../../core/core_utils.js';
+import { getPurposes, getVendors } from '../../core/core_vendor_information.js';
 
 
 const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';

@@ -25,8 +25,21 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 * Local opt-in (called "Site Opt-In", SOI) as well as group-based cross-company opt-in (called "Power Opt-In", POI)
 * Advanced Settings with Cookie Preference Center (CPC)
 
-The Opt-In Layer (OIL) is an offical link:http://advertisingconsent.eu/iab-europe-transparency-consent-framework-list-of-registered-cmps/[Consent Management Provider (CMP)] after the IAB Europe "Transparency & Consent Framework".
+The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://advertisingconsent.eu/iab-europe-transparency-consent-framework-list-of-registered-cmps/) after the IAB Europe "Transparency & Consent Framework". Registered with ID 80.
 
+![](/src/assets/images/landing_page/iab-logo.png)
+
+## Table of Contents
+
+* [Intro](#about-oiljs)
+* [Usage](#usage)
+* [Configuration](#configuration)
+    * [Hosting](#hosting-it-is-recommended-to-host-all-files-on-your-own-webspace-or-cdn)
+    * [Configuration values](#configuration-values)
+    * [Labels](#labels)
+* [Development](#development)
+* [Changelog and releases](https://github.com/as-ideas/oil/releases)
+  
 ## Technical Quality Goals
 
 * OIL will be held compatible with the latest official browser releases, going back to the latest version as listed below and tested on broad range of browsers using Browserstack.com:
@@ -60,7 +73,32 @@ The Opt-In Layer (OIL) is an offical link:http://advertisingconsent.eu/iab-europ
 * Easy to implement with open documentation and examples, including dev kit
 * With SaaS: Domain White Listing against unauthorized usage
 
-# Usage
+## Usage
+
+There are 3 parts: 
+
+1) Add the CMP stub to your HTML (this makes the loading of a CMP independent from any call by vendors)
+2) Add the oil.js configuration to your website
+3) Add the script-tag for oil.js to your website
+
+
+Your custom configuration, this is an incomplete example:
+
+```javascript
+<script id="oil-configuration" type="application/configuration">
+{
+  "timeout": -1,
+  "locale": {
+    "localeId": "enEN_01",
+    "version": 1,
+    "texts": {
+      "label_intro_heading": "Insider, Inc.",
+      "label_intro": "This site uses cookies. By continuing to use this site, closing this banner, or clicking \"I Agree\", you agree to the use of cookies. Read our <a href=\"//www.businessinsider.com/cookies-policy\" target=\"_blank\">cookies policy</a> and <a href=\"//www.businessinsider.com/privacy-policy\" target=\"_blank\">privacy statement</a> for more information."
+    }
+  }
+}
+</script>
+```
 
 You need to add the CMP stub (a small script which stores all requests until the full script is loaded) and the script itself:
 
@@ -71,21 +109,32 @@ You need to add the CMP stub (a small script which stores all requests until the
 <script type="text/javascript" src="https://oil.axelspringer.com/release/1.1.0/oil.1.1.0-RELEASE.min.js"></script>
 ```
 
-And you need your custom configuration:
+## Configuration
+
+### Hosting: It is recommended to host all files on your own webspace or CDN!
+
+Here is an [example](https://oil.axelspringer.com/demos/open-source-example.html) how to configure oil.js with selfhosted files. All you need to do is upload the complete content of any release folder, like this folder from [v1.1.2](https://github.com/as-ideas/oil/tree/master/release/1.1.2). All these files are for example uploaded to ``https//your.cdn.com/lib/oil/1.1.2/`` and you can now configure your public path.
+
+### Configuration values
+
+Your configuration is added to your page via a script tag, for example: 
 
 ```javascript
 <script id="oil-configuration" type="application/configuration">
-  {
-    "poi_activate_poi": true,
-    "poi_group_name": "axelSpringerSe_01",
-    "locale": "enEN_01"
+{
+  "timeout": -1,
+  "locale": {
+    "localeId": "enEN_01",
+    "version": 1,
+    "texts": {
+      "label_intro_heading": "Insider, Inc."
+    }
   }
+}
 </script>
 ```
 
-# Configuration (WIP)
-
-## Configuration values
+For detailed explanations, please visit the [documentation](https://oil.axelspringer.com/docs/last-release).
 
 | Config Parameter | Description | Default Setting |
 |----------|---------------|-------|
@@ -107,7 +156,58 @@ And you need your custom configuration:
 | default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
 
-## Labels
+### Labels
+
+The labels are configured in you configuration. There are three options. The "localeId" and the "version" will be stored in the consent information for the user.
+
+* Store your locale object as 'locale' in the oil.js configuration (lowest priority)
+
+```javascript
+<script id="oil-configuration" type="application/configuration">
+{
+  "locale": {
+    "localeId": "enEN_01",
+    "version": 1,
+    "texts": {
+      "label_intro_heading": "Insider, Inc."
+    }
+  }
+}
+</script>
+```
+
+* Write your locale object directly to AS_OIL.LOCALE (middle priority)
+
+```javascript
+<script>
+(function () {
+    if (!window.AS_OIL) {
+      window.AS_OIL = {};
+    }
+    window.AS_OIL.locale = {
+      "localeId": "enEN_01",
+      "version": 1,
+      "texts": {
+        "label_intro_heading": "Insider, Inc."
+      }
+    };
+  }()
+)
+</script>
+```
+
+* Override single labels directly as part of the oil.js configuration (highest priority)
+
+```javascript
+<script id="oil-configuration" type="application/configuration">
+{
+  "timeout": -1,
+  "label_intro_heading": "Insider, Inc."
+}
+</script>
+```
+
+These are the available labels:
 
 ```json
 {
@@ -145,11 +245,8 @@ And you need your custom configuration:
 }
 ```
 
-## Full documentatin example
-
-tbd.
-
 ## Development
+
 ### Installation / Build
 
 After 'install' there is a post install step which automatically runs build.
@@ -201,8 +298,9 @@ The `-e` parameter should contain the id of the test setting to launch with. In 
 
 #### Advanced Usage
 
-npm run build:release creates an app version that loads its parts
-from oil.axelspringer.com/release/*.min.js
+``npm run build:release`` creates an app version that loads its parts from oil.axelspringer.com/release/*.min.js
+
+The releases are build with a bash script via ``./release.sh``.
 
 This should be used in production.
 
@@ -210,16 +308,13 @@ This should be used in production.
 
 NODE_DEBUG=oil-debug npm run ...
 
-### Documentation
+### Creating and editing documentation
 
-see http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
-
+We are using [AsciiDoc](http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/) to create and edit the documentation. You can find the sources und ``docs/`` and can create the HTML (``dist/docs``) with ``npm run build:docs``.
 
 ### Changelog
 
-see CHANGELOG.md
-
-tool: https://github.com/lob/generate-changelog
+see the [releases](https://github.com/as-ideas/oil/releases) section.
 
 ## License
 
