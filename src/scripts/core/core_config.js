@@ -1,6 +1,6 @@
-import {OIL_CONFIG} from './core_constants.js';
-import {logError, logInfo} from './core_log.js';
-import {isObject, OilVersion, setGlobalOilObject} from './core_utils';
+import { OIL_CONFIG } from './core_constants.js';
+import { logError, logInfo } from './core_log.js';
+import { isObject, OilVersion, setGlobalOilObject } from './core_utils';
 
 let cachedConfig = null;
 
@@ -116,7 +116,7 @@ export function getOilBackendUrl() {
 }
 
 export function getIabVendorListUrl() {
-  return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_LIST_URL, undefined);
+  return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_LIST_URL, 'https://vendorlist.consensu.org/vendorlist.json');
 }
 
 export function getIabVendorBlacklist() {
