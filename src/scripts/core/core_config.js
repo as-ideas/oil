@@ -111,8 +111,8 @@ export function getHubPath() {
   return getConfigValue(OIL_CONFIG.ATTR_HUB_PATH, `/release/${OilVersion.getLatestReleaseVersion()}/hub.html`);
 }
 
-export function getOilBackendUrl() {
-  return getConfigValue(OIL_CONFIG.ATTR_OIL_BACKEND_URL, 'https://oil-backend.herokuapp.com/oil');
+export function getLocaleUrl() {
+  return getConfigValue(OIL_CONFIG.ATTR_LOCALE_URL, 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/' + getLocaleVariantName());
 }
 
 export function getIabVendorListUrl() {
