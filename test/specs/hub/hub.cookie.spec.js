@@ -11,7 +11,7 @@ import {
 } from '../../../src/scripts/core/core_constants';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
-import {getPoiCookie, setPoiCookie} from '../../../src/scripts/hub/hub_cookies';
+import { getPoiCookie, setPoiCookie } from '../../../src/scripts/hub/hub_cookies';
 
 const {ConsentString} = require('consent-string');
 
@@ -54,6 +54,19 @@ describe('hub cookies', () => {
         customPurposes: [25, 26]
       });
     });
+  });
+
+  // FIXME
+  xit('should NOT set poi cookie for OLD payload (old oil.js, new hub.js with new cookie format)', () => {
+    let payload = givenPayload({
+      privacy: {"1": true, "2": false, "3": true, "4": true, "5": true},
+      localeVariantName: LOCALE_VARIANT_EN_NAME,
+      localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
+      version: OIL_VERSION
+    });
+
+    setPoiCookie(GROUP_NAME, payload);
+    expect(CoreCookies.setDomainCookie).not.toHaveBeenCalled();
   });
 
   describe('poi cookie retrieval', () => {
@@ -201,4 +214,5 @@ describe('hub cookies', () => {
     expect(retrievedConsentData.getVendorsAllowed().sort()).toEqual(expectedConsentData.getVendorsAllowed().sort());
   }
 
-});
+})
+;
