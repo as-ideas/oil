@@ -12,6 +12,7 @@ import {
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import { getPoiCookie, setPoiCookie } from '../../../src/scripts/hub/hub_cookies';
+import { deleteAllCookies } from '../../utils';
 
 const {ConsentString} = require('consent-string');
 
@@ -25,6 +26,44 @@ const PRIVACY = 1;
 const PURPOSE_LIST = [1, 2, 3, 4, 5];
 
 describe('hub cookies', () => {
+
+  const DEFAULT_PAYLOAD = {p: 'BOO4NpHOO4NpHBQABBENAkuAAAAXyABgACAvgA'};
+
+  describe('poi cookie get/set', () => {
+    beforeEach(() => {
+      deleteAllCookies();
+    });
+
+    it('shouldn\'t return the version of oil in the hub domain cookie, when never set', () => {
+      let resultCookie = getPoiCookie();
+      expect(resultCookie.version).toBe('unknown');
+    });
+
+    it('should create the correct hub domain default cookie with empty group name', () => {
+      setPoiCookie(undefined, DEFAULT_PAYLOAD);
+      let resultCookie = JSON.parse(getCookie('oil_data'));
+      expect(resultCookie.power_opt_in).toBe(true);
+    });
+
+    it('should create the correct hub domain default cookie with undefined group name', () => {
+      setPoiCookie(undefined, DEFAULT_PAYLOAD);
+      let resultCookie = JSON.parse(getCookie('oil_data'));
+      expect(resultCookie.power_opt_in).toBe(true);
+    });
+
+    it('should create the correct hub domain default cookie with given group name', () => {
+      setPoiCookie('lisasimpson', DEFAULT_PAYLOAD);
+      let resultCookie = JSON.parse(getCookie('lisasimpson_oil_data'));
+      expect(resultCookie.power_opt_in).toBe(true);
+    });
+
+    function getCookie(sKey) {
+      if (!sKey) {
+        return null;
+      }
+      return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+    }
+  });
 
   describe('poi cookie setting', () => {
 
@@ -54,20 +93,32 @@ describe('hub cookies', () => {
         customPurposes: [25, 26]
       });
     });
-  });
 
-  // FIXME
-  xit('should NOT set poi cookie for OLD payload (old oil.js, new hub.js with new cookie format)', () => {
-    let payload = givenPayload({
-      privacy: {"1": true, "2": false, "3": true, "4": true, "5": true},
-      localeVariantName: LOCALE_VARIANT_EN_NAME,
-      localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
-      version: OIL_VERSION
+    it('should NOT set poi cookie for OLD payload (old oil.js, new hub.js with new cookie format) with NUMBER', () => {
+      let payload = givenPayload({
+        privacy: 1,
+        localeVariantName: LOCALE_VARIANT_EN_NAME,
+        localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
+        version: OIL_VERSION
+      });
+
+      setPoiCookie(GROUP_NAME, payload);
+      expect(CoreCookies.setDomainCookie).not.toHaveBeenCalled();
     });
 
-    setPoiCookie(GROUP_NAME, payload);
-    expect(CoreCookies.setDomainCookie).not.toHaveBeenCalled();
+    it('should NOT set poi cookie for OLD payload (old oil.js, new hub.js with new cookie format) with OBJECT', () => {
+      let payload = givenPayload({
+        privacy: {"1": true, "2": false, "3": true, "4": true, "5": true},
+        localeVariantName: LOCALE_VARIANT_EN_NAME,
+        localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
+        version: OIL_VERSION
+      });
+
+      setPoiCookie(GROUP_NAME, payload);
+      expect(CoreCookies.setDomainCookie).not.toHaveBeenCalled();
+    });
   });
+
 
   describe('poi cookie retrieval', () => {
 

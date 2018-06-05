@@ -1,9 +1,10 @@
-import {logInfo} from '../core/core_log.js';
-import {POI_FALLBACK_GROUP_NAME, POI_FALLBACK_NAME, POI_PAYLOAD} from '../core/core_constants.js';
-import {getPoiCookie, setPoiCookie} from '../hub/hub_cookies.js';
-import {OilVersion, registerMessageListener, removeMessageListener} from '../core/core_utils.js';
-import {getStringParam} from './hub_utils.js';
-import {removeHubCookie} from '../core/core_cookies.js';
+import { logInfo } from '../core/core_log.js';
+import { POI_FALLBACK_GROUP_NAME, POI_FALLBACK_NAME, POI_PAYLOAD } from '../core/core_constants.js';
+import { getPoiCookie, setPoiCookie } from '../hub/hub_cookies.js';
+import { OilVersion, registerMessageListener, removeMessageListener } from '../core/core_utils.js';
+import { getStringParam } from './hub_utils.js';
+import { removeHubCookie } from '../core/core_cookies.js';
+import { logError } from '../core/core_log';
 
 let initComplete = false;
 
@@ -22,10 +23,12 @@ export function initOilHub(locationString) {
     if (hasPayload(locationString)) {
       let payloadString = decodeURIComponent(getStringParam(locationString, POI_PAYLOAD));
       payload = JSON.parse(payloadString);
-      logInfo('Using payload:', payload);
+      logInfo('Using payload:', JSON.stringify(payload));
+      setPoiCookie(groupName, payload);
+    } else {
+      logError('Redirect mode without payload!');
     }
 
-    setPoiCookie(groupName, payload);
     exports.redirectBack();
   } else {
     if (!initComplete) {
@@ -54,7 +57,7 @@ function handlerFunction(message) {
         case 'oil-poi-activate':
           logInfo('OIL Hub - activating POI ');
           logInfo('Using groupName:', groupName);
-          logInfo('Using payload:', payload);
+          logInfo('Using payload:', JSON.stringify(payload));
           setPoiCookie(groupName, payload);
           break;
         case 'oil-status-read':
