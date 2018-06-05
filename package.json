@@ -25,6 +25,7 @@
     "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 ",
     "browserstack": "bash ./etc/runBrowserstackSeq.sh",
     "browserstack:full": "bash ./etc/runFullBrowserstackSeq.sh",
+    "browserstack:remote-localhost": "bash ./etc/runBrowserstackLocal.sh",
     "pree2e": "node etc/nightwatch.local.conf.js",
     "e2e": "mkdir -p target/reports &&./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e chrome",
     "e2esafari": "./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e safari",
@@ -43,6 +44,7 @@
   "dependencies": {
     "compression": "1.7.2",
     "consent-string": "1.2.4",
+    "core-js": "2.5.7",
     "express": "4.16.2",
     "fresh": "0.5.2",
     "js-cookie": "2.1.4",
@@ -62,7 +64,6 @@
     "babel-plugin-transform-es2015-destructuring": "6.23.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
     "babel-plugin-transform-es2015-object-super": "6.24.1",
-    "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.7.0",
     "babel-register": "6.26.0",
     "banner-webpack-plugin": "0.2.3",

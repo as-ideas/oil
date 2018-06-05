@@ -3,7 +3,7 @@
 source etc/browserstackTest.sh
 
 run_test chrome57
-run_test e9
+run_test ie9
 run_test ff52
 run_test safari91
 
