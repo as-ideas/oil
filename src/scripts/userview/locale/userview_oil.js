@@ -1,6 +1,6 @@
 import { OIL_LABELS, OPTIONAL_LABEL_PREFIX } from '../userview_constants';
 import { logError, logWarn } from '../../core/core_log';
-import { fetchJsonData, getGlobalOilObject, setGlobalOilObject } from '../../core/core_utils';
+import { fetchJsonData } from '../../core/core_utils';
 import { getLocaleUrl, getConfigValue, setLocale } from '../../core/core_config';
 import { OIL_CONFIG } from '../../core/core_constants';
 

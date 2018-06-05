@@ -1,4 +1,4 @@
-import {getGlobalOilObject, OilVersion, sendEventToHostSite, setGlobalOilObject} from './core_utils.js';
+import {OilVersion, sendEventToHostSite, setGlobalOilObject} from './core_utils.js';
 import {handleOptOut} from './core_optout.js';
 import {logError, logInfo, logPreviewInfo} from './core_log.js';
 import {checkOptIn} from './core_optin.js';

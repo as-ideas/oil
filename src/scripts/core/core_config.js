@@ -44,7 +44,6 @@ function getConfiguration() {
  * 2) Sets the publicPath for async loading from Webpack
  * cf. https://webpack.js.org/guides/public-path/
  *
- * @param AS_OIL.config
  */
 // FIXME needs testing
 function parseServerUrl() {
@@ -129,7 +128,6 @@ export function getCookieExpireInDays() {
   return getConfigValue(OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS, 31);
 }
 
-// FIXME
 export function getLocaleVariantName() {
   let localeVariantName = getConfigValue(OIL_CONFIG.ATTR_LOCALE, undefined);
   if (!localeVariantName) {
