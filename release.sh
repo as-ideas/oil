@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 echo "\n### Installing dependencies"
 npm i || exit 1
-npm run build || exit 1
 
 PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')
 
@@ -14,7 +13,7 @@ cp dist/*.$PACKAGE_VERSION-RELEASE.*.js release/$PACKAGE_VERSION/
 cp -r dist/docs release/$PACKAGE_VERSION/
 
 echo "\n### Copying stats.json"
-cp src/stats.json release/$PACKAGE_VERSION/
+cp dist/stats.json release/$PACKAGE_VERSION/
 
 echo "\n### Copying and versioning hub.html"
 cp src/hub.html release/$PACKAGE_VERSION/
@@ -26,4 +25,5 @@ echo "\n### Increasing patch version"
 git add *
 git commit -am "Adding new release $PACKAGE_VERSION$SNAPSHOT" --no-edit
 git tag -a $PACKAGE_VERSION
-git npm version patch
+git push origin $PACKAGE_VERSION
+npm version patch

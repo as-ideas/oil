@@ -1,13 +1,10 @@
-export function idempotentBabelPolyfill() {
-  if (
-    !global._babelPolyfill &&
-    // eslint-disable-next-line no-undef
-    (typeof window === 'undefined' || !window._babelPolyfill)
-  ) {
+export function polyfillPromise(){
+  if(typeof window === 'undefined' || !window.Promise) {
     // eslint-disable-next-line global-require
-    return require('babel-polyfill');
+    window.Promise = require('core-js/fn/promise');
+  } else {
+    return null;
   }
-  return null;
 }
 
-export default idempotentBabelPolyfill();
+export default polyfillPromise();
