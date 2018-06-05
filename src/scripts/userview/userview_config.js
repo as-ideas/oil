@@ -1,6 +1,5 @@
 import { OIL_CONFIG } from '../core/core_constants.js';
 import { getConfigValue } from '../core/core_config.js';
-import { getGlobalOilObject } from '../core/core_utils.js';
 
 // tag::config-timeout[]
 const defaultTimeoutInSeconds = 60;
@@ -25,11 +24,22 @@ export function getTheme() {
   return getConfigValue(OIL_CONFIG.ATTR_THEME, 'light');
 }
 
-export function getLabel(configName) {
-  return getLabelWithDefault(configName, configName);
+export function getLabel(labelName) {
+  return getLabelWithDefault(labelName, labelName);
 }
 
-export function getLabelWithDefault(configName, defaultLabel) {
+/**
+ * Returns the label or the given default value if it could not be found in configuration.
+ *
+ * At first, the label is searched directly in the configuration. This is deprecated behaviour.
+ * If there is no label definition, it is searched within the 'locale.texts' configuration object.
+ * If there is no label definition too, the given default value is returned.
+ *
+ * @param labelName label name
+ * @param defaultLabel the default value.
+ * @returns {*}
+ */
+export function getLabelWithDefault(labelName, defaultLabel) {
   let defaultLocale = getConfigValue(OIL_CONFIG.ATTR_LOCALE, undefined);
-  return getConfigValue(configName, (defaultLocale && defaultLocale.texts[configName]) ? defaultLocale.texts[configName] : defaultLabel);
+  return getConfigValue(labelName, (defaultLocale && defaultLocale.texts[labelName]) ? defaultLocale.texts[labelName] : defaultLabel);
 }
