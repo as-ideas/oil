@@ -22,7 +22,7 @@ export function getPrivacySettings() {
   if (document.querySelector('.as-js-purpose-slider')) {
     let result = {};
     forEach(document.querySelectorAll('.as-js-purpose-slider'), (element) => {
-      let element_id = element.dataset ? element.dataset.id : element.getAttribute('id');
+      let element_id = element.dataset ? element.dataset.id : element.getAttribute('data-id');
       result[element_id] = element.checked;
     }, this);
     return result;
