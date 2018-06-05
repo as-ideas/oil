@@ -1,7 +1,8 @@
-import { OIL_LABELS } from '../userview_constants';
-import { logError } from '../../core/core_log';
+import { OIL_LABELS, OPTIONAL_LABEL_PREFIX } from '../userview_constants';
+import { logError, logWarn } from '../../core/core_log';
 import { fetchJsonData, getGlobalOilObject, setGlobalOilObject } from '../../core/core_utils';
-import { getLocaleUrl } from '../../core/core_config';
+import { getLocaleUrl, getConfigValue, setLocale } from '../../core/core_config';
+import { OIL_CONFIG } from '../../core/core_constants';
 
 export {
   renderOil,
@@ -14,21 +15,45 @@ export {
 
 export function locale(callback) {
   // FIXME write test for this
-  if (getGlobalOilObject('LOCALE')) {
+  let localeObject = getConfigValue(OIL_CONFIG.ATTR_LOCALE, undefined);
+  const missingLabels = (localeObject && localeObject.texts) ? findMissingLabels(localeObject.texts) : [];
+  if (localeObject && localeObject.texts && missingLabels.length === 0) {
     return callback(this);
   } else {
     fetchJsonData(getLocaleUrl())
       .then(response => {
-        setGlobalOilObject('LOCALE', response);
+        fillAndSetLocaleObject(response, localeObject, missingLabels);
         callback(this);
       })
       .catch(error => {
-        let defaultLocale = getDefaultLocale();
-        setGlobalOilObject('LOCALE', defaultLocale);
+        const defaultLocale = getDefaultLocale();
         logError(`OIL backend returned error: ${error}. Falling back to default locale '${defaultLocale.localeId}', version ${defaultLocale.version}!`);
+        fillAndSetLocaleObject(defaultLocale, localeObject, missingLabels);
         callback(this);
       });
   }
+}
+
+function fillAndSetLocaleObject(sourceObject, targetObject, missingLabels) {
+  if (!targetObject || !targetObject.texts) {
+    setLocale(sourceObject);
+    return;
+  }
+
+  missingLabels.forEach((label) => {
+    if(!sourceObject.texts[label]){
+      logWarn(`${label} missing from locale config.`);
+    } else {
+      targetObject.texts[label] = sourceObject.texts[label];
+    }
+  });
+
+  setLocale(targetObject);
+}
+
+function findMissingLabels(locale) {
+  const requiredLabels = Object.keys(OIL_LABELS).filter(key => !key.startsWith(OPTIONAL_LABEL_PREFIX));
+  return requiredLabels.filter(key => !locale[key]);
 }
 
 function getDefaultLocale() {

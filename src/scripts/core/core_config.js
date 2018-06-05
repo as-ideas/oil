@@ -188,3 +188,7 @@ export function getAdvancedSettingsPurposesDefault() {
 export function getDefaultToOptin() {
   return getConfigValue(OIL_CONFIG.ATTR_DEFAULT_TO_OPTIN, false);
 }
+
+export function setLocale(localeObject) {
+  getConfiguration().locale = localeObject;
+}

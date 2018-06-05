@@ -1,5 +1,6 @@
 import {initOilLayer} from '../../../src/scripts/core/core_oil.js';
 import * as CoreUtils from '../../../src/scripts/core/core_utils.js';
+import * as Userview from '../../../src/scripts/userview/locale/userview_oil.js';
 import * as CoreCommandCollection from '../../../src/scripts/core/core_command_collection.js';
 import * as CoreOptIn from '../../../src/scripts/core/core_optin.js';
 import {waitsForAndRuns} from '../../utils';
@@ -73,6 +74,7 @@ describe('core_oil', () => {
     spyOn(CoreOptIn, 'checkOptIn').and.returnValue(Promise.resolve(false));
     spyOn(CoreUtils, 'setGlobalOilObject');
     spyOn(CoreUtils, 'sendEventToHostSite');
+    spyOn(Userview, 'locale');
 
     initOilLayer();
 

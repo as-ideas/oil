@@ -30,6 +30,6 @@ export function getLabel(configName) {
 }
 
 export function getLabelWithDefault(configName, defaultLabel) {
-  let defaultLocale = getGlobalOilObject('LOCALE');
+  let defaultLocale = getConfigValue(OIL_CONFIG.ATTR_LOCALE, undefined);
   return getConfigValue(configName, (defaultLocale && defaultLocale.texts[configName]) ? defaultLocale.texts[configName] : defaultLabel);
 }

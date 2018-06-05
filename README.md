@@ -159,7 +159,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 
 ### Labels
 
-The labels are configured in you configuration. There are three options. The "localeId" and the "version" will be stored in the consent information for the user.
+The labels are configured in you configuration. There are two options. The "localeId" and the "version" will be stored in the consent information for the user.
 
 * Store your locale object as 'locale' in the oil.js configuration (lowest priority)
 
@@ -183,9 +183,11 @@ The labels are configured in you configuration. There are three options. The "lo
 <script>
 (function () {
     if (!window.AS_OIL) {
-      window.AS_OIL = {};
+      window.AS_OIL = {
+        CONFIG: {}
+      };
     }
-    window.AS_OIL.locale = {
+    window.AS_OIL.CONFIG.locale = {
       "localeId": "enEN_01",
       "version": 1,
       "texts": {
@@ -194,17 +196,6 @@ The labels are configured in you configuration. There are three options. The "lo
     };
   }()
 )
-</script>
-```
-
-* Override single labels directly as part of the oil.js configuration (highest priority)
-
-```javascript
-<script id="oil-configuration" type="application/configuration">
-{
-  "timeout": -1,
-  "label_intro_heading": "Insider, Inc."
-}
 </script>
 ```
 

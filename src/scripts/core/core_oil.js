@@ -4,8 +4,8 @@ import {logError, logInfo, logPreviewInfo} from './core_log.js';
 import {checkOptIn} from './core_optin.js';
 import {getSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePreviewCookie, removeVerboseCookie, setPreviewCookie, setVerboseCookie} from './core_cookies.js';
 import {doSetTealiumVariables} from './core_tealium_loading_rules.js';
-import {getLocaleVariantName, isPreviewMode, resetConfiguration} from './core_config.js';
-import {EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN} from './core_constants.js';
+import {getLocaleVariantName, getConfigValue, isPreviewMode, resetConfiguration} from './core_config.js';
+import {EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN, OIL_CONFIG} from './core_constants.js';
 import {executeCommandCollection} from './core_command_collection';
 
 /**
@@ -87,7 +87,7 @@ function attachUtilityFunctionsToWindowObject(locale) {
   function loadLocale(callbackMethod) {
     import('../userview/locale/userview_oil.js')
       .then(userview_modal => {
-        if (!getGlobalOilObject('LOCALE')) {
+        if (!getConfigValue(OIL_CONFIG.ATTR_LOCALE, undefined)) {
           userview_modal.locale(callbackMethod);
         } else {
           callbackMethod(userview_modal);
