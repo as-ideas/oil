@@ -1,30 +1,14 @@
-import {
-  renderOil,
-  oilShowPreferenceCenter,
-  stopTimeOut,
-  hasRunningTimeout
-} from '../../../src/scripts/userview/userview_modal';
-import {
-  loadFixture,
-  readFixture,
-  removeOilLayerAndConfig,
-  deleteAllCookies,
-  initCustomYasmineMatchers,
-  waitsForAndRuns,
-  waitForElementToDisplay
-} from '../../utils.js';
+import { hasRunningTimeout, oilShowPreferenceCenter, renderOil, stopTimeOut } from '../../../src/scripts/userview/userview_modal';
+import { deleteAllCookies, initCustomYasmineMatchers, loadFixture, readFixture, removeOilLayerAndConfig, waitForElementToDisplay, waitsForAndRuns } from '../../utils.js';
 import * as OilList from '../../../src/scripts/poi-list/oil.list';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
-import {setSoiCookie} from '../../../src/scripts/core/core_cookies';
-import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list'
+import { setSoiCookie } from '../../../src/scripts/core/core_cookies';
+import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list';
 
 describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   beforeEach(() => {
-    spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
-    spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
-    spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
     deleteAllCookies();
     CoreConfig.resetConfiguration();
     removeOilLayerAndConfig();
@@ -32,8 +16,8 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
     initCustomYasmineMatchers();
   });
 
-  it('should renderOil with ADVANCED-SETTINGS as CPC template', (done) => {
-
+  it('should renderOil with ADVANCED-SETTINGS as CPC template with purpose texts from configuration and vendors from vendor list', (done) => {
+    givenThatVendorListIsAvailable();
     spyOn(OilList, 'listSnippet').and.callThrough();
     loadFixture('config/given.config.example.labels.html');
     renderOil({optIn: false, advancedSettings: true});
@@ -48,7 +32,42 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   });
 
+  it('should renderOil with ADVANCED-SETTINGS as CPC template with purpose texts and vendors from vendor list', (done) => {
+    givenThatVendorListIsAvailable();
+    spyOn(OilList, 'listSnippet').and.callThrough();
+    loadFixture('config/given.config.html');
+    renderOil({optIn: false, advancedSettings: true});
+
+    waitsForAndRuns(function () {
+      return OilList.listSnippet.calls.count() > 0;
+    }, function () {
+      expect(document.querySelector('.as-oil')).toEqualWithDiff(readFixture('gold-master/cpc.texts.from.vendorlist.html'));
+      expectTimeoutNotStarted();
+      done();
+    }, 2000);
+
+  });
+
+  it('should renderOil with ADVANCED-SETTINGS as CPC template if vendors and purposes are not available', (done) => {
+    spyOn(CoreVendorInformation, 'getVendorList').and.returnValue({isDefault: true});
+    spyOn(CoreVendorInformation, 'getPurposes').and.returnValue([{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}]);
+    spyOn(CoreVendorInformation, 'getVendors').and.returnValue([{id: 12}, {id: 24}]);
+    spyOn(OilList, 'listSnippet').and.callThrough();
+    loadFixture('config/given.config.with.locale.html');
+    renderOil({optIn: false, advancedSettings: true});
+
+    waitsForAndRuns(function () {
+      return OilList.listSnippet.calls.count() > 0;
+    }, function () {
+      expect(document.querySelector('.as-oil')).toEqualWithDiff(readFixture('gold-master/cpc.vendorlist.error.html'));
+      expectTimeoutNotStarted();
+      done();
+    }, 2000);
+
+  });
+
   it('should insert CPC into host site with GIVEN PRIVACY SETTING', (done) => {
+    givenThatVendorListIsAvailable();
     loadFixture('html/integrated-cpc.html');
 
     setSoiCookie({
@@ -73,6 +92,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
   });
 
   it('should insert CPC into host site with STORED PRIVACY SETTING (from cookie)', (done) => {
+    givenThatVendorListIsAvailable();
     renderOil({optIn: false});
     setSoiCookie({
       '1': true,
@@ -96,6 +116,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
   });
 
   it('should show CPC in layer with DEFAULT PRIVACY SETTING', (done) => {
+    givenThatVendorListIsAvailable();
     loadFixture('html/integrated-cpc.html');
 
     oilShowPreferenceCenter();
@@ -113,6 +134,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
   });
 
   it('should show CPC in layer with PRIVACY SETTING from config', (done) => {
+    givenThatVendorListIsAvailable();
     renderOil({optIn: false});
 
     spyOn(CoreConfig, 'getAdvancedSettingsPurposesDefault').and.returnValue(true);
@@ -131,6 +153,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
   });
 
   it('should show CPC in layer with STORED PRIVACY SETTING (from cookie)', (done) => {
+    givenThatVendorListIsAvailable();
     renderOil({optIn: false});
     setSoiCookie({
       '1': true,
@@ -155,5 +178,11 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   function expectTimeoutNotStarted() {
     expect(hasRunningTimeout).toBeUndefined();
+  }
+
+  function givenThatVendorListIsAvailable() {
+    spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
+    spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
+    spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
   }
 });
