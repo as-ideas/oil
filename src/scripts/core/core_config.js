@@ -1,8 +1,6 @@
 import { OIL_CONFIG } from './core_constants.js';
 import { logError, logInfo } from './core_log.js';
-import { isObject, OilVersion, setGlobalOilObject } from './core_utils';
-
-let cachedConfig = null;
+import { isObject, OilVersion, setGlobalOilObject, getGlobalOilObject } from './core_utils';
 
 /**
  * Read configuration of component from JSON script block
@@ -28,15 +26,15 @@ function readConfiguration(configurationElement) {
  * @returns Object parsed config
  */
 function getConfiguration() {
-  if (!cachedConfig) {
+  if (!getGlobalOilObject('CONFIG')) {
     let configurationElement = document.querySelector('script[type="application/configuration"]#oil-configuration');
     if (configurationElement === null) {
       logInfo('Using default config');
     }
-    cachedConfig = readConfiguration(configurationElement);
-    parseLocaleAndServerUrl(cachedConfig);
+    setGlobalOilObject('CONFIG', readConfiguration(configurationElement));
+    parseServerUrl();
   }
-  return cachedConfig;
+  return getGlobalOilObject('CONFIG');
 }
 
 /**
@@ -46,18 +44,14 @@ function getConfiguration() {
  * 2) Sets the publicPath for async loading from Webpack
  * cf. https://webpack.js.org/guides/public-path/
  *
- * @param cachedConfig
+ * @param AS_OIL.config
  */
 // FIXME needs testing
-function parseLocaleAndServerUrl(cachedConfig) {
-  if (isObject(cachedConfig.locale)) {
-    setGlobalOilObject('LOCALE', cachedConfig.locale);
-  }
-  if (cachedConfig.publicPath) {
-    __webpack_public_path__ = cachedConfig.publicPath;
+function parseServerUrl() {
+  if (getGlobalOilObject('CONFIG').publicPath) {
+    __webpack_public_path__ = getGlobalOilObject('CONFIG').publicPath;
   }
 }
-
 
 /**
  * Returns a config value or its given default value if not existing in users configuration.
@@ -171,7 +165,7 @@ export function getHubLocation() {
  * Reset configuration, reread from HTML.
  */
 export function resetConfiguration() {
-  cachedConfig = null;
+  setGlobalOilObject('CONFIG', null);
 }
 
 export function getCustomPurposes() {

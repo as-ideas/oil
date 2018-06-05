@@ -95,7 +95,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   it('should insert CPC into host site with STORED PRIVACY SETTING (from cookie)', (done) => {
     givenThatVendorListIsAvailable();
-    spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(LOCALE);
+    spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(LOCALE).withArgs('CONFIG').and.callThrough();
     renderOil({optIn: false});
     setSoiCookie({
       '1': true,
@@ -138,7 +138,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   it('should show CPC in layer with PRIVACY SETTING from config', (done) => {
     givenThatVendorListIsAvailable();
-    spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(LOCALE);
+    spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(LOCALE).withArgs('CONFIG').and.callThrough();
     renderOil({optIn: false});
 
     spyOn(CoreConfig, 'getAdvancedSettingsPurposesDefault').and.returnValue(true);
@@ -158,7 +158,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   it('should show CPC in layer with STORED PRIVACY SETTING (from cookie)', (done) => {
     givenThatVendorListIsAvailable();
-    spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(LOCALE);
+    spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(LOCALE).withArgs('CONFIG').and.callThrough();
     renderOil({optIn: false});
     setSoiCookie({
       '1': true,
