@@ -1,6 +1,6 @@
-import {getIabVendorBlacklist, getIabVendorListUrl, getIabVendorWhitelist} from './core_config';
-import {logError} from './core_log';
-import {fetchJsonData} from './core_utils';
+import { getIabVendorBlacklist, getIabVendorListUrl, getIabVendorWhitelist } from './core_config';
+import { logError } from './core_log';
+import { fetchJsonData } from './core_utils';
 
 export const DEFAULT_VENDOR_LIST = {
   vendorListVersion: 36,
@@ -64,7 +64,8 @@ export function getVendorList() {
     lastUpdated: DEFAULT_VENDOR_LIST.lastUpdated,
     vendors: expandIdsToObjects(buildDefaultVendorIdList()),
     purposes: expandIdsToObjects(DEFAULT_VENDOR_LIST.purposeIds),
-    features: []
+    features: [],
+    isDefault: true
   }
 }
 

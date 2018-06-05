@@ -16,6 +16,9 @@ parserOptions: {
   }
 }
 
+globals:
+  __cmp: true
+  __webpack_public_path__: true
 
 env:
   amd: true

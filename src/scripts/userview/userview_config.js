@@ -1,6 +1,6 @@
-import {OIL_CONFIG} from '../core/core_constants.js';
-import {getConfigValue} from '../core/core_config.js';
-import {getGlobalOilObject} from '../core/core_utils.js';
+import { OIL_CONFIG } from '../core/core_constants.js';
+import { getConfigValue } from '../core/core_config.js';
+import { getGlobalOilObject } from '../core/core_utils.js';
 
 // tag::config-timeout[]
 const defaultTimeoutInSeconds = 60;
@@ -12,7 +12,7 @@ export function isPersistMinimumTracking() {
   return getConfigValue(OIL_CONFIG.ATTR_PERSIST_MINIMUM_TRACKING, true);
 }
 
-// FIXME bad name - isAdvacedSettingsEnabled
+// FIXME bad name - isAdvancedSettingsEnabled
 export function isAdvancedSettings() {
   return getConfigValue(OIL_CONFIG.ATTR_ADVANCED_SETTINGS, false);
 }
@@ -26,7 +26,10 @@ export function getTheme() {
 }
 
 export function getLabel(configName) {
+  return getLabelWithDefault(configName, configName);
+}
+
+export function getLabelWithDefault(configName, defaultLabel) {
   let defaultLocale = getGlobalOilObject('LOCALE');
-  let defaultLabel = (defaultLocale && defaultLocale.texts[configName]) ? defaultLocale.texts[configName] : '';
-  return getConfigValue(configName, defaultLabel ? defaultLabel : configName);
+  return getConfigValue(configName, (defaultLocale && defaultLocale.texts[configName]) ? defaultLocale.texts[configName] : defaultLabel);
 }
