@@ -818,7 +818,7 @@ This method should be called on the window that the message is being sent to. A 
           logInfo('OIL Hub - activating POI ');
           logInfo('Using groupName:', groupName);
           logInfo('Using payload:', payload);
-          setPoiOptIn(groupName, payload);
+          setPoiCookie(groupName, payload);
           break;
         case 'oil-status-read':
           poiOptin = getPoiCookie(groupName);
@@ -871,7 +871,7 @@ This method should be called on the window that the message is being sent to. A 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-05-24 12:56:13 CEST
+Last updated 2018-05-23 10:22:56 CEST
 </div>
 </div>
 <div class="sticky-footer">

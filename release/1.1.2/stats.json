@@ -1,0 +1,37 @@
+[
+    {
+        "name": "dist/0.1.1.2-RELEASE.chunk.js",
+        "size": 34567,
+        "sizeGz": 9268
+    },
+    {
+        "name": "dist/1.1.1.2-RELEASE.chunk.js",
+        "size": 5652,
+        "sizeGz": 2379
+    },
+    {
+        "name": "dist/2.1.1.2-RELEASE.chunk.js",
+        "size": 8645,
+        "sizeGz": 2820
+    },
+    {
+        "name": "dist/hub.1.1.2-RELEASE.min.js",
+        "size": 38819,
+        "sizeGz": 11213
+    },
+    {
+        "name": "dist/oil.1.1.2-RELEASE.min.js",
+        "size": 63969,
+        "sizeGz": 19819
+    },
+    {
+        "name": "dist/oildevkit.1.1.2-RELEASE.min.js",
+        "size": 30482,
+        "sizeGz": 10417
+    },
+    {
+        "name": "dist/oilstub.1.1.2-RELEASE.min.js",
+        "size": 1412,
+        "sizeGz": 740
+    }
+]
