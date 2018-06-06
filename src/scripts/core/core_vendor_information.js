@@ -17,20 +17,16 @@ export function loadVendorList() {
       resolve(cachedVendorList);
     } else {
       let iabVendorListUrl = getIabVendorListUrl();
-      if (!iabVendorListUrl) {
-        resolve(getVendorList());
-      } else {
-        fetchJsonData(iabVendorListUrl)
-          .then(response => {
-            cachedVendorList = response;
-            sortVendors(cachedVendorList);
-            resolve(cachedVendorList);
-          })
-          .catch(error => {
-            logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
-            resolve(getVendorList());
-          });
-      }
+      fetchJsonData(iabVendorListUrl)
+        .then(response => {
+          cachedVendorList = response;
+          sortVendors(cachedVendorList);
+          resolve(cachedVendorList);
+        })
+        .catch(error => {
+          logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
+          resolve(getVendorList());
+        });
     }
   });
 }
