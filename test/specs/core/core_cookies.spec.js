@@ -569,8 +569,8 @@ describe('core cookies', () => {
       defaultCookieContent: {
         opt_in: false,
         version: '1.0.0',
-        localeVariantName: (configData && configData.localeVariantName) ? configData.localeVariantName : LOCALE_VARIANT_DE_NAME,
-        localeVariantVersion: (configData && configData.localeVariantVersion) ? configData.localeVariantVersion : LOCALE_VARIANT_DE_VERSION,
+        localeVariantName: (configData && configData.localeVariantName) ? configData.localeVariantName : LOCALE_VARIANT_EN_NAME,
+        localeVariantVersion: (configData && configData.localeVariantVersion) ? configData.localeVariantVersion : LOCALE_VARIANT_EN_VERSION,
         customPurposes: [],
         consentData: consentData,
         consentString: consentData.getConsentString()

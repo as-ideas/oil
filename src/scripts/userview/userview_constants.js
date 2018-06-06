@@ -36,3 +36,4 @@ export const OIL_LABELS = {
   ATTR_LABEL_NO_COOKIES_TEXT: 'label_nocookie_text'
 };
 
+export const OPTIONAL_LABEL_PREFIX = 'label_cpc_purpose';

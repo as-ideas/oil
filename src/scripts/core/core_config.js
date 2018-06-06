@@ -1,8 +1,6 @@
 import { OIL_CONFIG } from './core_constants.js';
 import { logError, logInfo } from './core_log.js';
-import { isObject, OilVersion, setGlobalOilObject } from './core_utils';
-
-let cachedConfig = null;
+import { getGlobalOilObject, isObject, OilVersion, setGlobalOilObject } from './core_utils';
 
 /**
  * Read configuration of component from JSON script block
@@ -28,15 +26,15 @@ function readConfiguration(configurationElement) {
  * @returns Object parsed config
  */
 function getConfiguration() {
-  if (!cachedConfig) {
+  if (!getGlobalOilObject('CONFIG')) {
     let configurationElement = document.querySelector('script[type="application/configuration"]#oil-configuration');
     if (configurationElement === null) {
       logInfo('Using default config');
     }
-    cachedConfig = readConfiguration(configurationElement);
-    parseLocaleAndServerUrl(cachedConfig);
+    setGlobalOilObject('CONFIG', readConfiguration(configurationElement));
+    parseServerUrl();
   }
-  return cachedConfig;
+  return getGlobalOilObject('CONFIG');
 }
 
 /**
@@ -46,18 +44,13 @@ function getConfiguration() {
  * 2) Sets the publicPath for async loading from Webpack
  * cf. https://webpack.js.org/guides/public-path/
  *
- * @param cachedConfig
  */
 // FIXME needs testing
-function parseLocaleAndServerUrl(cachedConfig) {
-  if (isObject(cachedConfig.locale)) {
-    setGlobalOilObject('LOCALE', cachedConfig.locale);
-  }
-  if (cachedConfig.publicPath) {
-    __webpack_public_path__ = cachedConfig.publicPath;
+function parseServerUrl() {
+  if (getGlobalOilObject('CONFIG').publicPath) {
+    __webpack_public_path__ = getGlobalOilObject('CONFIG').publicPath;
   }
 }
-
 
 /**
  * Returns a config value or its given default value if not existing in users configuration.
@@ -135,9 +128,8 @@ export function getCookieExpireInDays() {
   return getConfigValue(OIL_CONFIG.ATTR_COOKIE_EXPIRES_IN_DAYS, 31);
 }
 
-// FIXME
 export function getLocaleVariantName() {
-  let localeVariantName = getConfigValue(OIL_CONFIG.ATTR_LOCALE, undefined);
+  let localeVariantName = getLocale();
   if (!localeVariantName) {
     localeVariantName = 'enEN_01';
     logError(`The locale is not set, falling back to ${localeVariantName}.`);
@@ -171,7 +163,7 @@ export function getHubLocation() {
  * Reset configuration, reread from HTML.
  */
 export function resetConfiguration() {
-  cachedConfig = null;
+  setGlobalOilObject('CONFIG', null);
 }
 
 export function getCustomPurposes() {
@@ -193,4 +185,12 @@ export function getAdvancedSettingsPurposesDefault() {
 
 export function getDefaultToOptin() {
   return getConfigValue(OIL_CONFIG.ATTR_DEFAULT_TO_OPTIN, false);
+}
+
+export function getLocale() {
+  return getConfigValue(OIL_CONFIG.ATTR_LOCALE, undefined);
+}
+
+export function setLocale(localeObject) {
+  getConfiguration()[OIL_CONFIG.ATTR_LOCALE] = localeObject;
 }
