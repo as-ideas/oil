@@ -4,13 +4,17 @@ import {
   OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
   OIL_PAYLOAD_PRIVACY,
   OIL_PAYLOAD_VERSION,
-  OIL_SPEC,
-  PRIVACY_MINIMUM_TRACKING
+  OIL_SPEC
 } from '../core/core_constants';
-import {logInfo} from '../core/core_log';
-import {getCookieExpireInDays, getLanguageFromLocale} from '../core/core_config';
-import {getLimitedVendorIds} from '../core/core_vendor_information';
-import {getOilCookie, getStandardPurposesWithConsent, hasOutdatedOilCookie, setDomainCookie} from '../core/core_cookies';
+import { logError, logInfo } from '../core/core_log';
+import { getCookieExpireInDays, getLanguageFromLocale } from '../core/core_config';
+import { getLimitedVendorIds } from '../core/core_vendor_information';
+import {
+  getOilCookie,
+  getStandardPurposesWithConsent,
+  hasOutdatedOilCookie,
+  setDomainCookie
+} from '../core/core_cookies';
 import Cookie from 'js-cookie';
 
 const {ConsentString} = require('consent-string');
@@ -26,15 +30,21 @@ export function getPoiCookie(groupName = '') {
 }
 
 export function setPoiCookie(groupName, payload) {
-  let cookie = {
-    power_opt_in: true,
-    version: getVersionFromPayload(payload),
-    localeVariantName: getLocaleVariantNameFromPayload(payload),
-    localeVariantVersion: getLocaleVariantVersionFromPayload(payload),
-    customPurposes: getCustomPurposesFromPayload(payload),
-    consentString: getConsentStringFromPayload(payload)
-  };
-  setDomainCookie(getOilHubCookieName(groupName), cookie, getCookieExpireInDays());
+  // If we send OLD DATA to a NEW HUB, we got a problem - in this case we do not want to store the POI-Cookie --> new data = consent string, old = privacy object
+  let consentStringAsPrivacy = getConsentStringFromPayload(payload);
+  if (payload && (typeof (consentStringAsPrivacy) === 'string')) {
+    let cookie = {
+      power_opt_in: true,
+      version: getVersionFromPayload(payload),
+      localeVariantName: getLocaleVariantNameFromPayload(payload),
+      localeVariantVersion: getLocaleVariantVersionFromPayload(payload),
+      customPurposes: getCustomPurposesFromPayload(payload),
+      consentString: consentStringAsPrivacy
+    };
+    setDomainCookie(getOilHubCookieName(groupName), cookie, getCookieExpireInDays());
+  } else {
+    logError('Oil Hub received old or empty payload! No POI cookie stored.')
+  }
 }
 
 function transformOutdatedOilCookie(cookieConfig) {
@@ -89,7 +99,7 @@ function getConsentStringFromPayload(payload) {
   if (payload && payload[OIL_PAYLOAD_PRIVACY]) {
     return payload[OIL_PAYLOAD_PRIVACY];
   }
-  return PRIVACY_MINIMUM_TRACKING;
+  return undefined;
 }
 
 function getCustomPurposesFromPayload(payload) {
