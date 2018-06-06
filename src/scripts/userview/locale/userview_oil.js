@@ -20,17 +20,24 @@ export function locale(callback) {
   if (localeObject && localeObject.texts && missingLabels.length === 0) {
     return callback(this);
   } else {
-    fetchJsonData(getLocaleUrl())
-      .then(response => {
-        fillAndSetLocaleObject(response, localeObject, missingLabels);
-        callback(this);
-      })
-      .catch(error => {
-        const defaultLocale = getDefaultLocale();
-        logError(`OIL backend returned error: ${error}. Falling back to default locale '${defaultLocale.localeId}', version ${defaultLocale.version}!`);
-        fillAndSetLocaleObject(defaultLocale, localeObject, missingLabels);
-        callback(this);
-      });
+    const localeUrl = getLocaleUrl();
+
+    if (localeUrl) {
+      fetchJsonData(localeUrl)
+        .then(response => {
+          setGlobalOilObject('LOCALE', response);
+          callback(this);
+        })
+        .catch(error => {
+          let defaultLocale = getDefaultLocale();
+          setGlobalOilObject('LOCALE', defaultLocale);
+          logError(`OIL backend returned error: ${error}. Falling back to default locale '${defaultLocale.localeId}', version ${defaultLocale.version}!`);
+          callback(this);
+        });
+    } else {
+      setGlobalOilObject('LOCALE', getDefaultLocale());
+      callback(this);
+    }
   }
 }
 
