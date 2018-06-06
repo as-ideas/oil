@@ -30,7 +30,7 @@ describe('core config', () => {
   });
 
   describe('getLocaleVariantName', function() {
-    
+
     it('returns default enEN_01 when locale in config empty', function() {
       let result = getLocaleVariantName();
       expect(result).toEqual('enEN_01');

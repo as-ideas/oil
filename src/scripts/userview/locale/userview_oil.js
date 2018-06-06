@@ -24,19 +24,19 @@ export function locale(callback) {
 
     if (localeUrl) {
       fetchJsonData(localeUrl)
-        .then(response => {
-          setGlobalOilObject('LOCALE', response);
-          callback(this);
-        })
-        .catch(error => {
-          let defaultLocale = getDefaultLocale();
-          setGlobalOilObject('LOCALE', defaultLocale);
-          logError(`OIL backend returned error: ${error}. Falling back to default locale '${defaultLocale.localeId}', version ${defaultLocale.version}!`);
-          callback(this);
-        });
+      .then(response => {
+        fillAndSetLocaleObject(response, localeObject, missingLabels);
+        return callback(this);
+      })
+      .catch(error => {
+        const defaultLocale = getDefaultLocale();
+        logError(`OIL backend returned error: ${error}. Falling back to default locale '${defaultLocale.localeId}', version ${defaultLocale.version}!`);
+        fillAndSetLocaleObject(defaultLocale, localeObject, missingLabels);
+        return callback(this);
+      });
     } else {
-      setGlobalOilObject('LOCALE', getDefaultLocale());
-      callback(this);
+      setLocale(getDefaultLocale());
+      return callback(this);
     }
   }
 }
