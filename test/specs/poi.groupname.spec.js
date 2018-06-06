@@ -3,7 +3,7 @@ import * as PoiAPIUserview from '../../src/scripts/userview/userview_poi.js';
 import {loadFixture, deleteAllCookies} from '../utils.js';
 import {resetConfiguration} from '../../src/scripts/core/core_config.js';
 
-describe('poi', () => {
+describe('poi group name', () => {
 
   let originalTimeout;
 
@@ -23,27 +23,13 @@ describe('poi', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
-  it('should activate POI with groupname', (done) => {
-    loadFixture('poi/poi.groupname.html');
+  // TODO: TBD test for default POI-Group... maybe more
+  // xit('should be loaded by default', () => {
+  //   loadFixture('config/empty.config.html');
+  // });
 
-    PoiAPIUserview.activatePowerOptInWithIFrame({}).then(() => PoiAPICore.verifyPowerOptIn().then((optin) => {
-        expect(optin.power_opt_in).toBeDefined();
-        expect(optin.power_opt_in).toBe(true);
-        done();
-      })
-    );
-  });
 
-  it('should redirect to the right hub with groupname', () => {
-    let redirectionTarget = '';
-    spyOn(PoiAPIUserview, 'redirectToLocation').and.callFake(function (location) {
-      redirectionTarget = location;
-    });
 
-    loadFixture('poi/poi.groupname.html');
 
-    PoiAPIUserview.activatePowerOptInWithRedirect({});
-    expect(redirectionTarget).toContain('homersimpson');
-  });
 
 });
