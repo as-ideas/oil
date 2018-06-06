@@ -5,6 +5,8 @@ import { resetConfiguration } from '../../src/scripts/core/core_config.js';
 
 describe('Power Opt-IN (POI)', () => {
 
+  const DEFAULT_PAYLOAD = {p: 'BOO4NpHOO4NpHBQABBENAkuAAAAXyABgACAvgA'};
+
   let originalTimeout;
 
   beforeEach((done) => {
@@ -49,7 +51,7 @@ describe('Power Opt-IN (POI)', () => {
   it('should activate POI', (done) => {
     loadFixture('poi/poi.default.html');
 
-    PoiAPIUserview.activatePowerOptInWithIFrame({}).then(() => PoiAPICore.verifyPowerOptIn().then((optin) => {
+    PoiAPIUserview.activatePowerOptInWithIFrame(DEFAULT_PAYLOAD).then(() => PoiAPICore.verifyPowerOptIn().then((optin) => {
         expect(optin.power_opt_in).toBeDefined();
         expect(optin.power_opt_in).toBe(true);
         done();
@@ -57,17 +59,44 @@ describe('Power Opt-IN (POI)', () => {
     );
   });
 
-  it('should redirect to the right hub without groupname', () => {
-    let redirectionTarget = '';
-    spyOn(PoiAPIUserview, 'redirectToLocation').and.callFake(function (location) {
-      redirectionTarget = location;
-    });
-    PoiAPIUserview.activatePowerOptInWithRedirect({});
-    expect(redirectionTarget).not.toContain('group_name');
-  });
-
   it('should add iframe', () => {
     let iframe = PoiAPICore.addFrame();
     expect(iframe).toBeDefined();
   });
+
+  describe('with POI-Group-Name', () => {
+
+    it('should activate POI with groupname', (done) => {
+      loadFixture('poi/poi.groupname.html');
+
+      PoiAPIUserview.activatePowerOptInWithIFrame(DEFAULT_PAYLOAD).then(() => PoiAPICore.verifyPowerOptIn().then((optin) => {
+          expect(optin.power_opt_in).toBeDefined();
+          expect(optin.power_opt_in).toBe(true);
+          done();
+        })
+      );
+    });
+
+    it('should redirect to the right hub with groupname', () => {
+      let redirectionTarget = '';
+      spyOn(PoiAPIUserview, 'redirectToLocation').and.callFake(function (location) {
+        redirectionTarget = location;
+      });
+
+      loadFixture('poi/poi.groupname.html');
+
+      PoiAPIUserview.activatePowerOptInWithRedirect({});
+      expect(redirectionTarget).toContain('homersimpson');
+    });
+
+    it('should redirect to the right hub without groupname', () => {
+      let redirectionTarget = '';
+      spyOn(PoiAPIUserview, 'redirectToLocation').and.callFake(function (location) {
+        redirectionTarget = location;
+      });
+      PoiAPIUserview.activatePowerOptInWithRedirect({});
+      expect(redirectionTarget).not.toContain('group_name');
+    });
+  })
+
 });

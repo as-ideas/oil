@@ -3,9 +3,12 @@ import * as CoreConfig from '../../../src/scripts/core/core_config';
 import {
   clearVendorListCache,
   DEFAULT_VENDOR_LIST,
-  getLimitedVendorIds, getPurposeIds,
-  getPurposes, getVendorIds,
-  getVendorList, getVendorListVersion,
+  getLimitedVendorIds,
+  getPurposeIds,
+  getPurposes,
+  getVendorIds,
+  getVendorList,
+  getVendorListVersion,
   getVendors,
   loadVendorList
 } from '../../../src/scripts/core/core_vendor_information';
@@ -43,17 +46,6 @@ describe('core_vendor_information', () => {
           expect(CoreUtils.fetchJsonData).not.toHaveBeenCalled();
           done();
         });
-      });
-    });
-
-    it('should use default vendor list if IAB vendor list url is not configured', (done) => {
-      spyOn(CoreUtils, 'fetchJsonData').and.callThrough();
-      spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue(undefined);
-
-      loadVendorList().then((retrievedVendorList) => {
-        expect(CoreUtils.fetchJsonData).not.toHaveBeenCalled();
-        expect(retrievedVendorList.vendorListVersion).toEqual(DEFAULT_VENDOR_LIST.vendorListVersion);
-        done();
       });
     });
 

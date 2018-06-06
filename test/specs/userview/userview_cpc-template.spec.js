@@ -2,9 +2,11 @@ import { hasRunningTimeout, oilShowPreferenceCenter, renderOil, stopTimeOut } fr
 import { deleteAllCookies, initCustomYasmineMatchers, loadFixture, readFixture, removeOilLayerAndConfig, waitForElementToDisplay, waitsForAndRuns } from '../../utils.js';
 import * as OilList from '../../../src/scripts/poi-list/oil.list';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
+import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import { setSoiCookie } from '../../../src/scripts/core/core_cookies';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list';
+import LOCALE from '../../fixtures/config/deDE_01_locale';
 
 describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
@@ -93,6 +95,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   it('should insert CPC into host site with STORED PRIVACY SETTING (from cookie)', (done) => {
     givenThatVendorListIsAvailable();
+    spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(LOCALE);
     renderOil({optIn: false});
     setSoiCookie({
       '1': true,
@@ -135,6 +138,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   it('should show CPC in layer with PRIVACY SETTING from config', (done) => {
     givenThatVendorListIsAvailable();
+    spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(LOCALE);
     renderOil({optIn: false});
 
     spyOn(CoreConfig, 'getAdvancedSettingsPurposesDefault').and.returnValue(true);
@@ -154,6 +158,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   it('should show CPC in layer with STORED PRIVACY SETTING (from cookie)', (done) => {
     givenThatVendorListIsAvailable();
+    spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(LOCALE);
     renderOil({optIn: false});
     setSoiCookie({
       '1': true,
