@@ -7,12 +7,6 @@ import {waitsForAndRuns} from '../../utils';
 
 describe('core_oil', () => {
 
-  beforeEach(() => {
-  });
-
-  afterEach(() => {
-  });
-
   it('should attach utility functions to window object', () => {
 
     function verifyThatGlobalOilObjectIsSet(invocationIndex, expectedKey, expectedValue) {
