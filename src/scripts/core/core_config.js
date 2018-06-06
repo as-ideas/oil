@@ -112,7 +112,7 @@ export function getHubPath() {
 }
 
 export function getLocaleUrl() {
-  return getConfigValue(OIL_CONFIG.ATTR_LOCALE_URL, 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/' + getLocaleVariantName());
+  return getConfigValue(OIL_CONFIG.ATTR_LOCALE_URL, undefined);
 }
 
 export function getIabVendorListUrl() {
