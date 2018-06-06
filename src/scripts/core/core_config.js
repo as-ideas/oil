@@ -1,6 +1,6 @@
 import { OIL_CONFIG } from './core_constants.js';
 import { logError, logInfo } from './core_log.js';
-import { isObject, OilVersion, setGlobalOilObject, getGlobalOilObject } from './core_utils';
+import { getGlobalOilObject, isObject, OilVersion, setGlobalOilObject } from './core_utils';
 
 /**
  * Read configuration of component from JSON script block
@@ -187,6 +187,10 @@ export function getDefaultToOptin() {
   return getConfigValue(OIL_CONFIG.ATTR_DEFAULT_TO_OPTIN, false);
 }
 
+export function getLocale() {
+  return getConfigValue(OIL_CONFIG.ATTR_LOCALE, undefined);
+}
+
 export function setLocale(localeObject) {
-  getConfiguration().locale = localeObject;
+  getConfiguration()[OIL_CONFIG.ATTR_LOCALE] = localeObject;
 }
