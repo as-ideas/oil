@@ -1,6 +1,6 @@
-import { logInfo } from './core_log.js';
-import { OIL_GLOBAL_OBJECT_NAME, OIL_CONFIG } from './core_constants.js';
-import { getConfigValue } from './core_config';
+import { logInfo } from './core_log';
+import { OIL_GLOBAL_OBJECT_NAME } from './core_constants';
+import { getLocale } from './core_config';
 
 /**
  * Check if environment is set to production
@@ -154,7 +154,7 @@ export function getGlobalOilObject(name) {
  * @returns {number}
  */
 export function getLocaleVariantVersion() {
-  let locale = getConfigValue(OIL_CONFIG.ATTR_LOCALE, undefined);
+  let locale = getLocale();
   return (locale && locale.version) ? locale.version : 0;
 }
 

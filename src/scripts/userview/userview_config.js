@@ -1,5 +1,5 @@
 import { OIL_CONFIG } from '../core/core_constants.js';
-import { getConfigValue } from '../core/core_config.js';
+import { getConfigValue, getLocale } from '../core/core_config';
 
 // tag::config-timeout[]
 const defaultTimeoutInSeconds = 60;
@@ -40,6 +40,6 @@ export function getLabel(labelName) {
  * @returns {*}
  */
 export function getLabelWithDefault(labelName, defaultLabel) {
-  let defaultLocale = getConfigValue(OIL_CONFIG.ATTR_LOCALE, undefined);
+  let defaultLocale = getLocale();
   return getConfigValue(labelName, (defaultLocale && defaultLocale.texts[labelName]) ? defaultLocale.texts[labelName] : defaultLabel);
 }
