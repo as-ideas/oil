@@ -1,7 +1,7 @@
 import * as UserViewOil from '../../../src/scripts/userview/locale/userview_oil';
 import * as CoreUtils from '../../../src/scripts/core/core_utils.js';
 import * as CoreConfig from '../../../src/scripts/core/core_config.js';
-import {OIL_LABELS} from '../../../src/scripts/userview/userview_constants';
+import { OIL_LABELS } from '../../../src/scripts/userview/userview_constants';
 
 xdescribe('the locale fetcher for userview modal', () => {
 
@@ -12,6 +12,7 @@ xdescribe('the locale fetcher for userview modal', () => {
 
   beforeEach(() => {
     spyOn(CoreConfig, 'getLocaleVariantName').and.returnValue('enEN_01');
+    spyOn(CoreConfig, 'getLocaleUrl').and.returnValue('https://oil-backend.herokuapp.com/oil/api/userViewLocales/enEN_01');
     spyOn(CoreUtils, 'setGlobalOilObject');
     spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(undefined).withArgs('CONFIG').and.callThrough();
   });
