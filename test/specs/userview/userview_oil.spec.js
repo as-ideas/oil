@@ -12,6 +12,7 @@ xdescribe('the locale fetcher for userview modal', () => {
 
   beforeEach(() => {
     spyOn(CoreConfig, 'getLocaleVariantName').and.returnValue('enEN_01');
+    spyOn(CoreConfig, 'getLocaleUrl').and.returnValue('https://oil-backend.herokuapp.com/oil/api/userViewLocales/enEN_01');
     spyOn(CoreUtils, 'setGlobalOilObject');
     spyOn(CoreUtils, 'getGlobalOilObject').withArgs('LOCALE').and.returnValue(undefined).withArgs('CONFIG').and.callThrough();
   });
