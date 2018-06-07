@@ -132,7 +132,6 @@ export function getLocaleVariantName() {
   let localeVariantName = getLocale();
   if (!localeVariantName) {
     localeVariantName = 'enEN_01';
-    logError(`The locale is not set, falling back to ${localeVariantName}.`);
   }
   if (localeVariantName && isObject(localeVariantName)) {
     return localeVariantName.localeId;
