@@ -3,6 +3,8 @@
 
 # oil.js - Open Source Opt-In Layer
 
+oil.js is lightweight consent manager and cookie banner. It is optimized for low latency and performance. It aims to be easy to customize, simple and user-friendly. It supports the IAB framework to forward the consent to ad providers.
+
 Currently in *beta* until 18.06.2018. 
 
 [![Latest Release](https://img.shields.io/github/release/as-ideas/oil.svg)](https://oil.axelspringer.com/release/) 
@@ -19,15 +21,17 @@ Currently in *beta* until 18.06.2018.
 
 The OIL project aims for a stable cross-company solution for the challenges the GDPR and new EU ePrivacy Regulation will pose to our business.
 
-* Data privacy opt-in overlay for all users of services offered by various Axel Springer brands and/or units
-* Supports the [IAB specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) explains how a vendor should communicate with a CMP to gather consent information before running any data processing. That API is a set of JavaScript functions. You can find more at the official website http://advertisingconsent.eu/
-
-* Local opt-in (called "Site Opt-In", SOI) as well as group-based cross-company opt-in (called "Power Opt-In", POI)
-* Advanced Settings with Cookie Preference Center (CPC)
+* **Privacy by design & default**: Data privacy opt-in overlay for all users of services offered by various 
+* **Standardized**: Supports the [IAB specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) explains how a vendor should communicate with a CMP to gather consent information before running any data processing. That API is a set of JavaScript functions. You can find more at the official website http://advertisingconsent.eu/
+* **Cross-Domain** It not only supports domain opt-in (called "Site Opt-In", SOI), but also group-based cross-domain opt-in (called "Power Opt-In", POI)
+* **Lightweight & fast**: oil.js is less than 20 kB of JavaScript (minified + gzipped) and uses asynchronous loading so that your users won't notice any difference when using it
+* **Mobile-friendly and compatible with all modern browsers** Works on 99,9% of all devices and browsers, even IE9 and Android 4
+* **Easy to customize**: You can change the stylesheet, configure everything or access the functionality directly via Javascript as well
+* **User-friendly**: Supports advanced settings with a detailed cookie preference center (CPC)
 
 The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://advertisingconsent.eu/iab-europe-transparency-consent-framework-list-of-registered-cmps/) after the IAB Europe "Transparency & Consent Framework". Registered with ID 80.
 
-![](/src/assets/images/landing_page/iab-logo.png)
+![iab logo](/src/assets/images/landing_page/iab-logo.png)
 
 ## Table of Contents
 
