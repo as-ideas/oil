@@ -47,7 +47,7 @@ function getConfiguration() {
  *
  */
 function parseServerUrls() {
-  let config = getConfiguration();
+  const config = getConfiguration();
 
   if((typeof config.locale) === 'string' && getLocaleUrl() === undefined) {
     logError(`locale as a string "${config.locale}" will be deprecated in future versions. Please review documentation.`);
@@ -67,7 +67,7 @@ function parseServerUrls() {
  * @returns {*}
  */
 export function getConfigValue(name, defaultValue) {
-  let config = getConfiguration();
+  const config = getConfiguration();
   return (config && config[name]) ? config[name] : defaultValue;
 }
 
