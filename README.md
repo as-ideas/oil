@@ -158,7 +158,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 
 ### Labels
 
-The labels are configured in you configuration. There are three options. The "localeId" and the "version" will be stored in the consent information for the user.
+Labels should be a part of your configuration object `locale`. The locale object must contain at least "localeId" and "version" along with the labels in the `texts` property. LocaleId and version will be stored in the consent information for the user so we can keep track of which explicit text version consent has been given. There are three options to insert labels into your application:
 
 * Store your locale object as 'locale' in the oil.js configuration (lowest priority)
 
@@ -196,13 +196,13 @@ The labels are configured in you configuration. There are three options. The "lo
 </script>
 ```
 
-* Override single labels directly as part of the oil.js configuration (highest priority)
+* Return a JSON object from your server through locale_url configuration parameter.
 
 ```javascript
 <script id="oil-configuration" type="application/configuration">
 {
   "timeout": -1,
-  "label_intro_heading": "Insider, Inc."
+  "locale_url": "//www.yoursite.com/locale.json"
 }
 </script>
 ```
