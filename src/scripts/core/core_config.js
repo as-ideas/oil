@@ -99,8 +99,8 @@ export function isSubscriberSetCookieActive() {
 }
 
 /**
- * The server path from which all chunks and ressources will be loaded.
- * @returns {string, '//oil.axelspringer.com'}
+ * Get the hub iFrame domain with protocol prefix for the current location
+ * @returns {string, null} domain iframe orgin
  */
 export function getHubOrigin() {
   let origin = getConfigValue(OIL_CONFIG.ATTR_HUB_ORIGIN, '//oil.axelspringer.com');
@@ -115,9 +115,8 @@ export function getHubPath() {
 }
 
 /**
- *
- * Get the hub iFrame domain with protocol prefix for the current location
- * @returns {string, null} domain iframe orgin
+ * The server path from which all chunks and ressources will be loaded.
+ * @returns {string, '//oil.axelspringer.com'}
  */
 export function getPublicPath() {
   return getConfigValue(OIL_CONFIG.ATTR_PUBLIC_PATH, undefined);
