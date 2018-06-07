@@ -126,7 +126,7 @@ export function getLocaleUrl() {
   return getConfigValue(OIL_CONFIG.ATTR_LOCALE_URL, undefined);
 }
 
-export function setLocaleUrl(value) {
+function setLocaleUrl(value) {
   setConfigValue(OIL_CONFIG.ATTR_LOCALE_URL, value);
 }
 

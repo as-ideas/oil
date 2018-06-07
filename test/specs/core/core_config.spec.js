@@ -34,13 +34,13 @@ describe('core_config', () => {
 
   });
 
-  describe('setConfigValue', function() {
+  describe('setLocale', function() {
 
-    it('should store config value', function() {
-      CoreConfig.setLocaleUrl('baz');
-      const result = CoreConfig.getLocaleUrl();
+    it('should store locale value', function() {
+      CoreConfig.setLocale('baz');
+      const result = CoreConfig.getLocale();
 
-      expect(result).toEqual('baz')
+      expect(result).toEqual('baz');
     });
 
   });
