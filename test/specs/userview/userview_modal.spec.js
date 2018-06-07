@@ -1,13 +1,7 @@
-import {
-  renderOil,
-  oilWrapper,
-  stopTimeOut,
-  forEach,
-  hasRunningTimeout
-} from '../../../src/scripts/userview/userview_modal.js';
-import { loadFixture, readFixture, removeOilLayerAndConfig, deleteAllCookies } from '../../utils.js';
+import { forEach, hasRunningTimeout, oilWrapper, renderOil, stopTimeOut } from '../../../src/scripts/userview/userview_modal.js';
+import { loadFixture, readFixture } from '../../test-utils/utils_fixtures.js';
 import * as CoreConfig from '../../../src/scripts/core/core_config.js';
-import { initCustomYasmineMatchers } from '../../utils';
+import { deleteAllCookies, initCustomYasmineMatchers, removeOilLayerAndConfig } from '../../test-utils/utils_reset';
 
 describe('the userview modal aka the oil layer wrapper', () => {
 

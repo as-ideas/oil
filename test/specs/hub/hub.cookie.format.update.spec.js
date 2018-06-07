@@ -1,5 +1,5 @@
 import { getPoiCookie } from '../../../src/scripts/hub/hub_cookies.js';
-import { deleteAllCookies } from '../../utils.js';
+import { deleteAllCookies } from '../../test-utils/utils_reset.js';
 
 describe('cookie Format needs to be backwards compatible', () => {
 

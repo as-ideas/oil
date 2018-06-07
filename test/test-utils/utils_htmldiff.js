@@ -45,7 +45,10 @@ export let customMatchers = {
   }
 };
 
-function formatHtml(element) {
+export function formatHtml(element) {
+  if (typeof  element !== 'string') {
+    element = element.outerHTML;
+  }
   return element
     .trim()
     .split('\n')

@@ -1,10 +1,11 @@
-import {getCookieExpireInDays, getHubLocation, getHubOrigin, getHubPath, getLocaleVariantName, resetConfiguration} from '../../src/scripts/core/core_config.js';
-import {getSoiCookie} from '../../src/scripts/core/core_cookies.js';
-import {getLabel} from '../../src/scripts/userview/userview_config.js';
-import {OIL_LABELS} from '../../src/scripts/userview/userview_constants.js';
-import {loadFixture, deleteAllCookies} from '../utils.js';
+import { getCookieExpireInDays, getHubLocation, getHubOrigin, getHubPath, getLocaleVariantName, resetConfiguration } from '../../src/scripts/core/core_config.js';
+import { getSoiCookie } from '../../src/scripts/core/core_cookies.js';
+import { getLabel } from '../../src/scripts/userview/userview_config.js';
+import { OIL_LABELS } from '../../src/scripts/userview/userview_constants.js';
+import { loadFixture } from '../test-utils/utils_fixtures.js';
 import VENDOR_LIST from '../fixtures/vendorlist/simple_vendor_list'
 import * as CoreVendorInformation from '../../src/scripts/core/core_vendor_information';
+import { deleteAllCookies } from '../test-utils/utils_reset';
 
 
 describe('configuration', () => {

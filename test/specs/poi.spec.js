@@ -1,7 +1,8 @@
 import * as PoiAPICore from '../../src/scripts/core/core_poi.js';
 import * as PoiAPIUserview from '../../src/scripts/userview/userview_poi.js';
-import { loadFixture, deleteAllCookies } from '../utils.js';
+import { loadFixture } from '../test-utils/utils_fixtures.js';
 import { resetConfiguration } from '../../src/scripts/core/core_config.js';
+import { deleteAllCookies } from '../test-utils/utils_reset';
 
 describe('Power Opt-IN (POI)', () => {
 

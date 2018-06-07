@@ -1,4 +1,4 @@
-import { deleteAllCookies } from '../utils.js';
+import { deleteAllCookies } from '../test-utils/utils_reset.js';
 import { getSoiCookie } from '../../src/scripts/core/core_cookies';
 
 describe('cookie Format needs to be backwards compatible', () => {

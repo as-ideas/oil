@@ -1,9 +1,9 @@
-import {initOilLayer} from '../../../src/scripts/core/core_oil.js';
+import { initOilLayer } from '../../../src/scripts/core/core_oil.js';
 import * as CoreUtils from '../../../src/scripts/core/core_utils.js';
 import * as Userview from '../../../src/scripts/userview/locale/userview_oil.js';
 import * as CoreCommandCollection from '../../../src/scripts/core/core_command_collection.js';
 import * as CoreOptIn from '../../../src/scripts/core/core_optin.js';
-import {waitsForAndRuns} from '../../utils';
+import { waitsForAndRuns } from '../../test-utils/utils_wait';
 
 describe('core_oil', () => {
 

@@ -1,10 +1,10 @@
 import Cookie from 'js-cookie';
-import {oilOptIn} from '../../src/scripts/userview/userview_optin.js';
-import {deleteAllCookies} from '../utils.js';
+import { oilOptIn } from '../../src/scripts/userview/userview_optin.js';
+import { deleteAllCookies } from '../test-utils/utils_reset.js';
 import * as CoreConfig from '../../src/scripts/core/core_config';
 import * as CoreCookies from '../../src/scripts/core/core_cookies';
 import * as CorePoi from '../../src/scripts/core/core_poi';
-import {checkOptIn} from '../../src/scripts/core/core_optin';
+import { checkOptIn } from '../../src/scripts/core/core_optin';
 import * as CoreVendorInformation from '../../src/scripts/core/core_vendor_information';
 import VENDOR_LIST from '../fixtures/vendorlist/simple_vendor_list.json';
 

@@ -1,8 +1,8 @@
 import Cookie from 'js-cookie';
 import * as HubAPI from '../../../src/scripts/hub/hub_oil.js';
-import { deleteAllCookies } from '../../utils.js';
+import { deleteAllCookies } from '../../test-utils/utils_reset.js';
 import { resetConfiguration } from '../../../src/scripts/core/core_config.js';
-import { waitsForAndRuns } from '../../utils';
+import { waitsForAndRuns } from '../../test-utils/utils_wait';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 

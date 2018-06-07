@@ -1,4 +1,4 @@
-import {waitsForAndRuns} from '../utils.js';
+import { waitsForAndRuns } from '../test-utils/utils_wait.js';
 
 describe('oil stub', () => {
 

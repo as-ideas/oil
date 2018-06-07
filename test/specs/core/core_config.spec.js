@@ -1,18 +1,19 @@
-import { getHubPath,
-  setLocale,
-  getLocaleVariantName,
-  resetConfiguration,
-  getIabVendorListUrl,
+import {
+  getAdvancedSettingsPurposesDefault,
+  getConfigValue,
+  getCookieExpireInDays,
+  getCustomPurposes,
+  getDefaultToOptin,
+  getHubPath,
   getIabVendorBlacklist,
   getIabVendorWhitelist,
-  getPoiGroupName,
-  getCookieExpireInDays,
   getLocaleUrl,
-  getCustomPurposes,
-  getAdvancedSettingsPurposesDefault,
-  getDefaultToOptin } from '../../../src/scripts/core/core_config';
-import * as CoreConfig from '../../../src/scripts/core/core_config';
-import { loadFixture } from '../../utils.js';
+  getLocaleVariantName,
+  getPoiGroupName,
+  resetConfiguration,
+  setLocale
+} from '../../../src/scripts/core/core_config';
+import { loadFixture } from '../../test-utils/utils_fixtures';
 
 describe('core config', () => {
 
@@ -23,7 +24,7 @@ describe('core config', () => {
   describe('getConfigValue', () => {
 
     it('returns default when value not found', function () {
-      let result = CoreConfig.getConfigValue('foo', 'bar');
+      let result = getConfigValue('foo', 'bar');
       expect(result).toEqual('bar');
     });
 
@@ -55,7 +56,7 @@ describe('core config', () => {
 
     it('should update locale property of config object', function() {
       setLocale('bra');
-      expect(CoreConfig.getConfigValue('locale')).toEqual('bra');
+      expect(getConfigValue('locale', undefined)).toEqual('bra');
     });
 
   });
@@ -63,9 +64,9 @@ describe('core config', () => {
   describe('get config parameters', function() {
 
     const DEFAULT_COOKIE_EXPIRES_IN = 31;
-    const DEFAULT_POI_GROUP         = 'default'; 
-    const DEFAULT_CUSTOM_PURPOSES   = []; 
-    const DEFAULT_HUB_PATH          = '/release/undefined/hub.html'; 
+    const DEFAULT_POI_GROUP = 'default';
+    const DEFAULT_CUSTOM_PURPOSES = [];
+    const DEFAULT_HUB_PATH = '/release/undefined/hub.html';
 
     it('should call getConfigValue with their respective attribute', function() {
       loadFixture('config/full.config.html');

@@ -1,16 +1,17 @@
 import { hasRunningTimeout, oilShowPreferenceCenter, renderOil, stopTimeOut } from '../../../src/scripts/userview/userview_modal';
-import { deleteAllCookies, initCustomYasmineMatchers, loadFixture, readFixture, removeOilLayerAndConfig, waitForElementToDisplay, waitsForAndRuns } from '../../utils';
+import { loadFixture, readFixture } from '../../test-utils/utils_fixtures';
 import * as OilList from '../../../src/scripts/poi-list/oil.list';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import { setSoiCookie } from '../../../src/scripts/core/core_cookies';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list';
+import { deleteAllCookies, initCustomYasmineMatchers, removeOilLayerAndConfig } from '../../test-utils/utils_reset';
+import { waitForElementToDisplay, waitsForAndRuns } from '../../test-utils/utils_wait';
 
 describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   beforeEach(() => {
     deleteAllCookies();
-    CoreConfig.resetConfiguration();
     removeOilLayerAndConfig();
     stopTimeOut();
     initCustomYasmineMatchers();

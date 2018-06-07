@@ -1,7 +1,5 @@
-import * as PoiAPICore from '../../src/scripts/core/core_poi.js';
-import * as PoiAPIUserview from '../../src/scripts/userview/userview_poi.js';
-import {loadFixture, deleteAllCookies} from '../utils.js';
-import {resetConfiguration} from '../../src/scripts/core/core_config.js';
+import { resetConfiguration } from '../../src/scripts/core/core_config.js';
+import { deleteAllCookies } from '../test-utils/utils_reset';
 
 describe('poi group name', () => {
 

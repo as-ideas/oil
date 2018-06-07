@@ -12,7 +12,7 @@ import {
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import { getPoiCookie, setPoiCookie } from '../../../src/scripts/hub/hub_cookies';
-import { deleteAllCookies } from '../../utils';
+import { deleteAllCookies } from '../../test-utils/utils_reset';
 
 const {ConsentString} = require('consent-string');
 

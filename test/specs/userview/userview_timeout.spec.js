@@ -1,6 +1,7 @@
-import {loadFixture, removeOilLayerAndConfig} from '../../utils';
-import {resetConfiguration} from '../../../src/scripts/core/core_config';
-import {renderOil, stopTimeOut} from '../../../src/scripts/userview/userview_modal';
+import { loadFixture } from '../../test-utils/utils_fixtures';
+import { resetConfiguration } from '../../../src/scripts/core/core_config';
+import { renderOil, stopTimeOut } from '../../../src/scripts/userview/userview_modal';
+import { removeOilLayerAndConfig } from '../../test-utils/utils_reset';
 
 describe('the timeout of the userview modal aka the auto hide function', () => {
 

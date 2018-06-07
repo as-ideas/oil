@@ -1,11 +1,8 @@
-import {executeCommandCollection} from '../../../src/scripts/core/core_command_collection';
+import { executeCommandCollection } from '../../../src/scripts/core/core_command_collection';
 import * as CoreLog from '../../../src/scripts/core/core_log';
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as CoreConsents from '../../../src/scripts/core/core_consents';
-import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
-import {getVendorList} from '../../../src/scripts/core/core_vendor_information';
-import {getVendorConsentData} from '../../../src/scripts/core/core_consents';
-import {waitsForAndRuns} from '../../utils';
+import { waitsForAndRuns } from '../../test-utils/utils_wait';
 
 describe('command collection executor', () => {
 
@@ -58,7 +55,7 @@ describe('command collection executor', () => {
     });
 
   });
- 
+
   describe('getVendorConsents', () => {
 
     it('should process command "getVendorConsents" from message event and send error status', (done) => {
@@ -100,12 +97,6 @@ describe('command collection executor', () => {
 
   it('should process command "getConsentData" with callback', (done) => {
     verifyInvocationOfCommandWithCallback('getConsentData', CoreConsents.getConsentDataString, 'aResult', done);
-  });
-
-  it('should process command "getVendorList" with callback', () => {
-    let ispy = spyOn(CoreVendorInformation, 'getVendorList');
-    getVendorList()
-    expect(ispy).toHaveBeenCalled()
   });
 
   it('should process single command if command entry is given as parameter', (done) => {
