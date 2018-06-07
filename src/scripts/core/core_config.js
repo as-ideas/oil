@@ -47,10 +47,10 @@ function getConfiguration() {
  *
  */
 function parseServerUrls() {
-  const config = getConfiguration();
+  const localeValue = getLocale();
 
-  if((typeof config.locale) === 'string' && getLocaleUrl() === undefined) {
-    logError(`locale as a string "${config.locale}" will be deprecated in future versions. Please review documentation.`);
+  if((!localeValue || (typeof localeValue) === 'string') && getLocaleUrl() === undefined) {
+    logError('Incorrect or missing locale parameter found. Please review documentation on how to set the locale object in your configuration.');
     setLocaleUrl('https://oil-backend.herokuapp.com/oil/api/userViewLocales/' + getLocaleVariantName());
   }
 
