@@ -1,53 +1,56 @@
 import {getGlobalOilObject, getLocaleVariantVersion, setGlobalOilObject} from '../../../src/scripts/core/core_utils.js';
+import {setLocale} from '../../../src/scripts/core/core_config.js';
 import {decodeBitsToInt, encodeIabCookieValue, encodeIntToBitString, fetchJsonData} from '../../../src/scripts/core/core_utils';
 
 require('jasmine-ajax');
 
-
 describe('core_utils', () => {
 
-  afterEach(() => {
-    setGlobalOilObject('LOCALE', undefined);
+  describe('getGlobalOilObject', function() {
+
+    it('should set a global variable correctly', () => {
+      let someData = '123456';
+      setGlobalOilObject('someData', someData);
+      let result = getGlobalOilObject('someData');
+      expect(result).toBe('123456');
+    });
+
+    it('should not die when getting non-existent data', () => {
+      let result = getGlobalOilObject('huckaboo');
+      expect(result).toBe(undefined);
+    });
+
+    it('should work with functions', () => {
+      let someFunction = (param) => {
+        return param + ' this works!'
+      };
+      setGlobalOilObject('verboseModeOn', someFunction);
+      let result = getGlobalOilObject('verboseModeOn');
+      expect(result('actually')).toBe('actually this works!');
+
+      expect(window.AS_OIL.verboseModeOn('wow,')).toBe('wow, this works!');
+    });
 
   });
 
-  it('should set a global variable correctly', () => {
-    let someData = '123456';
-    setGlobalOilObject('someData', someData);
-    let result = getGlobalOilObject('someData');
-    expect(result).toBe('123456');
-  });
+  describe('getLocaleVariantVersion', function() {
 
-  it('should not die when getting non-existent data', () => {
-    let result = getGlobalOilObject('huckaboo');
-    expect(result).toBe(undefined);
-  });
+    it('should get locale variant version correctly', () => {
+      let expectedVersion = 17;
+      setLocale({'version': expectedVersion, 'localeId': 'deDE_01', 'texts': {'key1': 'text1'}});
+      expect(getLocaleVariantVersion()).toBe(expectedVersion);
+    });
 
-  it('should work with functions', () => {
-    let someFunction = (param) => {
-      return param + ' this works!'
-    };
-    setGlobalOilObject('verboseModeOn', someFunction);
-    let result = getGlobalOilObject('verboseModeOn');
-    expect(result('actually')).toBe('actually this works!');
+    it('should return default version if locale does not exist', () => {
+      setLocale(null);
+      expect(getLocaleVariantVersion()).toBe(0);
+    });
 
-    expect(window.AS_OIL.verboseModeOn('wow,')).toBe('wow, this works!');
-  });
+    it('should return default version if locale has no version', () => {
+      setLocale({'localeId': 'deDE_01', 'texts': {'key1': 'text1'}});
+      expect(getLocaleVariantVersion()).toBe(0);
+    });
 
-  it('should get locale variant version correctly', () => {
-    let expectedVersion = 17;
-    setGlobalOilObject('LOCALE', {'version': expectedVersion, 'localeId': 'deDE_01', 'texts': {'key1': 'text1'}});
-    expect(getLocaleVariantVersion()).toBe(expectedVersion);
-  });
-
-  it('should return default version if locale does not exist', () => {
-    setGlobalOilObject('LOCALE', null);
-    expect(getLocaleVariantVersion()).toBe(0);
-  });
-
-  it('should return default version if locale has no version', () => {
-    setGlobalOilObject('LOCALE', {'localeId': 'deDE_01', 'texts': {'key1': 'text1'}});
-    expect(getLocaleVariantVersion()).toBe(0);
   });
 
   describe('core_utils_fetchJsonData', () => {

@@ -139,6 +139,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | Config Parameter | Description | Default Setting |
 |----------|---------------|-------|
 | locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. <<supported-languages,Supported language packs.>> | deDE_01
+| publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | `//oil.axelspringer.com/release/{version}/`
 | preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
 | poi_activate_poi | Activates or disactivates Power Opt-In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false
@@ -182,9 +183,11 @@ Labels should be a part of your configuration object `locale`. The locale object
 <script>
 (function () {
     if (!window.AS_OIL) {
-      window.AS_OIL = {};
+      window.AS_OIL = {
+        CONFIG: {}
+      };
     }
-    window.AS_OIL.locale = {
+    window.AS_OIL.CONFIG.locale = {
       "localeId": "enEN_01",
       "version": 1,
       "texts": {

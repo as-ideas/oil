@@ -1,12 +1,12 @@
-import {getGlobalOilObject, OilVersion, sendEventToHostSite, setGlobalOilObject} from './core_utils.js';
-import {handleOptOut} from './core_optout.js';
-import {logError, logInfo, logPreviewInfo} from './core_log.js';
-import {checkOptIn} from './core_optin.js';
-import {getSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePreviewCookie, removeVerboseCookie, setPreviewCookie, setVerboseCookie} from './core_cookies.js';
-import {doSetTealiumVariables} from './core_tealium_loading_rules.js';
-import {getLocaleVariantName, isPreviewMode, resetConfiguration} from './core_config.js';
-import {EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN} from './core_constants.js';
-import {executeCommandCollection} from './core_command_collection';
+import { OilVersion, sendEventToHostSite, setGlobalOilObject } from './core_utils';
+import { handleOptOut } from './core_optout';
+import { logError, logInfo, logPreviewInfo } from './core_log';
+import { checkOptIn } from './core_optin';
+import { getSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePreviewCookie, removeVerboseCookie, setPreviewCookie, setVerboseCookie } from './core_cookies';
+import { doSetTealiumVariables } from './core_tealium_loading_rules';
+import { getLocale, getLocaleVariantName, isPreviewMode, resetConfiguration } from './core_config';
+import { EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN } from './core_constants';
+import { executeCommandCollection } from './core_command_collection';
 
 /**
  * Initialize Oil on Host Site
@@ -87,7 +87,7 @@ function attachUtilityFunctionsToWindowObject(locale) {
   function loadLocale(callbackMethod) {
     import('../userview/locale/userview_oil.js')
       .then(userview_modal => {
-        if (!getGlobalOilObject('LOCALE')) {
+        if (!getLocale()) {
           userview_modal.locale(callbackMethod);
         } else {
           callbackMethod(userview_modal);

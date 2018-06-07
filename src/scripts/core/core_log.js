@@ -25,6 +25,16 @@ export function logInfo() {
 }
 
 /**
+ * LogWarn on none-production environments.
+ * if console.warn is not defined, fall back to console.log, ignore completely on weird cases
+ */
+export function logWarn() {
+  if ((isDev() || isVerboseCookieSet()) && window.console) {
+    logInternally(window.console.warn, arguments);
+  }
+}
+
+/**
  * LogPreviewInfo is for preview production environments.
  * if console.info is not defined, fall back to console.log, ignore completely on weird cases
  */
