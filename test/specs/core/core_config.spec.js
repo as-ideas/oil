@@ -13,8 +13,9 @@ import { getHubPath,
   getDefaultToOptin } from '../../../src/scripts/core/core_config';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import { loadFixture } from '../../utils.js';
+import * as CoreLog from '../../../src/scripts/core/core_log';
 
-describe('core config', () => {
+describe('core_config', () => {
 
   beforeEach(() => {
     resetConfiguration();
@@ -23,8 +24,47 @@ describe('core config', () => {
   describe('getConfigValue', () => {
 
     it('returns default when value not found', function () {
-      let result = CoreConfig.getConfigValue('foo', 'bar');
+      const result = CoreConfig.getConfigValue('foo', 'bar');
       expect(result).toEqual('bar');
+    });
+
+  });
+
+  describe('setConfigValue', function() {
+
+    it('should store config value', function() {
+      CoreConfig.setLocaleUrl('baz');
+      const result = CoreConfig.getLocaleUrl();
+
+      expect(result).toEqual('baz')
+    });
+
+  });
+
+  describe('parseServerUrls', function() {
+
+    const DEFAULT_FALLBACK_BACKEND_URL  = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/foo';
+    const EXPECTED_PUBLIC_PATH          = '//www';
+
+    it('should set __webpack_public_path__', function() {
+      loadFixture('config/given.config.with.publicPath.html');
+      
+      expect(CoreConfig.getPublicPath()).toEqual(EXPECTED_PUBLIC_PATH);
+      expect(__webpack_public_path__).toEqual(EXPECTED_PUBLIC_PATH);
+    });
+    
+    it('Backwards compatibility: creates locale_url property if locale is string and locale_url empty', function(){
+      loadFixture('config/given.config.with.locale.string.html');
+      const result = CoreConfig.getLocaleUrl();
+      expect(result).toEqual(DEFAULT_FALLBACK_BACKEND_URL);
+    });
+
+    it('should warn about deprecated locale string', function() {
+      loadFixture('config/given.config.with.locale.string.html');
+
+      spyOn(CoreLog, 'logError');
+      const result = CoreConfig.getLocale();
+      expect(CoreLog.logError).toHaveBeenCalled();
     });
 
   });
