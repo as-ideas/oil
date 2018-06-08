@@ -610,7 +610,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#soi-configuration">SOI configuration</a></li>
 <li><a href="#poi-configuration">POI configuration</a></li>
-<li><a href="#functional-configuration-parameters">Functional Configuration Parameters</a></li>
+<li><a href="#functional-configuration-parameters">Functional Configuration Parameters</a>
+<ul class="sectlevel4">
+<li><a href="#blacklisting-and-whitelisting">Blacklisting and Whitelisting</a></li>
+</ul>
+</li>
 <li><a href="#language-configuration">Language configuration</a></li>
 <li><a href="#label-configuration-parameters">Label Configuration Parameters</a></li>
 <li><a href="#auto-hiding-the-layer-timeout">Auto-Hiding the layer (timeout)</a></li>
@@ -669,7 +673,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#appendix">Appendix</a>
 <ul class="sectlevel2">
 <li><a href="#glossary">Glossary</a></li>
-<li><a href="#supported-languages">Supported Languages</a></li>
 <li><a href="#supported-poi-groups">Supported POI Groups</a></li>
 </ul>
 </li>
@@ -944,7 +947,7 @@ Consents both on desktop or mobile browsers given by the user are not able to be
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;script>
-/*! 1.1.2-RELEASE */!function(e){var n={};function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="//oil.axelspringer.com/release/1.1.2/",t(t.s=366)}({366:function(e,n,t){"use strict";!function(e,n){e.__cmp||(e.__cmp=function(){function t(){return!(!e.AS_OIL||!e.AS_OIL.commandCollectionExecutor)}(e.attachEvent||e.addEventListener)("message",function(n){e.__cmp.receiveMessage(n)},!1),function e(){if(!(n.getElementsByName("__cmpLocator").length>0))if(n.body){var t=n.createElement("iframe");t.style.display="none",t.name="__cmpLocator",n.body.appendChild(t)}else setTimeout(e,5)}();var o=[],r=function(n,r,a){if("ping"===n)(l=a)&&l({gdprAppliesGlobally:!1,cmpLoaded:t()});else{var c={command:n,parameter:r,callback:a};o.push(c),t()&&e.AS_OIL.commandCollectionExecutor(c)}var l};return r.commandCollection=o,r.receiveMessage=function(e){var n=e&&e.data&&e.data.__cmpCall;n&&o.push({callId:n.callId,command:n.command,parameter:n.parameter,event:e})},r}())}(window,document)}});
+/*! 1.1.2-RELEASE */!function(e){var n={};function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="//oil.axelspringer.com/release/1.1.2/",t(t.s=110)}({110:function(e,n,t){"use strict";!function(e,n){e.__cmp||(e.__cmp=function(){function t(){return!(!e.AS_OIL||!e.AS_OIL.commandCollectionExecutor)}(e.attachEvent||e.addEventListener)("message",function(n){e.__cmp.receiveMessage(n)},!1),function e(){if(!(n.getElementsByName("__cmpLocator").length>0))if(n.body){var t=n.createElement("iframe");t.style.display="none",t.name="__cmpLocator",n.body.appendChild(t)}else setTimeout(e,5)}();var o=[],r=function(n,r,a){if("ping"===n)(l=a)&&l({gdprAppliesGlobally:!1,cmpLoaded:t()});else{var c={command:n,parameter:r,callback:a};o.push(c),t()&&e.AS_OIL.commandCollectionExecutor(c)}var l};return r.commandCollection=o,r.receiveMessage=function(e){var n=e&&e.data&&e.data.__cmpCall;n&&o.push({callId:n.callId,command:n.command,parameter:n.parameter,event:e})},r}())}(window,document)}});
 &lt;/script>
 &lt;script type="text/javascript" src="https://oil.axelspringer.com/release/1.1.2/oil.1.1.2-RELEASE.min.js">&lt;/script></code></pre>
 </div>
@@ -1053,7 +1056,7 @@ Consents both on desktop or mobile browsers given by the user are not able to be
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;script>
-/*! 1.1.2-RELEASE */!function(e){var n={};function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="//oil.axelspringer.com/release/1.1.2/",t(t.s=366)}({366:function(e,n,t){"use strict";!function(e,n){e.__cmp||(e.__cmp=function(){function t(){return!(!e.AS_OIL||!e.AS_OIL.commandCollectionExecutor)}(e.attachEvent||e.addEventListener)("message",function(n){e.__cmp.receiveMessage(n)},!1),function e(){if(!(n.getElementsByName("__cmpLocator").length>0))if(n.body){var t=n.createElement("iframe");t.style.display="none",t.name="__cmpLocator",n.body.appendChild(t)}else setTimeout(e,5)}();var o=[],r=function(n,r,a){if("ping"===n)(l=a)&&l({gdprAppliesGlobally:!1,cmpLoaded:t()});else{var c={command:n,parameter:r,callback:a};o.push(c),t()&&e.AS_OIL.commandCollectionExecutor(c)}var l};return r.commandCollection=o,r.receiveMessage=function(e){var n=e&&e.data&&e.data.__cmpCall;n&&o.push({callId:n.callId,command:n.command,parameter:n.parameter,event:e})},r}())}(window,document)}});
+/*! 1.1.2-RELEASE */!function(e){var n={};function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="//oil.axelspringer.com/release/1.1.2/",t(t.s=110)}({110:function(e,n,t){"use strict";!function(e,n){e.__cmp||(e.__cmp=function(){function t(){return!(!e.AS_OIL||!e.AS_OIL.commandCollectionExecutor)}(e.attachEvent||e.addEventListener)("message",function(n){e.__cmp.receiveMessage(n)},!1),function e(){if(!(n.getElementsByName("__cmpLocator").length>0))if(n.body){var t=n.createElement("iframe");t.style.display="none",t.name="__cmpLocator",n.body.appendChild(t)}else setTimeout(e,5)}();var o=[],r=function(n,r,a){if("ping"===n)(l=a)&&l({gdprAppliesGlobally:!1,cmpLoaded:t()});else{var c={command:n,parameter:r,callback:a};o.push(c),t()&&e.AS_OIL.commandCollectionExecutor(c)}var l};return r.commandCollection=o,r.receiveMessage=function(e){var n=e&&e.data&&e.data.__cmpCall;n&&o.push({callId:n.callId,command:n.command,parameter:n.parameter,event:e})},r}())}(window,document)}});
 &lt;/script>
 &lt;script type="text/javascript" src="https://oil.axelspringer.com/release/1.1.2/oil.1.1.2-RELEASE.min.js">&lt;/script></code></pre>
 </div>
@@ -1175,19 +1178,19 @@ Only group names configured by Axel Springer are allowed.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. <a href="#supported-languages">Supported language packs.</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">deDE_01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#language-configuration">locale</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. <a href="#language-configuration">See available locale parameters</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enEN_01</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">publicPath</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">//oil.axelspringer.com/release/1.1.2-RELEASE/`</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">preview_mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">theme</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">'light'</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The theme for the layer. By default there are two themes and size modifier themes, <code>dark</code> and <code>light</code> as well as <code>small dark</code> and <code>small light</code>. Themes currently work only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">light</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">poi_activate_poi</p></td>
@@ -1227,12 +1230,12 @@ Only group names configured by Axel Springer are allowed.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">advanced_settings</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">persist_min_tracking</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">iabVendorListUrl</p></td>
@@ -1247,7 +1250,7 @@ Only group names configured by Axel Springer are allowed.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">iabVendorWhitelist</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Array of vendor IDs to allow. If it is set, values in <code>iabVendorBlacklist</code> are ignored.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">iabVendorBlacklist</p></td>
@@ -1257,36 +1260,145 @@ Only group names configured by Axel Springer are allowed.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">customPurposes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">default_to_optin</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Signal opt-in to vendors while still displaying the Opt-In layer to the end user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">advanced_settings_purposes_default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All purposes in the advanced settings layer should be activated by default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
 </tbody>
 </table>
+<div class="sect4">
+<h5 id="blacklisting-and-whitelisting"><a class="anchor" href="#blacklisting-and-whitelisting"></a>Blacklisting and Whitelisting</h5>
+<div class="paragraph">
+<p>With <strong>iabVendorWhitelist</strong> and <strong>iabVendorBlacklist</strong> you can exclude specific vendors from the consent (blacklist) or include only the ones you want (whitelist). You can only use one method at the time - either whitelist or blacklist.</p>
+</div>
+<div class="paragraph">
+<p>As an example, the vendorlist may contain vendors with vendor IDs 1 to 10. In the example the user accepts everything, he just pressed "OK". The consent-string would normally contain (by getVendorConsents) this data:</p>
+</div>
+<div class="listingblock">
+<div class="title">Default result from getVendorConsents without whitelist/blacklist</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">{
+  "metadata": "consent-string",
+  "purposeConsents": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1
+  },
+  "vendorConsents": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": true,
+    "7": true,
+    "8": true,
+    "9": true,
+    "10": true
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Whitelist</strong>: The whitelist contains IDs 3, 4, 5 in form of the configuration with <code>"iabVendorWhitelist": [3, 4, 5]</code>. If the user has given his consent by clicking on "OK" only vendors on the whitelist will be true.</p>
+</div>
+<div class="listingblock">
+<div class="title">Result from getVendorConsents with whitelisting vendor IDs 3, 4, 5</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">{
+  "metadata": "consent-string",
+  "purposeConsents": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1
+  },
+  "vendorConsents": {
+    "1": false,
+    "2": false,
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": false,
+    "7": false,
+    "8": false,
+    "9": false,
+    "10": false
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Blacklist</strong>: The blacklist contains IDs 6, 7, 8 in form of the configuration with <code>"iabVendorBlacklist": [6, 7, 8]</code>. If the user has given his consent by clicking on "OK" only vendors NOT on the blacklist will be true.</p>
+</div>
+<div class="listingblock">
+<div class="title">Result from getVendorConsents with blacklisting vendor IDs 6, 7, 8</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">{
+  "metadata": "consent-string",
+  "purposeConsents": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5": 1
+  },
+  "vendorConsents": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": false,
+    "7": false,
+    "8": false,
+    "9": true,
+    "10": true
+  }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="language-configuration"><a class="anchor" href="#language-configuration"></a>Language configuration</h4>
+<div class="paragraph">
+<p>You need to set a value for the <code>locale</code> config parameter. The locale defines the standard labels for all legal texts and buttons.</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 60%;">
-<col style="width: 20%;">
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Config Parameter</th>
+<th class="tableblock halign-left valign-top">Locale</th>
 <th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Default Setting</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. <a href="#supported-languages">Supported language packs.</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">deDE_01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">German</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enEN_01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">English</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">plPL_01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Polish</p></td>
 </tr>
 </tbody>
 </table>
@@ -1294,8 +1406,7 @@ Only group names configured by Axel Springer are allowed.</p>
 <div class="sect3">
 <h4 id="label-configuration-parameters"><a class="anchor" href="#label-configuration-parameters"></a>Label Configuration Parameters</h4>
 <div class="paragraph">
-<p>Recommended label configurations.
-Check developer documentation for information to change all labels.</p>
+<p>The recommended way is to keep the standard locale definitions. If you need to customize single labels you can manually pass them in the configuration or directly override the properties of the object in <code>window.AS_OIL.LOCALE.texts</code>.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -1312,6 +1423,126 @@ Check developer documentation for information to change all labels.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">label_intro_heading</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">We use cookies and other technologies</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_intro</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The website uses cookies, web beacons, JavaScript and similar technologies. I agree that &lt;a href=\"javascript:void(0)\" class=\"as-oil<em>intro-txt&#8212;&#8203;link as-js-companyList\"&gt;companies belonging to Axel Springer SE&lt;/a&gt; and &lt;a href=\"javascript:void(0)\" class=\"as-oil</em>intro-txt&#8212;&#8203;link as-js-thirdPartyList\"&gt;trusted partners&lt;/a&gt; generate pseudonymous user profiles for adapting the website to the user, for market research and for advertising. The generated data can also be shared with third parties while the user profiles cannot be combined with personal data. Detailed information, also on the right to withdraw consent, can be found in the website&#8217;s privacy policy.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_button_yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OK</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_button_back</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Back</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_button_advanced_settings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">More information</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_heading</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Please select a privacy setting:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Choose the allowed purposes.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_activate_all</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Activate all</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_deactivate_all</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deactivate all</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_desc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Purposes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_01_text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accessing a Device</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_01_desc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allow storing or accessing information on a user’s device.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_02_text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Advertising Personalisation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_02_desc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allow processing of a user’s data to provide and inform personalised advertising (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_03_text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Analytics</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_03_desc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allow processing of a user’s data to deliver content or advertisements and measure the delivery of such content or advertisements, extract insights and generate reports to understand service usage; and/or accessing or storing information on devices for that purpose.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_04_text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content Personalisation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_04_desc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allow processing of a user’s data to provide and inform personalised content (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_05_text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Matching Data to Offline Sources</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_05_desc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Combining data from offline sources that were initially collected in other contexts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_06_text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linking Devices</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_06_desc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allow processing of a user’s data to connect such user across multiple devices.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_07_text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Precise Geographic Location data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_cpc_purpose_07_desc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_poi_group_list_heading</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Your consent for companies of the group</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_poi_group_list_text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Here is a list of companies of the group:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_third_party</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Third Parties</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_thirdparty_list_heading</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Your consent for third party software</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_thirdparty_list_text</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_nocookie_head</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In order to be able to provide our services in the best possible way, cookies must be enable in your browser.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label_nocookie_text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Please enable Cookies in the properties of your Browsers. So you can do it in &lt;a href=\"https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&amp;hl=en-GB\" class=\"as-oil<em>intro-txt&#8212;&#8203;link\" target=\"_blank\"&gt;Google Chrome&lt;/a&gt; or &lt;a href=\"https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer\" class=\"as-oil</em>intro-txt&#8212;&#8203;link\" target=\"_blank\"&gt;Firefox&lt;/a&gt;."</p></td>
 </tr>
 </tbody>
 </table>
@@ -1944,8 +2175,8 @@ If you want to reference the company or third party list from your custom text y
         label_poi_group_list_text
       &lt;/p&gt;
       &lt;div class="as-oil-poi-group-list"&gt;
-        &lt;div&gt;a&lt;/div&gt;
-        &lt;div&gt;b&lt;/div&gt;
+        &lt;div class="as-oil-poi-group-list-element"&gt;a&lt;/div&gt;
+        &lt;div class="as-oil-poi-group-list-element"&gt;b&lt;/div&gt;
       &lt;/div&gt;
       &lt;button class="as-js-oilback" data-context="BACK" data-qa="oil-back-button"&gt;
         &lt;span class="as-js-oilback__text"&gt;label_button_back&lt;/span&gt;
@@ -2002,22 +2233,22 @@ If you want to reference the company or third party list from your custom text y
       &lt;div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content"&gt;
         &lt;div class="as-oil-cpc__left"&gt;
           &lt;a href="#as-oil-cpc-purposes" onclick="AS_OIL._switchLeftMenuClass(this)" class="as-oil-cpc__category-link as-oil-cpc__category-link--active"&gt;
-            Purposes
+            label_cpc_purpose_desc
           &lt;/a&gt;
           &lt;a href="#as-oil-cpc-third-parties" onclick="AS_OIL._switchLeftMenuClass(this)" class="as-oil-cpc__category-link"&gt;
-            3rd Parties
+            label_third_party
           &lt;/a&gt;
         &lt;/div&gt;
         &lt;div class="as-oil-cpc__middle as-js-purposes"&gt;
           &lt;div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes"&gt;
-            Purposes
+            label_cpc_purpose_desc
           &lt;/div&gt;
           &lt;div class="as-oil-cpc__purpose"&gt;
             &lt;div class="as-oil-cpc__purpose-container"&gt;
-              &lt;div class="as-oil-cpc__purpose-header"&gt;label_cpc_purpose_01_text&lt;/div&gt;
+              &lt;div class="as-oil-cpc__purpose-header"&gt;Purpose 1&lt;/div&gt;
               &lt;div class="as-oil-cpc__purpose-text"&gt;label_cpc_purpose_01_desc&lt;/div&gt;
               &lt;label class="as-oil-cpc__switch"&gt;
-                &lt;input id="as-js-purpose-slider-1" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_01_text" value="false"&gt;
+                &lt;input data-id="1" id="as-js-purpose-slider-1" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-1" value="false"&gt;
                 &lt;span class="as-oil-cpc__status"&gt;&lt;/span&gt;
                 &lt;span class="as-oil-cpc__slider"&gt;&lt;/span&gt;
               &lt;/label&gt;
@@ -2025,10 +2256,10 @@ If you want to reference the company or third party list from your custom text y
           &lt;/div&gt;
           &lt;div class="as-oil-cpc__purpose"&gt;
             &lt;div class="as-oil-cpc__purpose-container"&gt;
-              &lt;div class="as-oil-cpc__purpose-header"&gt;label_cpc_purpose_02_text&lt;/div&gt;
+              &lt;div class="as-oil-cpc__purpose-header"&gt;Purpose 2&lt;/div&gt;
               &lt;div class="as-oil-cpc__purpose-text"&gt;label_cpc_purpose_02_desc&lt;/div&gt;
               &lt;label class="as-oil-cpc__switch"&gt;
-                &lt;input id="as-js-purpose-slider-2" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_02_text" value="false"&gt;
+                &lt;input data-id="2" id="as-js-purpose-slider-2" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-2" value="false"&gt;
                 &lt;span class="as-oil-cpc__status"&gt;&lt;/span&gt;
                 &lt;span class="as-oil-cpc__slider"&gt;&lt;/span&gt;
               &lt;/label&gt;
@@ -2036,10 +2267,10 @@ If you want to reference the company or third party list from your custom text y
           &lt;/div&gt;
           &lt;div class="as-oil-cpc__purpose"&gt;
             &lt;div class="as-oil-cpc__purpose-container"&gt;
-              &lt;div class="as-oil-cpc__purpose-header"&gt;label_cpc_purpose_03_text&lt;/div&gt;
+              &lt;div class="as-oil-cpc__purpose-header"&gt;Purpose 3&lt;/div&gt;
               &lt;div class="as-oil-cpc__purpose-text"&gt;label_cpc_purpose_03_desc&lt;/div&gt;
               &lt;label class="as-oil-cpc__switch"&gt;
-                &lt;input id="as-js-purpose-slider-3" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_03_text" value="false"&gt;
+                &lt;input data-id="3" id="as-js-purpose-slider-3" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-3" value="false"&gt;
                 &lt;span class="as-oil-cpc__status"&gt;&lt;/span&gt;
                 &lt;span class="as-oil-cpc__slider"&gt;&lt;/span&gt;
               &lt;/label&gt;
@@ -2047,10 +2278,10 @@ If you want to reference the company or third party list from your custom text y
           &lt;/div&gt;
           &lt;div class="as-oil-cpc__purpose"&gt;
             &lt;div class="as-oil-cpc__purpose-container"&gt;
-              &lt;div class="as-oil-cpc__purpose-header"&gt;label_cpc_purpose_04_text&lt;/div&gt;
+              &lt;div class="as-oil-cpc__purpose-header"&gt;Purpose 4&lt;/div&gt;
               &lt;div class="as-oil-cpc__purpose-text"&gt;label_cpc_purpose_04_desc&lt;/div&gt;
               &lt;label class="as-oil-cpc__switch"&gt;
-                &lt;input id="as-js-purpose-slider-4" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_04_text" value="false"&gt;
+                &lt;input data-id="4" id="as-js-purpose-slider-4" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-4" value="false"&gt;
                 &lt;span class="as-oil-cpc__status"&gt;&lt;/span&gt;
                 &lt;span class="as-oil-cpc__slider"&gt;&lt;/span&gt;
               &lt;/label&gt;
@@ -2058,244 +2289,46 @@ If you want to reference the company or third party list from your custom text y
           &lt;/div&gt;
           &lt;div class="as-oil-cpc__purpose"&gt;
             &lt;div class="as-oil-cpc__purpose-container"&gt;
-              &lt;div class="as-oil-cpc__purpose-header"&gt;label_cpc_purpose_05_text&lt;/div&gt;
+              &lt;div class="as-oil-cpc__purpose-header"&gt;Purpose 5&lt;/div&gt;
               &lt;div class="as-oil-cpc__purpose-text"&gt;label_cpc_purpose_05_desc&lt;/div&gt;
               &lt;label class="as-oil-cpc__switch"&gt;
-                &lt;input id="as-js-purpose-slider-5" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_05_text" value="false"&gt;
-                &lt;span class="as-oil-cpc__status"&gt;&lt;/span&gt;
-                &lt;span class="as-oil-cpc__slider"&gt;&lt;/span&gt;
-              &lt;/label&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-          &lt;div class="as-oil-cpc__purpose"&gt;
-            &lt;div class="as-oil-cpc__purpose-container"&gt;
-              &lt;div class="as-oil-cpc__purpose-header"&gt;label_cpc_purpose_06_text&lt;/div&gt;
-              &lt;div class="as-oil-cpc__purpose-text"&gt;label_cpc_purpose_06_desc&lt;/div&gt;
-              &lt;label class="as-oil-cpc__switch"&gt;
-                &lt;input id="as-js-purpose-slider-6" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_06_text" value="false"&gt;
-                &lt;span class="as-oil-cpc__status"&gt;&lt;/span&gt;
-                &lt;span class="as-oil-cpc__slider"&gt;&lt;/span&gt;
-              &lt;/label&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-          &lt;div class="as-oil-cpc__purpose"&gt;
-            &lt;div class="as-oil-cpc__purpose-container"&gt;
-              &lt;div class="as-oil-cpc__purpose-header"&gt;label_cpc_purpose_07_text&lt;/div&gt;
-              &lt;div class="as-oil-cpc__purpose-text"&gt;label_cpc_purpose_07_desc&lt;/div&gt;
-              &lt;label class="as-oil-cpc__switch"&gt;
-                &lt;input id="as-js-purpose-slider-7" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-label_cpc_purpose_07_text" value="false"&gt;
+                &lt;input data-id="5" id="as-js-purpose-slider-5" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-5" value="false"&gt;
                 &lt;span class="as-oil-cpc__status"&gt;&lt;/span&gt;
                 &lt;span class="as-oil-cpc__slider"&gt;&lt;/span&gt;
               &lt;/label&gt;
             &lt;/div&gt;
           &lt;/div&gt;
           &lt;div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties"&gt;
-            3rd Parties
+            label_third_party
           &lt;/div&gt;
           &lt;div id="as-js-third-parties-list"&gt;
             &lt;div class="as-oil-poi-group-list"&gt;
               &lt;div class="as-oil-third-party-list-element"&gt;
                 &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;Contact Impact&lt;/span&gt;
+                        &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
+                          &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
+                        &lt;/svg&gt;
+                        &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
+                          &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
+                        &lt;/svg&gt;
+                        &lt;span class="as-oil-third-party-name"&gt;Emerse Sverige AB&lt;/span&gt;
                 &lt;/span&gt;
                 &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="http://www.adrolays.com/de/opt-out" target="_blank" title=""&gt;http://www.adrolays.com/de/opt-out&lt;/a&gt;
-                  &lt;/div&gt;
+                  &lt;a class="as-oil-third-party-link" href="https://www.emerse.com/privacy-policy/"&gt;https://www.emerse.com/privacy-policy/&lt;/a&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
               &lt;div class="as-oil-third-party-list-element"&gt;
                 &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;Ad Audience&lt;/span&gt;
+                        &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
+                          &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
+                        &lt;/svg&gt;
+                        &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
+                          &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
+                        &lt;/svg&gt;
+                        &lt;span class="as-oil-third-party-name"&gt;BeeswaxIO Corporation&lt;/span&gt;
                 &lt;/span&gt;
                 &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="http://www.adaudience.de/datenschutz/" target="_blank" title=""&gt;http://www.adaudience.de/datenschutz/&lt;/a&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-              &lt;div class="as-oil-third-party-list-element"&gt;
-                &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;Amazon&lt;/span&gt;
-                &lt;/span&gt;
-                &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="http://www.amazon.de/gp/dra/info" target="_blank" title=""&gt;http://www.amazon.de/gp/dra/info&lt;/a&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-              &lt;div class="as-oil-third-party-list-element"&gt;
-                &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;Audience Science&lt;/span&gt;
-                &lt;/span&gt;
-                &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="http://www.audiencescience.com/de/privacy" target="_blank" title=""&gt;http://www.audiencescience.com/de/privacy&lt;/a&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-              &lt;div class="as-oil-third-party-list-element"&gt;
-                &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;Criteo&lt;/span&gt;
-                &lt;/span&gt;
-                &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="http://www.criteo.com/de/privacy/" target="_blank" title=""&gt;http://www.criteo.com/de/privacy/&lt;/a&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-              &lt;div class="as-oil-third-party-list-element"&gt;
-                &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;Emetriq&lt;/span&gt;
-                &lt;/span&gt;
-                &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="https://www.emetriq.com/opt-out" target="_blank" title=""&gt;https://www.emetriq.com/opt-out&lt;/a&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-              &lt;div class="as-oil-third-party-list-element"&gt;
-                &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;1plusx&lt;/span&gt;
-                &lt;/span&gt;
-                &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="http://1plusx.com/privacy-policy/" target="_blank" title=""&gt;http://1plusx.com/privacy-policy/&lt;/a&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-              &lt;div class="as-oil-third-party-list-element"&gt;
-                &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;Nugg.ad&lt;/span&gt;
-                &lt;/span&gt;
-                &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="http://mtm.nuggad.net/" target="_blank" title=""&gt;http://mtm.nuggad.net/&lt;/a&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-              &lt;div class="as-oil-third-party-list-element"&gt;
-                &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;Vibrant Media&lt;/span&gt;
-                &lt;/span&gt;
-                &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="https://www.vibrantmedia.com/privacy-policy/" target="_blank" title=""&gt;https://www.vibrantmedia.com/privacy-policy/&lt;/a&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-              &lt;div class="as-oil-third-party-list-element"&gt;
-                &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;Xplosion&lt;/span&gt;
-                &lt;/span&gt;
-                &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="https://www.xplosion.de/opt-out.php" target="_blank" title=""&gt;https://www.xplosion.de/opt-out.php&lt;/a&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-              &lt;div class="as-oil-third-party-list-element"&gt;
-                &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;Yieldlab&lt;/span&gt;
-                &lt;/span&gt;
-                &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="http://www.yieldlab.de/privacy/" target="_blank" title=""&gt;http://www.yieldlab.de/privacy/&lt;/a&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-              &lt;div class="as-oil-third-party-list-element"&gt;
-                &lt;span onclick="AS_OIL._toggleViewElements(this)"&gt;
-                    &lt;svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"&gt;
-                      &lt;path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"&gt;&lt;/path&gt;
-                    &lt;/svg&gt;
-                    &lt;span class="as-oil-third-party-name"&gt;AppNexus&lt;/span&gt;
-                &lt;/span&gt;
-                &lt;div class="as-oil-third-party-toggle-part" style="display: none;"&gt;
-                  &lt;p class="as-oil-third-party-description"&gt;&lt;/p&gt;
-                  &lt;div class="as-oil-third-party-link"&gt;
-                    &lt;a href="https://www.appnexus.com/en/company/platform-privacy-policy-de1#choices" target="_blank" title=""&gt;https://www.appnexus.com/en/company/platform-privacy-policy-de1#choices&lt;/a&gt;
-                  &lt;/div&gt;
+                  &lt;a class="as-oil-third-party-link" href="https://www.beeswax.com/privacy.html"&gt;https://www.beeswax.com/privacy.html&lt;/a&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
             &lt;/div&gt;
@@ -2445,35 +2478,6 @@ head.appendChild(script);</code></pre>
 </table>
 </div>
 <div class="sect2">
-<h3 id="supported-languages"><a class="anchor" href="#supported-languages"></a>Supported Languages</h3>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Locale</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">deDE_01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">German</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">enEN_01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">English</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">plPL_01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Polish</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
 <h3 id="supported-poi-groups"><a class="anchor" href="#supported-poi-groups"></a>Supported POI Groups</h3>
 <div class="paragraph">
 <p><li>axelSpringerPl_01</li> <li>axelSpringerSe_01</li> <li>default</li> <li>insiderInc_01</li></p>
@@ -2484,7 +2488,7 @@ head.appendChild(script);</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-05-25 14:50:31 CEST
+Last updated 2018-06-08 08:49:27 UTC
 </div>
 </div>
 <div class="sticky-footer">
