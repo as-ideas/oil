@@ -1,11 +1,14 @@
-import { initOilLayer } from '../../../src/scripts/core/core_oil.js';
-import * as CoreUtils from '../../../src/scripts/core/core_utils.js';
-import * as Userview from '../../../src/scripts/userview/locale/userview_oil.js';
-import * as CoreCommandCollection from '../../../src/scripts/core/core_command_collection.js';
-import * as CoreOptIn from '../../../src/scripts/core/core_optin.js';
+import { initOilLayer } from '../../../src/scripts/core/core_oil';
+import * as CoreUtils from '../../../src/scripts/core/core_utils';
+import * as UserView from '../../../src/scripts/userview/locale/userview_oil';
+import * as CoreCommandCollection from '../../../src/scripts/core/core_command_collection';
+import * as CoreOptIn from '../../../src/scripts/core/core_optin';
 import { waitsForAndRuns } from '../../test-utils/utils_wait';
+import { resetOil } from '../../test-utils/utils_reset';
 
 describe('core_oil', () => {
+
+  beforeEach(() => resetOil());
 
   it('should attach utility functions to window object', () => {
 
@@ -14,44 +17,45 @@ describe('core_oil', () => {
       expect(CoreUtils.setGlobalOilObject.calls.argsFor(invocationIndex)[1].toString()).toContain(expectedValue);
     }
 
-    spyOn(CoreUtils, 'setGlobalOilObject');
+    spyOn(CoreUtils, 'setGlobalOilObject').and.callThrough();
 
     initOilLayer();
 
-    expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledTimes(11);
+    // we expect 11 invocations for registered functions and one for CONFIG object itself
+    expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledTimes(12);
 
-    verifyThatGlobalOilObjectIsSet(0, 'previewModeOn', "setPreviewCookie");
+    verifyThatGlobalOilObjectIsSet(1, 'previewModeOn', "setPreviewCookie");
 
-    verifyThatGlobalOilObjectIsSet(1, 'previewModeOff', 'removePreviewCookie');
+    verifyThatGlobalOilObjectIsSet(2, 'previewModeOff', 'removePreviewCookie');
 
-    verifyThatGlobalOilObjectIsSet(2, 'verboseModeOn', 'setVerboseCookie');
+    verifyThatGlobalOilObjectIsSet(3, 'verboseModeOn', 'setVerboseCookie');
 
-    verifyThatGlobalOilObjectIsSet(3, 'verboseModeOff', 'removeVerboseCookie');
+    verifyThatGlobalOilObjectIsSet(4, 'verboseModeOff', 'removeVerboseCookie');
 
-    verifyThatGlobalOilObjectIsSet(4, 'reload', 'resetConfiguration');
-    verifyThatGlobalOilObjectIsSet(4, 'reload', 'initOilLayer');
+    verifyThatGlobalOilObjectIsSet(5, 'reload', 'resetConfiguration');
+    verifyThatGlobalOilObjectIsSet(5, 'reload', 'initOilLayer');
 
-    verifyThatGlobalOilObjectIsSet(5, 'status', 'getSoiCookie');
+    verifyThatGlobalOilObjectIsSet(6, 'status', 'getSoiCookie');
 
-    verifyThatGlobalOilObjectIsSet(6, 'showPreferenceCenter', 'loadLocale');
-    verifyThatGlobalOilObjectIsSet(6, 'showPreferenceCenter', 'oilShowPreferenceCenter');
+    verifyThatGlobalOilObjectIsSet(7, 'showPreferenceCenter', 'loadLocale');
+    verifyThatGlobalOilObjectIsSet(7, 'showPreferenceCenter', 'oilShowPreferenceCenter');
 
-    verifyThatGlobalOilObjectIsSet(7, 'triggerOptIn', 'loadLocale');
-    verifyThatGlobalOilObjectIsSet(7, 'triggerOptIn', 'handleOptIn');
+    verifyThatGlobalOilObjectIsSet(8, 'triggerOptIn', 'loadLocale');
+    verifyThatGlobalOilObjectIsSet(8, 'triggerOptIn', 'handleOptIn');
 
-    verifyThatGlobalOilObjectIsSet(8, 'triggerSoiOptIn', 'loadLocale');
-    verifyThatGlobalOilObjectIsSet(8, 'triggerSoiOptIn', 'handleSoiOptIn');
+    verifyThatGlobalOilObjectIsSet(9, 'triggerSoiOptIn', 'loadLocale');
+    verifyThatGlobalOilObjectIsSet(9, 'triggerSoiOptIn', 'handleSoiOptIn');
 
-    verifyThatGlobalOilObjectIsSet(9, 'triggerPoiOptIn', 'loadLocale');
-    verifyThatGlobalOilObjectIsSet(9, 'triggerPoiOptIn', 'handlePoiOptIn');
+    verifyThatGlobalOilObjectIsSet(10, 'triggerPoiOptIn', 'loadLocale');
+    verifyThatGlobalOilObjectIsSet(10, 'triggerPoiOptIn', 'handlePoiOptIn');
 
-    verifyThatGlobalOilObjectIsSet(10, 'triggerOptOut', 'handleOptOut');
+    verifyThatGlobalOilObjectIsSet(11, 'triggerOptOut', 'handleOptOut');
   });
 
   it('should execute command collection and attach command collection execution to window object if optin is provided', (done) => {
     let executeCommandCollectionSpy = spyOn(CoreCommandCollection, 'executeCommandCollection').and.callThrough();
     spyOn(CoreOptIn, 'checkOptIn').and.returnValue(Promise.resolve(true));
-    spyOn(CoreUtils, 'setGlobalOilObject');
+    spyOn(CoreUtils, 'setGlobalOilObject').and.callThrough();
 
     initOilLayer();
 
@@ -66,9 +70,9 @@ describe('core_oil', () => {
   it('should not execute command collection and attach command collection execution to window object if optin is not provided', (done) => {
     let executeCommandCollectionSpy = spyOn(CoreCommandCollection, 'executeCommandCollection').and.callThrough();
     spyOn(CoreOptIn, 'checkOptIn').and.returnValue(Promise.resolve(false));
-    spyOn(CoreUtils, 'setGlobalOilObject');
+    spyOn(CoreUtils, 'setGlobalOilObject').and.callThrough();
     spyOn(CoreUtils, 'sendEventToHostSite');
-    spyOn(Userview, 'locale');
+    spyOn(UserView, 'locale');
 
     initOilLayer();
 

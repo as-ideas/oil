@@ -1,5 +1,6 @@
 import { forEach, stopTimeOut } from '../../src/scripts/userview/userview_modal';
 import { customMatchers } from './utils_htmldiff';
+import { clearVendorListCache } from '../../src/scripts/core/core_vendor_information';
 
 export function removeOilLayerAndConfig() {
   window.AS_OIL = undefined;
@@ -26,9 +27,31 @@ export function initCustomYasmineMatchers() {
   jasmine.addMatchers(customMatchers);
 }
 
+export function clearCmpCallbackRegistration() {
+  if (window.__cmp) {
+    window.__cmp.commandCollection.length = 0;
+  }
+}
+
+export function removeOilFrame() {
+  if (document.getElementById('oil-frame')) {
+    document.getElementById('oil-frame').remove();
+  }
+}
+
+export function removeTealiumLoadingRuleStuff() {
+  window.utag = undefined;
+  window.utag_data = undefined;
+  window.oilEventListenerForLoadingRules = undefined;
+}
+
 export function resetOil() {
   deleteAllCookies();
   removeOilLayerAndConfig();
+  removeOilFrame();
+  removeTealiumLoadingRuleStuff();
+  clearVendorListCache();
+  clearCmpCallbackRegistration();
   stopTimeOut();
   initCustomYasmineMatchers();
 }

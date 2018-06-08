@@ -1,4 +1,4 @@
-import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
+import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list';
 import Cookie from 'js-cookie';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import {
@@ -10,9 +10,9 @@ import {
   OIL_SPEC
 } from '../../../src/scripts/core/core_constants';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
-import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import { getPoiCookie, setPoiCookie } from '../../../src/scripts/hub/hub_cookies';
-import { deleteAllCookies } from '../../test-utils/utils_reset';
+import { resetOil } from '../../test-utils/utils_reset';
+import { setupVendorListSpies } from '../../test-utils/utils_vendorlist';
 
 const {ConsentString} = require('consent-string');
 
@@ -29,10 +29,9 @@ describe('hub cookies', () => {
 
   const DEFAULT_PAYLOAD = {p: 'BOO4NpHOO4NpHBQABBENAkuAAAAXyABgACAvgA'};
 
+  beforeEach(() => resetOil());
+
   describe('poi cookie get/set', () => {
-    beforeEach(() => {
-      deleteAllCookies();
-    });
 
     it('shouldn\'t return the version of oil in the hub domain cookie, when never set', () => {
       let resultCookie = getPoiCookie();
@@ -124,10 +123,7 @@ describe('hub cookies', () => {
 
     beforeEach(() => {
       spyOn(CoreCookies, 'getStandardPurposesWithConsent').withArgs(PRIVACY).and.returnValue(PURPOSE_LIST);
-      spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
-      spyOn(CoreVendorInformation, 'getLimitedVendorIds').and.returnValue(VENDOR_LIST.vendors.map(({id}) => id));
-      spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
-      spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
+      setupVendorListSpies();
     });
 
     it('should get poi cookie', () => {
@@ -265,5 +261,4 @@ describe('hub cookies', () => {
     expect(retrievedConsentData.getVendorsAllowed().sort()).toEqual(expectedConsentData.getVendorsAllowed().sort());
   }
 
-})
-;
+});

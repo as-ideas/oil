@@ -1,24 +1,19 @@
-import { hasRunningTimeout, oilShowPreferenceCenter, renderOil, stopTimeOut } from '../../../src/scripts/userview/userview_modal';
+import { hasRunningTimeout, oilShowPreferenceCenter, renderOil } from '../../../src/scripts/userview/userview_modal';
 import { loadFixture, readFixture } from '../../test-utils/utils_fixtures';
 import * as OilList from '../../../src/scripts/poi-list/oil.list';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import { setSoiCookie } from '../../../src/scripts/core/core_cookies';
-import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list';
-import { deleteAllCookies, initCustomYasmineMatchers, removeOilLayerAndConfig } from '../../test-utils/utils_reset';
+import { resetOil } from '../../test-utils/utils_reset';
 import { waitForElementToDisplay, waitsForAndRuns } from '../../test-utils/utils_wait';
+import { setupVendorListSpies } from '../../test-utils/utils_vendorlist';
 
 describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
-  beforeEach(() => {
-    deleteAllCookies();
-    removeOilLayerAndConfig();
-    stopTimeOut();
-    initCustomYasmineMatchers();
-  });
+  beforeEach(() => resetOil());
 
   it('should renderOil with ADVANCED-SETTINGS as CPC template with purpose texts from configuration and vendors from vendor list', (done) => {
-    givenThatVendorListIsAvailable();
+    setupVendorListSpies();
     spyOn(OilList, 'listSnippet').and.callThrough();
     loadFixture('config/given.config.example.labels.html');
     renderOil({optIn: false, advancedSettings: true});
@@ -34,7 +29,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
   });
 
   it('should renderOil with ADVANCED-SETTINGS as CPC template with purpose texts and vendors from vendor list', (done) => {
-    givenThatVendorListIsAvailable();
+    setupVendorListSpies();
     spyOn(OilList, 'listSnippet').and.callThrough();
     loadFixture('config/given.config.html');
     renderOil({optIn: false, advancedSettings: true});
@@ -68,7 +63,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
   });
 
   it('should insert CPC into host site with GIVEN PRIVACY SETTING', (done) => {
-    givenThatVendorListIsAvailable();
+    setupVendorListSpies();
     loadFixture('html/integrated-cpc.html');
 
     setSoiCookie({
@@ -93,7 +88,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
   });
 
   it('should insert CPC into host site with STORED PRIVACY SETTING (from cookie)', (done) => {
-    givenThatVendorListIsAvailable();
+    setupVendorListSpies();
     renderOil({optIn: false});
     setSoiCookie({
       '1': true,
@@ -117,7 +112,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
   });
 
   it('should show CPC in layer with DEFAULT PRIVACY SETTING', (done) => {
-    givenThatVendorListIsAvailable();
+    setupVendorListSpies();
     loadFixture('html/integrated-cpc.html');
 
     oilShowPreferenceCenter();
@@ -135,7 +130,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
   });
 
   it('should show CPC in layer with PRIVACY SETTING from config', (done) => {
-    givenThatVendorListIsAvailable();
+    setupVendorListSpies();
     renderOil({optIn: false});
 
     spyOn(CoreConfig, 'getAdvancedSettingsPurposesDefault').and.returnValue(true);
@@ -154,7 +149,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
   });
 
   it('should show CPC in layer with STORED PRIVACY SETTING (from cookie)', (done) => {
-    givenThatVendorListIsAvailable();
+    setupVendorListSpies();
     renderOil({optIn: false});
     setSoiCookie({
       '1': true,
@@ -181,9 +176,4 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
     expect(hasRunningTimeout).toBeUndefined();
   }
 
-  function givenThatVendorListIsAvailable() {
-    spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
-    spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
-    spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
-  }
 });

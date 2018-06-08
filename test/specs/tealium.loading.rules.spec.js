@@ -1,22 +1,15 @@
-import {doSetTealiumVariables} from '../../src/scripts/core/core_tealium_loading_rules';
-import {setSoiCookie} from '../../src/scripts/core/core_cookies';
-import {EVENT_NAME_OPT_IN, PRIVACY_FULL_TRACKING} from '../../src/scripts/core/core_constants';
-import {getOrigin} from '../../src/scripts/core/core_utils';
-import VENDOR_LIST from '../fixtures/vendorlist/simple_vendor_list'
-import * as CoreVendorInformation from '../../src/scripts/core/core_vendor_information';
+import { doSetTealiumVariables } from '../../src/scripts/core/core_tealium_loading_rules';
+import { setSoiCookie } from '../../src/scripts/core/core_cookies';
+import { EVENT_NAME_OPT_IN, PRIVACY_FULL_TRACKING } from '../../src/scripts/core/core_constants';
+import { getOrigin } from '../../src/scripts/core/core_utils';
+import { resetOil } from '../test-utils/utils_reset';
+import { setupVendorListSpies } from '../test-utils/utils_vendorlist';
 
 describe('the tealium loading rules', () => {
-  beforeEach(() => {
-    spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
-    spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
-    spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
-    deleteAllCookies();
-    window.utag = undefined;
-    window.utag_data = undefined;
-    window.oilEventListenerForLoadingRules = undefined;
-  });
 
-  afterEach(() => {
+  beforeEach(() => {
+    resetOil();
+    setupVendorListSpies();
   });
 
   it('should do nothing when utag is not defined', () => {

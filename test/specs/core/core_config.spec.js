@@ -12,19 +12,17 @@ import {
   getLocaleVariantName,
   getPoiGroupName,
   getPublicPath,
-  resetConfiguration,
   setLocale
 } from '../../../src/scripts/core/core_config';
 import { loadFixture } from '../../test-utils/utils_fixtures';
 import * as CoreLog from '../../../src/scripts/core/core_log';
+import { resetOil } from '../../test-utils/utils_reset';
 
 describe('core_config', () => {
 
   const DEFAULT_FALLBACK_BACKEND_URL = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/enEN_01';
 
-  beforeEach(() => {
-    resetConfiguration();
-  });
+  beforeEach(() => resetOil());
 
   describe('getConfigValue', () => {
 
@@ -82,36 +80,39 @@ describe('core_config', () => {
 
   describe('getLocaleVariantName', function() {
 
-    it('returns default enEN_01 when locale in config empty', function() {
+    it('returns default enEN_01 when locale in config empty', function () {
       let result = getLocaleVariantName();
       expect(result).toEqual('enEN_01');
     });
 
-    it('returns string if config.locale is string', function() {
+    it('returns string if config.locale is string', function () {
       loadFixture('config/given.config.with.locale.string.html');
       expect(getLocaleVariantName()).toEqual('foo');
     });
 
-    it('returns localeId if config.locale is object', function() {
-      AS_OIL.CONFIG = {};
-      AS_OIL.CONFIG.locale = {};
-      AS_OIL.CONFIG.locale.localeId = 'floo';
-
+    it('returns localeId if config.locale is object', function () {
+      AS_OIL = {
+        CONFIG: {
+          locale: {
+            localeId: 'floo'
+          }
+        }
+      };
       expect(getLocaleVariantName()).toEqual('floo');
     });
 
   });
 
-  describe('setLocale', function() {
+  describe('setLocale', function () {
 
-    it('should update locale property of config object', function() {
+    it('should update locale property of config object', function () {
       setLocale('bra');
       expect(getConfigValue('locale', undefined)).toEqual('bra');
     });
 
   });
 
-  describe('get config parameters', function() {
+  describe('get config parameters', function () {
 
     const DEFAULT_COOKIE_EXPIRES_IN = 31;
     const DEFAULT_ADVANCED_SETTINGS_PURPOSES_DEFAULT = false;
@@ -120,7 +121,7 @@ describe('core_config', () => {
     const DEFAULT_CUSTOM_PURPOSES = [];
     const DEFAULT_HUB_PATH = '/release/undefined/hub.html';
 
-    it('should call getConfigValue with their respective attribute', function() {
+    it('should call getConfigValue with their respective attribute', function () {
       loadFixture('config/full.config.html');
 
       expect(getHubPath()).toEqual(true);
@@ -134,7 +135,7 @@ describe('core_config', () => {
       expect(getPoiGroupName()).toEqual(true);
     });
 
-    it('should return correct default values', function(){
+    it('should return correct default values', function () {
       expect(getHubPath()).toEqual(DEFAULT_HUB_PATH);
       expect(getIabVendorWhitelist()).toBeFalsy();
       expect(getIabVendorBlacklist()).toBeFalsy();

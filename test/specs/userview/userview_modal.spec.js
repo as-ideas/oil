@@ -1,17 +1,10 @@
-import { forEach, hasRunningTimeout, oilWrapper, renderOil, stopTimeOut } from '../../../src/scripts/userview/userview_modal.js';
-import { loadFixture, readFixture } from '../../test-utils/utils_fixtures.js';
-import * as CoreConfig from '../../../src/scripts/core/core_config.js';
-import { deleteAllCookies, initCustomYasmineMatchers, removeOilLayerAndConfig } from '../../test-utils/utils_reset';
+import { forEach, hasRunningTimeout, oilWrapper, renderOil } from '../../../src/scripts/userview/userview_modal';
+import { loadFixture, readFixture } from '../../test-utils/utils_fixtures';
+import { resetOil } from '../../test-utils/utils_reset';
 
-describe('the userview modal aka the oil layer wrapper', () => {
+describe('the user view modal aka the oil layer wrapper', () => {
 
-  beforeEach(() => {
-    deleteAllCookies();
-    CoreConfig.resetConfiguration();
-    removeOilLayerAndConfig();
-    stopTimeOut();
-    initCustomYasmineMatchers();
-  });
+  beforeEach(() => resetOil());
 
   it('should have an functioning forEach replacement', () => {
     let array = [2, 1, 0];
@@ -34,21 +27,21 @@ describe('the userview modal aka the oil layer wrapper', () => {
     expect(oilWrapper().outerHTML).toBe('<div class="as-oil dark" data-qa="oil-Layer"></div>');
   });
 
-  it('should NOT renderOil with OPTIN YES', () => {
+  it('should NOT renderOil with OPT-IN YES', () => {
     renderOil({optIn: true});
 
     expect(document.querySelector('.as-oil')).toBeNull();
     expectTimeoutNotStarted();
   });
 
-  it('should NOT renderOil with OPTIN FALSE and OPT-IGNORE: TRUE', () => {
+  it('should NOT renderOil with OPT-IN FALSE and OPT-IGNORE: TRUE', () => {
     renderOil({optIn: true, optIgnore: true});
 
     expect(document.querySelector('.as-oil')).toBeNull();
     expectTimeoutNotStarted();
   });
 
-  it('should renderOil with NO OPTIN as DEFAULT TEMPLATE', () => {
+  it('should renderOil with NO OPT-IN as DEFAULT TEMPLATE', () => {
     loadFixture('config/given.config.example.labels.html');
     renderOil({optIn: false});
 

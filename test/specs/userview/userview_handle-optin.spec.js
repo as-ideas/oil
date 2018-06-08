@@ -1,22 +1,18 @@
-import { handleOptIn, } from '../../../src/scripts/userview/userview_modal.js';
-import { loadFixture } from '../../test-utils/utils_fixtures.js';
-import * as CoreConfig from '../../../src/scripts/core/core_config.js';
-import * as UserviewConfig from '../../../src/scripts/userview/userview_config.js';
-import * as UserViewPrivacy from '../../../src/scripts/userview/userview_privacy.js';
-import * as CoreUtils from '../../../src/scripts/core/core_utils.js';
-import * as UserviewOptIn from '../../../src/scripts/userview/userview_optin.js'
-import * as CorePoi from '../../../src/scripts/core/core_poi.js';
-import * as CoreCookies from '../../../src/scripts/core/core_cookies.js';
+import { handleOptIn, } from '../../../src/scripts/userview/userview_modal';
+import { loadFixture } from '../../test-utils/utils_fixtures';
+import * as UserviewConfig from '../../../src/scripts/userview/userview_config';
+import * as UserViewPrivacy from '../../../src/scripts/userview/userview_privacy';
+import * as CoreUtils from '../../../src/scripts/core/core_utils';
+import * as UserviewOptIn from '../../../src/scripts/userview/userview_optin'
+import * as CorePoi from '../../../src/scripts/core/core_poi';
+import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import { EVENT_NAME_POI_OPT_IN, EVENT_NAME_SOI_OPT_IN, PRIVACY_FULL_TRACKING, PRIVACY_MINIMUM_TRACKING } from '../../../src/scripts/core/core_constants';
-import { deleteAllCookies, removeOilLayerAndConfig } from '../../test-utils/utils_reset';
+import { resetOil } from '../../test-utils/utils_reset';
 
-describe('the userview modal handles optin clicks on', () => {
+describe('the user view modal handles opt-in clicks on', () => {
 
   beforeEach(() => {
-    deleteAllCookies();
-    CoreConfig.resetConfiguration();
-    removeOilLayerAndConfig();
-    CoreUtils.setGlobalOilObject('commandCollectionExecutor', undefined);
+    resetOil();
   });
 
   describe('SOI', () => {

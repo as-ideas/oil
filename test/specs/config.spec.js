@@ -1,19 +1,14 @@
-import { getCookieExpireInDays, getHubLocation, getHubOrigin, getHubPath, getLocaleVariantName, resetConfiguration } from '../../src/scripts/core/core_config.js';
-import { getSoiCookie } from '../../src/scripts/core/core_cookies.js';
-import { getLabel } from '../../src/scripts/userview/userview_config.js';
-import { OIL_LABELS } from '../../src/scripts/userview/userview_constants.js';
-import { loadFixture } from '../test-utils/utils_fixtures.js';
-import VENDOR_LIST from '../fixtures/vendorlist/simple_vendor_list'
-import * as CoreVendorInformation from '../../src/scripts/core/core_vendor_information';
-import { deleteAllCookies } from '../test-utils/utils_reset';
-
+import { getCookieExpireInDays, getHubLocation, getHubOrigin, getHubPath, getLocaleVariantName } from '../../src/scripts/core/core_config';
+import { getSoiCookie } from '../../src/scripts/core/core_cookies';
+import { getLabel } from '../../src/scripts/userview/userview_config';
+import { OIL_LABELS } from '../../src/scripts/userview/userview_constants';
+import { loadFixture } from '../test-utils/utils_fixtures';
+import { resetOil } from '../test-utils/utils_reset';
+import { setupVendorListSpies } from '../test-utils/utils_vendorlist';
 
 describe('configuration', () => {
 
-  beforeEach(() => {
-    resetConfiguration();
-    deleteAllCookies();
-  });
+  beforeEach(() => resetOil());
 
   it('should work with empty config', () => {
     loadFixture('config/empty.config.html');
@@ -49,9 +44,7 @@ describe('configuration', () => {
   });
 
   it('should set consent for all purposes when default_to_optin=true', function () {
-    spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
-    spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
-    spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
+    setupVendorListSpies();
 
     loadFixture('config/given.config.with.default.to.optin.html');
     expect(getSoiCookie().consentData.getPurposesAllowed().sort()).toEqual([1, 2, 3, 4, 5]);

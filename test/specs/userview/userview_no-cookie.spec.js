@@ -1,17 +1,10 @@
-import { hasRunningTimeout, renderOil, stopTimeOut, } from '../../../src/scripts/userview/userview_modal';
+import { hasRunningTimeout, renderOil, } from '../../../src/scripts/userview/userview_modal';
 import { loadFixture, readFixture } from '../../test-utils/utils_fixtures';
-import * as CoreConfig from '../../../src/scripts/core/core_config';
-import { deleteAllCookies, initCustomYasmineMatchers, removeOilLayerAndConfig } from '../../test-utils/utils_reset';
+import { resetOil } from '../../test-utils/utils_reset';
 
-describe('the userview modal aka the oil layer wrapper with NO COOKIE view', () => {
+describe('the user view modal aka the oil layer wrapper with NO COOKIE view', () => {
 
-  beforeEach(() => {
-    deleteAllCookies();
-    CoreConfig.resetConfiguration();
-    removeOilLayerAndConfig();
-    stopTimeOut();
-    initCustomYasmineMatchers();
-  });
+  beforeEach(() => resetOil());
 
   it('should renderOil with NO COOKIE as NO COOKIE template', () => {
     loadFixture('config/given.config.example.labels.html');

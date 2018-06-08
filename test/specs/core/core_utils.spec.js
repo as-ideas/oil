@@ -1,10 +1,12 @@
-import {getGlobalOilObject, getLocaleVariantVersion, setGlobalOilObject} from '../../../src/scripts/core/core_utils.js';
-import {setLocale} from '../../../src/scripts/core/core_config.js';
-import {decodeBitsToInt, encodeIabCookieValue, encodeIntToBitString, fetchJsonData} from '../../../src/scripts/core/core_utils';
+import { fetchJsonData, getGlobalOilObject, getLocaleVariantVersion, setGlobalOilObject } from '../../../src/scripts/core/core_utils';
+import { setLocale } from '../../../src/scripts/core/core_config';
+import { resetOil } from '../../test-utils/utils_reset';
 
 require('jasmine-ajax');
 
 describe('core_utils', () => {
+
+  beforeEach(() => resetOil());
 
   describe('getGlobalOilObject', function() {
 
@@ -21,9 +23,7 @@ describe('core_utils', () => {
     });
 
     it('should work with functions', () => {
-      let someFunction = (param) => {
-        return param + ' this works!'
-      };
+      let someFunction = (param) => param + ' this works!';
       setGlobalOilObject('verboseModeOn', someFunction);
       let result = getGlobalOilObject('verboseModeOn');
       expect(result('actually')).toBe('actually this works!');
@@ -54,6 +54,7 @@ describe('core_utils', () => {
   });
 
   describe('core_utils_fetchJsonData', () => {
+
     beforeEach(() => {
       jasmine.Ajax.install();
     });

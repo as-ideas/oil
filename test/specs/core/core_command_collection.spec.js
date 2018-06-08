@@ -3,41 +3,78 @@ import * as CoreLog from '../../../src/scripts/core/core_log';
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as CoreConsents from '../../../src/scripts/core/core_consents';
 import { waitsForAndRuns } from '../../test-utils/utils_wait';
+import { resetOil } from '../../test-utils/utils_reset';
 
 describe('command collection executor', () => {
 
-  it('should log error if command collection contains invalid command that is not a function', (done) => {
-    spyOn(CoreUtils, 'getCommandCollection').and.returnValue(['thisIsNotAFunction']);
-    spyOn(CoreLog, 'logError').and.callThrough();
+  beforeEach(() => resetOil());
 
-    executeCommandCollection();
-    waitsForAndRuns(
-      wasErrorLogged('Invalid CMP command'),
-      () => {
-        expect(CoreLog.logError).toHaveBeenCalled();
-        done();
-      },
-      5000
-    );
+  describe('error cases', () => {
+    it('should log error if command collection contains invalid command that is not a function', (done) => {
+      spyOn(CoreUtils, 'getCommandCollection').and.returnValue(['thisIsNotAFunction']);
+      spyOn(CoreLog, 'logError').and.callThrough();
+
+      executeCommandCollection();
+      waitsForAndRuns(
+        wasErrorLogged('Invalid CMP command'),
+        () => {
+          expect(CoreLog.logError).toHaveBeenCalled();
+          done();
+        },
+        5000
+      );
+    });
+
+    it('should log error if command collection contains invalid command that does not have callback and callId', (done) => {
+      spyOn(CoreUtils, 'getCommandCollection').and.returnValue([{
+        command: "getVendorConsents",
+        parameter: "aParameter"
+      }]);
+      spyOn(CoreLog, 'logError').and.callThrough();
+      spyOn(CoreConsents, 'getVendorConsentData').and.returnValue('aResult');
+
+      executeCommandCollection();
+      waitsForAndRuns(
+        wasErrorLogged('Invalid command entry'),
+        () => {
+          expect(CoreLog.logError).toHaveBeenCalled();
+          done();
+        },
+        5000
+      );
+    });
   });
 
-  it('should log error if command collection contains invalid command that does not have callback and callId', (done) => {
-    spyOn(CoreUtils, 'getCommandCollection').and.returnValue([{
-      command: "getVendorConsents",
-      parameter: "aParameter"
-    }]);
-    spyOn(CoreLog, 'logError').and.callThrough();
-    spyOn(CoreConsents, 'getVendorConsentData').and.returnValue('aResult');
+  describe('invocation with parameters', () => {
+    it('should process single command if command entry is given as parameter', (done) => {
+      const commandParameter = 'aParameter';
+      const commandToBeExecuted = 'getVendorConsents';
+      const expectedFunction = CoreConsents.getVendorConsentData;
+      const expectedResult = 'aResult';
 
-    executeCommandCollection();
-    waitsForAndRuns(
-      wasErrorLogged('Invalid command entry'),
-      () => {
-        expect(CoreLog.logError).toHaveBeenCalled();
+      let notInvokedCallback = () => {
+        fail();
+      };
+      spyOn(CoreUtils, 'getCommandCollection').and.returnValue(givenCommandEntryWithCallback(commandToBeExecuted, commandParameter, notInvokedCallback));
+
+      spyOn(CoreConsents, expectedFunction.name).and.returnValue(expectedResult);
+      let callbackToBeInvoked = (result, success) => {
+        expect(CoreConsents[expectedFunction.name]).toHaveBeenCalledWith(commandParameter);
+        expect(result).toEqual(expectedResult);
+        if (typeof expectedResult !== 'undefined') {
+          expect(success).toBeTruthy();
+        } else {
+          expect(success).toBeFalsy();
+        }
         done();
-      },
-      5000
-    );
+      };
+
+      executeCommandCollection({
+        command: commandToBeExecuted,
+        parameter: commandParameter,
+        callback: callbackToBeInvoked,
+      });
+    });
   });
 
   describe('getPublisherConsents', () => {
@@ -58,14 +95,9 @@ describe('command collection executor', () => {
 
   describe('getVendorConsents', () => {
 
-    it('should process command "getVendorConsents" from message event and send error status', (done) => {
-      verifyInvocationOfCommandWithCallId('getVendorConsents', CoreConsents.getVendorConsentData, undefined, done);
-    });
-
     it('should process command "getVendorConsents" with callback', (done) => {
       verifyInvocationOfCommandWithCallback('getVendorConsents', CoreConsents.getVendorConsentData, 'aResult', done);
     });
-
     it('should process command "getVendorConsents" with callback and return error status', (done) => {
       verifyInvocationOfCommandWithCallback('getVendorConsents', CoreConsents.getVendorConsentData, undefined, done);
     });
@@ -80,53 +112,23 @@ describe('command collection executor', () => {
 
   });
 
-  describe('getVendorConsents', function() {
+  describe('getConsentDataString', function () {
 
-    it('should process command "getVendorConsents" with callback and return error status', (done) => {
+    it('should process command "getConsentData" with callback', (done) => {
+      verifyInvocationOfCommandWithCallback('getConsentData', CoreConsents.getConsentDataString, 'aResult', done);
+    });
+
+    it('should process command "getConsentData" with callback and return error status', (done) => {
       verifyInvocationOfCommandWithCallback('getConsentData', CoreConsents.getConsentDataString, undefined, done);
     });
 
-    it('should process command "getVendorConsents" from message event', (done) => {
+    it('should process command "getConsentData" from message event', (done) => {
       verifyInvocationOfCommandWithCallId('getConsentData', CoreConsents.getConsentDataString, 'aResult', done);
     });
-
-    it('should process command "getVendorConsents" from message event and send error status', (done) => {
+    it('should process command "getConsentData" from message event and send error status', (done) => {
       verifyInvocationOfCommandWithCallId('getConsentData', CoreConsents.getConsentDataString, undefined, done);
     });
-  });
 
-  it('should process command "getConsentData" with callback', (done) => {
-    verifyInvocationOfCommandWithCallback('getConsentData', CoreConsents.getConsentDataString, 'aResult', done);
-  });
-
-  it('should process single command if command entry is given as parameter', (done) => {
-    const commandParameter = 'aParameter';
-    const commandToBeExecuted = 'getVendorConsents';
-    const expectedFunction = CoreConsents.getVendorConsentData;
-    const expectedResult = 'aResult';
-
-    let notInvokedCallback = () => {
-      fail();
-    };
-    spyOn(CoreUtils, 'getCommandCollection').and.returnValue(givenCommandEntryWithCallback(commandToBeExecuted, commandParameter, notInvokedCallback));
-
-    spyOn(CoreConsents, expectedFunction.name).and.returnValue(expectedResult);
-    let callbackToBeInvoked = (result, success) => {
-      expect(CoreConsents[expectedFunction.name]).toHaveBeenCalledWith(commandParameter);
-      expect(result).toEqual(expectedResult);
-      if (typeof expectedResult !== 'undefined') {
-        expect(success).toBeTruthy();
-      } else {
-        expect(success).toBeFalsy();
-      }
-      done();
-    };
-
-    executeCommandCollection({
-      command: commandToBeExecuted,
-      parameter: commandParameter,
-      callback: callbackToBeInvoked,
-    });
   });
 
   function verifyInvocationOfCommandWithCallback(command, expectedFunction, expectedResult, done) {

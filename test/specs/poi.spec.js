@@ -1,8 +1,7 @@
-import * as PoiAPICore from '../../src/scripts/core/core_poi.js';
-import * as PoiAPIUserview from '../../src/scripts/userview/userview_poi.js';
-import { loadFixture } from '../test-utils/utils_fixtures.js';
-import { resetConfiguration } from '../../src/scripts/core/core_config.js';
-import { deleteAllCookies } from '../test-utils/utils_reset';
+import * as PoiAPICore from '../../src/scripts/core/core_poi';
+import * as PoiAPIUserview from '../../src/scripts/userview/userview_poi';
+import { loadFixture } from '../test-utils/utils_fixtures';
+import { resetOil } from '../test-utils/utils_reset';
 
 describe('Power Opt-IN (POI)', () => {
 
@@ -11,14 +10,9 @@ describe('Power Opt-IN (POI)', () => {
   let originalTimeout;
 
   beforeEach((done) => {
-    resetConfiguration();
+    resetOil();
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
-    deleteAllCookies();
-    // remove every existing frame
-    if (document.getElementById('oil-frame')) {
-      document.getElementById('oil-frame').remove();
-    }
     done();
   });
 
