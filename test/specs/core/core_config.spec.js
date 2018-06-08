@@ -6,10 +6,12 @@ import {
   getDefaultToOptin,
   getHubPath,
   getIabVendorBlacklist,
-  getIabVendorWhitelist, getLocale,
+  getIabVendorWhitelist,
+  getLocale,
   getLocaleUrl,
   getLocaleVariantName,
-  getPoiGroupName, getPublicPath,
+  getPoiGroupName,
+  getPublicPath,
   resetConfiguration,
   setLocale
 } from '../../../src/scripts/core/core_config';
@@ -33,9 +35,9 @@ describe('core_config', () => {
 
   });
 
-  describe('setLocale', function() {
+  describe('setLocale', function () {
 
-    it('should store locale value', function() {
+    it('should store locale value', function () {
       setLocale('baz');
       const result = getLocale();
 
@@ -44,31 +46,31 @@ describe('core_config', () => {
 
   });
 
-  describe('parseServerUrls', function() {
+  describe('parseServerUrls', function () {
 
-    const DEFAULT_FALLBACK_BACKEND_URL_WITH_LOCALE_STRING  = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/foo';
+    const DEFAULT_FALLBACK_BACKEND_URL_WITH_LOCALE_STRING = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/foo';
     const EXPECTED_PUBLIC_PATH = '//www';
 
-    it('should set __webpack_public_path__', function() {
+    it('should set __webpack_public_path__', function () {
       loadFixture('config/given.config.with.publicPath.html');
 
       expect(getPublicPath()).toEqual(EXPECTED_PUBLIC_PATH);
       expect(__webpack_public_path__).toEqual(EXPECTED_PUBLIC_PATH);
     });
 
-    it('Backwards compatibility: creates locale_url property if locale is string and locale_url empty', function(){
+    it('Backwards compatibility: creates locale_url property if locale is string and locale_url empty', function () {
       loadFixture('config/given.config.with.locale.string.html');
       const result = getLocaleUrl();
       expect(result).toEqual(DEFAULT_FALLBACK_BACKEND_URL_WITH_LOCALE_STRING);
     });
 
-    it('Backwards compatibility: creates locale_url property if locale and locale_url empty', function(){
+    it('Backwards compatibility: creates locale_url property if locale and locale_url empty', function () {
       loadFixture('config/empty.config.html');
       const result = getLocaleUrl();
       expect(result).toEqual(DEFAULT_FALLBACK_BACKEND_URL);
     });
 
-    it('should warn about deprecated locale string', function() {
+    it('should warn about deprecated locale string', function () {
       loadFixture('config/given.config.with.locale.string.html');
 
       spyOn(CoreLog, 'logError');
@@ -112,11 +114,11 @@ describe('core_config', () => {
   describe('get config parameters', function() {
 
     const DEFAULT_COOKIE_EXPIRES_IN = 31;
-    const DEFAULT_ADVANCED_SETTINGS_PURPOSES_DEFAULT  = false;
-    const DEFAULT_DEFAULT_TO_OPTIN  = false;
-    const DEFAULT_POI_GROUP         = 'default';
-    const DEFAULT_CUSTOM_PURPOSES   = [];
-    const DEFAULT_HUB_PATH          = '/release/undefined/hub.html';
+    const DEFAULT_ADVANCED_SETTINGS_PURPOSES_DEFAULT = false;
+    const DEFAULT_DEFAULT_TO_OPTIN = false;
+    const DEFAULT_POI_GROUP = 'default';
+    const DEFAULT_CUSTOM_PURPOSES = [];
+    const DEFAULT_HUB_PATH = '/release/undefined/hub.html';
 
     it('should call getConfigValue with their respective attribute', function() {
       loadFixture('config/full.config.html');
