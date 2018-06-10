@@ -297,7 +297,7 @@ The `-e` parameter should contain the id of the test setting to launch with. In 
 #### Browserstack dev tests
 
 You can run the tests on your local http://localhost:8080/ in different browsers using BrowserStack.
-To do this, download (BrowserStackLocal)[https://www.browserstack.com/local-testing], install and run the application. Create a build with `npm run build` and start the server with `npm start`. Finally, get your browserstack credentials and run (for chrome57):
+To do this, download [BrowserStackLocal](https://www.browserstack.com/local-testing), install and run the application. Create a build with `npm run build` and start the server with `npm start`. Finally, get your browserstack credentials and run (for chrome57):
 
     $ ENV_USER=your-browserstack-user ENV_KEY=your-browserstack-key ./node_modules/.bin/nightwatch -c etc/nightwatch.localhost-remote.conf.js -e chrome57
 
