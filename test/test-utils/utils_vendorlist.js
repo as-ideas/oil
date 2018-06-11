@@ -6,4 +6,5 @@ export function setupVendorListSpies() {
   spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
   spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
   spyOn(CoreVendorInformation, 'getLimitedVendorIds').and.returnValue(VENDOR_LIST.vendors.map(({id}) => id));
+  spyOn(CoreVendorInformation, 'loadVendorList').and.returnValue(new Promise(resolve => resolve()));
 }
