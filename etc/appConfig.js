@@ -36,7 +36,7 @@ module.exports = {
   }, {
     filename: 'demos/advanced-settings-purposes-default.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings-purposes-default.html'),
-    chunks: ['oilstub' ,'oil', 'oildevkit'],
+    chunks: ['oilstub', 'oil', 'oildevkit'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/english-version.html',
@@ -156,6 +156,9 @@ module.exports = {
     'oilstub': path.resolve(sourcePath, 'oilstub.js')
   },
   copy: [{
+    from: path.resolve(sourcePath, 'public'),
+    to: ''
+  }, {
     from: path.resolve(sourcePath, 'assets'),
     to: 'assets'
   }, {
@@ -170,9 +173,6 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, '../release'),
     to: 'release'
-  }, {
-    from: path.resolve(sourcePath, 'index.html'),
-    to: 'index.html'
   }, {
     from: path.resolve(sourcePath, 'demos/empty.html'),
     to: 'demos/empty.html'

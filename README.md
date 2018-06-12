@@ -3,7 +3,7 @@
 
 # oil.js - Open Source Opt-In Layer
 
-Currently in *beta* until 18.06.2018. 
+oil.js is a lightweight consent manager and cookie banner. It is optimized for low latency and performance. It aims to be easy to customize, simple and user-friendly. It supports the IAB framework to forward the consent to ad providers.
 
 [![Latest Release](https://img.shields.io/github/release/as-ideas/oil.svg)](https://oil.axelspringer.com/release/) 
 [![Build Status](https://travis-ci.org/as-ideas/oil.svg?branch=master)](https://travis-ci.org/as-ideas/oil)
@@ -17,17 +17,19 @@ Currently in *beta* until 18.06.2018.
 
 ## About oil.js
 
-The OIL project aims for a stable cross-company solution for the challenges the GDPR and new EU ePrivacy Regulation will pose to our business.
+The OIL project aims for a stable cross-company solution for the challenges the GDPR and new EU ePrivacy Regulation will pose to websites and publishers.
 
-* Data privacy opt-in overlay for all users of services offered by various Axel Springer brands and/or units
-* Supports the [IAB specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) explains how a vendor should communicate with a CMP to gather consent information before running any data processing. That API is a set of JavaScript functions. You can find more at the official website http://advertisingconsent.eu/
-
-* Local opt-in (called "Site Opt-In", SOI) as well as group-based cross-company opt-in (called "Power Opt-In", POI)
-* Advanced Settings with Cookie Preference Center (CPC)
+* **Privacy by design & default**: Data privacy opt-in overlay for all users - it supports implicit and explicit modes of consent.
+* **Standardized**: Supports the [IAB specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) which defines how a vendor should communicate with a Consent Management Provider (CMP, like oil.js) to gather consent information before running any data processing. That API is a set of JavaScript functions. You can find more at the official website http://advertisingconsent.eu/
+* **Cross-Domain** It not only supports domain opt-in (called "Site Opt-In", SOI), but also group-based cross-domain opt-in (called "Power Opt-In", POI)
+* **Lightweight & fast**: oil.js is less than 20 kB of JavaScript (minified + gzipped) and uses asynchronous loading so that your users won't notice any difference when using it
+* **Mobile-friendly and compatible with all modern browsers** Works on 99,9% of all devices and browsers, even IE9 and Android 4
+* **Easy to customize**: You can change the stylesheet, configure everything or access the functionality directly via Javascript as well
+* **User-friendly**: Supports advanced settings with a detailed cookie preference center (CPC)
 
 The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://advertisingconsent.eu/iab-europe-transparency-consent-framework-list-of-registered-cmps/) after the IAB Europe "Transparency & Consent Framework". Registered with ID 80.
 
-![](/src/assets/images/landing_page/iab-logo.png)
+![iab logo](/src/assets/images/landing_page/iab-logo.png)
 
 ## Table of Contents
 
@@ -139,6 +141,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | Config Parameter | Description | Default Setting |
 |----------|---------------|-------|
 | locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. <<supported-languages,Supported language packs.>> | deDE_01
+| publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | `//oil.axelspringer.com/release/{version}/`
 | preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
 | poi_activate_poi | Activates or disactivates Power Opt-In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false
@@ -158,7 +161,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 
 ### Labels
 
-The labels are configured in you configuration. There are three options. The "localeId" and the "version" will be stored in the consent information for the user.
+The labels are configured in you configuration. There are two options. The "localeId" and the "version" will be stored in the consent information for the user.
 
 * Store your locale object as 'locale' in the oil.js configuration (lowest priority)
 
@@ -182,9 +185,11 @@ The labels are configured in you configuration. There are three options. The "lo
 <script>
 (function () {
     if (!window.AS_OIL) {
-      window.AS_OIL = {};
+      window.AS_OIL = {
+        CONFIG: {}
+      };
     }
-    window.AS_OIL.locale = {
+    window.AS_OIL.CONFIG.locale = {
       "localeId": "enEN_01",
       "version": 1,
       "texts": {
@@ -193,17 +198,6 @@ The labels are configured in you configuration. There are three options. The "lo
     };
   }()
 )
-</script>
-```
-
-* Override single labels directly as part of the oil.js configuration (highest priority)
-
-```javascript
-<script id="oil-configuration" type="application/configuration">
-{
-  "timeout": -1,
-  "label_intro_heading": "Insider, Inc."
-}
 </script>
 ```
 
@@ -303,7 +297,7 @@ The `-e` parameter should contain the id of the test setting to launch with. In 
 #### Browserstack dev tests
 
 You can run the tests on your local http://localhost:8080/ in different browsers using BrowserStack.
-To do this, download (BrowserStackLocal)[https://www.browserstack.com/local-testing], install and run the application. Create a build with `npm run build` and start the server with `npm start`. Finally, get your browserstack credentials and run (for chrome57):
+To do this, download [BrowserStackLocal](https://www.browserstack.com/local-testing), install and run the application. Create a build with `npm run build` and start the server with `npm start`. Finally, get your browserstack credentials and run (for chrome57):
 
     $ ENV_USER=your-browserstack-user ENV_KEY=your-browserstack-key ./node_modules/.bin/nightwatch -c etc/nightwatch.localhost-remote.conf.js -e chrome57
 
