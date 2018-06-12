@@ -32,7 +32,8 @@ function getConfiguration() {
       logInfo('Using default config');
     }
     setGlobalOilObject('CONFIG', readConfiguration(configurationElement));
-    parseServerUrl();
+
+    parseServerUrls();
   }
   return getGlobalOilObject('CONFIG');
 }
@@ -45,10 +46,16 @@ function getConfiguration() {
  * cf. https://webpack.js.org/guides/public-path/
  *
  */
-// FIXME needs testing
-function parseServerUrl() {
-  if (getGlobalOilObject('CONFIG').publicPath) {
-    __webpack_public_path__ = getGlobalOilObject('CONFIG').publicPath;
+function parseServerUrls() {
+  const localeValue = getLocale();
+
+  if((!localeValue || (typeof localeValue) === 'string') && getLocaleUrl() === undefined) {
+    logError('Incorrect or missing locale parameter found. Please review documentation on how to set the locale object in your configuration.');
+    setLocaleUrl('https://oil-backend.herokuapp.com/oil/api/userViewLocales/' + getLocaleVariantName());
+  }
+
+  if (getPublicPath()) {
+    __webpack_public_path__ = getPublicPath();
   }
 }
 
@@ -60,8 +67,12 @@ function parseServerUrl() {
  * @returns {*}
  */
 export function getConfigValue(name, defaultValue) {
-  let config = getConfiguration();
+  const config = getConfiguration();
   return (config && config[name]) ? config[name] : defaultValue;
+}
+
+function setConfigValue(name, value) {
+  getConfiguration()[name] = value;
 }
 
 // **
@@ -88,7 +99,6 @@ export function isSubscriberSetCookieActive() {
 }
 
 /**
- *
  * Get the hub iFrame domain with protocol prefix for the current location
  * @returns {string, null} domain iframe orgin
  */
@@ -104,8 +114,20 @@ export function getHubPath() {
   return getConfigValue(OIL_CONFIG.ATTR_HUB_PATH, `/release/${OilVersion.getLatestReleaseVersion()}/hub.html`);
 }
 
+/**
+ * The server path from which all chunks and ressources will be loaded.
+ * @returns {string, '//oil.axelspringer.com'}
+ */
+export function getPublicPath() {
+  return getConfigValue(OIL_CONFIG.ATTR_PUBLIC_PATH, undefined);
+}
+
 export function getLocaleUrl() {
   return getConfigValue(OIL_CONFIG.ATTR_LOCALE_URL, undefined);
+}
+
+function setLocaleUrl(value) {
+  setConfigValue(OIL_CONFIG.ATTR_LOCALE_URL, value);
 }
 
 export function getIabVendorListUrl() {
@@ -132,7 +154,6 @@ export function getLocaleVariantName() {
   let localeVariantName = getLocale();
   if (!localeVariantName) {
     localeVariantName = 'enEN_01';
-    logError(`The locale is not set, falling back to ${localeVariantName}.`);
   }
   if (localeVariantName && isObject(localeVariantName)) {
     return localeVariantName.localeId;
@@ -192,5 +213,5 @@ export function getLocale() {
 }
 
 export function setLocale(localeObject) {
-  getConfiguration()[OIL_CONFIG.ATTR_LOCALE] = localeObject;
+  setConfigValue(OIL_CONFIG.ATTR_LOCALE, localeObject);
 }

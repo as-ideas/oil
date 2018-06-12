@@ -4,7 +4,7 @@ import { logError, logInfo, logPreviewInfo } from './core_log';
 import { checkOptIn } from './core_optin';
 import { getSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePreviewCookie, removeVerboseCookie, setPreviewCookie, setVerboseCookie } from './core_cookies';
 import { doSetTealiumVariables } from './core_tealium_loading_rules';
-import { getLocale, getLocaleVariantName, isPreviewMode, resetConfiguration } from './core_config';
+import { getLocale, isPreviewMode, resetConfiguration } from './core_config';
 import { EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN } from './core_constants';
 import { executeCommandCollection } from './core_command_collection';
 
@@ -19,9 +19,7 @@ export function initOilLayer() {
     logPreviewInfo('Preview mode not correctly set, please see the documentation on how to set the cookie.');
   }
 
-  let locale = getLocaleVariantName();
-
-  attachUtilityFunctionsToWindowObject(locale);
+  attachUtilityFunctionsToWindowObject();
 
   doSetTealiumVariables();
 
@@ -40,14 +38,14 @@ export function initOilLayer() {
           userview_modal.locale(uv_m => uv_m.renderOil({noCookie: true}));
         })
         .catch((e) => {
-          logError(`${locale} could not be loaded.`, e);
+          logError('Locale could not be loaded.', e);
         });
       sendEventToHostSite(EVENT_NAME_NO_COOKIES_ALLOWED);
       return;
     }
 
     /**
-     * We read our cookie and get an optin value, true or false
+     * We read our cookie and get an opt-in value, true or false
      */
     checkOptIn().then((optin) => {
       if (optin) {
@@ -67,7 +65,7 @@ export function initOilLayer() {
             attachCommandCollectionFunctionToWindowObject();
           })
           .catch((e) => {
-            logError(`${locale} could not be loaded.`, e);
+            logError('Locale could not be loaded.', e);
           });
         sendEventToHostSite(EVENT_NAME_OIL_SHOWN);
       }
@@ -82,7 +80,7 @@ function attachCommandCollectionFunctionToWindowObject() {
 /**
  * Attach Utility Functions to window Object, so users of oil can use it.
  */
-function attachUtilityFunctionsToWindowObject(locale) {
+function attachUtilityFunctionsToWindowObject() {
 
   function loadLocale(callbackMethod) {
     import('../userview/locale/userview_oil.js')
@@ -94,7 +92,7 @@ function attachUtilityFunctionsToWindowObject(locale) {
         }
       })
       .catch((e) => {
-        logError(`${locale} could not be loaded.`, e);
+        logError('Locale could not be loaded.', e);
       });
   }
 
