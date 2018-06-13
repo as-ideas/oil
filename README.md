@@ -137,11 +137,12 @@ Your configuration is added to your page via a script tag, for example:
 ```
 
 For detailed explanations, please visit the [documentation](https://oil.axelspringer.com/docs/last-release).
+*=required
 
 | Config Parameter | Description | Default Setting |
 |----------|---------------|-------|
-| locale | The locale version that should be used. The locale defines the standard labels for all legal texts and buttons. <<supported-languages,Supported language packs.>> | deDE_01
-| publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | `//oil.axelspringer.com/release/{version}/`
+| locale* | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. See [here for a configuration example](#locale-object) and [here for all localizable labels](#available-text-labels) | None, required
+| publicPath* | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
 | preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
 | poi_activate_poi | Activates single consent cookie for multiple websites. [See requirements for POI here](#poi--power-opt-in) | false
@@ -159,9 +160,11 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
 
-### Labels
+### Locale object
 
-The labels are configured in you configuration. There are two options. The "localeId" and the "version" will be stored in the consent information for the user.
+The locale object must contain at least "localeId" and "version" along with the localized texts in the `texts` property.
+LocaleId and version will be stored with the consent cookie so we can keep track of which explicit text version consent was granted for.
+There are three options to pass a locale configuration into your application:
 
 * Store your locale object as 'locale' in the oil.js configuration (lowest priority)
 
@@ -179,15 +182,14 @@ The labels are configured in you configuration. There are two options. The "loca
 </script>
 ```
 
-* Write your locale object directly to AS_OIL.LOCALE (middle priority)
+* Write your locale object directly to AS_OIL.CONFIG.LOCALE (middle priority)
 
 ```javascript
 <script>
 (function () {
     if (!window.AS_OIL) {
-      window.AS_OIL = {
-        CONFIG: {}
-      };
+      window.AS_OIL = {};
+      window.AS_OIL.CONFIG = {}
     }
     window.AS_OIL.CONFIG.locale = {
       "localeId": "enEN_01",
@@ -201,7 +203,18 @@ The labels are configured in you configuration. There are two options. The "loca
 </script>
 ```
 
-These are the available labels:
+* Return a JSON object from your server through locale_url configuration parameter (highest priority)
+
+```javascript
+<script id="oil-configuration" type="application/configuration">
+{
+  "timeout": -1,
+  "locale_url": "//www.yoursite.com/locale.json"
+}
+</script>
+```
+
+### Available text labels
 
 ```json
 {
@@ -238,6 +251,7 @@ These are the available labels:
   "label_nocookie_text": "Please activate Cookies in the properties of your Browsers. So you can do it in <a href=\"https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en-GB\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Google Chrome</a> or <a href=\"https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Firefox</a>."
 }
 ```
+Labels starting with `label_cpc_purpose_N` are automatically derived from the vendor list if missing from your locale object.
 
 ## POI and SOI
 
