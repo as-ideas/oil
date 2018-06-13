@@ -239,6 +239,13 @@ These are the available labels:
 }
 ```
 
+## SOI and POI
+
+| Site Opt-In (SOI) | The __Site Opt-In__  stores a user's opt-in permit for the current site only. Also known as domain opt-in.
+| Power Opt-In (POI)  | The __Power Opt-In__ functionality stores the opt-in permit for multiple Axel Springer websites. This allows users to only give their opt-in permit for many websites at once. __POI__ is implemented via an iframe solution, see also __Hub__ . Also known as group opt-in.
+
+For more info on this subject see the documentation.
+
 ### Changelog
 
 see the [releases](https://github.com/as-ideas/oil/releases) section.
