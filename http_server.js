@@ -5,6 +5,7 @@ const serveStatic = require('serve-static');
 const compression = require('compression');
 const serveIndex = require('serve-index');
 const url = require('url');
+const morgan = require('morgan');
 
 // import CORS config
 const headerConfig = require('./etc/headerConfig');
@@ -73,7 +74,7 @@ app.use(serveStatic(DOCUMENT_ROOT, {maxAge: CACHE_DURATION, cacheControl: true})
 app.use('/devExamples', express.static('src/examples'));
 
 app.use('/devExamples', serveIndex('src/examples', {'icons': true}));
-
+app.use(morgan('combined'));
 console.log('server is now starting on port ', port);
 app.listen(port, '0.0.0.0');
 
