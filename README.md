@@ -182,7 +182,7 @@ There are three options to pass a locale configuration into your application:
 </script>
 ```
 
-* Write your locale object directly to AS_OIL.LOCALE (middle priority)
+* Write your locale object directly to AS_OIL.CONFIG.LOCALE (middle priority)
 
 ```javascript
 <script>
@@ -251,6 +251,8 @@ There are three options to pass a locale configuration into your application:
   "label_nocookie_text": "Please activate Cookies in the properties of your Browsers. So you can do it in <a href=\"https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en-GB\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Google Chrome</a> or <a href=\"https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Firefox</a>."
 }
 ```
+
+Labels starting with `label_cpc_purpose_N` are automatically derived from the vendor list if missing from your locale object.
 
 ## Development
 
