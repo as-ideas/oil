@@ -277,11 +277,9 @@ See the [releases](https://github.com/as-ideas/oil/releases) section.
 You are welcome to fork the oil.js project and submit pull requests to the master branch.
 To contribute, check out the project and set it up like:
 
-```bash
     git clone https://github.com/as-ideas/oil.git
     cd oil
     npm install
-```
 
 Detailed information for developers [is found here](https://github.com/as-ideas/oil/blob/master/CONTRIBUTING.md).
 
