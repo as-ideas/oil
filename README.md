@@ -21,7 +21,7 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 
 * **Privacy by design & default**: Data privacy opt-in overlay for all users - it supports implicit and explicit modes of consent.
 * **Standardized**: Supports the [IAB specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) which defines how a vendor should communicate with a Consent Management Provider (CMP, like oil.js) to gather consent information before running any data processing. That API is a set of JavaScript functions. You can find more at the official website http://advertisingconsent.eu/
-* **Cross-Domain** It not only supports domain opt-in (called "Site Opt-In", SOI), but also group-based cross-domain opt-in (called "Power Opt-In", POI)
+* **Cross-Domain** It not only supports domain opt-in (called "Site Opt-In", SOI), but also group-based cross-domain opt-in (called "Power Opt-In", POI) [More info here](#poi-and-soi)
 * **Lightweight & fast**: oil.js is less than 20 kB of JavaScript (minified + gzipped) and uses asynchronous loading so that your users won't notice any difference when using it
 * **Mobile-friendly and compatible with all modern browsers** Works on 99,9% of all devices and browsers, even IE9 and Android 4
 * **Easy to customize**: You can change the stylesheet, configure everything or access the functionality directly via Javascript as well
@@ -39,7 +39,8 @@ The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://
     * [Hosting](#hosting-it-is-recommended-to-host-all-files-on-your-own-webspace-or-cdn)
     * [Configuration values](#configuration-values)
     * [Labels](#labels)
-* [Development](#development)
+* [About POI and SOI](#poi-and-soi)
+* [Development and Contributing](#development-and-contributing)
 * [Changelog and releases](https://github.com/as-ideas/oil/releases)
   
 ## Technical Quality Goals
@@ -145,8 +146,8 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | publicPath* | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
 | preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
-| poi_activate_poi | Activates or deactivates Power-Opt-In. Remember that you also have to setup the hub.js part if you do so, or you will end up with a non-working button. | false
-| poi_hub_origin | The origin of the hub.js installation, if any. | None
+| poi_activate_poi | Activates single consent cookie for multiple websites. [See requirements for POI here](#poi--power-opt-in) | false
+| poi_hub_origin | The origin of the hub.js installation | None
 | poi_hub_path | The path to the hub.html installation on the origin, if any. | /hub.html
 | poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). The group name must be valid (existing). <<supported-poi-groups,Supported POI groups.>> | none
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
@@ -251,96 +252,54 @@ There are three options to pass a locale configuration into your application:
   "label_nocookie_text": "Please activate Cookies in the properties of your Browsers. So you can do it in <a href=\"https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en-GB\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Google Chrome</a> or <a href=\"https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Firefox</a>."
 }
 ```
-
 Labels starting with `label_cpc_purpose_N` are automatically derived from the vendor list if missing from your locale object.
 
-## Development
+## POI and SOI
 
-### Installation / Build
+### POI – Power Opt-In
 
-After 'install' there is a post install step which automatically runs build.
+In order to retrieve consent and *share it across multiple websites and domains* you will need to activate the __Power Opt-In__ aka POI. 
 
-```
-npm install
-```
+To instantiate oil.js with POI activated, make up a name for your company group (in the example below `MyGroupName` is used), then follow these steps:
 
-### Basic Usage
-
-* Start App locally: `npm start`
-* Creating Docs: `npm run build:docs`
-
-### Testing 
-#### Unit tests
-
-* Running unit-tests: `npm run test`
-
-There are two kinds of unit tests: For the oil.js itself (``npm run test:unit``) and for the node server delivering all files (``npm run test:node``)
-
-#### E2E tests (Selenium)
-
-* Before testing locally add the following dns entries into your /etc/hosts
-```
-127.0.0.1	oilsite1
-127.0.0.1	oilsite2
-127.0.0.1	oilcdn
+* Setup a server where the consent cookie is stored. For example `any.domain.com`.
+* Upload `hub.html` from the `./release` folder, resulting in `https://any.domain.com/hub.html`
+* Create a `MyGroupName.json` and upload it in a subfolder named `poi-lists` to your server, resulting in `https://any.domain.com/poi-lists/MyGroupName.json`. Note the file name must be the same as the value passed in poi_group_name. Examples for this file can be found in `release/1.1.2/poi-lists`
+* Add the required parameters to each website configuration that should share the consent cookie:
+```javascript
+  "poi_activate_poi": true,
+  "poi_hub_origin": "//any.domain.com",
+  "poi_hub_path": "/hub.html",
+  "poi_group_name": "MyGroupName"
 ```
 
-* Running end2end-tests locally: Start app in one terminal `npm start` and then in the next terminal `npm run e2e`
-* Running only one test:
+A single consent cookie will now be shared across sites that use the same `poi_hub_origin` and `poi_group_name` values. You can have multiple groups on the same domain.
 
-    $ ./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e chrome --test test/e2e/direct_integration_test.js
+You are legally obliged to list all websites/companies belonging to one group.
 
-### Browserstack integration
+### SOI - Single Opt-In
 
-#### Browserstack build tests
+If you want to implement oil.js on a single site you only need the __Site Opt-In__ aka SOI. It stores a user's opt-in permit for the current site only. Default. Also known as domain opt-in.
 
-You can run all E2E tests with different setups using Browserstack. Tests use our remote server at `https://oil-integration-host1.herokuapp.com` where the latest release is deployed to.
 
-To run tests in batch there are two commands, the first one covering a limited but most relevant selection of browsers.
+## Changelog
 
-    $ npm run browserstack
-    $ npm run browserstack:full
+See the [releases](https://github.com/as-ideas/oil/releases) section.
 
-*Both commands require you to have your Browserstack credentials ready.* You can find them [here](https://www.browserstack.com/accounts/settings).
 
-To test with only a specific browser, do this:
+## Development and Contributing
 
-    $ ENV_USER=your-browserstack-user ENV_KEY=your-browserstack-key ./node_modules/.bin/nightwatch -c etc/nightwatch.remote.conf.js -e ff52
+You are welcome to fork the oil.js project and submit pull requests to the master branch.
+To contribute, check out the project and set it up like:
 
-The `-e` parameter should contain the id of the test setting to launch with. In this case `ff52`. For all available test settings check the objects inside the file `etc/nightwatch.remote.config.js`
+    git clone https://github.com/as-ideas/oil.git
+    cd oil
+    npm install
 
-#### Browserstack dev tests
+Detailed information for developers [is found here](https://github.com/as-ideas/oil/blob/master/CONTRIBUTING.md).
 
-You can run the tests on your local http://localhost:8080/ in different browsers using BrowserStack.
-To do this, download [BrowserStackLocal](https://www.browserstack.com/local-testing), install and run the application. Create a build with `npm run build` and start the server with `npm start`. Finally, get your browserstack credentials and run (for chrome57):
+You may also wish to check the extended documentation in the `dist/docs/index.html` file after you've cloned the project.
 
-    $ ENV_USER=your-browserstack-user ENV_KEY=your-browserstack-key ./node_modules/.bin/nightwatch -c etc/nightwatch.localhost-remote.conf.js -e chrome57
-
-For possible test settings see above section.
-
-To run tests in batch trigger this command:
-
-    $ npm run browserstack:remote-localhost
-
-#### Advanced Usage
-
-``npm run build:release`` creates an app version that loads its parts from oil.axelspringer.com/release/*.min.js
-
-The releases are build with a bash script via ``./release.sh``.
-
-This should be used in production.
-
-#### debug logging
-
-NODE_DEBUG=oil-debug npm run ...
-
-### Creating and editing documentation
-
-We are using [AsciiDoc](http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/) to create and edit the documentation. You can find the sources und ``docs/`` and can create the HTML (``dist/docs``) with ``npm run build:docs``.
-
-### Changelog
-
-see the [releases](https://github.com/as-ideas/oil/releases) section.
 
 ## License
 
