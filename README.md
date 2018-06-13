@@ -241,29 +241,28 @@ These are the available labels:
 
 ## SOI and POI
 
-If you want to implement oil.js on a single site you only need the Site Opt-In aka SOI. If you want to retrieve consent from a user for multiple websites and domains you need Power Opt-In aka POI. 
 
-|-------------------| ------------------ |
-| Site Opt-In (SOI) | The __Site Opt-In__  stores a user's opt-in permit for the current site only. Also known as domain opt-in. |
-| Power Opt-In (POI)  | The __Power Opt-In__ functionality stores the opt-in permit for multiple Axel Springer websites. This allows users to give their opt-in permit for many websites at once. __POI__ is implemented via an iframe solution. Also known as group opt-in. |
+### SOI - Single Opt-In
+
+If you want to implement oil.js on a single site you only need the __Site Opt-In__ aka SOI. It stores a user's opt-in permit for the current site only. This is the default and apart from the common configuration no further action is required. Also known as domain opt-in.
 
 #### POI – Power Opt-In
 
-To properly implement a POI solution you need:
+In order to retrieve consent and *share it across multiple websites and domains* you will need to activate the __Power Opt-In__ aka POI. 
+
+To implement a functioning POI solution you need:
 
 * A server where the central cookie is stored. For example any.domain.com.
-* Upload hub.html from the release folder (in the released versions, the hub.js is inlined in the hub.html).
-
+* To that server, upload `hub.html` from the `./release` folder. Ex. https://any.domain.com/hub.html
 * Configure your setup to instantiate oil.js with POI activated:
+  * "poi_activate_poi": true
+  * "poi_hub_origin": "//any.domain.com"
+  * "poi_hub_path": "/hub.html",
+  * "poi_group_name": "MyGroupName"
+* You are legally obliged to list all websites/companies belonging to one group. Create a `MyGroupName.json` and upload it in a subfolder named `poi-lists` to your server.  Note the file name must be the same as the value passed in poi_group_name. Examples can be found in `release/1.1.2/`
 
- - "poi_activate_poi": true
- - "poi_hub_origin": "//any.domain.com"
- - "poi_hub_path": "/hub.html",
- - "poi_group_name": "MyGroupName"
+The consent cookie will be shared across sites that use the same `poi_hub_origin` and `poi_group_name` values. You can have multiple groups on the same domain if needed.
 
-* You are legally obliged to list all websites/companies belonging to one group. Create a `MyGroupName.json` and upload it in a subfolder named `poi-lists` to your server.  Note the file must have the exact same name as the value passed in poi_group_name.
-
-The consent cookie will be shared across sites that use the same `poi_hub_origin` and `poi_group_name`. You can have multiple groups on the same domain if you need.
 
 
 ### Changelog
