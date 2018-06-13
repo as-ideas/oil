@@ -1,7 +1,7 @@
 # Contributing to oil.js
 
-Feel free to fork this project and open pull requests to the master branch. We do not accept pull requests to the source files without accompanying tests.
-Bug reports are welcome through the issues tab.
+Feel free to fork this project and [open pull requests](#submitting-a-pull-request) to the master branch. We do not accept pull requests to the source files without accompanying tests.
+Bug reports are welcome through the issues tab of the project.
 
 ## Installation / Build
 
@@ -64,7 +64,7 @@ window.AS_OIL.getVendorList()
 
 ### Dev-Kit
 
-On some demo pages there's a little oil.js' oil rig icon in the corner. Clicking it gives you a menu where you can check the return values from the Oil instance as well as more options where you can opt-in, opt-out etc.
+On some demo pages there's a little oil rig icon in the top right corner. Clicking it opens a menu where you can check the return values from the Oil instance as well as more options where you can opt-in, opt-out etc.
 
 You can also run commands on the window.AS_OIL_DEV_KIT object, like:
 
@@ -180,3 +180,11 @@ To run tests in batch trigger this command:
 
 We are using [AsciiDoc](http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/) to create and edit the documentation. You can find the sources und ``docs/`` and can create the HTML (``dist/docs``) with ``npm run build:docs``.
 
+
+## Submitting a pull request
+
+Before submission, run the tests:
+
+    npm run test
+
+If they're all green, great! Go ahead and submit the PR. 
