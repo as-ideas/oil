@@ -36,8 +36,51 @@ For development you want to run a local webpack-dev-server at `http://localhost:
 
 This test server serves the html files from `src/demos` under the path `webpack-dev-server`. So if for instance you are going for a change in the small-design.html you want to open the URL `http://localhost:3000/webpack-dev-server/demos/small-design.html`
 
+See the [full list of available npm scripts here](#npm-scripts)
 
-See the [full list of npm scripts here](#all-available-npm-scripts)
+### window.AS_OIL
+
+A successfully integrated oil.js puts an object into your window named `AS_OIL` which provides a range of methods you can call to mimic user behaviour. It also stores the configuration and the locale object.
+
+```javascript
+// current configuration
+window.AS_OIL.CONFIG;
+// current locale configuration
+window.AS_OIL.CONFIG.locale;
+
+// functions
+window.AS_OIL.status() 
+window.AS_OIL.triggerOptIn() 
+window.AS_OIL.triggerSoiOptIn() 
+window.AS_OIL.triggerPoiOptIn() 
+window.AS_OIL.triggerOptOut()
+window.AS_OIL.getVendorConsents()
+window.AS_OIL.getPublisherConsents()
+window.AS_OIL.getConsentData()
+window.AS_OIL.getVendorList()
+
+```
+
+
+### Dev-Kit
+
+On some demo pages there's a little oil.js' oil rig icon in the corner. Clicking it gives you a menu where you can check the return values from the Oil instance as well as more options where you can opt-in, opt-out etc.
+
+You can also run commands on the window.AS_OIL_DEV_KIT object, like:
+
+```javascript
+window.AS_OIL_DEV_KIT.status() 
+window.AS_OIL_DEV_KIT.triggerOptIn() 
+window.AS_OIL_DEV_KIT.triggerSoiOptIn() 
+window.AS_OIL_DEV_KIT.triggerPoiOptIn() 
+window.AS_OIL_DEV_KIT.triggerOptOut()
+window.AS_OIL_DEV_KIT.getVendorConsents()
+window.AS_OIL_DEV_KIT.getPublisherConsents()
+window.AS_OIL_DEV_KIT.getConsentData()
+window.AS_OIL_DEV_KIT.getVendorList()
+
+```
+
 
 ## Tests
 
@@ -74,23 +117,26 @@ If you want to run only one test, in this example only tests from the file `test
 You can also run your local e2e tests with different browsers using [Browserstack](#browserstack-integration).
 
 
-### All scripts
+### NPM scripts
 
-| build | generate a complete build in `dist` folder
-| build:docs | compile documentation files into `dist/docs` folder
-| build:watch | start webpack-dev-server on `http://localhost:8080/` where files from the `dist` server are served and hotload on file change
-| watch | start webpack-dev-server on `http://localhost:3000/` and hotload on file change
-| eslint | Do the linting thang
-| browserstack | Run e2e tests with selected browser's against test installation at `https://oil-integration-host1.herokuapp.com`. For profiles used see file `etc/runBrowserstackSeq.sh`
-|  browserstack:full | Run e2e tests with selected browser's against test installation at `https://oil-integration-host1.herokuapp.com`. For profiles used see file `etc/runFullBrowserstackSeq.sh`
-| browserstack:remote-localhost | Run e2e tests with selected browser's against your localhost. [See details on this here](#browserstack-dev-tests)
-| e2e | Run E2E tests with Chrome Headless browser. Remember to run a webserver with `npm start` in another terminal window before starting this.
-| e2esafari | Run E2E tests with Safari. Remember to run a webserver with `npm start` in another terminal window before starting this.
-| test:unit | Run the unit tests
-| test:node | Run the server tests
-| test:selenium | Run the E2E tests against the integration CDN
-| test:watch | Run the tests and re-run on file update
+| Script | Description |
+| ------ | ----------- |
+| build | generate a complete build in `dist` folder |
+| build:docs | compile documentation files into `dist/docs` folder |
+| build:watch | start webpack-dev-server on `http://localhost:8080/` where files from the `dist` server are served and hotload on file change |
+| watch | start webpack-dev-server on `http://localhost:3000/` and hotload on file change |
+| eslint | Do the linting thing |
+| browserstack | Run e2e tests with selected browser's against test installation at `https://oil-integration-host1.herokuapp.com`. For profiles used see file `etc/runBrowserstackSeq.sh` |
+|  browserstack:full | Run e2e tests with selected browser's against test installation at `https://oil-integration-host1.herokuapp.com`. For profiles used see file `etc/runFullBrowserstackSeq.sh` |
+| browserstack:remote-localhost | Run e2e tests with selected browser's against your localhost. [See details on this here](#browserstack-dev-tests) |
+| e2e | Run E2E tests with Chrome Headless browser. Remember to run a webserver with `npm start` in another terminal window before starting this. |
+| e2esafari | Run E2E tests with Safari. Remember to run a webserver with `npm start` in another terminal window before starting this. |
+| test:unit | Run the unit tests |
+| test:node | Run the server tests |
+| test:selenium | Run the E2E tests against the integration CDN |
+| test:watch | Run the tests and re-run on file update |
 
+For an exhausting list just do `npm run`.
 
 ### Browserstack integration
 
@@ -123,8 +169,6 @@ For possible test settings see above section.
 To run tests in batch trigger this command:
 
     npm run browserstack:remote-localhost
-
-
 
 
 #### debug logging
