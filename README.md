@@ -144,8 +144,8 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | `//oil.axelspringer.com/release/{version}/`
 | preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
-| poi_activate_poi | Activates or disactivates Power Opt-In. Rememeber that you also have to setup the hub.js part if you do so, or you will endup with a non-working button. | false
-| poi_hub_origin | The origin of the hub.js installation, if any. | //oil.axelspringer.com
+| poi_activate_poi | Activates single consent cookie for multiple websites. [See requirements for POI here](#poi--power-opt-in) | false
+| poi_hub_origin | The origin of the hub.js installation | None
 | poi_hub_path | The path to the hub.html installation on the origin, if any. | /hub.html
 | poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). The group name must be valid (existing). <<supported-poi-groups,Supported POI groups.>> | none
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
