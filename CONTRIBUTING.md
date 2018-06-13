@@ -1,40 +1,43 @@
 # Contributing to oil.js
 
+Feel free to fork this project and open pull requests to the master branch. We do not accept pull requests to the source files without accompanying tests.
 Bug reports are welcome through the issues tab.
 
 ## Installation / Build
 
 ### Setting up development environment
 
-To contribute, fork the library and install dependencies. You need
+To begin with, fork the library and install dependencies. You need
 [git](http://git-scm.com/) and
 [node](http://nodejs.org/); you might use
 [nvm](https://github.com/creationix/nvm) or
 [nenv](https://github.com/ryuone/nenv) to install node.
 
+Run these commands in order to create a local copy of the project:
 
-```bash
     git clone https://github.com/as-ideas/oil.git
     cd oil
     npm install
-```
 
-After 'install' there is a post install step which automatically runs build.
-
+After `install` there is a post install step which automatically runs build.
 
 
 ## Basic Usage
 
-Start the app at http://localhost:8080/ with this command:
+Start the app with this command:
 
     npm start
 
-Start a local webpack-dev-server at http://localhost:3000/ with webpack auto-watching for changes to the source files:
+You will now be able to view a local test server at `http://localhost:8080/`. The html files from `src/demos` are now accessible through `http://localhost:8080/demos/direct-integration.html`.
+
+For development you want to run a local webpack-dev-server at `http://localhost:3000/` with webpack auto-watching for changes to the source files:
 
     npm run watch
 
-See the [full list of npm scripts here](#all-available-npm-scripts)
+This test server serves the html files from `src/demos` under the path `webpack-dev-server`. So if for instance you are going for a change in the small-design.html you want to open the URL `http://localhost:3000/webpack-dev-server/demos/small-design.html`
 
+
+See the [full list of npm scripts here](#all-available-npm-scripts)
 
 ## Tests
 

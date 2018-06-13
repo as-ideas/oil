@@ -39,7 +39,7 @@ The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://
     * [Hosting](#hosting-it-is-recommended-to-host-all-files-on-your-own-webspace-or-cdn)
     * [Configuration values](#configuration-values)
     * [Labels](#labels)
-* [Development](#development)
+* [Development](#development-and-contributing)
 * [Changelog and releases](https://github.com/as-ideas/oil/releases)
   
 ## Technical Quality Goals
@@ -244,7 +244,7 @@ These are the available labels:
 see the [releases](https://github.com/as-ideas/oil/releases) section.
 
 
-## Development & Contributing
+## Development and Contributing
 
 You are welcome to fork the oil.js project and submit pull requests to the master branch.
 To contribute, check out the project and set it up like:
