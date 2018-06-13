@@ -1,10 +1,9 @@
-import { logInfo } from '../core/core_log.js';
-import { POI_FALLBACK_GROUP_NAME, POI_FALLBACK_NAME, POI_PAYLOAD } from '../core/core_constants.js';
-import { getPoiCookie, setPoiCookie } from '../hub/hub_cookies.js';
-import { OilVersion, registerMessageListener, removeMessageListener } from '../core/core_utils.js';
-import { getStringParam } from './hub_utils.js';
-import { removeHubCookie } from '../core/core_cookies.js';
-import { logError } from '../core/core_log';
+import { logError, logInfo } from '../core/core_log';
+import { POI_FALLBACK_GROUP_NAME, POI_FALLBACK_NAME, POI_PAYLOAD } from '../core/core_constants';
+import { getPoiCookie, setPoiCookie } from '../hub/hub_cookies';
+import { OilVersion, registerMessageListener, removeMessageListener } from '../core/core_utils';
+import { getStringParam } from './hub_utils';
+import { removeHubCookie } from '../core/core_cookies';
 
 let initComplete = false;
 
@@ -94,7 +93,7 @@ function parseJson(data) {
   try {
     return (typeof data !== 'object' ? JSON.parse(data) : data);
   } catch (err) {
-    logInfo('OIL Hub - couldnt parse following data:', data);
+    logInfo('OIL Hub - couldn\'t parse following data:', data);
     return false;
   }
 }

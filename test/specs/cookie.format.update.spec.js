@@ -1,4 +1,4 @@
-import { deleteAllCookies } from '../utils.js';
+import { resetOil } from '../test-utils/utils_reset';
 import { getSoiCookie } from '../../src/scripts/core/core_cookies';
 
 describe('cookie Format needs to be backwards compatible', () => {
@@ -9,9 +9,7 @@ describe('cookie Format needs to be backwards compatible', () => {
   // {"opt_in":true,"version":"1.1.0-SNAPSHOT","localeVariantName":"enEN_01","localeVariantVersion":1,"customPurposes":[],"consentString":"BOO4NkCOO4NkCBQABBENAkuAAAAXyABgACAvgA"}
   const cookieFormat2 = "{%22opt_in%22:true%2C%22version%22:%221.1.0-SNAPSHOT%22%2C%22localeVariantName%22:%22enEN_01%22%2C%22localeVariantVersion%22:1%2C%22customPurposes%22:[]%2C%22consentString%22:%22BOO4NkCOO4NkCBQABBENAkuAAAAXyABgACAvgA%22};";
 
-  beforeEach(() => {
-    deleteAllCookies();
-  });
+  beforeEach(() => resetOil());
 
   it('should be able to translate any old SOI cookie to the new format', () => {
     setCookie('oil_data', cookieFormat1);

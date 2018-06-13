@@ -1,26 +1,29 @@
 import Cookie from 'js-cookie';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
-import {OilVersion} from '../../../src/scripts/core/core_utils';
-import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
+import { OilVersion } from '../../../src/scripts/core/core_utils';
 import {
+  getCustomPurposesWithConsent,
   getOilCookie,
-  getStandardPurposesWithConsent,
   getSoiCookie,
+  getStandardPurposesWithConsent,
   hasOutdatedOilCookie,
   isBrowserCookieEnabled,
   removeHubCookie,
   setSoiCookie,
-  setSoiCookieWithConsentData, getCustomPurposesWithConsent,
+  setSoiCookieWithConsentData,
 } from '../../../src/scripts/core/core_cookies';
-import {OIL_SPEC} from '../../../src/scripts/core/core_constants';
+import { OIL_SPEC } from '../../../src/scripts/core/core_constants';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
+import { resetOil } from '../../test-utils/utils_reset';
+import { setupVendorListSpies } from '../../test-utils/utils_vendorlist';
 
 const {ConsentString} = require('consent-string');
 
 describe('core cookies', () => {
 
   beforeEach(() => {
+    resetOil();
     spyOn(OilVersion, 'get').and.returnValue('1.0.0');
   });
 
@@ -123,9 +126,7 @@ describe('core cookies', () => {
       spyOn(CoreConfig, 'getLocaleVariantName').and.returnValue(LOCALE_VARIANT_EN_NAME);
       spyOn(CoreConfig, 'getCustomPurposes').and.returnValue(CUSTOM_PURPOSES);
       spyOn(CoreUtils, 'getLocaleVariantVersion').and.returnValue(LOCALE_VARIANT_EN_VERSION);
-      spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
-      spyOn(CoreVendorInformation, 'getLimitedVendorIds').and.returnValue(VENDOR_LIST.vendors.map(({id}) => id));
-      spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
+      setupVendorListSpies();
     });
 
     it('should set soi cookie for global opt-in if cookie does not exist yet', (done) => {
@@ -265,10 +266,7 @@ describe('core cookies', () => {
       spyOn(CoreConfig, 'getDefaultToOptin').and.returnValue(true);
       spyOn(CoreConfig, 'getCustomPurposes').and.returnValue(CUSTOM_PURPOSES);
       spyOn(CoreUtils, 'getLocaleVariantVersion').and.returnValue(LOCALE_VARIANT_EN_VERSION);
-      spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
-      spyOn(CoreVendorInformation, 'getLimitedVendorIds').and.returnValue(VENDOR_LIST.vendors.map(({id}) => id));
-      spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
-      spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
+      setupVendorListSpies();
     });
 
     it('should get soi cookie if it exists and is valid', () => {
@@ -451,7 +449,7 @@ describe('core cookies', () => {
   describe('getting standard purposes with consent', () => {
 
     beforeEach(() => {
-      spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
+      setupVendorListSpies();
     });
 
     it('should return all standard purposes if privacy settings are true', () => {

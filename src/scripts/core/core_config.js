@@ -49,7 +49,7 @@ function getConfiguration() {
 function parseServerUrls() {
   const localeValue = getLocale();
 
-  if((!localeValue || (typeof localeValue) === 'string') && getLocaleUrl() === undefined) {
+  if ((!localeValue || (typeof localeValue) === 'string') && getLocaleUrl() === undefined) {
     logError('Incorrect or missing locale parameter found. Please review documentation on how to set the locale object in your configuration.');
     setLocaleUrl('https://oil-backend.herokuapp.com/oil/api/userViewLocales/' + getLocaleVariantName());
   }

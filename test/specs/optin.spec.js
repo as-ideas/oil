@@ -1,18 +1,15 @@
 import Cookie from 'js-cookie';
-import {oilOptIn} from '../../src/scripts/userview/userview_optin.js';
-import {deleteAllCookies} from '../utils.js';
+import { oilOptIn } from '../../src/scripts/userview/userview_optin';
 import * as CoreConfig from '../../src/scripts/core/core_config';
 import * as CoreCookies from '../../src/scripts/core/core_cookies';
 import * as CorePoi from '../../src/scripts/core/core_poi';
-import {checkOptIn} from '../../src/scripts/core/core_optin';
-import * as CoreVendorInformation from '../../src/scripts/core/core_vendor_information';
-import VENDOR_LIST from '../fixtures/vendorlist/simple_vendor_list.json';
+import { checkOptIn } from '../../src/scripts/core/core_optin';
+import { resetOil } from '../test-utils/utils_reset';
+import { setupVendorListSpies } from '../test-utils/utils_vendorlist';
 
 describe('Opt-In', () => {
 
-  beforeEach(() => {
-    deleteAllCookies();
-  });
+  beforeEach(() => resetOil());
 
   describe('without changes', () => {
     it('it should define default cookie', () => {
@@ -32,10 +29,7 @@ describe('Opt-In', () => {
 
   describe('oilOptIn', () => {
     it('should persist opt-in', (done) => {
-      spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
-      spyOn(CoreVendorInformation, 'getLimitedVendorIds').and.returnValue(VENDOR_LIST.vendors.map(({id}) => id));
-      spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
-      spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
+      setupVendorListSpies();
       oilOptIn().then((optin) => {
         expect(optin).toBe(true);
         expect(CoreCookies.getSoiCookie().opt_in).toBe(true);

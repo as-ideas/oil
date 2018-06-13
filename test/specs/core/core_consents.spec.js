@@ -1,8 +1,9 @@
-import {getConsentDataString, getPublisherConsentData, getVendorConsentData} from '../../../src/scripts/core/core_consents';
+import { getConsentDataString, getPublisherConsentData, getVendorConsentData } from '../../../src/scripts/core/core_consents';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
-import {OIL_SPEC} from '../../../src/scripts/core/core_constants';
+import { OIL_SPEC } from '../../../src/scripts/core/core_constants';
+import { resetOil } from '../../test-utils/utils_reset';
 
 const {ConsentString} = require('consent-string');
 
@@ -110,6 +111,8 @@ describe('consents', () => {
     consentData: new ConsentString(CONSENT_STRING),
     consentString: CONSENT_STRING
   };
+
+  beforeEach(() => resetOil());
 
   describe('getting vendor consent data', () => {
     beforeEach(() => {

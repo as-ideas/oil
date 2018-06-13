@@ -4,8 +4,9 @@ import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreLog from '../../../src/scripts/core/core_log';
 import { OIL_LABELS } from '../../../src/scripts/userview/userview_constants';
 import DEFAULT_LOCALE from '../../../src/scripts/userview/locale/userview_default_locale';
+import { resetOil } from '../../test-utils/utils_reset';
 
-describe('the locale fetcher for userview modal', () => {
+describe('the locale fetcher for user view modal', () => {
 
   const COMPLETE_LOCALE = {
     'localeId': 'enEN_23',
@@ -64,6 +65,7 @@ describe('the locale fetcher for userview modal', () => {
   const LOCALE_URL = 'https://url.for.locales.retrieval';
 
   beforeEach(() => {
+    resetOil();
     spyOn(CoreConfig, 'setLocale');
   });
 
