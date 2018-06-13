@@ -250,19 +250,22 @@ If you want to implement oil.js on a single site you only need the __Site Opt-In
 
 In order to retrieve consent and *share it across multiple websites and domains* you will need to activate the __Power Opt-In__ aka POI. 
 
-To implement a functioning POI solution you need:
+To instantiate oil.js with POI activated, follow these steps:
 
-* A server where the central cookie is stored. For example any.domain.com.
-* To that server, upload `hub.html` from the `./release` folder. Ex. https://any.domain.com/hub.html
-* Configure your setup to instantiate oil.js with POI activated:
-  * "poi_activate_poi": true
-  * "poi_hub_origin": "//any.domain.com"
-  * "poi_hub_path": "/hub.html",
-  * "poi_group_name": "MyGroupName"
-* You are legally obliged to list all websites/companies belonging to one group. Create a `MyGroupName.json` and upload it in a subfolder named `poi-lists` to your server.  Note the file name must be the same as the value passed in poi_group_name. Examples can be found in `release/1.1.2/`
+* Setup a server where the consent cookie is stored. For example `any.domain.com`.
+* Upload `hub.html` from the `./release` folder, resulting in `https://any.domain.com/hub.html`
+* Add the required parameters to your configuration:
+```javascript
+  "poi_activate_poi": true,
+  "poi_hub_origin": "//any.domain.com",
+  "poi_hub_path": "/hub.html",
+  "poi_group_name": "MyGroupName"
+```
+* Create a `MyGroupName.json` and upload it in a subfolder named `poi-lists` to your server, resulting in `https://any.domain.com/poi-lists/MyGroupName.json`. Note the file name must be the same as the value passed in poi_group_name. Example files can be found in `release/1.1.2/poi-lists`
+
+You are legally obliged to list all websites/companies belonging to one group.
 
 The consent cookie will be shared across sites that use the same `poi_hub_origin` and `poi_group_name` values. You can have multiple groups on the same domain if needed.
-
 
 
 ### Changelog
