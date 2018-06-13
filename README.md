@@ -21,7 +21,7 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 
 * **Privacy by design & default**: Data privacy opt-in overlay for all users - it supports implicit and explicit modes of consent.
 * **Standardized**: Supports the [IAB specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) which defines how a vendor should communicate with a Consent Management Provider (CMP, like oil.js) to gather consent information before running any data processing. That API is a set of JavaScript functions. You can find more at the official website http://advertisingconsent.eu/
-* **Cross-Domain** It not only supports domain opt-in (called "Site Opt-In", SOI), but also group-based cross-domain opt-in (called "Power Opt-In", POI)
+* **Cross-Domain** It not only supports domain opt-in (called "Site Opt-In", SOI), but also group-based cross-domain opt-in (called "Power Opt-In", POI) [More info here](#poi-and-soi)
 * **Lightweight & fast**: oil.js is less than 20 kB of JavaScript (minified + gzipped) and uses asynchronous loading so that your users won't notice any difference when using it
 * **Mobile-friendly and compatible with all modern browsers** Works on 99,9% of all devices and browsers, even IE9 and Android 4
 * **Easy to customize**: You can change the stylesheet, configure everything or access the functionality directly via Javascript as well
@@ -39,7 +39,8 @@ The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://
     * [Hosting](#hosting-it-is-recommended-to-host-all-files-on-your-own-webspace-or-cdn)
     * [Configuration values](#configuration-values)
     * [Labels](#labels)
-* [Development](#development-and-contributing)
+* [About POI and SOI](#poi-and-soi)
+* [Development and Contributing](#development-and-contributing)
 * [Changelog and releases](https://github.com/as-ideas/oil/releases)
   
 ## Technical Quality Goals
