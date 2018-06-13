@@ -74,7 +74,7 @@ This is a full list of configurable options.
 | iabVendorListUrl | tbd | {embedded vendorlist}
 | oilBackendUrl | (deprecated) The backend from where OIL can load locale-versions | https://oil-backend.herokuapp.com/oil
 | iabVendorWhitelist | Array of vendor IDs to include in consent. If it is set, values in `iabVendorBlacklist` are ignored. <<blacklisting-and-whitelisting, Details here>> | none
-| iabVendorBlacklist | Array of vendor IDs to exclude from consent <<blacklisting-and-whitelisting, Details here>> | None
+| iabVendorBlacklist | Array of vendor IDs to exclude from consent. <<blacklisting-and-whitelisting, Details here>> | None
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | none
 | default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
