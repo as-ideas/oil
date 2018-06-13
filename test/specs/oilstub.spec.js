@@ -1,13 +1,9 @@
-import {waitsForAndRuns} from '../utils.js';
+import { waitsForAndRuns } from '../test-utils/utils_wait';
+import { resetOil } from '../test-utils/utils_reset';
 
 describe('oil stub', () => {
 
-  beforeEach(() => {
-    if (window.__cmp) {
-      window.__cmp.commandCollection.length = 0;
-    }
-    window['AS_OIL'] = undefined;
-  });
+  beforeEach(() => resetOil());
 
   it('should define __cmp() function', () => {
     expect(window.__cmp).toBeDefined();

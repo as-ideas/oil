@@ -1,18 +1,19 @@
-import {oilOptIn, oilPowerOptIn} from '../../../src/scripts/userview/userview_optin';
+import { oilOptIn, oilPowerOptIn } from '../../../src/scripts/userview/userview_optin';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as CorePoi from '../../../src/scripts/core/core_poi';
 import * as UserViewPoi from '../../../src/scripts/userview/userview_poi';
 import {
-  EVENT_NAME_OPT_IN, OIL_PAYLOAD_CUSTOM_PURPOSES,
+  EVENT_NAME_OPT_IN,
+  OIL_PAYLOAD_CUSTOM_PURPOSES,
   OIL_PAYLOAD_LOCALE_VARIANT_NAME,
   OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
   OIL_PAYLOAD_PRIVACY,
   OIL_PAYLOAD_VERSION
 } from '../../../src/scripts/core/core_constants';
-import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
-import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
+import { resetOil } from '../../test-utils/utils_reset';
+import { setupVendorListSpies } from '../../test-utils/utils_vendorlist';
 
 describe('user view opt-in handler', () => {
 
@@ -29,6 +30,8 @@ describe('user view opt-in handler', () => {
     'key': 'value'
   };
 
+  beforeEach(() => resetOil());
+
   describe('power opt-in handler', () => {
     let expectedLocaleVariantName = 'enEN_01';
     let expectedLocaleVariantVersion = 17;
@@ -41,10 +44,7 @@ describe('user view opt-in handler', () => {
       spyOn(CoreCookies, 'buildSoiCookie').and.returnValue(new Promise((resolve) => resolve(EXPECTED_COOKIE)));
       spyOn(CoreUtils, 'getLocaleVariantVersion').and.returnValue(expectedLocaleVariantVersion);
       spyOn(CoreUtils, 'sendEventToHostSite');
-      spyOn(CoreVendorInformation, 'getVendorList').and.returnValue(VENDOR_LIST);
-      spyOn(CoreVendorInformation, 'getLimitedVendorIds').and.returnValue(VENDOR_LIST.vendors.map(({id}) => id));
-      spyOn(CoreVendorInformation, 'getPurposes').and.returnValue(VENDOR_LIST.purposes);
-      spyOn(CoreVendorInformation, 'getVendors').and.returnValue(VENDOR_LIST.vendors);
+      setupVendorListSpies();
     });
 
     it('should set single opt-in too if it is not prohibited', (done) => {

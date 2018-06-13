@@ -1,21 +1,13 @@
-import * as PoiAPICore from '../../src/scripts/core/core_poi.js';
-import * as PoiAPIUserview from '../../src/scripts/userview/userview_poi.js';
-import {loadFixture, deleteAllCookies} from '../utils.js';
-import {resetConfiguration} from '../../src/scripts/core/core_config.js';
+import { resetOil } from '../test-utils/utils_reset';
 
 describe('poi group name', () => {
 
   let originalTimeout;
 
   beforeEach((done) => {
-    resetConfiguration();
+    resetOil();
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
-    deleteAllCookies();
-    // remove every existing frame
-    if (document.getElementById('oil-frame')) {
-      document.getElementById('oil-frame').remove();
-    }
     done();
   });
 
@@ -27,9 +19,5 @@ describe('poi group name', () => {
   // xit('should be loaded by default', () => {
   //   loadFixture('config/empty.config.html');
   // });
-
-
-
-
 
 });

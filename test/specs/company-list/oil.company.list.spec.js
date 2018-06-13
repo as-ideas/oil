@@ -1,14 +1,10 @@
-import { initCustomYasmineMatchers, loadFixture, readFixture, removeOilLayerAndConfig } from '../../utils';
-import {resetConfiguration} from '../../../src/scripts/core/core_config';
-import {oilGroupListTemplate} from '../../../src/scripts/poi-list/oil.list';
+import { loadFixture, readFixture } from '../../test-utils/utils_fixtures';
+import { oilGroupListTemplate } from '../../../src/scripts/poi-list/oil.list';
+import { resetOil } from '../../test-utils/utils_reset';
 
 describe('the company list', () => {
 
-  beforeEach(() => {
-    resetConfiguration();
-    removeOilLayerAndConfig();
-    initCustomYasmineMatchers();
-  });
+  beforeEach(() => resetOil());
 
   it('should be loaded with the given elements', () => {
     loadFixture('config/given.config.example.labels.html');

@@ -1,7 +1,6 @@
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import {
-  clearVendorListCache,
   DEFAULT_VENDOR_LIST,
   getLimitedVendorIds,
   getPurposeIds,
@@ -13,12 +12,11 @@ import {
   loadVendorList
 } from '../../../src/scripts/core/core_vendor_information';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
+import { resetOil } from '../../test-utils/utils_reset';
 
 describe('core_vendor_information', () => {
 
-  beforeEach(() => {
-    clearVendorListCache();
-  });
+  beforeEach(() => resetOil());
 
   describe('loading vendor list', () => {
 
