@@ -32,9 +32,7 @@ describe('the hub.js', () => {
         origin: 'origin',
         hostconfig: {'cookie_expires_in_days': 31}
       }, '*');
-      waitsForAndRuns(
-        () => cookieSetSpy.calls.count() > 0,
-        () => {
+      setTimeout(() => {
           let cookie = Cookie.getJSON(OIL_COOKIE.NAME);
           expect(cookie).toBeUndefined();
           done();
@@ -49,9 +47,7 @@ describe('the hub.js', () => {
         payload: {p: 1}
 
       }, '*');
-      waitsForAndRuns(
-        () => cookieSetSpy.calls.count() > 0,
-        () => {
+      setTimeout(() => {
           let cookie = Cookie.getJSON(OIL_COOKIE.NAME);
           expect(cookie).toBeUndefined();
           done();
@@ -104,56 +100,36 @@ describe('the hub.js', () => {
       setupVendorListSpies();
     });
 
-    it('should write a cookie with group name', function (done) {
+    it('should write a cookie with group name', function () {
       HubAPI.initOilHub('hub.html?fallback=1&group_name=bartsimpson' + DEFAULT_PAYLOAD);
 
-      waitsForAndRuns(
-        () => cookieSetSpy.calls.count() > 0,
-        () => {
-          let cookie = Cookie.getJSON('bartsimpson_' + OIL_COOKIE.NAME);
-          expect(cookie).toBeDefined();
-          expect(HubAPI.redirectBack).toHaveBeenCalled();
-          done();
-        }, 2000);
+      let cookie = Cookie.getJSON('bartsimpson_' + OIL_COOKIE.NAME);
+      expect(cookie).toBeDefined();
+      expect(HubAPI.redirectBack).toHaveBeenCalled();
     });
 
-    it('should write NO cookie without payload', function (done) {
+    it('should write NO cookie without payload', function () {
       HubAPI.initOilHub('hub.html?fallback=1');
 
-      waitsForAndRuns(
-        () => cookieSetSpy.calls.count() > 0,
-        () => {
-          let cookie = Cookie.getJSON(OIL_COOKIE.NAME);
-          expect(cookie).toBeUndefined();
-          expect(HubAPI.redirectBack).toHaveBeenCalled();
-          done();
-        }, 2000);
+      let cookie = Cookie.getJSON(OIL_COOKIE.NAME);
+      expect(cookie).toBeUndefined();
+      expect(HubAPI.redirectBack).toHaveBeenCalled();
     });
 
-    it('should write NO cookie with old payload/privacy format', function (done) {
+    it('should write NO cookie with old payload/privacy format', function () {
       HubAPI.initOilHub('hub.html?fallback=1' + OLD_DEFAULT_PAYLOAD);
 
-      waitsForAndRuns(
-        () => cookieSetSpy.calls.count() > 0,
-        () => {
-          let cookie = Cookie.getJSON(OIL_COOKIE.NAME);
-          expect(cookie).toBeUndefined();
-          expect(HubAPI.redirectBack).toHaveBeenCalled();
-          done();
-        }, 2000);
+      let cookie = Cookie.getJSON(OIL_COOKIE.NAME);
+      expect(cookie).toBeUndefined();
+      expect(HubAPI.redirectBack).toHaveBeenCalled();
     });
 
-    it('should write a cookie with default name', function (done) {
+    it('should write a cookie with default name', function () {
       HubAPI.initOilHub('hub.html?fallback=1' + DEFAULT_PAYLOAD);
 
-      waitsForAndRuns(
-        () => cookieSetSpy.calls.count() > 0,
-        () => {
-          let cookie = Cookie.getJSON(OIL_COOKIE.NAME);
-          expect(cookie).toBeDefined();
-          expect(HubAPI.redirectBack).toHaveBeenCalled();
-          done();
-        }, 2000);
+      let cookie = Cookie.getJSON(OIL_COOKIE.NAME);
+      expect(cookie).toBeDefined();
+      expect(HubAPI.redirectBack).toHaveBeenCalled();
     });
   });
 
