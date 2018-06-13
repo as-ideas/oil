@@ -21,9 +21,13 @@ HUB_HTML=$(cat release/$PACKAGE_VERSION/hub.html)
 HUB_JS=$(cat release/$PACKAGE_VERSION/hub.$PACKAGE_VERSION-RELEASE.min.js)
 echo "${HUB_HTML/<!--REPLACEME-->/$HUB_JS}" > release/$PACKAGE_VERSION/hub.html
 
+echo "\n### Copying and versioning poi-list"
+cp -r dist/poi-lists release/$PACKAGE_VERSION/
+
+
 echo "\n### Increasing patch version"
 git add *
 git commit -am "Adding new release $PACKAGE_VERSION$SNAPSHOT" --no-edit
 git tag -a $PACKAGE_VERSION
 git push origin $PACKAGE_VERSION
-npm version patch
+#npm version patch
