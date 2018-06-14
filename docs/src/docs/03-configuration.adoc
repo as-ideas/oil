@@ -1,4 +1,4 @@
-== Configuration
+== Configuring OIL
 
 OIL is configured using a simple JSON configuration block that you put in the upper part of your html. 
 
@@ -22,7 +22,7 @@ There are two ways to pass locale configuration to your OIL instance. One is the
 configuration parameter `locale` which is expected to be an object, the other is `locale_url` signaling OIL to load that same configuration object from the given URL.
 You can use whichever is better suited for you but make sure that one of the parameters is part of your configuration.
 
-See the <<functional-configuration-parameters,functional configuration parameters>> section for information on publicPath, locale_url, locale and all the other configuration parameters.
+*See the <<functional-configuration-parameters,functional configuration parameters>> section for information on publicPath, locale_url, locale and all the other configuration parameters.*
 
 
 === Power Opt-In (POI) or Site Opt-In (SOI)?
@@ -89,7 +89,7 @@ This is a full list of configurable options.
 | poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). | none
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31
-| [[auto-hiding-the-layer-timeout]]timeout | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
+| <<auto-hiding-the-layer-timeout,timeout>> | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | false
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | true
 | iabVendorListUrl | tbd | {embedded vendorlist}
