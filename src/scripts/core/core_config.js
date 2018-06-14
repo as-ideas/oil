@@ -119,7 +119,11 @@ export function getHubPath() {
  * @returns {string, '//oil.axelspringer.com'}
  */
 export function getPublicPath() {
-  return getConfigValue(OIL_CONFIG.ATTR_PUBLIC_PATH, undefined);
+  let publicPath = getConfigValue(OIL_CONFIG.ATTR_PUBLIC_PATH, undefined);
+  if(publicPath && publicPath.substr(-1) !== '/') {
+    publicPath += '/'
+  }
+  return publicPath;
 }
 
 export function getLocaleUrl() {
