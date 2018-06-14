@@ -8,13 +8,12 @@
 ----
 <script id="oil-configuration" type="application/configuration">
   {
-    "poi_activate_poi": true,
-    "poi_group_name": "axelSpringerSe_01",
-    "locale": "enEN_01"
+    "publicPath": "//my.server",
+    "locale_url": "//my.server/myLocale.json"
   }
 </script>
 ----
-* Add OIL and the CMP-stub to your website, with a tag manager like <<adding-oil-js-to-your-site-via-tealium-recommended,tealium>> or <<adding-oil-js-to-your-site-via-direct-integration,directly>> as a tag, for exampel:
+* Add OIL and the CMP-stub to your website, with a tag manager like <<adding-oil-js-to-your-site-via-tealium-recommended,tealium>> or <<adding-oil-js-to-your-site-via-direct-integration,directly>> as a tag, i.e.:
 
 [source, html, subs="attributes"]
 ----
@@ -27,7 +26,7 @@ include::../../../dist/oilstub.{version}.min.js[]
 
 
 * <<styling-guide,Style>> your layer according to your style guide
-* If needed: Create your own <<supported-languages,language pack>> and create your own <<supported-poi-groups,POI group>> (currently only possible by mail to the developers, a UI is currently worked on)
+* Create your own <<locale-object,language pack>>
 
 include::02-quickstart/dev-kit.adoc[]
 

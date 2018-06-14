@@ -12,7 +12,3 @@
 | Subscriber | A site that subscribes to a POI hub
 |===
 
-=== Supported POI Groups
-
-{SUPPORTED_POI_GROUPS}
-

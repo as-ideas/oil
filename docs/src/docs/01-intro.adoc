@@ -41,7 +41,7 @@ The Opt-In Layer (OIL) is an offical link:http://advertisingconsent.eu/iab-europ
 * Redirect-Fallback for some older browsers and even for disabled 3rd party cookies in Safari
 * High quality code with high test coverage and static code analysis
 * Loads with low latency and asynchronously for different parts
-* Happy path loads only 10.5k (subject to change and further optimization) of gzipped JavaScript
+* Happy path loads only ~20k (subject to change and further optimization) of gzipped JavaScript
 * Easy to implement with open documentation and examples, including dev kit
 * With SaaS: Domain White Listing against unauthorized usage
 
@@ -64,13 +64,12 @@ Tealium Consulting | Michael Sievers, CDP|
 
 === Solution Strategy
 
-According the proposal of the Commission, the European Parliament, and the Council of Ministers, websites will be required to prompt users with a menu of privacy options when they are visited for the first time.[1]
+According the proposal of the Commission, the European Parliament, and the Council of Ministers, a website is required to prompt users with a menu of privacy options when they are visiting for the first time.[1]
 
 The Opt-In Layer (OIL) is our solution for these requirements consisting of three parts:
 
 * A **subscriber** part, which adds the opt-in Layer to the host pages DOM and asks the user to opt-in.
-* A **hub** part, which acts as a registry site for POI on a domain hosted by Ideas Engineering. This is optional and only needed for POI functionality.
-* A **backend** part on a domain hosted by Ideas Engineering that provides all the texts and labels shown by the Opt-In Layer. Different languages and variants of these texts and labels are supported.
+* A **hub** part, which acts as a registry site for POI on a domain hosted by the content provider/publishder. This is optional and only needed for POI functionality.
 
 Opt-In Information is stored in a first party cookie in the user's browser and communicated in a general way to the host site and Tealium. For Power Opt-In there is also a 3rd party cookie stored on a second domain to share information between sites.
 

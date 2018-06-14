@@ -11,7 +11,6 @@ fs.copySync(base_dir.concat('/docs/last-release'), base_dir.concat('/dist/docs/l
 const BUNDLE_VERSION = process.env.npm_package_version + (process.env.SNAPSHOT || '-SNAPSHOT');
 const BUNDLE_VERSION_RAW = process.env.npm_package_version;
 const SUPPORTED_LANGUAGE = getSupportedLanguagesFromDir();
-const SUPPORTED_POI_GROUPS = getSupportedPoiGroupsFromDir();
 
 glob('docs/*.adoc', function (err, files) {
   files.forEach(function (file) {
@@ -24,8 +23,7 @@ glob('docs/*.adoc', function (err, files) {
       'attributes': {
         'version': BUNDLE_VERSION,
         'version_raw': BUNDLE_VERSION_RAW,
-        'SUPPORTED_LANGUAGE': SUPPORTED_LANGUAGE,
-        'SUPPORTED_POI_GROUPS': SUPPORTED_POI_GROUPS
+        'SUPPORTED_LANGUAGE': SUPPORTED_LANGUAGE
       }
     });
   });
