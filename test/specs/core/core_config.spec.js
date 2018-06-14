@@ -21,6 +21,8 @@ import { resetOil } from '../../test-utils/utils_reset';
 describe('core_config', () => {
 
   const DEFAULT_FALLBACK_BACKEND_URL = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/enEN_01';
+  const EXPECTED_PUBLIC_PATH = '//www/';
+  const EXPECTED_PUBLIC_PATH_WITH_SLASH = '//www/i-forgot-the-trailing-slash/'; 
 
   beforeEach(() => resetOil());
 
@@ -47,7 +49,6 @@ describe('core_config', () => {
   describe('parseServerUrls', function () {
 
     const DEFAULT_FALLBACK_BACKEND_URL_WITH_LOCALE_STRING = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/foo';
-    const EXPECTED_PUBLIC_PATH = '//www';
 
     it('should set __webpack_public_path__', function () {
       loadFixture('config/given.config.with.publicPath.html');
@@ -145,6 +146,24 @@ describe('core_config', () => {
       expect(getLocaleUrl()).toEqual(DEFAULT_FALLBACK_BACKEND_URL);
       expect(getCookieExpireInDays()).toEqual(DEFAULT_COOKIE_EXPIRES_IN);
       expect(getPoiGroupName()).toEqual(DEFAULT_POI_GROUP);
+    });
+
+  });
+
+  describe('getPublicPath', function() {
+
+    it('returns publicPath from configuration', function() {
+      loadFixture('config/given.config.with.publicPath.html');
+      expect(getPublicPath()).toEqual(EXPECTED_PUBLIC_PATH);
+    });
+
+    it('adds slash when missing to publicPath', function() {
+      loadFixture('config/given.config.with.publicPath.noslash.html');
+      expect(getPublicPath()).toEqual(EXPECTED_PUBLIC_PATH_WITH_SLASH);
+    });
+
+    it('returns undefined when no publicPath in config', function() {
+      expect(getPublicPath()).toBeFalsy();
     });
 
   });
