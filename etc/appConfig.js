@@ -165,9 +165,6 @@ module.exports = {
     from: path.resolve(docsPath, 'src/images'),
     to: 'docs/src/images'
   }, {
-    from: path.resolve(sourcePath, 'examples'),
-    to: 'examples'
-  }, {
     from: path.resolve(sourcePath, 'poi-lists'),
     to: 'poi-lists'
   }, {

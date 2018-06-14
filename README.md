@@ -143,8 +143,9 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 
 | Config Parameter | Description | Default Setting |
 |----------|---------------|-------|
-| locale* | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. See [here for a configuration example](#locale-object) and [here for all localizable labels](#available-text-labels) | None, required
-| publicPath* | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
+| publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
+| locale | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. See [here for a configuration example](#locale-object) and [here for all localizable labels](#available-text-labels) | None
+| locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See [here for an example file](https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json) | None
 | preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
 | poi_activate_poi | Activates single consent cookie for multiple websites. [See requirements for POI here](#poi--power-opt-in) | false
