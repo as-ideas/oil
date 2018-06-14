@@ -139,8 +139,6 @@ Your configuration is added to your page via a script tag, for example:
 
 For detailed explanations, please visit the [documentation](https://oil.axelspringer.com/docs/last-release).
 
-*=required
-
 | Config Parameter | Description | Default Setting |
 |----------|---------------|-------|
 | publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
