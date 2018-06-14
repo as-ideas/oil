@@ -138,12 +138,12 @@ Your configuration is added to your page via a script tag, for example:
 ```
 
 For detailed explanations, please visit the [documentation](https://oil.axelspringer.com/docs/last-release).
-*=required
 
 | Config Parameter | Description | Default Setting |
 |----------|---------------|-------|
-| locale* | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. See [here for a configuration example](#locale-object) and [here for all localizable labels](#available-text-labels) | None, required
-| publicPath* | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
+| publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
+| locale | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. See [here for a configuration example](#locale-object) and [here for all localizable labels](#available-text-labels) | None
+| locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See [here for an example file](https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json) | None
 | preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
 | poi_activate_poi | Activates single consent cookie for multiple websites. [See requirements for POI here](#poi--power-opt-in) | false
@@ -265,6 +265,7 @@ To instantiate oil.js with POI activated, make up a name for your company group 
 * Setup a server where the consent cookie is stored. For example `any.domain.com`.
 * Upload `hub.html` from the `./release` folder, resulting in `https://any.domain.com/hub.html`
 * Create a `MyGroupName.json` and upload it in a subfolder named `poi-lists` to your server, resulting in `https://any.domain.com/poi-lists/MyGroupName.json`. Note the file name must be the same as the value passed in poi_group_name. Examples for this file can be found in `release/1.1.2/poi-lists`
+* Make sure the `MyGroupName.json` is served with the right CORS-headers so that your websites are allowed to read it.
 * Add the required parameters to each website configuration that should share the consent cookie:
 ```javascript
   "poi_activate_poi": true,
