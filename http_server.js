@@ -66,14 +66,10 @@ app.use(compression());
 
 // Serve directory indexes folder (with icons)
 app.use('/release', serveIndex('release', {'icons': true}));
-app.use('/examples', serveIndex('dist/examples', {'icons': true}));
 app.use('/demos', serveIndex('dist/demos', {'icons': true}));
 
 // static with cache headers
 app.use(serveStatic(DOCUMENT_ROOT, {maxAge: CACHE_DURATION, cacheControl: true}));
-app.use('/devExamples', express.static('src/examples'));
-
-app.use('/devExamples', serveIndex('src/examples', {'icons': true}));
 app.use(morgan('combined'));
 console.log('server is now starting on port ', port);
 app.listen(port, '0.0.0.0');
