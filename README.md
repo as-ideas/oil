@@ -265,7 +265,7 @@ To instantiate oil.js with POI activated, make up a name for your company group 
 
 * Setup a server where the consent cookie is stored. For example `any.domain.com`.
 * Upload `hub.html` from the `./release` folder, resulting in `https://any.domain.com/hub.html`
-* Create a `MyGroupName.json` and upload it in a subfolder named `poi-lists` to your server, resulting in `https://any.domain.com/poi-lists/MyGroupName.json`. Note the file name must be the same as the value passed in poi_group_name. See the [POI-List section](#poi-list) for an example.
+* Create a `MyGroupName.json` and upload it in a subfolder named `poi-lists` to your server, resulting in `https://any.domain.com/poi-lists/MyGroupName.json`. Note the file name must be the same as the value passed in poi_group_name. See the [POI-List section](#the-poi-list) for an example.
 * Make sure the `MyGroupName.json` is served with the right CORS-headers so that your websites are allowed to read it.
 * Add the required parameters to each website configuration that should share the consent cookie:
 ```javascript
@@ -279,7 +279,7 @@ A single consent cookie will now be shared across sites that use the same `poi_h
 
 You are legally obliged to list all websites/companies belonging to one group.
 
-#### POI-List
+#### The POI-List
 
 A POI-List file must be a json containing an object with a single property `companyList`. CompanyList must be an array of company names. 
 
