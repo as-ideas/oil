@@ -155,6 +155,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | [[config-timeout]]timeout | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | False
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True
+| iabVendorListUrl | URL of the list of vendors to use | https://vendorlist.consensu.org/vendorlist.json
 | iabVendorWhitelist | Array of vendor IDs to allow. If it is set, values in `iabVendorBlacklist` are ignored. | None
 | iabVendorBlacklist | Array of vendor IDs to exclude. | None
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None

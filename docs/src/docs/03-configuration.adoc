@@ -92,7 +92,7 @@ This is a full list of configurable options.
 | <<auto-hiding-the-layer-timeout,timeout>> | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | false
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | true
-| iabVendorListUrl | tbd | {embedded vendorlist}
+| iabVendorListUrl | Vendorlist to use | https://vendorlist.consensu.org/vendorlist.json
 | iabVendorWhitelist | Array of vendor IDs to include in consent. If it is set, values in `iabVendorBlacklist` are ignored. <<blacklisting-and-whitelisting, Details here>> | none
 | iabVendorBlacklist | Array of vendor IDs to exclude from consent. <<blacklisting-and-whitelisting, Details here>> | None
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | none
