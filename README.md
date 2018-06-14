@@ -280,7 +280,7 @@ You are legally obliged to list all websites/companies belonging to one group.
 
 ### SOI - Single Opt-In
 
-If you want to implement oil.js on a single site you only need the __Site Opt-In__ aka SOI. It stores a user's opt-in permit for the current site only. Default. Also known as domain opt-in.
+If you want to implement oil.js on a single site you only need the __Site Opt-In__ aka SOI. It stores a user's opt-in permit for the current site only. Default setting. Also known as domain opt-in.
 
 
 ## Changelog
