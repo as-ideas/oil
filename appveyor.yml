@@ -31,4 +31,4 @@ build: off
 
 test_script:
   - npm install .
-  - NODE_ENV=test npm test
+  - npm test
