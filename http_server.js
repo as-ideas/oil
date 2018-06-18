@@ -57,6 +57,8 @@ let additionalHeaders = function (req, res, next) {
  */
 
 let app = express();
+// access log *this configuration must be defined before of the path configuration
+app.use(morgan('combined'));
 app.use(domainBlacklist);
 
 app.use(additionalHeaders);
@@ -70,7 +72,6 @@ app.use('/demos', serveIndex('dist/demos', {'icons': true}));
 
 // static with cache headers
 app.use(serveStatic(DOCUMENT_ROOT, {maxAge: CACHE_DURATION, cacheControl: true}));
-app.use(morgan('combined'));
 console.log('server is now starting on port ', port);
 app.listen(port, '0.0.0.0');
 
