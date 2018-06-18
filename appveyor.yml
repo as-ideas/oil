@@ -1,0 +1,34 @@
+# appveyor file
+# http://www.appveyor.com/docs/appveyor-yml
+environment:
+  matrix:
+    - NODE_VERSION: "6"
+      NPM_VERSION: "3"
+    - NODE_VERSION: "7"
+      NPM_VERSION: "3"
+    - NODE_VERSION: "7"
+      NPM_VERSION: "4"
+    - NODE_VERSION: "8"
+      NPM_VERSION: "4"
+    - NODE_VERSION: "8"
+      NPM_VERSION: "5"
+    - NODE_VERSION: "9"
+      NPM_VERSION: "5"
+    - NODE_VERSION: "10"
+      NPM_VERSION: "6"
+
+platform:
+  - x86
+  - x64
+
+install:
+  - ps: Install-Product node $env:NODE_VERSION
+  - node --version
+  - npm --version
+  - npm install -g npm@%NPM_VERSION%
+
+build: off
+
+test_script:
+  - npm install .
+  - npm test
