@@ -44,8 +44,10 @@ The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://
     * [Configuration values](#configuration-values)
     * [Labels](#labels)
 * [About POI and SOI](#poi-and-soi)
+* [Styling](#styling)
 * [Development and Contributing](#development-and-contributing)
 * [Changelog and releases](https://github.com/as-ideas/oil/releases)
+* [Roadmap](ROADMAP.md)
   
 ## Technical Quality Goals
 
@@ -304,6 +306,12 @@ A POI-List file must be a json containing an object with a single property `comp
 
 If you want to implement oil.js on a single site you only need the __Site Opt-In__ aka SOI. It stores a user's opt-in permit for the current site only. Default setting. Also known as domain opt-in.
 
+## Styling
+
+The is a detailed section about styling in the documentation. You can edit the design to your likings. Here are some examples:
+
+![mobile-demo](/src/assets/images/readme/example-1.png) ![mobile-demo](/src/assets/images/readme/example-2.png)
+![mobile-demo](/src/assets/images/readme/example-mobile-1.png) ![mobile-demo](/src/assets/images/readme/example-mobile-2.png)
 
 ## Changelog
 
