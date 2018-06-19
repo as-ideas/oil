@@ -15,7 +15,7 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const imageminMozjpeg = require('imagemin-mozjpeg');
 const imageminPngquant = require('imagemin-pngquant');
-
+const imageminSvgo = require('imagemin-svgo');
 /**
  * Webpack Constants
  */
@@ -112,7 +112,8 @@ const config = webpackMerge(commonConfig, {
         }),
         imageminPngquant({
           quality: 10
-        })
+        }),
+        imageminSvgo()
       ],
       gifsicle: {
         optimizationLevel: 3
