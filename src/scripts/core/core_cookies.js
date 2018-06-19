@@ -1,10 +1,10 @@
 import Cookie from 'js-cookie';
-import {logInfo} from './core_log';
-import {getCookieExpireInDays, getCustomPurposes, getDefaultToOptin, getLanguage, getLanguageFromLocale, getLocaleVariantName} from './core_config';
-import {getLocaleVariantVersion} from './core_utils.js';
-import {OIL_SPEC} from './core_constants';
-import {getLimitedVendorIds, getPurposes, getVendorList, loadVendorList} from './core_vendor_information';
-import {OilVersion} from './core_utils';
+import { logInfo } from './core_log';
+import { getCookieExpireInDays, getCustomPurposes, getDefaultToOptin, getLanguage, getLanguageFromLocale, getLocaleVariantName } from './core_config';
+import { getLocaleVariantVersion } from './core_utils.js';
+import { OIL_SPEC } from './core_constants';
+import { getLimitedVendorIds, getPurposes, getVendorList, loadVendorList } from './core_vendor_information';
+import { OilVersion } from './core_utils';
 
 const {ConsentString} = require('consent-string');
 
@@ -44,19 +44,28 @@ export function getSoiCookie() {
   return cookie;
 }
 
-export function setSoiCookieWithConsentData(consentData, customPurposes) {
+export function setSoiCookieWithPoiCookieData(poiCookieJson) {
   return new Promise((resolve, reject) => {
     loadVendorList().then(() => {
       let cookieConfig = getOilCookieConfig();
+      let consentString;
 
-      consentData.setGlobalVendorList(getVendorList());
+      if (poiCookieJson.consentString) {
+        consentString = poiCookieJson.consentString;
+      } else {
+        let consentData = cookieConfig.defaultCookieContent.consentData;
+        consentData.setPurposesAllowed(poiCookieJson.consentData.allowedPurposeIds);
+        consentData.setVendorsAllowed(poiCookieJson.consentData.allowedVendorIds);
+        consentData.setConsentLanguage(poiCookieJson.consentData.consentLanguage);
+        consentString = consentData.getConsentString();
+      }
       let cookie = {
         opt_in: true,
         version: cookieConfig.defaultCookieContent.version,
         localeVariantName: cookieConfig.defaultCookieContent.localeVariantName,
         localeVariantVersion: cookieConfig.defaultCookieContent.localeVariantVersion,
-        customPurposes: customPurposes,
-        consentString: consentData.getConsentString()
+        customPurposes: poiCookieJson.customPurposes,
+        consentString: consentString
       };
       setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires);
       resolve(cookie);
