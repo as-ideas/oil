@@ -196,7 +196,6 @@ function getOilDOMNodes() {
     oilWrapper: document.querySelectorAll('.as-oil'),
     btnOptIn: document.querySelectorAll('.as-js-optin'),
     btnPoiOptIn: document.querySelectorAll('.as-js-optin-poi'),
-    btnOptLater: document.querySelectorAll('.as-js-optlater'),
     companyList: document.querySelectorAll('.as-js-companyList'),
     thirdPartyList: document.querySelectorAll('.as-js-thirdPartyList'),
     btnAdvancedSettings: document.querySelectorAll('.as-js-advanced-settings'),
@@ -249,7 +248,7 @@ export function handleOptIn() {
 function animateOptInButton() {
   let optInButton = document.querySelector('.as-js-optin');
   if (optInButton) {
-    optInButton.className += ' as-js-clicked';
+    optInButton.className += ' as-oil__btn-optin-clicked';
     window.setTimeout(() => {
       optInButton.className = optInButton.className.replace(' as-js-clicked', '');
     }, 1200);

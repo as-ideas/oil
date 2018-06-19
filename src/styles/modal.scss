@@ -251,7 +251,7 @@
   @include btn-blue;
   transition: opacity 0.8s ease 0s;
 
-  &.as-js-clicked {
+  &.as-oil__btn-optin-clicked {
     opacity: 0.3;
   }
 }
@@ -264,9 +264,7 @@
   @include btn-grey;
 }
 
-// FIXME
-// BACK Button <-- DONT STYLE JS classes!!!
-.as-js-oilback {
+.as-oil-back-button {
   border: none;
   background-color: transparent;
   position: absolute;
@@ -280,7 +278,7 @@
     margin: 0;
     padding: 0;
 
-    .as-js-oilback__text {
+    .as-oil-back-button__text {
       visibility: hidden;
     }
   }
@@ -291,7 +289,7 @@
 
 }
 
-.as-js-oilback__text {
+.as-oil-back-button__text {
   margin-right: 6px;
 }
 
