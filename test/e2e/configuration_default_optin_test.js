@@ -12,8 +12,9 @@ module.exports = {
   'Script loads and displays OIL layer': function (browser) {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/configuration-default-optin.html')
-      .useCss().waitForElementVisible('body', 1000, false)
-      .useXpath().waitForElementVisible(OIL_LAYER, 2000, false)
+      .refresh()
+      .useCss().waitForElementVisible('body', 3100, false)
+      .useXpath().waitForElementVisible(OIL_LAYER, 3100, false)
       .end()
   },
 

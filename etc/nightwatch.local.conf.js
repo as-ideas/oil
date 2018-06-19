@@ -43,6 +43,24 @@ module.exports = {
         "browserName": "safari",
         "javascriptEnabled": true
       }
+    },
+    ie9: {
+      desiredCapabilities: {
+        'browser': 'IE',
+        'browser_version': '9.0',
+      }
+    },
+    ie10: {
+      desiredCapabilities: {
+        'browser': 'IE',
+        'browser_version': '10.0',
+      }
+    },
+    ie11: {
+      desiredCapabilities: {
+        'browser': 'IE',
+        'browser_version': '11.0',
+      }
     }
   }
 };
