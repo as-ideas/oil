@@ -15,11 +15,13 @@ oil.js is a lightweight consent manager and cookie banner. It is optimized for l
 
 [Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs/last-release) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html) | [Release Notes](https://github.com/as-ideas/oil/releases)
 
-##### [current roadmap](roadmap.md)
+##### [current roadmap](ROADMAP.md)
 
 ## About oil.js
 
 The OIL project aims for a stable cross-company solution for the challenges the GDPR and new EU ePrivacy Regulation will pose to websites and publishers.
+
+![mobile-demo](/src/assets/images/readme/mobile-demo.gif)
 
 * **Privacy by design & default**: Data privacy opt-in overlay for all users - it supports implicit and explicit modes of consent.
 * **Standardized**: Supports the [IAB specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) which defines how a vendor should communicate with a Consent Management Provider (CMP, like oil.js) to gather consent information before running any data processing. That API is a set of JavaScript functions. You can find more at the official website http://advertisingconsent.eu/
@@ -219,6 +221,8 @@ There are three options to pass a locale configuration into your application:
 ```
 
 ### Available text labels
+
+The full [documentation](https://oil.axelspringer.com/docs/last-release) contains detailed explanations.
 
 ```json
 {
