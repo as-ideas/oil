@@ -310,10 +310,6 @@ If you want to implement oil.js on a single site you only need the __Site Opt-In
 
 The is a detailed section about styling in the documentation. You can edit the design to your likings. Here are some examples:
 
-<p align="center">
-   <img width="460" height="300" src="http://www.fillmurray.com/460/300">
-</p>
-
 #### Desktop
 
 <p align="center">
