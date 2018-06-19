@@ -314,17 +314,19 @@ The is a detailed section about styling in the documentation. You can edit the d
    <img width="460" height="300" src="http://www.fillmurray.com/460/300">
 </p>
 
+#### Desktop
 
 <p align="center">
-   <img width="300" src="http://www.fillmurray.com/300/300">
-   <img width="300" src="http://www.fillmurray.com/300/300">
+  <img width="400" src="/src/assets/images/readme/example-1.png">
+  <img width="400" src="/src/assets/images/readme/example-2.png">
 </p>
 
-   <img width="300" src="/src/assets/images/readme/example-1.png">
+#### Mobile
 
-
-![mobile-demo](/src/assets/images/readme/example-1.png | width=400) ![mobile-demo](/src/assets/images/readme/example-2.png | width=400)
-![mobile-demo](/src/assets/images/readme/example-mobile-1.png | width=290) ![mobile-demo](/src/assets/images/readme/example-mobile-2.png | width=290)
+<p align="center">
+  <img width="290" src="/src/assets/images/readme/example-mobile-1.png">
+  <img width="290" src="/src/assets/images/readme/example-mobile-2.png">
+</p>
 
 ## Changelog
 
