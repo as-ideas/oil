@@ -311,9 +311,20 @@ If you want to implement oil.js on a single site you only need the __Site Opt-In
 The is a detailed section about styling in the documentation. You can edit the design to your likings. Here are some examples:
 
 <p align="center">
+   <img width="460" height="300" src="http://www.fillmurray.com/460/300">
+</p>
+
+
+<p align="center">
+   <img width="300" src="http://www.fillmurray.com/300/300">
+   <img width="300" src="http://www.fillmurray.com/300/300">
+</p>
+
+   <img width="300" src="/src/assets/images/readme/example-1.png">
+
+
 ![mobile-demo](/src/assets/images/readme/example-1.png | width=400) ![mobile-demo](/src/assets/images/readme/example-2.png | width=400)
 ![mobile-demo](/src/assets/images/readme/example-mobile-1.png | width=290) ![mobile-demo](/src/assets/images/readme/example-mobile-2.png | width=290)
-</p>
 
 ## Changelog
 
