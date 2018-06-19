@@ -26,7 +26,7 @@ include::../../../dist/oilstub.{version}.min.js[]
 
 
 * <<styling-guide,Style>> your layer according to your style guide
-* Create your own <<locale-object,language pack>>
+* Create your own <<texts-locale-object,language pack>>
 
 include::02-quickstart/dev-kit.adoc[]
 
