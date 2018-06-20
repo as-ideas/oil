@@ -42,7 +42,6 @@ export function generatePolyfills(){
       }
     });
   }
-  console.log(Array.prototype.fill);
 }
 
 export default generatePolyfills();
