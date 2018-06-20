@@ -150,7 +150,8 @@ if (window.AS_OIL.eventCollection && window.AS_OIL.eventCollection.length) {
         // console.log(item.name);
         // console.log(item.timestamp);
         // use your tracking code to process every event that has been fired so far
-        trackMyEvent(item);
+        // example: Adobe tag manager
+        _satellite.track(item.name)
     });
 }
 
