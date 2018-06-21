@@ -6,6 +6,7 @@ import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as UserviewOptIn from '../../../src/scripts/userview/userview_optin'
 import * as CorePoi from '../../../src/scripts/core/core_poi';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
+import * as CoreTagManagement from '../../../src/scripts/core/core_tag_management';
 import { EVENT_NAME_POI_OPT_IN, EVENT_NAME_SOI_OPT_IN, PRIVACY_FULL_TRACKING, PRIVACY_MINIMUM_TRACKING } from '../../../src/scripts/core/core_constants';
 import { resetOil } from '../../test-utils/utils_reset';
 
@@ -66,6 +67,12 @@ describe('the user view modal handles opt-in clicks on', () => {
       });
       handleOptIn();
     });
+
+    it('should activate dom elements with consent', () => {
+      spyOn(CoreTagManagement, 'activateDomElementsWithConsent').and.callThrough();
+      handleOptIn();
+      expect(CoreTagManagement.activateDomElementsWithConsent).toHaveBeenCalled();
+    });
   });
 
   describe('POI', () => {
@@ -123,6 +130,12 @@ describe('the user view modal handles opt-in clicks on', () => {
       handleOptIn();
     });
 
+    it('should activate dom elements with consent', () => {
+      loadFixture('poi/poi.default.html');
+      spyOn(CoreTagManagement, 'activateDomElementsWithConsent').and.callThrough();
+      handleOptIn();
+      expect(CoreTagManagement.activateDomElementsWithConsent).toHaveBeenCalled();
+    });
   });
 
   function mockPowerOptInAndSingleOptIn() {
