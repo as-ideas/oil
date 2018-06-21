@@ -171,7 +171,6 @@ export function getLanguage() {
 
 export function getLanguageFromLocale(localeVariantName) {
   if(!localeVariantName) {
-    logError('localeId missing in locale');
     localeVariantName = 'en';
   }
   return localeVariantName.substring(0, 2);

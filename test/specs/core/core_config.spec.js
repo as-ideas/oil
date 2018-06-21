@@ -111,21 +111,10 @@ describe('core_config', () => {
       expect(getLanguageFromLocale('foo_bar')).toEqual('fo');
     });
 
-    it('errors when localeId is missing and returns en', function(){
-      AS_OIL = {
-        CONFIG: {
-          locale: {
-            localeId: null
-          }
-        }
-      }
-
-      spyOn(CoreLog, 'logError');
-      
+    it('returns en parameter empty', function(){
       expect(getLanguageFromLocale()).toEqual('en');
-
-      expect(CoreLog.logError).toHaveBeenCalled();
     })
+
   });
 
   describe('setLocale', function () {
