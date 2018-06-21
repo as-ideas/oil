@@ -11,7 +11,7 @@ import {
   isBrowserCookieEnabled,
   removeHubCookie,
   setSoiCookie,
-  setSoiCookieWithConsentData,
+  setSoiCookieWithPoiCookieData,
 } from '../../../src/scripts/core/core_cookies';
 import { OIL_SPEC } from '../../../src/scripts/core/core_constants';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
@@ -46,6 +46,7 @@ describe('core cookies', () => {
       description: 'description26'
     }
   ];
+  const CONSENT_STRING = 'BOOkmUuOOkmUuBQABBENAR-AAAABgACACA';
 
   describe('get oil cookie', () => {
 
@@ -212,11 +213,29 @@ describe('core cookies', () => {
         done();
       });
     });
+  });
 
-    it('should set soi cookie with consent data if cookie does not exist yet', (done) => {
+  describe('soi cookie setting with poi cookie data', () => {
+
+    let cookieSetSpy;
+
+    beforeEach(() => {
+      cookieSetSpy = spyOn(Cookie, 'set');
+      spyOn(CoreConfig, 'getLocaleVariantName').and.returnValue(LOCALE_VARIANT_EN_NAME);
+      spyOn(CoreConfig, 'getCustomPurposes').and.returnValue(CUSTOM_PURPOSES);
+      spyOn(CoreUtils, 'getLocaleVariantVersion').and.returnValue(LOCALE_VARIANT_EN_VERSION);
+      setupVendorListSpies();
+    });
+
+    it('should set soi cookie with data from poi cookie with consent string if cookie does not exist yet', (done) => {
       spyOn(Cookie, 'get').withArgs('oil_data').and.returnValue(undefined).withArgs('oil_verbose').and.callThrough();
 
-      setSoiCookieWithConsentData(new ConsentString('BOOkmUuOOkmUuBQABBENAR-AAAABgACACA'), [25]).then(() => {
+      setSoiCookieWithPoiCookieData({
+        // we omit the 'consentData' field here - this is not a real case but now we can be sure that consent string is used.
+        power_opt_in: true,
+        consentString: CONSENT_STRING,
+        customPurposes: [25]
+      }).then(() => {
         expect(cookieSetSpy).toHaveBeenCalled();
         verifyThatCookieWasSetCorrectly({
           localeVariantName: LOCALE_VARIANT_EN_NAME,
@@ -231,7 +250,29 @@ describe('core cookies', () => {
       });
     });
 
-    it('should overwrite soi cookie with consent data if cookie already exists', (done) => {
+    it('should set soi cookie with data from poi cookie without consent string if cookie does not exist yet', (done) => {
+      spyOn(Cookie, 'get').withArgs('oil_data').and.returnValue(undefined).withArgs('oil_verbose').and.callThrough();
+
+      setSoiCookieWithPoiCookieData({
+        power_opt_in: true,
+        consentData: new ConsentString(CONSENT_STRING),
+        customPurposes: [25]
+      }).then(() => {
+        expect(cookieSetSpy).toHaveBeenCalled();
+        verifyThatCookieWasSetCorrectly({
+          localeVariantName: LOCALE_VARIANT_EN_NAME,
+          localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
+          language: LANGUAGE_EN,
+          allowedPurposeIds: [1, 2, 3, 4, 5],
+          allowedVendorIds: [12, 24],
+          customPurposes: [25],
+          cmpVersion: OIL_SPEC.CMP_VERSION,
+        });
+        done();
+      });
+    });
+
+    it('should overwrite soi cookie with data from poi cookie with consent string if cookie already exists', (done) => {
       givenThatOilCookieIsSet({
         language: LANGUAGE_DE,
         localeVariantName: LOCALE_VARIANT_DE_NAME,
@@ -242,7 +283,42 @@ describe('core cookies', () => {
         cmpVersion: OTHER_CMP_VERSION
       });
 
-      setSoiCookieWithConsentData(new ConsentString('BOOkmUuOOkmUuBQABBENAR-AAAABgACACA'), [25]).then(() => {
+      setSoiCookieWithPoiCookieData({
+        // we omit the 'consentData' field here - this is not a real case but now we can be sure that consent string is used.
+        power_opt_in: true,
+        consentString: CONSENT_STRING,
+        customPurposes: [25]
+      }).then(() => {
+        expect(cookieSetSpy).toHaveBeenCalled();
+        verifyThatCookieWasSetCorrectly({
+          localeVariantName: LOCALE_VARIANT_EN_NAME,
+          localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
+          language: LANGUAGE_EN,
+          allowedPurposeIds: [1, 2, 3, 4, 5],
+          allowedVendorIds: [12, 24],
+          customPurposes: [25],
+          cmpVersion: OIL_SPEC.CMP_VERSION,
+        });
+        done();
+      });
+    });
+
+    it('should overwrite soi cookie with data from poi cookie without consent string if cookie already exists', (done) => {
+      givenThatOilCookieIsSet({
+        language: LANGUAGE_DE,
+        localeVariantName: LOCALE_VARIANT_DE_NAME,
+        localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
+        allowedPurposeIds: [],
+        allowedVendorIds: [12],
+        customPurposes: [],
+        cmpVersion: OTHER_CMP_VERSION
+      });
+
+      setSoiCookieWithPoiCookieData({
+        power_opt_in: true,
+        consentData: new ConsentString(CONSENT_STRING),
+        customPurposes: [25]
+      }).then(() => {
         expect(cookieSetSpy).toHaveBeenCalled();
         verifyThatCookieWasSetCorrectly({
           localeVariantName: LOCALE_VARIANT_EN_NAME,
