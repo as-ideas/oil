@@ -4,7 +4,7 @@
 source etc/browserstackTest.sh
 
 run_test() {
-  echo "- Testing $1 -"
+  echo "----- Testing local server through Browserstack with browser $1 -"
   ENV_USER=$browserstack_user ENV_KEY=$browserstack_key ./node_modules/.bin/nightwatch -c etc/nightwatch.localhost-remote.conf.js -e $1
 }
 
