@@ -126,6 +126,7 @@
     "pretty": "2.0.0",
     "puppeteer": "1.4.0",
     "raw-loader": "0.5.1",
+    "regenerator-runtime": "^0.11.1",
     "remap-istanbul": "0.11.0",
     "rimraf": "2.6.2",
     "sass-loader": "7.0.1",
