@@ -169,10 +169,7 @@ export function getLanguage() {
   return getLanguageFromLocale(getLocaleVariantName());
 }
 
-export function getLanguageFromLocale(localeVariantName) {
-  if(!localeVariantName) {
-    localeVariantName = 'en';
-  }
+export function getLanguageFromLocale(localeVariantName = 'en') {
   return localeVariantName.substring(0, 2);
 }
 

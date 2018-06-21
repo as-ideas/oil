@@ -111,7 +111,7 @@ describe('core_config', () => {
       expect(getLanguageFromLocale('foo_bar')).toEqual('fo');
     });
 
-    it('returns en parameter empty', function(){
+    it('returns "en" when parameter is null', function(){
       expect(getLanguageFromLocale()).toEqual('en');
     })
 
