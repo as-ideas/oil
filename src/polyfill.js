@@ -6,20 +6,10 @@ require('core-js/modules/es6.object.keys');
 require('core-js/modules/es6.object.get-own-property-names');
 require('core-js/modules/es6.object.assign');
 
-require('core-js/modules/es6.string.raw');
-require('core-js/modules/es6.string.trim');
-require('core-js/modules/es6.string.iterator');
-require('core-js/modules/es6.string.code-point-at');
-require('core-js/modules/es6.string.ends-with');
 require('core-js/modules/es6.string.includes');
-require('core-js/modules/es6.string.repeat');
 require('core-js/modules/es6.string.starts-with');
 require('core-js/modules/es6.string.sub');
 require('core-js/modules/es6.string.sup');
-
-
-
-
 
 require('core-js/modules/es6.array.is-array');
 require('core-js/modules/es6.array.from');
@@ -45,23 +35,8 @@ require('core-js/modules/es6.array.iterator');
 
 require('core-js/modules/es6.promise');
 require('core-js/modules/es7.array.includes');
-require('core-js/modules/es7.array.flat-map');
-require('core-js/modules/es7.array.flatten');
-require('core-js/modules/es7.string.at');
-require('core-js/modules/es7.string.pad-start');
-require('core-js/modules/es7.string.pad-end');
-require('core-js/modules/es7.string.trim-left');
-require('core-js/modules/es7.string.trim-right');
-require('core-js/modules/es7.string.match-all');
-require('core-js/modules/es7.symbol.async-iterator');
-require('core-js/modules/es7.symbol.observable');
-require('core-js/modules/es7.object.get-own-property-descriptors');
 require('core-js/modules/es7.object.values');
 require('core-js/modules/es7.object.entries');
-require('core-js/modules/es7.object.define-getter');
-require('core-js/modules/es7.object.define-setter');
-require('core-js/modules/es7.object.lookup-getter');
-require('core-js/modules/es7.object.lookup-setter');
 
 require('core-js/modules/es7.promise.finally');
 require('core-js/modules/es7.promise.try');
