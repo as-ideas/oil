@@ -64,7 +64,7 @@ describe('core_oil', () => {
     }, () => {
       expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledWith('commandCollectionExecutor', executeCommandCollectionSpy);
       done();
-    }, 2000);
+    }, 4000);
   });
 
   it('should not execute command collection and attach command collection execution to window object if optin is not provided', (done) => {
