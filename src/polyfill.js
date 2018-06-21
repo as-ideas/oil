@@ -2,20 +2,10 @@ require('core-js/modules/es6.symbol');
 require('core-js/modules/es6.object.create');
 require('core-js/modules/es6.object.define-property');
 require('core-js/modules/es6.object.define-properties');
-require('core-js/modules/es6.object.get-own-property-descriptor');
-require('core-js/modules/es6.object.get-prototype-of');
 require('core-js/modules/es6.object.keys');
 require('core-js/modules/es6.object.get-own-property-names');
-require('core-js/modules/es6.object.freeze');
-require('core-js/modules/es6.object.seal');
-require('core-js/modules/es6.object.prevent-extensions');
-require('core-js/modules/es6.object.is-frozen');
-require('core-js/modules/es6.object.is-sealed');
-require('core-js/modules/es6.object.is-extensible');
 require('core-js/modules/es6.object.assign');
 
-
-require('core-js/modules/es6.string.from-code-point');
 require('core-js/modules/es6.string.raw');
 require('core-js/modules/es6.string.trim');
 require('core-js/modules/es6.string.iterator');
@@ -24,9 +14,6 @@ require('core-js/modules/es6.string.ends-with');
 require('core-js/modules/es6.string.includes');
 require('core-js/modules/es6.string.repeat');
 require('core-js/modules/es6.string.starts-with');
-require('core-js/modules/es6.string.link');
-require('core-js/modules/es6.string.small');
-require('core-js/modules/es6.string.strike');
 require('core-js/modules/es6.string.sub');
 require('core-js/modules/es6.string.sup');
 
@@ -57,10 +44,6 @@ require('core-js/modules/es6.array.species');
 require('core-js/modules/es6.array.iterator');
 
 require('core-js/modules/es6.promise');
-require('core-js/modules/es6.map');
-require('core-js/modules/es6.set');
-require('core-js/modules/es6.weak-map');
-require('core-js/modules/es6.weak-set');
 require('core-js/modules/es7.array.includes');
 require('core-js/modules/es7.array.flat-map');
 require('core-js/modules/es7.array.flatten');
