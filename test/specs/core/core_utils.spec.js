@@ -1,4 +1,4 @@
-import { fetchJsonData, getGlobalOilObject, getLocaleVariantVersion, setGlobalOilObject } from '../../../src/scripts/core/core_utils';
+import { arrayContainsArray, fetchJsonData, getGlobalOilObject, getLocaleVariantVersion, setGlobalOilObject } from '../../../src/scripts/core/core_utils';
 import { setLocale } from '../../../src/scripts/core/core_config';
 import { resetOil } from '../../test-utils/utils_reset';
 
@@ -8,7 +8,7 @@ describe('core_utils', () => {
 
   beforeEach(() => resetOil());
 
-  describe('getGlobalOilObject', function() {
+  describe('getGlobalOilObject', function () {
 
     it('should set a global variable correctly', () => {
       let someData = '123456';
@@ -33,7 +33,7 @@ describe('core_utils', () => {
 
   });
 
-  describe('getLocaleVariantVersion', function() {
+  describe('getLocaleVariantVersion', function () {
 
     it('should get locale variant version correctly', () => {
       let expectedVersion = 17;
@@ -53,7 +53,7 @@ describe('core_utils', () => {
 
   });
 
-  describe('core_utils_fetchJsonData', () => {
+  describe('fetchJsonData', () => {
 
     beforeEach(() => {
       jasmine.Ajax.install();
@@ -137,4 +137,49 @@ describe('core_utils', () => {
       });
     });
   });
+
+  describe('arrayContainsArray', () => {
+
+    it('should return true if checked array is empty and other array not', () => {
+      expect(arrayContainsArray([4, 2, 3, 1], [])).toBeTruthy();
+    });
+
+    it('should return false if checked array is not empty but other array is', () => {
+      expect(arrayContainsArray([], [1, 2])).toBeFalsy();
+    });
+
+    it('should return true if checked array is completely contained in other array', () => {
+      expect(arrayContainsArray([2, 3, 4, 1], [1, 2])).toBeTruthy();
+    });
+
+    it('should return false if checked array is not completely contained in other array', () => {
+      expect(arrayContainsArray([4, 1, 2, 3], [1, 5, 2])).toBeFalsy();
+    });
+
+    it('should return true if checked array with non-unique element is completely contained in other array', () => {
+      expect(arrayContainsArray([2, 3, 4, 2, 1], [2, 1, 2])).toBeTruthy();
+    });
+
+    it('should return false if checked array with non-unique element is not completely contained in other array', () => {
+      expect(arrayContainsArray([4, 3, 2, 1], [2, 2, 1])).toBeFalsy();
+    });
+
+    it('should return true if checked array is completely contained in other array with non-unique element', () => {
+      expect(arrayContainsArray([2, 3, 4, 2, 1], [1, 2])).toBeTruthy();
+    });
+
+    it('should return false if checked array is not completely contained in other array with non-unique element', () => {
+      expect(arrayContainsArray([4, 3, 2, 2, 1], [1, 5, 2])).toBeFalsy();
+    });
+
+    it('should return false if checked array is undefined', () => {
+      expect(arrayContainsArray([4, 3, 2, 2, 1], undefined)).toBeFalsy();
+    });
+
+    it('should return false if other array is undefined', () => {
+      expect(arrayContainsArray(undefined, [1, 2])).toBeFalsy();
+    });
+
+  });
+
 });
