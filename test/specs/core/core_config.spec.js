@@ -10,6 +10,7 @@ import {
   getLocale,
   getLocaleUrl,
   getLocaleVariantName,
+  getLanguageFromLocale,
   getPoiGroupName,
   getPublicPath,
   setLocale
@@ -102,6 +103,29 @@ describe('core_config', () => {
       expect(getLocaleVariantName()).toEqual('floo');
     });
 
+  });
+
+  describe('getLanguageFromLocale', function() {
+
+    it('retrieves substring from parameter', function() {
+      expect(getLanguageFromLocale('foo_bar')).toEqual('fo');
+    });
+
+    it('errors when localeId is missing and returns en', function(){
+      AS_OIL = {
+        CONFIG: {
+          locale: {
+            localeId: null
+          }
+        }
+      }
+
+      spyOn(CoreLog, 'logError');
+      
+      expect(getLanguageFromLocale()).toEqual('en');
+
+      expect(CoreLog.logError).toHaveBeenCalled();
+    })
   });
 
   describe('setLocale', function () {
