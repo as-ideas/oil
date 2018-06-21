@@ -12,10 +12,6 @@ const appConfig = helpers.getAppConfig();
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const imageminMozjpeg = require('imagemin-mozjpeg');
-const imageminPngquant = require('imagemin-pngquant');
-const imageminSvgo = require('imagemin-svgo');
 /**
  * Webpack Constants
  */
@@ -94,31 +90,6 @@ const config = webpackMerge(commonConfig, {
    * See: http://webpack.github.io/docs/configuration.html#plugins
    */
   plugins: [
-
-    /**
-     * Plugin: ImageminPlugin
-     * Description: Optimizes image assets
-     *
-     * This is a simple plugin that uses Imagemin to compress all images in your project.
-     *
-     * See: https://github.com/Klathmon/imagemin-webpack-plugin
-     */
-    new ImageminPlugin({
-      test: /\.(jpe?g|png|gif|svg)$/i,
-      plugins: [
-        imageminMozjpeg({
-          quality: 35,
-          progressive: true
-        }),
-        imageminPngquant({
-          quality: 10
-        }),
-        imageminSvgo()
-      ],
-      gifsicle: {
-        optimizationLevel: 3
-      }
-    }),
 
     /*
      * Plugin: OccurenceOrderPlugin

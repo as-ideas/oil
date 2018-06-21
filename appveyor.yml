@@ -2,18 +2,10 @@
 # http://www.appveyor.com/docs/appveyor-yml
 environment:
   matrix:
-    - NODE_VERSION: "6"
-      NPM_VERSION: "3"
-    - NODE_VERSION: "7"
-      NPM_VERSION: "3"
-    - NODE_VERSION: "7"
-      NPM_VERSION: "4"
     - NODE_VERSION: "8"
-      NPM_VERSION: "4"
-    - NODE_VERSION: "8"
-      NPM_VERSION: "5"
+      NPM_VERSION: "6"
     - NODE_VERSION: "9"
-      NPM_VERSION: "5"
+      NPM_VERSION: "6"
     - NODE_VERSION: "10"
       NPM_VERSION: "6"
 
