@@ -7,8 +7,12 @@ export function generatePolyfills(){
   // eslint-disable-next-line global-require
   require('es6-object-assign/auto');
 
+  if (!Object.values) {
+    // eslint-disable-next-line global-require
+    Object.values = require('core-js/fn/object/values');
+  }
+
   if (!Array.prototype.fill) {
-    console.log('prototype fill');
     // eslint-disable-next-line no-extend-native
     Object.defineProperty(Array.prototype, 'fill', {
       value: function(value) {
