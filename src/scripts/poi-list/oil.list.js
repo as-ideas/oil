@@ -141,9 +141,9 @@ function oilListTemplate(list, heading, text) {
                 ${text} 
             </p>
             ${listSnippet(list)}
-            <button class="as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
-                <span class="as-js-oilback__text">${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}</span>
-                <svg class="as-js-oilback__icon" width="22" height="22" viewBox="0 0 22 22"
+            <button class="as-oil-back-button as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
+                <span class="as-oil-back-button__text">${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}</span>
+                <svg class="as-oil-back-button__icon" width="22" height="22" viewBox="0 0 22 22"
                      xmlns="http://www.w3.org/2000/svg">
                     <g fill="none" fill-rule="evenodd">
                         <circle fill="#757575" cx="11" cy="11" r="11"/>

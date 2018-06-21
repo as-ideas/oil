@@ -3,7 +3,7 @@
 #oil-preference-center {
   overflow: hidden;
 
-  .as-js-oilback {
+  .as-oil-back-button {
     display: none;
   }
 }
@@ -263,7 +263,7 @@ $slider-padding: 3px;
 .as-oil {
   &.dark {
     .as-oil-cpc__left a,
-    .as-js-oilback__text {
+    .as-oil-back-button__text {
       color: $text-color-primary-dark !important;
     }
     .as-oil-cpc__purpose {

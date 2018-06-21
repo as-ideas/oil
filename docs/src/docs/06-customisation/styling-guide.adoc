@@ -1,5 +1,12 @@
 === Styling guide
 
+There are 5 different view you can style:
+* The default layer
+* No-cookies banner
+* Group list
+* 3rd party list
+* Cookie Preference Center
+
 You can style the layer with additional CSS. All OIL styles use the css classes directly, this means the lowest possible css specificity. Here are two examples. The first one is for changing the font and the color. The second is for changing the background color and the shadow.
 
 [source,css]
@@ -22,12 +29,16 @@ Here are the current raw html snippets used for the opt-in layer. You can use th
 
 ==== Opt-In layer
 
+image::src/images/view_default.png[Default View]
+
 [source,html]
 ----
 include::../../../../test/fixtures/gold-master/soi.html[]
 ----
 
 ==== No-cookie layer
+
+image::src/images/view_no_cookies.png[No Cookies]
 
 [source,html]
 ----
@@ -36,12 +47,26 @@ include::../../../../test/fixtures/gold-master/no-cookie.html[]
 
 ==== POI group list
 
+image::src/images/view_group_list.png[Group list]
+
 [source,html]
 ----
 include::../../../../test/fixtures/gold-master/company-list.html[]
 ----
 
+==== Third party list
+
+image::src/images/view_third_parties.png[Third party list]
+
+[source,html]
+----
+include::../../../../test/fixtures/gold-master/third-party-list.html[]
+----
+
+
 ==== Advanced Settings (CPC, Cookie Preference Center)
+
+image::src/images/view_cpc.png[CPC]
 
 [source,html]
 ----
