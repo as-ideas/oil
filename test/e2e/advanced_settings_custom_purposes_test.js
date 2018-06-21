@@ -24,6 +24,7 @@ module.exports = {
       .waitForElementPresent(OIL_CUSTOM_PURPOSE_SLIDER, 100, false)
       .pause(100)
       .useCss()
+      // FIXME OIL-196
       // deactivate because opening the page in IE10 and 9 the custom purposes, only the e2e test fails
       //.assert.containsText('html', 'Custom Purpose 1', 'Checking custom purpose title')
       .pause(200)

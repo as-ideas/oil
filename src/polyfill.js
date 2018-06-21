@@ -4,10 +4,7 @@ export function generatePolyfills(){
     return;
   }
   require('core-js/modules/es6.object.assign');
-  require('core-js/modules/es6.string.includes');
   require('core-js/modules/es6.string.starts-with');
-  require('core-js/modules/es6.string.sub');
-  require('core-js/modules/es6.string.sup');
   require('core-js/modules/es6.array.from');
   require('core-js/modules/es6.array.slice');
   require('core-js/modules/es6.array.sort');
@@ -21,8 +18,6 @@ export function generatePolyfills(){
   require('core-js/modules/es7.promise.try');
 
   require('core-js/modules/_core');
-
-  require('regenerator-runtime/runtime');
 }
 
 export default generatePolyfills();
