@@ -138,5 +138,22 @@ function receiveOptInMessage(event) {
   }
 }
 
-eventer(messageEvent, receiveMessage, false);
+eventer(messageEvent, receiveOptInMessage, false);
+----
+
+You can also use the global event queue to process events that have been fired before you declared the event listeners.
+Therefore all events are stored in the global window.AS_OIL.eventCollection array. Every entry is an object including the event name and the timestamp when it has been fired.
+[source,javascript]
+----
+if (window.AS_OIL.eventCollection && window.AS_OIL.eventCollection.length) {
+    window.AS_OIL.eventCollection.forEach(function(item){
+        // console.log(item.name);
+        // console.log(item.timestamp);
+        // use your tracking code to process every event that has been fired so far
+        // example: Adobe tag manager
+        _satellite.track(item.name)
+    });
+}
+
+// event listener code, see above
 ----

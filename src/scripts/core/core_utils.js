@@ -50,6 +50,13 @@ export function getOrigin() {
  */
 export function sendEventToHostSite(eventName) {
   window.postMessage(eventName, getOrigin());
+  window.AS_OIL.eventCollection = window.AS_OIL.eventCollection || [];
+  window.AS_OIL.eventCollection.push(
+    {
+      name: eventName,
+      timestamp: new Date().getTime()
+    }
+  );
   logInfo(`Sent postmessage event: ${eventName}`);
 }
 
