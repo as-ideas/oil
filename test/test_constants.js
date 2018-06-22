@@ -17,3 +17,4 @@ export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_SHOW_PREF = '//*[@data-qa="show-p
 export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_TRIGGER_OPTIN = '//*[@data-qa="oil-YesButton"]';
 export const OIL_ADVANCED_SETTINGS_SNIPPET = '//*[@data-qa="cpc-snippet"]';
 export const OIL_CUSTOM_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-25"]';
+export const PAGE_BACKGROUND = '.has-big-bad-background';

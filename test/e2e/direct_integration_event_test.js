@@ -1,4 +1,4 @@
-import {OIL_LAYER, OIL_YES_BUTTON, EVENT_NOTIFIER_DIV} from '../test_constants.js';
+import {OIL_LAYER, OIL_YES_BUTTON, EVENT_NOTIFIER_DIV, PAGE_BACKGROUND} from '../test_constants.js';
 
 module.exports = {
   '@disabled': false,
@@ -22,9 +22,8 @@ module.exports = {
       .assert.cssClassNotPresent(EVENT_NOTIFIER_DIV, 'event-notifier-hidden')
       .refresh()
       .useCss()
-      .waitForElementVisible('body', 1000, false)
+      .waitForElementVisible(PAGE_BACKGROUND, 1000, false)
       .useXpath()
-      .pause(500)
       .waitForElementNotPresent(OIL_LAYER, 1000)
       .assert.cssClassNotPresent(EVENT_NOTIFIER_DIV, 'event-notifier-hidden')
       .end();
