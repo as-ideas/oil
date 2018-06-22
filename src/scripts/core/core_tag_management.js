@@ -3,19 +3,12 @@ import { getSoiCookie } from './core_cookies';
 import { arrayContainsArray } from './core_utils';
 import { getPurposeIds } from './core_vendor_information';
 
-export function activateDomElementsWithConsent() {
-  findManagedElements()
-    .filter(element => hasConsent(element, getSoiCookie()))
-    .forEach(element => activateElement(element));
-}
+export function manageDomElementActivation() {
+  let managedElements = findManagedElements();
+  let cookie = getSoiCookie();
 
-function hasConsent(element, cookie) {
-  if (cookie.opt_in) {
-    let allowedPurposes = cookie.consentData.getPurposesAllowed();
-    let necessaryPurposes = getNecessaryPurposes(element);
-    return arrayContainsArray(allowedPurposes, necessaryPurposes);
-  } else {
-    return false;
+  for (let i = 0; i < managedElements.length; i++) {
+    manageElement(managedElements[i], cookie);
   }
 }
 
@@ -25,23 +18,18 @@ function getNecessaryPurposes(element) {
 }
 
 function findManagedElements() {
-  let elementNodeList = document.querySelectorAll('[' + MANAGED_TAG_IDENTIFIER_ATTRIBUTE + '=\'' + MANAGED_TAG_IDENTIFIER + '\']');
-  let elementArray = [];
-  for (let i = 0; i < elementNodeList.length; i++) {
-    elementArray.push(elementNodeList[i]);
-  }
-  return elementArray;
+  return document.querySelectorAll('[' + MANAGED_TAG_IDENTIFIER_ATTRIBUTE + '=\'' + MANAGED_TAG_IDENTIFIER + '\']');
 }
 
-function activateElement(element) {
+function manageElement(element, cookie) {
   if (element.tagName === 'SCRIPT') {
-    activateScriptElement(element);
+    manageScriptElement(element, cookie);
   } else {
-    activateNonScriptElement(element);
+    manageNonScriptElement(element, cookie);
   }
 }
 
-function activateScriptElement(element) {
+function manageScriptElement(element, cookie) {
   let newElement = document.createElement('script');
 
   for (let i = 0; i < element.attributes.length; i++) {
@@ -50,11 +38,16 @@ function activateScriptElement(element) {
       newElement.setAttribute(attribute.name, attribute.value);
     }
   }
-  if (element.getAttribute('data-type')) {
-    newElement.type = element.getAttribute('data-type');
-  }
-  if (element.getAttribute('data-src')) {
-    newElement.src = element.getAttribute('data-src');
+  if (hasConsent(element, cookie)) {
+    if (element.getAttribute('data-type')) {
+      newElement.type = element.getAttribute('data-type');
+    }
+    if (element.getAttribute('data-src')) {
+      newElement.src = element.getAttribute('data-src');
+    }
+  } else {
+    // we must set a (dummy) type for script tags without consent - otherwise they will be executed
+    newElement.type = MANAGED_TAG_IDENTIFIER;
   }
   newElement.innerText = element.innerText;
   newElement.text = element.text;
@@ -69,17 +62,37 @@ function activateScriptElement(element) {
   parent.removeChild(element);
 }
 
-function activateNonScriptElement(element) {
+function manageNonScriptElement(element, cookie) {
   let managedAttributes = ['href', 'src', 'title', 'display'];
 
-  for (let managedAttribute of managedAttributes) {
-    let managedAttributeValue = element.getAttribute('data-' + managedAttribute);
-    if (managedAttributeValue) {
+  if (hasConsent(element, cookie)) {
+    for (let managedAttribute of managedAttributes) {
+      let managedAttributeValue = element.getAttribute('data-' + managedAttribute);
       if (managedAttribute === 'display') {
-        element.style.display = managedAttributeValue;
+        element.style.display = managedAttributeValue ? managedAttributeValue : '';
       } else {
-        element[managedAttribute] = managedAttributeValue;
+        if (managedAttributeValue) {
+          element.setAttribute(managedAttribute, managedAttributeValue);
+        }
       }
     }
+  } else {
+    for (let managedAttribute of managedAttributes) {
+      if (managedAttribute === 'display') {
+        element.style.display = 'none';
+      } else if (element.hasAttribute(managedAttribute)) {
+        element.removeAttribute(managedAttribute);
+      }
+    }
+  }
+}
+
+function hasConsent(element, cookie) {
+  if (cookie.opt_in) {
+    let allowedPurposes = cookie.consentData.getPurposesAllowed();
+    let necessaryPurposes = getNecessaryPurposes(element);
+    return arrayContainsArray(allowedPurposes, necessaryPurposes);
+  } else {
+    return false;
   }
 }

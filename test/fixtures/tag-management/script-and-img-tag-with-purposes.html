@@ -1,53 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script data-managed="as-oil"
-            data-type="text/javascript"
-            data-src="http://www.somewhere.org/scripts/simpleJavaScript1.js"
-            data-anotherAttribute="anotherAttributeValue"
-            data-purposes="1, 2, 3"
-            class="aClass"
-            id="anId1"
-            charset="UTF-8"
-            defer
-            async>
-    </script>
-  </head>
-  <body>
-    <script data-managed="as-oil"
-            data-type="text/javascript"
-            data-anotherAttribute="anotherAttributeValue"
-            data-purposes="1,2,4"
-            type="as-oil"
-            class="aClass"
-            id="anId"
-            charset="UTF-8"
-            defer
-            async>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script data-managed="as-oil"
+          data-type="text/javascript"
+          data-src="http://www.somewhere.org/scripts/simpleJavaScript1.js"
+          data-anotherAttribute="anotherAttributeValue"
+          data-purposes="1, 2, 3"
+          class="scriptClass"
+          id="scriptId1"
+          charset="UTF-8"
+          defer
+          async>
+  </script>
+</head>
+<body>
+<script data-managed="as-oil"
+        data-type="text/javascript"
+        data-anotherAttribute="anotherAttributeValue"
+        data-purposes="1,2,4"
+        type="as-oil"
+        class="scriptClass"
+        id="scriptId2"
+        charset="UTF-8"
+        defer
+        async>
       console.trace('This is some useless JavaScript code!');
-    </script>
+</script>
 
-    <script data-managed="as-oil"
-            data-type="text/javascript"
-            data-src="http://www.somewhere.org/scripts/simpleJavaScript2.js"
-            data-anotherAttribute="anotherAttributeValue"
-            data-purposes="1, 3,5"
-            class="aClass"
-            id="anId2"
-            charset="UTF-8"
-            defer
-            async>
-    </script>
-    <img data-managed="as-oil"
-         data-src="http://www.somewhere.org/img/simpleImage.png"
-         data-title="aTitle"
-         data-display="block"
-         data-anotherAttribute="anotherAttributeValue"
-         data-purposes="1,4, 5"
-         alt="An alternative text"
-         height="50"
-         width="50">
-  </body>
+<script data-managed="as-oil"
+        data-type="text/javascript"
+        data-src="http://www.somewhere.org/scripts/simpleJavaScript2.js"
+        data-anotherAttribute="anotherAttributeValue"
+        data-purposes="1, 3,5"
+        class="scriptClass"
+        id="scriptId3"
+        charset="UTF-8"
+        defer
+        async>
+</script>
+<img data-managed="as-oil"
+     data-src="http://www.somewhere.org/img/simpleImage.png"
+     data-title="aTitle"
+     data-display="block"
+     data-anotherAttribute="anotherAttributeValue"
+     data-purposes="1,4, 5"
+     alt="An alternative text"
+     height="50"
+     width="50"
+     id="imgId"
+     class="imgClass"
+     style="border: 1px solid #ddd; border-radius: 20px;">
+</body>
 </html>

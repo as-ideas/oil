@@ -32,7 +32,7 @@ import {
 } from './userview_privacy.js';
 import { getGlobalOilObject, isObject } from '../core/core_utils';
 import { getPurposes, loadVendorList } from '../core/core_vendor_information';
-import { activateDomElementsWithConsent } from '../core/core_tag_management';
+import { manageDomElementActivation } from '../core/core_tag_management';
 
 
 // Initialize our Oil wrapper and save it ...
@@ -239,7 +239,7 @@ export function handleOptIn() {
     if (commandCollectionExecutor) {
       commandCollectionExecutor();
     }
-    activateDomElementsWithConsent();
+    manageDomElementActivation();
   });
   animateOptInButton();
 }

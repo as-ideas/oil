@@ -15,7 +15,7 @@ describe('the user view modal handles opt-in clicks on', () => {
 
   beforeEach(() => {
     resetOil();
-    spyOn(CoreTagManagement, 'activateDomElementsWithConsent');
+    spyOn(CoreTagManagement, 'manageDomElementActivation');
   });
 
   describe('SOI', () => {
@@ -27,7 +27,7 @@ describe('the user view modal handles opt-in clicks on', () => {
 
       handleOptIn();
       waitsForAndRuns(
-        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
         () => {
           expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
           expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_SOI_OPT_IN);
@@ -47,7 +47,7 @@ describe('the user view modal handles opt-in clicks on', () => {
       handleOptIn();
 
       waitsForAndRuns(
-        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
         () => {
           expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
           expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_SOI_OPT_IN);
@@ -67,7 +67,7 @@ describe('the user view modal handles opt-in clicks on', () => {
       handleOptIn();
 
       waitsForAndRuns(
-        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
         () => {
           expect(UserviewOptIn.oilOptIn).toHaveBeenCalledTimes(0);
           expect(CoreCookies.removeSubscriberCookies).toHaveBeenCalled();
@@ -89,9 +89,9 @@ describe('the user view modal handles opt-in clicks on', () => {
     it('should activate dom elements with consent', (done) => {
       handleOptIn();
       waitsForAndRuns(
-        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
         () => {
-          expect(CoreTagManagement.activateDomElementsWithConsent).toHaveBeenCalled();
+          expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalled();
           done();
         },
         2000);
@@ -108,7 +108,7 @@ describe('the user view modal handles opt-in clicks on', () => {
       handleOptIn();
 
       waitsForAndRuns(
-        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
         () => {
           expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
           expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_POI_OPT_IN);
@@ -128,7 +128,7 @@ describe('the user view modal handles opt-in clicks on', () => {
       handleOptIn();
 
       waitsForAndRuns(
-        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
         () => {
           expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
           expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_POI_OPT_IN);
@@ -151,7 +151,7 @@ describe('the user view modal handles opt-in clicks on', () => {
       handleOptIn();
 
       waitsForAndRuns(
-        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
         () => {
           expect(UserviewOptIn.oilPowerOptIn).toHaveBeenCalledTimes(0);
           expect(CoreCookies.removeSubscriberCookies).toHaveBeenCalled();
@@ -176,9 +176,9 @@ describe('the user view modal handles opt-in clicks on', () => {
       loadFixture('poi/poi.default.html');
       handleOptIn();
       waitsForAndRuns(
-        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
         () => {
-          expect(CoreTagManagement.activateDomElementsWithConsent).toHaveBeenCalled();
+          expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalled();
           done();
         },
         2000);

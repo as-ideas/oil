@@ -7,7 +7,7 @@ import { doSetTealiumVariables } from './core_tealium_loading_rules';
 import { getLocale, isPreviewMode, resetConfiguration } from './core_config';
 import { EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED, EVENT_NAME_OIL_SHOWN } from './core_constants';
 import { executeCommandCollection } from './core_command_collection';
-import { activateDomElementsWithConsent } from './core_tag_management';
+import { manageDomElementActivation } from './core_tag_management';
 
 /**
  * Initialize Oil on Host Site
@@ -19,6 +19,8 @@ export function initOilLayer() {
   if (isPreviewMode() && !isPreviewCookieSet()) {
     logPreviewInfo('Preview mode not correctly set, please see the documentation on how to set the cookie.');
   }
+
+  manageDomElementActivation();
 
   attachUtilityFunctionsToWindowObject();
 
@@ -56,7 +58,7 @@ export function initOilLayer() {
         sendEventToHostSite(EVENT_NAME_HAS_OPTED_IN);
         executeCommandCollection();
         attachCommandCollectionFunctionToWindowObject();
-        activateDomElementsWithConsent();
+        manageDomElementActivation();
       } else {
         /**
          * Any other case, when the user didn't decide before and oil needs to be shown:

@@ -2,7 +2,7 @@ import { resetOil } from '../../test-utils/utils_reset';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import { loadFixture, readFixture } from '../../test-utils/utils_fixtures';
-import { activateDomElementsWithConsent } from '../../../src/scripts/core/core_tag_management';
+import { manageDomElementActivation } from '../../../src/scripts/core/core_tag_management';
 
 const {ConsentString} = require('consent-string');
 
@@ -34,7 +34,7 @@ describe("Tag Management", () => {
     spyOn(CoreCookies, 'getSoiCookie').and.returnValue({opt_in: false});
     loadFixture('tag-management/script-and-img-tag.html');
 
-    activateDomElementsWithConsent();
+    manageDomElementActivation();
     expect(document.getElementById('jasmine-fixtures').innerHTML).toEqualWithDiff(readFixture('tag-management/managed-results/inactive-managed-tags.html'));
   });
 
@@ -42,7 +42,7 @@ describe("Tag Management", () => {
     spyOn(CoreCookies, 'getSoiCookie').and.returnValue(givenCookieWithoutConsents());
     loadFixture('tag-management/script-and-img-tag.html');
 
-    activateDomElementsWithConsent();
+    manageDomElementActivation();
     expect(document.getElementById('jasmine-fixtures').innerHTML).toEqualWithDiff(readFixture('tag-management/managed-results/inactive-managed-tags.html'));
   });
 
@@ -50,7 +50,7 @@ describe("Tag Management", () => {
     spyOn(CoreCookies, 'getSoiCookie').and.returnValue(givenCookieWithSelectedConsents());
     loadFixture('tag-management/script-and-img-tag-with-purposes.html');
 
-    activateDomElementsWithConsent();
+    manageDomElementActivation();
     expect(document.getElementById('jasmine-fixtures').innerHTML).toEqualWithDiff(readFixture('tag-management/managed-results/inactive-managed-tags-with-purposes.html'));
   });
 
@@ -59,7 +59,7 @@ describe("Tag Management", () => {
     spyOn(CoreVendorInformation, 'getPurposeIds').and.returnValue([1, 2, 3, 4, 5]);
     loadFixture('tag-management/script-and-img-tag.html');
 
-    activateDomElementsWithConsent();
+    manageDomElementActivation();
     expect(document.getElementById('jasmine-fixtures').innerHTML).toEqualWithDiff(readFixture('tag-management/managed-results/active-managed-tags.html'));
   });
 
@@ -67,7 +67,7 @@ describe("Tag Management", () => {
     spyOn(CoreCookies, 'getSoiCookie').and.returnValue(givenCookieWithAllConsents());
     loadFixture('tag-management/script-and-img-tag-with-purposes.html');
 
-    activateDomElementsWithConsent();
+    manageDomElementActivation();
     expect(document.getElementById('jasmine-fixtures').innerHTML).toEqualWithDiff(readFixture('tag-management/managed-results/active-managed-tags-with-purposes.html'));
   });
 

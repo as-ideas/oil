@@ -92,27 +92,22 @@ describe('core_oil', () => {
 
   it('should activate dom elements with consent if opt-in is provided', (done) => {
     spyOn(CoreOptIn, 'checkOptIn').and.returnValue(Promise.resolve(true));
-    spyOn(CoreTagManagement, 'activateDomElementsWithConsent').and.callThrough();
+    spyOn(CoreTagManagement, 'manageDomElementActivation').and.callThrough();
 
     initOilLayer();
-    waitsForAndRuns(() => {
-      return CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0;
-    }, () => {
-      expect(CoreTagManagement.activateDomElementsWithConsent).toHaveBeenCalled();
+    setTimeout(() => {
+      expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalledTimes(2);
       done();
     }, 2000);
   });
 
   it('should not activate dom elements with consent if opt-in is not provided', (done) => {
     spyOn(CoreOptIn, 'checkOptIn').and.returnValue(Promise.resolve(false));
-    spyOn(CoreTagManagement, 'activateDomElementsWithConsent').and.callThrough();
+    spyOn(CoreTagManagement, 'manageDomElementActivation').and.callThrough();
 
     initOilLayer();
-    waitsForAndRuns(() => {
-      // we expect that the method is not invoked - but if it does we don't need to wait any longer...
-      return CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0;
-    }, () => {
-      expect(CoreTagManagement.activateDomElementsWithConsent).not.toHaveBeenCalled();
+    setTimeout(() => {
+      expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalledTimes(1);
       done();
     }, 2000);
   });
