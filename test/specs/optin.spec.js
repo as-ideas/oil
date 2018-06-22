@@ -40,22 +40,21 @@ describe('Opt-In', () => {
 
   describe('opt in checker', () => {
     beforeEach(() => {
-      spyOn(CoreCookies, 'setSoiCookieWithConsentData').and.returnValue(new Promise((resolve) => resolve()));
+      spyOn(CoreCookies, 'setSoiCookieWithPoiCookieData').and.returnValue(new Promise((resolve) => resolve()));
     });
 
-    it('should set use the power opt-in for the single opt-in if single opt-in is not defined and power opt-in can be verified', (done) => {
+    it('should use the power opt-in for the single opt-in if single opt-in is not defined and power opt-in can be verified', (done) => {
       let singleOptIn = false;
       let powerOptIn = true;
+      const poiCookieJson = {power_opt_in: powerOptIn, consentData: 'aConsentDataObject'};
       spyOn(CoreCookies, 'getSoiCookie').and.returnValue({opt_in: singleOptIn});
       spyOn(CoreConfig, 'isSubscriberSetCookieActive').and.returnValue(true);
-      spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise(resolve => {
-        resolve({power_opt_in: powerOptIn, consentData: 'aConsentDataObject'});
-      }));
+      spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise(resolve => resolve(poiCookieJson)));
 
       checkOptIn().then(resultOptIn => {
         expect(resultOptIn).toBe(powerOptIn);
         expect(CorePoi.verifyPowerOptIn).toHaveBeenCalled();
-        expect(CoreCookies.setSoiCookieWithConsentData).toHaveBeenCalledWith('aConsentDataObject');
+        expect(CoreCookies.setSoiCookieWithPoiCookieData).toHaveBeenCalledWith(poiCookieJson);
         done();
       });
     });
@@ -71,7 +70,7 @@ describe('Opt-In', () => {
       checkOptIn().then(resultOptIn => {
         expect(resultOptIn).toBe(singleOptIn);
         expect(CorePoi.verifyPowerOptIn).toHaveBeenCalled();
-        expect(CoreCookies.setSoiCookieWithConsentData).not.toHaveBeenCalled();
+        expect(CoreCookies.setSoiCookieWithPoiCookieData).not.toHaveBeenCalled();
         done();
       });
     });
@@ -88,7 +87,7 @@ describe('Opt-In', () => {
       checkOptIn().then(resultOptIn => {
         expect(resultOptIn).toBe(powerOptIn);
         expect(CorePoi.verifyPowerOptIn).toHaveBeenCalled();
-        expect(CoreCookies.setSoiCookieWithConsentData).not.toHaveBeenCalled();
+        expect(CoreCookies.setSoiCookieWithPoiCookieData).not.toHaveBeenCalled();
         done();
       });
     });
@@ -105,7 +104,7 @@ describe('Opt-In', () => {
       checkOptIn().then(resultOptIn => {
         expect(resultOptIn).toBe(powerOptIn);
         expect(CorePoi.verifyPowerOptIn).toHaveBeenCalled();
-        expect(CoreCookies.setSoiCookieWithConsentData).not.toHaveBeenCalled();
+        expect(CoreCookies.setSoiCookieWithPoiCookieData).not.toHaveBeenCalled();
         done();
       });
     });

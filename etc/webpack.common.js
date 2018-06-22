@@ -12,6 +12,7 @@ debugLog('Using following appConfig:', appConfig);
  */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 /*
  * Webpack Constants
@@ -27,9 +28,13 @@ const METADATA = {
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-var config = {
+let config = {
 
   bail: true,
+
+  performance: {
+    maxAssetSize: 1000000
+  },
 
   /*
    * The entry point for the bundle
@@ -115,30 +120,6 @@ var config = {
         type: 'javascript/auto',
         test: /\.json$/,
         loader: 'json-loader'
-      }, {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader?mimetype=image/svg+xml'
-      }, {
-        test: /\.png(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader?mimetype=image/png'
-      }, {
-        test: /\.jpeg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader?mimetype=image/png'
-      }, {
-        test: /\.jpg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader?mimetype=image/png'
-      }, {
-        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader?mimetype=application/font-woff'
-      }, {
-        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader?mimetype=application/font-woff'
-      }, {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader?mimetype=application/octet-stream'
-      }, {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader'
       },
       // https://github.com/jtangelder/sass-loader#usage
       {
@@ -192,8 +173,8 @@ var config = {
      *
      * See: https://www.npmjs.com/package/copy-webpack-plugin
      */
-    new CopyWebpackPlugin(appConfig.copy)
-
+    new CopyWebpackPlugin(appConfig.copy),
+    new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i })
   ],
 
   /*

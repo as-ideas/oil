@@ -1,6 +1,6 @@
 == Configuring OIL
 
-OIL is configured using a simple JSON configuration block that you put in the upper part of your html. 
+OIL is configured using a simple JSON configuration block that you put in the upper part of your html.
 
 === The Configuration Block
 
@@ -75,7 +75,7 @@ Example minimal POI configuration:
 ==== POI-List
 
 
-A POI-List file must be a json containing an object with a single property `companyList`. CompanyList must be an array of company names. 
+A POI-List file must be a json containing an object with a single property `companyList`. CompanyList must be an array of company names.
 
 [source,json]
 ----
@@ -98,7 +98,7 @@ This is a full list of configurable options.
 |====
 | Config Parameter | Description | Default Setting
 | publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
-| <<locale-object,locale>> | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. <<locale-object, See here for details>> | None
+| <<texts-locale-object,locale>> | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. <<locale-object, See here for details>> | None
 | locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See link:https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json[See here for an example file] | None
 | <<preview_mode,preview_mode>> | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
 | theme | The theme for the layer. By default there are two themes and size modifier themes, `dark` and `light` as well as `small dark` and `small light`. Themes currently work only as an additional css class. To change the style or theme, look into the <<styling-guide,styling guide>>. | light
@@ -121,7 +121,7 @@ This is a full list of configurable options.
 
 
 
-=== Locale Object
+=== Texts & Locale Object
 
 The locale object must contain at least "localeId" and "version" along with the localized texts in the `texts` property.
 LocaleId and version will be stored with the consent cookie so we can keep track of which explicit text version consent was granted for.
@@ -183,7 +183,7 @@ The recommended way is to keep the standard locale definitions.
 
 Language configuration goes in the `texts` object of the `locale` config parameter. These texts define the standard labels for all legal texts and buttons. For configurations with `advanced_settings=false` most of these labels are not needed.
 
-==== Example for complete texts object 
+==== Example for complete texts object
 
 [source,javascript]
 ----
@@ -229,6 +229,24 @@ Labels starting with `label_cpc_purpose_N` are automatically derived from the ve
 Example Screenshot:
 
 image::src/images/oil-labels-intro.png[]
+
+==== Special CSS classes within labels
+
+There are multiple special CSS classes, which will get click handlers attached. If any element has these classes, they will work as links to the different pages of the layer. Currently there are these special css classes:
+
+* **as-js-optin**: Will trigger an opt-in with SOI/POI depending on the current configuration.
+* **as-js-optin-poi**: Will trigger an opt-in as POI.
+* **as-js-companyList**: Will trigger the layer to show the company list.
+* **as-js-thirdPartyList**: Will trigger the layer to show the 3rd party list.
+* **as-js-advanced-settings**: Will trigger the layer to show the CPC (cookie preference center / advanced settings).
+* **as-js-oilback**: Will trigger the layer to go back to the first view.
+
+For example adding the class ``as-js-companyList`` will add a click handler, which will show the company list (group list):
+
+```json
+"label_intro": "I agree that <a href=\"javascript:void(0)\" class=\"as-oil__intro-txt--link as-js-companyList\">companies belonging to Group X</a> ...",
+
+```
 
 
 === preview_mode
