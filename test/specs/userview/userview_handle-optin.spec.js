@@ -9,30 +9,36 @@ import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreTagManagement from '../../../src/scripts/core/core_tag_management';
 import { EVENT_NAME_POI_OPT_IN, EVENT_NAME_SOI_OPT_IN, PRIVACY_FULL_TRACKING, PRIVACY_MINIMUM_TRACKING } from '../../../src/scripts/core/core_constants';
 import { resetOil } from '../../test-utils/utils_reset';
+import { waitsForAndRuns } from '../../test-utils/utils_wait';
 
 describe('the user view modal handles opt-in clicks on', () => {
 
   beforeEach(() => {
     resetOil();
+    spyOn(CoreTagManagement, 'activateDomElementsWithConsent');
   });
 
   describe('SOI', () => {
-    it('should do Opt-In with full tracking and send one event', () => {
+    it('should do opt-in with full tracking and send one event', (done) => {
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
       spyOn(UserviewConfig, 'isPersistMinimumTracking').and.returnValue(false);
       spyOn(UserViewPrivacy, 'getPrivacySettings').and.callFake(() => PRIVACY_FULL_TRACKING);
 
       handleOptIn();
-
-      expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
-      expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_SOI_OPT_IN);
-      expect(UserviewOptIn.oilOptIn).toHaveBeenCalledWith(PRIVACY_FULL_TRACKING);
-      thenOilLayerIsHidden();
+      waitsForAndRuns(
+        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => {
+          expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
+          expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_SOI_OPT_IN);
+          expect(UserviewOptIn.oilOptIn).toHaveBeenCalledWith(PRIVACY_FULL_TRACKING);
+          thenOilLayerIsHidden();
+          done();
+        },
+        2000);
     });
 
-
-    it('should do Opt-In with minimal tracking and send one event ', () => {
+    it('should do opt-in with minimal tracking and send one event ', (done) => {
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
       spyOn(UserviewConfig, 'isPersistMinimumTracking').and.returnValue(true);
@@ -40,13 +46,19 @@ describe('the user view modal handles opt-in clicks on', () => {
 
       handleOptIn();
 
-      expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
-      expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_SOI_OPT_IN);
-      expect(UserviewOptIn.oilOptIn).toHaveBeenCalledWith(PRIVACY_MINIMUM_TRACKING);
-      thenOilLayerIsHidden();
+      waitsForAndRuns(
+        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => {
+          expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
+          expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_SOI_OPT_IN);
+          expect(UserviewOptIn.oilOptIn).toHaveBeenCalledWith(PRIVACY_MINIMUM_TRACKING);
+          thenOilLayerIsHidden();
+          done();
+        },
+        2000);
     });
 
-    it('should do NOT Opt-In with minimal tracking and do not persist minimal tracking', () => {
+    it('should not do opt-in with minimal tracking and not persist minimal tracking', (done) => {
       mockPowerOptInAndSingleOptIn();
       spyOn(UserviewConfig, 'isPersistMinimumTracking').and.returnValue(false);
       spyOn(UserViewPrivacy, 'getPrivacySettings').and.callFake(() => PRIVACY_MINIMUM_TRACKING);
@@ -54,8 +66,14 @@ describe('the user view modal handles opt-in clicks on', () => {
 
       handleOptIn();
 
-      expect(UserviewOptIn.oilOptIn).toHaveBeenCalledTimes(0);
-      expect(CoreCookies.removeSubscriberCookies).toHaveBeenCalled();
+      waitsForAndRuns(
+        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => {
+          expect(UserviewOptIn.oilOptIn).toHaveBeenCalledTimes(0);
+          expect(CoreCookies.removeSubscriberCookies).toHaveBeenCalled();
+          done();
+        },
+        2000);
     });
 
     it('should execute command collection executor', (done) => {
@@ -68,28 +86,40 @@ describe('the user view modal handles opt-in clicks on', () => {
       handleOptIn();
     });
 
-    it('should activate dom elements with consent', () => {
-      spyOn(CoreTagManagement, 'activateDomElementsWithConsent').and.callThrough();
+    it('should activate dom elements with consent', (done) => {
       handleOptIn();
-      expect(CoreTagManagement.activateDomElementsWithConsent).toHaveBeenCalled();
+      waitsForAndRuns(
+        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => {
+          expect(CoreTagManagement.activateDomElementsWithConsent).toHaveBeenCalled();
+          done();
+        },
+        2000);
     });
   });
 
   describe('POI', () => {
-    it('should do Power Opt-In with full tracking and send one event', () => {
+
+    it('should do power opt-in with full tracking and send one event', (done) => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
 
       handleOptIn();
 
-      expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
-      expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_POI_OPT_IN);
-      expect(UserviewOptIn.oilPowerOptIn).toHaveBeenCalledWith(PRIVACY_FULL_TRACKING, false);
-      thenOilLayerIsHidden();
+      waitsForAndRuns(
+        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => {
+          expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
+          expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_POI_OPT_IN);
+          expect(UserviewOptIn.oilPowerOptIn).toHaveBeenCalledWith(PRIVACY_FULL_TRACKING, false);
+          thenOilLayerIsHidden();
+          done();
+        },
+        2000);
     });
 
-    it('should do Power Opt-In with minimal tracking and send one event ', () => {
+    it('should do power opt-in with minimal tracking and send one event ', (done) => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
@@ -97,26 +127,38 @@ describe('the user view modal handles opt-in clicks on', () => {
 
       handleOptIn();
 
-      expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
-      expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_POI_OPT_IN);
-      expect(UserviewOptIn.oilPowerOptIn).toHaveBeenCalledWith(PRIVACY_MINIMUM_TRACKING, false);
-      thenOilLayerIsHidden();
+      waitsForAndRuns(
+        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => {
+          expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
+          expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_POI_OPT_IN);
+          expect(UserviewOptIn.oilPowerOptIn).toHaveBeenCalledWith(PRIVACY_MINIMUM_TRACKING, false);
+          thenOilLayerIsHidden();
+          done();
+        },
+        2000);
     });
 
-    it('should do NOT Power Opt-In with minimal tracking and do not persist minimal tracking', () => {
+    it('should not do power opt-in with minimal tracking and not persist minimal tracking', (done) => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
       spyOn(UserViewPrivacy, 'getPrivacySettings').and.callFake(() => PRIVACY_MINIMUM_TRACKING);
       spyOn(UserviewConfig, 'isPersistMinimumTracking').and.returnValue(false);
       spyOn(CoreCookies, 'removeSubscriberCookies');
-      spyOn(CorePoi, 'deActivatePowerOptIn');
+      spyOn(CorePoi, 'deActivatePowerOptIn').and.returnValue(new Promise(resolve => resolve()));
 
       handleOptIn();
 
-      expect(UserviewOptIn.oilPowerOptIn).toHaveBeenCalledTimes(0);
-      expect(CoreCookies.removeSubscriberCookies).toHaveBeenCalled();
-      expect(CorePoi.deActivatePowerOptIn).toHaveBeenCalled();
+      waitsForAndRuns(
+        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => {
+          expect(UserviewOptIn.oilPowerOptIn).toHaveBeenCalledTimes(0);
+          expect(CoreCookies.removeSubscriberCookies).toHaveBeenCalled();
+          expect(CorePoi.deActivatePowerOptIn).toHaveBeenCalled();
+          done();
+        },
+        2000);
     });
 
     it('should execute command collection executor', (done) => {
@@ -130,30 +172,22 @@ describe('the user view modal handles opt-in clicks on', () => {
       handleOptIn();
     });
 
-    it('should activate dom elements with consent', () => {
+    it('should activate dom elements with consent', (done) => {
       loadFixture('poi/poi.default.html');
-      spyOn(CoreTagManagement, 'activateDomElementsWithConsent').and.callThrough();
       handleOptIn();
-      expect(CoreTagManagement.activateDomElementsWithConsent).toHaveBeenCalled();
+      waitsForAndRuns(
+        () => CoreTagManagement.activateDomElementsWithConsent.calls.count() > 0,
+        () => {
+          expect(CoreTagManagement.activateDomElementsWithConsent).toHaveBeenCalled();
+          done();
+        },
+        2000);
     });
   });
 
   function mockPowerOptInAndSingleOptIn() {
-    spyOn(UserviewOptIn, 'oilOptIn').and.callFake(() => {
-      return {
-        then: (func) => {
-          func();
-        }
-      };
-    });
-
-    spyOn(UserviewOptIn, 'oilPowerOptIn').and.callFake(() => {
-      return {
-        then: (func) => {
-          func();
-        }
-      };
-    });
+    spyOn(UserviewOptIn, 'oilOptIn').and.returnValue(new Promise((resolve) => resolve()));
+    spyOn(UserviewOptIn, 'oilPowerOptIn').and.returnValue(new Promise((resolve) => resolve()));
   }
 
   function thenOilLayerIsHidden() {

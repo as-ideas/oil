@@ -1,10 +1,10 @@
 import Cookie from 'js-cookie';
-import {logInfo} from './core_log';
-import {getCookieExpireInDays, getCustomPurposes, getDefaultToOptin, getLanguage, getLanguageFromLocale, getLocaleVariantName} from './core_config';
-import {getLocaleVariantVersion} from './core_utils.js';
-import {OIL_SPEC} from './core_constants';
-import {getLimitedVendorIds, getPurposes, getVendorList, loadVendorList} from './core_vendor_information';
-import {OilVersion} from './core_utils';
+import { logInfo } from './core_log';
+import { getCookieExpireInDays, getCustomPurposes, getDefaultToOptin, getLanguage, getLanguageFromLocale, getLocaleVariantName } from './core_config';
+import { getLocaleVariantVersion } from './core_utils.js';
+import { OIL_SPEC } from './core_constants';
+import { getLimitedVendorIds, getPurposes, getVendorList, loadVendorList } from './core_vendor_information';
+import { OilVersion } from './core_utils';
 
 const {ConsentString} = require('consent-string');
 
