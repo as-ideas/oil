@@ -35,10 +35,6 @@ export const EVENT_NAME_OPT_IN = 'oil_optin_done';
 export const EVENT_NAME_SOI_OPT_IN = 'oil_soi_optin_done';
 export const EVENT_NAME_POI_OPT_IN = 'oil_poi_optin_done';
 
-// CPC
-export const PRIVACY_MINIMUM_TRACKING = 0;
-export const PRIVACY_FULL_TRACKING = 1;
-
 // Tracking Events
 export const EVENT_NAME_AS_PRIVACY_SELECTED = 'oil_as_cpc_privacy_selected';
 export const EVENT_NAME_ADVANCED_SETTINGS = 'oil_click_advanced_settings';
@@ -52,9 +48,21 @@ export const EVENT_NAME_OIL_SHOWN = 'oil_shown';
 // Persisted Status Events (will fire after reload)
 export const EVENT_NAME_HAS_OPTED_IN = 'oil_has_optedin';
 
+// CPC
+export const PRIVACY_MINIMUM_TRACKING = 0;
+export const PRIVACY_FULL_TRACKING = 1;
+
+// Power Opt-In
 export const POI_FALLBACK_NAME = 'fallback';
 export const POI_FALLBACK_GROUP_NAME = 'group_name';
 export const POI_PAYLOAD = 'payload';
+
+// Power Opt-In message payload
+export const OIL_PAYLOAD_PRIVACY = 'p';
+export const OIL_PAYLOAD_VERSION = 'v';
+export const OIL_PAYLOAD_LOCALE_VARIANT_NAME = 'lvn';
+export const OIL_PAYLOAD_LOCALE_VARIANT_VERSION = 'lvv';
+export const OIL_PAYLOAD_CUSTOM_PURPOSES = 'cp';
 
 // Identify privacy page link, eg. for tracking
 export const DATAQA_PRIVACY_PAGE = 'oil-PrivacyPage';
@@ -64,10 +72,9 @@ export const DATA_CONTEXT_YES = 'YES';
 export const DATA_CONTEXT_ADVANCED_SETTINGS = 'ADVANCEDSETTINGS';
 export const DATA_CONTEXT_BACK = 'BACK';
 
-export const OIL_PAYLOAD_PRIVACY = 'p';
-export const OIL_PAYLOAD_VERSION = 'v';
-export const OIL_PAYLOAD_LOCALE_VARIANT_NAME = 'lvn';
-export const OIL_PAYLOAD_LOCALE_VARIANT_VERSION = 'lvv';
-export const OIL_PAYLOAD_CUSTOM_PURPOSES = 'cp';
-
 export const OIL_GLOBAL_OBJECT_NAME = 'AS_OIL';
+
+// Tag management
+export const MANAGED_TAG_IDENTIFIER = 'as-oil';
+export const MANAGED_TAG_IDENTIFIER_ATTRIBUTE = 'data-managed';
+export const MANAGED_TAG_PURPOSES_ATTRIBUTE = 'data-purposes';

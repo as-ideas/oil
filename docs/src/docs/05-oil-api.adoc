@@ -117,6 +117,66 @@ CPC API definition:
 | window.AS_OIL.triggerOptIn() | will trigger the generic opt-in (can also result in an opt-out)
 |====
 
+=== Soft Blocking of DOM Elements
+With OIL you can manage third-party scripts to ensure that they only run if the user has given consent to their use. For example, this is useful for scripts provided by
+vendors that do not implement the IAB JavaScript API yet. Furthermore, OIL can manage other elements with a `src` or an `href` attribute the same way.
+
+
+==== Managing `<script>` Elements
+
+To manage `<script>` tags you have to add a `data-managed` attribute with the value `as-oil`. To avoid automatic execution of the `<script>` tag as long as it should be deactivated
+change the `type` attribute to `opt-in` and add a `data-type` attribute with the original type. In case of tag activation OIL replaces the `type` attribute with this
+original type. With an additional `data-purposes` attribute you can specify a comma-separated list of purpose ids the user has to consent with to activate the tag. If `data-purposes`
+attribute is omitted all defined purposes are necessary for tag activation.
+
+Here is an example for a managed `<script>` tag:
+----
+<script data-managed="as-oil"
+        data-type="text/javascript"
+        data-purposes="1,2,4"
+        type="as-oil"
+        id="managedScriptTag">
+  document.getElementById("demoText").innerHTML = "This text will be shown with given consent!";
+</script>
+----
+OIL can manage `<script>` tags that load a script from an URL as well. Simply replace the `src` attribute with `data-src` as shown below:
+----
+<script data-managed="as-oil"
+        data-type="text/javascript"
+        data-src="oilDemoScript.js"
+        data-purposes="1,2,4"
+        type="as-oil"
+        id="managedScriptTag">
+</script>
+----
+Attributes `class`, `id`, `defer`, `async` and `charset` and further `data-` attributes can be used. They are not changed by OIL.
+
+==== Managing Other Elements
+
+To manage elements with a `src` or `href` attribute add a `data-managed` attribute with the value `as-oil` and replace the `src` attribute with `data-src` or the `href`
+attribute with `data-href`. With the optional `data-title` attribute a title can be defined - use it instead of `title` attribute. With a `data-purposes` attribute you
+can specify a comma-separated list of purpose ids the user has to consent with to activate the tag. If `data-purposes` attribute is omitted all defined purposes are necessary for
+tag activation. All other attributes are not changed by OIL - with one exception.
+To ensure that managed elements are not visible as long as they should be deactivated OIL sets the CSS `display` property to `none`. To provide a value for this property that is
+used when the tag is activated add a corresponding `data-display` attribute. OIL sets its value into the CSS display property when it activates the tag. Other CSS properties
+can be specified by a `style` attribute or in a CSS section or file.
+
+Here is an example for a managed `<img>` tag:
+
+----
+<img data-managed="as-oil"
+         data-src="simpleImage.png"
+         data-title="Simple Image"
+         data-display="block"
+         data-purposes="1,2,4"
+         alt="A simple image"
+         height="50"
+         width="50"
+         id="imgId"
+         class="imgClass"
+         style="border: 1px solid #ddd; border-radius: 20px;">
+----
+
 === Tracking and Google Analytics Events
 If you want to use Google Analytics with OIL you can use OIL Events (see above) and proxy them to your specific GA installation.
 
