@@ -31,7 +31,7 @@ module.exports = {
       .click(OIL_YES_BUTTON)
       .pause(200)
       .waitForElementPresent(OIL_MANAGED_TAGS_SCRIPT_TAG, 1000, false)
-      .pause(1000)
+      .pause(500)
       .assert.containsText(OIL_MANAGED_TAGS_DIV, 'Dieser Text wird erst sichtbar, wenn der Consent gegeben wurde!');
     browser
       .waitForElementPresent(OIL_MANAGED_TAGS_IMG_TAG, 1000, false)

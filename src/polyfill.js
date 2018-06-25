@@ -7,6 +7,7 @@ export function generatePolyfills(){
   require('core-js/modules/es6.object.assign');
   require('core-js/modules/es6.string.starts-with');
   require('core-js/modules/es6.array.iterator');
+  require('core-js/modules/es6.array.fill');
   require('core-js/modules/es6.promise');
   require('core-js/modules/es7.object.values');
   require('core-js/modules/es7.promise.finally');
