@@ -129,6 +129,26 @@ export function arrayContains(array, obj) {
   return false;
 }
 
+export function arrayContainsArray(array, checkedArray) {
+  if (!array || !checkedArray) {
+    return false;
+  }
+  let elementCounterMap = {};
+
+  for (let i = 0; i < array.length; i++) {
+    if (!elementCounterMap[array[i]]) {
+      elementCounterMap[array[i]] = 0;
+    }
+    elementCounterMap[array[i]]++;
+  }
+  for (let i = 0; i < checkedArray.length; i++) {
+    if (!elementCounterMap[checkedArray[i]] || --elementCounterMap[checkedArray[i]] < 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
 /**
  * Sets a global object within OIL namespace.
  *

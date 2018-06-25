@@ -1,7 +1,7 @@
 import '../../styles/modal.scss';
 import '../../styles/cpc.scss';
-import {sendEventToHostSite} from '../core/core_utils.js';
-import {removeSubscriberCookies} from '../core/core_cookies.js';
+import { sendEventToHostSite } from '../core/core_utils.js';
+import { removeSubscriberCookies } from '../core/core_cookies.js';
 import {
   EVENT_NAME_ADVANCED_SETTINGS,
   EVENT_NAME_AS_PRIVACY_SELECTED,
@@ -31,7 +31,8 @@ import {
   getSoiConsentData
 } from './userview_privacy.js';
 import { getGlobalOilObject, isObject } from '../core/core_utils';
-import {getPurposes, loadVendorList} from '../core/core_vendor_information';
+import { getPurposes, loadVendorList } from '../core/core_vendor_information';
+import { manageDomElementActivation } from '../core/core_tag_management';
 
 
 // Initialize our Oil wrapper and save it ...
@@ -232,17 +233,14 @@ function handleThirdPartyList() {
 }
 
 export function handleOptIn() {
-  if (isPoiActive()) {
-    handlePoiOptIn();
-  } else {
-    handleSoiOptIn();
-  }
+  (isPoiActive() ? handlePoiOptIn() : handleSoiOptIn()).then(() => {
+    let commandCollectionExecutor = getGlobalOilObject('commandCollectionExecutor');
+    if (commandCollectionExecutor) {
+      commandCollectionExecutor();
+    }
+    manageDomElementActivation();
+  });
   animateOptInButton();
-
-  let commandCollectionExecutor = getGlobalOilObject('commandCollectionExecutor');
-  if (commandCollectionExecutor) {
-    commandCollectionExecutor();
-  }
 }
 
 function animateOptInButton() {
@@ -255,29 +253,32 @@ function animateOptInButton() {
   }
 }
 
-export function handleSoiOptIn() {
+function handleSoiOptIn() {
   let privacySetting = getPrivacySettings();
   logInfo('Handling SOI with settings: ', privacySetting);
   trackPrivacySettings(privacySetting);
 
   if (shouldPrivacySettingBeStored(privacySetting)) {
-    oilOptIn(privacySetting).then(() => {
+    return oilOptIn(privacySetting).then(() => {
       // FIXME should remove Wrapper
       renderOil({optIn: true});
       sendEventToHostSite(EVENT_NAME_SOI_OPT_IN);
     });
   } else {
-    removeSubscriberCookies();
+    return new Promise(resolve => {
+      removeSubscriberCookies();
+      resolve();
+    });
   }
 }
 
-export function handlePoiOptIn() {
+function handlePoiOptIn() {
   let privacySetting = getPrivacySettings();
   logInfo('Handling POI with settings: ', privacySetting);
   trackPrivacySettings(privacySetting);
 
   if (shouldPrivacySettingBeStored(privacySetting)) {
-    oilPowerOptIn(privacySetting, !isSubscriberSetCookieActive()).then(() => {
+    return oilPowerOptIn(privacySetting, !isSubscriberSetCookieActive()).then(() => {
       // FIXME should remove Wrapper
       renderOil({optIn: true});
       if (isPoiActive()) {
@@ -286,7 +287,7 @@ export function handlePoiOptIn() {
     });
   } else {
     removeSubscriberCookies();
-    deActivatePowerOptIn();
+    return deActivatePowerOptIn();
   }
 }
 

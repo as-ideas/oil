@@ -148,6 +148,11 @@ module.exports = {
     template: path.resolve(sourcePath, 'demos', 'small-design.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency'
+  }, {
+    filename: 'demos/tag-management.html',
+    template: path.resolve(sourcePath, 'demos', 'tag-management.html'),
+    chunks: ['oil'],
+    chunksSortMode: 'dependency'
   }],
   entry: {
     'hub': path.resolve(sourcePath, 'hub.js'),

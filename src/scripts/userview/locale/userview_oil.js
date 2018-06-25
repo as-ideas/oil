@@ -9,8 +9,6 @@ export {
   renderOil,
   oilShowPreferenceCenter,
   handleOptIn,
-  handleSoiOptIn,
-  handlePoiOptIn,
   oilWrapper
 } from '../userview_modal';
 
