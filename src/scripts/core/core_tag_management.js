@@ -2,6 +2,7 @@ import { MANAGED_TAG_IDENTIFIER, MANAGED_TAG_IDENTIFIER_ATTRIBUTE, MANAGED_TAG_P
 import { getSoiCookie } from './core_cookies';
 import { arrayContainsArray } from './core_utils';
 import { getPurposeIds } from './core_vendor_information';
+import { getCustomPurposeIds } from './core_config';
 
 export function manageDomElementActivation() {
   let managedElements = findManagedElements();
@@ -14,7 +15,7 @@ export function manageDomElementActivation() {
 
 function getNecessaryPurposes(element) {
   let purposesString = element.getAttribute(MANAGED_TAG_PURPOSES_ATTRIBUTE);
-  return purposesString ? purposesString.split(/,\s*/) : getPurposeIds();
+  return purposesString ? purposesString.split(/,\s*/) : getPurposeIds().concat(getCustomPurposeIds());
 }
 
 function findManagedElements() {
@@ -89,8 +90,10 @@ function manageNonScriptElement(element, cookie) {
 
 function hasConsent(element, cookie) {
   if (cookie.opt_in) {
-    let allowedPurposes = cookie.consentData.getPurposesAllowed();
     let necessaryPurposes = getNecessaryPurposes(element);
+    let allowedPurposes = cookie.consentData.getPurposesAllowed();
+    allowedPurposes = allowedPurposes ? allowedPurposes.concat(cookie.customPurposes) : cookie.customPurposes;
+
     return arrayContainsArray(allowedPurposes, necessaryPurposes);
   } else {
     return false;
