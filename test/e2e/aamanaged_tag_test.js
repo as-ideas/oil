@@ -1,4 +1,4 @@
-import { OIL_LAYER, OIL_MANAGED_TAGS_IMG_TAG, OIL_MANAGED_TAGS_SCRIPT_TAG, OIL_YES_BUTTON } from '../test_constants';
+import { OIL_LAYER, OIL_MANAGED_TAGS_DIV, OIL_MANAGED_TAGS_IMG_TAG, OIL_MANAGED_TAGS_SCRIPT_TAG, OIL_YES_BUTTON } from '../test_constants';
 
 module.exports = {
   '@disabled': false,
@@ -31,7 +31,8 @@ module.exports = {
       .click(OIL_YES_BUTTON)
       .pause(200)
       .waitForElementPresent(OIL_MANAGED_TAGS_SCRIPT_TAG, 1000, false)
-      .expect.element(OIL_MANAGED_TAGS_SCRIPT_TAG).to.have.attribute('type').equals('text/javascript');
+      .pause(1000)
+      .assert.containsText(OIL_MANAGED_TAGS_DIV, 'Dieser Text wird erst sichtbar, wenn der Consent gegeben wurde!');
     browser
       .waitForElementPresent(OIL_MANAGED_TAGS_IMG_TAG, 1000, false)
       .assert.visible(OIL_MANAGED_TAGS_IMG_TAG)
