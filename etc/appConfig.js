@@ -161,9 +161,9 @@ module.exports = {
   }],
   entry: {
     'hub': path.resolve(sourcePath, 'hub.js'),
+    'oilstub': path.resolve(sourcePath, 'oilstub.js'),
     'oil': path.resolve(sourcePath, 'oil.js'),
-    'oildevkit': path.resolve(sourcePath, 'scripts/dev-kit/dev-kit.js'),
-    'oilstub': path.resolve(sourcePath, 'oilstub.js')
+    'oildevkit': path.resolve(sourcePath, 'scripts/dev-kit/dev-kit.js')
   },
   copy: [{
     from: path.resolve(sourcePath, 'public'),
@@ -184,8 +184,8 @@ module.exports = {
     from: path.resolve(sourcePath, 'demos/empty.html'),
     to: 'demos/empty.html'
   }, {
-    from: path.resolve(sourcePath, 'cmp'),
-    to: 'cmp'
+    from: path.resolve(sourcePath, 'sandbox'),
+    to: 'sandbox'
   }],
   mangle: {},
   proxy: {},
