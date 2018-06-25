@@ -151,12 +151,12 @@ module.exports = {
   }, {
     filename: 'demos/tag-management.html',
     template: path.resolve(sourcePath, 'demos', 'tag-management.html'),
-    chunks: ['oil'],
+    chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency'
   }, {
     filename: 'demos/tag-management.html',
     template: path.resolve(sourcePath, 'demos', 'tag-management.html'),
-    chunks: ['oil'],
+    chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency'
   }],
   entry: {
