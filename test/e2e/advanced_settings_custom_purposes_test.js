@@ -1,4 +1,8 @@
-import { OIL_LAYER, OIL_ADVANCED_SETTINGS, OIL_ADVANCED_SETTINGS_WRAPPER, OIL_CUSTOM_PURPOSE_SLIDER } from '../test_constants.js';
+import { OIL_LAYER,
+  OIL_YES_BUTTON,
+  OIL_ADVANCED_SETTINGS,
+  OIL_ADVANCED_SETTINGS_WRAPPER,
+  OIL_CUSTOM_PURPOSE_SLIDER } from '../test_constants.js';
 
 module.exports = {
   '@disabled': false,
@@ -12,7 +16,7 @@ module.exports = {
       .useCss()
       .waitForElementVisible('body', 1000, false)
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 2000, false);
+      .waitForElementVisible(OIL_YES_BUTTON, 3000, false);
   },
 
   'Displays custom purposes in list': function (browser) {
