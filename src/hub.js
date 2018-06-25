@@ -1,4 +1,5 @@
-import {initOilHub} from './scripts/hub/hub_oil.js';
+import './polyfill.js';
+import { initOilHub } from './scripts/hub/hub_oil.js';
 
 (function () {
   let locationString = '';
