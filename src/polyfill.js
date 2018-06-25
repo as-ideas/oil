@@ -10,8 +10,6 @@ export function generatePolyfills(){
   require('core-js/modules/es6.array.fill');
   require('core-js/modules/es6.promise');
   require('core-js/modules/es7.object.values');
-  require('core-js/modules/es7.promise.finally');
-  require('core-js/modules/es7.promise.try');
 
   require('core-js/modules/_core');
 }
