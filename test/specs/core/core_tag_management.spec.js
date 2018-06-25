@@ -1,5 +1,6 @@
 import { resetOil } from '../../test-utils/utils_reset';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
+import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
 import { loadFixture, readFixture } from '../../test-utils/utils_fixtures';
 import { manageDomElementActivation } from '../../../src/scripts/core/core_tag_management';
@@ -46,8 +47,16 @@ describe("Tag Management", () => {
     expect(document.getElementById('jasmine-fixtures').innerHTML).toEqualWithDiff(readFixture('tag-management/managed-results/inactive-managed-tags.html'));
   });
 
-  it('should not activate elements if opt-in is given but some required purposes don\'t have consent', () => {
-    spyOn(CoreCookies, 'getSoiCookie').and.returnValue(givenCookieWithSelectedConsents());
+  it('should not activate elements if opt-in is given but some required standard purposes don\'t have consent', () => {
+    spyOn(CoreCookies, 'getSoiCookie').and.returnValue(givenCookieWithSelectedConsentsForStandardPurposes());
+    loadFixture('tag-management/script-and-img-tag-with-purposes.html');
+
+    manageDomElementActivation();
+    expect(document.getElementById('jasmine-fixtures').innerHTML).toEqualWithDiff(readFixture('tag-management/managed-results/inactive-managed-tags-with-purposes.html'));
+  });
+
+  it('should not activate elements if opt-in is given but some required custom purposes don\'t have consent', () => {
+    spyOn(CoreCookies, 'getSoiCookie').and.returnValue(givenCookieWithSelectedConsentsForCustomPurposes());
     loadFixture('tag-management/script-and-img-tag-with-purposes.html');
 
     manageDomElementActivation();
@@ -57,6 +66,7 @@ describe("Tag Management", () => {
   it('should activate elements without requested purposes if opt-in and purpose consents are given', () => {
     spyOn(CoreCookies, 'getSoiCookie').and.returnValue(givenCookieWithAllConsents());
     spyOn(CoreVendorInformation, 'getPurposeIds').and.returnValue([1, 2, 3, 4, 5]);
+    spyOn(CoreConfig, 'getCustomPurposeIds').and.returnValue([25, 26]);
     loadFixture('tag-management/script-and-img-tag.html');
 
     manageDomElementActivation();
@@ -72,24 +82,28 @@ describe("Tag Management", () => {
   });
 
   function givenCookieWithAllConsents() {
-    return givenCookieWithConsentString(CONSENT_STRING_WITH_ALL_CONSENTS)
+    return givenCookieWithConsentString(CONSENT_STRING_WITH_ALL_CONSENTS, [25, 26]);
   }
 
   function givenCookieWithoutConsents() {
-    return givenCookieWithConsentString(CONSENT_STRING_WITHOUT_CONSENTS)
+    return givenCookieWithConsentString(CONSENT_STRING_WITHOUT_CONSENTS, undefined);
   }
 
-  function givenCookieWithSelectedConsents() {
-    return givenCookieWithConsentString(CONSENT_STRING_WITH_SELECTED_CONSENTS)
+  function givenCookieWithSelectedConsentsForStandardPurposes() {
+    return givenCookieWithConsentString(CONSENT_STRING_WITH_SELECTED_CONSENTS, [25, 26]);
   }
 
-  function givenCookieWithConsentString(consentString) {
+  function givenCookieWithSelectedConsentsForCustomPurposes() {
+    return givenCookieWithConsentString(CONSENT_STRING_WITH_ALL_CONSENTS, [26]);
+  }
+
+  function givenCookieWithConsentString(consentString, customPurposes) {
     return {
       opt_in: true,
       version: '1.0.0',
       localeVariantName: 'deDE_01',
       localeVariantVersion: 1,
-      customPurposes: [25, 26],
+      customPurposes: customPurposes,
       consentData: new ConsentString(consentString),
       consentString: consentString
     }
