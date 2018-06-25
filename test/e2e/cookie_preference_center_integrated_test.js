@@ -20,7 +20,8 @@ module.exports = {
       .useCss()
       .waitForElementVisible('body', 1000, false)
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 2000, false);
+      .waitForElementVisible(OIL_LAYER, 2000, false)
+      .waitForElementVisible(OIL_YES_BUTTON, 1000, false);
   },
 
   'Cookie Preference Center integrates into the host site on trigger and works': function (browser) {
@@ -30,8 +31,8 @@ module.exports = {
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-poi-integrated.html')
       .useCss()
       .waitForElementVisible('body', 1000, false)
-      .useXpath()
       .pause(300)
+      .useXpath()
       .waitForElementNotPresent(OIL_LAYER, 1000)
       .waitForElementNotPresent(OIL_ADVANCED_SETTINGS_SNIPPET, 1000)
       .click(OIL_ADVANCED_SETTINGS_TEST_BUTTON_SHOW_PREF)

@@ -6,7 +6,8 @@ import {
   OIL_LAYER_GROUP_LIST_ELEMENT,
   OIL_LAYER_THIRD_PARTY_LIST_ELEMENT,
   OIL_BACK_BUTTON,
-  OIL_LAYER_FULL
+  OIL_LAYER_FULL,
+  PAGE_BACKGROUND
 } from '../test_constants.js';
 
 module.exports = {
@@ -19,7 +20,7 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/direct-integration.html')
       .useCss()
-      .waitForElementVisible('body', 1000, false)
+      .waitForElementVisible(PAGE_BACKGROUND, 1000, false)
       .useXpath()
       .waitForElementVisible(OIL_LAYER, 2000, false);
   },

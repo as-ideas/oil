@@ -1,4 +1,4 @@
-import { OIL_LAYER, OIL_YES_BUTTON } from '../test_constants.js';
+import { OIL_LAYER, OIL_YES_BUTTON, PAGE_BACKGROUND } from '../test_constants.js';
 
 module.exports = {
   '@disabled': false,
@@ -10,7 +10,7 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/direct-integration.html')
       .useCss()
-      .waitForElementVisible('body', 1000, false)
+      .waitForElementVisible(PAGE_BACKGROUND, 1000, false)
       .useXpath()
       .waitForElementVisible(OIL_LAYER, 2000, false);
   },
@@ -22,7 +22,7 @@ module.exports = {
       .waitForElementNotPresent(OIL_LAYER, 1000)
       .refresh()
       .useCss()
-      .waitForElementVisible('body', 1000, false)
+      .waitForElementVisible(PAGE_BACKGROUND, 1000, false)
       .useXpath()
       .pause(500)
       .waitForElementNotPresent(OIL_LAYER, 1000)

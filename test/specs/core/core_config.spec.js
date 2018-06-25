@@ -10,6 +10,7 @@ import {
   getLocale,
   getLocaleUrl,
   getLocaleVariantName,
+  getLanguageFromLocale,
   getPoiGroupName,
   getPublicPath,
   setLocale
@@ -101,6 +102,18 @@ describe('core_config', () => {
       };
       expect(getLocaleVariantName()).toEqual('floo');
     });
+
+  });
+
+  describe('getLanguageFromLocale', function() {
+
+    it('retrieves substring from parameter', function() {
+      expect(getLanguageFromLocale('foo_bar')).toEqual('fo');
+    });
+
+    it('returns "en" when parameter is null', function(){
+      expect(getLanguageFromLocale()).toEqual('en');
+    })
 
   });
 
