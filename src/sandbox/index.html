@@ -40,10 +40,26 @@
 
     eventer(messageEvent, receiveOilMessage, false);
     printCookieData();
+
+    function showCPC() {
+      document.getElementById('oil-preference-center-container').style.display = "block";
+      AS_OIL.showPreferenceCenter();
+      document.addEventListener("oil_as_cpc_privacy_selected", function(){
+        console.log('LAYER CLOSED');
+        document.getElementById('oil-preference-center-container').style.display = "none";
+      });
+    }
+
   </script>
 </head>
-
 <body>
+
+<div id="oil-preference-center-container" class="container-fluid">
+  <div id="oil-preference-center" class="vertical-center-row col-sm-10 align-middle">CPC goes here</div>
+</div>
+<script>
+  
+</script>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/index.html">oil.js sandbox</a>
 </nav>
@@ -229,11 +245,21 @@
             </div>
           </div>
         </div>
+
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Cookie Preference Center (CPC)</h5>
+              <p class="card-text">Embed a Cookie Preference Center into your page</p>
+              <a href="#" class="btn btn-primary" onclick="showCPC()">Open CPC</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
 </div>
-
 <!-- Icons -->
 <script type="text/javascript" src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
 <script type="text/javascript">feather.replace();</script>
