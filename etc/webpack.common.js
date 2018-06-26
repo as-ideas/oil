@@ -12,7 +12,6 @@ debugLog('Using following appConfig:', appConfig);
  */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 /*
  * Webpack Constants
@@ -173,8 +172,7 @@ let config = {
      *
      * See: https://www.npmjs.com/package/copy-webpack-plugin
      */
-    new CopyWebpackPlugin(appConfig.copy),
-    new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i })
+    new CopyWebpackPlugin(appConfig.copy)
   ],
 
   /*
@@ -201,7 +199,7 @@ let config = {
  *
  * See: https://github.com/ampedandwired/html-webpack-plugin
  */
-for (var indexConfig of appConfig.indexFiles) {
+for (let indexConfig of appConfig.indexFiles) {
   config.plugins.push(new HtmlWebpackPlugin(indexConfig));
 }
 
