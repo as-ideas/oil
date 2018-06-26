@@ -14,7 +14,15 @@
 
   <!-- Custom styles for this template -->
   <link href="assets/dashboard.css" rel="stylesheet">
+  <script type="text/javascript">
+    let eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    let messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+    let eventer = window[eventMethod];
 
+    function eventDataContains(str) {
+      return JSON.stringify(event.data).indexOf(str) !== -1;
+    }
+  </script>
 </head>
 
 <body>
@@ -117,13 +125,59 @@
       <div class="row">
         <div class="col">
           <div class="card">
-            <div class="card-header">
-              getVendorConsents()
-            </div>
             <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title">Cookie Data</h5>
+              <p class="card-text">The Opt-In Layer sets a cookie that stores all necessary data about user's consents. It ensure traceability in terms of an audit trail. See current cookie here:</p>
+              <table class="table table-striped">
+                <tbody>
+                <tr>
+                  <th scope="row">Opt-In given:</th>
+                  <td id="oilCookieOptIn"></td>
+                </tr>
+                <tr>
+                  <th scope="row">OIL version:</th>
+                  <td id="oilCookieOilVersion"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Locale Variant Name:</th>
+                  <td id="oilCookieLocaleVariantName"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Locale Variant Version:</th>
+                  <td id="oilCookieLocaleVariantVersion"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Custom Purpose Ids:</th>
+                  <td id="oilCookieCustomPurposeIds"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Consent String:</th>
+                  <td id="oilCookieConsentString"></td>
+                </tr>
+                </tbody>
+              </table>
+              <script type="text/javascript">
+                function printCookieData() {
+                  document.getElementById('oilCookieOptIn').innerHTML = AS_OIL.status().opt_in;
+                  document.getElementById('oilCookieOilVersion').innerHTML = AS_OIL.status().version;
+                  document.getElementById('oilCookieLocaleVariantName').innerHTML = AS_OIL.status().localeVariantName;
+                  document.getElementById('oilCookieLocaleVariantVersion').innerHTML = AS_OIL.status().localeVariantVersion;
+                  document.getElementById('oilCookieCustomPurposeIds').innerHTML = AS_OIL.status().customPurposes;
+                  document.getElementById('oilCookieConsentString').innerHTML = AS_OIL.status().consentString;
+                }
+
+                function receiveOilMessage(event) {
+                  if (event && event.data && (eventDataContains('oil_optin_done') || eventDataContains('oil_has_optedin'))) {
+                    printCookieData();
+                  }
+                }
+                eventer(messageEvent, receiveOilMessage, false);
+                AS_OIL.eventCollection.forEach((event) => {
+                  if (event && event.name && (event.name === 'oil_optin_done' || event.name === 'oil_has_optedin')) {
+                    printCookieData();
+                  }
+                })
+              </script>
             </div>
           </div>
         </div>
@@ -139,6 +193,8 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col">
           <div class="card">
             <div class="card-header">
@@ -163,6 +219,8 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col">
           <div class="card">
             <div class="card-header">
