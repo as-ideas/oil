@@ -27,8 +27,9 @@ module.exports = {
   'Cookie Preference Center integrates into the host site on trigger and works': function (browser) {
     browser
       .click(OIL_YES_BUTTON)
-      .pause(200)
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-poi-integrated.html')
+      .useXpath()
+      .waitForElementNotPresent(OIL_LAYER, 1000)
+      .refresh()
       .useCss()
       .waitForElementVisible('body', 1000, false)
       .pause(300)
