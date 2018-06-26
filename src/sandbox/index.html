@@ -15,13 +15,31 @@
   <!-- Custom styles for this template -->
   <link href="assets/dashboard.css" rel="stylesheet">
   <script type="text/javascript">
+    function eventDataContains(str) {
+      return JSON.stringify(event.data).indexOf(str) !== -1;
+    }
+
+    function printCookieData() {
+      document.getElementById('oilCookieOptIn').innerHTML = AS_OIL.status().opt_in;
+      document.getElementById('oilCookieOilVersion').innerHTML = AS_OIL.status().version;
+      document.getElementById('oilCookieLocaleVariantName').innerHTML = AS_OIL.status().localeVariantName;
+      document.getElementById('oilCookieLocaleVariantVersion').innerHTML = AS_OIL.status().localeVariantVersion;
+      document.getElementById('oilCookieCustomPurposeIds').innerHTML = AS_OIL.status().customPurposes;
+      document.getElementById('oilCookieConsentString').innerHTML = AS_OIL.status().consentString;
+    }
+
+    function receiveOilMessage(event) {
+      if (event && event.data && (eventDataContains('oil_optin_done') || eventDataContains('oil_has_optedin'))) {
+        printCookieData();
+      }
+    }
+
     let eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
     let messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
     let eventer = window[eventMethod];
 
-    function eventDataContains(str) {
-      return JSON.stringify(event.data).indexOf(str) !== -1;
-    }
+    eventer(messageEvent, receiveOilMessage, false);
+    printCookieData();
   </script>
 </head>
 
@@ -156,24 +174,6 @@
                 </tr>
                 </tbody>
               </table>
-              <script type="text/javascript">
-                function printCookieData() {
-                  document.getElementById('oilCookieOptIn').innerHTML = AS_OIL.status().opt_in;
-                  document.getElementById('oilCookieOilVersion').innerHTML = AS_OIL.status().version;
-                  document.getElementById('oilCookieLocaleVariantName').innerHTML = AS_OIL.status().localeVariantName;
-                  document.getElementById('oilCookieLocaleVariantVersion').innerHTML = AS_OIL.status().localeVariantVersion;
-                  document.getElementById('oilCookieCustomPurposeIds').innerHTML = AS_OIL.status().customPurposes;
-                  document.getElementById('oilCookieConsentString').innerHTML = AS_OIL.status().consentString;
-                }
-
-                function receiveOilMessage(event) {
-                  if (event && event.data && (eventDataContains('oil_optin_done') || eventDataContains('oil_has_optedin'))) {
-                    printCookieData();
-                  }
-                }
-                eventer(messageEvent, receiveOilMessage, false);
-                printCookieData();
-              </script>
             </div>
           </div>
         </div>
