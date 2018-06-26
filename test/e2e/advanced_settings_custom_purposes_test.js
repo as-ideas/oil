@@ -21,7 +21,7 @@ module.exports = {
       .useXpath().waitForElementVisible(OIL_YES_BUTTON, 3000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
-      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
+      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
       .pause(100)
       .waitForElementNotPresent(OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER, 1000, false)
       .end();
@@ -36,7 +36,7 @@ module.exports = {
       .waitForElementVisible(OIL_YES_BUTTON, 3000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
-      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
+      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
       .pause(100)
       .waitForElementPresent(OIL_CUSTOM_PURPOSE_SLIDER, 100, false)
       .waitForElementPresent(OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER, 100, false)
