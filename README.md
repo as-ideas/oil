@@ -11,7 +11,7 @@ oil.js is a lightweight consent manager and cookie banner. It is optimized for l
 ![GZIP SIZE](http://img.badgesize.io/https://oil.axelspringer.com/latest/oil.min.js?compression=gzip&style=flat-square)
 [![GPL2 License][license-image]][license-url] 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fas-ideas%2Foil.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fas-ideas%2Foil?ref=badge_shield)
-[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=K0diOE0wb08vMTBzVFNOcFNLQ0NpVTNDdWZOR0JDWStscE84Z1VqOGZUUT0tLU40MEJSQVk3dFJ2RXh1a294S1VJTUE9PQ==--63f8bb4a27933f962a3a17112782edeac545ba77)](https://www.browserstack.com/automate/public-build/K0diOE0wb08vMTBzVFNOcFNLQ0NpVTNDdWZOR0JDWStscE84Z1VqOGZUUT0tLU40MEJSQVk3dFJ2RXh1a294S1VJTUE9PQ==--63f8bb4a27933f962a3a17112782edeac545ba77)
+[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=L3gycEdHSG9Ea0JiT3RXbTBjSTl2RUpJUG9vOFh0M3F5dnFrU3pQNkxCUT0tLUw5aEhDalhOTng0R2N2cEh5a3Z5T1E9PQ==--802c6b824e7d37574af5556756b996c65129a2fa)](https://www.browserstack.com/automate/public-build/L3gycEdHSG9Ea0JiT3RXbTBjSTl2RUpJUG9vOFh0M3F5dnFrU3pQNkxCUT0tLUw5aEhDalhOTng0R2N2cEh5a3Z5T1E9PQ==--802c6b824e7d37574af5556756b996c65129a2fa)
 
 [Website](https://oil.axelspringer.com/) | [Full documentation](https://oil.axelspringer.com/docs/last-release) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html) | [Release Notes](https://github.com/as-ideas/oil/releases)
 

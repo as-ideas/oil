@@ -19,4 +19,5 @@ export const OIL_ADVANCED_SETTINGS_SNIPPET = '//*[@data-qa="cpc-snippet"]';
 export const OIL_CUSTOM_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-25"]';
 export const OIL_MANAGED_TAGS_SCRIPT_TAG = '//*[@id="managedScriptTag"]';
 export const OIL_MANAGED_TAGS_IMG_TAG = '//*[@id="managedImgTag"]';
+export const OIL_MANAGED_TAGS_DIV = '//*[@id="demoText"]';
 export const PAGE_BACKGROUND = '.has-big-bad-background';
