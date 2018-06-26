@@ -109,17 +109,7 @@ body {
 
 
 
+
 #oil-preference-center-container {
-  position: absolute;
   display: none;
-  width: 100%;
-  height: 100%;
-  z-index: 5000000;
-  background-color: rgba(120,120,120,.5);
-}
-#oil-preference-center {
-  background-color: white;
-  margin: auto;
-  padding: 2em;
-  margin-top: 20%;
 }
