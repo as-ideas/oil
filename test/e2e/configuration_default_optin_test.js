@@ -1,4 +1,5 @@
 import { OIL_LAYER,
+  OIL_YES_BUTTON,
   PAGE_BACKGROUND } from '../test_constants';
 
 module.exports = {
@@ -15,7 +16,8 @@ module.exports = {
       .url(browser.globals.launch_url_host1 + 'demos/configuration-default-optin.html')
       .refresh()
       .useCss().waitForElementVisible(PAGE_BACKGROUND, 2000, false)
-      .useXpath().waitForElementVisible(OIL_LAYER, 2000, false)
+      .useXpath()
+      .waitForElementVisible(OIL_YES_BUTTON, 2000, false)
       .end()
   },
 

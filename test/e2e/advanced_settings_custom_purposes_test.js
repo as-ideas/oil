@@ -2,7 +2,8 @@ import { OIL_LAYER,
   OIL_YES_BUTTON,
   OIL_ADVANCED_SETTINGS,
   OIL_ADVANCED_SETTINGS_WRAPPER,
-  OIL_CUSTOM_PURPOSE_SLIDER } from '../test_constants.js';
+  OIL_CUSTOM_PURPOSE_SLIDER,
+  OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER } from '../test_constants.js';
 
 module.exports = {
   '@disabled': false,
@@ -26,12 +27,10 @@ module.exports = {
       .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
       .pause(100)
       .waitForElementPresent(OIL_CUSTOM_PURPOSE_SLIDER, 100, false)
-      .pause(100)
-      .useCss()
-      // FIXME OIL-196
-      // deactivate because opening the page in IE10 and 9 the custom purposes, only the e2e test fails
-      //.assert.containsText('html', 'Custom Purpose 1', 'Checking custom purpose title')
+      .waitForElementPresent(OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER, 100, false)
       .pause(200)
+      .assert.containsText(OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER,'Custom Purpose 1')
+      .pause(100)
       .end()
   }
 
