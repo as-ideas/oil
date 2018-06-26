@@ -172,11 +172,7 @@
                   }
                 }
                 eventer(messageEvent, receiveOilMessage, false);
-                AS_OIL.eventCollection.forEach((event) => {
-                  if (event && event.name && (event.name === 'oil_optin_done' || event.name === 'oil_has_optedin')) {
-                    printCookieData();
-                  }
-                })
+                printCookieData();
               </script>
             </div>
           </div>
