@@ -96,7 +96,7 @@ describe('core_oil', () => {
 
     initOilLayer();
     setTimeout(() => {
-      expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalledTimes(2);
+      expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalledTimes(1);
       done();
     }, 2000);
   });
@@ -107,7 +107,7 @@ describe('core_oil', () => {
 
     initOilLayer();
     setTimeout(() => {
-      expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalledTimes(1);
+      expect(CoreTagManagement.manageDomElementActivation).not.toHaveBeenCalled();
       done();
     }, 2000);
   });

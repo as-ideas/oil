@@ -19,8 +19,7 @@ export function initOilLayer() {
   if (isPreviewMode() && !isPreviewCookieSet()) {
     logPreviewInfo('Preview mode not correctly set, please see the documentation on how to set the cookie.');
   }
-
-  manageDomElementActivation();
+  registerDomElementActivationManager();
 
   attachUtilityFunctionsToWindowObject();
 
@@ -75,6 +74,12 @@ export function initOilLayer() {
       }
     });
   }
+}
+
+function registerDomElementActivationManager() {
+  document.addEventListener('DOMContentLoaded', function () {
+    manageDomElementActivation();
+  });
 }
 
 function attachCommandCollectionFunctionToWindowObject() {
