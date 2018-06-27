@@ -20,11 +20,11 @@
         "advanced_settings": true,
         "timeout": -1
       }
+
   </script>
 </head>
 
 <body>
-
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/index.html">oil.js sandbox</a>
 </nav>
@@ -40,7 +40,6 @@
             <a class="nav-link active" href="#">
               <span data-feather="home"></span>
               Main
-              <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
@@ -83,6 +82,7 @@
             <a class="nav-link" href="#">
               <span data-feather="code"></span>
               ping()
+              <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
@@ -120,97 +120,7 @@
 
     <!--main section-->
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <h1>oil.js Sandbox</h1>
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Cookie Data</h5>
-              <p class="card-text">The Opt-In Layer sets a cookie that stores all necessary data about user's consents. It ensure traceability in terms of an audit trail. See current cookie here:</p>
-              <table class="table table-striped">
-                <tbody>
-                <tr>
-                  <th scope="row">Opt-In given:</th>
-                  <td id="oilCookieOptIn"></td>
-                </tr>
-                <tr>
-                  <th scope="row">OIL version:</th>
-                  <td id="oilCookieOilVersion"></td>
-                </tr>
-                <tr>
-                  <th scope="row">Locale Variant Name:</th>
-                  <td id="oilCookieLocaleVariantName"></td>
-                </tr>
-                <tr>
-                  <th scope="row">Locale Variant Version:</th>
-                  <td id="oilCookieLocaleVariantVersion"></td>
-                </tr>
-                <tr>
-                  <th scope="row">Custom Purpose Ids:</th>
-                  <td id="oilCookieCustomPurposeIds"></td>
-                </tr>
-                <tr>
-                  <th scope="row">Consent String:</th>
-                  <td id="oilCookieConsentString"></td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Reset Consents</h5>
-              <p class="card-text">If you have given the consent and want to show oil banner again, click on the reset button. All your consent data will be removed immediately.</p>
-              <button id="resetButton" type="button" class="btn btn-primary">Reset</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Simulate Banner Timeout</h5>
-              <p class="card-text">When the user navigates to another page of the website, the banner is closed and consent is stored. Click on the button below to simulate that. The banner will be hidden and the list of consents by vendor shown below will be updated.</p>
-              <div id="simulateBannerTimeoutCountdown"></div>
-              <div id="simulateBannerTimeoutContainer" class="input-group mb-3">
-                <input id="simulateBannerTimeoutValue" type="text" class="form-control" placeholder="Timeout in seconds">
-                <div class="input-group-append">
-                  <button id="simulateBannerTimeoutButton" class="btn btn-primary" type="button">Start Banner Timeout</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-header">
-              getPublisherConsents()
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <div class="card-header">
-              getVendorList()
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h1>oil.js ping</h1>
     </main>
   </div>
 </div>
@@ -289,7 +199,7 @@
       let config = JSON.parse(document.getElementById('oil-configuration').text);
       let timeoutValue = parseInt(document.getElementById('simulateBannerTimeoutValue').value);
 
-      if (isNaN(timeoutValue)) return;
+      if (isNaN(timeoutValue) || timeoutValue === 0) return;
 
       config['timeout'] = timeoutValue;
       document.getElementById('oil-configuration').text = JSON.stringify(config);
