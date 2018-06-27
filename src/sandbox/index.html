@@ -36,7 +36,7 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a id="menu-oil-main" class="nav-link active" href="javascript:activateSection('oil-main');">
               <span data-feather="home"></span>
               Main
               <span class="sr-only">(current)</span>
@@ -49,7 +49,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="javascript:showCPC();">
+            <a id="menu-oil-preference-center-container" class="nav-link" href="javascript:activateSection('oil-preference-center-container', showCPC);">
               <span data-feather="sliders"></span>
               Cookie Preference Center (CPC)
             </a>
@@ -138,6 +138,18 @@
     if (event && event.data && (eventDataContains(event, ['oil_optin_done', 'oil_has_optedin', 'oil_optout_done']))) {
       showCookieData();
     }
+  }
+
+  function activateSection(sectionToActivate, activationFunction) {
+    let sections = ['oil-main', 'oil-preference-center-container'];
+
+    sections.forEach(section => {
+      document.getElementById(section).style.display = "none";
+      document.getElementById('menu-' + section).classList.remove('active');
+    });
+    document.getElementById(sectionToActivate).style.display = "block";
+    document.getElementById('menu-' + sectionToActivate).classList.add('active');
+    if (activationFunction) activationFunction();
   }
 
   let eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
