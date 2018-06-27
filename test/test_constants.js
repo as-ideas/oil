@@ -17,6 +17,7 @@ export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_SHOW_PREF = '//*[@data-qa="show-p
 export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_TRIGGER_OPTIN = '//*[@data-qa="oil-YesButton"]';
 export const OIL_ADVANCED_SETTINGS_SNIPPET = '//*[@data-qa="cpc-snippet"]';
 export const OIL_CUSTOM_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-25"]';
+export const OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER = '//*[@id="as-oil-cpc"]/div/div[3]/div[2]/div[7]/div/div[1]';
 export const OIL_MANAGED_TAGS_SCRIPT_TAG = '//*[@id="managedScriptTag"]';
 export const OIL_MANAGED_TAGS_IMG_TAG = '//*[@id="managedImgTag"]';
 export const OIL_MANAGED_TAGS_DIV = '//*[@id="demoText"]';

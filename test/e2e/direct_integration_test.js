@@ -12,7 +12,7 @@ module.exports = {
       .useCss()
       .waitForElementVisible(PAGE_BACKGROUND, 1000, false)
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 2000, false);
+      .waitForElementVisible(OIL_YES_BUTTON, 2000, false);
   },
 
   'OIL Layer closed after clicking yes': function (browser) {
@@ -20,18 +20,19 @@ module.exports = {
       .click(OIL_YES_BUTTON)
       .pause(200)
       .waitForElementNotPresent(OIL_LAYER, 1000)
+      .waitForElementNotPresent(OIL_YES_BUTTON, 1000)
       .refresh()
       .useCss()
       .waitForElementVisible(PAGE_BACKGROUND, 1000, false)
       .useXpath()
       .pause(500)
       .waitForElementNotPresent(OIL_LAYER, 1000)
+      .waitForElementNotPresent(OIL_YES_BUTTON, 1000)
       .end();
   },
 
   'OIL Layer wont break after the user deleted cookies while having the page open and then click yes': function (browser) {
     browser
-      .waitForElementVisible(OIL_LAYER, 2000, false)
       .deleteCookies()
       .click(OIL_YES_BUTTON)
       .pause(200)
