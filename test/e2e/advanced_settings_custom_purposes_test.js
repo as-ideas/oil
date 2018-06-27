@@ -1,4 +1,9 @@
-import { OIL_LAYER, OIL_ADVANCED_SETTINGS, OIL_ADVANCED_SETTINGS_WRAPPER, OIL_CUSTOM_PURPOSE_SLIDER } from '../test_constants.js';
+import { OIL_LAYER,
+  OIL_YES_BUTTON,
+  OIL_ADVANCED_SETTINGS,
+  OIL_ADVANCED_SETTINGS_WRAPPER,
+  OIL_CUSTOM_PURPOSE_SLIDER,
+  OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER } from '../test_constants.js';
 
 module.exports = {
   '@disabled': false,
@@ -6,29 +11,39 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-custom-purposes.html')
       .deleteCookies();
+  },
 
+  'Shows five purposes by default': function (browser) {
+    browser
+      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
+      .useCss()
+      .waitForElementVisible('body', 1000, false)
+      .useXpath().waitForElementVisible(OIL_YES_BUTTON, 3000, false)
+      .click(OIL_ADVANCED_SETTINGS)
+      .pause(200)
+      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
+      .pause(100)
+      .waitForElementNotPresent(OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER, 1000, false)
+      .end();
+  },
+
+  'Displays custom purposes in list': function (browser) {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-custom-purposes.html')
       .useCss()
       .waitForElementVisible('body', 1000, false)
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 2000, false);
-  },
-
-  'Displays custom purposes in list': function (browser) {
-    browser
+      .waitForElementVisible(OIL_YES_BUTTON, 3000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
-      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
+      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
       .pause(100)
       .waitForElementPresent(OIL_CUSTOM_PURPOSE_SLIDER, 100, false)
+      .waitForElementPresent(OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER, 100, false)
+      // FIXME selector fails in IE10
+      // .assert.containsText(OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER,'Custom Purpose 1')
       .pause(100)
-      .useCss()
-      // FIXME OIL-196
-      // deactivate because opening the page in IE10 and 9 the custom purposes, only the e2e test fails
-      //.assert.containsText('html', 'Custom Purpose 1', 'Checking custom purpose title')
-      .pause(200)
-      .end()
+      .end();
   }
 
 };

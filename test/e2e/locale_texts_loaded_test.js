@@ -26,6 +26,11 @@ module.exports = {
       .useCss().waitForElementVisible('body', 1000, false)
       .useXpath().waitForElementVisible(OIL_LAYER, 2000, false);
 
+    // FIXME
+    // this test fails in BrowserStack IE9. Change in the browser settings:
+    // Tools -> Internet Options -> Security -> Custom level... -> Miscellaneous -> Access data sources across domains -> Enable
+    // then this test works fine in a manual test
+
     browser.useXpath().expect.element(OIL_YES_BUTTON).text.to.match(end2endRegexp);
     browser.useXpath().expect.element(OIL_ADVANCED_SETTINGS).text.to.match(end2endRegexp);
 

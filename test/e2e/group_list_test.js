@@ -1,5 +1,6 @@
 import {
   OIL_LAYER,
+  OIL_YES_BUTTON,
   OIL_SHOW_COMPANY_LIST_BUTTON,
   OIL_SHOW_THIRD_PARTY_LIST_BUTTON,
   OIL_LAYER_POI_LIST,
@@ -22,7 +23,7 @@ module.exports = {
       .useCss()
       .waitForElementVisible(PAGE_BACKGROUND, 1000, false)
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 2000, false);
+      .waitForElementVisible(OIL_YES_BUTTON, 2000, false);
   },
 
   'OIL Layer show group list clicked, verify group list is visible and back': function (browser) {
