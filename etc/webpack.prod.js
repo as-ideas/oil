@@ -12,7 +12,6 @@ const appConfig = helpers.getAppConfig();
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
 /**
  * Webpack Constants
  */
@@ -91,8 +90,6 @@ const config = webpackMerge(commonConfig, {
    * See: http://webpack.github.io/docs/configuration.html#plugins
    */
   plugins: [
-
-    // new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }),
 
     /*
      * Plugin: OccurenceOrderPlugin
