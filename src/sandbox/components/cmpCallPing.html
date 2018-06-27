@@ -1,0 +1,33 @@
+<div id="cmp-call-ping">
+  <h1 class="display-6">CMP Api Call <code>ping()</code></h1>
+  <p>From specification
+    <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/CMP%20JS%20API%20v1.1%20Final.md" target="iabJsApiSpec">Consent Management Provider JavaScript API v1.1: Transparency & Consent Framework</a>:<br/>
+    <em>The "ping" command invokes the callback immediately with information about whether the main CMP script has loaded yet and if GDPR has been configured for all users or just EU users. (This requires this command's implementation and this configuration to be in the stub).</em>
+  </p>
+  <p>Invoke the <code>ping()</code> command as follows:
+    <code>__cmp('ping', null, (result, success) => { console.log('success ' + success + '; result = ' + JSON.stringify(result)) });</code></p>
+  <p>Here is what OIL layer currently returns for <code>ping()</code> calls:</p>
+  <table class="table table-sm" style="max-width: 30%;">
+    <tbody>
+    <tr>
+      <th scope="row">Success:</th>
+      <td><span id="ping-command-success"></span></td>
+    </tr>
+    <tr>
+      <th scope="row">Result:</th>
+      <td>
+        <pre id="ping-command-result"></pre>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+  function invokePing() {
+    __cmp('ping', null, (result, success) => {
+      document.getElementById('ping-command-success').innerText = success;
+      document.getElementById('ping-command-result').innerText = JSON.stringify(result, null, '  ');
+    });
+  }
+</script>

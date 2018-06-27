@@ -20,8 +20,6 @@
         "advanced_settings": true,
         "timeout": -1
       }
-
-
   </script>
 </head>
 <body>
@@ -67,31 +65,31 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a id="menu-cmp-call-getVendorConsents" class="nav-link" href="#">
               <span data-feather="code"></span>
               getVendorConsents()
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a id="menu-cmp-call-getConsentData" class="nav-link" href="#">
               <span data-feather="code"></span>
               getConsentData()
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a id="menu-cmp-call-ping" class="nav-link" href="javascript:activateSection('cmp-call-ping', invokePing());">
               <span data-feather="code"></span>
               ping()
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a id="menu-cmp-call-getPublisherConsents" class="nav-link" href="#">
               <span data-feather="code"></span>
               getPublisherConsents()
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a id="menu-cmp-call-getVendorList" class="nav-link" href="#">
               <span data-feather="code"></span>
               getVendorList()
             </a>
@@ -122,13 +120,15 @@
       <hr/>
       ${require('./components/main.html')}
       ${require('./components/cpc.html')}
+      ${require('./components/cmpCallPing.html')}
     </main>
   </div>
 </div>
 <!-- Icons -->
 <script type="text/javascript" src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
 <script type="text/javascript">feather.replace();</script>
-<!--SDK -->
+
+<!--Sandbox controlling -->
 <script type="text/javascript">
   function eventDataContains(event, eventNames) {
     return eventNames.filter((name) => JSON.stringify(event.data).indexOf(name) !== -1).length > 0;
@@ -141,7 +141,7 @@
   }
 
   function activateSection(sectionToActivate, activationFunction) {
-    let sections = ['oil-main', 'oil-preference-center-container'];
+    let sections = ['oil-main', 'oil-preference-center-container', 'cmp-call-ping'];
 
     sections.forEach(section => {
       document.getElementById(section).style.display = "none";
@@ -161,7 +161,7 @@
   showCookieData();
   configureResetButton();
   configureTimeoutSimulator();
-
+  activateSection('oil-main');
 </script>
 </body>
 </html>
