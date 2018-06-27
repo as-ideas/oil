@@ -22,7 +22,6 @@
       }
   </script>
 </head>
-
 <body>
 
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -30,7 +29,7 @@
 </nav>
 
 
-<!--ToDo: https://feathericons.com/-->
+<!--ToDo: https://feathericons.com/ -->
 <div class="container-fluid">
   <div class="row">
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
@@ -50,7 +49,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="javascript:showCPC();">
               <span data-feather="sliders"></span>
               Cookie Preference Center (CPC)
             </a>
@@ -121,6 +120,16 @@
     <!--main section-->
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <h1>oil.js Sandbox</h1>
+
+      <hr />
+      <div id="oil-preference-center-container" class="container-fluid">
+        <h3>Cookie Preference Center (CPC)</h3>
+        <p class="card-text">You can add an integrated version of the OIL Cookie Preference Center to your page to give the user the chance to reverse his initial selection (or even Opt-Out).</p>
+        <div id="oil-preference-center"></div>
+      </div>
+
+
+      <div id="oil-main">
       <div class="row">
         <div class="col">
           <div class="card">
@@ -210,11 +219,12 @@
             </div>
           </div>
         </div>
+
+      </div>
       </div>
     </main>
   </div>
 </div>
-
 <!-- Icons -->
 <script type="text/javascript" src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
 <script type="text/javascript">feather.replace();</script>
@@ -309,6 +319,18 @@
   configureResetButton();
   configureTimeoutSimulator();
 
+
+  function showCPC() {
+    showContentLayer('oil-preference-center-container');
+    AS_OIL.showPreferenceCenter();
+  }
+
+  function showContentLayer(layer) {
+    document.getElementById('oil-preference-center-container').style.display = "none";
+    document.getElementById('oil-main').style.display = "none";
+
+    document.getElementById(layer).style.display = "block";
+  }
 
 </script>
 </body>
