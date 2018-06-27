@@ -134,14 +134,10 @@ let config = {
         test: /\.css$/,
         loaders: ['to-string-loader', 'css-loader']
       },
-      /* Raw loader support for *.html
-       * Returns file content as string
-       *
-       * See: https://github.com/webpack/raw-loader
-       */
+      //process sandbox HTML Page hierarchy
       {
-        test: /\.html$/,
-        loader: 'raw-loader'
+        test: /sandbox\/.*\.html$/,
+        loaders: [{loader: 'html-loader', options: {interpolate: true}}]
       }
     ]
 
