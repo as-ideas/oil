@@ -65,7 +65,7 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a id="menu-cmp-call-getVendorConsents" class="nav-link" href="#">
+            <a id="menu-cmp-call-getVendorConsents" class="nav-link" href="javascript:activateSection('cmp-call-getVendorConsents')">
               <span data-feather="code"></span>
               getVendorConsents()
             </a>
@@ -120,6 +120,7 @@
       <hr/>
       ${require('./components/main.html')}
       ${require('./components/cpc.html')}
+      ${require('./components/cmpCallGetVendorConsents.html')}
       ${require('./components/cmpCallPing.html')}
     </main>
   </div>
@@ -141,7 +142,7 @@
   }
 
   function activateSection(sectionToActivate, activationFunction) {
-    let sections = ['oil-main', 'oil-preference-center-container', 'cmp-call-ping'];
+    let sections = ['oil-main', 'oil-preference-center-container', 'cmp-call-getVendorConsents', 'cmp-call-ping'];
 
     sections.forEach(section => {
       document.getElementById(section).style.display = "none";
@@ -161,6 +162,7 @@
   showCookieData();
   configureResetButton();
   configureTimeoutSimulator();
+  configureGetVendorConsentsInputFields();
   activateSection('oil-main');
 </script>
 </body>
