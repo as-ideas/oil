@@ -2,7 +2,7 @@
   <h1 class="display-6">CMP Api Call <code>getConsentData()</code></h1>
   <p>From specification
     <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/CMP%20JS%20API%20v1.1%20Final.md" target="iabJsApiSpec">Consent Management Provider JavaScript API v1.1: Transparency & Consent Framework</a>:<br/>
-    <em>If consentStringVersion is provided, then fetch that version if available (else returns null). If consentStringVersion is null, then the latest supported version of the consent string is returned. The callback is called only after consent is obtained from the UI or existing cookies. The boolean success parameter passed to the callback indicates whether the call to getConsentData() was successful.</em>
+    <em>If <code>consentStringVersion</code> is provided, then fetch that version if available (else returns null). If <code>consentStringVersion</code> is null, then the latest supported version of the consent string is returned. The callback is called only after consent is obtained from the UI or existing cookies. The boolean <code>success</code> parameter passed to the callback indicates whether the call to <code>getConsentData()</code> was successful.</em>
   </p>
   <p>Invoke the <code>getConsentData()</code> command as follows:</p>
   <ul>
@@ -14,9 +14,9 @@
   </ul>
   <p>Enter a consent string version (empty string is allowed), click button and see what OIL layer currently returns for <code>getConsentData()</code> calls:</p>
   <div class="input-group mb-3" style="max-width: 35%;">
-    <input id="getConsentData-command-vendorIds-input" type="text" class="form-control" placeholder="Requested consent string version (only 1 is allowed)">
+    <input id="getConsentData-command-consentStringVersion-input" type="text" class="form-control" placeholder="Requested consent string version (only 1 is allowed)">
     <div class="input-group-append">
-      <button id="getConsentData-command-vendorIds-button" class="btn btn-primary" type="button">Get Consent Data</button>
+      <button id="getConsentData-command-consentStringVersion-button" class="btn btn-primary" type="button">Get Consent Data</button>
     </div>
   </div>
   <table id="getConsentData-command-resultTable" class="table table-sm" style="max-width: 30%; display: none;">
@@ -45,8 +45,8 @@
   }
 
   function configureGetConsentDataInputFields() {
-    $('#getConsentData-command-vendorIds-button').on('click', () => {
-      invokeGetConsentData(document.getElementById('getConsentData-command-vendorIds-input').value);
+    $('#getConsentData-command-consentStringVersion-button').on('click', () => {
+      invokeGetConsentData(document.getElementById('getConsentData-command-consentStringVersion-input').value);
     });
   }
 </script>

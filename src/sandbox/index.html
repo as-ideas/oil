@@ -18,7 +18,14 @@
   <script id="oil-configuration" type="application/configuration">
       {
         "advanced_settings": true,
-        "timeout": -1
+        "timeout": -1,
+        "customPurposes": [
+          {
+            "id": 28,
+            "name": "My Custom Purpose 28",
+            "description": "This is a Custom Purpose with id 28."
+          }
+        ]
       }
   </script>
 </head>
@@ -83,7 +90,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a id="menu-cmp-call-getPublisherConsents" class="nav-link" href="#">
+            <a id="menu-cmp-call-getPublisherConsents" class="nav-link" href="javascript:activateSection('cmp-call-getPublisherConsents')">
               <span data-feather="code"></span>
               getPublisherConsents()
             </a>
@@ -123,6 +130,7 @@
       ${require('./components/cmpCallGetVendorConsents.html')}
       ${require('./components/cmpCallGetConsentData.html')}
       ${require('./components/cmpCallPing.html')}
+      ${require('./components/cmpCallGetPublisherConsents.html')}
     </main>
   </div>
 </div>
@@ -143,7 +151,7 @@
   }
 
   function activateSection(sectionToActivate, activationFunction) {
-    let sections = ['oil-main', 'oil-preference-center-container', 'cmp-call-getVendorConsents', 'cmp-call-getConsentData', 'cmp-call-ping'];
+    let sections = ['oil-main', 'oil-preference-center-container', 'cmp-call-getVendorConsents', 'cmp-call-getConsentData', 'cmp-call-ping', 'cmp-call-getPublisherConsents'];
 
     sections.forEach(section => {
       document.getElementById(section).style.display = "none";
@@ -165,6 +173,7 @@
   configureTimeoutSimulator();
   configureGetVendorConsentsInputFields();
   configureGetConsentDataInputFields();
+  configureGetPublisherConsentsInputFields();
   activateSection('oil-main');
 </script>
 </body>

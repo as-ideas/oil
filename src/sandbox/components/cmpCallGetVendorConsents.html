@@ -2,8 +2,8 @@
   <h1 class="display-6">CMP Api Call <code>getVendorConsents()</code></h1>
   <p>From specification
     <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/CMP%20JS%20API%20v1.1%20Final.md" target="iabJsApiSpec">Consent Management Provider JavaScript API v1.1: Transparency & Consent Framework</a>:<br/>
-    <em>The vendorIds array contains the vendor ids (as identified in the Global Vendor List) for which consent is being requested. If vendorIds is null or empty, the operation will return consent status for all vendors in the vendor list. The callback function will be called with a VendorConsents object as the parameter. If vendorIds is provided and not empty, then VendorConsents.vendorConsents will only included IDs from vendorIds, The callback is called only after consent is obtained from the UI or existing cookies.
-      The consent will be returned false ("No Consent") for any invalid vendorId. The boolean success parameter passed to the callback indicates whether the call to getVendorConsents() was successful.</em>
+    <em>The <code>vendorIds</code> array contains the vendor ids (as identified in the Global Vendor List) for which consent is being requested. If vendorIds is null or empty, the operation will return consent status for all vendors in the vendor list. The callback function will be called with a <code>VendorConsents</code> object as the parameter. If <code>vendorIds</code> is provided and not empty, then <code>VendorConsents.vendorConsents</code> will only included IDs from <code>vendorIds</code>, The callback is called only after consent is obtained from the UI or existing cookies.
+      The consent will be returned false ("No Consent") for any invalid vendorId. The boolean <code>success</code> parameter passed to the callback indicates whether the call to <code>getVendorConsents()</code> was successful.</em>
   </p>
   <p>Invoke the <code>getVendorConsents()</code> command as follows:</p>
   <ul>

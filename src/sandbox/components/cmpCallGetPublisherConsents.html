@@ -1,0 +1,55 @@
+<div id="cmp-call-getPublisherConsents" style="display: none;">
+  <h1 class="display-6">CMP Api Call <code>getPublisherConsents()</code></h1>
+  <p>From specification
+    <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/CMP%20JS%20API%20v1.1%20Final.md" target="iabJsApiSpec">Consent Management Provider JavaScript API v1.1: Transparency & Consent Framework</a>:<br/>
+    <em>The <code>purposeIds</code> lists the purpose ids the publisher is requesting consent for. If this array is null or empty, it will default to all configured purposes. PurposeId's 1-24 indicate standard purposes, while 25-88 indicate custom (publisher-configured) purposes. The callback function will be called with a <code>PublisherConsents</code> object as the parameter. The purpose ids would be set by the publisher using a CMP-defined initialization function. The callback is called only after consent is obtained from the UI or existing cookies. The boolean <code>success</code> parameter passed to the callback indicates whether the call to <code>getPublisherConsents()</code> was successful.</em>
+  </p>
+  <p>Invoke the <code>getPublisherConsents()</code> command as follows:</p>
+  <ul>
+    <li>Without purpose ids: <code>__cmp('getPublisherConsents', null, (result, success) => { console.log('success ' + success + '; result = ' + JSON.stringify(result)) });</code></li>
+    <li>With purpose ids: <code>__cmp('getPublisherConsents', [1, 2, 28], (result, success) => { console.log('success ' + success + '; result = ' + JSON.stringify(result)) });</code>
+    </li>
+  </ul>
+  <p>Enter a comma separated list of purpose ids (empty list is allowed), click button and see what OIL layer currently returns for <code>getPublisherConsents()</code> calls:</p>
+  <div class="input-group mb-3" style="max-width: 30%;">
+    <input id="getPublisherConsents-command-purposeIds-input" type="text" class="form-control" placeholder="Requested purpose ids (e.g. 1, 2, 28)">
+    <div class="input-group-append">
+      <button id="getPublisherConsents-command-purposeIds-button" class="btn btn-primary" type="button">Get Publisher Consents</button>
+    </div>
+  </div>
+  <table id="getPublisherConsents-command-resultTable" class="table table-sm" style="max-width: 30%; display: none;">
+    <tbody>
+    <tr>
+      <th scope="row">Success:</th>
+      <td><span id="getPublisherConsents-command-success"></span></td>
+    </tr>
+    <tr>
+      <th scope="row">Result:</th>
+      <td>
+        <pre id="getPublisherConsents-command-result"></pre>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+  function invokeGetPublisherConsents(purpose) {
+    __cmp('getPublisherConsents', purpose, (result, success) => {
+      document.getElementById('getPublisherConsents-command-success').innerText = success;
+      document.getElementById('getPublisherConsents-command-result').innerText = JSON.stringify(result, null, '  ');
+      document.getElementById('getPublisherConsents-command-resultTable').style.display = 'block';
+    });
+  }
+
+  function configureGetPublisherConsentsInputFields() {
+    $('#getPublisherConsents-command-purposeIds-button').on('click', () => {
+      let purposeIdsString = document.getElementById('getPublisherConsents-command-purposeIds-input').value;
+      if (purposeIdsString) {
+        invokeGetPublisherConsents(purposeIdsString.split(/,\s*/).map(purposeId => parseInt(purposeId)).filter(purposeId => !isNaN(purposeId)));
+      } else {
+        invokeGetPublisherConsents(null);
+      }
+    });
+  }
+</script>
