@@ -63,20 +63,19 @@
 <script type="text/javascript">
   function showCookieData() {
     if (AS_OIL.status().opt_in) {
-      document.getElementById('oilCookieOptIn').innerHTML = AS_OIL.status().opt_in;
-      document.getElementById('oilCookieOilVersion').innerHTML = AS_OIL.status().version;
-      document.getElementById('oilCookieLocaleVariantName').innerHTML = AS_OIL.status().localeVariantName;
-      document.getElementById('oilCookieLocaleVariantVersion').innerHTML = AS_OIL.status().localeVariantVersion;
-      document.getElementById('oilCookieCustomPurposeIds').innerHTML = AS_OIL.status().customPurposes;
-      document.getElementById('oilCookieConsentString').innerHTML = AS_OIL.status().consentString;
+      $('#oilCookieOptIn').text(AS_OIL.status().opt_in);
+      $('#oilCookieOilVersion').text(AS_OIL.status().version);
+      $('#oilCookieLocaleVariantName').text(AS_OIL.status().localeVariantName);
+      $('#oilCookieLocaleVariantVersion').text(AS_OIL.status().localeVariantVersion);
+      $('#oilCookieCustomPurposeIds').text(AS_OIL.status().customPurposes);
+      $('#oilCookieConsentString').text(AS_OIL.status().consentString);
     } else {
-      document.getElementById('oilCookieOptIn').innerHTML = '';
-      document.getElementById('oilCookieOilVersion').innerHTML = '';
-      document.getElementById('oilCookieLocaleVariantName').innerHTML = '';
-      document.getElementById('oilCookieLocaleVariantVersion').innerHTML = '';
-      document.getElementById('oilCookieCustomPurposeIds').innerHTML = '';
-      document.getElementById('oilCookieConsentString').innerHTML = '';
-
+      $('#oilCookieOptIn').text('');
+      $('#oilCookieOilVersion').text('');
+      $('#oilCookieLocaleVariantName').text('');
+      $('#oilCookieLocaleVariantVersion').text('');
+      $('#oilCookieCustomPurposeIds').text('');
+      $('#oilCookieConsentString').text('');
     }
   }
 
@@ -89,43 +88,50 @@
     $('#resetButton').on('click', () => resetOil())
   }
 
-  function countDown(startValue) {
+  function countDown(startValue, cleanUpFunction) {
 
     let currentValue = startValue;
-    let countdownElement = document.getElementById('simulateBannerTimeoutCountdown');
-    let containerElement = document.getElementById('simulateBannerTimeoutContainer');
+    let countdownElement = $('#simulateBannerTimeoutCountdown');
+    let containerElement = $('#simulateBannerTimeoutContainer');
 
-    countdownElement.innerHTML = currentValue + " seconds";
-    containerElement.style.visibility = 'hidden';
-    countdownElement.style.visibility = 'visible';
+    countdownElement.text(currentValue + ' seconds');
+    containerElement.css('visibility:hidden');
+    countdownElement.css('visibility:visible');
 
     let x = setInterval(() => {
       if (--currentValue <= 0) {
         clearInterval(x);
-        countdownElement.style.visibility = 'hidden';
-        countdownElement.innerHTML = '';
-        containerElement.style.visibility = 'visible';
+        countdownElement.css('visibility:hidden');
+        countdownElement.text('');
+        containerElement.css('visibility:visible');
+        cleanUpFunction();
         return;
       }
-      countdownElement.innerHTML = currentValue + " seconds";
+      countdownElement.text(currentValue + ' seconds');
     }, 1000);
   }
 
+  function setOilConfiguration(config) {
+    $('#oil-configuration').text(JSON.stringify(config));
+  }
+
   function configureTimeoutSimulator() {
-
-    document.getElementById('simulateBannerTimeoutCountdown').style.visibility = 'hidden';
-
+    $('#simulateBannerTimeoutCountdown').css = ('visibility:hidden');
     $('#simulateBannerTimeoutButton').on('click', () => {
+
       let config = JSON.parse(document.getElementById('oil-configuration').text);
       let timeoutValue = parseInt(document.getElementById('simulateBannerTimeoutValue').value);
+      const previousTimeoutValue = config['timeout'];
 
       if (isNaN(timeoutValue) || timeoutValue === 0) return;
-
       config['timeout'] = timeoutValue;
-      document.getElementById('oil-configuration').text = JSON.stringify(config);
+      setOilConfiguration(config);
 
       resetOil();
-      countDown(timeoutValue);
+      countDown(timeoutValue, ()=>{
+        config['timeout'] = previousTimeoutValue;
+        setOilConfiguration(config);
+      });
     });
   }
 </script>
