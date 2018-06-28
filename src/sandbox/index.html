@@ -96,7 +96,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a id="menu-cmp-call-getVendorList" class="nav-link" href="#">
+            <a id="menu-cmp-call-getVendorList" class="nav-link" href="javascript:activateSection('cmp-call-getVendorList', invokeGetVendorList());">
               <span data-feather="code"></span>
               getVendorList()
             </a>
@@ -131,6 +131,7 @@
       ${require('./components/cmpCallGetConsentData.html')}
       ${require('./components/cmpCallPing.html')}
       ${require('./components/cmpCallGetPublisherConsents.html')}
+      ${require('./components/cmpCallGetVendorList.html')}
     </main>
   </div>
 </div>
@@ -151,7 +152,7 @@
   }
 
   function activateSection(sectionToActivate, activationFunction) {
-    let sections = ['oil-main', 'oil-preference-center-container', 'cmp-call-getVendorConsents', 'cmp-call-getConsentData', 'cmp-call-ping', 'cmp-call-getPublisherConsents'];
+    let sections = ['oil-main', 'oil-preference-center-container', 'cmp-call-getVendorConsents', 'cmp-call-getConsentData', 'cmp-call-ping', 'cmp-call-getPublisherConsents', 'cmp-call-getVendorList'];
 
     sections.forEach(section => {
       document.getElementById(section).style.display = "none";
