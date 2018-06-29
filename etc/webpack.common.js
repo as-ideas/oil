@@ -137,7 +137,7 @@ let config = {
       //process sandbox HTML Page hierarchy
       {
         test: /sandbox\/.*\.html$/,
-        loaders: [{loader: 'html-loader', options: {interpolate: true}}]
+        loaders: [{loader: 'html-loader', options: {interpolate: 'require'}}]
       }
     ]
 

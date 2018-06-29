@@ -47,12 +47,13 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="settings"></span>
-              OIL Configuration
-            </a>
-          </li>
+          <!-- TODO Activate this as soon as configuration manager is implemented! -->
+          <!--<li class="nav-item">-->
+            <!--<a id="menu-oil-configuration-manager" class="nav-link" href="javascript:activateSection('oil-configuration-manager');">-->
+              <!--<span data-feather="settings"></span>-->
+              <!--OIL Configuration-->
+            <!--</a>-->
+          <!--</li>-->
           <li class="nav-item">
             <a id="menu-oil-preference-center-container" class="nav-link" href="javascript:activateSection('oil-preference-center-container', showCPC);">
               <span data-feather="sliders"></span>
@@ -126,6 +127,7 @@
       <h1>oil.js Sandbox</h1>
       <hr/>
       ${require('./components/main.html')}
+      ${require('./components/configurationManager.html')}
       ${require('./components/cpc.html')}
       ${require('./components/cmpCallGetVendorConsents.html')}
       ${require('./components/cmpCallGetConsentData.html')}
@@ -152,7 +154,16 @@
   }
 
   function activateSection(sectionToActivate, activationFunction) {
-    let sections = ['oil-main', 'oil-preference-center-container', 'cmp-call-getVendorConsents', 'cmp-call-getConsentData', 'cmp-call-ping', 'cmp-call-getPublisherConsents', 'cmp-call-getVendorList'];
+    let sections = [
+      'oil-main',
+      'oil-configuration-manager',
+      'oil-preference-center-container',
+      'cmp-call-getVendorConsents',
+      'cmp-call-getConsentData',
+      'cmp-call-ping',
+      'cmp-call-getPublisherConsents',
+      'cmp-call-getVendorList'
+    ];
 
     sections.forEach(section => {
       document.getElementById(section).style.display = "none";
@@ -169,12 +180,12 @@
 
   eventer(messageEvent, receiveOilMessage, false);
 
-  showCookieData();
-  configureResetButton();
-  configureTimeoutSimulator();
-  configureGetVendorConsentsInputFields();
-  configureGetConsentDataInputFields();
-  configureGetPublisherConsentsInputFields();
+  configureMainElements();
+  configureConfigurationManagerElements();
+  configureGetVendorConsentsElements();
+  configureGetConsentDataElements();
+  configureGetPublisherConsentsElements();
+
   activateSection('oil-main');
 </script>
 </body>
