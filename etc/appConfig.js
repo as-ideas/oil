@@ -33,13 +33,13 @@ module.exports = {
   }, {
     filename: 'demos/advanced-settings-custom-purposes.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings-custom-purposes.html'),
-    chunks: ['oilstub', 'oil', 'oildevkit'],
+    chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
     filename: 'demos/advanced-settings-purposes-default.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings-purposes-default.html'),
-    chunks: ['oilstub', 'oil', 'oildevkit'],
+    chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
@@ -51,7 +51,7 @@ module.exports = {
   }, {
     filename: 'demos/configuration-default-optin.html',
     template: path.resolve(sourcePath, 'demos', 'configuration-default-optin.html'),
-    chunks: ['oilstub', 'oil', 'oildevkit'],
+    chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
@@ -75,7 +75,7 @@ module.exports = {
   }, {
     filename: 'demos/direct-integration.html',
     template: path.resolve(sourcePath, 'demos', 'direct-integration.html'),
-    chunks: ['oilstub', 'oil', 'oildevkit'],
+    chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
