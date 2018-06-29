@@ -140,4 +140,11 @@
     configureResetButton();
     configureTimeoutSimulator();
   }
+
+  function handleOilMessageInMainSection(event) {
+    if (event && event.data && (eventDataContains(event, ['oil_optin_done', 'oil_has_optedin', 'oil_optout_done']))) {
+      showCookieData();
+    }
+  }
+
 </script>

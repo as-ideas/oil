@@ -47,13 +47,12 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <!-- TODO Activate this as soon as configuration manager is implemented! -->
-          <!--<li class="nav-item">-->
-            <!--<a id="menu-oil-configuration-manager" class="nav-link" href="javascript:activateSection('oil-configuration-manager');">-->
-              <!--<span data-feather="settings"></span>-->
-              <!--OIL Configuration-->
-            <!--</a>-->
-          <!--</li>-->
+          <li class="nav-item">
+            <a id="menu-oil-configuration-manager" class="nav-link" href="javascript:activateSection('oil-configuration-manager');">
+              <span data-feather="settings"></span>
+              OIL Configuration
+            </a>
+          </li>
           <li class="nav-item">
             <a id="menu-oil-preference-center-container" class="nav-link" href="javascript:activateSection('oil-preference-center-container', showCPC);">
               <span data-feather="sliders"></span>
@@ -108,13 +107,13 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a id="menu-soft-blocking-script" class="nav-link" href="javascript:activateSection('soft-blocking-script');">
               <span data-feather="tag"></span>
               script-Tag
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a id="menu-soft-blocking-img" class="nav-link" href="javascript:activateSection('soft-blocking-img')">
               <span data-feather="image"></span>
               img-Tag
             </a>
@@ -134,6 +133,8 @@
       ${require('./components/cmpCallPing.html')}
       ${require('./components/cmpCallGetPublisherConsents.html')}
       ${require('./components/cmpCallGetVendorList.html')}
+      ${require('./components/softBlockingScript.html')}
+      ${require('./components/softBlockingImg.html')}
     </main>
   </div>
 </div>
@@ -147,12 +148,6 @@
     return eventNames.filter((name) => JSON.stringify(event.data).indexOf(name) !== -1).length > 0;
   }
 
-  function receiveOilMessage(event) {
-    if (event && event.data && (eventDataContains(event, ['oil_optin_done', 'oil_has_optedin', 'oil_optout_done']))) {
-      showCookieData();
-    }
-  }
-
   function activateSection(sectionToActivate, activationFunction) {
     let sections = [
       'oil-main',
@@ -162,7 +157,9 @@
       'cmp-call-getConsentData',
       'cmp-call-ping',
       'cmp-call-getPublisherConsents',
-      'cmp-call-getVendorList'
+      'cmp-call-getVendorList',
+      'soft-blocking-script',
+      'soft-blocking-img'
     ];
 
     sections.forEach(section => {
@@ -178,13 +175,17 @@
   let messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
   let eventer = window[eventMethod];
 
-  eventer(messageEvent, receiveOilMessage, false);
+  eventer(messageEvent, handleOilMessageInMainSection, false);
+  eventer(messageEvent, handleOilMessageInSoftBlockingScriptSection, false);
+  eventer(messageEvent, handleOilMessageInSoftBlockingImgSection, false);
 
   configureMainElements();
   configureConfigurationManagerElements();
   configureGetVendorConsentsElements();
   configureGetConsentDataElements();
   configureGetPublisherConsentsElements();
+  configureSoftBlockingScriptElements();
+  configureSoftBlockingImgElements();
 
   activateSection('oil-main');
 </script>
