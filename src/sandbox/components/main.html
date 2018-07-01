@@ -1,0 +1,150 @@
+<div id="oil-main">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Cookie Data</h5>
+          <p class="card-text">The Opt-In Layer sets a cookie that stores all necessary data about user's consents. It ensure traceability in terms of an audit trail. See current cookie here:</p>
+          <table class="table table-striped">
+            <tbody>
+            <tr>
+              <th scope="row">Opt-In given:</th>
+              <td id="oilCookieOptIn"></td>
+            </tr>
+            <tr>
+              <th scope="row">OIL version:</th>
+              <td id="oilCookieOilVersion"></td>
+            </tr>
+            <tr>
+              <th scope="row">Locale Variant Name:</th>
+              <td id="oilCookieLocaleVariantName"></td>
+            </tr>
+            <tr>
+              <th scope="row">Locale Variant Version:</th>
+              <td id="oilCookieLocaleVariantVersion"></td>
+            </tr>
+            <tr>
+              <th scope="row">Custom Purpose Ids:</th>
+              <td id="oilCookieCustomPurposeIds"></td>
+            </tr>
+            <tr>
+              <th scope="row">Consent String:</th>
+              <td id="oilCookieConsentString"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col d-flex align-items-end flex-column">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Reset Consents</h5>
+          <p class="card-text">If you have given the consent and want to show oil banner again, click on the reset button. All your consent data will be removed immediately.</p>
+          <button id="resetButton" type="button" class="btn btn-primary">Reset</button>
+        </div>
+      </div>
+      <div class="card mt-auto">
+        <div class="card-body">
+          <h5 class="card-title">Simulate Banner Timeout</h5>
+          <p class="card-text">Oil banner supports auto-hide feature using configuration parameter 'timeout'. You can try it out yourself by entering timeout value in seconds in the field below and clicking start button.</p>
+          <div id="simulateBannerTimeoutCountdown"></div>
+          <div id="simulateBannerTimeoutContainer" class="input-group mb-3">
+            <input id="simulateBannerTimeoutValue" type="text" class="form-control" placeholder="Timeout in seconds">
+            <div class="input-group-append">
+              <button id="simulateBannerTimeoutButton" class="btn btn-primary" type="button">Start Banner Timeout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function showCookieData() {
+    if (AS_OIL.status().opt_in) {
+      $('#oilCookieOptIn').text(AS_OIL.status().opt_in);
+      $('#oilCookieOilVersion').text(AS_OIL.status().version);
+      $('#oilCookieLocaleVariantName').text(AS_OIL.status().localeVariantName);
+      $('#oilCookieLocaleVariantVersion').text(AS_OIL.status().localeVariantVersion);
+      $('#oilCookieCustomPurposeIds').text(AS_OIL.status().customPurposes);
+      $('#oilCookieConsentString').text(AS_OIL.status().consentString);
+    } else {
+      $('#oilCookieOptIn').text('');
+      $('#oilCookieOilVersion').text('');
+      $('#oilCookieLocaleVariantName').text('');
+      $('#oilCookieLocaleVariantVersion').text('');
+      $('#oilCookieCustomPurposeIds').text('');
+      $('#oilCookieConsentString').text('');
+    }
+  }
+
+  function resetOil() {
+    AS_OIL.triggerOptOut();
+    AS_OIL.reload();
+  }
+
+  function configureResetButton() {
+    $('#resetButton').on('click', () => resetOil())
+  }
+
+  function countDown(startValue, cleanUpFunction) {
+
+    let currentValue = startValue;
+    let countdownElement = $('#simulateBannerTimeoutCountdown');
+    let containerElement = $('#simulateBannerTimeoutContainer');
+
+    countdownElement.text(currentValue + ' seconds');
+    containerElement.css('visibility:hidden');
+    countdownElement.css('visibility:visible');
+
+    let x = setInterval(() => {
+      if (--currentValue <= 0) {
+        clearInterval(x);
+        countdownElement.css('visibility:hidden');
+        countdownElement.text('');
+        containerElement.css('visibility:visible');
+        cleanUpFunction();
+        return;
+      }
+      countdownElement.text(currentValue + ' seconds');
+    }, 1000);
+  }
+
+  function setOilConfiguration(config) {
+    $('#oil-configuration').text(JSON.stringify(config));
+  }
+
+  function configureTimeoutSimulator() {
+    $('#simulateBannerTimeoutCountdown').css = ('visibility:hidden');
+    $('#simulateBannerTimeoutButton').on('click', () => {
+
+      let config = JSON.parse(document.getElementById('oil-configuration').text);
+      let timeoutValue = parseInt(document.getElementById('simulateBannerTimeoutValue').value);
+      const previousTimeoutValue = config['timeout'];
+
+      if (isNaN(timeoutValue) || timeoutValue === 0) return;
+      config['timeout'] = timeoutValue;
+      setOilConfiguration(config);
+
+      resetOil();
+      countDown(timeoutValue, ()=>{
+        config['timeout'] = previousTimeoutValue;
+        setOilConfiguration(config);
+      });
+    });
+  }
+
+  function configureMainElements() {
+    showCookieData();
+    configureResetButton();
+    configureTimeoutSimulator();
+  }
+
+  function handleOilMessageInMainSection(event) {
+    if (event && event.data && (eventDataContains(event, ['oil_optin_done', 'oil_has_optedin', 'oil_optout_done']))) {
+      showCookieData();
+    }
+  }
+
+</script>

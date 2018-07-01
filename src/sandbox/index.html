@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="oil.js Sandbox">
+
+  <link rel="icon" href="/favicon.ico">
+
+  <title>oil.js sandbox</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="assets/dashboard.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@vladocar/nanojs/src/nanoJS.min.js"></script>
+  <script id="oil-configuration" type="application/configuration">
+      {
+        "advanced_settings": true,
+        "timeout": -1,
+        "customPurposes": [
+          {
+            "id": 28,
+            "name": "My Custom Purpose 28",
+            "description": "This is a Custom Purpose with id 28."
+          }
+        ]
+      }
+  </script>
+</head>
+<body>
+
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/index.html">oil.js sandbox</a>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a id="menu-oil-main" class="nav-link active" href="javascript:activateSection('oil-main');">
+              <span data-feather="home"></span>
+              Main
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a id="menu-oil-configuration-manager" class="nav-link" href="javascript:activateSection('oil-configuration-manager');">
+              <span data-feather="settings"></span>
+              OIL Configuration
+            </a>
+          </li>
+          <li class="nav-item">
+            <a id="menu-oil-preference-center-container" class="nav-link" href="javascript:activateSection('oil-preference-center-container', showCPC);">
+              <span data-feather="sliders"></span>
+              Cookie Preference Center (CPC)
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="book"></span>
+              Documentation
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>CMP API Calls</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a id="menu-cmp-call-getVendorConsents" class="nav-link" href="javascript:activateSection('cmp-call-getVendorConsents')">
+              <span data-feather="code"></span>
+              getVendorConsents()
+            </a>
+          </li>
+          <li class="nav-item">
+            <a id="menu-cmp-call-getConsentData" class="nav-link" href="javascript:activateSection('cmp-call-getConsentData')">
+              <span data-feather="code"></span>
+              getConsentData()
+            </a>
+          </li>
+          <li class="nav-item">
+            <a id="menu-cmp-call-ping" class="nav-link" href="javascript:activateSection('cmp-call-ping', invokePing());">
+              <span data-feather="code"></span>
+              ping()
+            </a>
+          </li>
+          <li class="nav-item">
+            <a id="menu-cmp-call-getPublisherConsents" class="nav-link" href="javascript:activateSection('cmp-call-getPublisherConsents')">
+              <span data-feather="code"></span>
+              getPublisherConsents()
+            </a>
+          </li>
+          <li class="nav-item">
+            <a id="menu-cmp-call-getVendorList" class="nav-link" href="javascript:activateSection('cmp-call-getVendorList', invokeGetVendorList());">
+              <span data-feather="code"></span>
+              getVendorList()
+            </a>
+          </li>
+        </ul>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Tag Soft Blocking</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a id="menu-soft-blocking-script" class="nav-link" href="javascript:activateSection('soft-blocking-script');">
+              <span data-feather="tag"></span>
+              script-Tag
+            </a>
+          </li>
+          <li class="nav-item">
+            <a id="menu-soft-blocking-img" class="nav-link" href="javascript:activateSection('soft-blocking-img')">
+              <span data-feather="image"></span>
+              img-Tag
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--main section-->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <h1>oil.js Sandbox</h1>
+      <hr/>
+      ${require('./components/main.html')}
+      ${require('./components/configurationManager.html')}
+      ${require('./components/cpc.html')}
+      ${require('./components/cmpCallGetVendorConsents.html')}
+      ${require('./components/cmpCallGetConsentData.html')}
+      ${require('./components/cmpCallPing.html')}
+      ${require('./components/cmpCallGetPublisherConsents.html')}
+      ${require('./components/cmpCallGetVendorList.html')}
+      ${require('./components/softBlockingScript.html')}
+      ${require('./components/softBlockingImg.html')}
+    </main>
+  </div>
+</div>
+<!-- Icons -->
+<script type="text/javascript" src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script type="text/javascript">feather.replace();</script>
+
+<!--Sandbox controlling -->
+<script type="text/javascript">
+  function eventDataContains(event, eventNames) {
+    return eventNames.filter((name) => JSON.stringify(event.data).indexOf(name) !== -1).length > 0;
+  }
+
+  function activateSection(sectionToActivate, activationFunction) {
+    let sections = [
+      'oil-main',
+      'oil-configuration-manager',
+      'oil-preference-center-container',
+      'cmp-call-getVendorConsents',
+      'cmp-call-getConsentData',
+      'cmp-call-ping',
+      'cmp-call-getPublisherConsents',
+      'cmp-call-getVendorList',
+      'soft-blocking-script',
+      'soft-blocking-img'
+    ];
+
+    sections.forEach(section => {
+      document.getElementById(section).style.display = "none";
+      document.getElementById('menu-' + section).classList.remove('active');
+    });
+    document.getElementById(sectionToActivate).style.display = "block";
+    document.getElementById('menu-' + sectionToActivate).classList.add('active');
+    if (activationFunction) activationFunction();
+  }
+
+  let eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+  let messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+  let eventer = window[eventMethod];
+
+  eventer(messageEvent, handleOilMessageInMainSection, false);
+  eventer(messageEvent, handleOilMessageInSoftBlockingScriptSection, false);
+  eventer(messageEvent, handleOilMessageInSoftBlockingImgSection, false);
+
+  configureMainElements();
+  configureConfigurationManagerElements();
+  configureGetVendorConsentsElements();
+  configureGetConsentDataElements();
+  configureGetPublisherConsentsElements();
+  configureSoftBlockingScriptElements();
+  configureSoftBlockingImgElements();
+
+  activateSection('oil-main');
+</script>
+</body>
+</html>

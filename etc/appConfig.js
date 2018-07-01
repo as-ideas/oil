@@ -181,11 +181,11 @@ module.exports = {
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
-    filename: 'demos/tag-management.html',
-    template: path.resolve(sourcePath, 'demos', 'tag-management.html'),
+    filename: 'sandbox/index.html',
+    template: path.resolve(sourcePath, 'sandbox', 'index.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
-    inject: 'body'
+    inject: 'head'
   }],
   entry: {
     'hub': path.resolve(sourcePath, 'hub.js'),
@@ -212,11 +212,9 @@ module.exports = {
     from: path.resolve(sourcePath, 'demos/empty.html'),
     to: 'demos/empty.html'
   }, {
-    from: path.resolve(sourcePath, 'cmp'),
-    to: 'cmp'
+    from: path.resolve(sourcePath, 'sandbox/assets'),
+    to: 'sandbox/assets'
   }],
-  mangle: {},
-  proxy: {},
   title: 'OIL',
   additionalWebpackOptions: false
 };

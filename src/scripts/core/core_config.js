@@ -32,6 +32,7 @@ function getConfiguration() {
       logInfo('Using default config');
     }
     setGlobalOilObject('CONFIG', readConfiguration(configurationElement));
+    setGlobalOilObject('CONFIG_ATTRIBUTES', OIL_CONFIG);
 
     parseServerUrls();
   }
