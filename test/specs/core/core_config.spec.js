@@ -182,8 +182,10 @@ describe('core_config', () => {
   });
 
   describe('getGdprApplies', function() {
+
     it('returns getGdprApplies from configuration', function() {
-      expect(getGdprApplies()).toBeTruthy();
+      loadFixture('config/given.config.with.gdpr.not.applies.html');
+      expect(getGdprApplies()).toBeFalsy();
     });
 
     it('returns true when no getGdprApplies in config', function() {

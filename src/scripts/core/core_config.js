@@ -69,7 +69,7 @@ function parseServerUrls() {
  */
 export function getConfigValue(name, defaultValue) {
   const config = getConfiguration();
-  return (config && config[name]) ? config[name] : defaultValue;
+  return (config && typeof config[name] !== 'undefined') ? config[name] : defaultValue;
 }
 
 function setConfigValue(name, value) {
