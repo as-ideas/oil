@@ -23,7 +23,8 @@ module.exports = {
     browser
       .waitForElementPresent(OIL_MANAGED_TAGS_IMG_TAG, 1000, false)
       .assert.hidden(OIL_MANAGED_TAGS_IMG_TAG)
-      .expect.element(OIL_MANAGED_TAGS_IMG_TAG).to.not.have.attribute('src');
+      .expect.element(OIL_MANAGED_TAGS_IMG_TAG).to.not.have.attribute('src')
+      .end();
   },
 
   'Managed tags are visible if consent was given': function (browser) {
@@ -36,7 +37,8 @@ module.exports = {
     browser
       .waitForElementPresent(OIL_MANAGED_TAGS_IMG_TAG, 1000, false)
       .assert.visible(OIL_MANAGED_TAGS_IMG_TAG)
-      .expect.element(OIL_MANAGED_TAGS_IMG_TAG).to.have.attribute('src').which.contains('/assets/images/landing_page/logo.png');
+      .expect.element(OIL_MANAGED_TAGS_IMG_TAG).to.have.attribute('src').which.contains('/assets/images/landing_page/logo.png')
+      .end();
   }
 
 };
