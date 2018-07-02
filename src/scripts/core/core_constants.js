@@ -19,6 +19,7 @@ export const OIL_CONFIG = {
   ATTR_ADVANCED_SETTINGS: 'advanced_settings',
   ATTR_PERSIST_MINIMUM_TRACKING: 'persist_min_tracking',
   ATTR_LOCALE: 'locale',
+  ATTR_CPC_TYPE: 'cpc_type',
   ATTR_THEME: 'theme',
   ATTR_TIMEOUT: 'timeout',
   ATTR_LOCALE_URL: 'locale_url',
@@ -29,6 +30,11 @@ export const OIL_CONFIG = {
   ATTR_ADVANCED_SETTINGS_PURPOSES_DEFAULT: 'advanced_settings_purposes_default',
   ATTR_DEFAULT_TO_OPTIN: 'default_to_optin'
 };
+
+export const OIL_CONFIG_CPC_TYPES = {
+  CPC_TYPE_STANDARD: 'standard',
+  CPC_TYPE_TABS: 'tabs'
+}
 
 // Main Click events
 export const EVENT_NAME_OPT_IN = 'oil_optin_done';
