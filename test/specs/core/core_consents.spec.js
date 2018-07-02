@@ -357,6 +357,12 @@ describe('consents', () => {
       expect(getPublisherConsentData()).not.toBeDefined();
     });
 
+    it('should return gdprApplies false when got getGdprApplies false from configuration', () => {
+      spyOn(CoreConfig, 'getGdprApplies').and.returnValue(false);
+      let publisherConsentData = getPublisherConsentData();
+      expect(publisherConsentData.gdprApplies).toBeFalsy();
+    });
+
   });
 
 });

@@ -220,3 +220,7 @@ export function getLocale() {
 export function setLocale(localeObject) {
   setConfigValue(OIL_CONFIG.ATTR_LOCALE, localeObject);
 }
+
+export function getGdprApplies() {
+  return getConfigValue(OIL_CONFIG.ATTR_GDPR_APPLIES, true);
+}

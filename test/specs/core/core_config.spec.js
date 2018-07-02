@@ -13,7 +13,7 @@ import {
   getLanguageFromLocale,
   getPoiGroupName,
   getPublicPath,
-  setLocale
+  setLocale, getGdprApplies
 } from '../../../src/scripts/core/core_config';
 import { loadFixture } from '../../test-utils/utils_fixtures';
 import * as CoreLog from '../../../src/scripts/core/core_log';
@@ -23,7 +23,7 @@ describe('core_config', () => {
 
   const DEFAULT_FALLBACK_BACKEND_URL = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/enEN_01';
   const EXPECTED_PUBLIC_PATH = '//www/';
-  const EXPECTED_PUBLIC_PATH_WITH_SLASH = '//www/i-forgot-the-trailing-slash/'; 
+  const EXPECTED_PUBLIC_PATH_WITH_SLASH = '//www/i-forgot-the-trailing-slash/';
 
   beforeEach(() => resetOil());
 
@@ -177,6 +177,17 @@ describe('core_config', () => {
 
     it('returns undefined when no publicPath in config', function() {
       expect(getPublicPath()).toBeFalsy();
+    });
+
+  });
+
+  describe('getGdprApplies', function() {
+    it('returns getGdprApplies from configuration', function() {
+      expect(getGdprApplies()).toBeTruthy();
+    });
+
+    it('returns true when no getGdprApplies in config', function() {
+      expect(getGdprApplies()).toBeTruthy();
     });
 
   });
