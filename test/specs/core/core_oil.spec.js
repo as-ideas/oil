@@ -1,11 +1,11 @@
-import { initOilLayer } from '../../../src/scripts/core/core_oil';
+import {initOilLayer} from '../../../src/scripts/core/core_oil';
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as UserView from '../../../src/scripts/userview/locale/userview_oil';
 import * as CoreCommandCollection from '../../../src/scripts/core/core_command_collection';
 import * as CoreOptIn from '../../../src/scripts/core/core_optin';
 import * as CoreTagManagement from '../../../src/scripts/core/core_tag_management';
-import { waitsForAndRuns } from '../../test-utils/utils_wait';
-import { resetOil } from '../../test-utils/utils_reset';
+import {waitsForAndRuns} from '../../test-utils/utils_wait';
+import {resetOil} from '../../test-utils/utils_reset';
 
 describe('core_oil', () => {
 
@@ -22,35 +22,35 @@ describe('core_oil', () => {
 
     initOilLayer();
 
-    // we expect 11 invocations for registered functions and one for CONFIG object itself
-    expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledTimes(12);
+    // we expect 11 invocations for registered functions and TWO for CONFIG object itself
+    expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledTimes(13);
 
-    verifyThatGlobalOilObjectIsSet(1, 'previewModeOn', "setPreviewCookie");
+    verifyThatGlobalOilObjectIsSet(2, 'previewModeOn', "setPreviewCookie");
 
-    verifyThatGlobalOilObjectIsSet(2, 'previewModeOff', 'removePreviewCookie');
+    verifyThatGlobalOilObjectIsSet(3, 'previewModeOff', 'removePreviewCookie');
 
-    verifyThatGlobalOilObjectIsSet(3, 'verboseModeOn', 'setVerboseCookie');
+    verifyThatGlobalOilObjectIsSet(4, 'verboseModeOn', 'setVerboseCookie');
 
-    verifyThatGlobalOilObjectIsSet(4, 'verboseModeOff', 'removeVerboseCookie');
+    verifyThatGlobalOilObjectIsSet(5, 'verboseModeOff', 'removeVerboseCookie');
 
-    verifyThatGlobalOilObjectIsSet(5, 'reload', 'resetConfiguration');
-    verifyThatGlobalOilObjectIsSet(5, 'reload', 'initOilLayer');
+    verifyThatGlobalOilObjectIsSet(6, 'reload', 'resetConfiguration');
+    verifyThatGlobalOilObjectIsSet(6, 'reload', 'initOilLayer');
 
-    verifyThatGlobalOilObjectIsSet(6, 'status', 'getSoiCookie');
+    verifyThatGlobalOilObjectIsSet(7, 'status', 'getSoiCookie');
 
-    verifyThatGlobalOilObjectIsSet(7, 'showPreferenceCenter', 'loadLocale');
-    verifyThatGlobalOilObjectIsSet(7, 'showPreferenceCenter', 'oilShowPreferenceCenter');
+    verifyThatGlobalOilObjectIsSet(8, 'showPreferenceCenter', 'loadLocale');
+    verifyThatGlobalOilObjectIsSet(8, 'showPreferenceCenter', 'oilShowPreferenceCenter');
 
-    verifyThatGlobalOilObjectIsSet(8, 'triggerOptIn', 'loadLocale');
-    verifyThatGlobalOilObjectIsSet(8, 'triggerOptIn', 'handleOptIn');
+    verifyThatGlobalOilObjectIsSet(9, 'triggerOptIn', 'loadLocale');
+    verifyThatGlobalOilObjectIsSet(9, 'triggerOptIn', 'handleOptIn');
 
-    verifyThatGlobalOilObjectIsSet(9, 'triggerSoiOptIn', 'loadLocale');
-    verifyThatGlobalOilObjectIsSet(9, 'triggerSoiOptIn', 'handleSoiOptIn');
+    verifyThatGlobalOilObjectIsSet(10, 'triggerSoiOptIn', 'loadLocale');
+    verifyThatGlobalOilObjectIsSet(10, 'triggerSoiOptIn', 'handleSoiOptIn');
 
-    verifyThatGlobalOilObjectIsSet(10, 'triggerPoiOptIn', 'loadLocale');
-    verifyThatGlobalOilObjectIsSet(10, 'triggerPoiOptIn', 'handlePoiOptIn');
+    verifyThatGlobalOilObjectIsSet(11, 'triggerPoiOptIn', 'loadLocale');
+    verifyThatGlobalOilObjectIsSet(11, 'triggerPoiOptIn', 'handlePoiOptIn');
 
-    verifyThatGlobalOilObjectIsSet(11, 'triggerOptOut', 'handleOptOut');
+    verifyThatGlobalOilObjectIsSet(12, 'triggerOptOut', 'handleOptOut');
   });
 
   it('should execute command collection and attach command collection execution to window object if opt-in is provided', (done) => {

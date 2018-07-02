@@ -12,7 +12,6 @@ debugLog('Using following appConfig:', appConfig);
  */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 /*
  * Webpack Constants
@@ -135,14 +134,10 @@ let config = {
         test: /\.css$/,
         loaders: ['to-string-loader', 'css-loader']
       },
-      /* Raw loader support for *.html
-       * Returns file content as string
-       *
-       * See: https://github.com/webpack/raw-loader
-       */
+      //process sandbox HTML Page hierarchy
       {
-        test: /\.html$/,
-        loader: 'raw-loader'
+        test: /sandbox\/.*\.html$/,
+        loaders: [{loader: 'html-loader', options: {interpolate: 'require'}}]
       }
     ]
 
@@ -173,8 +168,7 @@ let config = {
      *
      * See: https://www.npmjs.com/package/copy-webpack-plugin
      */
-    new CopyWebpackPlugin(appConfig.copy),
-    new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i })
+    new CopyWebpackPlugin(appConfig.copy)
   ],
 
   /*
@@ -201,7 +195,7 @@ let config = {
  *
  * See: https://github.com/ampedandwired/html-webpack-plugin
  */
-for (var indexConfig of appConfig.indexFiles) {
+for (let indexConfig of appConfig.indexFiles) {
   config.plugins.push(new HtmlWebpackPlugin(indexConfig));
 }
 

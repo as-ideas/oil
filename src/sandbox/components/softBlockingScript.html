@@ -1,0 +1,113 @@
+<div id="soft-blocking-script" style="display: none;">
+  <h1 class="display-6">Soft Blocking of <code>&lt;script&gt;</code> tags</h1>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Example code for managed <code>&lt;script&gt;</code> tags:</h5>
+          <pre class="card-text">
+    &lt;script data-managed="as-oil"
+            data-type="text/javascript"
+            data-purposes="1"
+            type="as-oil"
+            id="managedScriptTag"&gt;
+      document.getElementById("demoText").innerHTML = "This text will be shown with given consent!";
+    &lt;/script&gt;
+          </pre>
+          <pre class="card-text">
+    &lt;script data-managed="as-oil"
+            data-type="text/javascript"
+            data-src="oilDemoScript.js"
+            data-purposes="1"
+            type="as-oil"
+            id="managedScriptTag"&gt;
+    &lt;/script&gt;
+          </pre>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Try it out!</h5>
+          <p class="card-text">If OIL layer is currently shown, click 'OK' to give consent. Otherwise, click the 'Reset' button!</p>
+          <button id="softBlockingScriptResetButton" type="button" class="btn btn-primary">Reset</button>
+          <hr/>
+          <div id="soft-blocking-script-no-consent">
+            <p class="card-text">Consent for purpose 1 is not given (yet). <code>&lt;script&gt;</code> tag is (still) deactivated:</p>
+            <pre class="card-text" style="background-color: lightgrey">
+    &lt;script data-managed="as-oil"
+            data-type="text/javascript"
+            data-purposes="1"
+            <span style="background-color:lightblue">type="as-oil"</span>
+            id="managedScriptTag"&gt;
+      document.getElementById("demoText").innerHTML = "This text will be shown with given consent!";
+    &lt;/script&gt;
+            </pre>
+            <pre class="card-text" style="background-color: lightgrey">
+    &lt;script data-managed="as-oil"
+            data-type="text/javascript"
+            data-src="oilDemoScript.js"
+            data-purposes="1"
+            <span style="background-color:lightblue">type="as-oil"</span>
+            id="managedScriptTag"&gt;
+    &lt;/script&gt;
+            </pre>
+          </div>
+          <div id="soft-blocking-script-consent">
+            <p class="card-text">Consent is given. <code>&lt;script&gt;</code> tag is now activated:</p>
+            <pre class="card-text" style="background-color: lightgrey">
+    &lt;script data-managed="as-oil"
+            data-type="text/javascript"
+            data-purposes="1"
+            <span style="background-color:blue; color:white">type="text/javascript"</span>
+            id="managedScriptTag"&gt;
+      document.getElementById("demoText").innerHTML = "This text will be shown with given consent!";
+    &lt;/script&gt;
+            </pre>
+            <pre class="card-text" style="background-color: lightgrey">
+    &lt;script data-managed="as-oil"
+            data-type="text/javascript"
+            data-src="oilDemoScript.js"
+            data-purposes="1"
+            <span style="background-color:blue; color:white">src="oilDemoScript.js"</span>
+            <span style="background-color:blue; color:white">type="text/javascript"</span>
+            id="managedScriptTag"&gt;
+    &lt;/script&gt;
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function switchSoftBlockingScriptElements() {
+    const cookie = AS_OIL.status();
+    if (cookie.opt_in && cookie.consentData.getPurposesAllowed().indexOf(1) !== -1) {
+      document.getElementById('soft-blocking-script-no-consent').style.display = 'none';
+      document.getElementById('soft-blocking-script-consent').style.display = 'block';
+    } else {
+      document.getElementById('soft-blocking-script-no-consent').style.display = 'block';
+      document.getElementById('soft-blocking-script-consent').style.display = 'none';
+    }
+  }
+
+  function resetOilAndSwitchSoftBlockingScriptElements() {
+    AS_OIL.triggerOptOut();
+    AS_OIL.reload();
+    switchSoftBlockingScriptElements();
+  }
+
+  function configureSoftBlockingScriptElements() {
+    $('#softBlockingScriptResetButton').on('click', () => resetOilAndSwitchSoftBlockingScriptElements());
+    switchSoftBlockingScriptElements();
+  }
+
+  function handleOilMessageInSoftBlockingScriptSection(event) {
+    if (event && event.data && (eventDataContains(event, ['oil_optin_done', 'oil_has_optedin', 'oil_optout_done']))) {
+      switchSoftBlockingScriptElements();
+    }
+  }
+
+</script>

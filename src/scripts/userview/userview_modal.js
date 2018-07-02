@@ -46,6 +46,7 @@ function startTimeOut() {
     hasRunningTimeout = setTimeout(function () {
       removeOilWrapperFromDOM();
       sendEventToHostSite(EVENT_NAME_TIMEOUT);
+      hasRunningTimeout = undefined;
     }, getTimeOutValue() * 1000);
   }
 }

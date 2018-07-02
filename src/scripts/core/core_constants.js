@@ -34,6 +34,7 @@ export const OIL_CONFIG = {
 export const EVENT_NAME_OPT_IN = 'oil_optin_done';
 export const EVENT_NAME_SOI_OPT_IN = 'oil_soi_optin_done';
 export const EVENT_NAME_POI_OPT_IN = 'oil_poi_optin_done';
+export const EVENT_NAME_OPT_OUT = 'oil_optout_done';
 
 // Tracking Events
 export const EVENT_NAME_AS_PRIVACY_SELECTED = 'oil_as_cpc_privacy_selected';

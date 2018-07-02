@@ -28,7 +28,7 @@
           pingCallback({
             gdprAppliesGlobally: false,
             cmpLoaded: isOilAlreadyLoaded()
-          });
+          }, true);
         }
       }
 
