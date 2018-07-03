@@ -1,5 +1,6 @@
 import { OIL_CONFIG } from '../core/core_constants.js';
 import { getConfigValue, getLocale } from '../core/core_config';
+import { OIL_CONFIG_CPC_TYPES } from '../core/core_constants';
 
 // tag::config-timeout[]
 const defaultTimeoutInSeconds = 60;
@@ -24,10 +25,13 @@ export function getTheme() {
   return getConfigValue(OIL_CONFIG.ATTR_THEME, 'light');
 }
 
+export function getCpcType() {
+  return getConfigValue(OIL_CONFIG.ATTR_CPC_TYPE, OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD);
+}
+
 export function getLabel(labelName) {
   return getLabelWithDefault(labelName, labelName);
 }
-
 /**
  * Returns the label or the given default value if it could not be found in configuration.
  *
