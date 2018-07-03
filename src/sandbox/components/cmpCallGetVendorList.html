@@ -27,8 +27,8 @@
 <script type="text/javascript">
   function invokeGetVendorList() {
     __cmp('getVendorList', null, (result, success) => {
-      document.getElementById('getVendorList-command-success').innerText = success;
-      document.getElementById('getVendorList-command-result').innerText = JSON.stringify(result, null, '  ');
+      $('#getVendorList-command-success').text(success);
+      $('#getVendorList-command-result').text(JSON.stringify(result, null, '  '));
     });
   }
 </script>

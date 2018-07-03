@@ -36,9 +36,9 @@
 <script type="text/javascript">
   function invokeGetPublisherConsents(purpose) {
     __cmp('getPublisherConsents', purpose, (result, success) => {
-      document.getElementById('getPublisherConsents-command-success').innerText = success;
-      document.getElementById('getPublisherConsents-command-result').innerText = JSON.stringify(result, null, '  ');
-      document.getElementById('getPublisherConsents-command-resultTable').style.display = 'block';
+      $('#getPublisherConsents-command-success').text(success);
+      $('#getPublisherConsents-command-result').text(JSON.stringify(result, null, '  '));
+      $('#getPublisherConsents-command-resultTable').css('display: block');
     });
   }
 

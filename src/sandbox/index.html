@@ -163,11 +163,11 @@
     ];
 
     sections.forEach(section => {
-      document.getElementById(section).style.display = "none";
-      document.getElementById('menu-' + section).classList.remove('active');
+      $(`#${section}`).css('display: none');
+      $(`#menu-${section}`).removeClass('active');
     });
-    document.getElementById(sectionToActivate).style.display = "block";
-    document.getElementById('menu-' + sectionToActivate).classList.add('active');
+      $(`#${sectionToActivate}`).css('display: block');
+      $(`#menu-${sectionToActivate}`).addClass('active');
     if (activationFunction) activationFunction();
   }
 

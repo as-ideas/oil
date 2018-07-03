@@ -26,8 +26,8 @@
 <script type="text/javascript">
   function invokePing() {
     __cmp('ping', null, (result, success) => {
-      document.getElementById('ping-command-success').innerText = success;
-      document.getElementById('ping-command-result').innerText = JSON.stringify(result, null, '  ');
+      $('#ping-command-success').text(success);
+      $('#ping-command-result').text(JSON.stringify(result, null, '  '));
     });
   }
 </script>

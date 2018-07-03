@@ -94,9 +94,9 @@
     let countdownElement = $('#simulateBannerTimeoutCountdown');
     let containerElement = $('#simulateBannerTimeoutContainer');
 
-    countdownElement.text(currentValue + ' seconds');
-    containerElement.css('visibility:hidden');
-    countdownElement.css('visibility:visible');
+    countdownElement.text(`${currentValue} seconds`);
+    containerElement.css('visibility: hidden');
+    countdownElement.css('visibility: visible');
 
     let x = setInterval(() => {
       if (--currentValue <= 0) {
@@ -116,7 +116,7 @@
   }
 
   function configureTimeoutSimulator() {
-    $('#simulateBannerTimeoutCountdown').css = ('visibility:hidden');
+    $('#simulateBannerTimeoutCountdown').css('visibility: hidden');
     $('#simulateBannerTimeoutButton').on('click', () => {
 
       let config = JSON.parse(document.getElementById('oil-configuration').text);
@@ -146,5 +146,4 @@
       showCookieData();
     }
   }
-
 </script>

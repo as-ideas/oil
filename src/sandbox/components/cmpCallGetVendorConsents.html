@@ -37,9 +37,9 @@
 <script type="text/javascript">
   function invokeGetVendorConsents(vendorIds) {
     __cmp('getVendorConsents', vendorIds, (result, success) => {
-      document.getElementById('getVendorConsents-command-success').innerText = success;
-      document.getElementById('getVendorConsents-command-result').innerText = JSON.stringify(result, null, '  ');
-      document.getElementById('getVendorConsents-command-resultTable').style.display = 'block';
+      $('#getVendorConsents-command-success').text(success);
+      $('#getVendorConsents-command-result').text(JSON.stringify(result, null, '  '));
+      $('#getVendorConsents-command-resultTable').css('display: block');
     });
   }
 

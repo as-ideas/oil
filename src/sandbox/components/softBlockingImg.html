@@ -81,11 +81,11 @@
   function switchSoftBlockingImgElements() {
     const cookie = AS_OIL.status();
     if (cookie.opt_in && cookie.consentData.getPurposesAllowed().indexOf(1) !== -1) {
-      document.getElementById('soft-blocking-img-no-consent').style.display = 'none';
-      document.getElementById('soft-blocking-img-consent').style.display = 'block';
+      $('#soft-blocking-img-no-consent').css('display: none');
+      $('#soft-blocking-img-consent').css('display: block');
     } else {
-      document.getElementById('soft-blocking-img-no-consent').style.display = 'block';
-      document.getElementById('soft-blocking-img-consent').style.display = 'none';
+      $('#soft-blocking-img-no-consent').css('display: block');
+      $('#soft-blocking-img-consent').css('display: none');
     }
   }
 
