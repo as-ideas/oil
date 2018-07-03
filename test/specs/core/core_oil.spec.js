@@ -1,11 +1,12 @@
-import {initOilLayer} from '../../../src/scripts/core/core_oil';
+import { initOilLayer } from '../../../src/scripts/core/core_oil';
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as UserView from '../../../src/scripts/userview/locale/userview_oil';
 import * as CoreCommandCollection from '../../../src/scripts/core/core_command_collection';
 import * as CoreOptIn from '../../../src/scripts/core/core_optin';
 import * as CoreTagManagement from '../../../src/scripts/core/core_tag_management';
-import {waitsForAndRuns} from '../../test-utils/utils_wait';
-import {resetOil} from '../../test-utils/utils_reset';
+import { waitsForAndRuns } from '../../test-utils/utils_wait';
+import { resetOil } from '../../test-utils/utils_reset';
+import { triggerEvent } from '../../test-utils/utils_events';
 
 describe('core_oil', () => {
 
@@ -60,12 +61,13 @@ describe('core_oil', () => {
 
     initOilLayer();
 
-    waitsForAndRuns(() => {
-      return CoreCommandCollection.executeCommandCollection.calls.count() > 0;
-    }, () => {
-      expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledWith('commandCollectionExecutor', executeCommandCollectionSpy);
-      done();
-    }, 2000);
+    waitsForAndRuns(
+      () => CoreCommandCollection.executeCommandCollection.calls.count() > 0,
+      () => {
+        expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledWith('commandCollectionExecutor', executeCommandCollectionSpy);
+        done();
+      },
+      2000);
   });
 
   it('should not execute command collection and attach command collection execution to window object if opt-in is not provided', (done) => {
@@ -78,37 +80,31 @@ describe('core_oil', () => {
     initOilLayer();
 
     waitsForAndRuns(() => {
-      let calls = CoreUtils.setGlobalOilObject.calls;
-      for (let i = 0; i < calls.count(); i++) {
-        if (calls.argsFor(i)[0] === 'commandCollectionExecutor') return true;
-      }
-      return false;
-    }, () => {
-      expect(CoreCommandCollection.executeCommandCollection).not.toHaveBeenCalled();
-      expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledWith('commandCollectionExecutor', executeCommandCollectionSpy);
-      done();
-    }, 2000);
+        let calls = CoreUtils.setGlobalOilObject.calls;
+        for (let i = 0; i < calls.count(); i++) {
+          if (calls.argsFor(i)[0] === 'commandCollectionExecutor') return true;
+        }
+        return false;
+      }, () => {
+        expect(CoreCommandCollection.executeCommandCollection).not.toHaveBeenCalled();
+        expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledWith('commandCollectionExecutor', executeCommandCollectionSpy);
+        done();
+      },
+      2000);
   });
 
-  it('should activate dom elements with consent if opt-in is provided', (done) => {
-    spyOn(CoreOptIn, 'checkOptIn').and.returnValue(Promise.resolve(true));
+  it('should manage dom elements if oil is initialized and page has been loaded', (done) => {
     spyOn(CoreTagManagement, 'manageDomElementActivation').and.callThrough();
 
     initOilLayer();
-    setTimeout(() => {
-      expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalledTimes(1);
-      done();
-    }, 2000);
+    triggerEvent('DOMContentLoaded');
+    waitsForAndRuns(
+      () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
+      () => {
+        expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalledTimes(1);
+        done();
+      },
+      2000);
   });
 
-  it('should not activate dom elements with consent if opt-in is not provided', (done) => {
-    spyOn(CoreOptIn, 'checkOptIn').and.returnValue(Promise.resolve(false));
-    spyOn(CoreTagManagement, 'manageDomElementActivation').and.callThrough();
-
-    initOilLayer();
-    setTimeout(() => {
-      expect(CoreTagManagement.manageDomElementActivation).not.toHaveBeenCalled();
-      done();
-    }, 2000);
-  });
 });

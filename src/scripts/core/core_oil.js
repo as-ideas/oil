@@ -57,7 +57,6 @@ export function initOilLayer() {
         sendEventToHostSite(EVENT_NAME_HAS_OPTED_IN);
         executeCommandCollection();
         attachCommandCollectionFunctionToWindowObject();
-        manageDomElementActivation();
       } else {
         /**
          * Any other case, when the user didn't decide before and oil needs to be shown:
