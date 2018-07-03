@@ -41,20 +41,20 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a id="menu-oil-main" class="nav-link active" href="javascript:activateSection('oil-main');">
+            <a id="menu-oil-main" class="nav-link active" href="javascript:void(0);">
               <span data-feather="home"></span>
               Main
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a id="menu-oil-configuration-manager" class="nav-link" href="javascript:activateSection('oil-configuration-manager');">
+            <a id="menu-oil-configuration-manager" class="nav-link" href="javascript:void(0);">
               <span data-feather="settings"></span>
               OIL Configuration
             </a>
           </li>
           <li class="nav-item">
-            <a id="menu-oil-preference-center-container" class="nav-link" href="javascript:activateSection('oil-preference-center-container', showCPC);">
+            <a id="menu-oil-preference-center-container" class="nav-link" href="javascript:showCPC();">
               <span data-feather="sliders"></span>
               Cookie Preference Center (CPC)
             </a>
@@ -72,31 +72,31 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a id="menu-cmp-call-getVendorConsents" class="nav-link" href="javascript:activateSection('cmp-call-getVendorConsents')">
+            <a id="menu-cmp-call-getVendorConsents" class="nav-link" href="javascript:void(0);">
               <span data-feather="code"></span>
               getVendorConsents()
             </a>
           </li>
           <li class="nav-item">
-            <a id="menu-cmp-call-getConsentData" class="nav-link" href="javascript:activateSection('cmp-call-getConsentData')">
+            <a id="menu-cmp-call-getConsentData" class="nav-link" href="javascript:void(0);">
               <span data-feather="code"></span>
               getConsentData()
             </a>
           </li>
           <li class="nav-item">
-            <a id="menu-cmp-call-ping" class="nav-link" href="javascript:activateSection('cmp-call-ping', invokePing());">
+            <a id="menu-cmp-call-ping" class="nav-link" href="javascript:invokePing();">
               <span data-feather="code"></span>
               ping()
             </a>
           </li>
           <li class="nav-item">
-            <a id="menu-cmp-call-getPublisherConsents" class="nav-link" href="javascript:activateSection('cmp-call-getPublisherConsents')">
+            <a id="menu-cmp-call-getPublisherConsents" class="nav-link" href="javascript:void(0);">
               <span data-feather="code"></span>
               getPublisherConsents()
             </a>
           </li>
           <li class="nav-item">
-            <a id="menu-cmp-call-getVendorList" class="nav-link" href="javascript:activateSection('cmp-call-getVendorList', invokeGetVendorList());">
+            <a id="menu-cmp-call-getVendorList" class="nav-link" href="javascript:invokeGetVendorList();">
               <span data-feather="code"></span>
               getVendorList()
             </a>
@@ -107,13 +107,13 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a id="menu-soft-blocking-script" class="nav-link" href="javascript:activateSection('soft-blocking-script');">
+            <a id="menu-soft-blocking-script" class="nav-link" href="javascript:void(0);">
               <span data-feather="tag"></span>
               script-Tag
             </a>
           </li>
           <li class="nav-item">
-            <a id="menu-soft-blocking-img" class="nav-link" href="javascript:activateSection('soft-blocking-img')">
+            <a id="menu-soft-blocking-img" class="nav-link" href="javascript:void(0);">
               <span data-feather="image"></span>
               img-Tag
             </a>
@@ -148,27 +148,27 @@
     return eventNames.filter((name) => JSON.stringify(event.data).indexOf(name) !== -1).length > 0;
   }
 
-  function activateSection(sectionToActivate, activationFunction) {
-    let sections = [
-      'oil-main',
-      'oil-configuration-manager',
-      'oil-preference-center-container',
-      'cmp-call-getVendorConsents',
-      'cmp-call-getConsentData',
-      'cmp-call-ping',
-      'cmp-call-getPublisherConsents',
-      'cmp-call-getVendorList',
-      'soft-blocking-script',
-      'soft-blocking-img'
-    ];
 
-    sections.forEach(section => {
-      $(`#${section}`).css('display: none');
-      $(`#menu-${section}`).removeClass('active');
-    });
-      $(`#${sectionToActivate}`).css('display: block');
-      $(`#menu-${sectionToActivate}`).addClass('active');
-    if (activationFunction) activationFunction();
+  function activateWidgetSection() {
+    $('.sidebar a').on('click', function () {
+        //switch menu status
+        clearActiveStatus();
+        $(this).addClass('active');
+
+        //show widget section
+        clearWidgetSection();
+        let sectionId = $(this).getAttr('id').replace('menu-','');
+        $(`#${sectionId}`).css('display: block');
+      }
+    )
+  }
+
+  function clearActiveStatus() {
+    $('.sidebar a').removeClass('active');
+  }
+
+  function clearWidgetSection() {
+    $('.widget-section').css('display: none');
   }
 
   let eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
@@ -186,8 +186,7 @@
   configureGetPublisherConsentsElements();
   configureSoftBlockingScriptElements();
   configureSoftBlockingImgElements();
-
-  activateSection('oil-main');
+  activateWidgetSection();
 </script>
 </body>
 </html>
