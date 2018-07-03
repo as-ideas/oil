@@ -13,7 +13,8 @@ import {
   getLanguageFromLocale,
   getPoiGroupName,
   getPublicPath,
-  setLocale, getGdprApplies
+  setLocale,
+  getGdprApplies
 } from '../../../src/scripts/core/core_config';
 import { loadFixture } from '../../test-utils/utils_fixtures';
 import * as CoreLog from '../../../src/scripts/core/core_log';
