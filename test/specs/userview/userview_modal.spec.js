@@ -41,6 +41,15 @@ describe('the user view modal aka the oil layer wrapper', () => {
     expectTimeoutNotStarted();
   });
 
+  it('should NOT renderOil with gdpr_applies FALSE', () => {
+    loadFixture('config/given.config.with.gdpr.not.applies.html');
+
+    expect(document.querySelector('.as-oil')).toBeNull();
+    expectTimeoutNotStarted();
+  });
+
+
+
   it('should renderOil with NO OPT-IN as DEFAULT TEMPLATE', () => {
     loadFixture('config/given.config.example.labels.html');
     renderOil({optIn: false});

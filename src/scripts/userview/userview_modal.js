@@ -24,7 +24,7 @@ import {
 } from './view/oil.advanced.settings.js';
 import { logError, logInfo } from '../core/core_log.js';
 import { getTheme, getTimeOutValue, isPersistMinimumTracking } from './userview_config.js';
-import { isPoiActive, isSubscriberSetCookieActive, getAdvancedSettingsPurposesDefault } from '../core/core_config.js';
+import { isPoiActive, isSubscriberSetCookieActive, getAdvancedSettingsPurposesDefault, getGdprApplies } from '../core/core_config.js';
 import {
   applyPrivacySettings,
   getPrivacySettings,
@@ -95,7 +95,7 @@ export function renderOil(props) {
  * @param {*} props
  */
 function shouldRenderOilLayer(props) {
-  return props.optIn !== true;
+  return props.optIn !== true && getGdprApplies();
 }
 
 export function oilShowPreferenceCenter() {
