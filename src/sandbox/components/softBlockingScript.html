@@ -1,4 +1,4 @@
-<div id="soft-blocking-script" style="display: none;">
+<div id="soft-blocking-script" class="widget-section">
   <h1 class="display-6">Soft Blocking of <code>&lt;script&gt;</code> tags</h1>
   <div class="row">
     <div class="col">
@@ -85,11 +85,11 @@
   function switchSoftBlockingScriptElements() {
     const cookie = AS_OIL.status();
     if (cookie.opt_in && cookie.consentData.getPurposesAllowed().indexOf(1) !== -1) {
-      document.getElementById('soft-blocking-script-no-consent').style.display = 'none';
-      document.getElementById('soft-blocking-script-consent').style.display = 'block';
+      $('#soft-blocking-script-no-consent').css('display: none');
+      $('#soft-blocking-script-consent').css('display: block');
     } else {
-      document.getElementById('soft-blocking-script-no-consent').style.display = 'block';
-      document.getElementById('soft-blocking-script-consent').style.display = 'none';
+      $('#soft-blocking-script-no-consent').css('display: block');
+      $('#soft-blocking-script-consent').css('display: none');
     }
   }
 
@@ -109,5 +109,4 @@
       switchSoftBlockingScriptElements();
     }
   }
-
 </script>

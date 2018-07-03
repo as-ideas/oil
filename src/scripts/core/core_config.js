@@ -222,5 +222,5 @@ export function setLocale(localeObject) {
 }
 
 export function getGdprApplies() {
-  return getConfigValue(OIL_CONFIG.ATTR_GDPR_APPLIES, true);
+  return getConfigValue(OIL_CONFIG.ATTR_GDPR_APPLIES_GLOBALLY, true);
 }

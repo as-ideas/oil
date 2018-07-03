@@ -110,6 +110,7 @@ This is a full list of configurable options.
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31
 | <<auto-hiding-the-layer-timeout,timeout>> | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
 | advanced_settings | Replaces the No Button with a advanced settings button, which enables the user to select between different settings of privacy. The results of this selection is stored in the oil cookie (both SOI and POI) as well. | false
+| cpc_type | Specifies the type (the layout) of the Cookie Preference Center. Currently, two types are supported: 'standard' and 'tabs'. Depending on this parameter additional label configuration may be necessary. See section <<Full Label Configuration>> for details. | standard
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | true
 | iabVendorListUrl | Vendorlist to use | https://vendorlist.consensu.org/vendorlist.json
 | iabVendorWhitelist | Array of vendor IDs to include in consent. If it is set, values in `iabVendorBlacklist` are ignored. <<blacklisting-and-whitelisting, Details here>> | none
@@ -117,7 +118,7 @@ This is a full list of configurable options.
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | none
 | default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
-| gdpr_applies | Flag that indicates if a user is from the EU (or that we want to apply the consent to everyone). The flag is passed to vendors | true
+| gdpr_applies_globally | Flag that indicates if a user is from the EU (or that we want to apply the consent to everyone). The flag is passed to vendors | true
 |====
 
 
