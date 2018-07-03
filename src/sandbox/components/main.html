@@ -1,4 +1,4 @@
-<div id="oil-main">
+<div id="oil-main" class="widget-section" style="display: block">
   <div class="row">
     <div class="col">
       <div class="card">
@@ -70,12 +70,12 @@
       $('#oilCookieCustomPurposeIds').text(AS_OIL.status().customPurposes);
       $('#oilCookieConsentString').text(AS_OIL.status().consentString);
     } else {
-      $('#oilCookieOptIn').text('');
-      $('#oilCookieOilVersion').text('');
-      $('#oilCookieLocaleVariantName').text('');
-      $('#oilCookieLocaleVariantVersion').text('');
-      $('#oilCookieCustomPurposeIds').text('');
-      $('#oilCookieConsentString').text('');
+      $('#oilCookieOptIn').empty();
+      $('#oilCookieOilVersion').empty();
+      $('#oilCookieLocaleVariantName').empty();
+      $('#oilCookieLocaleVariantVersion').empty();
+      $('#oilCookieCustomPurposeIds').empty();
+      $('#oilCookieConsentString').empty();
     }
   }
 
@@ -94,15 +94,15 @@
     let countdownElement = $('#simulateBannerTimeoutCountdown');
     let containerElement = $('#simulateBannerTimeoutContainer');
 
-    countdownElement.text(currentValue + ' seconds');
-    containerElement.css('visibility:hidden');
-    countdownElement.css('visibility:visible');
+    countdownElement.text(`${currentValue} seconds`);
+    containerElement.css('visibility: hidden');
+    countdownElement.css('visibility: visible');
 
     let x = setInterval(() => {
       if (--currentValue <= 0) {
         clearInterval(x);
         countdownElement.css('visibility:hidden');
-        countdownElement.text('');
+        countdownElement.empty();
         containerElement.css('visibility:visible');
         cleanUpFunction();
         return;
@@ -116,11 +116,11 @@
   }
 
   function configureTimeoutSimulator() {
-    $('#simulateBannerTimeoutCountdown').css = ('visibility:hidden');
+    $('#simulateBannerTimeoutCountdown').css('visibility: hidden');
     $('#simulateBannerTimeoutButton').on('click', () => {
 
-      let config = JSON.parse(document.getElementById('oil-configuration').text);
-      let timeoutValue = parseInt(document.getElementById('simulateBannerTimeoutValue').value);
+      let config = JSON.parse($('#oil-configuration').value[0].text);
+      let timeoutValue = parseInt($('#simulateBannerTimeoutValue').value[0].value);
       const previousTimeoutValue = config['timeout'];
 
       if (isNaN(timeoutValue) || timeoutValue === 0) return;
@@ -146,5 +146,4 @@
       showCookieData();
     }
   }
-
 </script>

@@ -1,4 +1,4 @@
-<div id="cmp-call-getVendorConsents" style="display: none;">
+<div id="cmp-call-getVendorConsents" class="widget-section">
   <h1 class="display-6">CMP Api Call <code>getVendorConsents()</code></h1>
   <p>From specification
     <a href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/CMP%20JS%20API%20v1.1%20Final.md" target="iabJsApiSpec">Consent Management Provider JavaScript API v1.1: Transparency & Consent Framework</a>:<br/>
@@ -37,9 +37,9 @@
 <script type="text/javascript">
   function invokeGetVendorConsents(vendorIds) {
     __cmp('getVendorConsents', vendorIds, (result, success) => {
-      document.getElementById('getVendorConsents-command-success').innerText = success;
-      document.getElementById('getVendorConsents-command-result').innerText = JSON.stringify(result, null, '  ');
-      document.getElementById('getVendorConsents-command-resultTable').style.display = 'block';
+      $('#getVendorConsents-command-success').text(success);
+      $('#getVendorConsents-command-result').text(JSON.stringify(result, null, '  '));
+      $('#getVendorConsents-command-resultTable').css('display: block');
     });
   }
 
