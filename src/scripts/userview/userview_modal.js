@@ -1,6 +1,6 @@
 import '../../styles/modal.scss';
 import '../../styles/cpc.scss';
-import { sendEventToHostSite } from '../core/core_utils';
+import { getGlobalOilObject, isObject, sendEventToHostSite } from '../core/core_utils';
 import { removeSubscriberCookies } from '../core/core_cookies';
 import {
   EVENT_NAME_ADVANCED_SETTINGS,
@@ -11,48 +11,26 @@ import {
   EVENT_NAME_SOI_OPT_IN,
   EVENT_NAME_THIRD_PARTY_LIST,
   EVENT_NAME_TIMEOUT,
+  OIL_CONFIG_CPC_TYPES,
   PRIVACY_MINIMUM_TRACKING
 } from '../core/core_constants';
 import { oilOptIn, oilPowerOptIn } from './userview_optin';
 import { deActivatePowerOptIn } from '../core/core_poi';
 import { oilDefaultTemplate } from './view/oil.default';
 import { oilNoCookiesTemplate } from './view/oil.no.cookies';
-import {
-  attachCpcHandlers,
-  oilAdvancedSettingsInlineTemplate,
-  oilAdvancedSettingsTemplate
-} from './view/oil.advanced.settings.standard';
+import * as AdvancedSettingsStandard from './view/oil.advanced.settings.standard';
+import * as AdvancedSettingsTabs from './view/oil.advanced.settings.tabs';
 import { logError, logInfo } from '../core/core_log';
-import { getTheme, getTimeOutValue, isPersistMinimumTracking } from './userview_config';
-import { isPoiActive, isSubscriberSetCookieActive, getAdvancedSettingsPurposesDefault } from '../core/core_config';
-import {
-  applyPrivacySettings,
-  getPrivacySettings,
-  getSoiConsentData
-} from './userview_privacy';
-import { getGlobalOilObject, isObject } from '../core/core_utils';
-import { getPurposes, loadVendorList } from '../core/core_vendor_information';
+import { getCpcType, getTheme, getTimeOutValue, isPersistMinimumTracking } from './userview_config';
+import { getAdvancedSettingsPurposesDefault, isPoiActive, isSubscriberSetCookieActive } from '../core/core_config';
+import { applyPrivacySettings, getPrivacySettings, getSoiConsentData } from './userview_privacy';
+import { getPurposeIds, loadVendorList } from '../core/core_vendor_information';
 import { manageDomElementActivation } from '../core/core_tag_management';
-import { getCpcType } from './userview_config';
-import { OIL_CONFIG_CPC_TYPES } from '../core/core_constants';
-import { attachTabsCpcHandlers, oilAdvancedSettingsTabsInlineTemplate, oilAdvancedSettingsTabsTemplate } from './view/oil.advanced.settings.tabs';
-
 
 // Initialize our Oil wrapper and save it ...
 
 export const oilWrapper = defineOilWrapper;
 export let hasRunningTimeout;
-
-function startTimeOut() {
-  if (!hasRunningTimeout && getTimeOutValue() > 0) {
-    logInfo('OIL will auto-hide in', getTimeOutValue(), 'seconds.');
-    hasRunningTimeout = setTimeout(function () {
-      removeOilWrapperFromDOM();
-      sendEventToHostSite(EVENT_NAME_TIMEOUT);
-      hasRunningTimeout = undefined;
-    }, getTimeOutValue() * 1000);
-  }
-}
 
 export function stopTimeOut() {
   if (hasRunningTimeout) {
@@ -63,10 +41,6 @@ export function stopTimeOut() {
 
 /**
  * Utility function for forEach safety
- *
- * @param array
- * @param callback
- * @param scope
  */
 export function forEach(array, callback, scope) {
   for (let i = 0; i < array.length; i++) {
@@ -74,51 +48,6 @@ export function forEach(array, callback, scope) {
   }
 }
 
-function findAdvancedSettingsTemplate() {
-  const cpcType = getCpcType();
-  switch (cpcType) {
-    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD:
-      return oilAdvancedSettingsTemplate();
-    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_TABS:
-      return oilAdvancedSettingsTabsTemplate();
-    default:
-      logError(`Found unknown CPC type '${cpcType}'! Falling back to CPC type '${OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD}'!`);
-      return oilAdvancedSettingsTemplate();
-  }
-}
-
-function findAdvancedSettingsInlineTemplate() {
-  const cpcType = getCpcType();
-  switch (cpcType) {
-    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD:
-      return oilAdvancedSettingsInlineTemplate();
-    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_TABS:
-      return oilAdvancedSettingsTabsInlineTemplate();
-    default:
-      logError(`Found unknown CPC type '${cpcType}'! Falling back to CPC type '${OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD}'!`);
-      return oilAdvancedSettingsInlineTemplate();
-  }
-}
-
-function attachCpcEventHandlers() {
-  const cpcType = getCpcType();
-  switch (cpcType) {
-    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD:
-      attachCpcHandlers();
-      break;
-    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_TABS:
-      attachTabsCpcHandlers();
-      break;
-    default:
-      logError(`Found unknown CPC type '${cpcType}'! Falling back to CPC type '${OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD}'!`);
-      attachCpcHandlers();
-      break;
-  }
-}
-
-/**
- * Oil Main Render Function:
- */
 export function renderOil(props) {
   if (shouldRenderOilLayer(props)) {
     if (props.noCookie) {
@@ -132,15 +61,6 @@ export function renderOil(props) {
   } else {
     removeOilWrapperFromDOM();
   }
-}
-
-/**
- * Helper that determines if Oil layer is shown or not...
- * Oil layer is not rendered eg. if user opted in
- * @param {*} props
- */
-function shouldRenderOilLayer(props) {
-  return props.optIn !== true;
 }
 
 export function oilShowPreferenceCenter() {
@@ -166,12 +86,81 @@ export function oilShowPreferenceCenter() {
       if (consentData) {
         currentPrivacySettings = consentData.getPurposesAllowed();
       } else {
-        currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? getPurposes().map(({id}) => id) : [];
+        currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? getPurposeIds() : [];
       }
       applyPrivacySettings(currentPrivacySettings);
     })
     .catch((error) => logError(error));
 }
+
+export function handleOptIn() {
+  (isPoiActive() ? handlePoiOptIn() : handleSoiOptIn()).then(() => {
+    let commandCollectionExecutor = getGlobalOilObject('commandCollectionExecutor');
+    if (commandCollectionExecutor) {
+      commandCollectionExecutor();
+    }
+    manageDomElementActivation();
+  });
+  animateOptInButton();
+}
+
+function shouldRenderOilLayer(props) {
+  return props.optIn !== true;
+}
+
+function startTimeOut() {
+  if (!hasRunningTimeout && getTimeOutValue() > 0) {
+    logInfo('OIL will auto-hide in', getTimeOutValue(), 'seconds.');
+    hasRunningTimeout = setTimeout(function () {
+      removeOilWrapperFromDOM();
+      sendEventToHostSite(EVENT_NAME_TIMEOUT);
+      hasRunningTimeout = undefined;
+    }, getTimeOutValue() * 1000);
+  }
+}
+
+function findAdvancedSettingsTemplate() {
+  const cpcType = getCpcType();
+  switch (cpcType) {
+    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD:
+      return AdvancedSettingsStandard.oilAdvancedSettingsTemplate();
+    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_TABS:
+      return AdvancedSettingsTabs.oilAdvancedSettingsTemplate();
+    default:
+      logError(`Found unknown CPC type '${cpcType}'! Falling back to CPC type '${OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD}'!`);
+      return AdvancedSettingsStandard.oilAdvancedSettingsTemplate();
+  }
+}
+
+function findAdvancedSettingsInlineTemplate() {
+  const cpcType = getCpcType();
+  switch (cpcType) {
+    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD:
+      return AdvancedSettingsStandard.oilAdvancedSettingsInlineTemplate();
+    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_TABS:
+      return AdvancedSettingsTabs.oilAdvancedSettingsInlineTemplate();
+    default:
+      logError(`Found unknown CPC type '${cpcType}'! Falling back to CPC type '${OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD}'!`);
+      return AdvancedSettingsStandard.oilAdvancedSettingsInlineTemplate();
+  }
+}
+
+function attachCpcEventHandlers() {
+  const cpcType = getCpcType();
+  switch (cpcType) {
+    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD:
+      AdvancedSettingsStandard.attachCpcHandlers();
+      break;
+    case OIL_CONFIG_CPC_TYPES.CPC_TYPE_TABS:
+      AdvancedSettingsTabs.attachCpcHandlers();
+      break;
+    default:
+      logError(`Found unknown CPC type '${cpcType}'! Falling back to CPC type '${OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD}'!`);
+      AdvancedSettingsStandard.attachCpcHandlers();
+      break;
+  }
+}
+
 
 function oilShowCompanyList() {
   import('../poi-list/poi-info.js')
@@ -276,17 +265,6 @@ function handleThirdPartyList() {
   stopTimeOut();
   oilShowThirdPartyList();
   sendEventToHostSite(EVENT_NAME_THIRD_PARTY_LIST);
-}
-
-export function handleOptIn() {
-  (isPoiActive() ? handlePoiOptIn() : handleSoiOptIn()).then(() => {
-    let commandCollectionExecutor = getGlobalOilObject('commandCollectionExecutor');
-    if (commandCollectionExecutor) {
-      commandCollectionExecutor();
-    }
-    manageDomElementActivation();
-  });
-  animateOptInButton();
 }
 
 function animateOptInButton() {

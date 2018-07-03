@@ -129,7 +129,7 @@ const ContentSnippet = () => {
 </div>`;
 };
 
-export function oilAdvancedSettingsTabsInlineTemplate() {
+export function oilAdvancedSettingsInlineTemplate() {
   return `<div class="as-oil-l-wrapper-layout-max-width as-oil-cpc-wrapper">
     <div class="as-oil__heading">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
@@ -143,14 +143,14 @@ export function oilAdvancedSettingsTabsInlineTemplate() {
   </div>`
 }
 
-export function oilAdvancedSettingsTabsTemplate() {
+export function oilAdvancedSettingsTemplate() {
   return `
   <div id="as-oil-cpc" class="as-oil-content-overlay" data-qa="oil-cpc-overlay">
-    ${oilAdvancedSettingsTabsInlineTemplate()}
+    ${oilAdvancedSettingsInlineTemplate()}
   </div>`
 }
 
-export function attachTabsCpcHandlers() {
+export function attachCpcHandlers() {
   forEach(document.querySelectorAll('.as-js-btn-activate-all'), (domNode) => {
     domNode && domNode.addEventListener('click', activateAll, false);
   });
