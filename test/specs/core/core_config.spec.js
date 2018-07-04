@@ -14,7 +14,7 @@ import {
   getPoiGroupName,
   getPublicPath,
   setLocale,
-  getGdprApplies,
+  gdprApplies,
   setGdprApplies
 } from '../../../src/scripts/core/core_config';
 import { loadFixture } from '../../test-utils/utils_fixtures';
@@ -183,28 +183,34 @@ fdescribe('core_config', () => {
 
   });
 
-  describe('getGdprApplies', function() {
+  describe('gdprApplies', function() {
 
-    it('returns getGdprApplies from configuration', function() {
-      loadFixture('config/given.config.with.gdpr.not.applies.html');
-      expect(getGdprApplies()).toBeFalsy();
+    it('returns true when gdpr_applies_globally and gdpr_applies not in config', function() {
+      expect(gdprApplies()).toBeTruthy();
     });
 
-    it('returns true when no getGdprApplies in config', function() {
-      expect(getGdprApplies()).toBeTruthy();
+    it('returns false when gdpr_applies_globally is false and setGdprApplies is not invoked with true', function() {
+      loadFixture('config/given.config.with.gdpr.not.applies.html');
+      expect(gdprApplies()).toBeFalsy();
+    });
+
+    it('returns true when set after initialisation', function() {
+      loadFixture('config/given.config.with.gdpr.not.applies.html');
+      setGdprApplies(true);
+      expect(gdprApplies()).toBeTruthy();
     });
 
   });
 
   describe('setGdprApplies', function() {
 
-    it('returns getGdprApplies from configuration', function() {
+    it('sets gdprApplies in configuration', function() {
       loadFixture('config/given.config.with.gdpr.not.applies.html');
-      expect(getGdprApplies()).toBeFalsy();
+      expect(gdprApplies()).toBeFalsy();
       setGdprApplies(true);
-      expect(getGdprApplies()).toBeTruthy();
+      expect(gdprApplies()).toBeTruthy();
       setGdprApplies(false);
-      expect(getGdprApplies()).toBeFalsy();
+      expect(gdprApplies()).toBeFalsy();
     });
 
   });
