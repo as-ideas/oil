@@ -12,7 +12,7 @@ describe('oil stub', () => {
   it('should define __cmp() function that can handle ping request', (done) => {
     window.__cmp('ping', null, (pingArgs, success) => {
       expect(pingArgs).toBeDefined();
-      expect(pingArgs.gdprAppliesGlobally).toEqual(false);
+      expect(pingArgs.gdprAppliesGlobally).toEqual(true);
       expect(pingArgs.cmpLoaded).toEqual(false);
       expect(success).toBeTruthy();
       done();

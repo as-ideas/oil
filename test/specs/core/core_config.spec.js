@@ -21,7 +21,7 @@ import { loadFixture } from '../../test-utils/utils_fixtures';
 import * as CoreLog from '../../../src/scripts/core/core_log';
 import { resetOil } from '../../test-utils/utils_reset';
 
-fdescribe('core_config', () => {
+describe('core_config', () => {
 
   const DEFAULT_FALLBACK_BACKEND_URL = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/enEN_01';
   const EXPECTED_PUBLIC_PATH = '//www/';

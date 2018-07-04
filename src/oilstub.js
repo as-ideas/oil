@@ -25,8 +25,20 @@
 
       function handlePing(pingCallback) {
         if (pingCallback) {
+          let gdprAppliesGlobally = true;
+          const configurationElement = document.querySelector('script[type="application/configuration"]#oil-configuration');
+          if (configurationElement !== null && configurationElement.text) {
+            try {
+              let parsedConfig = JSON.parse(configurationElement.text);
+              if(parsedConfig && parsedConfig.hasOwnProperty('gdpr_applies_globally')) {
+                gdprAppliesGlobally = parsedConfig.gdpr_applies_globally
+              }
+            } catch(error) {
+              // no complaints
+            }
+          }
           pingCallback({
-            gdprAppliesGlobally: false,
+            gdprAppliesGlobally: gdprAppliesGlobally,
             cmpLoaded: isOilAlreadyLoaded()
           }, true);
         }
