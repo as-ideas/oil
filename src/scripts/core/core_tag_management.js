@@ -67,24 +67,32 @@ function manageNonScriptElement(element, cookie) {
   let managedAttributes = ['href', 'src', 'title', 'display'];
 
   if (hasConsent(element, cookie)) {
-    for (let managedAttribute of managedAttributes) {
-      let managedAttributeValue = element.getAttribute('data-' + managedAttribute);
-      if (managedAttribute === 'display') {
-        element.style.display = managedAttributeValue ? managedAttributeValue : '';
-      } else {
-        if (managedAttributeValue) {
-          element.setAttribute(managedAttribute, managedAttributeValue);
-        }
-      }
+    for (let i = 0; i < managedAttributes.length; i++) {
+      manageElementWithConsent(element, managedAttributes[i]);
     }
   } else {
-    for (let managedAttribute of managedAttributes) {
-      if (managedAttribute === 'display') {
-        element.style.display = 'none';
-      } else if (element.hasAttribute(managedAttribute)) {
-        element.removeAttribute(managedAttribute);
-      }
+    for (let i = 0; i < managedAttributes.length; i++) {
+      manageElementWithoutConsent(element, managedAttributes[i]);
     }
+  }
+}
+
+function manageElementWithConsent(element, managedAttribute) {
+  let managedAttributeValue = element.getAttribute('data-' + managedAttribute);
+  if (managedAttribute === 'display') {
+    element.style.display = managedAttributeValue ? managedAttributeValue : '';
+  } else {
+    if (managedAttributeValue) {
+      element.setAttribute(managedAttribute, managedAttributeValue);
+    }
+  }
+}
+
+function manageElementWithoutConsent(element, managedAttribute) {
+  if (managedAttribute === 'display') {
+    element.style.display = 'none';
+  } else if (element.hasAttribute(managedAttribute)) {
+    element.removeAttribute(managedAttribute);
   }
 }
 
