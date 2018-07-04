@@ -1,8 +1,8 @@
-import {MANAGED_TAG_IDENTIFIER, MANAGED_TAG_IDENTIFIER_ATTRIBUTE, MANAGED_TAG_PURPOSES_ATTRIBUTE} from './core_constants';
-import {getSoiCookie} from './core_cookies';
-import {arrayContainsArray} from './core_utils';
-import {getPurposeIds} from './core_vendor_information';
-import {getCustomPurposeIds} from './core_config';
+import { MANAGED_TAG_IDENTIFIER, MANAGED_TAG_IDENTIFIER_ATTRIBUTE, MANAGED_TAG_PURPOSES_ATTRIBUTE } from './core_constants';
+import { getSoiCookie } from './core_cookies';
+import { arrayContainsArray } from './core_utils';
+import { getPurposeIds } from './core_vendor_information';
+import { getCustomPurposeIds } from './core_config';
 
 export function manageDomElementActivation() {
   let managedElements = findManagedElements();
