@@ -1,5 +1,6 @@
 import { waitsForAndRuns } from '../test-utils/utils_wait';
 import { resetOil } from '../test-utils/utils_reset';
+import { loadFixture } from '../test-utils/utils_fixtures';
 
 describe('oil stub', () => {
 
@@ -15,6 +16,16 @@ describe('oil stub', () => {
       expect(pingArgs.gdprAppliesGlobally).toEqual(true);
       expect(pingArgs.cmpLoaded).toEqual(false);
       expect(success).toBeTruthy();
+      done();
+    });
+  });
+
+  it('ping() should return gdprAppliesGlobally from oil configuration', (done) => {
+    loadFixture('config/given.config.with.gdpr.not.applies.html');
+
+    window.__cmp('ping', null, (pingArgs, success) => {
+      expect(pingArgs).toBeDefined();
+      expect(pingArgs.gdprAppliesGlobally).toEqual(false);
       done();
     });
   });

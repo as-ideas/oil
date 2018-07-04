@@ -167,7 +167,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
 | default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
-| gdpr_applies_globally | Flag that indicates if a user is from the EU (or that we want to apply the consent to everyone). The flag is passed to vendors | true
+| gdpr_applies_globally | Flag to indicate that publisher is from the EU, thus showing the OIL layer to every user. The flag is passed to vendors. | true
 
 ### Texts & Locale Object
 
