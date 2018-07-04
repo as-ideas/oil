@@ -1,8 +1,8 @@
-import { MANAGED_TAG_IDENTIFIER, MANAGED_TAG_IDENTIFIER_ATTRIBUTE, MANAGED_TAG_PURPOSES_ATTRIBUTE } from './core_constants';
-import { getSoiCookie } from './core_cookies';
-import { arrayContainsArray } from './core_utils';
-import { getPurposeIds } from './core_vendor_information';
-import { getCustomPurposeIds } from './core_config';
+import {MANAGED_TAG_IDENTIFIER, MANAGED_TAG_IDENTIFIER_ATTRIBUTE, MANAGED_TAG_PURPOSES_ATTRIBUTE} from './core_constants';
+import {getSoiCookie} from './core_cookies';
+import {arrayContainsArray} from './core_utils';
+import {getPurposeIds} from './core_vendor_information';
+import {getCustomPurposeIds} from './core_config';
 
 export function manageDomElementActivation() {
   let managedElements = findManagedElements();
@@ -67,24 +67,32 @@ function manageNonScriptElement(element, cookie) {
   let managedAttributes = ['href', 'src', 'title', 'display'];
 
   if (hasConsent(element, cookie)) {
-    for (let managedAttribute of managedAttributes) {
-      let managedAttributeValue = element.getAttribute('data-' + managedAttribute);
-      if (managedAttribute === 'display') {
-        element.style.display = managedAttributeValue ? managedAttributeValue : '';
-      } else {
-        if (managedAttributeValue) {
-          element.setAttribute(managedAttribute, managedAttributeValue);
-        }
-      }
+    for (let i = 0; i < managedAttributes.length; i++) {
+      manageElementWithConsent(element, managedAttributes[i]);
     }
   } else {
-    for (let managedAttribute of managedAttributes) {
-      if (managedAttribute === 'display') {
-        element.style.display = 'none';
-      } else if (element.hasAttribute(managedAttribute)) {
-        element.removeAttribute(managedAttribute);
-      }
+    for (let i = 0; i < managedAttributes.length; i++) {
+      manageElementWithoutConsent(element, managedAttributes[i]);
     }
+  }
+}
+
+function manageElementWithConsent(element, managedAttribute) {
+  let managedAttributeValue = element.getAttribute('data-' + managedAttribute);
+  if (managedAttribute === 'display') {
+    element.style.display = managedAttributeValue ? managedAttributeValue : '';
+  } else {
+    if (managedAttributeValue) {
+      element.setAttribute(managedAttribute, managedAttributeValue);
+    }
+  }
+}
+
+function manageElementWithoutConsent(element, managedAttribute) {
+  if (managedAttribute === 'display') {
+    element.style.display = 'none';
+  } else if (element.hasAttribute(managedAttribute)) {
+    element.removeAttribute(managedAttribute);
   }
 }
 
