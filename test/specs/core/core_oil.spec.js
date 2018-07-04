@@ -52,7 +52,8 @@ describe('core_oil', () => {
 
     verifyThatGlobalOilObjectIsSet(12, 'triggerOptOut', 'handleOptOut');
 
-    verifyThatGlobalOilObjectIsSet(13, 'setGdprApplies', 'setGdprApplies');
+    verifyThatGlobalOilObjectIsSet(13, 'applyGDPR', 'setGdprApplies');
+    verifyThatGlobalOilObjectIsSet(13, 'applyGDPR', 'initOilLayer');
   });
 
   it('should execute command collection and attach command collection execution to window object if opt-in is provided', (done) => {

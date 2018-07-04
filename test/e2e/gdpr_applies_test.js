@@ -24,7 +24,7 @@ module.exports = {
       .end();
   },
 
-  'OIL Layer should show after calling AS_OIL.setGdprApplies() gdpr_applies_globally is false': function (browser) {
+  'OIL Layer should show after calling AS_OIL.applyGDPR()': function (browser) {
     browser
       .useXpath().waitForElementNotPresent(OIL_LAYER, 1000)
       .click(GDPR_APPLY_BUTTON)

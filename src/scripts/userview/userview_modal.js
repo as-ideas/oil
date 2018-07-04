@@ -22,7 +22,7 @@ import * as AdvancedSettingsStandard from './view/oil.advanced.settings.standard
 import * as AdvancedSettingsTabs from './view/oil.advanced.settings.tabs';
 import { logError, logInfo } from '../core/core_log';
 import { getCpcType, getTheme, getTimeOutValue, isPersistMinimumTracking } from './userview_config';
-import { getAdvancedSettingsPurposesDefault, isPoiActive, isSubscriberSetCookieActive } from '../core/core_config';
+import { getAdvancedSettingsPurposesDefault, isPoiActive, isSubscriberSetCookieActive, gdprApplies } from '../core/core_config';
 import { applyPrivacySettings, getPrivacySettings, getSoiConsentData } from './userview_privacy';
 import { getPurposeIds, loadVendorList } from '../core/core_vendor_information';
 import { manageDomElementActivation } from '../core/core_tag_management';
@@ -105,7 +105,7 @@ export function handleOptIn() {
 }
 
 function shouldRenderOilLayer(props) {
-  return props.optIn !== true;
+  return props.optIn === false && gdprApplies();
 }
 
 function startTimeOut() {
