@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>GDPR Applies Test Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- tag::oil-config[] -->
+  <script id="oil-configuration" type="application/configuration">
+      {
+        "gdpr_applies_globally": false,
+        "publicPath": "/",
+        "locale": {
+          "version": 0,
+          "localeId": "de",
+          "texts": {
+  "label_intro_heading": "We use cookies and other technologies",
+  "label_intro": "The website uses cookies, web beacons, JavaScript and similar technologies. I agree that <a href=\"javascript:void(0)\" class=\"as-oil__intro-txt--link as-js-companyList\">companies belonging to Axel Springer SE</a> and <a href=\"javascript:void(0)\" class=\"as-oil__intro-txt--link as-js-thirdPartyList\">trusted partners</a> generate pseudonymous user profiles for adapting the website to the user, for market research and for advertising. The generated data can also be shared with third parties while the user profiles cannot be combined with personal data. Detailed information, also on the right to withdraw consent, can be found in the website's privacy policy.",
+  "label_button_yes": "OK",
+  "label_button_back": "Back",
+  "label_button_advanced_settings": "More information",
+  "label_cpc_heading": "Please select a privacy setting:",
+  "label_cpc_text": "cpc_text",
+  "label_cpc_activate_all": "Activate all",
+  "label_cpc_deactivate_all": "Deactivate all",
+  "label_cpc_purpose_desc": "Purposes",
+  "label_cpc_purpose_01_text": "Accessing a Device",
+  "label_cpc_purpose_01_desc": "Allow storing or accessing information on a user’s device.",
+  "label_cpc_purpose_02_text": "Advertising Personalisation",
+  "label_cpc_purpose_02_desc": "Allow processing of a user’s data to provide and inform personalised advertising (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.",
+  "label_cpc_purpose_03_text": "Analytics",
+  "label_cpc_purpose_03_desc": "Allow processing of a user’s data to deliver content or advertisements and measure the delivery of such content or advertisements, extract insights and generate reports to understand service usage; and/or accessing or storing information on devices for that purpose.",
+  "label_cpc_purpose_04_text": "Content Personalisation",
+  "label_cpc_purpose_04_desc": "Allow processing of a user’s data to provide and inform personalised content (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.",
+  "label_cpc_purpose_05_text": "Matching Data to Offline Sources",
+  "label_cpc_purpose_05_desc": "Combining data from offline sources that were initially collected in other contexts",
+  "label_cpc_purpose_06_text": "Linking Devices",
+  "label_cpc_purpose_06_desc": "Allow processing of a user’s data to connect such user across multiple devices.",
+  "label_cpc_purpose_07_text": "Precise Geographic Location data",
+  "label_cpc_purpose_07_desc": "Allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent",
+  "label_poi_group_list_heading": "Your consent for companies of the group",
+  "label_poi_group_list_text": "Here is a list of companies of the group:",
+  "label_third_party": "Third Parties",
+  "label_thirdparty_list_heading": "Your consent for third party software",
+  "label_thirdparty_list_text": "",
+  "label_nocookie_head": "In order to be able to provide our services in the best possible way, cookies must be activated in your browser.",
+  "label_nocookie_text": "Please activate Cookies in the properties of your Browsers. So you can do it in <a href=\"https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en-GB\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Google Chrome</a> or <a href=\"https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Firefox</a>."
+}
+        }
+      }
+  </script>
+  <!-- end::oil-config[] -->
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 60px;
+      color: #f7f7f7;
+      min-height: 100vh;
+      height: 100%;
+      background: linear-gradient(20deg, #3a871a 0%, #a5ba10 50%, #cfcd26 100%);
+      padding: 0;
+      margin: 0;
+    }
+
+    .demoname {
+      padding: 24px;
+    }
+  </style>
+</head>
+
+<body>
+<button id="applyGDPR" onclick="window.AS_OIL.setGdprApplies(true); window.AS_OIL.reload();">Enable GDPR</button>
+<div class="demoname">gdprApplies?</div>
+</body>
+</html>

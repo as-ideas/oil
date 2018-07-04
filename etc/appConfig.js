@@ -49,6 +49,12 @@ module.exports = {
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
+    filename: 'demos/gdpr-applies-false.html',
+    template: path.resolve(sourcePath, 'demos', 'gdpr-applies-false.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  }, {
     filename: 'demos/configuration-default-optin.html',
     template: path.resolve(sourcePath, 'demos', 'configuration-default-optin.html'),
     chunks: ['oilstub', 'oil'],
