@@ -22,3 +22,4 @@ export const OIL_MANAGED_TAGS_SCRIPT_TAG = '//*[@id="managedScriptTag"]';
 export const OIL_MANAGED_TAGS_IMG_TAG = '//*[@id="managedImgTag"]';
 export const OIL_MANAGED_TAGS_DIV = '//*[@id="demoText"]';
 export const PAGE_BACKGROUND = '.has-big-bad-background';
+export const GDPR_APPLY_BUTTON = '//*[@id="applyGDPR"]';

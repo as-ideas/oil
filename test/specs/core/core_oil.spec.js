@@ -23,8 +23,8 @@ describe('core_oil', () => {
 
     initOilLayer();
 
-    // we expect 11 invocations for registered functions and TWO for CONFIG object itself
-    expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledTimes(13);
+    // we expect 11 invocations for registered functions and THREE for CONFIG object itself
+    expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledTimes(14);
 
     verifyThatGlobalOilObjectIsSet(2, 'previewModeOn', "setPreviewCookie");
 
@@ -52,6 +52,9 @@ describe('core_oil', () => {
     verifyThatGlobalOilObjectIsSet(11, 'triggerPoiOptIn', 'handlePoiOptIn');
 
     verifyThatGlobalOilObjectIsSet(12, 'triggerOptOut', 'handleOptOut');
+
+    verifyThatGlobalOilObjectIsSet(13, 'applyGDPR', 'setGdprApplies');
+    verifyThatGlobalOilObjectIsSet(13, 'applyGDPR', 'initOilLayer');
   });
 
   it('should execute command collection and attach command collection execution to window object if opt-in is provided', (done) => {

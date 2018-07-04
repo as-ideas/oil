@@ -69,7 +69,7 @@ function parseServerUrls() {
  */
 export function getConfigValue(name, defaultValue) {
   const config = getConfiguration();
-  return (config && config[name]) ? config[name] : defaultValue;
+  return (config && typeof config[name] !== 'undefined') ? config[name] : defaultValue;
 }
 
 function setConfigValue(name, value) {
@@ -219,4 +219,12 @@ export function getLocale() {
 
 export function setLocale(localeObject) {
   setConfigValue(OIL_CONFIG.ATTR_LOCALE, localeObject);
+}
+
+export function gdprApplies() {
+  return getConfigValue(OIL_CONFIG.ATTR_GDPR_APPLIES_GLOBALLY, true) || getConfigValue(OIL_CONFIG.ATTR_GDPR_APPLIES, false);
+}
+
+export function setGdprApplies(value = true) {
+  setConfigValue(OIL_CONFIG.ATTR_GDPR_APPLIES, value);
 }

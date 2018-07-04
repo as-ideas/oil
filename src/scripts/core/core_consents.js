@@ -1,5 +1,5 @@
 import {getSoiCookie} from './core_cookies';
-import {getCustomPurposeIds} from './core_config';
+import {getCustomPurposeIds, gdprApplies} from './core_config';
 import {getLimitedVendorIds, getPurposeIds} from './core_vendor_information';
 import {OIL_SPEC} from './core_constants';
 
@@ -9,7 +9,7 @@ export function getVendorConsentData(vendorIds) {
   if (cookie && cookie.consentData) {
     return {
       metadata: cookie.consentData.getMetadataString(),
-      gdprApplies: true,
+      gdprApplies: gdprApplies(),
       hasGlobalScope: false,
       purposeConsents: buildPurposeConsents(cookie.consentData.getPurposesAllowed(), getPurposeIds()),
       vendorConsents: buildVendorConsents(cookie, vendorIds)
@@ -25,7 +25,7 @@ export function getConsentDataString(consentStringVersion) {
 
     if (consentString) {
       return {
-        gdprApplies: true,
+        gdprApplies: gdprApplies(),
         hasGlobalScope: false,
         consentData: consentString
       };
@@ -39,7 +39,7 @@ export function getPublisherConsentData(purposeIds) {
   if (cookie && cookie.consentData && cookie.customPurposes) {
     return {
       metadata: cookie.consentData.getMetadataString(),
-      gdprApplies: true,
+      gdprApplies: gdprApplies(),
       hasGlobalScope: false,
       standardPurposeConsents: buildPurposeConsents(cookie.consentData.getPurposesAllowed(), getPurposeIds(), purposeIds),
       customPurposeConsents: buildPurposeConsents(cookie.customPurposes, getCustomPurposeIds(), purposeIds)
