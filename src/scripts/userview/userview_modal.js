@@ -105,7 +105,8 @@ export function handleOptIn() {
 }
 
 function shouldRenderOilLayer(props) {
-  return props.optIn === false && gdprApplies();
+  // first condition makes sure that optIn has to be true and nothing else is allowed. So leave it as ugly as it is
+  return props.optIn !== true && gdprApplies();
 }
 
 function startTimeOut() {
