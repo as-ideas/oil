@@ -58,6 +58,7 @@ window.AS_OIL.getVendorConsents()
 window.AS_OIL.getPublisherConsents()
 window.AS_OIL.getConsentData()
 window.AS_OIL.getVendorList()
+window.AS_OIL.setGdprApplies()
 
 ```
 

@@ -14,13 +14,14 @@ import {
   getPoiGroupName,
   getPublicPath,
   setLocale,
-  getGdprApplies
+  getGdprApplies,
+  setGdprApplies
 } from '../../../src/scripts/core/core_config';
 import { loadFixture } from '../../test-utils/utils_fixtures';
 import * as CoreLog from '../../../src/scripts/core/core_log';
 import { resetOil } from '../../test-utils/utils_reset';
 
-describe('core_config', () => {
+fdescribe('core_config', () => {
 
   const DEFAULT_FALLBACK_BACKEND_URL = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/enEN_01';
   const EXPECTED_PUBLIC_PATH = '//www/';
@@ -191,6 +192,19 @@ describe('core_config', () => {
 
     it('returns true when no getGdprApplies in config', function() {
       expect(getGdprApplies()).toBeTruthy();
+    });
+
+  });
+
+  describe('setGdprApplies', function() {
+
+    it('returns getGdprApplies from configuration', function() {
+      loadFixture('config/given.config.with.gdpr.not.applies.html');
+      expect(getGdprApplies()).toBeFalsy();
+      setGdprApplies(true);
+      expect(getGdprApplies()).toBeTruthy();
+      setGdprApplies(false);
+      expect(getGdprApplies()).toBeFalsy();
     });
 
   });

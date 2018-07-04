@@ -222,5 +222,16 @@ export function setLocale(localeObject) {
 }
 
 export function getGdprApplies() {
+  const gdprApplied = getConfigValue(OIL_CONFIG.ATTR_GDPR_APPLIES, undefined);
+  if(gdprApplied !== undefined) {
+    return gdprApplied;
+  }
   return getConfigValue(OIL_CONFIG.ATTR_GDPR_APPLIES_GLOBALLY, true);
+}
+
+/**
+* To manually override the setting in gpdrAppliesGlobally
+**/
+export function setGdprApplies(value = true) {
+  setConfigValue(OIL_CONFIG.ATTR_GDPR_APPLIES, value);
 }

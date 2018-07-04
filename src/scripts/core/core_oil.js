@@ -162,6 +162,11 @@ function attachUtilityFunctionsToWindowObject() {
   setGlobalOilObject('triggerOptOut', () => {
     handleOptOut();
   });
+
+  setGlobalOilObject('setGdprApplies', (value) => {
+    setGdprApplies(value);
+    return `gdprApplies set to ${value}`;
+  });
 }
 
 
