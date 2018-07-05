@@ -2,20 +2,6 @@
 <head>
   <title>Click dummy</title>
   <style>
-    .tabs {
-      left: 50%;
-      -webkit-transform: translateX(-50%);
-      transform: translateX(-50%);
-      position: relative;
-      background: white;
-      padding: 50px 50px 80px;
-      width: 70%;
-      height: 250px;
-      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-      border-radius: 5px;
-      min-width: 240px;
-    }
-
     .tabs input[name="tab-control"] {
       display: none;
     }
@@ -220,10 +206,6 @@
       transform: rotate(-45deg);
     }
 
-    .checkmark-off.hairline::before, .checkmark-off.hairline::after {
-      height: 1px;
-    }
-
     @-webkit-keyframes content {
       from {
         opacity: 0;
@@ -260,6 +242,18 @@
       .tabs .content {
         margin-top: 20px;
       }
+    }
+
+    .info span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      border-radius: 50%;
+      text-align: center;
+      color: white;
+      font-weight: 700;
+      background: rgba(255, 0, 0, 0.6);
     }
   </style>
 </head>
@@ -355,7 +349,7 @@
       </div>
     </section>
     <div>
-      <a href="javascript:void(0);" onclick="toggleThirdPartyVisibility('third-parties-list')">Informationen zu Drittanbietern</a>
+      <a href="javascript:toggleThirdPartyVisibility('third-parties-list')" class="info"><span>i</span>Informationen zu Drittanbietern</a>
       <div id="third-parties-list" style="display: none;">
         <div class="third-party-list-element">
           <span onclick="toggleViewVisibility(this)">
