@@ -1,0 +1,167 @@
+<html>
+<head>
+  <title>0</title>
+  <style>
+    .tabs {
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      position: relative;
+      background: white;
+      padding: 50px 50px 80px;
+      width: 70%;
+      height: 250px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+      border-radius: 5px;
+      min-width: 240px;
+    }
+
+    .tabs input[name="tab-control"] {
+      display: none;
+    }
+
+    .tabs .buttons {
+      display: table;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 1px;
+    }
+
+    .tabs .buttons label {
+      display: table-cell;
+      box-sizing: border-box;
+      text-align: center;
+      vertical-align: middle;
+      font-weight: bold;
+      font-size: 18px;
+      color: rgba(52, 140, 32, 0.6);
+      background: rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+      padding: 5px auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      white-space: nowrap;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      height: 50px;
+      border-radius: 5px;
+      width: 25%;
+    }
+
+    .tabs .content {
+      margin-top: 30px;
+    }
+
+    .tabs .content section {
+      display: none;
+      -webkit-animation-name: content;
+      animation-name: content;
+      -webkit-animation-direction: normal;
+      animation-direction: normal;
+      -webkit-animation-duration: 0.3s;
+      animation-duration: 0.3s;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      -webkit-animation-iteration-count: 1;
+      animation-iteration-count: 1;
+      line-height: 1.4;
+    }
+
+
+
+    .tabs input[name="tab-control"]:nth-of-type(1):checked ~ .buttons > label:nth-child(1),
+    .tabs input[name="tab-control"]:nth-of-type(2):checked ~ .buttons > label:nth-child(2),
+    .tabs input[name="tab-control"]:nth-of-type(3):checked ~ .buttons > label:nth-child(3),
+    .tabs input[name="tab-control"]:nth-of-type(4):checked ~ .buttons > label:nth-child(4) {
+      background: rgba(52, 140, 32, 0.6);
+      cursor: default;
+      color: rgb(255, 255, 255);
+    }
+
+
+
+    .tabs input[name="tab-control"]:nth-of-type(1):checked ~ .content > section:nth-child(1),
+    .tabs input[name="tab-control"]:nth-of-type(2):checked ~ .content > section:nth-child(2),
+    .tabs input[name="tab-control"]:nth-of-type(3):checked ~ .content > section:nth-child(3),
+    .tabs input[name="tab-control"]:nth-of-type(4):checked ~ .content > section:nth-child(4) {
+      display: block;
+    }
+
+    @-webkit-keyframes content {
+      from {
+        opacity: 0;
+        -webkit-transform: translateY(5%);
+        transform: translateY(5%);
+      }
+      to {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+      }
+    }
+
+    @keyframes content {
+      from {
+        opacity: 0;
+        -webkit-transform: translateY(5%);
+        transform: translateY(5%);
+      }
+      to {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .tabs .buttons label {
+        display: table-header-group;
+        height: auto;
+      }
+
+      .tabs .content {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="tabs">
+
+  <input type="radio" id="tab1" name="tab-control" checked>
+  <input type="radio" id="tab2" name="tab-control">
+  <input type="radio" id="tab3" name="tab-control">
+  <input type="radio" id="tab4" name="tab-control">
+
+  <div class="buttons">
+    <label for="tab1">Features</label>
+    <label for="tab2">Delivery Contents</label>
+    <label for="tab3">Shipping</label>
+    <label for="tab4">Returns</label>
+  </div>
+
+  <div class="content">
+    <section>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?
+    </section>
+    <section>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
+    </section>
+    <section>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+    </section>
+    <section>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.
+    </section>
+  </div>
+</div>
+</body>
+</html>
+
+
+
