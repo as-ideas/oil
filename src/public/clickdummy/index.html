@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>0</title>
+  <title>Click dummy</title>
   <style>
     .tabs {
       left: 50%;
@@ -71,7 +71,35 @@
       line-height: 1.4;
     }
 
+    .tabs .content section div {
+      display: table;
+      margin-top: 1em;
+    }
 
+    .tabs .content section p {
+      display: table-cell;
+      width: 80%;
+    }
+
+    .purpose-description-list {
+      display: table;
+      margin-top: 1em;
+    }
+
+    .purpose-description-list ul {
+      width: 100%;
+      display: table-cell;
+      list-style: none;
+    }
+
+    .purpose-description-list ul li {
+      list-style-position: inside;
+      text-indent: -1.30em;
+    }
+
+    .purpose-description-list ul li span:nth-child(2) {
+      margin-left: 1.3em;
+    }
 
     .tabs input[name="tab-control"]:nth-of-type(1):checked ~ .buttons > label:nth-child(1),
     .tabs input[name="tab-control"]:nth-of-type(2):checked ~ .buttons > label:nth-child(2),
@@ -82,13 +110,118 @@
       color: rgb(255, 255, 255);
     }
 
-
-
     .tabs input[name="tab-control"]:nth-of-type(1):checked ~ .content > section:nth-child(1),
     .tabs input[name="tab-control"]:nth-of-type(2):checked ~ .content > section:nth-child(2),
     .tabs input[name="tab-control"]:nth-of-type(3):checked ~ .content > section:nth-child(3),
     .tabs input[name="tab-control"]:nth-of-type(4):checked ~ .content > section:nth-child(4) {
       display: block;
+    }
+
+    .as-oil-cpc__slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #eaeaea;
+      transition: .4s;
+      border-radius: 17px;
+    }
+
+    .as-oil-cpc__slider::before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #767676;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    .as-oil-cpc__switch {
+      width: 50px;
+      height: 26px;
+      display: table-cell;
+      position: absolute;
+      margin-left: 30px;
+    }
+
+    .as-oil-cpc__switch input {
+      display: none;
+    }
+
+    .as-oil-cpc__switch input .as-oil-cpc__status::after {
+      content: "Off";
+    }
+
+    .as-oil-cpc__switch input:checked ~ .as-oil-cpc__slider {
+      background-color: rgb(63, 126, 223);
+    }
+
+    .as-oil-cpc__switch input:checked ~ .as-oil-cpc__status::after {
+      content: "On";
+    }
+
+    .as-oil-cpc__switch input:focus ~ .as-oil-cpc__slider {
+      box-shadow: 0 0 1px rgb(63, 126, 223);
+    }
+
+    .as-oil-cpc__switch input:checked ~ .as-oil-cpc__slider::before {
+      transform: translateX(20px);
+      background-color: darken(#767676, 30%);
+    }
+
+    .checkmark-on {
+      display: inline-block;
+      position: absolute;
+    }
+
+    .checkmark-on::after {
+      display: block;
+      content: '';
+
+      width: 6px;
+      height: 12px;
+
+      border: solid #000;
+      border-width: 0 2px 2px 0;
+      border-color: rgba(52, 140, 32, 0.6);
+
+      transform: rotate(45deg);
+    }
+
+    .checkmark-off {
+      position: absolute;
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+    }
+
+    .checkmark-off::before, .checkmark-off::after {
+      content: '';
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      margin-top: 3px;
+      background: rgba(255, 0, 0, 0.6);
+    }
+
+    .checkmark-off::before {
+      transform: rotate(45deg);
+    }
+
+    .checkmark-off::after {
+      transform: rotate(-45deg);
+    }
+
+    .checkmark-off.hairline::before, .checkmark-off.hairline::after {
+      height: 1px;
     }
 
     @-webkit-keyframes content {
@@ -145,21 +278,161 @@
     <label for="tab4">Returns</label>
   </div>
 
-  <div class="content">
+  <span class="content">
     <section>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?
+      <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?
+        </p>
+        <label class="as-oil-cpc__switch">
+          <input data-id="1" id="as-js-purpose-slider-1" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-1" value="false" onclick="toggleListMarks(this)">
+          <span class="as-oil-cpc__status"></span>
+          <span class="as-oil-cpc__slider"></span>
+        </label>
+      </div>
+      <div class="purpose-description-list" id="purpose-description-list-1">
+        <ul>
+          <li><span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span></li>
+          <li><span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span></li>
+          <li><span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span></li>
+        </ul>
+      </div>
     </section>
     <section>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
+      <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
+        </p>
+        <label class="as-oil-cpc__switch">
+          <input data-id="2" id="as-js-purpose-slider-2" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-2" value="false">
+          <span class="as-oil-cpc__status"></span>
+          <span class="as-oil-cpc__slider"></span>
+        </label>
+      </div>
+      <div class="purpose-description-list" id="purpose-description-list-2">
+        <ul>
+          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.</li>
+          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.</li>
+        </ul>
+      </div>
     </section>
     <section>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+      <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+        </p>
+        <label class="as-oil-cpc__switch">
+          <input data-id="3" id="as-js-purpose-slider-3" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-3" value="false">
+          <span class="as-oil-cpc__status"></span>
+          <span class="as-oil-cpc__slider"></span>
+        </label>
+      </div>
+      <div class="purpose-description-list" id="purpose-description-list-3">
+        <ul>
+          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.</li>
+          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.</li>
+          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.</li>
+          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.</li>
+        </ul>
+      </div>
     </section>
     <section>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.
+        <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.
+        </p>
+        <label class="as-oil-cpc__switch">
+          <input data-id="4" id="as-js-purpose-slider-4" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-4" value="false">
+          <span class="as-oil-cpc__status"></span>
+          <span class="as-oil-cpc__slider"></span>
+        </label>
+      </div>
+      <div class="purpose-description-list" id="purpose-description-list-4">
+        <ul>
+          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.</li>
+        </ul>
+      </div>
     </section>
-  </div>
+    <div>
+      <a href="javascript:void(0);" onclick="toggleThirdPartyVisibility('third-parties-list')">Informationen zu Drittanbietern</a>
+      <div id="third-parties-list" style="display: none;">
+        <div class="third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Exponential Interactive, Inc</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://exponential.com/privacy">http://exponential.com/privacy</a>
+          </div>
+        </div>
+        <div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
+</div>
+<script type="text/javascript">
+  function toggleViewVisibility(element) {
+    let iconMinus = element.children[0];
+    let iconPlus = element.children[1];
+    let descriptionPart = element.nextElementSibling;
+
+    const styleDisplayInlineBlock = 'display: inline-block; animation: fadein 0.5s';
+    const styleDisplayNone = 'display: none';
+
+    if (descriptionPart.style.display === 'none') {
+      descriptionPart.setAttribute('style', 'display: block; animation: fadein 0.5s');
+      iconPlus.setAttribute('style', styleDisplayInlineBlock);
+      iconMinus.setAttribute('style', styleDisplayNone);
+    } else {
+      descriptionPart.setAttribute('style', styleDisplayNone);
+      iconPlus.setAttribute('style', styleDisplayNone);
+      iconMinus.setAttribute('style', styleDisplayInlineBlock);
+    }
+  }
+
+  function toggleThirdPartyVisibility(viewName) {
+    let view = document.getElementById(viewName);
+    view.style.display = view.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function toggleListMarks(checkbox) {
+    let id = checkbox.getAttribute('data-id');
+    let listElement = document.getElementById(`purpose-description-list-${id}`);
+    let checkmarkElements = listElement.getElementsByClassName('checkmark');
+
+    if (checkbox.checked) {
+      for (let i = 0; i < checkmarkElements.length; i++) {
+        checkmarkElements[i].classList.remove('checkmark-off');
+        checkmarkElements[i].classList.add('checkmark-on');
+      }
+    } else {
+      for (let i = 0; i < checkmarkElements.length; i++) {
+        checkmarkElements[i].classList.remove('checkmark-on');
+        checkmarkElements[i].classList.add('checkmark-off');
+      }
+    }
+  }
+
+</script>
 </body>
 </html>
 
