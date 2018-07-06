@@ -1,4 +1,4 @@
-@import "./_settings";
+@import "./_cpc_global";
 
 #oil-preference-center {
   overflow: hidden;
@@ -188,10 +188,7 @@
   }
 }
 
-// CHECKBOX SWITCH WITH SLIDER
-$slider-size: 20px;
-$slider-padding: 3px;
-.as-oil-cpc__switch {
+.as-oil-cpc__standard-switch {
   position: absolute;
   display: inline-block;
   width: 50px;
@@ -223,39 +220,6 @@ $slider-padding: 3px;
       transform: translateX($slider-size);
       background-color: darken($slider-background-circle, 30%);
     }
-  }
-}
-
-.as-oil-cpc__status {
-  position: absolute;
-  top: 5px;
-  left: -($slider-size + 5);
-  color: $btn-primary;
-  font-weight: 500;
-}
-
-.as-oil-cpc__slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: $slider-background-grey;
-  transition: .4s;
-  border-radius: 17px;
-
-  &:before {
-    position: absolute;
-    content: "";
-    height: $slider-size;
-    width: $slider-size;
-    left: $slider-padding;
-    bottom: $slider-padding;
-    background-color: $slider-background-circle;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
-    transition: .4s;
-    border-radius: 50%;
   }
 }
 

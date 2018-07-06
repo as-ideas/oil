@@ -18,20 +18,17 @@
       border-top: 1px #d8d8d8 solid;
     }
 
-    .tabs .buttons label {
+    .tabs .buttons span {
       display: table-cell;
       box-sizing: border-box;
       text-align: center;
       vertical-align: middle;
       font-weight: bold;
       font-size: 18px;
-      color: rgba(52, 140, 32, 0.6);
-      background: rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease-in-out;
       padding: 5px auto;
       overflow: hidden;
       text-overflow: ellipsis;
-      cursor: pointer;
       white-space: nowrap;
       user-select: none;
       height: 50px;
@@ -39,8 +36,19 @@
       width: 25%;
     }
 
+    .button-active {
+      background: rgba(52, 140, 32, 0.6);
+      cursor: default;
+      color: rgb(255, 255, 255);
+    }
+
+    .button-inactive {
+      color: rgba(52, 140, 32, 0.6);
+      background: rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+
     .tabs .content section {
-      display: none;
       animation-name: content;
       animation-direction: normal;
       animation-duration: 0.3s;
@@ -75,22 +83,6 @@
 
     .purpose-description-list ul li span:nth-child(2) {
       margin-left: 1.3em;
-    }
-
-    .tabs input[name="tab-control"]:nth-of-type(1):checked ~ .buttons > label:nth-child(1),
-    .tabs input[name="tab-control"]:nth-of-type(2):checked ~ .buttons > label:nth-child(2),
-    .tabs input[name="tab-control"]:nth-of-type(3):checked ~ .buttons > label:nth-child(3),
-    .tabs input[name="tab-control"]:nth-of-type(4):checked ~ .buttons > label:nth-child(4) {
-      background: rgba(52, 140, 32, 0.6);
-      cursor: default;
-      color: rgb(255, 255, 255);
-    }
-
-    .tabs input[name="tab-control"]:nth-of-type(1):checked ~ .content > section:nth-child(1),
-    .tabs input[name="tab-control"]:nth-of-type(2):checked ~ .content > section:nth-child(2),
-    .tabs input[name="tab-control"]:nth-of-type(3):checked ~ .content > section:nth-child(3),
-    .tabs input[name="tab-control"]:nth-of-type(4):checked ~ .content > section:nth-child(4) {
-      display: block;
     }
 
     .as-oil-cpc__slider {
@@ -130,16 +122,8 @@
       display: none;
     }
 
-    .as-oil-cpc__switch input .as-oil-cpc__status::after {
-      content: "Off";
-    }
-
     .as-oil-cpc__switch input:checked ~ .as-oil-cpc__slider {
       background-color: rgb(63, 126, 223);
-    }
-
-    .as-oil-cpc__switch input:checked ~ .as-oil-cpc__status::after {
-      content: "On";
     }
 
     .as-oil-cpc__switch input:focus ~ .as-oil-cpc__slider {
@@ -225,7 +209,7 @@
 
     @media (max-width: 600px) {
 
-      .tabs .buttons label {
+      .tabs .buttons span {
         display: table-header-group;
         height: auto;
       }
@@ -334,21 +318,14 @@
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam.
   </div>
 
-
-
-  <input type="radio" id="tab1" name="tab-control" checked>
-  <input type="radio" id="tab2" name="tab-control">
-  <input type="radio" id="tab3" name="tab-control">
-  <input type="radio" id="tab4" name="tab-control">
-
-  <div class="buttons cpc-section">
-    <label for="tab1">Features</label>
-    <label for="tab2">Delivery Contents</label>
-    <label for="tab3">Shipping</label>
-    <label for="tab4">Returns</label>
-  </div>
+  <span class="buttons cpc-section">
+    <span data-id="1" class="button button-active" onclick="toggleTab(this)">Features</span>
+    <span data-id="2" class="button button-inactive" onclick="toggleTab(this)">Delivery Contents</span>
+    <span data-id="3" class="button button-inactive" onclick="toggleTab(this)">Shipping</span>
+    <span data-id="4" class="button button-inactive" onclick="toggleTab(this)">Returns</span>
+  </span>
   <div class="content cpc-section">
-    <section class="cpc-section">
+    <section id="tabsection1" class="tabsection cpc-section" style="display:block">
       <div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?
@@ -356,7 +333,6 @@
         </p>
         <label class="as-oil-cpc__switch">
           <input data-id="1" id="as-js-purpose-slider-1" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-1" value="false" onclick="toggleListMarks(this)">
-          <span class="as-oil-cpc__status"></span>
           <span class="as-oil-cpc__slider"></span>
         </label>
       </div>
@@ -374,14 +350,13 @@
         </ul>
       </div>
     </section>
-    <section class="cpc-section">
+    <section id="tabsection2" class="tabsection cpc-section" style="display: none">
       <div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
         </p>
         <label class="as-oil-cpc__switch">
           <input data-id="2" id="as-js-purpose-slider-2" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-2" value="false">
-          <span class="as-oil-cpc__status"></span>
           <span class="as-oil-cpc__slider"></span>
         </label>
       </div>
@@ -396,14 +371,13 @@
         </ul>
       </div>
     </section>
-    <section class="cpc-section">
+    <section id="tabsection3" class="tabsection cpc-section" style="display: none">
       <div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
         </p>
         <label class="as-oil-cpc__switch">
           <input data-id="3" id="as-js-purpose-slider-3" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-3" value="false">
-          <span class="as-oil-cpc__status"></span>
           <span class="as-oil-cpc__slider"></span>
         </label>
       </div>
@@ -424,14 +398,13 @@
         </ul>
       </div>
     </section>
-    <section class="cpc-section">
+    <section id="tabsection4" class="tabsection cpc-section" style="display: none">
       <div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.
         </p>
         <label class="as-oil-cpc__switch">
           <input data-id="4" id="as-js-purpose-slider-4" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-4" value="false">
-          <span class="as-oil-cpc__status"></span>
           <span class="as-oil-cpc__slider"></span>
         </label>
       </div>
@@ -525,6 +498,22 @@
     }
   }
 
+  function toggleTab(tab) {
+    let sectionElements = document.getElementsByClassName('tabsection');
+    for (let i = 0; i < sectionElements.length; i++) {
+      sectionElements[i].style.display = 'none';
+    }
+    let buttonElements = document.getElementsByClassName('button');
+    for (let i = 0; i < buttonElements.length; i++) {
+      buttonElements[i].classList.remove('button-active');
+      buttonElements[i].classList.add('button-inactive');
+    }
+    tab.classList.remove('button-inactive');
+    tab.classList.add('button-active');
+    let id = tab.getAttribute('data-id');
+    let sectionElement = document.getElementById(`tabsection${id}`);
+    sectionElement.style.display = 'block';
+  }
 </script>
 </body>
 </html>
