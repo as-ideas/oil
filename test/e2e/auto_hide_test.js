@@ -21,7 +21,7 @@ module.exports = {
   'OIL Layer should be auto-hidden after the correct amount of time': function (browser) {
     browser
       .pause(2000)
-      .useXpath().waitForElementNotPresent(OIL_LAYER, 500)
+      .useXpath().waitForElementNotPresent(OIL_LAYER, 4000)
       .end();
   }
 };
