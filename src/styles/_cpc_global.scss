@@ -36,6 +36,20 @@ $slider-padding: 3px;
   }
 }
 
+.as-oil-cpc__middle {
+  flex: 1 1 auto;
+  padding: 24px;
+  display: inline-block;
+
+  overflow: scroll;
+  max-height: 500px; /* The Fallback */
+  height: 30vh;
+
+  @include media('<=phone') {
+    padding: 0;
+  }
+}
+
 .checkmark {
   display: inline-block;
   position: absolute;

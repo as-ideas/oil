@@ -99,20 +99,6 @@
   }
 }
 
-.as-oil-cpc__middle {
-  flex: 1 1 auto;
-  padding: 24px;
-  display: inline-block;
-
-  overflow: scroll;
-  max-height: 500px; /* The Fallback */
-  max-height: 40vh;
-
-  @include media('<=phone') {
-    padding: 0;
-  }
-}
-
 .as-oil-cpc__right {
   flex: 0 0 200px;
   display: inline-block;

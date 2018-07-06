@@ -8,11 +8,21 @@
   margin-top: 1em;
 }
 
+.as-oil-cpc__tabs-headline {
+  display: block;
+  max-width: 100%;
+  font-size: 1.45em;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
 .as-oil-cpc-wrapper {
+
   hr {
     border: 0;
     border-top: 1px #d8d8d8 solid;
   }
+
   .as-oil-cpc__purpose-tab-labels {
     border-collapse: separate;
     border-spacing: 1px;
@@ -49,6 +59,7 @@
     animation-timing-function: ease-in-out;
     display: none;
     line-height: 1.4;
+    position: relative;
 
     &:first-child {
       display: block;
@@ -56,6 +67,7 @@
 
     div {
       display: table;
+      width: 100%;
     }
 
     p {

@@ -144,10 +144,10 @@ const ContentSnippet = () => {
 export function oilAdvancedSettingsInlineTemplate() {
   return `
     <div class="as-oil-l-wrapper-layout-max-width as-oil-cpc-wrapper">
-      <div class="as-oil__heading as-oil-center">
+      <div class="as-oil-cpc__tabs-headline as-oil-center">
         ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
       </div>
-      <p class="as-oil__intro-txt as-oil-center as-oil-margin-top">
+      <p class="as-oil-center as-oil-margin-top">
         ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_TEXT)}
       </p>
       <hr/>
