@@ -1,3 +1,4 @@
+import '../../../styles/cpc_standard.scss';
 import { OIL_LABELS } from '../userview_constants.js';
 import { forEach } from '../userview_modal.js';
 import { getLabel, getLabelWithDefault, getTheme } from '../userview_config.js';

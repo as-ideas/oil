@@ -1,3 +1,4 @@
+import '../../../styles/cpc_tabs.scss';
 import { OIL_LABELS } from '../userview_constants.js';
 import { forEach } from '../userview_modal.js';
 import { getLabel, getLabelWithDefault, getTheme } from '../userview_config.js';
@@ -75,15 +76,6 @@ const BackButtonSnippet = () => {
 `
 };
 
-const ActivateButtonSnippet = () => {
-  return `
-  <div class="as-oil-cpc__row-btn-all">
-        <span class="as-js-btn-deactivate-all as-oil__btn-grey">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL)}</span>
-        <span class="as-js-btn-activate-all as-oil__btn-blue">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL)}</span>
-      </div>
-  `
-};
-
 const buildPurposeEntries = (list) => {
   return list.map(element => PurposeContainerSnippet({
     id: element.id,
@@ -95,28 +87,20 @@ const buildPurposeEntries = (list) => {
 
 const ContentSnippet = () => {
   return `
-<div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
-    <div class="as-oil-cpc__left">
-        <a href="#as-oil-cpc-purposes" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}">
-          ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
-        </a>
-        <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
-          ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}  
-        </a>
+    <div class="as-oil-cpc__purpose-description as-oil-center as-oil-margin-top" id="as-oil-cpc-purposes">
+        ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
     </div>
-    <div class="as-oil-cpc__middle as-js-purposes">
-        <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
-            ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
-        </div>
-        ${buildPurposeEntries(getPurposes())}
-        ${buildPurposeEntries(getCustomPurposes())}
-        <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
-            ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
-        </div>
-       <div id="as-js-third-parties-list">
-         ${buildVendorEntries()}
-       </div>
+
+
+      ${buildPurposeEntries(getPurposes())}
+      ${buildPurposeEntries(getCustomPurposes())}
+      <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
+          ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
+      </div>
+     <div id="as-js-third-parties-list">
+       ${buildVendorEntries()}
     </div>
+ 
     <div class="as-oil-cpc__right">
      <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
       <div class="as-oil-l-item">
@@ -125,19 +109,18 @@ const ContentSnippet = () => {
         </button>
       </div>
     </div>
-  </div>
-</div>`;
+  </div>`;
 };
 
 export function oilAdvancedSettingsInlineTemplate() {
   return `<div class="as-oil-l-wrapper-layout-max-width as-oil-cpc-wrapper">
-    <div class="as-oil__heading">
+    <div class="as-oil__heading as-oil-center">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
     </div>
-    <p class="as-oil__intro-txt">
+    <p class="as-oil__intro-txt as-oil-center as-oil-margin-top">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_TEXT)}
     </p>
-    ${ActivateButtonSnippet()}
+    <hr/>
     ${BackButtonSnippet()}
     ${ContentSnippet()}
   </div>`

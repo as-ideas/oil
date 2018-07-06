@@ -19,7 +19,7 @@ export const OIL_LABELS = {
   ATTR_LABEL_CPC_DEACTIVATE_ALL: 'label_cpc_deactivate_all',
   ATTR_LABEL_CPC_PURPOSE_DESC: 'label_cpc_purpose_desc',
   ATTR_LABEL_NO_COOKIES_HEADING: 'label_nocookie_head',
-  ATTR_LABEL_NO_COOKIES_TEXT: 'label_nocookie_text',
+  ATTR_LABEL_NO_COOKIES_TEXT: 'label_nocookie_text'
 };
 
 export const OPTIONAL_LABEL_PREFIX = 'label_cpc_purpose';
