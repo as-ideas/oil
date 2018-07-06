@@ -13,6 +13,11 @@
       border-spacing: 1px;
     }
 
+    .tabs hr {
+      border: 0;
+      border-top: 1px #d8d8d8 solid;
+    }
+
     .tabs .buttons label {
       display: table-cell;
       box-sizing: border-box;
@@ -285,24 +290,75 @@
       opacity: .5;
       text-decoration: none;
     }
+
+    .as-oil-l-item {
+      text-align: right;
+    }
+
+    .as-oil__btn-optin {
+      min-width: 160px;
+      min-height: 42px;
+      margin: 0;
+      padding: .5em 1em;
+      font-size: 1.1em;
+      font-weight: 700;
+      border: 1px rgba(255, 0, 0, 0.6) solid;
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+      color: rgba(255, 0, 0, 0.6);
+      transition: opacity .8s ease 0s;
+    }
+
+    .as-oil__heading,
+    .as-oil__intro-txt,
+    .as-oil-cpc__purpose-description {
+      text-align: center;
+      font-size: .9375em;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .as-oil__heading {
+      font-size: 1.45em;
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+
+
   </style>
 </head>
 <body>
 <div class="tabs">
+
+  <div class="as-oil__heading">
+    Es ist uns sehr wichtig, Ihre Daten zu schützen.
+  </div>
+  <p class="as-oil__intro-txt cpc-section">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam.
+  </p>
+  <hr/>
+  <div class="as-oil-cpc__purpose-description cpc-section">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam.
+  </div>
+
+
 
   <input type="radio" id="tab1" name="tab-control" checked>
   <input type="radio" id="tab2" name="tab-control">
   <input type="radio" id="tab3" name="tab-control">
   <input type="radio" id="tab4" name="tab-control">
 
-  <div class="buttons">
+  <div class="buttons cpc-section">
     <label for="tab1">Features</label>
     <label for="tab2">Delivery Contents</label>
     <label for="tab3">Shipping</label>
     <label for="tab4">Returns</label>
   </div>
-
-  <span class="content cpc-section">
+  <div class="content cpc-section">
     <section class="cpc-section">
       <div>
         <p>
@@ -317,9 +373,15 @@
       </div>
       <div class="purpose-description-list cpc-section" id="purpose-description-list-1">
         <ul>
-          <li><span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span></li>
-          <li><span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span></li>
-          <li><span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span></li>
+          <li>
+            <span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span>
+          </li>
+          <li>
+            <span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span>
+          </li>
+          <li>
+            <span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span>
+          </li>
         </ul>
       </div>
     </section>
@@ -336,8 +398,12 @@
       </div>
       <div class="purpose-description-list cpc-section" id="purpose-description-list-2">
         <ul>
-          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.</li>
-          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.</li>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
+          </li>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
+          </li>
         </ul>
       </div>
     </section>
@@ -354,15 +420,23 @@
       </div>
       <div class="purpose-description-list cpc-section" id="purpose-description-list-3">
         <ul>
-          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.</li>
-          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.</li>
-          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.</li>
-          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.</li>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+          </li>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+          </li>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+          </li>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+          </li>
         </ul>
       </div>
     </section>
     <section class="cpc-section">
-        <div>
+      <div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.
         </p>
@@ -374,7 +448,9 @@
       </div>
       <div class="purpose-description-list cpc-section" id="purpose-description-list-4">
         <ul>
-          <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.</li>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.
+          </li>
         </ul>
       </div>
     </section>
@@ -411,7 +487,11 @@
         </div>
       </div>
     </div>
-</div>
+    <hr/>
+    <div class="as-oil-l-item">
+      <button class="as-oil__btn-optin as-js-optin" data-context="YES" data-qa="oil-YesButton">Speichern</button>
+    </div>
+  </div>
 </div>
 <script type="text/javascript">
   function toggleViewVisibility(element) {
