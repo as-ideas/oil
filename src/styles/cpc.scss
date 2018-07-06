@@ -105,7 +105,7 @@
   display: inline-block;
 
   overflow: scroll;
-  max-height: 500px; /* The Fallback */
+  max-height: 420px; /* The Fallback for  */
   max-height: 40vh;
 
   @include media('<=phone') {
