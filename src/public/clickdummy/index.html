@@ -38,10 +38,6 @@
       width: 25%;
     }
 
-    .tabs .content {
-      margin-top: 30px;
-    }
-
     .tabs .content section {
       display: none;
       -webkit-animation-name: content;
@@ -59,7 +55,6 @@
 
     .tabs .content section div {
       display: table;
-      margin-top: 1em;
     }
 
     .tabs .content section p {
@@ -69,7 +64,6 @@
 
     .purpose-description-list {
       display: table;
-      margin-top: 1em;
     }
 
     .purpose-description-list ul {
@@ -195,6 +189,7 @@
       top: 50%;
       left: 0;
       margin-top: 3px;
+      margin-left: -3px;
       background: rgba(255, 0, 0, 0.6);
     }
 
@@ -239,9 +234,16 @@
         height: auto;
       }
 
-      .tabs .content {
-        margin-top: 20px;
-      }
+    }
+
+    .cpc-section {
+      margin-top: 1em;
+    }
+
+    .info {
+      text-decoration: none;
+      color: #000000;
+      cursor: pointer;
     }
 
     .info span {
@@ -254,6 +256,34 @@
       color: white;
       font-weight: 700;
       background: rgba(255, 0, 0, 0.6);
+      margin-right: 0.5em;
+    }
+
+    .third-parties-list {
+      margin-top: 0.5em;
+      margin-left: 1.7em;
+    }
+
+    .as-oil-third-party-list-element {
+      border-bottom: 1px #d8d8d8 solid;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+    }
+
+    .as-oil-third-party-toggle-part {
+      margin-left: 16px;
+    }
+
+    .as-oil-third-party-name {
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .as-oil-third-party-link {
+      color: #262626;
+      font-size: 12px;
+      opacity: .5;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -272,8 +302,8 @@
     <label for="tab4">Returns</label>
   </div>
 
-  <span class="content">
-    <section>
+  <span class="content cpc-section">
+    <section class="cpc-section">
       <div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?
@@ -285,7 +315,7 @@
           <span class="as-oil-cpc__slider"></span>
         </label>
       </div>
-      <div class="purpose-description-list" id="purpose-description-list-1">
+      <div class="purpose-description-list cpc-section" id="purpose-description-list-1">
         <ul>
           <li><span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span></li>
           <li><span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span></li>
@@ -293,7 +323,7 @@
         </ul>
       </div>
     </section>
-    <section>
+    <section class="cpc-section">
       <div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
@@ -304,14 +334,14 @@
           <span class="as-oil-cpc__slider"></span>
         </label>
       </div>
-      <div class="purpose-description-list" id="purpose-description-list-2">
+      <div class="purpose-description-list cpc-section" id="purpose-description-list-2">
         <ul>
           <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.</li>
           <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.</li>
         </ul>
       </div>
     </section>
-    <section>
+    <section class="cpc-section">
       <div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
@@ -322,7 +352,7 @@
           <span class="as-oil-cpc__slider"></span>
         </label>
       </div>
-      <div class="purpose-description-list" id="purpose-description-list-3">
+      <div class="purpose-description-list cpc-section" id="purpose-description-list-3">
         <ul>
           <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.</li>
           <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.</li>
@@ -331,7 +361,7 @@
         </ul>
       </div>
     </section>
-    <section>
+    <section class="cpc-section">
         <div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.
@@ -342,16 +372,16 @@
           <span class="as-oil-cpc__slider"></span>
         </label>
       </div>
-      <div class="purpose-description-list" id="purpose-description-list-4">
+      <div class="purpose-description-list cpc-section" id="purpose-description-list-4">
         <ul>
           <li><span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.</li>
         </ul>
       </div>
     </section>
-    <div>
+    <div class="cpc-section">
       <a href="javascript:toggleThirdPartyVisibility('third-parties-list')" class="info"><span>i</span>Informationen zu Drittanbietern</a>
-      <div id="third-parties-list" style="display: none;">
-        <div class="third-party-list-element">
+      <div id="third-parties-list" class="third-parties-list" style="display: none;">
+        <div class="as-oil-third-party-list-element">
           <span onclick="toggleViewVisibility(this)">
               <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
