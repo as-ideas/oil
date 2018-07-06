@@ -86,8 +86,8 @@ const ActivateButtonSnippet = () => {
 const buildPurposeEntries = (list) => {
   return list.map(element => PurposeContainerSnippet({
     id: element.id,
-    header: getLabelWithDefault(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_TEXT`], element.name || `Error: Missing text for purpose with id ${element.id}!`),
-    text: getLabelWithDefault(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_DESC`], element.description || ''),
+    header: getLabelWithDefault(`label_cpc_purpose_0${element.id}_text`, element.name || `Error: Missing text for purpose with id ${element.id}!`),
+    text: getLabelWithDefault(`label_cpc_purpose_0${element.id}_desc`, element.description || ''),
     value: false
   })).join('');
 };
