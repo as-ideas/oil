@@ -92,3 +92,12 @@ $slider-padding: 3px;
     transform: rotate(-45deg);
   }
 }
+
+@mixin space-out($min, $max) {
+  @for $i from $min through $max {
+    &:first-child:nth-last-child(#{$i}),
+    &:first-child:nth-last-child(#{$i}) ~ & {
+      width: 1 / $i * 100%;
+    }
+  }
+}

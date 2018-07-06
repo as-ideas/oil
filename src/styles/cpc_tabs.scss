@@ -43,7 +43,6 @@
       transition: all 0.3s ease-in-out;
       vertical-align: middle;
       white-space: nowrap;
-      width: 25%;
       user-select: none;
       @media (max-width: 600px) {
         display: table-header-group;
@@ -173,3 +172,11 @@
   }
 }
 
+.as-oil-cpc__middle {
+  width: 100%;
+}
+
+//ToDo: give me another class please and end number
+.as-js-tab-label {
+  @include space-out(1, 10);
+}
