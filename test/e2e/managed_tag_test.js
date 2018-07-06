@@ -1,4 +1,10 @@
-import { OIL_LAYER, OIL_MANAGED_TAGS_DIV, OIL_MANAGED_TAGS_IMG_TAG, OIL_MANAGED_TAGS_SCRIPT_TAG, OIL_YES_BUTTON } from '../test_constants';
+import {
+  OIL_LAYER,
+  OIL_MANAGED_TAGS_DIV,
+  OIL_MANAGED_TAGS_IMG_TAG,
+  OIL_MANAGED_TAGS_SCRIPT_TAG,
+  OIL_YES_BUTTON
+} from '../test_constants';
 
 module.exports = {
   '@disabled': false,
@@ -16,14 +22,19 @@ module.exports = {
       .waitForElementVisible(OIL_LAYER, 2000, false);
   },
 
-  'Managed tags are not visible if consent was not given (yet)': function (browser) {
+  'Managed tags are NOT visible if consent was NOT given (yet)': function (browser) {
     browser
       .waitForElementPresent(OIL_MANAGED_TAGS_SCRIPT_TAG, 1000, false)
       .expect.element(OIL_MANAGED_TAGS_SCRIPT_TAG).to.have.attribute('type').equals('as-oil');
     browser
       .waitForElementPresent(OIL_MANAGED_TAGS_IMG_TAG, 1000, false)
-      .assert.hidden(OIL_MANAGED_TAGS_IMG_TAG)
-      .expect.element(OIL_MANAGED_TAGS_IMG_TAG).to.not.have.attribute('src');
+      .assert.hidden(OIL_MANAGED_TAGS_IMG_TAG);
+
+    // HINT: A more stable (thin EDGE and IE) version for images of: .expect.element(OIL_MANAGED_TAGS_IMG_TAG).to.not.have.attribute('src');
+    browser.getAttribute(OIL_MANAGED_TAGS_IMG_TAG, 'src', function (result) {
+      this.assert.equal(!!result.value, false);
+    });
+
     browser.end();
   },
 
