@@ -97,7 +97,7 @@ const ContentSnippet = () => {
 <div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
     <div class="as-oil-cpc__left">
         <a href="#as-oil-cpc-purposes" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}">
-          ${getLabel(OIL_LABELS.ATTR_LABEL_PURPOSE_DESC)}
+          ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
         </a>
         <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
           ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}  
@@ -105,7 +105,7 @@ const ContentSnippet = () => {
     </div>
     <div class="as-oil-cpc__middle as-js-purposes">
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
-            ${getLabel(OIL_LABELS.ATTR_LABEL_PURPOSE_DESC)}
+            ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
         </div>
         ${buildPurposeEntries(getPurposes())}
         ${buildPurposeEntries(getCustomPurposes())}
