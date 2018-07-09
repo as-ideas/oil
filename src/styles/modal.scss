@@ -230,12 +230,12 @@
 @mixin btn-grey {
   @include btn-shared;
 
-  color: #aaa;
-  background-color: #eee;
+  color: $btn-text-grey;
+  background-color: $btn-background-grey;
 
   &:hover {
-    color: darken(#aaa, 5%);
-    background-color: darken(#eee, 5%);
+    color: darken($btn-text-grey, 5%);
+    background-color: darken($btn-background-grey, 5%);
   }
 }
 

@@ -33,11 +33,10 @@
       border-radius: 5px;
       box-sizing: border-box;
       display: table-cell;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: bold;
       height: 50px;
       overflow: hidden;
-      padding: 5px auto;
       text-align: center;
       text-overflow: ellipsis;
       transition: all 0.3s ease-in-out;
@@ -105,26 +104,28 @@
   }
 }
 
+.as-js-tab-label {
+  @include space-out(1, 5);
+}
+
 .as-oil-cpc__purpose-tab-label-active {
-  background: rgba(52, 140, 32, 0.6);
+  background: $btn-primary;
+  color: $btn-primary-text-color;
   cursor: default;
-  color: rgb(255, 255, 255);
 }
 
 .as-oil-cpc__purpose-tab-label-inactive {
-  color: rgba(52, 140, 32, 0.6);
-  background: rgba(0, 0, 0, 0.1);
+  color: $btn-text-grey;
+  background: $btn-background-grey;
   cursor: pointer;
 }
 
-
 .as-oil-cpc__third-parties-link {
-  color: #000000;
   cursor: pointer;
   text-decoration: none;
 
   span {
-    background: rgba(255, 0, 0, 0.6);
+    background: $btn-primary;
     border-radius: 50%;
     color: white;
     display: inline-block;
@@ -174,9 +175,4 @@
 
 .as-oil-cpc__middle {
   width: 100%;
-}
-
-//ToDo: give me another class please and end number
-.as-js-tab-label {
-  @include space-out(1, 5);
 }
