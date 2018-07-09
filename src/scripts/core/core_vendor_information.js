@@ -1,5 +1,5 @@
-import { getIabVendorBlacklist, getIabVendorListUrl, getIabVendorWhitelist } from './core_config';
-import { logError } from './core_log';
+import { getIabVendorBlacklist, getIabVendorListUrl, getIabVendorWhitelist, getShowLimitedVendors } from './core_config';
+import { logInfo, logError } from './core_log';
 import { fetchJsonData } from './core_utils';
 
 export const DEFAULT_VENDOR_LIST = {
@@ -12,6 +12,7 @@ export const DEFAULT_VENDOR_LIST = {
 export let cachedVendorList;
 
 export function loadVendorList() {
+  logInfo('loadVendorList');
   return new Promise(function (resolve) {
     if (cachedVendorList) {
       resolve(cachedVendorList);
@@ -67,6 +68,21 @@ export function getVendorList() {
 
 export function clearVendorListCache() {
   cachedVendorList = undefined;
+}
+
+export function getVendorsToDisplay() {
+  return getShowLimitedVendors() ? getLimitedVendors() : getVendors();
+}
+
+export function getLimitedVendors() {
+  let vendors = getVendors();
+  const limitedIds = getLimitedVendorIds();
+
+  logInfo('limiting vendors');
+
+  vendors = vendors.filter(vendor => limitedIds.indexOf(vendor.id) > -1);
+
+  return vendors;
 }
 
 export function getLimitedVendorIds() {

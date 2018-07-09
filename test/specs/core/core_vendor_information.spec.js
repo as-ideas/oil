@@ -9,12 +9,16 @@ import {
   getVendorList,
   getVendorListVersion,
   getVendors,
+  getLimitedVendors,
+  getVendorsToDisplay,
   loadVendorList
 } from '../../../src/scripts/core/core_vendor_information';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
 import { resetOil } from '../../test-utils/utils_reset';
 
-describe('core_vendor_information', () => {
+fdescribe('core_vendor_information', () => {
+
+  const WHITELISTED_VENDORS = [1,2];
 
   beforeEach(() => resetOil());
 
@@ -265,6 +269,23 @@ describe('core_vendor_information', () => {
         done();
       });
     });
+  });
+
+  describe('getVendorsToDisplay', function() {
+    
+    it('should return full vendor list when configuration parameter show_limited_vendors is false', function() {
+      spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(false);
+      let result = getVendorsToDisplay();
+      expect(result.length).toEqual(380);
+    });
+
+    it('should return limited vendor list when configuration parameter show_limited_vendors is true', function() {
+      spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
+      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue(WHITELISTED_VENDORS);
+      let result = getVendorsToDisplay();
+      expect(result.length).toEqual(WHITELISTED_VENDORS.length);
+    });
+
   });
 
   function buildDefaultVendorIdList(maxVendorId) {

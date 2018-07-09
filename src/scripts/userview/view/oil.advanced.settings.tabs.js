@@ -4,7 +4,7 @@ import { getLabel, getLabelWithDefault, getTheme } from '../userview_config.js';
 import { getCustomPurposes } from '../../core/core_config.js';
 import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
 import { setGlobalOilObject } from '../../core/core_utils.js';
-import { getPurposes, getVendorList, getVendors } from '../../core/core_vendor_information.js';
+import { getPurposes, getVendorList, getVendorsToDisplay } from '../../core/core_vendor_information.js';
 
 // TODO Currently, this template is a copy of the standard CPC template.
 // TODO It has to be reimplemented to provide a tab layout
@@ -34,7 +34,7 @@ const buildVendorEntries = () => {
   let vendorList = getVendorList();
 
   if (vendorList && !vendorList.isDefault) {
-    let listWrapped = getVendors().map((element) => {
+    let listWrapped = getVendorsToDisplay().map((element) => {
       if (element.name) {
         return `<div class="as-oil-third-party-list-element">
                     <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
