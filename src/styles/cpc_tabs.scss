@@ -14,6 +14,9 @@
   font-size: 1.45em;
   font-weight: 600;
   line-height: 1.15;
+  @include media('<=phone') {
+    margin-right: 20px;
+  }
 }
 
 .as-oil-cpc-wrapper {
@@ -43,7 +46,7 @@
       vertical-align: middle;
       white-space: nowrap;
       user-select: none;
-      @media (max-width: 600px) {
+      @include media('<=phone') {
         display: table-header-group;
         height: auto;
       }
@@ -82,6 +85,11 @@
     display: table-cell;
     list-style: none;
     width: 100%;
+
+    @include media('<=phone') {
+      padding-left: 1.5rem;
+    }
+
     li {
       list-style-position: inside;
       text-indent: -1.30em;
@@ -155,6 +163,10 @@
   margin-left: 30px;
   position: absolute;
   width: 50px;
+
+  @include media('<=phone') {
+    margin-left: 5px;
+  }
 
   input {
     display: none;
