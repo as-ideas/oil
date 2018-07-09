@@ -23,3 +23,4 @@ export const OIL_MANAGED_TAGS_IMG_TAG = '//*[@id="managedImgTag"]';
 export const OIL_MANAGED_TAGS_DIV = '//*[@id="demoText"]';
 export const PAGE_BACKGROUND = '.has-big-bad-background';
 export const GDPR_APPLY_BUTTON = '//*[@id="applyGDPR"]';
+export const OIL_THIRD_PARTY_NAME = '.as-oil-third-party-name';
