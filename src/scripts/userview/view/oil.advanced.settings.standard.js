@@ -25,31 +25,28 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
 </div>`
 };
 
-/**
- *
- * @param {[]} vendors, eg. {id:8,name:"Asdf",policyUrl:"https://privacy-policy/",purposeIds:[1,2],legIntPurposeIds:[3],featureIds:[1,2]}
- * @returns {*}
- */
 const buildVendorEntries = () => {
   let vendorList = getVendorList();
 
   if (vendorList && !vendorList.isDefault) {
     let listWrapped = getVendors().map((element) => {
       if (element.name) {
-        return `<div class="as-oil-third-party-list-element">
-                    <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
-                        <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
-                        </svg>
-                        <svg class='as-oil-icon-minus' style='display: none;' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
-                        </svg>
-                        <span class='as-oil-third-party-name'>${element.name}</span>
-                    </span>
-                    <div class='as-oil-third-party-toggle-part' style='display: none;'>
-                      <a class='as-oil-third-party-link' href='${element.policyUrl}'>${element.policyUrl}</a>
-                    </div>
-                  </div>`;
+        return `
+          <div class="as-oil-third-party-list-element">
+              <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
+                  <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
+                  </svg>
+                  <svg class='as-oil-icon-minus' style='display: none;' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
+                  </svg>
+                  <span class='as-oil-third-party-name'>${element.name}</span>
+              </span>
+              <div class='as-oil-third-party-toggle-part' style='display: none;'>
+                <a class='as-oil-third-party-link' href='${element.policyUrl}'>${element.policyUrl}</a>
+              </div>
+            </div>
+          `;
       }
     });
     return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
