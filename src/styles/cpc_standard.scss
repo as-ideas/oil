@@ -1,22 +1,6 @@
 @import "./_cpc_global";
 
-#oil-preference-center {
-  overflow: hidden;
-
-  .as-oil-back-button {
-    display: none;
-  }
-}
-
-#as-oil-cpc {
-  &.as-oil-content-overlay {
-    @include media('<=849px') {
-      padding: 2rem 1rem;
-    }
-  }
-}
-
-.as-oil-cpc-wrapper {
+.as-oil-standard-cpc__wrapper {
 
   button {
     cursor: pointer;
@@ -58,14 +42,14 @@
   }
 }
 
-.as-oil-cpc__content {
+.as-oil-standard-cpc__content {
   display: flex;
   @include media('<=phone') {
     display: block;
   }
 }
 
-.as-oil-cpc__left {
+.as-oil-standard-cpc__left {
   flex: 0 0 200px;
   max-width: 200px;
   display: inline-block;
@@ -92,7 +76,7 @@
   }
 }
 
-.as-oil-cpc__right {
+.as-oil-standard-cpc__right {
   flex: 0 0 200px;
   display: inline-block;
   align-self: flex-end;
@@ -105,7 +89,7 @@
 
 }
 
-.as-oil-cpc__row-btn-all {
+.as-oil-standard-cpc__activation-buttons {
   text-align: right;
   span {
     @include media('<=phone') {
@@ -117,59 +101,59 @@
   }
 }
 
-.as-oil-cpc__row-title {
+.as-oil-standard-cpc__section-title {
   font-size: 1.2rem;
   font-weight: 600;
   margin: 20px 8px;
 }
 
-.as-oil-cpc__category-link {
+.as-oil-standard-cpc__category-link {
   padding: 6px 12px;
   display: block;
   border-right: 2px solid rgba(255, 255, 255, 0);
 }
 
-.as-oil-cpc__category-link--active {
+.as-oil-standard-cpc__category-link--active {
   border-right: 2px solid #3f7ddf;
 }
 
-.as-oil-cpc__purpose {
+.as-oil-standard-cpc__purpose {
   border: 1px solid #eaeaea;
   border-radius: 5px;
   padding: 20px;
   margin: 16px 0;
 }
 
-.as-oil-cpc__purpose-container {
+.as-oil-standard-cpc__purpose-container {
   position: relative;
 }
 
-.as-oil-cpc__purpose-header {
+.as-oil-standard-cpc__purpose-header {
   font-size: 1rem;
   font-weight: 500;
   margin: 0 75px 30px 0;
 }
 
-.as-oil-cpc__purpose-text {
+.as-oil-standard-cpc__purpose-text {
   font-size: 0.9rem;
   color: lighten($text-color-primary-light, 30%);
 }
 
 .dark {
-  .as-oil-cpc__purpose-text {
+  .as-oil-standard-cpc__purpose-text {
     color: darken($text-color-primary-dark, 30%);
   }
 }
 
 .light {
-  .as-oil-cpc__left {
+  .as-oil-standard-cpc__left {
     a {
       color: $text-color-primary-light;
     }
   }
 }
 
-.as-oil-cpc__standard-switch {
+.as-oil-standard-cpc__switch {
   position: absolute;
   display: inline-block;
   width: 50px;
@@ -207,11 +191,11 @@
 //dark theme adjustments
 .as-oil {
   &.dark {
-    .as-oil-cpc__left a,
+    .as-oil-standard-cpc__left a,
     .as-oil-back-button__text {
       color: $text-color-primary-dark !important;
     }
-    .as-oil-cpc__purpose {
+    .as-oil-standard-cpc__purpose {
       background-color: $cpc-background-dark;
     }
   }

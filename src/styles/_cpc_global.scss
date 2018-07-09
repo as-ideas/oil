@@ -3,6 +3,22 @@
 $slider-size: 20px;
 $slider-padding: 3px;
 
+#oil-preference-center {
+  overflow: hidden;
+
+  .as-oil-back-button {
+    display: none;
+  }
+}
+
+#as-oil-cpc {
+  &.as-oil-content-overlay {
+    @include media('<=849px') {
+      padding: 2rem 1rem;
+    }
+  }
+}
+
 .as-oil-cpc__status {
   position: absolute;
   top: 5px;
