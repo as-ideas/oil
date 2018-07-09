@@ -8,15 +8,15 @@ import { setGlobalOilObject } from '../../core/core_utils.js';
 import { getPurposes, getVendorList, getVendors } from '../../core/core_vendor_information.js';
 
 
-const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';
+const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-standard-cpc__category-link--active';
 
 const PurposeContainerSnippet = ({id, header, text, value}) => {
   return `
-<div class="as-oil-cpc__purpose">
-    <div class="as-oil-cpc__purpose-container">
-        <div class="as-oil-cpc__purpose-header">${header}</div>
-        <div class="as-oil-cpc__purpose-text">${text}</div>
-        <label class="as-oil-cpc__standard-switch">
+<div class="as-oil-standard-cpc__purpose">
+    <div class="as-oil-standard-cpc__purpose-container">
+        <div class="as-oil-standard-cpc__purpose-header">${header}</div>
+        <div class="as-oil-standard-cpc__purpose-text">${text}</div>
+        <label class="as-oil-standard-cpc__switch">
             <input data-id="${id}" id="as-js-purpose-slider-${id}" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-${id}" value="${value}"/>
             <span class="as-oil-cpc__status"></span>
             <span class="as-oil-cpc__slider"></span>
@@ -25,31 +25,28 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
 </div>`
 };
 
-/**
- *
- * @param {[]} vendors, eg. {id:8,name:"Asdf",policyUrl:"https://privacy-policy/",purposeIds:[1,2],legIntPurposeIds:[3],featureIds:[1,2]}
- * @returns {*}
- */
 const buildVendorEntries = () => {
   let vendorList = getVendorList();
 
   if (vendorList && !vendorList.isDefault) {
     let listWrapped = getVendors().map((element) => {
       if (element.name) {
-        return `<div class="as-oil-third-party-list-element">
-                    <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
-                        <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
-                        </svg>
-                        <svg class='as-oil-icon-minus' style='display: none;' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
-                        </svg>
-                        <span class='as-oil-third-party-name'>${element.name}</span>
-                    </span>
-                    <div class='as-oil-third-party-toggle-part' style='display: none;'>
-                      <a class='as-oil-third-party-link' href='${element.policyUrl}'>${element.policyUrl}</a>
-                    </div>
-                  </div>`;
+        return `
+          <div class="as-oil-third-party-list-element">
+              <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
+                  <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
+                  </svg>
+                  <svg class='as-oil-icon-minus' style='display: none;' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
+                  </svg>
+                  <span class='as-oil-third-party-name'>${element.name}</span>
+              </span>
+              <div class='as-oil-third-party-toggle-part' style='display: none;'>
+                <a class='as-oil-third-party-link' href='${element.policyUrl}'>${element.policyUrl}</a>
+              </div>
+            </div>
+          `;
       }
     });
     return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
@@ -77,7 +74,7 @@ const BackButtonSnippet = () => {
 
 const ActivateButtonSnippet = () => {
   return `
-  <div class="as-oil-cpc__row-btn-all">
+  <div class="as-oil-standard-cpc__activation-buttons">
         <span class="as-js-btn-deactivate-all as-oil__btn-grey">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL)}</span>
         <span class="as-js-btn-activate-all as-oil__btn-blue">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL)}</span>
       </div>
@@ -95,29 +92,29 @@ const buildPurposeEntries = (list) => {
 
 const ContentSnippet = () => {
   return `
-<div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
-    <div class="as-oil-cpc__left">
-        <a href="#as-oil-cpc-purposes" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}">
+<div data-qa="cpc-snippet" class="as-oil-l-row as-oil-standard-cpc__content">
+    <div class="as-oil-standard-cpc__left">
+        <a href="#as-oil-cpc-purposes" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-standard-cpc__category-link ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}">
           ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
         </a>
-        <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
+        <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-standard-cpc__category-link">
           ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}  
         </a>
     </div>
     <div class="as-oil-cpc__middle as-js-purposes">
-        <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
+        <div class="as-oil-standard-cpc__section-title" id="as-oil-cpc-purposes">
             ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
         </div>
         ${buildPurposeEntries(getPurposes())}
         ${buildPurposeEntries(getCustomPurposes())}
-        <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
+        <div class="as-oil-standard-cpc__section-title" id="as-oil-cpc-third-parties">
             ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
         </div>
        <div id="as-js-third-parties-list">
          ${buildVendorEntries()}
        </div>
     </div>
-    <div class="as-oil-cpc__right">
+    <div class="as-oil-standard-cpc__right">
      <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
       <div class="as-oil-l-item">
         <button class="as-oil__btn-optin as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
@@ -130,7 +127,7 @@ const ContentSnippet = () => {
 };
 
 export function oilAdvancedSettingsInlineTemplate() {
-  return `<div class="as-oil-l-wrapper-layout-max-width as-oil-cpc-wrapper">
+  return `<div class="as-oil-l-wrapper-layout-max-width as-oil-standard-cpc__wrapper">
     <div class="as-oil__heading">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
     </div>

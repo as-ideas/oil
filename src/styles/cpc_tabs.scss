@@ -1,29 +1,24 @@
 @import "./_cpc_global";
 
-.as-oil-center {
-  text-align: center;
-}
-
-.as-oil-margin-top {
-  margin-top: 1em;
-}
-
-.as-oil-cpc__tabs-headline {
+.as-oil-tabs-cpc__headline {
   display: block;
   max-width: 100%;
-  font-size: 1.45em;
+  font-size: 1.45rem;
   font-weight: 600;
   line-height: 1.15;
+  @include media('<=phone') {
+    margin-right: 20px;
+  }
 }
 
-.as-oil-cpc-wrapper {
+.as-oil-tabs-cpc__wrapper {
 
   hr {
     border: 0;
     border-top: 1px #d8d8d8 solid;
   }
 
-  .as-oil-cpc__purpose-tab-labels {
+  .as-oil-tabs-cpc__purpose-labels {
     border-collapse: separate;
     border-spacing: 1px;
     display: table;
@@ -33,25 +28,25 @@
       border-radius: 5px;
       box-sizing: border-box;
       display: table-cell;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: bold;
       height: 50px;
       overflow: hidden;
-      padding: 5px auto;
       text-align: center;
       text-overflow: ellipsis;
       transition: all 0.3s ease-in-out;
       vertical-align: middle;
       white-space: nowrap;
-      width: 25%;
       user-select: none;
-      @media (max-width: 600px) {
+
+      @include media('<=phone') {
         display: table-header-group;
         height: auto;
       }
     }
   }
-  .as-oil-cpc__purpose-tab-text section {
+
+  .as-oil-tabs-cpc__purpose-text section {
     animation-direction: normal;
     animation-duration: 0.3s;
     animation-iteration-count: 1;
@@ -78,17 +73,23 @@
 
 }
 
-.as-oil-cpc__purpose-feature-texts {
+.as-oil-tabs-cpc__purpose-feature-texts {
   display: table;
   ul {
     display: table-cell;
     list-style: none;
     width: 100%;
+
+    @include media('<=phone') {
+      padding-left: 1.5rem;
+    }
+
     li {
       list-style-position: inside;
-      text-indent: -1.30em;
+      text-indent: -1.30rem;
+
       span:nth-child(2) {
-        margin-left: 1.3em;
+        margin-left: 1.3rem;
       }
     }
   }
@@ -106,65 +107,72 @@
   }
 }
 
-.as-oil-cpc__purpose-tab-label-active {
-  background: rgba(52, 140, 32, 0.6);
-  cursor: default;
-  color: rgb(255, 255, 255);
+.as-js-tab-label {
+  @include space-out(1, 5);
 }
 
-.as-oil-cpc__purpose-tab-label-inactive {
-  color: rgba(52, 140, 32, 0.6);
-  background: rgba(0, 0, 0, 0.1);
+.as-oil-tabs-cpc__purpose-label-active {
+  background: $btn-primary;
+  color: $btn-primary-text-color;
+  cursor: default;
+}
+
+.as-oil-tabs-cpc__purpose-label-inactive {
+  color: $btn-text-grey;
+  background: $btn-background-grey;
   cursor: pointer;
 }
 
-
-.as-oil-cpc__third-parties-link {
-  color: #000000;
+.as-oil-tabs-cpc__third-parties-link {
   cursor: pointer;
   text-decoration: none;
 
   span {
-    background: rgba(255, 0, 0, 0.6);
+    background: $btn-primary;
     border-radius: 50%;
     color: white;
     display: inline-block;
     font-weight: 700;
     height: 20px;
     line-height: 20px;
-    margin-right: 0.5em;
+    margin-right: .5rem;
     text-align: center;
     width: 20px;
   }
 }
 
-.as-oil-cpc__third-parties-list {
-  margin-left: 1.7em;
-  margin-top: 0.5em;
+.as-oil-tabs-cpc__third-parties-list {
+  margin-left: 1.7rem;
+  margin-top: .5rem;
 }
 
-.as-oil-cpc__purpose-description {
-  font-size: .7375em;
+.as-oil-tabs-cpc__purpose-description {
+  font-size: .7375rem;
   font-weight: 400;
   line-height: 1.4;
 }
 
-.as-oil-cpc__tab-switch {
+.as-oil-tabs-cpc__switch {
   display: table-cell;
   height: 26px;
   margin-left: 30px;
   position: absolute;
   width: 50px;
 
+  @include media('<=phone') {
+    margin-left: 5px;
+  }
+
   input {
     display: none;
+
     &:checked ~ {
       .as-oil-cpc__slider {
-        background-color: rgb(63, 126, 223);
+        background-color: $btn-primary;
       }
     }
     &:focus ~ .as-oil-cpc__slider {
-      box-shadow: 0 0 1px rgb(63, 126, 223);
+      box-shadow: 0 0 1px $btn-primary;
     }
     &:checked ~ .as-oil-cpc__slider::before {
       background-color: darken(#767676, 30%);
@@ -172,4 +180,3 @@
     }
   }
 }
-

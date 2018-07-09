@@ -33,7 +33,7 @@ const PurposeFeatureTextsSnippet = (featureText) => {
 
 const PurposeTabLabelElement = ({id, label}) => {
   return `
-    <span data-id="${id}" class="as-js-tab-label ${id === 1 ? 'as-oil-cpc__purpose-tab-label-active' : 'as-oil-cpc__purpose-tab-label-inactive'}">${label}</span>
+    <span data-id="${id}" class="as-js-tab-label ${id === 1 ? 'as-oil-tabs-cpc__purpose-label-active' : 'as-oil-tabs-cpc__purpose-label-inactive'}">${label}</span>
   `;
 };
 
@@ -42,12 +42,12 @@ const PurposeTabContentSnippet = ({id, text, featureTexts, isSelected}) => {
     <section id="as-js-tab-section-${id}" class="as-oil-margin-top as-js-tab-section">
       <div>
         <p>${text}</p>
-        <label class="as-oil-cpc__tab-switch">
+        <label class="as-oil-tabs-cpc__switch">
           <input data-id="${id}" id="as-js-purpose-slider-${id}" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-${id}" value="${isSelected}">
           <span class="as-oil-cpc__slider"></span>
         </label>
       </div>
-      <div class="as-oil-cpc__purpose-feature-texts as-oil-margin-top" id="purpose-feature-texts-${id}">
+      <div class="as-oil-tabs-cpc__purpose-feature-texts as-oil-margin-top" id="purpose-feature-texts-${id}">
         ${featureTexts.length > 0 ? buildPurposeFeatureTextsSnippet(featureTexts) : ''}
       </div>
     </section>
@@ -79,10 +79,10 @@ const buildPurposeTabContentElements = (purposes) => {
 
 const buildPurposeEntries = (purposes) => {
   return `
-    <div class="as-oil-cpc__purpose-tab-labels as-oil-margin-top">
+    <div class="as-oil-tabs-cpc__purpose-labels as-oil-margin-top">
       ${buildPurposeTabLabelElements(purposes)}
     </div>
-    <div class="as-oil-cpc__purpose-tab-text as-oil-margin-top">
+    <div class="as-oil-tabs-cpc__purpose-text as-oil-margin-top">
       ${buildPurposeTabContentElements(purposes)}
     </div>
   `;
@@ -120,14 +120,14 @@ const buildVendorEntries = () => {
 
 const ContentSnippet = () => {
   return `
-    <div class="as-oil-cpc__purpose-description as-oil-center as-oil-margin-top" id="as-oil-cpc-purposes">
+    <div class="as-oil-tabs-cpc__purpose-description as-oil-center as-oil-margin-top" id="as-oil-cpc-purposes">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
     </div>
     <div class="as-oil-cpc__middle">
       ${buildPurposeEntries(getPurposes().concat(getCustomPurposes()))}
       <div class="as-oil-margin-top">
-        <div class="as-oil-cpc__third-parties-link" id="as-js-third-parties-link"><span>i</span>${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}</a></div>
-        <div id="as-js-third-parties-list" class="as-oil-cpc__third-parties-list" style="display: none;">
+        <div class="as-oil-tabs-cpc__third-parties-link" id="as-js-third-parties-link"><span>i</span>${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}</a></div>
+        <div id="as-js-third-parties-list" class="as-oil-tabs-cpc__third-parties-list" style="display: none;">
            ${buildVendorEntries()}
         </div>
       </div>
@@ -143,8 +143,8 @@ const ContentSnippet = () => {
 
 export function oilAdvancedSettingsInlineTemplate() {
   return `
-    <div class="as-oil-l-wrapper-layout-max-width as-oil-cpc-wrapper">
-      <div class="as-oil-cpc__tabs-headline as-oil-center">
+    <div class="as-oil-l-wrapper-layout-max-width as-oil-tabs-cpc__wrapper">
+      <div class="as-oil-tabs-cpc__headline as-oil-center">
         ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
       </div>
       <p class="as-oil-center as-oil-margin-top">
@@ -202,11 +202,11 @@ function toggleFeatureTextsMarks(checkbox) {
 function toggleTab(tab) {
   let tabLabelElements = document.getElementsByClassName('as-js-tab-label');
   for (let i = 0; i < tabLabelElements.length; i++) {
-    tabLabelElements[i].classList.remove('as-oil-cpc__purpose-tab-label-active');
-    tabLabelElements[i].classList.add('as-oil-cpc__purpose-tab-label-inactive');
+    tabLabelElements[i].classList.remove('as-oil-tabs-cpc__purpose-label-active');
+    tabLabelElements[i].classList.add('as-oil-tabs-cpc__purpose-label-inactive');
   }
-  tab.classList.remove('as-oil-cpc__purpose-tab-label-inactive');
-  tab.classList.add('as-oil-cpc__purpose-tab-label-active');
+  tab.classList.remove('as-oil-tabs-cpc__purpose-label-inactive');
+  tab.classList.add('as-oil-tabs-cpc__purpose-label-active');
 
   let tabSectionElements = document.getElementsByClassName('as-js-tab-section');
   for (let i = 0; i < tabSectionElements.length; i++) {

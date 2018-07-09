@@ -3,6 +3,22 @@
 $slider-size: 20px;
 $slider-padding: 3px;
 
+#oil-preference-center {
+  overflow: hidden;
+
+  .as-oil-back-button {
+    display: none;
+  }
+}
+
+#as-oil-cpc {
+  &.as-oil-content-overlay {
+    @include media('<=849px') {
+      padding: 2rem 1rem;
+    }
+  }
+}
+
 .as-oil-cpc__status {
   position: absolute;
   top: 5px;
@@ -44,6 +60,7 @@ $slider-padding: 3px;
   overflow: scroll;
   max-height: 500px; /* The Fallback */
   height: 30vh;
+  width: 100%;
 
   @include media('<=phone') {
     padding: 0;
@@ -90,5 +107,22 @@ $slider-padding: 3px;
   }
   &::after {
     transform: rotate(-45deg);
+  }
+}
+
+.as-oil-center {
+  text-align: center;
+}
+
+.as-oil-margin-top {
+  margin-top: 1rem;
+}
+
+@mixin space-out($min, $max) {
+  @for $i from $min through $max {
+    &:first-child:nth-last-child(#{$i}),
+    &:first-child:nth-last-child(#{$i}) ~ & {
+      width: 1 / $i * 100%;
+    }
   }
 }
