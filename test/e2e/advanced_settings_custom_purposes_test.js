@@ -1,9 +1,11 @@
-import { OIL_LAYER,
+import {
+  OIL_LAYER,
   OIL_YES_BUTTON,
   OIL_ADVANCED_SETTINGS,
   OIL_ADVANCED_SETTINGS_WRAPPER,
   OIL_CUSTOM_PURPOSE_SLIDER,
-  OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER } from '../test_constants.js';
+  OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER
+} from '../test_constants.js';
 
 module.exports = {
   '@disabled': false,
@@ -16,8 +18,8 @@ module.exports = {
   'Shows five purposes by default': function (browser) {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
-      .useCss()
-      .waitForElementVisible('body', 1000, false)
+      .useCss().waitForElementVisible('body', 1000, false)
+      .useXpath().waitForElementVisible(OIL_LAYER, 2000, false)
       .useXpath().waitForElementVisible(OIL_YES_BUTTON, 3000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
@@ -30,10 +32,9 @@ module.exports = {
   'Displays custom purposes in list': function (browser) {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-custom-purposes.html')
-      .useCss()
-      .waitForElementVisible('body', 1000, false)
-      .useXpath()
-      .waitForElementVisible(OIL_YES_BUTTON, 3000, false)
+      .useCss().waitForElementVisible('body', 1000, false)
+      .useXpath().waitForElementVisible(OIL_LAYER, 2000, false)
+      .useXpath().waitForElementVisible(OIL_YES_BUTTON, 3000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
       .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
