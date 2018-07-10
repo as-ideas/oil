@@ -12,7 +12,6 @@ export const DEFAULT_VENDOR_LIST = {
 export let cachedVendorList;
 
 export function loadVendorList() {
-  logInfo('loadVendorList');
   return new Promise(function (resolve) {
     if (cachedVendorList) {
       resolve(cachedVendorList);
