@@ -77,7 +77,7 @@ be overwritten, even the default ones, in the OIL configuration block (see chapt
 |label_cpc_purpose_desc| The headline of the purposes section (standard CPC) or its intro text (Tab-based CPC)| Purposes
 |label_cpc_purpose_xx_text| The name of purpose with id `xx` (e.g. `01`). If undefined the name is taken from global vendor list or custom purpose definition.| Information storage an access
 |label_cpc_purpose_xx_desc| The description of purpose with id `xx` (e.g. `01`). If undefined the description is taken from global vendor list or custom purpose definition.| The storage of information, or access to information that is already stored, on your device such as advertising identifiers, device identifiers, cookies, and similar technologies.
-|label_cpc_purpose_xx_features| A list of texts describing the features of purpose with id `xx` (e.g. `01`). Only used in tab-based CPC. If undefined nothing is shown.| ["Storage of information.", "Acces to information"]
+|label_cpc_purpose_xx_features| A list of texts describing the features of purpose with id `xx` (e.g. `01`). Only used in tab-based CPC. If undefined nothing is shown.| ["Storage of information.", "Access to information"]
 |label_nocookie_head| The headline that is shown if user has disallowed all cookies.| No Cookies allowed.
 |label_nocookie_text| The text that is shown if user has disallowed all cookies.| Please enable cookies!
 |label_poi_group_list_heading| Headline for POI group section| Company units
