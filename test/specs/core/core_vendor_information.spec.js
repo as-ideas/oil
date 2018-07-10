@@ -16,7 +16,7 @@ import {
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
 import { resetOil } from '../../test-utils/utils_reset';
 
-fdescribe('core_vendor_information', () => {
+describe('core_vendor_information', () => {
 
   const WHITELISTED_VENDORS = [1,2];
   const BLACKLISTED_VENDORS = Array.apply(null, {length: (DEFAULT_VENDOR_LIST.maxVendorId-2)}).map(Number.call, Number).slice(1);
