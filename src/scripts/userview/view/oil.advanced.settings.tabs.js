@@ -4,7 +4,6 @@ import { forEach } from '../userview_modal.js';
 import { getLabel, getLabelWithDefault } from '../userview_config.js';
 import { getCustomPurposes } from '../../core/core_config.js';
 import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
-import { setGlobalOilObject } from '../../core/core_utils.js';
 import { getPurposes, getVendorList, getVendorsToDisplay } from '../../core/core_vendor_information.js';
 
 const BackButtonSnippet = () => {
