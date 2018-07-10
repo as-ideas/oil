@@ -4,7 +4,6 @@ import { forEach } from '../userview_modal.js';
 import { getLabel, getLabelWithDefault } from '../userview_config.js';
 import { getCustomPurposes } from '../../core/core_config.js';
 import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
-import { setGlobalOilObject } from '../../core/core_utils.js';
 import { getPurposes, getVendorList, getVendorsToDisplay } from '../../core/core_vendor_information.js';
 
 const BackButtonSnippet = () => {
@@ -65,17 +64,21 @@ const buildPurposeFeatureTextsSnippet = (featureTexts) => {
 const buildPurposeTabLabelElements = (purposes) => {
   return purposes.map(purpose => PurposeTabLabelElement({
     id: purpose.id,
-    label: getLabelWithDefault(`${purpose.id < 10 ? `label_cpc_purpose_0${purpose.id}_text` : `label_cpc_purpose_${purpose.id}_text`}`, purpose.name || `Error: Missing text for purpose with id ${purpose.id}!`)
+    label: getLabelWithDefault(`label_cpc_purpose_${formatPurposeId(purpose.id)}_text`, purpose.name || `Error: Missing text for purpose with id ${purpose.id}!`)
   })).join('');
 };
 
 const buildPurposeTabContentElements = (purposes) => {
   return purposes.map(purpose => PurposeTabContentSnippet({
     id: purpose.id,
-    text: getLabelWithDefault(`${purpose.id < 10 ? `label_cpc_0${purpose.id}_desc`: `label_cpc_purpose_${purpose.id}_desc`}`, purpose.description || ''),
-    featureTexts: getLabelWithDefault(`${purpose.id < 10 ? `label_cpc_purpose_0${purpose.id}_features`: `label_cpc_purpose_${purpose.id}_features`}`, []),
+    text: getLabelWithDefault(`label_cpc_purpose_${formatPurposeId(purpose.id)}_desc`, purpose.description || ''),
+    featureTexts: getLabelWithDefault(`label_cpc_purpose_${formatPurposeId(purpose.id)}_features`, []),
     isSelected: false
   })).join('');
+};
+
+const formatPurposeId = (id) => {
+  return id < 10 ? `0${id}` : id;
 };
 
 const buildPurposeEntries = (purposes) => {

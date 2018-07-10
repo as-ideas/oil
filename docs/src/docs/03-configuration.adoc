@@ -115,6 +115,7 @@ This is a full list of configurable options.
 | iabVendorListUrl | Vendorlist to use | https://vendorlist.consensu.org/vendorlist.json
 | iabVendorWhitelist | Array of vendor IDs to include in consent. If it is set, values in `iabVendorBlacklist` are ignored. <<blacklisting-and-whitelisting, Details here>> | none
 | iabVendorBlacklist | Array of vendor IDs to exclude from consent. <<blacklisting-and-whitelisting, Details here>> | None
+| show_limited_vendors_only | Flag to only show the vendors limited by `iabVendorWhitelist` or `iabVendorBlacklist` in the CPC | false
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | none
 | default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false

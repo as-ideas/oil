@@ -28,8 +28,8 @@ describe('the timeout of the user view modal aka the auto hide function', () => 
       window.setTimeout(() => {
         expect(document.querySelector('.as-oil')).not.toBeNull();
         done();
-      }, 700);
-    }, 400);
+      }, 1000);
+    }, 501);
   });
 
   function givenOilIsShown() {

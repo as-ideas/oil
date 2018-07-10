@@ -2,7 +2,8 @@ import {
   OIL_LAYER,
   OIL_ADVANCED_SETTINGS_WRAPPER,
   OIL_ADVANCED_SETTINGS,
-  OIL_THIRD_PARTY_NAME
+  OIL_THIRD_PARTY_NAME,
+  OIL_LAYER_THIRD_PARTY_LIST_ELEMENT
 } from '../test_constants.js';
 
 module.exports = {
@@ -28,7 +29,9 @@ module.exports = {
       .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
       .pause(200)
       .useCss()
-      .expect.element(OIL_THIRD_PARTY_NAME).text.to.equal('Captify Technologies Limited')
+      .expect.element(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(1) ' + OIL_THIRD_PARTY_NAME).text.to.equal('Captify Technologies Limited');
+    browser.expect.element(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(2) ' + OIL_THIRD_PARTY_NAME).text.to.equal('affilinet');
+    browser.waitForElementNotPresent(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(3) ' + OIL_THIRD_PARTY_NAME, 1000);
     browser.end();
   }
 

@@ -19,7 +19,7 @@ import { resetOil } from '../../test-utils/utils_reset';
 describe('core_vendor_information', () => {
 
   const WHITELISTED_VENDORS = [1,2];
-  const BLACKLISTED_VENDORS = Array.apply(null, {length: (DEFAULT_VENDOR_LIST.maxVendorId-2)}).map(Number.call, Number);
+  const BLACKLISTED_VENDORS = Array.apply(null, {length: (DEFAULT_VENDOR_LIST.maxVendorId-2)}).map(Number.call, Number).slice(1);
 
   beforeEach(() => resetOil());
 
@@ -288,20 +288,20 @@ describe('core_vendor_information', () => {
     it('returns limited vendors when getShowLimitedVendors is true and blacklist exists', function() {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
       spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue(BLACKLISTED_VENDORS);
-      expect(getLimitedVendors().length).toEqual(DEFAULT_VENDOR_LIST.maxVendorId - BLACKLISTED_VENDORS.length + 1);
+      expect(getLimitedVendors().length).toEqual(DEFAULT_VENDOR_LIST.maxVendorId - BLACKLISTED_VENDORS.length);
     });
 
   });
 
   describe('getVendorsToDisplay', function() {
     
-    it('should return full vendor list when configuration parameter show_limited_vendors is false', function() {
+    it('should return full vendor list when configuration parameter show_limited_vendors_only is false', function() {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(false);
       let result = getVendorsToDisplay();
       expect(result.length).toEqual(380);
     });
 
-    it('should return limited vendor list when configuration parameter show_limited_vendors is true', function() {
+    it('should return limited vendor list when configuration parameter show_limited_vendors_only is true', function() {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
       spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue(WHITELISTED_VENDORS);
       let result = getVendorsToDisplay();
