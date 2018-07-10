@@ -71,7 +71,7 @@ const buildPurposeTabLabelElements = (purposes) => {
 const buildPurposeTabContentElements = (purposes) => {
   return purposes.map(purpose => PurposeTabContentSnippet({
     id: purpose.id,
-    text: getLabelWithDefault(`${purpose.id < 10 ? `label_cpc_purpose_0${purpose.id}_desc`: `label_cpc_purpose_${purpose.id}_desc`}`, purpose.description || ''),
+    text: getLabelWithDefault(`${purpose.id < 10 ? `label_cpc_0${purpose.id}_desc`: `label_cpc_purpose_${purpose.id}_desc`}`, purpose.description || ''),
     featureTexts: getLabelWithDefault(`${purpose.id < 10 ? `label_cpc_purpose_0${purpose.id}_features`: `label_cpc_purpose_${purpose.id}_features`}`, []),
     isSelected: false
   })).join('');

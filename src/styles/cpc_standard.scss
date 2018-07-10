@@ -1,20 +1,4 @@
-@import "./_settings";
-
-#oil-preference-center {
-  overflow: hidden;
-
-  .as-oil-back-button {
-    display: none;
-  }
-}
-
-#as-oil-cpc {
-  &.as-oil-content-overlay {
-    @include media('<=849px') {
-      padding: 2em 1em;
-    }
-  }
-}
+@import "./_cpc_global";
 
 .as-oil-cpc-wrapper {
 
@@ -70,6 +54,9 @@
 
 .as-oil-cpc__content {
   display: flex;
+  @include media('<=phone') {
+    display: block;
+  }
 }
 
 .as-oil-cpc__left {
@@ -78,7 +65,7 @@
   display: inline-block;
   text-align: right;
   text-transform: uppercase;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   margin-bottom: -25px;
   border-right: 1px solid #ccc;
 
@@ -99,20 +86,6 @@
   }
 }
 
-.as-oil-cpc__middle {
-  flex: 1 1 auto;
-  padding: 24px;
-  display: inline-block;
-
-  overflow: scroll;
-  max-height: 420px; /* The Fallback for  */
-  max-height: 40vh;
-
-  @include media('<=phone') {
-    padding: 0;
-  }
-}
-
 .as-oil-cpc__right {
   flex: 0 0 200px;
   display: inline-block;
@@ -120,6 +93,8 @@
 
   @include media('<=phone') {
     flex: 0;
+    display: block;
+    align-self: unset;
   }
 
 }
@@ -131,13 +106,13 @@
       display: inline-block;
       width: 49%;
       text-align: center;
-      padding: .7em 1em;
+      padding: .7rem 1rem;
     }
   }
 }
 
 .as-oil-cpc__row-title {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-weight: 600;
   margin: 20px 8px;
 }
@@ -164,13 +139,13 @@
 }
 
 .as-oil-cpc__purpose-header {
-  font-size: 1.0em;
+  font-size: 1rem;
   font-weight: 500;
   margin: 0 75px 30px 0;
 }
 
 .as-oil-cpc__purpose-text {
-  font-size: 0.9em;
+  font-size: 0.9rem;
   color: lighten($text-color-primary-light, 30%);
 }
 
@@ -188,9 +163,6 @@
   }
 }
 
-// CHECKBOX SWITCH WITH SLIDER
-$slider-size: 20px;
-$slider-padding: 3px;
 .as-oil-cpc__switch {
   position: absolute;
   display: inline-block;
@@ -223,39 +195,6 @@ $slider-padding: 3px;
       transform: translateX($slider-size);
       background-color: darken($slider-background-circle, 30%);
     }
-  }
-}
-
-.as-oil-cpc__status {
-  position: absolute;
-  top: 5px;
-  left: -($slider-size + 5);
-  color: $btn-primary;
-  font-weight: 500;
-}
-
-.as-oil-cpc__slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: $slider-background-grey;
-  transition: .4s;
-  border-radius: 17px;
-
-  &:before {
-    position: absolute;
-    content: "";
-    height: $slider-size;
-    width: $slider-size;
-    left: $slider-padding;
-    bottom: $slider-padding;
-    background-color: $slider-background-circle;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
-    transition: .4s;
-    border-radius: 50%;
   }
 }
 

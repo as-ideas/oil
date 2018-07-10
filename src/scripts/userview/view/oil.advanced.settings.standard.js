@@ -1,3 +1,4 @@
+import '../../../styles/cpc_standard.scss';
 import { OIL_LABELS } from '../userview_constants.js';
 import { forEach } from '../userview_modal.js';
 import { getLabel, getLabelWithDefault, getTheme } from '../userview_config.js';
@@ -24,31 +25,28 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
 </div>`
 };
 
-/**
- *
- * @param {[]} vendors, eg. {id:8,name:"Asdf",policyUrl:"https://privacy-policy/",purposeIds:[1,2],legIntPurposeIds:[3],featureIds:[1,2]}
- * @returns {*}
- */
 const buildVendorEntries = () => {
   let vendorList = getVendorList();
 
   if (vendorList && !vendorList.isDefault) {
     let listWrapped = getVendors().map((element) => {
       if (element.name) {
-        return `<div class="as-oil-third-party-list-element">
-                    <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
-                        <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
-                        </svg>
-                        <svg class='as-oil-icon-minus' style='display: none;' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
-                        </svg>
-                        <span class='as-oil-third-party-name'>${element.name}</span>
-                    </span>
-                    <div class='as-oil-third-party-toggle-part' style='display: none;'>
-                      <a class='as-oil-third-party-link' href='${element.policyUrl}'>${element.policyUrl}</a>
-                    </div>
-                  </div>`;
+        return `
+          <div class="as-oil-third-party-list-element">
+              <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
+                  <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
+                  </svg>
+                  <svg class='as-oil-icon-minus' style='display: none;' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
+                  </svg>
+                  <span class='as-oil-third-party-name'>${element.name}</span>
+              </span>
+              <div class='as-oil-third-party-toggle-part' style='display: none;'>
+                <a class='as-oil-third-party-link' href='${element.policyUrl}'>${element.policyUrl}</a>
+              </div>
+            </div>
+          `;
       }
     });
     return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
@@ -86,8 +84,8 @@ const ActivateButtonSnippet = () => {
 const buildPurposeEntries = (list) => {
   return list.map(element => PurposeContainerSnippet({
     id: element.id,
-    header: getLabelWithDefault(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_TEXT`], element.name || `Error: Missing text for purpose with id ${element.id}!`),
-    text: getLabelWithDefault(OIL_LABELS[`ATTR_LABEL_CPC_0${element.id}_DESC`], element.description || ''),
+    header: getLabelWithDefault(`${element.id < 10 ? `label_cpc_purpose_0${element.id}_text` : `label_cpc_purpose_${element.id}_text`}`, element.name || `Error: Missing text for purpose with id ${element.id}!`),
+    text: getLabelWithDefault(`${element.id < 10 ? `label_cpc_purpose_0${element.id}_desc`: `label_cpc_purpose_${element.id}_desc`}`, element.description || ''),
     value: false
   })).join('');
 };
@@ -97,7 +95,7 @@ const ContentSnippet = () => {
 <div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
     <div class="as-oil-cpc__left">
         <a href="#as-oil-cpc-purposes" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}">
-          ${getLabel(OIL_LABELS.ATTR_LABEL_PURPOSE_DESC)}
+          ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
         </a>
         <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
           ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}  
@@ -105,7 +103,7 @@ const ContentSnippet = () => {
     </div>
     <div class="as-oil-cpc__middle as-js-purposes">
         <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
-            ${getLabel(OIL_LABELS.ATTR_LABEL_PURPOSE_DESC)}
+            ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
         </div>
         ${buildPurposeEntries(getPurposes())}
         ${buildPurposeEntries(getCustomPurposes())}

@@ -83,6 +83,10 @@
     font-size: 12px;
     opacity: .5;
     text-decoration: none;
+
+    .dark & {
+      color: $text-color-primary-dark;
+    }
   }
 }
 
