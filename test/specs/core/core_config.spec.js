@@ -15,7 +15,8 @@ import {
   getPublicPath,
   setLocale,
   gdprApplies,
-  setGdprApplies
+  setGdprApplies,
+  getShowLimitedVendors
 } from '../../../src/scripts/core/core_config';
 import { loadFixture } from '../../test-utils/utils_fixtures';
 import * as CoreLog from '../../../src/scripts/core/core_log';
@@ -212,6 +213,20 @@ describe('core_config', () => {
       setGdprApplies(false);
       expect(gdprApplies()).toBeFalsy();
     });
+
+  });
+
+  describe('getShowLimitedVendors', function() {
+    
+    it('returns false by default', function() {
+      expect(getShowLimitedVendors()).toEqual(false);
+    });
+
+    it('returns true when show_limited_vendors_only in configuration', function() {
+      loadFixture('config/given.config.with.advanced.settings.show.limited.vendors.html');
+      expect(getShowLimitedVendors()).toBeTruthy();
+    });
+
 
   });
 
