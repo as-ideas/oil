@@ -28,7 +28,7 @@ module.exports = {
       .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
       .pause(200)
       .useCss()
-      .expect.element(OIL_THIRD_PARTY_NAME).text.to.equal('Exponential Interactive, Inc')
+      .expect.element(OIL_THIRD_PARTY_NAME).text.to.equal('Captify Technologies Limited')
     browser.end();
   }
 
