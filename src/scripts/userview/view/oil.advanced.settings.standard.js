@@ -53,7 +53,7 @@ const buildVendorEntries = () => {
     });
     return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
   } else {
-    return 'Missing vendor list! Maybe vendor list retrieval has been failed! Please contact web administrator!';
+    return 'Missing vendor list! Maybe vendor list retrieval has failed! Please contact web administrator!';
   }
 };
 
