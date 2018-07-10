@@ -8,15 +8,15 @@ import { setGlobalOilObject } from '../../core/core_utils.js';
 import { getPurposes, getVendorList, getVendors } from '../../core/core_vendor_information.js';
 
 
-const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-standard-cpc__category-link--active';
+const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';
 
 const PurposeContainerSnippet = ({id, header, text, value}) => {
   return `
-<div class="as-oil-standard-cpc__purpose">
-    <div class="as-oil-standard-cpc__purpose-container">
-        <div class="as-oil-standard-cpc__purpose-header">${header}</div>
-        <div class="as-oil-standard-cpc__purpose-text">${text}</div>
-        <label class="as-oil-standard-cpc__switch">
+<div class="as-oil-cpc__purpose">
+    <div class="as-oil-cpc__purpose-container">
+        <div class="as-oil-cpc__purpose-header">${header}</div>
+        <div class="as-oil-cpc__purpose-text">${text}</div>
+        <label class="as-oil-cpc__switch">
             <input data-id="${id}" id="as-js-purpose-slider-${id}" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-${id}" value="${value}"/>
             <span class="as-oil-cpc__status"></span>
             <span class="as-oil-cpc__slider"></span>
@@ -74,7 +74,7 @@ const BackButtonSnippet = () => {
 
 const ActivateButtonSnippet = () => {
   return `
-  <div class="as-oil-standard-cpc__activation-buttons">
+  <div class="as-oil-cpc__row-btn-all">
         <span class="as-js-btn-deactivate-all as-oil__btn-grey">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL)}</span>
         <span class="as-js-btn-activate-all as-oil__btn-blue">${getLabel(OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL)}</span>
       </div>
@@ -92,29 +92,29 @@ const buildPurposeEntries = (list) => {
 
 const ContentSnippet = () => {
   return `
-<div data-qa="cpc-snippet" class="as-oil-l-row as-oil-standard-cpc__content">
-    <div class="as-oil-standard-cpc__left">
-        <a href="#as-oil-cpc-purposes" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-standard-cpc__category-link ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}">
+<div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
+    <div class="as-oil-cpc__left">
+        <a href="#as-oil-cpc-purposes" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}">
           ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
         </a>
-        <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-standard-cpc__category-link">
+        <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
           ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}  
         </a>
     </div>
     <div class="as-oil-cpc__middle as-js-purposes">
-        <div class="as-oil-standard-cpc__section-title" id="as-oil-cpc-purposes">
+        <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
             ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
         </div>
         ${buildPurposeEntries(getPurposes())}
         ${buildPurposeEntries(getCustomPurposes())}
-        <div class="as-oil-standard-cpc__section-title" id="as-oil-cpc-third-parties">
+        <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
             ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
         </div>
        <div id="as-js-third-parties-list">
          ${buildVendorEntries()}
        </div>
     </div>
-    <div class="as-oil-standard-cpc__right">
+    <div class="as-oil-cpc__right">
      <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
       <div class="as-oil-l-item">
         <button class="as-oil__btn-optin as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
@@ -127,7 +127,7 @@ const ContentSnippet = () => {
 };
 
 export function oilAdvancedSettingsInlineTemplate() {
-  return `<div class="as-oil-l-wrapper-layout-max-width as-oil-standard-cpc__wrapper">
+  return `<div class="as-oil-l-wrapper-layout-max-width as-oil-cpc-wrapper">
     <div class="as-oil__heading">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
     </div>

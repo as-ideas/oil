@@ -1,6 +1,6 @@
 @import "./_cpc_global";
 
-.as-oil-standard-cpc__wrapper {
+.as-oil-cpc-wrapper {
 
   button {
     cursor: pointer;
@@ -42,14 +42,14 @@
   }
 }
 
-.as-oil-standard-cpc__content {
+.as-oil-cpc__content {
   display: flex;
   @include media('<=phone') {
     display: block;
   }
 }
 
-.as-oil-standard-cpc__left {
+.as-oil-cpc__left {
   flex: 0 0 200px;
   max-width: 200px;
   display: inline-block;
@@ -76,7 +76,7 @@
   }
 }
 
-.as-oil-standard-cpc__right {
+.as-oil-cpc__right {
   flex: 0 0 200px;
   display: inline-block;
   align-self: flex-end;
@@ -89,7 +89,7 @@
 
 }
 
-.as-oil-standard-cpc__activation-buttons {
+.as-oil-cpc__row-btn-all {
   text-align: right;
   span {
     @include media('<=phone') {
@@ -101,59 +101,59 @@
   }
 }
 
-.as-oil-standard-cpc__section-title {
+.as-oil-cpc__row-title {
   font-size: 1.2rem;
   font-weight: 600;
   margin: 20px 8px;
 }
 
-.as-oil-standard-cpc__category-link {
+.as-oil-cpc__category-link {
   padding: 6px 12px;
   display: block;
   border-right: 2px solid rgba(255, 255, 255, 0);
 }
 
-.as-oil-standard-cpc__category-link--active {
+.as-oil-cpc__category-link--active {
   border-right: 2px solid #3f7ddf;
 }
 
-.as-oil-standard-cpc__purpose {
+.as-oil-cpc__purpose {
   border: 1px solid #eaeaea;
   border-radius: 5px;
   padding: 20px;
   margin: 16px 0;
 }
 
-.as-oil-standard-cpc__purpose-container {
+.as-oil-cpc__purpose-container {
   position: relative;
 }
 
-.as-oil-standard-cpc__purpose-header {
+.as-oil-cpc__purpose-header {
   font-size: 1rem;
   font-weight: 500;
   margin: 0 75px 30px 0;
 }
 
-.as-oil-standard-cpc__purpose-text {
+.as-oil-cpc__purpose-text {
   font-size: 0.9rem;
   color: lighten($text-color-primary-light, 30%);
 }
 
 .dark {
-  .as-oil-standard-cpc__purpose-text {
+  .as-oil-cpc__purpose-text {
     color: darken($text-color-primary-dark, 30%);
   }
 }
 
 .light {
-  .as-oil-standard-cpc__left {
+  .as-oil-cpc__left {
     a {
       color: $text-color-primary-light;
     }
   }
 }
 
-.as-oil-standard-cpc__switch {
+.as-oil-cpc__switch {
   position: absolute;
   display: inline-block;
   width: 50px;
@@ -191,11 +191,11 @@
 //dark theme adjustments
 .as-oil {
   &.dark {
-    .as-oil-standard-cpc__left a,
+    .as-oil-cpc__left a,
     .as-oil-back-button__text {
       color: $text-color-primary-dark !important;
     }
-    .as-oil-standard-cpc__purpose {
+    .as-oil-cpc__purpose {
       background-color: $cpc-background-dark;
     }
   }
