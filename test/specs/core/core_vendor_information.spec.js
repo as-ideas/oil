@@ -19,6 +19,7 @@ import { resetOil } from '../../test-utils/utils_reset';
 describe('core_vendor_information', () => {
 
   const WHITELISTED_VENDORS = [1,2];
+  const BLACKLISTED_VENDORS = Array.apply(null, {length: (DEFAULT_VENDOR_LIST.maxVendorId-2)}).map(Number.call, Number);
 
   beforeEach(() => resetOil());
 
@@ -269,6 +270,27 @@ describe('core_vendor_information', () => {
         done();
       });
     });
+  });
+
+  describe('getLimitedVendors', function() {
+    
+    it('returns regular vendors when no whitelist or blacklist exists', function() {
+      spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
+      expect(getLimitedVendors().length).toEqual(DEFAULT_VENDOR_LIST.maxVendorId);
+    });
+
+    it('returns limited vendors when getShowLimitedVendors is true and whitelist exists', function() {
+      spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
+      spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue(WHITELISTED_VENDORS);
+      expect(getLimitedVendors().length).toEqual(WHITELISTED_VENDORS.length);
+    });
+
+    it('returns limited vendors when getShowLimitedVendors is true and blacklist exists', function() {
+      spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
+      spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue(BLACKLISTED_VENDORS);
+      expect(getLimitedVendors().length).toEqual(DEFAULT_VENDOR_LIST.maxVendorId - BLACKLISTED_VENDORS.length + 1);
+    });
+
   });
 
   describe('getVendorsToDisplay', function() {
