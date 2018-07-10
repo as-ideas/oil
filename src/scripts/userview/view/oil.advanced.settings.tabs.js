@@ -64,15 +64,15 @@ const buildPurposeFeatureTextsSnippet = (featureTexts) => {
 const buildPurposeTabLabelElements = (purposes) => {
   return purposes.map(purpose => PurposeTabLabelElement({
     id: purpose.id,
-    label: getLabelWithDefault(`label_cpc_purpose_0${purpose.id}_text`, purpose.name || `Error: Missing text for purpose with id ${purpose.id}!`)
+    label: getLabelWithDefault(`${purpose.id < 10 ? `label_cpc_purpose_0${purpose.id}_text` : `label_cpc_purpose_${purpose.id}_text`}`, purpose.name || `Error: Missing text for purpose with id ${purpose.id}!`)
   })).join('');
 };
 
 const buildPurposeTabContentElements = (purposes) => {
   return purposes.map(purpose => PurposeTabContentSnippet({
     id: purpose.id,
-    text: getLabelWithDefault(`label_cpc_purpose_0${purpose.id}_desc`, purpose.description || ''),
-    featureTexts: getLabelWithDefault(`label_cpc_purpose_0${purpose.id}_features`, []),
+    text: getLabelWithDefault(`${purpose.id < 10 ? `label_cpc_0${purpose.id}_desc`: `label_cpc_purpose_${purpose.id}_desc`}`, purpose.description || ''),
+    featureTexts: getLabelWithDefault(`${purpose.id < 10 ? `label_cpc_purpose_0${purpose.id}_features`: `label_cpc_purpose_${purpose.id}_features`}`, []),
     isSelected: false
   })).join('');
 };
