@@ -222,7 +222,7 @@ describe('core_config', () => {
       expect(getShowLimitedVendors()).toEqual(false);
     });
 
-    it('returns true when show_limited_vendors in configuration', function() {
+    it('returns true when show_limited_vendors_only in configuration', function() {
       loadFixture('config/given.config.with.advanced.settings.show.limited.vendors.html');
       expect(getShowLimitedVendors()).toBeTruthy();
     });

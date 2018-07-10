@@ -295,13 +295,13 @@ describe('core_vendor_information', () => {
 
   describe('getVendorsToDisplay', function() {
     
-    it('should return full vendor list when configuration parameter show_limited_vendors is false', function() {
+    it('should return full vendor list when configuration parameter show_limited_vendors_only is false', function() {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(false);
       let result = getVendorsToDisplay();
       expect(result.length).toEqual(380);
     });
 
-    it('should return limited vendor list when configuration parameter show_limited_vendors is true', function() {
+    it('should return limited vendor list when configuration parameter show_limited_vendors_only is true', function() {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
       spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue(WHITELISTED_VENDORS);
       let result = getVendorsToDisplay();
