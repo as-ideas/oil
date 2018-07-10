@@ -1,5 +1,4 @@
 import '../../styles/modal.scss';
-import '../../styles/cpc.scss';
 import { getGlobalOilObject, isObject, sendEventToHostSite } from '../core/core_utils';
 import { removeSubscriberCookies } from '../core/core_cookies';
 import {

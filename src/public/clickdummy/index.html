@@ -1,0 +1,691 @@
+<html>
+<head>
+  <title>Click dummy</title>
+  <style>
+    .tabs input[name="tab-control"] {
+      display: none;
+    }
+
+    .tabs .buttons {
+      display: table;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 1px;
+    }
+
+    .tabs hr {
+      border: 0;
+      border-top: 1px #d8d8d8 solid;
+    }
+
+    .tabs .buttons span {
+      display: table-cell;
+      box-sizing: border-box;
+      text-align: center;
+      vertical-align: middle;
+      font-weight: bold;
+      font-size: 18px;
+      transition: all 0.3s ease-in-out;
+      padding: 5px auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      user-select: none;
+      height: 50px;
+      border-radius: 5px;
+      width: 25%;
+    }
+
+    .button-active {
+      background: rgba(52, 140, 32, 0.6);
+      cursor: default;
+      color: rgb(255, 255, 255);
+    }
+
+    .button-inactive {
+      color: rgba(52, 140, 32, 0.6);
+      background: rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+
+    .tabs .content section {
+      animation-name: content;
+      animation-direction: normal;
+      animation-duration: 0.3s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: 1;
+      line-height: 1.4;
+    }
+
+    .tabs .content section div {
+      display: table;
+    }
+
+    .tabs .content section p {
+      display: table-cell;
+      width: 80%;
+    }
+
+    .purpose-description-list {
+      display: table;
+    }
+
+    .purpose-description-list ul {
+      width: 100%;
+      display: table-cell;
+      list-style: none;
+    }
+
+    .purpose-description-list ul li {
+      list-style-position: inside;
+      text-indent: -1.30em;
+    }
+
+    .purpose-description-list ul li span:nth-child(2) {
+      margin-left: 1.3em;
+    }
+
+    .as-oil-cpc__slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #eaeaea;
+      transition: .4s;
+      border-radius: 17px;
+    }
+
+    .as-oil-cpc__slider::before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #767676;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    .as-oil-cpc__switch {
+      width: 50px;
+      height: 26px;
+      display: table-cell;
+      position: absolute;
+      margin-left: 30px;
+    }
+
+    .as-oil-cpc__switch input {
+      display: none;
+    }
+
+    .as-oil-cpc__switch input:checked ~ .as-oil-cpc__slider {
+      background-color: rgb(63, 126, 223);
+    }
+
+    .as-oil-cpc__switch input:focus ~ .as-oil-cpc__slider {
+      box-shadow: 0 0 1px rgb(63, 126, 223);
+    }
+
+    .as-oil-cpc__switch input:checked ~ .as-oil-cpc__slider::before {
+      transform: translateX(20px);
+      background-color: darken(#767676, 30%);
+    }
+
+    .checkmark-on {
+      display: inline-block;
+      position: absolute;
+    }
+
+    .checkmark-on::after {
+      display: block;
+      content: '';
+
+      width: 6px;
+      height: 12px;
+
+      border: solid #000;
+      border-width: 0 2px 2px 0;
+      border-color: rgba(52, 140, 32, 0.6);
+
+      transform: rotate(45deg);
+    }
+
+    .checkmark-off {
+      position: absolute;
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+    }
+
+    .checkmark-off::before, .checkmark-off::after {
+      content: '';
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      margin-top: 3px;
+      margin-left: -3px;
+      background: rgba(255, 0, 0, 0.6);
+    }
+
+    .checkmark-off::before {
+      transform: rotate(45deg);
+    }
+
+    .checkmark-off::after {
+      transform: rotate(-45deg);
+    }
+
+    @-webkit-keyframes content {
+      from {
+        opacity: 0;
+        -webkit-transform: translateY(5%);
+        transform: translateY(5%);
+      }
+      to {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+      }
+    }
+
+    @keyframes content {
+      from {
+        opacity: 0;
+        -webkit-transform: translateY(5%);
+        transform: translateY(5%);
+      }
+      to {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .tabs .buttons span {
+        display: table-header-group;
+        height: auto;
+      }
+
+    }
+
+    .cpc-section {
+      margin-top: 1em;
+    }
+
+    .info {
+      text-decoration: none;
+      color: #000000;
+      cursor: pointer;
+    }
+
+    .info span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      border-radius: 50%;
+      text-align: center;
+      color: white;
+      font-weight: 700;
+      background: rgba(255, 0, 0, 0.6);
+      margin-right: 0.5em;
+    }
+
+    .third-parties-list {
+      margin-top: 0.5em;
+      margin-left: 1.7em;
+    }
+
+    .as-oil-third-party-list-element {
+      border-bottom: 1px #d8d8d8 solid;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+    }
+
+    .as-oil-third-party-toggle-part {
+      margin-left: 16px;
+    }
+
+    .as-oil-third-party-name {
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .as-oil-third-party-link {
+      color: #262626;
+      font-size: 12px;
+      opacity: .5;
+      text-decoration: none;
+    }
+
+    .as-oil-l-item {
+      text-align: right;
+    }
+
+    .as-oil__btn-optin {
+      min-width: 160px;
+      min-height: 42px;
+      margin: 0;
+      padding: .5em 1em;
+      font-size: 1.1em;
+      font-weight: 700;
+      border: 1px rgba(255, 0, 0, 0.6) solid;
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+      color: rgba(255, 0, 0, 0.6);
+      transition: opacity .8s ease 0s;
+    }
+
+    .as-oil__heading,
+    .as-oil__intro-txt,
+    .as-oil-cpc__purpose-description {
+      text-align: center;
+      font-size: .9375em;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .as-oil__heading {
+      font-size: 1.45em;
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+  </style>
+</head>
+<body>
+<div class="tabs">
+
+  <div class="as-oil__heading">
+    Es ist uns sehr wichtig, Ihre Daten zu schützen.
+  </div>
+  <p class="as-oil__intro-txt cpc-section">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam.
+  </p>
+  <hr/>
+  <div class="as-oil-cpc__purpose-description cpc-section">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam.
+  </div>
+
+  <span class="buttons cpc-section">
+    <span data-id="1" class="button button-active" onclick="toggleTab(this)">Features</span>
+    <span data-id="2" class="button button-inactive" onclick="toggleTab(this)">Delivery Contents</span>
+    <span data-id="3" class="button button-inactive" onclick="toggleTab(this)">Shipping</span>
+    <span data-id="4" class="button button-inactive" onclick="toggleTab(this)">Returns</span>
+  </span>
+  <div class="content cpc-section">
+    <section id="tabsection1" class="tabsection cpc-section" style="display:block">
+      <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?
+        </p>
+        <label class="as-oil-cpc__switch">
+          <input data-id="1" id="as-js-purpose-slider-1" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-1" value="false" onclick="toggleListMarks(this)">
+          <span class="as-oil-cpc__slider"></span>
+        </label>
+      </div>
+      <div class="purpose-description-list cpc-section" id="purpose-description-list-1">
+        <ul>
+          <li>
+            <span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span>
+          </li>
+          <li>
+            <span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span>
+          </li>
+          <li>
+            <span class="checkmark checkmark-off"></span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dolorem sequi, quo tempore in eum obcaecati atque quibusdam officiis est dolorum minima deleniti ratione molestias numquam. Voluptas voluptates quibusdam cum?</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="tabsection2" class="tabsection cpc-section" style="display: none">
+      <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
+        </p>
+        <label class="as-oil-cpc__switch">
+          <input data-id="2" id="as-js-purpose-slider-2" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-2" value="false">
+          <span class="as-oil-cpc__slider"></span>
+        </label>
+      </div>
+      <div class="purpose-description-list cpc-section" id="purpose-description-list-2">
+        <ul>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
+          </li>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="tabsection3" class="tabsection cpc-section" style="display: none">
+      <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+        </p>
+        <label class="as-oil-cpc__switch">
+          <input data-id="3" id="as-js-purpose-slider-3" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-3" value="false">
+          <span class="as-oil-cpc__slider"></span>
+        </label>
+      </div>
+      <div class="purpose-description-list cpc-section" id="purpose-description-list-3">
+        <ul>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+          </li>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+          </li>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+          </li>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="tabsection4" class="tabsection cpc-section" style="display: none">
+      <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.
+        </p>
+        <label class="as-oil-cpc__switch">
+          <input data-id="4" id="as-js-purpose-slider-4" class="as-js-purpose-slider" type="checkbox" name="oil-cpc-purpose-4" value="false">
+          <span class="as-oil-cpc__slider"></span>
+        </label>
+      </div>
+      <div class="purpose-description-list cpc-section" id="purpose-description-list-4">
+        <ul>
+          <li>
+            <span class="checkmark"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta vero rerum? Eaque repudiandae architecto libero reprehenderit aliquam magnam ratione quidem? Nobis doloribus molestiae enim deserunt necessitatibus eaque quidem incidunt.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <div class="cpc-section">
+      <a href="javascript:toggleThirdPartyVisibility('third-parties-list')" class="info"><span>i</span>Informationen zu Drittanbietern</a>
+      <div id="third-parties-list" class="third-parties-list" style="display: none;">
+        <div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Exponential Interactive, Inc</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://exponential.com/privacy">http://exponential.com/privacy</a>
+          </div>
+        </div>
+        <div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div><div class="as-oil-third-party-list-element">
+          <span onclick="toggleViewVisibility(this)">
+              <svg class="as-oil-icon-plus" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"></path>
+              </svg>
+              <svg class="as-oil-icon-minus" style="display: none;" width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"></path>
+              </svg>
+              <span class="as-oil-third-party-name">Captify Technologies Limited</span>
+          </span>
+          <div class="as-oil-third-party-toggle-part" style="display: none;">
+            <a class="as-oil-third-party-link" href="http://www.captify.co.uk/privacy-policy/">http://www.captify.co.uk/privacy-policy/</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div class="as-oil-l-item">
+      <button class="as-oil__btn-optin as-js-optin" data-context="YES" data-qa="oil-YesButton">Speichern</button>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function toggleViewVisibility(element) {
+    let iconMinus = element.children[0];
+    let iconPlus = element.children[1];
+    let descriptionPart = element.nextElementSibling;
+
+    const styleDisplayInlineBlock = 'display: inline-block; animation: fadein 0.5s';
+    const styleDisplayNone = 'display: none';
+
+    if (descriptionPart.style.display === 'none') {
+      descriptionPart.setAttribute('style', 'display: block; animation: fadein 0.5s');
+      iconPlus.setAttribute('style', styleDisplayInlineBlock);
+      iconMinus.setAttribute('style', styleDisplayNone);
+    } else {
+      descriptionPart.setAttribute('style', styleDisplayNone);
+      iconPlus.setAttribute('style', styleDisplayNone);
+      iconMinus.setAttribute('style', styleDisplayInlineBlock);
+    }
+  }
+
+  function toggleThirdPartyVisibility(viewName) {
+    let view = document.getElementById(viewName);
+    view.style.display = view.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function toggleListMarks(checkbox) {
+    let id = checkbox.getAttribute('data-id');
+    let listElement = document.getElementById(`purpose-description-list-${id}`);
+    let checkmarkElements = listElement.getElementsByClassName('checkmark');
+
+    if (checkbox.checked) {
+      for (let i = 0; i < checkmarkElements.length; i++) {
+        checkmarkElements[i].classList.remove('checkmark-off');
+        checkmarkElements[i].classList.add('checkmark-on');
+      }
+    } else {
+      for (let i = 0; i < checkmarkElements.length; i++) {
+        checkmarkElements[i].classList.remove('checkmark-on');
+        checkmarkElements[i].classList.add('checkmark-off');
+      }
+    }
+  }
+
+  function toggleTab(tab) {
+    let sectionElements = document.getElementsByClassName('tabsection');
+    for (let i = 0; i < sectionElements.length; i++) {
+      sectionElements[i].style.display = 'none';
+    }
+    let buttonElements = document.getElementsByClassName('button');
+    for (let i = 0; i < buttonElements.length; i++) {
+      buttonElements[i].classList.remove('button-active');
+      buttonElements[i].classList.add('button-inactive');
+    }
+    tab.classList.remove('button-inactive');
+    tab.classList.add('button-active');
+    let id = tab.getAttribute('data-id');
+    let sectionElement = document.getElementById(`tabsection${id}`);
+    sectionElement.style.display = 'block';
+  }
+</script>
+</body>
+</html>
+
+
+
