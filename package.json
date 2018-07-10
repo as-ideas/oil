@@ -32,6 +32,7 @@
     "e2esafari": "./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e safari",
     "test": "npm run test:unit && npm run test:node",
     "test:unit": "cross-env NODE_ENV=test karma start etc/karma.conf.ci.js",
+    "test:unit:fast": "cross-env NODE_ENV=test karma start etc/karma.conf.js",
     "test:node": "mocha 3000 test/node",
     "test:selenium": "node etc/nightwatch.jenkins.conf.js && mkdir -p target/reports &&./node_modules/.bin/nightwatch -c etc/nightwatch.jenkins.conf.js -e chrome",
     "test:watch": "cross-env SNAPSHOT=$SNAPSHOT cross-env NODE_ENV=test karma start etc/karma.conf.js",

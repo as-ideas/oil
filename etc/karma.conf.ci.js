@@ -16,6 +16,17 @@ module.exports = function (config) {
       'coverage',
       'coveralls'
     ],
+
+    coverageReporter: {
+      dir: 'target/coverage',
+      reporters: [
+        {type: 'text-summary'},
+        {type: 'json'},
+        {type: 'html'},
+        {type: 'lcov'}
+      ]
+    },
+
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
     singleRun: true,

@@ -73,16 +73,6 @@ module.exports = function (config) {
 
     junitReporter: JUNIT,
 
-    coverageReporter: {
-      dir: 'target/coverage',
-      reporters: [
-        {type: 'text-summary'},
-        {type: 'json'},
-        {type: 'html'},
-        {type: 'lcov'}
-      ]
-    },
-
     webpack: webpackConfig,
 
     webpackMiddleware: {

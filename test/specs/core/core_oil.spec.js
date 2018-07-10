@@ -96,7 +96,7 @@ describe('core_oil', () => {
       2000);
   });
 
-  it('should manage dom elements if oil is initialized and page has been loaded', (done) => {
+  fit('should manage dom elements if oil is initialized and page has been loaded', (done) => {
     spyOn(CoreTagManagement, 'manageDomElementActivation').and.callThrough();
 
     initOilLayer();
