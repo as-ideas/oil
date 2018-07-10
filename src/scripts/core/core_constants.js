@@ -37,7 +37,7 @@ export const OIL_CONFIG = {
 export const OIL_CONFIG_CPC_TYPES = {
   CPC_TYPE_STANDARD: 'standard',
   CPC_TYPE_TABS: 'tabs'
-}
+};
 
 // Main Click events
 export const EVENT_NAME_OPT_IN = 'oil_optin_done';

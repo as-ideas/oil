@@ -66,9 +66,21 @@ include::../../../../test/fixtures/gold-master/third-party-list.html[]
 
 ==== Advanced Settings (CPC, Cookie Preference Center)
 
+===== Standard CPC
+
 image::src/images/view_cpc.png[CPC]
 
 [source,html]
 ----
 include::../../../../test/fixtures/gold-master/cpc.html[]
 ----
+
+===== Tab-based CPC
+
+image::src/images/view_tab_cpc.png[CPC]
+
+[source,html]
+----
+include::../../../../test/fixtures/gold-master/tab-cpc.html[]
+----
+

@@ -80,8 +80,8 @@ function registerDomElementActivationManager() {
 }
 
 function onDomContentLoaded() {
-    document.removeEventListener('DOMContentLoaded', onDomContentLoaded);
-    manageDomElementActivation();
+  document.removeEventListener('DOMContentLoaded', onDomContentLoaded);
+  manageDomElementActivation();
 }
 
 function attachCommandCollectionFunctionToWindowObject() {
