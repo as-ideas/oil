@@ -76,9 +76,12 @@ export function initOilLayer() {
 }
 
 function registerDomElementActivationManager() {
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', onDomContentLoaded);
+}
+
+function onDomContentLoaded() {
+    document.removeEventListener('DOMContentLoaded', onDomContentLoaded);
     manageDomElementActivation();
-  });
 }
 
 function attachCommandCollectionFunctionToWindowObject() {

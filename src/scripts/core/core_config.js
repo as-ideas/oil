@@ -228,3 +228,8 @@ export function gdprApplies() {
 export function setGdprApplies(value = true) {
   setConfigValue(OIL_CONFIG.ATTR_GDPR_APPLIES, value);
 }
+
+export function getShowLimitedVendors() {
+  return getConfigValue(OIL_CONFIG.ATTR_SHOW_LIMITED_VENDORS, false);
+}
+

@@ -1,10 +1,10 @@
-import {getLabel, getTheme} from '../userview/userview_config.js';
-import {OIL_LABELS} from '../userview/userview_constants.js';
-import {DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME} from '../core/core_constants.js';
+import { getLabel, getTheme } from '../userview/userview_config.js';
+import { OIL_LABELS } from '../userview/userview_constants.js';
+import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../core/core_constants.js';
 import './poi.group.scss';
-import {getGlobalOilObject, setGlobalOilObject} from '../core/core_utils.js';
-import {getGroupList} from './poi.group.list';
-import {loadVendorList} from '../core/core_vendor_information';
+import { getGlobalOilObject, setGlobalOilObject } from '../core/core_utils';
+import { getGroupList } from './poi.group.list';
+import { loadVendorList, getVendorsToDisplay } from '../core/core_vendor_information';
 
 export function renderOilGroupListTemplate(renderMethod) {
   getGroupList()
@@ -15,8 +15,8 @@ export function renderOilGroupListTemplate(renderMethod) {
 
 export function renderOilThirdPartyListTemplate(renderMethod) {
   loadVendorList()
-    .then((vendorList) => {
-      renderMethod(oilThirdPartyListTemplate(vendorList.vendors))
+    .then(() => {
+      renderMethod(oilThirdPartyListTemplate(getVendorsToDisplay()))
     });
 }
 

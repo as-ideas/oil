@@ -24,3 +24,20 @@ export function waitsForAndRuns(escapeFunction, runFunction, escapeTime) {
 export function waitForElementToDisplay(selector, callback) {
   waitsForAndRuns(() => document.querySelector(selector), callback, 200);
 }
+
+export function waitForElementsToDisplay(selectors, callback) {
+  let all_exist = true;
+  selectors.map((selector) => {
+    if(!document.querySelector(selector)) {
+      all_exist = false;
+    }
+  });
+
+  if(all_exist) {
+    return callback();
+  } else {
+    setTimeout(() => {
+      waitForElementsToDisplay(selectors, callback);
+    }, 50);
+  }
+}
