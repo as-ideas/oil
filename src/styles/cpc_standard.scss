@@ -10,6 +10,16 @@
     @include media('>phone') {
       float: right;
     }
+
+    @include media('<=phone') {
+      display: initial;
+      background: $background-color-light;
+      box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
+      padding: 8px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
   }
 
   .as-oil-l-buttons-dark {

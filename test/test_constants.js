@@ -22,5 +22,6 @@ export const OIL_MANAGED_TAGS_SCRIPT_TAG = '//*[@id="managedScriptTag"]';
 export const OIL_MANAGED_TAGS_IMG_TAG = '//*[@id="managedImgTag"]';
 export const OIL_MANAGED_TAGS_DIV = '//*[@id="demoText"]';
 export const PAGE_BACKGROUND = '.has-big-bad-background';
+export const GDPR_APPLY_BUTTON = '//*[@id="applyGDPR"]';
 export const OIL_ADVANCED_SETTINGS_ACTIVE_PURPOSE_TAB = '.as-oil-tabs-cpc__purpose-label-active';
 export const OIL_ADVANCED_SETTINGS_INACTIVE_PURPOSE_TABS = '.as-oil-tabs-cpc__purpose-labels > .as-oil-tabs-cpc__purpose-label-inactive:nth-child(4)';

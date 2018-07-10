@@ -7,15 +7,14 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/direct-integration-event-test.html')
       .deleteCookies();
-
-    browser
-      .url(browser.globals.launch_url_host1 + 'demos/direct-integration-event-test.html')
-      .useCss().waitForElementVisible('body', 1000, false)
-      .useXpath().waitForElementVisible(OIL_LAYER, 2000, false);
   },
 
   'OIL Layer event being sent after clicking yes, even after refresh': function (browser) {
     browser
+      .url(browser.globals.launch_url_host1 + 'demos/direct-integration-event-test.html')
+      .useCss().waitForElementVisible('body', 1000, false)
+      .useXpath().waitForElementVisible(OIL_LAYER, 2000, false)
+      .waitForElementVisible(OIL_YES_BUTTON, 2000, false)
       .assert.cssClassPresent(EVENT_NOTIFIER_DIV, 'event-notifier-hidden')
       .click(OIL_YES_BUTTON)
       .waitForElementNotPresent(OIL_LAYER, 1000)

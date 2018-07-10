@@ -57,6 +57,13 @@ describe('the user view modal aka the oil layer wrapper', () => {
       expectTimeoutStarted();
     });
 
+    it('should NOT renderOil with gdpr_applies FALSE', () => {
+      loadFixture('config/given.config.with.gdpr.not.applies.html');
+
+      expect(document.querySelector('.as-oil')).toBeNull();
+      expectTimeoutNotStarted();
+    });
+
     it('should render oil with standard CPC if CPC is required and CPC type is not specified', () => {
       loadFixture('config/given.config.with.advanced.settings.no.cpc.type.html');
       setupAdvancedSettingsSpies();

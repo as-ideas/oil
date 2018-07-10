@@ -38,6 +38,7 @@ Please note that verbose logging can only be activated for your own browser, all
 |window.AS_OIL.triggerOptOut(); | OIL will remove all cookies if triggered and therefore opt-out the user of everything, even POI.
 |window.AS_OIL.reload(); | OIL will reload the configuration from the host's website.
 |window.AS_OIL.showPreferenceCenter(); | OIL will inject the Cookie Preference Center into your website. Please see "OIL CPC API" section.
+|window.AS_OIL.applyGDPR(); | Sets gdprApplies variable to true and displays the layer if user hasn't opted-in. Useful in case you need to show the layer to a user from inside the EU and you're not a EU publisher.
 |====
 
 === OIL Events

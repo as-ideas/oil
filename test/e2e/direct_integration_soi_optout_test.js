@@ -6,32 +6,24 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/direct-integration-opt-out-event-test.html')
       .deleteCookies();
-
-    browser
-      .url(browser.globals.launch_url_host1 + 'demos/direct-integration-opt-out-event-test.html')
-      .useCss()
-      .waitForElementVisible('body', 1000, false)
-      .useXpath()
-      .waitForElementVisible(OIL_LAYER, 2000, false);
   },
 
   'OIL Layer Site Opt-In clicked, verify opt-in, opt-out by event': function (browser) {
     browser
+      .url(browser.globals.launch_url_host1 + 'demos/direct-integration-opt-out-event-test.html')
+      .useCss().waitForElementVisible('body', 1000, false)
+      .useXpath().waitForElementVisible(OIL_LAYER, 2000, false)
       .click(OIL_YES_BUTTON)
       .pause(200)
       .waitForElementNotPresent(OIL_LAYER, 1000)
       .refresh()
-      .useCss()
-      .waitForElementVisible('body', 1000, false)
-      .useXpath()
+      .useCss().waitForElementVisible('body', 1000, false)
       .pause(500)
-      .waitForElementNotPresent(OIL_LAYER, 1000)
+      .useXpath().waitForElementNotPresent(OIL_LAYER, 1000)
       .click(HOST_SEND_OPTOUT_BUTTON)
       .refresh()
-      .useCss()
-      .waitForElementVisible('body', 1000, false)
-      .useXpath()
-      .waitForElementVisible(OIL_LAYER, 2000, false)
+      .useCss().waitForElementVisible('body', 1000, false)
+      .useXpath().waitForElementVisible(OIL_LAYER, 2000, false)
       .end();
   }
 };

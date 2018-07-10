@@ -15,7 +15,7 @@ describe('the timeout of the user view modal aka the auto hide function', () => 
     window.setTimeout(() => {
       expect(document.querySelector('.as-oil')).toBeNull();
       done();
-    }, 1050);
+    }, 1150);
   });
 
   // HINT: I know there are multiple ways to trigger a stopTimeout, but they currently are hard to test - I settle for the principal test of the function
@@ -28,7 +28,7 @@ describe('the timeout of the user view modal aka the auto hide function', () => 
     window.setTimeout(() => {
       expect(document.querySelector('.as-oil')).not.toBeNull();
       done();
-    }, 1050);
+    }, 1150);
   });
 
   function givenOilIsShown() {

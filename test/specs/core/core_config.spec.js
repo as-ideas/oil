@@ -13,7 +13,9 @@ import {
   getLanguageFromLocale,
   getPoiGroupName,
   getPublicPath,
-  setLocale
+  setLocale,
+  gdprApplies,
+  setGdprApplies
 } from '../../../src/scripts/core/core_config';
 import { loadFixture } from '../../test-utils/utils_fixtures';
 import * as CoreLog from '../../../src/scripts/core/core_log';
@@ -23,7 +25,7 @@ describe('core_config', () => {
 
   const DEFAULT_FALLBACK_BACKEND_URL = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/enEN_01';
   const EXPECTED_PUBLIC_PATH = '//www/';
-  const EXPECTED_PUBLIC_PATH_WITH_SLASH = '//www/i-forgot-the-trailing-slash/'; 
+  const EXPECTED_PUBLIC_PATH_WITH_SLASH = '//www/i-forgot-the-trailing-slash/';
 
   beforeEach(() => resetOil());
 
@@ -177,6 +179,38 @@ describe('core_config', () => {
 
     it('returns undefined when no publicPath in config', function() {
       expect(getPublicPath()).toBeFalsy();
+    });
+
+  });
+
+  describe('gdprApplies', function() {
+
+    it('returns true when gdpr_applies_globally and gdpr_applies not in config', function() {
+      expect(gdprApplies()).toBeTruthy();
+    });
+
+    it('returns false when gdpr_applies_globally is false and setGdprApplies is not invoked with true', function() {
+      loadFixture('config/given.config.with.gdpr.not.applies.html');
+      expect(gdprApplies()).toBeFalsy();
+    });
+
+    it('returns true when set after initialisation', function() {
+      loadFixture('config/given.config.with.gdpr.not.applies.html');
+      setGdprApplies(true);
+      expect(gdprApplies()).toBeTruthy();
+    });
+
+  });
+
+  describe('setGdprApplies', function() {
+
+    it('sets gdprApplies in configuration', function() {
+      loadFixture('config/given.config.with.gdpr.not.applies.html');
+      expect(gdprApplies()).toBeFalsy();
+      setGdprApplies(true);
+      expect(gdprApplies()).toBeTruthy();
+      setGdprApplies(false);
+      expect(gdprApplies()).toBeFalsy();
     });
 
   });
