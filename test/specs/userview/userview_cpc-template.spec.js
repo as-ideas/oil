@@ -6,7 +6,7 @@ import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_in
 import * as UserviewConfig from '../../../src/scripts/userview/userview_config';
 import { setSoiCookie } from '../../../src/scripts/core/core_cookies';
 import { resetOil } from '../../test-utils/utils_reset';
-import { waitForElementToDisplay, waitsForAndRuns } from '../../test-utils/utils_wait';
+import { waitForElementToDisplay, waitForElementsToDisplay, waitsForAndRuns } from '../../test-utils/utils_wait';
 import { setupVendorListSpies } from '../../test-utils/utils_vendorlist';
 import { OIL_CONFIG_CPC_TYPES } from '../../../src/scripts/core/core_constants';
 import * as AdvancedSettingsStandard from '../../../src/scripts/userview/view/oil.advanced.settings.standard';
@@ -16,6 +16,8 @@ import * as CoreLog from '../../../src/scripts/core/core_log';
 describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   beforeEach(() => resetOil());
+
+  const DEFAULT_SLIDER_ELEMENTS = ['#as-js-purpose-slider-1','#as-js-purpose-slider-2','#as-js-purpose-slider-3','#as-js-purpose-slider-4','#as-js-purpose-slider-5'];
 
   // FIXME these are broken on the master branch
   xdescribe('show CPC in oil layer', () => {
@@ -85,7 +87,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
       }).then(() => {
         oilShowPreferenceCenter();
 
-        waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc #as-js-purpose-slider-5', () => {
+        waitForElementsToDisplay(DEFAULT_SLIDER_ELEMENTS, () => {
           expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
           expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeFalsy();
           expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
@@ -109,7 +111,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
       }).then(() => {
         oilShowPreferenceCenter();
 
-        waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc #as-js-purpose-slider-5', () => {
+        waitForElementsToDisplay(DEFAULT_SLIDER_ELEMENTS, () => {
           expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
           expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
           expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
@@ -127,7 +129,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
       oilShowPreferenceCenter();
 
-      waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc  #as-js-purpose-slider-5', () => {
+      waitForElementsToDisplay(DEFAULT_SLIDER_ELEMENTS, () => {
         expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
         expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeFalsy();
         expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeFalsy();
@@ -147,7 +149,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
       oilShowPreferenceCenter();
 
-      waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc #as-js-purpose-slider-5', () => {
+      waitForElementsToDisplay(DEFAULT_SLIDER_ELEMENTS, () => {
         expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
         expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
         expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
@@ -170,7 +172,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
       }).then(() => {
         oilShowPreferenceCenter();
 
-        waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc #as-js-purpose-slider-5', () => {
+        waitForElementsToDisplay(DEFAULT_SLIDER_ELEMENTS, () => {
           expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
           expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
           expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
@@ -210,7 +212,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
       oilShowPreferenceCenter();
 
-      waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc  #as-js-purpose-slider-1', () => {
+      waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc #as-js-purpose-slider-1', () => {
         expect(AdvancedSettingsStandard.oilAdvancedSettingsInlineTemplate).not.toHaveBeenCalled();
         expect(AdvancedSettingsStandard.attachCpcHandlers).not.toHaveBeenCalled();
         expect(AdvancedSettingsTabs.oilAdvancedSettingsInlineTemplate).toHaveBeenCalled();
