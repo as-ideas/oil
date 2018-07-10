@@ -85,7 +85,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
       }).then(() => {
         oilShowPreferenceCenter();
 
-        waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
+        waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc #as-js-purpose-slider-5', () => {
           expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
           expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeFalsy();
           expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
@@ -109,7 +109,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
       }).then(() => {
         oilShowPreferenceCenter();
 
-        waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
+        waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc #as-js-purpose-slider-5', () => {
           expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
           expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
           expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
@@ -127,7 +127,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
       oilShowPreferenceCenter();
 
-      waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc  #as-js-purpose-slider-1', () => {
+      waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc  #as-js-purpose-slider-5', () => {
         expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
         expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeFalsy();
         expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeFalsy();
@@ -170,7 +170,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
       }).then(() => {
         oilShowPreferenceCenter();
 
-        waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc', () => {
+        waitForElementToDisplay('.qa-find-cpc-in-div .as-oil-cpc #as-js-purpose-slider-5', () => {
           expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
           expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
           expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
