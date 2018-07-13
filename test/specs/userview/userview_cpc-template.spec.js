@@ -19,8 +19,7 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
   const DEFAULT_SLIDER_ELEMENTS = ['#as-js-purpose-slider-1','#as-js-purpose-slider-2','#as-js-purpose-slider-3','#as-js-purpose-slider-4','#as-js-purpose-slider-5'];
 
-  // FIXME these are broken on the master branch
-  xdescribe('show CPC in oil layer', () => {
+  describe('show CPC in oil layer', () => {
     it('should renderOil with ADVANCED-SETTINGS as CPC template with purpose texts from configuration and vendors from vendor list', (done) => {
       setupVendorListSpies();
       spyOn(OilList, 'listSnippet').and.callThrough();
