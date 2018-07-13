@@ -69,7 +69,7 @@ module.exports = function (config) {
 
     specReporter: {
       suppressPassed: false,
-      suppressSkipped: true
+      suppressSkipped: false
     },
 
     junitReporter: JUNIT,
