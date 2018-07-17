@@ -50,14 +50,14 @@ Please make sure you're working with the *latest version* available. Please chec
 To ensure that your self-hosted OIL can find all its necessary scripts you must define the `publicPath` parameter in your <<configuring-oil,oil configuration>>.
 It specifies the server path from which all chunks and ressources will be loaded. This is a minimal configuration tag:
 
-[source,json,subs="attributes"]
+[source,html,subs="attributes"]
 ----
-<script id="oil-configuration" type="application/configuration">
+&lt;script id="oil-configuration" type="application/configuration"&gt;
   {
     "publicPath": "//&lt;your-host&gt;/&lt;path-to-oil&gt;",
-    "locale_url": "//&lt;your-host&gt;/&lt;path-to-locale&gt;myLocale.json"
+    "locale_url": "//&lt;your-host&gt;/&lt;path-to-locale&gt;/myLocale.json"
   }
-</script>
+&lt;/script&gt;
 ----
 
 include::02-quickstart/dev-kit.adoc[]
