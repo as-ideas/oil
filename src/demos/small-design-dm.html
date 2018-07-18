@@ -10,22 +10,24 @@
         {
             "preview_mode": false,
             "timeout": -1,
-            "theme": "small",
+            "advanced_settings": true,
             "locale": {
                 "localeId": "enEN_01",
                 "version": 1,
                 "texts": {
-                    "label_intro": "Cookies help us customise our site for you, and some are necessary to make it work. Cookies also let us show you personalised offers and promotions, both on and off our site. Of course, you're in control. You can <a href="https://www.oiljs.org">manage your cookies</a> at any time.",
-                    "label_button_yes": "Accept Cookies"
+                    "label_cpc_purpose_desc": "Purposes",
+                    "label_button_advanced_settings": "See our privacy settings and policy",
+                    "label_intro_heading": "By using the site you agree to our privacy settings",
+                    "label_intro": "<span class='custom-list-element'>We'll give you the best experience </span><span class='custom-list-element'>We'll show you relevant advertising</span>",
+                    "label_button_yes": "Got it"
                 }
             }
         }
-
   </script>
   <!-- end::oil-config[] -->
   <style>
     body {
-      font-family: 'Nunito', sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       font-size: 60px;
       color: #f7f7f7;
       min-height: 100vh;
@@ -47,43 +49,101 @@
 <body>
 <div class="demoname">Group A Site A</div>
 <style type="text/css">
+  .as-oil,
+  .as-oil__btn-cpc,
+  .as-oil-cpc__purpose-text,
+  .as-oil-cpc__status,
+  .as-oil-third-party-list-element .as-oil-third-party-link,
+  .light .as-oil-cpc__left a,
+  .as-oil-back-button__text {
+    color: white;
+  }
+
+  .as-oil-cpc__category-link--active {
+    border-color: white;
+  }
+
+  .as-oil-l-wrapper-layout-max-width {
+    max-width: 800px;
+  }
+
+  .as-oil-l-wrapper-layout-max-width.as-oil-cpc-wrapper {
+    max-width: initial;
+  }
+
+  .as-oil__heading {
+    font-size: 1.7rem;
+    font-weight: bold;
+  }
+
+  .custom-list-element {
+    display: list-item;
+    list-style-position: inside;
+    text-indent: -1.6rem;
+    padding-left: 1.6rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 2rem;
+  }
+
   .as-oil__btn-optin {
-    font-size: 19px;
+    font-size: 1.2rem;
     font-weight: bold;
-    text-transform: uppercase;
-    background-color: #2eb8ff;
+    background-color: #0cac0d;
+    min-width: 16rem;
+    min-height: 2.25rem;
   }
 
-  .as-oil__btn-optin::after {
-    font-family: FontAwesome;
-    font-weight: bold;
-    content: '\f05d';
+  .as-oil__btn-optin:hover {
+    color: #0cac0d;
+    background-color: white;
   }
 
-  .small .as-oil-l-row {
-    min-width: 20%;
+  .as-oil__btn-cpc:hover {
+    color: white;
   }
 
-  .as-oil__intro-txt {
-    color: #ffffff;
-    font-size: 19px;
+  .as-oil-l-row.as-oil-l-buttons {
+    display: block;
+    margin: 0;
   }
 
-  .as-oil__intro-txt a {
-    color: #ffffff;
-    text-decoration: underline;
-  }
-
-  .small .as-oil-content-overlay {
-    background-color: rgba(71, 81, 84, .95);
+  .as-oil-content-overlay {
+    background-color: #0a50b0;
     padding: 1.2rem !important
   }
 
-  .small .as-oil__btn-optin {
-    min-width: 160px;
-    min-height: 42px;
+  .as-oil__btn-cpc {
+    float: left;
+    margin-top: -2rem;
   }
 
+  .as-oil__btn-blue,
+  .as-oil-cpc__switch input:checked ~ .as-oil-cpc__slider {
+    background-color: #0cac0d;
+  }
+
+  .as-oil-icon-plus,
+  .as-oil-icon-minus {
+    stroke: white;
+  }
+
+  @media (max-width: 1023px) and (min-width: 601px) {
+    .as-oil-l-buttons {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .as-oil__heading {
+      text-align: justify;
+    }
+
+    .as-oil__btn-cpc {
+      float: none;
+      margin-top: 0;
+    }
+  }
 </style>
 </body>
 </html>
