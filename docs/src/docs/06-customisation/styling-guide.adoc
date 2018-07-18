@@ -1,13 +1,14 @@
 === Styling guide
 
 There are 5 different view you can style:
-* The default layer
-* No-cookies banner
-* Group list
-* 3rd party list
-* Cookie Preference Center
 
-You can style the layer with additional CSS. All OIL styles use the css classes directly, this means the lowest possible css specificity. Here are two examples. The first one is for changing the font and the color. The second is for changing the background color and the shadow.
+* <<Opt-In Layer,The default layer>>
+* <<No-cookie layer,No-cookies banner>>
+* <<POI group list,Group list>>
+* <<Third party List,3rd party list>>
+* <<Advanced Settings (CPC - Cookie Preference Center),Cookie Preference Center>>
+
+You can style the layer with additional CSS. All OIL styles use the CSS classes directly, this means the lowest possible CSS specificity. Here are two examples. The first one is for changing the font and the color. The second is for changing the background color and the shadow.
 
 [source,css]
 ----
@@ -25,7 +26,8 @@ div.as-oil-content-overlay {
 }
 ----
 
-Here are the current raw html snippets used for the opt-in layer. You can use these as reference for which classes were used.
+The following sections show the current raw html snippets used for the opt-in layer. You can use these as reference for which classes were used.
+In section <<Styling Examples>> you can find design examples for the opt-in layer with corresponding customized configuration and CSS styles.
 
 ==== Opt-In layer
 
@@ -64,7 +66,7 @@ include::../../../../test/fixtures/gold-master/third-party-list.html[]
 ----
 
 
-==== Advanced Settings (CPC, Cookie Preference Center)
+==== Advanced Settings (CPC - Cookie Preference Center)
 
 ===== Standard CPC
 
@@ -82,5 +84,130 @@ image::src/images/view_tab_cpc.png[CPC]
 [source,html]
 ----
 include::../../../../test/fixtures/gold-master/tab-cpc.html[]
+----
+
+==== Styling Examples
+
+The following examples show different types of banners the opt-in layer can be used for. Every example comes with a screenshot, the minimal
+configuration and the CSS code that is to be added to the page. All examples are responsive and can be used for desktop and mobile pages.
+
+===== Simple consent banner (button on the right)
+
+image::src/images/view_design_example_simple_banner_button_right.png[Simple consent banner (button on the right)]
+
+This example shows the opt-in layer as simple consent banner or cookie banner respectively the user can interact with to give consent to all
+purposes and vendors. There is no possibility for further adjustment. The example uses the `small` theme of the opt-in layer.
+
+Here is the minimal configuration for this example:
+
+[source,html]
+----
+<script id="oil-configuration" type="application/configuration">
+  {
+    "theme": "small",
+    "locale": {
+      "localeId": "enEN_01",
+      "version": 1,
+      "texts": {
+        "label_intro": "This site uses cookies. By continuing to use this site, closing this banner, or clicking \"I Agree\", you agree to the use of cookies. Read our <a href='https://www.oiljs.org' target='_blank'>cookies policy</a> and <a href='https://www.oiljs.org' target='_blank'>privacy statement</a> for more information.",
+        "label_button_yes": "I agree"
+      }
+    }
+  }
+</script>
+----
+
+This is the CSS code that has to be added to the page (after the opt-in layer include) to change the (default) design of the banner:
+
+[source,css]
+----
+include::../../examples/view_design_example_simple_banner_button_right.css[]
+----
+
+Furthermore, an additional link has to be added:
+
+[source,html]
+----
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+----
+
+
+===== Simple consent banner (centered button)
+
+image::src/images/view_design_example_simple_banner_centered_button.png[Simple consent banner (centered button)]
+
+This examples shows another design for the opt-in layer as simple cookie banner. The user can give consent to all purposes and vendors.
+Other adjustments are not provided. The example uses the `small` theme of the opt-in layer.
+
+Here is the minimal configuration for this example:
+
+[source,html]
+----
+<script id="oil-configuration" type="application/configuration">
+  {
+    "theme": "small",
+    "locale": {
+      "localeId": "enEN_01",
+      "version": 1,
+      "texts": {
+        "label_intro": "Cookies help us customise our site for you, and some are necessary to make it work. Cookies also let us show you personalised offers and promotions, both on and off our site. Of course, you're in control. You can <b><a href='https://www.oiljs.org'>manage your cookies</a></b> at any time.",
+        "label_button_yes": "Accept Cookies"
+      }
+    }
+  }
+</script>
+----
+
+This is the CSS code that has to be added to the page (after the opt-in layer include) to change the (default) design of the banner:
+
+[source,css]
+----
+include::../../examples/view_design_example_simple_banner_centered_button.css[]
+----
+
+===== Consent banner with Cookie Preference Center
+
+image::src/images/view_design_example_banner_with_cpc_link.png[Consent banner with Cookie Preference Center]
+
+This example shows the opt-in layer as consent banner the user can interact with to give consent to all purposes and vendors. Furthermore,
+a link to the Cookie Preference Center is provided that allows specific adjustments of consents to purposes.
+
+This is the CPC view:
+
+image::src/images/view_design_example_cpc.png[Cookie Preference Center]
+
+Here is the minimal configuration for this example. It is slightly more complex than configuration sections of previous examples to cover the
+Cookie Preference Center too:
+
+[source,html]
+----
+<script id="oil-configuration" type="application/configuration">
+  {
+    "advanced_settings": true,
+    "locale": {
+      "localeId": "enEN_01",
+      "version": 1,
+      "texts": {
+        "label_cpc_purpose_desc": "Purposes",
+        "label_button_advanced_settings": "See our privacy settings and policy",
+        "label_intro_heading": "By using the site you agree to our privacy settings",
+        "label_intro": "<span class='custom-list-element'>We'll give you the best experience</span><span class='custom-list-element'>We'll show you relevant advertising</span>",
+        "label_button_yes": "Got it"
+      }
+    }
+  }
+</script>
+----
+
+Please note the definition of the list elements (within the `label_intro` element) using `<span>` tags. The opt-in layer uses a block element (a paragraph) for the banner
+text. Therefore, usage of a `<ul>` based list would cause some problems we avoid with this solution. The list layout is created completely
+by CSS.
+
+This is the CSS code that has to be added to the page (after the opt-in layer include) to change the (default) design of the banner
+(including the Cookie Preference Center):
+
+[source,css]
+----
+include::../../examples/view_design_example_banner_with_cpc.css[]
 ----
 

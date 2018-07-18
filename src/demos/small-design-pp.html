@@ -68,12 +68,6 @@
     text-decoration: underline;
   }
 
-  @media (max-width: 1023px) and (min-width: 601px) {
-    .as-oil-l-buttons {
-     max-width: 100%;
-    }
-  }
-
   .small .as-oil-l-row {
     display: block;
   }
@@ -82,7 +76,7 @@
     text-align: center;
   }
 
-  .as-oil__intro-txt {
+  .small .as-oil__intro-txt {
     display: block;
     text-align: justify;
     font-weight: 400;
@@ -91,6 +85,7 @@
     color: white;
     min-width: 100%;
     max-width: 100%;
+    margin: 0 0 1rem 0;
   }
 
   .as-oil__intro-txt a {
@@ -98,14 +93,17 @@
     text-decoration: underline;
   }
 
-  .small .as-oil__intro-txt {
-    margin: 0 0 1rem 0;
-  }
-
   .small .as-oil-content-overlay {
     background-color: #012169;
     padding: 1.2rem !important;
   }
+
+  @media (max-width: 1023px) and (min-width: 601px) {
+    .as-oil-l-buttons {
+      max-width: 100%;
+    }
+  }
+
 </style>
 </body>
 </html>
