@@ -198,6 +198,18 @@ module.exports = {
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
+  },{
+    filename: 'demos/small-design-pp.html',
+    template: path.resolve(sourcePath, 'demos', 'small-design-pp.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  },{
+    filename: 'demos/small-design-dm.html',
+    template: path.resolve(sourcePath, 'demos', 'small-design-dm.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
   }, {
     filename: 'demos/tag-management.html',
     template: path.resolve(sourcePath, 'demos', 'tag-management.html'),
