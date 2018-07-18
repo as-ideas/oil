@@ -193,6 +193,12 @@ module.exports = {
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
+    filename: 'demos/small-design-bi.html',
+    template: path.resolve(sourcePath, 'demos', 'small-design-bi.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  }, {
     filename: 'demos/tag-management.html',
     template: path.resolve(sourcePath, 'demos', 'tag-management.html'),
     chunks: ['oilstub', 'oil'],
