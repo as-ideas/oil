@@ -76,7 +76,7 @@ Opt-In Information is stored in a first party cookie in the user's browser and c
 === Why is there no native app support?
 
 Native mobile apps are very customized concerning technology stack and implementation of tracking and advertising. Therefore, the OIL project won't offer a generic solution for this purpose.
-Each unit has to review their app regarding the individual implementation of tracking and advertising and find a solution to get the user's consent using a dialog.
+
 Consents both on desktop or mobile browsers given by the user can't be used in the mobile app for two technical reasons:
 * mobile browsers and in app web views use different ressources to store their cookies
 * desktop browsers and mobile apps have no physical connections
