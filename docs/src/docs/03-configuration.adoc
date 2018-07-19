@@ -254,21 +254,20 @@ For example adding the class ``as-js-companyList`` will add a click handler, whi
 
 === preview_mode
 
-The preview mode is useful when testing OIL in a production or live environment. When in preview_mode, the consent layer remains hidden until you set a cookie named "oil_preview" with the value "true".
+The preview mode is useful when testing OIL in a production or live environment. When in preview_mode, the consent layer remains hidden until you manually control its display using the following commands. 
 
-
-This will show the OIL layer on your client:
-
-[source,javascript]
-----
-document.cookie = "oil_preview=true";
-----
-
-To delete the cookie, do:
+Run this in the console to show the OIL layer on your client:
 
 [source,javascript]
 ----
-document.cookie = "oil_preview=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+window.AS_OIL.previewModeOn();
+----
+
+To delete the cookie, run:
+
+[source,javascript]
+----
+window.AS_OIL.previewModeOff();
 ----
 
 When preview_mode is not set in configuration and no consent cookie is found, the layer will show for the visitor.
