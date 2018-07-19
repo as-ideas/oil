@@ -30,9 +30,15 @@ module.exports = {
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
-  },{
+  }, {
     filename: 'demos/advanced-settings-tabs.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings-tabs.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  }, {
+    filename: 'demos/advanced-settings-confirm-optout.html',
+    template: path.resolve(sourcePath, 'demos', 'advanced-settings-tabs-confirm-optout.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'

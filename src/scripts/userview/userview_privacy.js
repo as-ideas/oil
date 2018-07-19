@@ -3,6 +3,7 @@ import {PRIVACY_FULL_TRACKING} from '../core/core_constants';
 import {logInfo} from '../core/core_log';
 import {forEach} from './userview_modal';
 import {getPurposes} from '../core/core_vendor_information';
+import {showOptoutConfirmation} from './userview_optout_confirm';
 
 export function getSoiConsentData() {
   let soiCookie = getSoiCookie();
@@ -48,4 +49,19 @@ export function applyPrivacySettings(allowedPurposes) {
       domNode && (domNode.checked = false);
     });
   }
+}
+
+export function activateOptoutConfirm() {
+  forEach(document.querySelectorAll('.as-js-purpose-slider'), (element) => {
+    element.onclick = (event) => {
+      if(event.target.checked) {
+        // open dialog
+        showOptoutConfirmation().then((confirmed) => {
+          // on confirmation trigger deactivate
+          event.target.checked = !!confirmed;
+        });
+        return false;
+      }
+    }
+  });
 }

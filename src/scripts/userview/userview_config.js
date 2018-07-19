@@ -1,4 +1,5 @@
 import { OIL_CONFIG } from '../core/core_constants.js';
+import { OIL_LABELS } from '../userview/userview_constants.js';
 import { getConfigValue, getLocale } from '../core/core_config';
 import { OIL_CONFIG_CPC_TYPES } from '../core/core_constants';
 
@@ -46,4 +47,13 @@ export function getLabel(labelName) {
 export function getLabelWithDefault(labelName, defaultLabel) {
   let defaultLocale = getLocale();
   return getConfigValue(labelName, (defaultLocale && defaultLocale.texts[labelName]) ? defaultLocale.texts[labelName] : defaultLabel);
+}
+
+export function requiresOptoutConfirmation() {
+  return (
+    getLabelWithDefault(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_HEADING, false) &&
+    getLabelWithDefault(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_TEXT, false) &&
+    getLabelWithDefault(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_YES, false) &&
+    getLabelWithDefault(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL, false)
+  );
 }
