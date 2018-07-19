@@ -158,7 +158,7 @@ describe('the user view modal handles opt-in clicks on', () => {
           expect(CorePoi.deActivatePowerOptIn).toHaveBeenCalled();
           done();
         },
-        3000);
+        2000);
     });
 
     it('should execute command collection executor', (done) => {
