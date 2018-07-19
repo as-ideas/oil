@@ -1,0 +1,57 @@
+.as-oil__btn-optin {
+  min-width: 6rem;
+  border: 1px solid white;
+  border-radius: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 250ms ease;
+  background-color: white;
+  color: #0070ba;
+  width: 200px;
+}
+
+.as-oil__btn-optin:hover {
+  color: white;
+  background-color: #0070ba;
+  text-decoration: underline;
+}
+
+.small .as-oil-l-row {
+  display: block;
+}
+
+.as-oil-l-item {
+  text-align: center;
+}
+
+.small .as-oil__intro-txt {
+  display: block;
+  text-align: justify;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  color: white;
+  min-width: 100%;
+  max-width: 100%;
+  margin: 0 0 1rem 0;
+}
+
+.as-oil__intro-txt a {
+  color: white;
+  text-decoration: underline;
+}
+
+.small .as-oil-content-overlay {
+  background-color: #012169;
+  padding: 1.2rem !important;
+}
+
+@media (max-width: 1023px) and (min-width: 601px) {
+  .as-oil-l-buttons {
+    max-width: 100%;
+  }
+}

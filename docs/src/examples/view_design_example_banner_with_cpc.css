@@ -1,0 +1,95 @@
+.as-oil,
+.as-oil__btn-cpc,
+.as-oil-cpc__purpose-text,
+.as-oil-cpc__status,
+.as-oil-third-party-list-element .as-oil-third-party-link,
+.light .as-oil-cpc__left a,
+.as-oil-back-button__text {
+  color: white;
+}
+
+.as-oil-cpc__category-link--active {
+  border-color: white;
+}
+
+.as-oil-l-wrapper-layout-max-width {
+  max-width: 800px;
+}
+
+.as-oil-l-wrapper-layout-max-width.as-oil-cpc-wrapper {
+  max-width: initial;
+}
+
+.as-oil__heading {
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.custom-list-element {
+  display: list-item;
+  list-style-position: inside;
+  text-indent: -1.6rem;
+  padding-left: 1.6rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 2rem;
+}
+
+.as-oil__btn-optin {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #0cac0d;
+  min-width: 16rem;
+  min-height: 2.25rem;
+}
+
+.as-oil__btn-optin:hover {
+  color: #0cac0d;
+  background-color: white;
+}
+
+.as-oil__btn-cpc {
+  float: left;
+  margin-top: -2rem;
+}
+
+.as-oil__btn-cpc:hover {
+  color: white;
+}
+
+.as-oil-l-row.as-oil-l-buttons {
+  display: block;
+  margin: 0;
+}
+
+.as-oil-content-overlay {
+  background-color: #0a50b0;
+  padding: 1.2rem !important
+}
+
+.as-oil__btn-blue,
+.as-oil-cpc__switch input:checked ~ .as-oil-cpc__slider {
+  background-color: #0cac0d;
+}
+
+.as-oil-icon-plus,
+.as-oil-icon-minus {
+  stroke: white;
+}
+
+@media (max-width: 1023px) and (min-width: 601px) {
+  .as-oil-l-buttons {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .as-oil__heading {
+    text-align: justify;
+  }
+
+  .as-oil__btn-cpc {
+    float: none;
+    margin-top: 0;
+  }
+}
