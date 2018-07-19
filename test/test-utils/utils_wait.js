@@ -7,7 +7,7 @@ export function waitsForAndRuns(escapeFunction, runFunction, escapeTime) {
       clearMe();
       runFunction();
     }
-  }, escapeTime > REPEAT_INTERVAL ? Math.floor(escapeTime / REPEAT_INTERVAL) : 1);
+  }, escapeTime > REPEAT_INTERVAL ? Math.floor(escapeTime / (REPEAT_INTERVAL*10)) : 1);
 
   // in case we never reach the escapeFunction, we will time out
   // at the escapeTime
