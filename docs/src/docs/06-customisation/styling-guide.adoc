@@ -136,7 +136,7 @@ Furthermore, an additional link has to be added:
 
 image::src/images/view_design_example_simple_banner_centered_button.png[Simple consent banner (centered button)]
 
-This examples shows another design for the opt-in layer as simple cookie banner. The user can give consent to all purposes and vendors.
+This example shows another design for the opt-in layer as simple cookie banner. The user can give consent to all purposes and vendors.
 Other adjustments are not provided. The example uses the `small` theme of the opt-in layer.
 
 Here is the minimal configuration for this example:
