@@ -1,6 +1,6 @@
 === Styling guide
 
-There are 5 different view you can style:
+There are 5 different views you can style:
 
 * <<Opt-In Layer,The default layer>>
 * <<No-cookie layer,No-cookies banner>>
