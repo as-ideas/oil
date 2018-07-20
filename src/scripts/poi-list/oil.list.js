@@ -1,6 +1,6 @@
 import { getLabel, getTheme } from '../userview/userview_config.js';
 import { OIL_LABELS } from '../userview/userview_constants.js';
-import { OIL_GLOBAL_OBJECT_NAME } from '../core/core_constants.js';
+import { OIL_GLOBAL_OBJECT_NAME, JS_CLASS_BUTTON_OPTIN } from '../core/core_constants.js';
 import './poi.group.scss';
 import { getGlobalOilObject, setGlobalOilObject } from '../core/core_utils';
 import { getGroupList } from './poi.group.list';
@@ -146,7 +146,7 @@ function oilListTemplate(list, heading, text) {
         </div>
         <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
             <div class="as-oil-l-item">
-              ${YesButton()}
+              ${YesButton(`as-oil__btn-optin ${JS_CLASS_BUTTON_OPTIN}`)}
             </div>
         </div>
     </div>

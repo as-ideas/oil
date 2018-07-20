@@ -20,7 +20,7 @@ import { oilNoCookiesTemplate } from './view/oil.no.cookies';
 import * as AdvancedSettingsStandard from './view/oil.advanced.settings.standard';
 import * as AdvancedSettingsTabs from './view/oil.advanced.settings.tabs';
 import { logError, logInfo } from '../core/core_log';
-import { getCpcType, getTheme, getTimeOutValue, isPersistMinimumTracking, requiresOptoutConfirmation } from './userview_config';
+import { getCpcType, getTheme, getTimeOutValue, isPersistMinimumTracking, isOptoutConfirmRequired } from './userview_config';
 import { getAdvancedSettingsPurposesDefault, isPoiActive, isSubscriberSetCookieActive, gdprApplies } from '../core/core_config';
 import { applyPrivacySettings, getPrivacySettings, getSoiConsentData } from './userview_privacy';
 import { activateOptoutConfirm } from './userview_optout_confirm.js';
@@ -89,10 +89,6 @@ export function oilShowPreferenceCenter() {
         currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? getPurposeIds() : [];
       }
       applyPrivacySettings(currentPrivacySettings);
-
-      if(requiresOptoutConfirmation()){
-        activateOptoutConfirm();
-      }
     })
     .catch((error) => logError(error));
 }
@@ -163,6 +159,9 @@ function attachCpcEventHandlers() {
       logError(`Found unknown CPC type '${cpcType}'! Falling back to CPC type '${OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD}'!`);
       AdvancedSettingsStandard.attachCpcHandlers();
       break;
+  }
+  if(isOptoutConfirmRequired()){
+    activateOptoutConfirm();
   }
 }
 

@@ -31,7 +31,8 @@ export const OIL_CONFIG = {
   ATTR_ADVANCED_SETTINGS_PURPOSES_DEFAULT: 'advanced_settings_purposes_default',
   ATTR_DEFAULT_TO_OPTIN: 'default_to_optin',
   ATTR_GDPR_APPLIES_GLOBALLY: 'gdpr_applies_globally',
-  ATTR_GDPR_APPLIES: 'gdpr_applies'
+  ATTR_GDPR_APPLIES: 'gdpr_applies',
+  ATTR_REQUIRE_OPTOUT_CONFIRM: 'require_optout_confirm'
 };
 
 export const OIL_CONFIG_CPC_TYPES = {
@@ -77,9 +78,17 @@ export const OIL_PAYLOAD_CUSTOM_PURPOSES = 'cp';
 // Identify privacy page link, eg. for tracking
 export const DATAQA_PRIVACY_PAGE = 'oil-PrivacyPage';
 
+// Button labels
+export const JS_CLASS_BUTTON_OPTIN = 'as-js-optin';
+export const JS_CLASS_BUTTON_OILBACK = 'as-js-oilback';
+export const JS_CLASS_BUTTON_PROCEED = 'as-js-proceed';
+export const JS_CLASS_BUTTON_CANCEL = 'as-js-cancel';
+export const JS_CLASS_BUTTON_ADVANCED_SETTINGS = 'as-js-advanced-settings';
+
 // context attributes for action items, used for ga tracking
 export const DATA_CONTEXT_YES = 'YES';
 export const DATA_CONTEXT_CANCEL = 'CANCEL';
+export const DATA_CONTEXT_PROCEED = 'PROCEED';
 export const DATA_CONTEXT_ADVANCED_SETTINGS = 'ADVANCEDSETTINGS';
 export const DATA_CONTEXT_BACK = 'BACK';
 

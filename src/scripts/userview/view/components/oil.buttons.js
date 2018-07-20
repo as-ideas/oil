@@ -2,8 +2,13 @@ import { OIL_LABELS } from '../../userview_constants';
 import { getLabel } from '../../userview_config';
 import { DATA_CONTEXT_YES,
 DATA_CONTEXT_CANCEL,
+DATA_CONTEXT_PROCEED,
 DATA_CONTEXT_BACK,
-DATA_CONTEXT_ADVANCED_SETTINGS } from '../../../core/core_constants.js';
+DATA_CONTEXT_ADVANCED_SETTINGS,
+JS_CLASS_BUTTON_OILBACK,
+JS_CLASS_BUTTON_PROCEED,
+JS_CLASS_BUTTON_CANCEL,
+JS_CLASS_BUTTON_ADVANCED_SETTINGS } from '../../../core/core_constants.js';
 
 export const YesButton = (classes) => {
   return `
@@ -13,9 +18,17 @@ export const YesButton = (classes) => {
   `
 }
 
+export const ProceedButton = () => {
+  return `
+    <button class="as-oil__btn-proceed ${JS_CLASS_BUTTON_PROCEED}" data-context="${DATA_CONTEXT_PROCEED}" data-qa="oil-ProceedButton">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_PROCEED)}
+    </div>
+  `
+}
+
 export const CancelButton = () => {
   return `
-    <button class="as-oil__btn-cancel as-js-cancel" data-context="${DATA_CONTEXT_CANCEL}" data-qa="oil-CancelButton">
+    <button class="as-oil__btn-cancel ${JS_CLASS_BUTTON_CANCEL}" data-context="${DATA_CONTEXT_CANCEL}" data-qa="oil-CancelButton">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL)}
     </div>
   `
@@ -23,7 +36,7 @@ export const CancelButton = () => {
 
 export const BackButton = () => {
   return `
-    <button class="as-oil-back-button as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
+    <button class="as-oil-back-button ${JS_CLASS_BUTTON_OILBACK}" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
       <span class="as-oil-back-button__text">
         ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_BACK)}
       </span>
@@ -45,7 +58,7 @@ export const BackButton = () => {
 export const AdvancedSettingsButton = (advancedSettings) => {
   return advancedSettings === true ? (
     `
-        <button class="as-oil__btn-cpc as-js-advanced-settings" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
+        <button class="as-oil__btn-cpc ${JS_CLASS_BUTTON_ADVANCED_SETTINGS}" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
             ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS)}
         </button>
       `

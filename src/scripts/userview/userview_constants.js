@@ -20,6 +20,7 @@ export const OIL_LABELS = {
   ATTR_LABEL_CPC_PURPOSE_DESC: 'label_cpc_purpose_desc',
   ATTR_LABEL_CPC_PURPOSE_OPTOUT_HEADING: 'label_cpc_purpose_optout_confirm_heading',
   ATTR_LABEL_CPC_PURPOSE_OPTOUT_TEXT: 'label_cpc_purpose_optout_confirm_text',
+  ATTR_LABEL_CPC_PURPOSE_OPTOUT_PROCEED: 'label_cpc_purpose_optout_confirm_proceed',
   ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL: 'label_cpc_purpose_optout_confirm_cancel',
   ATTR_LABEL_NO_COOKIES_HEADING: 'label_nocookie_head',
   ATTR_LABEL_NO_COOKIES_TEXT: 'label_nocookie_text'

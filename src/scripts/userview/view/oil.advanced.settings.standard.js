@@ -105,7 +105,7 @@ const ContentSnippet = () => {
     <div class="as-oil-cpc__right">
      <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
       <div class="as-oil-l-item">
-        ${YesButton('as-oil__btn-optin as-js-optin')}
+        ${YesButton(`as-oil__btn-optin ${JS_CLASS_BUTTON_OPTIN}`)}
       </div>
     </div>
   </div>

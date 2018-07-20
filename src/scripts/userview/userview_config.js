@@ -49,10 +49,6 @@ export function getLabelWithDefault(labelName, defaultLabel) {
   return getConfigValue(labelName, (defaultLocale && defaultLocale.texts[labelName]) ? defaultLocale.texts[labelName] : defaultLabel);
 }
 
-export function requiresOptoutConfirmation() {
-  return (
-    getLabelWithDefault(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_HEADING, false) &&
-    getLabelWithDefault(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_TEXT, false) &&
-    getLabelWithDefault(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL, false)
-  );
+export function isOptoutConfirmRequired() {
+  return getConfigValue(OIL_CONFIG.ATTR_REQUIRE_OPTOUT_CONFIRM, false);
 }
