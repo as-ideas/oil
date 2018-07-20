@@ -153,7 +153,7 @@ export function oilAdvancedSettingsTemplate() {
 
 export function attachCpcHandlers() {
   forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
-    domNode && domNode.addEventListener('click', event => toggleFeatureTextsMarks(event.target || event.srcElement), false);
+    domNode && domNode.addEventListener('change', event => toggleFeatureTextsMarks(event.target || event.srcElement), false);
   });
   forEach(document.querySelectorAll('.as-js-tab-label'), (domNode) => {
     domNode && domNode.addEventListener('click', event => toggleTab(event.target || event.srcElement), false);

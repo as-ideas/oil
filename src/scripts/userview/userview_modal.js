@@ -150,6 +150,10 @@ function findAdvancedSettingsInlineTemplate() {
 }
 
 function attachCpcEventHandlers() {
+  if(isOptoutConfirmRequired()){
+    activateOptoutConfirm();
+  }
+
   const cpcType = getCpcType();
   switch (cpcType) {
     case OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD:
@@ -162,9 +166,6 @@ function attachCpcEventHandlers() {
       logError(`Found unknown CPC type '${cpcType}'! Falling back to CPC type '${OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD}'!`);
       AdvancedSettingsStandard.attachCpcHandlers();
       break;
-  }
-  if(isOptoutConfirmRequired()){
-    activateOptoutConfirm();
   }
 }
 

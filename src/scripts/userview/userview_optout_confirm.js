@@ -34,6 +34,7 @@ function optoutHandler(event) {
   if(!event.target.checked) {
     showOptoutConfirmation().then((confirmed) => {
       event.target.checked = confirmed;
+      event.target.dispatchEvent(new Event('change'))
       hideOptoutConfirmation();
     });
     event.target.checked = true;
