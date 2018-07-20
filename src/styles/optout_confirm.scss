@@ -4,7 +4,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  z-index: 502;
+  z-index: 1;
   background-color: rgba(0,0,0,0.7);
   margin: -2rem -5rem;
 
@@ -20,10 +20,12 @@
     text-align: center;
     min-width: 320px;
     max-width: 420px;
-    background-color: white;
+    background-color: $background-color-light;
+   
     margin: 0 auto;
     margin-top: 10%;
     padding: 1rem;
+
     p {
       width: 100%;
       text-align: justify;
@@ -41,4 +43,8 @@
       }
     }
   }
+}
+
+.dark .as-oil-optout-confirm__dialog {
+  background-color: $background-color-dark;
 }
