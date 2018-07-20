@@ -149,8 +149,7 @@ function activateAll() {
   });
 }
 
-
-function deactivateAll() {
+export function deactivateAll() {
   forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
     domNode && (domNode.checked = false);
   });

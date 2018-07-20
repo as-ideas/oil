@@ -1,5 +1,6 @@
 import { OptoutConfirmDialog } from './view/components/oil.optout.confirm.js';
 import { forEach } from './userview_modal';
+import { deactivateAll } from './view/oil.advanced.settings.standard';
 import { JS_CLASS_BUTTON_CANCEL, JS_CLASS_BUTTON_PROCEED, CSS_CLASS_OPTOUT_DIALOG } from '../core/core_constants';
 
 export function showOptoutConfirmation() {
@@ -28,12 +29,28 @@ export function activateOptoutConfirm() {
   forEach(document.querySelectorAll('.as-js-purpose-slider'), (element) => {
     element.addEventListener('click', optoutHandler, true);
   });
+  forEach(document.querySelectorAll('.as-js-btn-deactivate-all'), (element) => {
+    element.addEventListener('click', deactivateHandler, true);
+  });
 }
+
+function deactivateHandler(event) {
+  showOptoutConfirmation().then((actionCancelled) => {
+    if(!actionCancelled) {
+      deactivateAll();
+    }
+    hideOptoutConfirmation();
+  });
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation();
+  return false;
+} 
 
 function optoutHandler(event) {
   if(!event.target.checked) {
-    showOptoutConfirmation().then((confirmed) => {
-      event.target.checked = confirmed;
+    showOptoutConfirmation().then((actionCancelled) => {
+      event.target.checked = actionCancelled;
       event.target.dispatchEvent(new Event('change'))
       hideOptoutConfirmation();
     });
