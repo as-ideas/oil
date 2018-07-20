@@ -109,7 +109,7 @@ Here is the minimal configuration for this example:
       "localeId": "enEN_01",
       "version": 1,
       "texts": {
-        "label_intro": "This site uses cookies. By continuing to use this site, closing this banner, or clicking \"I Agree\", you agree to the use of cookies. Read our <a href='https://www.oiljs.org' target='_blank'>cookies policy</a> and <a href='https://www.oiljs.org' target='_blank'>privacy statement</a> for more information.",
+        "label_intro": "This site uses cookies. By continuing to use this site, closing this banner, or clicking \"I Agree\", you agree to the use of cookies. Read our <a href='https://www.example.com' target='_blank'>cookies policy</a> and <a href='https://www.example.com' target='_blank'>privacy statement</a> for more information.",
         "label_button_yes": "I agree"
       }
     }
@@ -150,7 +150,7 @@ Here is the minimal configuration for this example:
       "localeId": "enEN_01",
       "version": 1,
       "texts": {
-        "label_intro": "Cookies help us customise our site for you, and some are necessary to make it work. Cookies also let us show you personalised offers and promotions, both on and off our site. Of course, you're in control. You can <b><a href='https://www.oiljs.org'>manage your cookies</a></b> at any time.",
+        "label_intro": "Cookies help us customise our site for you, and some are necessary to make it work. Cookies also let us show you personalised offers and promotions, both on and off our site. Of course, you're in control. You can <b><a href='https://www.example.com'>manage your cookies</a></b> at any time.",
         "label_button_yes": "Accept Cookies"
       }
     }
