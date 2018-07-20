@@ -27,7 +27,7 @@ export function oilDefaultTemplate() {
             </p>
             <div class="as-oil-l-row as-oil-l-buttons">
                 <div class="as-oil-l-item">
-                    ${YesButton()}
+                    ${YesButton('as-oil__btn-optin as-js-optin')}
                 </div>
                 <div class="as-oil-l-item as-oil-l-item--stretch">
                     ${AdvancedSettingsButton(isAdvancedSettings())}

@@ -1,0 +1,16 @@
+.as-oil-optout-confirm {
+  position: absolute;
+  width: 88%;
+  height: 100%;
+  z-index: 502;
+  background-color: rgba(0,0,0,0.1);
+
+  .as-oil-optout-confirm__modal {
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    margin: 0 auto;
+    margin-top: 10%;
+    padding: 1rem;
+  }
+}

@@ -1,36 +1,37 @@
 import { OptoutConfirmDialog } from './view/components/oil.optout.confirm.js';
-import { forEach } from './userview_modal.js';
+import { forEach } from './userview_modal';
 
 export function showOptoutConfirmation() {
-  let confirmer = new Promise(() => {
+  let confirmer = new Promise((resolve) => {
     let entryNode = document.querySelector('#as-oil-cpc');
-    debugger
-    let dialog = document.createElement(OptoutConfirmDialog());
-    entryNode.appendChild(dialog);
+    let dialog = OptoutConfirmDialog();
+    entryNode.insertBefore(dialog, entryNode.firstElementChild);
 
-    // show dialog
-    //if(true == 1) {
-      // user clciks yes, resolve
-      //resolve(answer);
-    //} else {
-    //  reject();
-    //}
+    document.querySelector('.as-js-cancel').addEventListener('click', () => resolve(true), false);
+    document.querySelector('.as-js-confirm').addEventListener('click', () => resolve(false), false);
   });
-  debugger
   return confirmer;
+}
+
+function hideOptoutConfirmation() {
+  let dialog = document.querySelector('#as-oil-optout-confirm');
+  dialog.parentNode.removeChild(dialog);
 }
 
 export function activateOptoutConfirm() {
   forEach(document.querySelectorAll('.as-js-purpose-slider'), (element) => {
-    element.onclick = (event) => {
-      if(!event.target.checked) {
-        // open dialog
-        showOptoutConfirmation().then((confirmed) => {
-          // on confirmation trigger deactivate
-          event.target.checked = !!confirmed;
-        });
-        return false;
-      }
-    }
+    element.addEventListener('click', optoutHandler, true);
   });
+}
+
+function optoutHandler(event) {
+  if(!event.target.checked) {
+    showOptoutConfirmation().then((confirmed) => {
+      event.target.checked = confirmed;
+      hideOptoutConfirmation();
+    });
+    event.target.checked = true;
+    event.preventDefault();
+    event.stopPropagation();
+  }
 }

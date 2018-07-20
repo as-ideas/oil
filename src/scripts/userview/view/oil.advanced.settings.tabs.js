@@ -122,7 +122,7 @@ const ContentSnippet = () => {
     </div>
     <hr>
       <div class="as-oil-l-item">
-        ${YesButton()}
+        ${YesButton('as-oil__btn-optin as-js-optin')}
       </div>
   `;
 };
