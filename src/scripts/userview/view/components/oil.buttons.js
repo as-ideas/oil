@@ -14,23 +14,23 @@ export const YesButton = (classes) => {
   return `
     <button class="${classes}" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
       ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES)}
-    </div>
+    </button>
   `
 }
 
 export const ProceedButton = () => {
   return `
-    <button class="as-oil__btn-proceed ${JS_CLASS_BUTTON_PROCEED}" data-context="${DATA_CONTEXT_PROCEED}" data-qa="oil-ProceedButton">
+    <button class="as-oil__btn-proceed as-oil__btn-blue ${JS_CLASS_BUTTON_PROCEED}" data-context="${DATA_CONTEXT_PROCEED}" data-qa="oil-ProceedButton">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_PROCEED)}
-    </div>
+    </button>
   `
 }
 
 export const CancelButton = () => {
   return `
-    <button class="as-oil__btn-cancel ${JS_CLASS_BUTTON_CANCEL}" data-context="${DATA_CONTEXT_CANCEL}" data-qa="oil-CancelButton">
+    <button class="as-oil__btn-cancel as-oil__btn-grey ${JS_CLASS_BUTTON_CANCEL}" data-context="${DATA_CONTEXT_CANCEL}" data-qa="oil-CancelButton">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL)}
-    </div>
+    </button>
   `
 }
 

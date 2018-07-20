@@ -8,16 +8,16 @@ export const OptoutConfirmDialog = () => {
   dialog.id = 'as-oil-optout-confirm';
   dialog.className = 'as-oil-optout-confirm';
   dialog.innerHTML = `
-    <div class="as-oil-optout-confirm__modal">
-      <div class="as-oil__heading">
+    <div class="as-oil-optout-confirm__dialog">
+      <div class="as-oil-optout-confirm__dialog__heading">
         ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_HEADING)}
       </div>
-      <p class="as-oil__intro-txt">
+      <p>
         ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_TEXT)}
       </p>
       <div class="as-oil-l-row as-oil-l-buttons">
-        ${ProceedButton()}
         ${CancelButton()}
+        ${ProceedButton()}
       </div>
     </div>
   `;

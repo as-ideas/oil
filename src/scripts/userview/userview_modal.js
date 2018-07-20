@@ -242,7 +242,7 @@ function getOilDOMNodes() {
     companyList: document.querySelectorAll('.as-js-companyList'),
     thirdPartyList: document.querySelectorAll('.as-js-thirdPartyList'),
     btnAdvancedSettings: document.querySelectorAll(`.${JS_CLASS_BUTTON_ADVANCED_SETTINGS}`),
-    btnBack: document.querySelectorAll(`${JS_CLASS_BUTTON_OILBACK}`)
+    btnBack: document.querySelectorAll(`.${JS_CLASS_BUTTON_OILBACK}`)
   }
 }
 
@@ -275,7 +275,7 @@ function handleThirdPartyList() {
 }
 
 function animateOptInButton() {
-  let optInButton = document.querySelector(`${JS_CLASS_BUTTON_OPTIN}`);
+  let optInButton = document.querySelector(`.${JS_CLASS_BUTTON_OPTIN}`);
   if (optInButton) {
     optInButton.className += ' as-oil__btn-optin-clicked';
     window.setTimeout(() => {

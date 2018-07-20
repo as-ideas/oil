@@ -85,6 +85,8 @@ export const JS_CLASS_BUTTON_PROCEED = 'as-js-proceed';
 export const JS_CLASS_BUTTON_CANCEL = 'as-js-cancel';
 export const JS_CLASS_BUTTON_ADVANCED_SETTINGS = 'as-js-advanced-settings';
 
+export const CSS_CLASS_OPTOUT_DIALOG = 'as-oil-optout-confirm';
+
 // context attributes for action items, used for ga tracking
 export const DATA_CONTEXT_YES = 'YES';
 export const DATA_CONTEXT_CANCEL = 'CANCEL';

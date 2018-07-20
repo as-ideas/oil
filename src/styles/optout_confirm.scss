@@ -3,14 +3,24 @@
   width: 88%;
   height: 100%;
   z-index: 502;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.7);
 
-  .as-oil-optout-confirm__modal {
-    width: 400px;
-    height: 200px;
+  .as-oil-optout-confirm__dialog {
+    text-align: center;
+    min-width: 320px;
+    max-width: 420px;
     background-color: white;
     margin: 0 auto;
     margin-top: 10%;
     padding: 1rem;
+    p {
+      width: 100%;
+      text-align: justify;
+    }
+    .as-oil-optout-confirm__dialog__heading {
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 1.15;
+    }
   }
 }
