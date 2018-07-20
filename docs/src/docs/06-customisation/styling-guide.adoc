@@ -68,6 +68,9 @@ include::../../../../test/fixtures/gold-master/third-party-list.html[]
 
 ==== Advanced Settings (CPC - Cookie Preference Center)
 
+Currently, there are two types of the Cookie Preference Center you can choose from: Standard and Tabs-based CPC. Use the
+<<Functional Configuration Parameters, configuration parameter>> `cpc_type` to activate the preferred type.
+
 ===== Standard CPC
 
 image::src/images/view_cpc.png[CPC]
@@ -84,6 +87,18 @@ image::src/images/view_tab_cpc.png[CPC]
 [source,html]
 ----
 include::../../../../test/fixtures/gold-master/tab-cpc.html[]
+----
+
+===== Opt-out confirmation
+
+Opt-out confirmation can be activated by setting <<Functional Configuration Parameters, configuration parameter>> `require_optout_confirm`
+to `true`.
+
+image::src/images/view_cpc_optout_confirmation.png[CPC Opt-out confirmation dialog]
+
+[source,html]
+----
+include::../../../../test/fixtures/gold-master/cpc_optout_confirmation.html[]
 ----
 
 ==== Styling Examples
