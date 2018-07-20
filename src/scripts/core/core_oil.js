@@ -17,7 +17,7 @@ export function initOilLayer() {
   logInfo(`Init OilLayer (version ${OilVersion.get()})`);
 
   if (isPreviewMode() && !isPreviewCookieSet()) {
-    logPreviewInfo('Preview mode ON and OIL layer remains is hidden. Run AS_OIL.previewModeOn() and reload to display the layer.');
+    logPreviewInfo('Preview mode ON and OIL layer remains hidden. Run AS_OIL.previewModeOn() and reload to display the layer.');
   }
   registerDomElementActivationManager();
 
