@@ -79,6 +79,7 @@ export const DATAQA_PRIVACY_PAGE = 'oil-PrivacyPage';
 
 // context attributes for action items, used for ga tracking
 export const DATA_CONTEXT_YES = 'YES';
+export const DATA_CONTEXT_CANCEL = 'CANCEL';
 export const DATA_CONTEXT_ADVANCED_SETTINGS = 'ADVANCEDSETTINGS';
 export const DATA_CONTEXT_BACK = 'BACK';
 

@@ -53,7 +53,6 @@ export function requiresOptoutConfirmation() {
   return (
     getLabelWithDefault(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_HEADING, false) &&
     getLabelWithDefault(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_TEXT, false) &&
-    getLabelWithDefault(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_YES, false) &&
     getLabelWithDefault(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL, false)
   );
 }

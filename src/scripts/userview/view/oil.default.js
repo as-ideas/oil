@@ -1,23 +1,10 @@
-import {DATA_CONTEXT_YES, DATA_CONTEXT_ADVANCED_SETTINGS} from '../../core/core_constants.js';
-import {privacyPageSnippet} from './components/oil.privacy.page';
-import {OIL_LABELS} from '../userview_constants.js'
+import { privacyPageSnippet } from './components/oil.privacy.page';
+import { OIL_LABELS } from '../userview_constants.js';
+import { YesButton, AdvancedSettingsButton } from './components/oil.buttons.js';
 import {
   getLabel,
   isAdvancedSettings
 } from '../userview_config.js';
-
-/**
- * OIL advanced settings button
- */
-const OilAdvancedSettings = (advancedSettings) => {
-  return advancedSettings === true ? (
-    `
-        <button class="as-oil__btn-cpc as-js-advanced-settings" data-context="${DATA_CONTEXT_ADVANCED_SETTINGS}" data-qa="oil-AdvancedSettingsButton">
-            ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS)}
-        </button>
-      `
-  ) : '';
-};
 
 const introLabelSnippet = () => {
   let labelIntro = getLabel(OIL_LABELS.ATTR_LABEL_INTRO);
@@ -40,12 +27,10 @@ export function oilDefaultTemplate() {
             </p>
             <div class="as-oil-l-row as-oil-l-buttons">
                 <div class="as-oil-l-item">
-                    <button class="as-oil__btn-optin as-js-optin" data-context="${DATA_CONTEXT_YES}" data-qa="oil-YesButton">
-                        ${getLabel(OIL_LABELS.ATTR_LABEL_BUTTON_YES)}
-                    </button>
+                    ${YesButton()}
                 </div>
                 <div class="as-oil-l-item as-oil-l-item--stretch">
-                    ${OilAdvancedSettings(isAdvancedSettings())}
+                    ${AdvancedSettingsButton(isAdvancedSettings())}
                 </div>
             </div>
 
