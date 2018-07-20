@@ -5,6 +5,7 @@ import {
   getLabel,
   isAdvancedSettings
 } from '../userview_config.js';
+import { JS_CLASS_BUTTON_OPTIN } from '../../core/core_constants.js';
 
 const introLabelSnippet = () => {
   let labelIntro = getLabel(OIL_LABELS.ATTR_LABEL_INTRO);

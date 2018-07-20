@@ -1,11 +1,8 @@
-import { OIL_CONFIG } from '../core/core_constants.js';
-import { OIL_LABELS } from '../userview/userview_constants.js';
-import { getConfigValue, getLocale } from '../core/core_config';
-import { OIL_CONFIG_CPC_TYPES } from '../core/core_constants';
+import { OIL_CONFIG, OIL_CONFIG_CPC_TYPES } from '../core/core_constants.js';
+import { getConfigValue, getLocale } from '../core/core_config.js';
 
 // tag::config-timeout[]
 const defaultTimeoutInSeconds = 60;
-
 // end::config-timeout[]
 
 // FIXME bad name - isPersistOptOut or similiar

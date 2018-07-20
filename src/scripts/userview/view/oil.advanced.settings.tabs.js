@@ -3,9 +3,9 @@ import { OIL_LABELS } from '../userview_constants.js';
 import { forEach } from '../userview_modal.js';
 import { getLabel, getLabelWithDefault } from '../userview_config.js';
 import { getCustomPurposes } from '../../core/core_config.js';
-import { OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
+import { JS_CLASS_BUTTON_OPTIN, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
 import { getPurposes, getVendorList, getVendorsToDisplay } from '../../core/core_vendor_information.js';
-import { YesButton, BackButton } from './components/oil.buttons.js';
+import { BackButton, YesButton } from './components/oil.buttons.js';
 
 const PurposeFeatureTextsSnippet = (featureText) => {
   return `
