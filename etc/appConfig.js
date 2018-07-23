@@ -217,6 +217,16 @@ module.exports = {
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
+    filename: 'demos/vendor-integration-with-iframe.html',
+    template: path.resolve(sourcePath, 'demos', 'vendor-integration-with-iframe.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  }, {
+    filename: 'demos/vendor-integration-iframe.html',
+    chunks: [],
+    template: path.resolve(sourcePath, 'demos', 'vendor-integration-iframe.html')
+  }, {
     filename: 'sandbox/index.html',
     template: path.resolve(sourcePath, 'sandbox', 'index.html'),
     chunks: ['oilstub', 'oil'],
