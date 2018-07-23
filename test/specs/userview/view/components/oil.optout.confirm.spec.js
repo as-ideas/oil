@@ -5,6 +5,10 @@ describe('OptoutConfirmDialog', function() {
     let dialog = OptoutConfirmDialog();
     expect(dialog.id).toEqual('as-oil-optout-confirm');
     expect(dialog.className).toEqual('as-oil-optout-confirm');
+  });
+
+  it('is a very small family', function() {
+    let dialog = OptoutConfirmDialog();
     expect(dialog.childElementCount).toEqual(1);
   });
 });
