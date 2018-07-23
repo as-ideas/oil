@@ -80,8 +80,7 @@ A POI-List file must be a json containing an object with a single property `comp
 [source,json]
 ----
 {
-"companyList":
-  [
+  "companyList": [
     "Foo Comp",
     "Bar Inc."
   ]
@@ -97,29 +96,30 @@ This is a full list of configurable options.
 [width="100%",options="header", cols="1,3,1"]
 |====
 | Config Parameter | Description | Default Setting
-| publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
-| <<texts-locale-object,locale>> | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. <<locale-object, See here for details>> | None
-| locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See link:https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json[See here for an example file] | None
-| <<preview_mode,preview_mode>> | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
-| theme | The theme for the layer. By default there are two themes and size modifier themes, `dark` and `light` as well as `small dark` and `small light`. Themes currently work only as an additional css class. To change the style or theme, look into the <<styling-guide,styling guide>>. | light
-| poi_activate_poi | Activates or disactivates Power Opt-In. | false
-| poi_hub_origin | The origin of the hub.js installation, if any. | None
-| poi_hub_path | The path to the hub.html installation on the origin, if any. | /hub.html
-| poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). | none
-| poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
+| advanced_settings | Shows an advanced settings button, displaying the Cookie Preference Center. The CPC enables the user to choose their own level of privacy. These settings are stored in the oil cookie (both SOI and POI) as well. | false
+| advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31
-| <<auto-hiding-the-layer-timeout,timeout>> | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
-| advanced_settings | | advanced_settings | Replaces the No Button with an advanced settings button, displaying the Cookie Preference Center. The CPC enables the user to choose their own level of privacy. These settings are stored in the oil cookie (both SOI and POI) as well. | false
 | cpc_type | Specifies the type (the layout) of the Cookie Preference Center. Currently, two types are supported: 'standard' and 'tabs'. Depending on this parameter additional label configuration may be necessary. See section <<Full Label Configuration>> for details. | standard
-| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | true
-| iabVendorListUrl | Vendorlist to use | https://vendorlist.consensu.org/vendorlist.json
-| iabVendorWhitelist | Array of vendor IDs to include in consent. If it is set, values in `iabVendorBlacklist` are ignored. <<blacklisting-and-whitelisting, Details here>> | none
-| iabVendorBlacklist | Array of vendor IDs to exclude from consent. <<blacklisting-and-whitelisting, Details here>> | None
-| show_limited_vendors_only | Flag to only show the vendors limited by `iabVendorWhitelist` or `iabVendorBlacklist` in the CPC | false
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | none
 | default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
-| advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
 | gdpr_applies_globally | Flag to indicate that publisher is from the EU, thus showing the OIL layer to every user. The flag is passed to vendors. | true
+| iabVendorBlacklist | Array of vendor IDs to exclude from consent. <<blacklisting-and-whitelisting, Details here>> | None
+| iabVendorListUrl | Vendorlist to use | https://vendorlist.consensu.org/vendorlist.json
+| iabVendorWhitelist | Array of vendor IDs to include in consent. If it is set, values in `iabVendorBlacklist` are ignored. <<blacklisting-and-whitelisting, Details here>> | none
+| <<texts-locale-object,locale>> | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. <<locale-object, See here for details>> | None
+| locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See link:https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json[See here for an example file] | None
+| persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | true
+| poi_activate_poi | Activates or disactivates Power Opt-In. | false
+| poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). | none
+| poi_hub_origin | The origin of the hub.js installation, if any. | None
+| poi_hub_path | The path to the hub.html installation on the origin, if any. | /hub.html
+| poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
+| <<preview_mode,preview_mode>> | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
+| publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
+| require_optout_confirm | Flag to activate the opt-out confirmation dialog within Cookie Preference Center. If set to `true`, addition label definitions (for labels with prefix `label_cpc_purpose_optout_confirm`) are required. See section <<Language label configuration>> for details. | false
+| show_limited_vendors_only | Flag to only show the vendors limited by `iabVendorWhitelist` or `iabVendorBlacklist` in the CPC | false
+| theme | The theme for the layer. By default there are two themes and size modifier themes, `dark` and `light` as well as `small dark` and `small light`. Themes currently work only as an additional css class. To change the style or theme, look into the <<styling-guide,styling guide>>. | light
+| <<auto-hiding-the-layer-timeout,timeout>> | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
 |====
 
 
@@ -184,7 +184,44 @@ The recommended way is to keep the standard locale definitions.
 
 ==== Language label configuration
 
-Language configuration goes in the `texts` object of the `locale` config parameter. These texts define the standard labels for all legal texts and buttons. For configurations with `advanced_settings=false` most of these labels are not needed.
+Even though OIL is supposed to come with legal texts that shouldn't be altered, except the main heading, button labels and some additional texts, all labels can
+be overwritten, even the default ones, in the OIL configuration block. Language configuration goes in the `texts` object of the `locale` config parameter.
+The following table lists all label configuration parameters:
+
+[width="100%",options="header", cols="1,2,3"]
+|====
+|Config Parameter| Description| Example Value
+|label_intro_heading| The headline of the layer| We use cookies and other technologies
+|label_intro| The text of the layer| We're using cookies, please confirm!
+|label_button_yes| The label of the consent button| Yes
+|label_button_back| The label of the back button in cookie preference center (CPC)| Back
+|label_button_advanced_settings| The text of the link to the cookie preference center| More information
+|label_cpc_heading| The headline of the cookie preference center| Cookie Preference Center
+|label_cpc_text| The intro text of the cookie preference center| Please select a setting:
+|label_cpc_activate_all| The label of the button that activates all purposes| Activate all
+|label_cpc_deactivate_all| The label of the button that deactivates all purposes| Deactivate all
+|label_cpc_purpose_desc| The headline of the purposes section (standard CPC) or its intro text (Tab-based CPC)| Purposes
+|label_cpc_purpose_xx_text| The name of purpose with id `xx` (e.g. `01`). If undefined the name is taken from global vendor list or custom purpose definition.| Information storage an access
+|label_cpc_purpose_xx_desc| The description of purpose with id `xx` (e.g. `01`). If undefined the description is taken from global vendor list or custom purpose definition.| The storage of information, or access to information that is already stored, on your device such as advertising identifiers, device identifiers, cookies, and similar technologies.
+|label_cpc_purpose_xx_features| A list of texts describing the features of purpose with id `xx` (e.g. `01`). Only used in tab-based CPC. If undefined nothing is shown.| ["Storage of information.", "Access to information"]
+|label_cpc_purpose_optout_confirm_heading| The headline of the opt-out confirmation dialog.| Are you really sure?
+|label_cpc_purpose_optout_confirm_text| The text of the opt-out confirmation dialog.| This setting will significantly affect your experience on our website.
+|label_cpc_purpose_optout_confirm_proceed| The confirmation button label of the opt-out confirmation dialog.| Continue
+|label_cpc_purpose_optout_confirm_cancel| The cancel button label of the opt-out confirmation dialog.| Cancel
+|label_nocookie_head| The headline that is shown if user has disallowed all cookies.| No Cookies allowed.
+|label_nocookie_text| The text that is shown if user has disallowed all cookies.| Please enable cookies!
+|label_poi_group_list_heading| Headline for POI group section| Company units
+|label_poi_group_list_text| Text for POI group section| Here is a list of company units
+|label_third_party| The headline of the vendors section in CPC| Third parties
+|====
+
+IMPORTANT: If you want to reference the company or third party list from your custom text you need to add the links inline and set the right css classes.
+
+[source,html]
+----
+<a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-companyList">CompanyListLink</a>
+<a href="javascript:void(0)" class="as-oil__intro-txt--link as-js-thirdPartyList">ThirdPartys</a>
+----
 
 ==== Example for complete texts object
 
@@ -204,6 +241,7 @@ Language configuration goes in the `texts` object of the `locale` config paramet
   "label_cpc_purpose_desc": "Purposes",
   "label_cpc_purpose_01_text": "Accessing a Device",
   "label_cpc_purpose_01_desc": "Allow storing or accessing information on a user’s device.",
+  "label_cpc_purpose_01_features": ["Storage of Information", "Access to Information"],
   "label_cpc_purpose_02_text": "Advertising Personalisation",
   "label_cpc_purpose_02_desc": "Allow processing of a user’s data to provide and inform personalised advertising (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.",
   "label_cpc_purpose_03_text": "Analytics",
@@ -216,13 +254,15 @@ Language configuration goes in the `texts` object of the `locale` config paramet
   "label_cpc_purpose_06_desc": "Allow processing of a user’s data to connect such user across multiple devices.",
   "label_cpc_purpose_07_text": "Precise Geographic Location data",
   "label_cpc_purpose_07_desc": "Allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent",
+  "label_cpc_purpose_optout_confirm_heading": "Are you really sure?",
+  "label_cpc_purpose_optout_confirm_text": "This setting will significantly affect your experience on our website.",
+  "label_cpc_purpose_optout_confirm_proceed": "Continue",
+  "label_cpc_purpose_optout_confirm_cancel": "Cancel",
+  "label_nocookie_head": "In order to be able to provide our services in the best possible way, cookies must be activated in your browser.",
+  "label_nocookie_text": "Please activate Cookies in the properties of your Browsers. So you can do it in <a href=\"https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en-GB\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Google Chrome</a> or <a href=\"https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Firefox</a>."
   "label_poi_group_list_heading": "Your consent for companies of the group",
   "label_poi_group_list_text": "Here is a list of companies of the group:",
   "label_third_party": "Third Parties",
-  "label_thirdparty_list_heading": "Your consent for third party software",
-  "label_thirdparty_list_text": "",
-  "label_nocookie_head": "In order to be able to provide our services in the best possible way, cookies must be activated in your browser.",
-  "label_nocookie_text": "Please activate Cookies in the properties of your Browsers. So you can do it in <a href=\"https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en-GB\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Google Chrome</a> or <a href=\"https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Firefox</a>."
 }
 ----
 
