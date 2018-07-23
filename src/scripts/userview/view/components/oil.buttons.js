@@ -20,7 +20,7 @@ export const YesButton = (classes) => {
 
 export const ProceedButton = () => {
   return `
-    <button class="as-oil__btn-proceed as-oil__btn-blue ${JS_CLASS_BUTTON_PROCEED}" data-context="${DATA_CONTEXT_PROCEED}" data-qa="oil-ProceedButton">
+    <button class="as-oil__btn-proceed as-oil__btn-blue ${JS_CLASS_BUTTON_PROCEED}" data-context="${DATA_CONTEXT_PROCEED}" data-qa="oil-proceed-button">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_PROCEED)}
     </button>
   `
@@ -28,7 +28,7 @@ export const ProceedButton = () => {
 
 export const CancelButton = () => {
   return `
-    <button class="as-oil__btn-cancel as-oil__btn-grey ${JS_CLASS_BUTTON_CANCEL}" data-context="${DATA_CONTEXT_CANCEL}" data-qa="oil-CancelButton">
+    <button class="as-oil__btn-cancel as-oil__btn-grey ${JS_CLASS_BUTTON_CANCEL}" data-context="${DATA_CONTEXT_CANCEL}" data-qa="oil-cancel-button">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL)}
     </button>
   `
