@@ -60,7 +60,7 @@ module.exports = {
     browser
       .waitForElementPresent(OIL_PROCEED_BUTTON, 1000, false)
       .click(OIL_PROCEED_BUTTON)
-      .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 1000, false)
+      .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 2000, false)
       .end()
   },
 
@@ -68,7 +68,7 @@ module.exports = {
     browser
       .waitForElementPresent(OIL_PROCEED_BUTTON, 1000, false)
       .click(OIL_PROCEED_BUTTON)
-      .pause(100)
+      .pause(200)
       .useCss().waitForElementNotPresent(CHECKED_SLIDER, 500, false)
       .end();
   },
@@ -77,7 +77,7 @@ module.exports = {
     browser
       .waitForElementPresent(OIL_CANCEL_BUTTON, 1000, false)
       .click(OIL_CANCEL_BUTTON)
-      .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 1000, false)
+      .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 2000, false)
       .end();
   },
 

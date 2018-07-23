@@ -13,7 +13,6 @@ export function showOptoutConfirmation() {
     document.querySelector(`.${JS_CLASS_BUTTON_PROCEED}`).addEventListener('click', () => resolve(false), false);
     document.querySelector(`.${CSS_CLASS_OPTOUT_DIALOG}`).addEventListener('click', (event) => {
       if(event.target.id === CSS_CLASS_OPTOUT_DIALOG) {
-        console.log('resolve and do nothing');
         resolve(true);
       }
     }, false);
@@ -22,9 +21,7 @@ export function showOptoutConfirmation() {
 }
 
 function hideOptoutConfirmation() {
-  console.log('called hideOptoutConfirmation');
   let dialog = document.querySelector(`.${CSS_CLASS_OPTOUT_DIALOG}`);
-  console.log('remove it really');
   dialog.parentNode.removeChild(dialog);
 }
 
