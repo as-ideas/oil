@@ -17,11 +17,11 @@ module.exports = {
 
   beforeEach: browser => {
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-tabs-confirm-optout.html')
+      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-confirm-optout.html')
       .deleteCookies();
 
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-tabs-confirm-optout.html')
+      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-confirm-optout.html')
       .useXpath()
       .waitForElementVisible(OIL_LAYER, 1000, false)
       .click(OIL_ADVANCED_SETTINGS)
@@ -37,7 +37,7 @@ module.exports = {
 
   'Optout layer should remain hidden when require_optout_confirm not in config or false': function (browser) {
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-tabs.html')
+      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
       .useXpath()
       .waitForElementVisible(OIL_LAYER, 1000, false)
       .click(OIL_ADVANCED_SETTINGS)
