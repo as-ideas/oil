@@ -98,7 +98,7 @@ describe('the user view modal handles opt-in clicks on', () => {
     });
   });
 
-  describe('POI', () => {
+  xdescribe('POI', () => {
 
     it('should do power opt-in with full tracking and send one event', (done) => {
       loadFixture('poi/poi.default.html');
