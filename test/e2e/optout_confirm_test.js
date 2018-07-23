@@ -1,4 +1,5 @@
 import {
+  OIL_LAYER,
   OIL_ADVANCED_SETTINGS_WRAPPER,
   OIL_ADVANCED_SETTINGS,
   OIL_OPTOUT_CONFIRM,
@@ -7,6 +8,9 @@ import {
   OIL_DEFAULT_PURPOSE_SLIDER,
   PAGE_BACKGROUND
 } from '../test_constants.js';
+
+const SLIDER = '.as-oil-cpc__slider';
+const CHECKED_SLIDER = '.as-js-purpose-slider:checked';
 
 module.exports = {
   '@disabled': false,
@@ -17,20 +21,29 @@ module.exports = {
       .deleteCookies();
 
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-tabs.html')
-      .useCss()
-      .waitForElementVisible(PAGE_BACKGROUND, 1000, false)
+      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-tabs-confirm-optout.html')
       .useXpath()
+      .waitForElementVisible(OIL_LAYER, 1000, false)
       .click(OIL_ADVANCED_SETTINGS)
-      .pause(200)
       .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
-      .waitForElementVisible(OIL_DEFAULT_PURPOSE_SLIDER, 1000, false);
+      .waitForElementPresent(OIL_DEFAULT_PURPOSE_SLIDER, 1000, false)
+      .useCss().waitForElementNotPresent(CHECKED_SLIDER, 500, false)
+      .click(SLIDER)
+      .useCss().waitForElementPresent(CHECKED_SLIDER, 500, false)
+      .pause(100)
+      .click(SLIDER)
+      .useXpath();
   },
 
   'Optout layer should remain hidden when require_optout_confirm not in config or false': function (browser) {
     browser
+      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-tabs.html')
+      .useXpath()
+      .waitForElementVisible(OIL_LAYER, 1000, false)
+      .click(OIL_ADVANCED_SETTINGS)
+      .waitForElementPresent(OIL_DEFAULT_PURPOSE_SLIDER, 1000, false)
       .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .pause(10)
+      .pause(100)
       .click(OIL_DEFAULT_PURPOSE_SLIDER)
       .pause(100)
       .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 500)
@@ -39,61 +52,51 @@ module.exports = {
 
   'Optout layer should show when trying to deactivate a consent slider': function (browser) {
     browser
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .pause(100)
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .waitForElementVisible(OIL_OPTOUT_CONFIRM)
+      .waitForElementPresent(OIL_OPTOUT_CONFIRM, 1000, false)
       .end()
   },
 
   'Optout layer should hide when pressing proceed button': function (browser) {
     browser
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .pause(100)
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .waitForElementVisible(OIL_OPTOUT_CONFIRM)
+      .waitForElementPresent(OIL_PROCEED_BUTTON, 1000, false)
       .click(OIL_PROCEED_BUTTON)
-      .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 500)
-      .refresh();
+      .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 1000, false)
+      .end()
+  },
+
+  'Slider should get deactivated when proceed was clicked in modal': function (browser) {
+    browser
+      .waitForElementPresent(OIL_PROCEED_BUTTON, 1000, false)
+      .click(OIL_PROCEED_BUTTON)
+      .pause(100)
+      .useCss().waitForElementNotPresent(CHECKED_SLIDER, 500, false)
+      .end();
   },
 
   'Optout layer should hide when pressing cancel button': function (browser) {
     browser
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .pause(100)
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .waitForElementVisible(OIL_OPTOUT_CONFIRM)
+      .waitForElementPresent(OIL_CANCEL_BUTTON, 1000, false)
       .click(OIL_CANCEL_BUTTON)
-      .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 500)
-      .refresh();
+      .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 1000, false)
+      .end();
   },
 
   'Slider should remain activated when cancel was clicked in modal': function (browser) {
     browser
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
+      .waitForElementPresent(OIL_CANCEL_BUTTON, 1000, false)
+      .click(OIL_CANCEL_BUTTON)
       .pause(100)
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .waitForElementVisible(OIL_OPTOUT_CONFIRM)
-      .click(OIL_PROCEED_BUTTON)
-      .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 500)
-      .end()
+      .useCss().waitForElementPresent(CHECKED_SLIDER, 500, false)
+      .end();
   },
 
   'Slider should remain activated when background area was clicked': function (browser) {
     browser
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
+      .waitForElementPresent(OIL_CANCEL_BUTTON, 1000, false)
+      .click(OIL_OPTOUT_CONFIRM)
       .pause(100)
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .waitForElementVisible(OIL_OPTOUT_CONFIRM)
-      // CONTINUE
-  },
-
-  'Slider should not be activated when proceed was clicked in modal': function (browser) {
-    browser
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .pause(100)
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .waitForElementVisible(OIL_OPTOUT_CONFIRM)
-      // CONTINUE
+      .useCss().waitForElementPresent(CHECKED_SLIDER, 500, false)
+      .end();
   }
+
 };
