@@ -1,5 +1,3 @@
-== Version: {version}
-
 == Introduction
 
 === About oil.js
