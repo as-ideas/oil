@@ -150,7 +150,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
 | locale | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. See [here for a configuration example](#texts-locale-object) and [here for all localizable labels](#available-text-labels) | None
 | locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See [here for an example file](https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json) | None
-| preview_mode | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
+| preview_mode | The preview mode is useful when testing OIL in a production or live environment. When value is `true`, the layer remains hidden until you manually trigger `window.AS_OIL.previewModeOn()` in your console. Reload, and the layer is displayed. You can hide it again with `window.AS_OIL.previewModeOff()`. | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
 | poi_activate_poi | Activates single consent cookie for multiple websites. [See requirements for POI here](#poi--power-opt-in) | false
 | poi_hub_origin | The origin of the hub.js installation | None
@@ -169,6 +169,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
 | gdpr_applies_globally | Flag to indicate that publisher is from the EU, thus showing the OIL layer to every user. The flag is passed to vendors. | true
+| require_optout_confirm | Flag to activate the opt-out confirmation dialog within the CPC. If set to `true`, additional label definitions (with prefix `label_cpc_purpose_optout`) are required. See the label configuration section in the documentation for details. | false
 
 ### Texts & Locale Object
 

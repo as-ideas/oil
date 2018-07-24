@@ -58,7 +58,7 @@ insert a customized version of this script:
 ----
 
 OIL is supposed to come with legal texts that shouldn't be altered, except the main heading, button labels and some additional texts. Nevertheless, all labels can
-be overwritten, even the default ones, in the OIL configuration block (see chapter "Language label configuration").
+be overwritten, even the default ones, in the OIL configuration block (see chapter <<Language label configuration>>).
 
 include::06-customisation/styling-guide.adoc[]
 
