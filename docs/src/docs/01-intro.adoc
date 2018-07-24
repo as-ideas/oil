@@ -8,7 +8,7 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 
 * Data privacy opt-in overlay for all users of services offered by various Axel Springer brands and/or units
 * Local opt-in (called "Site Opt-In", SOI) as well as group-based cross-company opt-in (called "Power Opt-In", POI)
-* Integration and hosting on Tealium with the option to run it standalone.
+* Integration and hosting on Tealium as well as the option to run it standalone.
 
 The Opt-In Layer (OIL) is an offical link:http://advertisingconsent.eu/iab-europe-transparency-consent-framework-list-of-registered-cmps/[Consent Management Provider (CMP)] in accordance with the IAB Europe "Transparency & Consent Framework".
 
@@ -43,28 +43,10 @@ The Opt-In Layer (OIL) is an offical link:http://advertisingconsent.eu/iab-europ
 * Loads with low latency and asynchronously for different parts
 * Happy path loads only ~20k (subject to change and further optimization) of gzipped JavaScript
 * Easy to implement with open documentation and examples, including dev kit
-* With SaaS: Domain White Listing against unauthorized usage
-
-=== Team & Stakeholders
-
-[options="header",cols="1,2"]
-|===
-|Role/Name|Contact|
-Business Owner | Johannes Fenner, CDP |
-Legal Affairs | Susanne Stollhoff, Dr. Olaf Koglin |
-Product Owner | Antonino Tumminelli, AS Ideas Engineering |
-UX | Özden Gelgec, AS Ideas Engineering |
-UX | Andreas Wagner, AS Ideas Engineering |
-Developer | Sebastian Waschnick, AS Ideas Engineering |
-Developer | Marcel Bankmann, AS Ideas Engineering |
-Developer | Alexander Glintschert, AS Ideas Engineering |
-Developer | Dmitri Awerkov-Schäfer, AS Ideas Engineering |
-Tealium Consulting | Michael Sievers, CDP|
-|===
 
 === Solution Strategy
 
-According the proposal of the European Commission, the European Parliament, and the Council of Ministers, a website is required to prompt users with a menu of privacy options when they are visiting for the first time.[1]
+According the proposal of the European Commission, the European Parliament, and the Council of Ministers, a website is required to prompt users with a menu of privacy options when they are visiting for the first time.
 
 The Opt-In Layer (OIL) is our solution for these requirements consisting of three parts:
 
