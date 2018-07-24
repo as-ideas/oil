@@ -25,9 +25,15 @@ export const OIL_MANAGED_TAGS_SCRIPT_TAG = '//*[@id="managedScriptTag"]';
 export const OIL_MANAGED_TAGS_IMG_TAG = '//*[@id="managedImgTag"]';
 export const OIL_MANAGED_TAGS_DIV = '//*[@id="demoText"]';
 export const PAGE_BACKGROUND = '.has-big-bad-background';
+export const VENDOR_INTEGRATION_IFRAME_ID = 'vendor-integration-iframe';
+export const VENDOR_INTEGRATION_IFRAME = `//*[@id="${VENDOR_INTEGRATION_IFRAME_ID}"]`;
 export const GDPR_APPLY_BUTTON = '//*[@id="applyGDPR"]';
 export const OIL_THIRD_PARTY_NAME = '.as-oil-third-party-name';
 export const OIL_ADVANCED_SETTINGS_ACTIVE_PURPOSE_TAB = '.as-oil-tabs-cpc__purpose-label-active';
 export const OIL_ADVANCED_SETTINGS_INACTIVE_PURPOSE_TABS = '.as-oil-tabs-cpc__purpose-labels > .as-oil-tabs-cpc__purpose-label-inactive:nth-child(4)';
+export const IFRAME_PING_RESULT_SUCCESS = '//*[@id="ping-result-success"]';
+export const IFRAME_PING_RESULT_VALUE = '//*[@id="ping-result-value"]';
+export const IFRAME_GETCONSENTDATA_RESULT_SUCCESS = '//*[@id="getConsentData-result-success"]';
+export const IFRAME_GETCONSENTDATA_RESULT_VALUE = '//*[@id="getConsentData-result-value"]';
 
 export const OIL_OPTOUT_CONFIRM = '//*[@id="as-oil-optout-confirm"]';
