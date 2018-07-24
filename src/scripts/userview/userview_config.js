@@ -1,10 +1,8 @@
-import { OIL_CONFIG } from '../core/core_constants.js';
-import { getConfigValue, getLocale } from '../core/core_config';
-import { OIL_CONFIG_CPC_TYPES } from '../core/core_constants';
+import { OIL_CONFIG, OIL_CONFIG_CPC_TYPES } from '../core/core_constants.js';
+import { getConfigValue, getLocale } from '../core/core_config.js';
 
 // tag::config-timeout[]
 const defaultTimeoutInSeconds = 60;
-
 // end::config-timeout[]
 
 // FIXME bad name - isPersistOptOut or similiar
@@ -46,4 +44,8 @@ export function getLabel(labelName) {
 export function getLabelWithDefault(labelName, defaultLabel) {
   let defaultLocale = getLocale();
   return getConfigValue(labelName, (defaultLocale && defaultLocale.texts[labelName]) ? defaultLocale.texts[labelName] : defaultLabel);
+}
+
+export function isOptoutConfirmRequired() {
+  return getConfigValue(OIL_CONFIG.ATTR_REQUIRE_OPTOUT_CONFIRM, false);
 }

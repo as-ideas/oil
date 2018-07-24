@@ -10,6 +10,9 @@ import {
   EVENT_NAME_SOI_OPT_IN,
   EVENT_NAME_THIRD_PARTY_LIST,
   EVENT_NAME_TIMEOUT,
+  JS_CLASS_BUTTON_ADVANCED_SETTINGS,
+  JS_CLASS_BUTTON_OILBACK,
+  JS_CLASS_BUTTON_OPTIN,
   OIL_CONFIG_CPC_TYPES,
   PRIVACY_MINIMUM_TRACKING
 } from '../core/core_constants';
@@ -20,9 +23,10 @@ import { oilNoCookiesTemplate } from './view/oil.no.cookies';
 import * as AdvancedSettingsStandard from './view/oil.advanced.settings.standard';
 import * as AdvancedSettingsTabs from './view/oil.advanced.settings.tabs';
 import { logError, logInfo } from '../core/core_log';
-import { getCpcType, getTheme, getTimeOutValue, isPersistMinimumTracking } from './userview_config';
-import { getAdvancedSettingsPurposesDefault, isPoiActive, isSubscriberSetCookieActive, gdprApplies } from '../core/core_config';
+import { getCpcType, getTheme, getTimeOutValue, isOptoutConfirmRequired, isPersistMinimumTracking } from './userview_config';
+import { gdprApplies, getAdvancedSettingsPurposesDefault, isPoiActive, isSubscriberSetCookieActive } from '../core/core_config';
 import { applyPrivacySettings, getPrivacySettings, getSoiConsentData } from './userview_privacy';
+import { activateOptoutConfirm } from './userview_optout_confirm.js';
 import { getPurposeIds, loadVendorList } from '../core/core_vendor_information';
 import { manageDomElementActivation } from '../core/core_tag_management';
 
@@ -146,6 +150,10 @@ function findAdvancedSettingsInlineTemplate() {
 }
 
 function attachCpcEventHandlers() {
+  if(isOptoutConfirmRequired()){
+    activateOptoutConfirm();
+  }
+
   const cpcType = getCpcType();
   switch (cpcType) {
     case OIL_CONFIG_CPC_TYPES.CPC_TYPE_STANDARD:
@@ -230,12 +238,12 @@ function injectOilWrapperInDOM(wrapper) {
 function getOilDOMNodes() {
   return {
     oilWrapper: document.querySelectorAll('.as-oil'),
-    btnOptIn: document.querySelectorAll('.as-js-optin'),
+    btnOptIn: document.querySelectorAll(`.${JS_CLASS_BUTTON_OPTIN}`),
     btnPoiOptIn: document.querySelectorAll('.as-js-optin-poi'),
     companyList: document.querySelectorAll('.as-js-companyList'),
     thirdPartyList: document.querySelectorAll('.as-js-thirdPartyList'),
-    btnAdvancedSettings: document.querySelectorAll('.as-js-advanced-settings'),
-    btnBack: document.querySelectorAll('.as-js-oilback')
+    btnAdvancedSettings: document.querySelectorAll(`.${JS_CLASS_BUTTON_ADVANCED_SETTINGS}`),
+    btnBack: document.querySelectorAll(`.${JS_CLASS_BUTTON_OILBACK}`)
   }
 }
 
@@ -268,7 +276,7 @@ function handleThirdPartyList() {
 }
 
 function animateOptInButton() {
-  let optInButton = document.querySelector('.as-js-optin');
+  let optInButton = document.querySelector(`.${JS_CLASS_BUTTON_OPTIN}`);
   if (optInButton) {
     optInButton.className += ' as-oil__btn-optin-clicked';
     window.setTimeout(() => {
