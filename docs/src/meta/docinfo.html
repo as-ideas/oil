@@ -1,44 +1,15 @@
-<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,600" rel="stylesheet"/>
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/vendor/jquery.min.js"></script><!--<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>--><!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>-->
-
-
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-<script>
-  // $(document).ready(function () {
-  //   var element = document.querySelector('.sectlevel1');
-  //   element.classList.add('accordion');
-  //   element.setAttribute('data-accordion', '');
-  //   element.setAttribute('data-multi-expand', 'true');
-  //   element.setAttribute('data-allow-all-closed', 'true');
-  //   element.setAttribute('data-slide-speed', '500');
-  //   element.setAttribute('role', 'tablist');
-  //
-  //   var liElements = element.children;
-  //   for (var i = 0; i < liElements.length; i++) {
-  //     let liElement = liElements[i];
-  //     liElement.classList.add('accordion-item is-active');
-  //     liElement.setAttribute('data-accordion-item', '');
-  //
-  //     let ulElement = liElement.querySelector('ul');
-  //     if (ulElement) {
-  //       ulElement.classList.add('accordion-content');
-  //       ulElement.setAttribute('data-tab-content', '');
-  //     }
-  //   }
-  //
-  //   $(document).foundation();
-  //   window.setTimeout(function () {
-  //     $('.accordion').foundation('up', $('.accordion-content'));
-  //   }, 500);
-  // })
-</script>
-
 <style>
   body, html {
     font-family: 'Source Sans Pro', serif;
   }
+
+  body.article.toc2 {
+    padding-left: 320px;
+  }
+
+</style>
+
+<style>
 
   /* HEADER aka TOC or SIDEBAR */
   #header #toc {
@@ -154,6 +125,8 @@
   }
 
   h2 {
+    margin: 46px 0 24px 0;
+
     font-size: 36px;
     font-weight: 600;
     line-height: 1.25;
@@ -161,12 +134,15 @@
   }
 
   h3 {
+    margin: 36px 0 18px 0;
+
     font-size: 26px;
     font-weight: 600;
     line-height: 1.15;
   }
 
   h4 {
+    margin: 24px 0 10px 0;
 
   }
 
@@ -176,6 +152,71 @@
     line-height: 1.5;
     letter-spacing: 0.5px;
   }
+
+  .ulist ul {
+    list-style-position: outside;
+  }
+
+  .ulist li {
+    padding-left: 12px;
+  }
+
+  #content .tableblock th {
+    font-family: 'Source Code Pro';
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: normal;
+    color: #17ce68;
+  }
+
+  /* DARKER CELLS */
+  #content table tr.odd, #content table tr:nth-of-type(odd) {
+    background-color: #f9fafc;
+  }
+
+  /* LIGHTER CELLS */
+  #content table.tableblock thead tr, #content table tr.even, #content table tr.alt, #content table tr:nth-of-type(even) {
+    background-color: #ffffff;
+  }
+
+  /* BORDER*/
+  #content table.tableblock, #content th.tableblock, #content td.tableblock {
+    border: 0.5px solid #f0f2f8;
+  }
+
+  #content p.tableblock {
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    color: #3c4c57;
+  }
+
+  #content .sect1 {
+    border-top: none;
+
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-bottom: solid 1px #1eb8ff;
+  }
+
+  #content .sect1:last-of-type {
+
+  }
+
+  #content .sect2 {
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-bottom: solid 1px #e0e8ed;
+  }
+
+  #content .sect2:last-of-type {
+    padding-bottom: initial;
+    margin-bottom: initial;
+    border-bottom: none;
+  }
+
+
 </style>
 
 <style>
