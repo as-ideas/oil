@@ -26,6 +26,8 @@ include::src/docs/04-iab-europe-framework.adoc[]
 
 include::src/docs/05-oil-api.adoc[]
 
-include::src/docs/06-customisation.adoc[]
+include::src/docs/06-tealium.adoc[]
 
-include::src/docs/07-appendix.adoc[]
+include::src/docs/07-customisation.adoc[]
+
+include::src/docs/08-appendix.adoc[]
