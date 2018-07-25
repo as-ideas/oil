@@ -11,8 +11,10 @@
 ++++
     </div>
     <div class="main-header__call-to-action">
-      <a class="menu-button blue-design" href="https://sandbox.oiljs.org/" target="_blank">Sandbox</a>
-      <a class="menu-button" href="https://github.com/as-ideas/oil" target="_blank">Github</a>
+      <a class="menu-button xs-only" href="https://sandbox.oiljs.org/" target="_blank" alt="sandbox"><i class="fas fa-chalkboard-teacher"></i></a>
+      <a class="menu-button xs-only" href="https://github.com/as-ideas/oil" target="_blank" alt="github"><i class="fab fa-github"></i></a>
+      <a class="menu-button blue-design desktop-only" href="https://sandbox.oiljs.org/" target="_blank">Sandbox</a>
+      <a class="menu-button desktop-only" href="https://github.com/as-ideas/oil" target="_blank">Github</a>
     </div>
    </div>
 </div>

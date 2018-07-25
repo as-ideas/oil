@@ -220,6 +220,7 @@
 </style>
 
 <style>
+  /* HEADER */
   .main-header {
     position: fixed;
     top: 0;
@@ -359,12 +360,75 @@
   }
 
   @media only screen and (max-device-width: 480px) {
+    body, html {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    .sect2 {
+      overflow-x: scroll;
+    }
+
+    #header {
+      padding-left: unset;
+      padding-right: unset;
+    }
+
+    #content {
+      max-width: 100%;
+      padding: 6px 6px 6px 10px;
+    }
+
+    body.article.toc2 {
+      padding-left: unset;
+    }
+
+    .main-header {
+      max-width: 100vw;
+      width: auto;
+    }
+
+    .main-header__left {
+      flex: 1 1 auto;
+      width: 228px;
+      padding-left: 12px;
+    }
+
+    .main-header__right {
+      padding: 0 0 0 0;
+      background: #f8f9fb;
+    }
+
+    .main-header__version p {
+      padding-left: 6px;
+      font-size: 8px;
+    }
+
+    .main-header__call-to-action {
+      display: flex;
+      align-items: center;
+    }
+
+    .desktop-only {
+      display: none;
+    }
+
     .menu-button {
       height: 24px;
-      width: 80px;
+      width: 40px;
 
       font-size: 14px;
       line-height: 24px;
+    }
+
+    .sectlevel1 {
+      padding: 12px;
+    }
+  }
+
+  @media only screen and (min-device-width: 480px) {
+    .xs-only {
+      display: none;
     }
   }
 </style>
