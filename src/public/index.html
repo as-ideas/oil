@@ -62,7 +62,12 @@
     padding: 80px 20px 20px 20px;
   }
 
+  .logo-wrapper {
+    text-align: center;
+  }
+
   .logo {
+    display: inline-block;
     width: 200px;
     height: 200px;
     background: url('assets/images/landing_page/logo.png') no-repeat center;
@@ -76,7 +81,7 @@
     text-align: center;
     width: 100%;
     padding: 0 20px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
   }
 
   .claim-wrapper .logo-claim {
@@ -89,18 +94,18 @@
     letter-spacing: 0.1px;
   }
 
-  /* MAIN HERO */
-  .fa-ul {
-    font-size: 24px;
-  }
+  /*!* MAIN HERO *!*/
+  /*.fa-ul {*/
+  /*font-size: 24px;*/
+  /*}*/
 
-  .fa-ul .fa {
-    font-size: 28px;
-  }
+  /*.fa-ul .fa {*/
+  /*font-size: 28px;*/
+  /*}*/
 
-  .fa-ul li {
-    margin: 12px 4px;
-  }
+  /*.fa-ul li {*/
+  /*margin: 12px 4px;*/
+  /*}*/
 
   .hero-call-to-action {
     margin-top: 40px;
@@ -117,49 +122,6 @@
 
   .hero-call-to-action a:hover {
     background-color: #4e4e4e;
-  }
-
-  /* HUGE IMAGE ROW */
-  .image-row {
-    width: 100vw;
-    height: 500px;
-    background: #151515;
-    padding: 10px 20px;
-    margin: 40px 0;
-  }
-
-  .badmovie {
-    width: 100%;
-    height: 100%;
-    background: url('assets/images/landing_page/badmovie.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-
-  /* 2nd content */
-  .full-row {
-    width: 100vw;
-    min-height: 300px;
-    background-color: black;
-    color: white;
-    padding: 50px 60px;
-    margin-bottom: 20px;
-
-  }
-
-  .full-row .logo-claim-2 {
-    font-size: 20px;
-    font-weight: 100;
-    line-height: 1.4;
-    padding-top: 20px;
-    color: white;
-    max-width: 700px;
-    margin: auto;
-  }
-
-  .full-row .logo-claim {
-    color: white;
   }
 
   /* FOOTER */
@@ -179,7 +141,7 @@
   }
 
   .social-links {
-    font-size: 22px;
+    font-size: 16px;
     font-weight: 100;
   }
 
@@ -312,262 +274,48 @@
 
 <div class="content-wrapper">
 
-  <div class="logo"></div>
+  <div class="logo-wrapper">
+    <a class="logo" href="https://www.oiljs.org"></a>
+  </div>
 
   <div class="claim-wrapper">
-    <h1 class="logo-claim">Prepares you for GDPR and ePrivacy</h1>
-    <h2 class="logo-claim-2">Optimized. Tested. Compatible. Awesome.</h2>
+    <h1 class="logo-claim">This is not the real website of OIL.js</h1>
+    <h2 class="logo-claim-2"><a href="https://www.oiljs.org">On oiljs.org you will find everything you need.</a></h2>
   </div>
 
   <div class="jumbotron hero">
     <div class="row">
-      <div class="col-6 col-sm-push-5 col-sm-7 animated wow fadeInRight">
-        <img class="img-responsive" alt="Looks great on every device"
-             src="assets/images/landing_page/mutli-devices.png">
-        <br>
-      </div>
-
-      <div class="col-6 col-sm-pull-7 col-sm-offset-1 col-sm-4 animated wow slideInLeft">
-        <ul class="fa-ul">
-          <li><i class="fa fa-li fa-cog"></i>Fully customizable</li>
-          <li><i class="fa fa-li fa-heart"></i>Looks great on every device</li>
-          <li><i class="fa fa-li fa-cloud"></i>Quick installation</li>
-          <li><i class="fa fa-li fa-magic"></i>Highly optimized</li>
-        </ul>
-
+      <div class="col-6 col-sm-6 animated wow fadeInRight">
         <p class="hero-call-to-action">
-          <a href="docs/" class="btn btn-primary btn-lg" target="_blank" role="button">Documentation <i
-            class="fa fa-chevron-right"></i>
+          <a href="https://www.oiljs.org" class="btn btn-primary btn-lg" target="_blank" role="button">
+            Website <i class="fa fa-chevron-right"></i>
           </a>
-          <a href="sandbox/" class="btn btn-secondary btn-lg" target="_blank" role="button">Demo-Sandbox
-            <i class="fa fa-chevron-right"></i>
+          <a href="https://oil.axelspringer.com/docs/" class="btn btn-secondary btn-lg" target="_blank" role="button">
+            Documentation <i class="fa fa-chevron-right"></i>
           </a>
-          <a href="https://github.com/as-ideas/oil" target="_blank">Github</a>
+          <a href="https://github.com/as-ideas/oil" class="btn btn-secondary btn-lg" target="_blank">
+            Github <i class="fa fa-chevron-right"></i>
+          </a>
+          <a href="release/" class="btn btn-secondary btn-lg" target="_blank">
+            Released versions <i class="fa fa-chevron-right"></i>
+          </a>
           <br/>
-          <a href="release/" target="_blank">Released versions</a>
-          <br/>
-          <a href="demos/" target="_blank">Example Pages</a>
+          <a href="demos/" class="btn btn-secondary btn-lg" target="_blank">
+            Example Pages <i class="fa fa-chevron-right"></i>
+          </a>
         </p>
       </div>
-    </div>
-  </div>
-</div>
 
-
-<div class="full-row">
-  <div class="claim-wrapper">
-    <h1 class="logo-claim">Supports your preparation for GDPR and ePrivacy compliance</h1>
-    <h1 class="logo-claim-2">The Opt-In and Transparency Layer (OIL) is a JavaScript library for displaying the user
-      consent dialog. It
-      offers
-      a substantial variety of options and helps you to manage your tags.<br/> Best served with <a
-        href="https://tealiumiq.com" target="_blank">Tealium</a>! </h1>
-  </div>
-</div>
-
-<div class="content-wrapper">
-
-  <div class="row">
-    <div class="col-sm-7 animated wow slideInLeft">
-      <h1>
-        We can help you.
-        <span class="text-muted">No worries.</span>
-      </h1>
-      <p class="lead">
-        How does consent, provided by the end user, get forwarded to different vendors? We aim to help you by offering
-        you full access to our userfriendly and high
-        quality solution. </p>
-      <p class="lead">
-        OIL.js generates detailed events for every interaction, a fully featured JavaScript API and support for the
-        <a href="http://advertisingconsent.eu/" target="_blank">IAB standard</a>. Besides supporting the <a
-        href="https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework" target="_blank">IAB
-        specification</a>, we encourage its adoption and advise you to get involved with its development.</p>
-    </div>
-    <div class="col-sm-5">
-      <img class="img-responsive pull-right animated wow fadeInRight dropshadow"
-           src="assets/images/landing_page/privacy.jpg" alt="Generic placeholder image">
-    </div>
-  </div>
-
-  <hr/>
-
-  <div class="claim-wrapper">
-    <h1 class="logo-claim">Some of our features</h1>
-  </div>
-
-  <hr class="hidden-xs"/>
-
-  <div>
-    <ul class="fa-ul">
-      <li><i class="fa fa-li fa-arrow-right"></i>Direct or complete integration with tealium</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Single Opt-In for one website</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Power Opt-In with third party cookie softblock fallback</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Power Opt-In for groups of websites (1-n POI-groups)</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Central domain oil.axelspringer.com as cookie registry for Power Opt-In
-      </li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Many demos, examples, and documentation</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Domain White Listing against unauthorized usage</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Cookie Preference Center (embeddable)</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Highly Customizable Layer - just some lines of CSS away</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Multiple possible buttons ("Yes", "Later", "CPC", "Ignore", "X")</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>All texts are configurable</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Javascript events for everything</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Preview and debug modes</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Works with all resolutions and device types</li>
-    </ul>
-  </div>
-</div>
-
-<div class="image-row animated wow slideInUp">
-  <div class="badmovie"></div>
-</div>
-
-<div class="content-wrapper">
-  <div class="row">
-    <div class="col-sm-7 col-sm-push-5 animated wow slideInRight">
-      <h1>
-        OIL, no vinegar. <span class="text-muted">See for yourself.</span>
-      </h1>
-      <p class="lead">
-        Our library was AB-tested with large amounts of users thus improving the solutions's quality and its
-        documentation.
-        We value your technical feedback and are looking forward to sparing ideas with you. <a
-        href="mailto:oil-support@asideas.de">Contact us</a> and let's improve OIL together! </p>
-    </div>
-    <div class="col-sm-5 col-sm-pull-7">
-      <img class="img-responsive animated wow slideInLeft dropshadow" src="assets/images/landing_page/oil.jpeg"
-           alt="Generic placeholder image">
-    </div>
-  </div>
-
-  <hr/>
-
-  <div class="quick-install">
-    <h1>OIL.JS QUICK INSTALL</h1>
-    <p>You have multiple options: For our own brands you can just include the JS-Library via our CDN. Otherwise you will
-      need to host
-      the released files on your own infrastructure.
-      For direct integration you only need to add our tag: </p>
-    <ul>
-      <li>Add the configuration first</li>
-      <li>Add the stub code</li>
-      <li>Add the script with a link to the oil.min.js file</li>
-    </ul>
-    <pre style="white-space: pre;">&lt;script id=&quot;oil-configuration&quot; type=&quot;application/configuration&quot;&gt;
-{
-  &quot;advanced_settings&quot;: true,
-  &quot;timeout&quot;: 0,
-  &quot;publicPath&quot;: &quot;//oil-integration-host1.herokuapp.com/1.0.35/&quot;,
-  &quot;poi_activate_poi&quot;: true,
-  &quot;poi_group_name&quot;: &quot;myPoiGroupForGroupingPois&quot;,
-  &quot;poi_hub_origin&quot;: &quot;//oil-integration-host1.herokuapp.com/&quot;,
-  &quot;poi_hub_path&quot;: &quot;/release/1.0.35/hub.html&quot;,
-  &quot;locale&quot;: {
-    &quot;localeId&quot;: &quot;enEN_01&quot;,
-    &quot;version&quot;: 1,
-    &quot;texts&quot;: {
-      &quot;label_intro_heading&quot;: &quot;We use cookies and other technologies&quot;,
-      &quot;label_intro&quot;: &quot;The website uses cookies, web beacons, JavaScript and similar technologies. I agree that &lt;a href=\&quot;javascript:void(0)\&quot; class=\&quot;as-oil__intro-txt--link as-js-companyList\&quot;&gt;companies belonging to Axel Springer SE&lt;/a&gt; and &lt;a href=\&quot;javascript:void(0)\&quot; class=\&quot;as-oil__intro-txt--link as-js-thirdPartyList\&quot;&gt;trusted partners&lt;/a&gt; generate pseudonymous user profiles for adapting the website to the user, for market research and for advertising. The generated data can also be shared with third parties while the user profiles cannot be combined with personal data. Detailed information, also on the right to withdraw consent, can be found in the website&#39;s privacy policy.&quot;,
-      &quot;label_button_yes&quot;: &quot;OK&quot;,
-      &quot;label_button_back&quot;: &quot;Back&quot;,
-      &quot;label_button_advanced_settings&quot;: &quot;More information&quot;,
-      &quot;label_cpc_heading&quot;: &quot;Please select a privacy setting:&quot;,
-      &quot;label_cpc_text&quot;: &quot;Cookie Preference Center&quot;,
-      &quot;label_cpc_activate_all&quot;: &quot;Activate all&quot;,
-      &quot;label_cpc_deactivate_all&quot;: &quot;Deactivate all&quot;,
-      &quot;label_cpc_purpose_01_text&quot;: &quot;Accessing a Device&quot;,
-      &quot;label_cpc_purpose_01_desc&quot;: &quot;Allow storing or accessing information on a user’s device.&quot;,
-      &quot;label_cpc_purpose_02_text&quot;: &quot;Advertising Personalisation&quot;,
-      &quot;label_cpc_purpose_02_desc&quot;: &quot;Allow processing of a user’s data to provide and inform personalised advertising (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.&quot;,
-      &quot;label_cpc_purpose_03_text&quot;: &quot;Analytics&quot;,
-      &quot;label_cpc_purpose_03_desc&quot;: &quot;Allow processing of a user’s data to deliver content or advertisements and measure the delivery of such content or advertisements, extract insights and generate reports to understand service usage; and/or accessing or storing information on devices for that purpose.&quot;,
-      &quot;label_cpc_purpose_04_text&quot;: &quot;Content Personalisation&quot;,
-      &quot;label_cpc_purpose_04_desc&quot;: &quot;Allow processing of a user’s data to provide and inform personalised content (including delivery, measurement, and reporting) based on a user’s preferences or interests known or inferred from data collected across multiple sites, apps, or devices; and/or accessing or storing information on devices for that purpose.&quot;,
-      &quot;label_cpc_purpose_05_text&quot;: &quot;Matching Data to Offline Sources&quot;,
-      &quot;label_cpc_purpose_05_desc&quot;: &quot;Combining data from offline sources that were initially collected in other contexts&quot;,
-      &quot;label_cpc_purpose_06_text&quot;: &quot;Linking Devices&quot;,
-      &quot;label_cpc_purpose_06_desc&quot;: &quot;Allow processing of a user’s data to connect such user across multiple devices.&quot;,
-      &quot;label_cpc_purpose_07_text&quot;: &quot;Precise Geographic Location data&quot;,
-      &quot;label_cpc_purpose_07_desc&quot;: &quot;Allow processing of a user’s precise geographic location data in support of a purpose for which that certain third party has consent&quot;,
-      &quot;label_cpc_purpose_desc&quot;: &quot;Purpose&quot;,
-      &quot;label_poi_group_list_heading&quot;: &quot;Your consent for companies of the group&quot;,
-      &quot;label_poi_group_list_text&quot;: &quot;Here is a list of companies of the group:&quot;,
-      &quot;label_third_party&quot;: &quot;Third Parties&quot;,
-      &quot;label_thirdparty_list_heading&quot;: &quot;Your consent for third party software&quot;,
-      &quot;label_thirdparty_list_text&quot;: &quot;&quot;,
-      &quot;label_nocookie_head&quot;: &quot;In order to be able to provide our services in the best possible way, cookies must be activated in your browser.&quot;,
-      &quot;label_nocookie_text&quot;: &quot;Please activate Cookies in the properties of your Browsers. So you can do it in &lt;a href=\&quot;https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&amp;hl=en-GB\&quot; class=\&quot;as-oil__intro-txt--link\&quot; target=\&quot;_blank\&quot;&gt;Google Chrome&lt;/a&gt; or &lt;a href=\&quot;https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer\&quot; class=\&quot;as-oil__intro-txt--link\&quot; target=\&quot;_blank\&quot;&gt;Firefox&lt;/a&gt;.&quot;
-    }
-  }
-}
-&lt;/script&gt;</pre>
-    <pre>&lt;script&gt;
-!function(e){var n={};function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="/",t(t.s=365)}({365:function(e,n,t){"use strict";!function(e,n){e.__cmp||(e.__cmp=function(){function t(){return!(!e.AS_OIL||!e.AS_OIL.commandCollectionExecutor)}(e.attachEvent||e.addEventListener)("message",function(n){e.__cmp.receiveMessage(n)},!1),function e(){if(!(n.getElementsByName("__cmpLocator").length>0))if(n.body){var t=n.createElement("iframe");t.style.display="none",t.name="__cmpLocator",n.body.appendChild(t)}else setTimeout(e,5)}();var o=[],r=function(n,r,a){if("ping"===n)(i=a)&&i({gdprAppliesGlobally:!1,cmpLoaded:t()});else{var c={command:n,parameter:r,callback:a};o.push(c),t()&&e.AS_OIL.commandCollectionExecutor(c)}var i};return r.commandCollection=o,r.receiveMessage=function(e){var n=e&&e.data&&e.data.__cmpCall;n&&o.push({callId:n.callId,command:n.command,parameter:n.parameter,event:e})},r}())}(window,document)}});
-&lt;/script&gt;
-    </pre>
-    <pre>
-      &lt;script type=&quot;text/javascript&quot; src=&quot;https://oil.axelspringer.com/release/1.1.1/oil.1.1.1-SNAPSHOT.min.js&quot;&gt;&lt;/script&gt;
-    </pre>
-    <a class="btn btn-primary btn-lg" href="docs/#quickstart">
-      <i class="fa fa-bolt" aria-hidden="true"></i> READ QUICKSTART GUIDE
-    </a>
-    <a class="btn btn-primary btn-lg" href="docs/#configuring-oil">
-      <i class="fa fa-gear" aria-hidden="true"></i> GET TO KNOW THE CONFIGURATION
-    </a>
-  </div>
-
-  <hr/>
-
-  <div class="claim-wrapper">
-    <h1 class="logo-claim">Let's talk tech</h1>
-  </div>
-
-  <div>
-    <ul class="fa-ul">
-      <li><i class="fa fa-li fa-arrow-right"></i>JavaScript. Super optimized. Non-blocking.</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Written in ECMA Script 2015 and transpiled to ES5.</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Comes with a super slim pre-loader to minimize traffic.</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Built with WebPack2 and lots of optimizations.</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Jasmine &amp; Mocha unit tests which cover everything.</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Nightwatch Selenium Tests to test all features.</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Automated Browserstack Testfarm (Multibrowser, Desktop, Android, iOS).
-      </li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Continuous Integration with Jenkins.</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Load tested with 2.000 requests per second.</li>
-      <li><i class="fa fa-li fa-arrow-right"></i>Heavy duty hosting with CDN and it's continously scalable.</li>
-    </ul>
-  </div>
-
-  <br/>
-  <hr/>
-  <br/>
-
-  <div class="row">
-    <div class="col-sm-7 animated wow slideInLeft">
-      <h1>
-        And lastly, we support 99,99% of all Browsers. <span class="text-muted">Checkmate.</span>
-      </h1>
-      <div class="row">
-        <div class="col-md-6">
-          <ul class="fa-ul">
-            <li><i class="fa fa-li fa-android"></i> Android 4+</li>
-            <li><i class="fa fa-li fa-apple"></i> Iphone 4S+</li>
-            <li><i class="fa fa-li fa-internet-explorer"></i> ie9+</li>
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <ul class="fa-ul">
-            <li><i class="fa fa-li fa-chrome"></i> Chrome 14+</li>
-            <li><i class="fa fa-li fa-firefox"></i> Firefox 9+</li>
-            <li><i class="fa fa-li fa-safari"></i> Safari 6+</li>
-            <br/>
-          </ul>
-        </div>
+      <div class="col-6 col-sm-6 animated wow slideInLeft">
+        <p class="hero-call-to-action">
+          <a href="https://fuel.oiljs.org" class="btn btn-primary btn-lg" target="_blank" role="button">
+            Fuel (Tag-Database) <i class="fa fa-chevron-right"></i>
+          </a>
+          <a href="https://sandbox.oiljs.org/" class="btn btn-secondary btn-lg" target="_blank" role="button">
+            Sandbox <i class="fa fa-chevron-right"></i>
+          </a>
+        </p>
       </div>
-    </div>
-    <div class="col-sm-5">
-      <img class="img-responsive pull-right animated wow fadeInRight dropshadow"
-           src="assets/images/landing_page/coffee.gif" alt="Generic placeholder image">
     </div>
   </div>
 </div>
@@ -589,21 +337,15 @@
     </ul>
 
     <p class="footer-menu">
-      <a href="http://www.axelspringerideas.de" target="_blank">Axel Springer Ideas Engineering © 2017</a>
+      <a href="http://www.axelspringerideas.de" target="_blank">Axel Springer Ideas Engineering © 2018</a>
       |
-      <a href="http://axelspringerideas.de/contact" target="_blank" title="Contact Axel Springer Ideas Engineering">Contact</a>
+      <a href="mailto:oilsupport@asideas.de" target="_blank" title="Contact Axel Springer Ideas Engineering">Contact</a>
       |
       <a href="https://career.axelspringer.com/jobangebote/#ideas|engineering"
          title="Careers at Axel Springer Ideas Engineering" target="_blank">Careers</a>
-      |
-      <a href="docs/" target="_blank" title="OIL Documentation">Documentation</a>
-      |
-      <a href="demos/" target="_blank" title="OIL Examples">Examples</a>
     </p>
     <p class="footer-menu">
-      <a href="https://kube-jenkins.ipool.asideas.de/view/OIL%20Project/" target="_blank">Build Server</a>
-      |
-      <a href="https://as-wiki.axelspringer.de/display/IDEASINNO/Opt+In+Layer" target="_blank"> Wiki </a>
+      <a href="https://jenkins.ipool.asideas.de/view/OIL%20Project/" target="_blank">Build Server</a>
       |
       <a href="https://github.com/as-ideas/oil" target="_blank">Github guide</a>
       |
