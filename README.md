@@ -6,6 +6,7 @@
 [oil.js](https://www.oiljs.org) is a lightweight consent manager and cookie banner. It is optimized for low latency and performance. It aims to be easy to customize, simple and user-friendly. It supports the IAB framework to forward the consent to ad providers.
 
 [![Latest Release](https://img.shields.io/github/release/as-ideas/oil.svg)](https://oil.axelspringer.com/release/) 
+[![npm version](https://img.shields.io/npm/v/@ideasio/oil.js.svg)](https://www.npmjs.com/package/@ideasio/oil.js)
 [![Build Status](https://travis-ci.org/as-ideas/oil.svg?branch=master)](https://travis-ci.org/as-ideas/oil)
 [![Coverage Status](https://coveralls.io/repos/github/as-ideas/oil/badge.svg?branch=master)](https://coveralls.io/github/as-ideas/oil?branch=master)
 ![GZIP SIZE](http://img.badgesize.io/https://oil.axelspringer.com/latest/oil.min.js?compression=gzip&style=flat-square)
