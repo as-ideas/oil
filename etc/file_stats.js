@@ -8,7 +8,7 @@ function getFilesInDir(directory) {
 
 function filterForScripts(filenames) {
   return filenames.filter((filename) => {
-    return filename.match('\.(min|chunk)\.js$') && filename.match('\.*(SNAPSHOT|RELEASE)\.*js$');
+    return (filename.match('\.(min|chunk)\.js$') && filename.match('\.*(SNAPSHOT|RELEASE)\.*js$')) || filename.endsWith('hub.html');
   });
 }
 

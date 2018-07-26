@@ -150,5 +150,9 @@
   "engines": {
     "node": ">= 8.8 <9",
     "npm": ">= 6.0"
-  }
+  },
+  "files": [
+    "dist/latest",
+    "CONTRIBUTING.md"
+  ]
 }
