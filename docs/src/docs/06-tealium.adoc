@@ -20,7 +20,7 @@ needs two components to be delivered by Tealium:
 * the stub and
 * the layer itself.
 
-Both of them have to be added as extensions to your Tealium profile. At first, we add the stub with the following settings:
+Both of them have to be added as extensions to your Tealium profile (in section "Extensions"). At first, we add the stub with the following settings:
 ----
 Title:     OIL Stub
 Scope:     All Tags
@@ -63,7 +63,7 @@ That's it.
 As described in section <<Configuring OIL>> the Opt-In Layer has a wide range of configuration settings that affects its appearance and
 function. This configuration can also be delivered by Tealium.
 
-Go to your Tealium profile and create an extension with the following settings:
+Go to your Tealium profile (section "Extensions") and create an extension with the following settings:
 ----
 Title:     OIL Configuration
 Scope:     All Tags
@@ -93,6 +93,50 @@ The variable `config` should contain your configuration that is to be delivered.
 NOTE: The order of extensions in the list is the order they are loaded by the page. Therefore, please ensure that the OIL configuration
 extension is located above the Opt-In Layer code extension in the list.
 
-=== (Vendor) Tag Management with OIL and Tealium
+=== Vendor Tag Management with OIL and Tealium
 
-// TODO Continue here with adding OIL variables and loading rules
+Tealium is a tag manager that enables you to integrate tags in your page or website respectively depending on several conditions. For
+vendor tags, such a condition is a consent that the user gives to a purpose. Consents, in turn, are managed by the Opt-In Layer. To support
+tag integration depending on given consents OIL uses special variables that it defines in the Tealium data layer - one for each purpose:
+
+----
+_dip_oil_purpose_01
+_dip_oil_purpose_02
+_dip_oil_purpose_03
+_dip_oil_purpose_04
+_dip_oil_purpose_05
+----
+
+Each variable can be `true` or `false` - `true` if user gave consent to the corresponding standard purpose with the id referenced in the variable's name.
+
+Additionally, a variable named
+----
+_dip_oil_purpose_all
+----
+is used that is `true` if user gave consent to all standard purposes.
+
+NOTE: Currently, custom purposes are not supported.
+
+To establish connection between the Opt-In Layer and your Tealium profile, you have to ensure, that these variables are defined in your
+profile. Go to section "Data Layer" and define each of the variables mentioned above as shown in this example:
+
+----
+Source: _dip_oil_purpose_01
+Type:   UDO Variable
+----
+
+To be able to activate or deactivate (vendor) tags, Tealium uses so-called loading rules. To connect tag activation and Tealium variables
+set by the Opt-In Layer, you should define such rules - one for each variable as shown in the following examples:
+
+----
+Title:      _dip_oil_purpose_all
+Conditions: IF js._dip_oil_purpose_all EQUALS 1
+----
+----
+Title:      _dip_oil_purpose_01
+Conditions: IF js._dip_oil_purpose_all EQUALS 1 OR js._dip_oil_purpose_01 EQUALS 1
+----
+
+That's all. Now you can combine your tags managed by Tealium with these loading rules (see Tealium documentation to learn how to do that).
+If a user gives consent to a purpose or revokes it, OIL sets corresponding data layer variable to `true` or `false` respectively and causes
+Tealium to re-evaluate it. This activates corresponding loading rule and the tag combined with it is activated or deactivated.
