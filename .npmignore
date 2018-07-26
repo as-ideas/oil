@@ -13,5 +13,3 @@ target/
 *.iml
 .npmrc
 .nvmrc
-http_server.js
-changelog.js
