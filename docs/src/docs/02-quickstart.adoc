@@ -10,10 +10,12 @@ Setting up OIL on your page consists of the following steps:
 * <<styling-guide,Style>> your layer according to your style guide.
 * Create your own <<texts-locale-object,language pack>>.
 
+An alternative way to integrate OIL with your page is the use of a tag manager like Tealium. If you prefer this solution please read section <<OIL and Tealium>>.
+
 OIL creates a standard for the Opt-In but can't automatically stop your site from tracking your users. So to actually make your page respond to opt-ins you also need to do the following:
 
 * Make sure your page doesn't track the user in its default state.
-* If possible, use Tealium for all tracking activities and use the loading rules we provide.
+* If possible, use Tealium for all tracking activities and take advantage of the loading rules support that OIL provides (see section <<OIL and Tealium>> for details).
 * Listen to OIL events for loading non-Tealium tags, after the user opted in.
 * Use the <<Soft Blocking of DOM Elements,soft-blocking feature>> for tags that OIL provides.
 
