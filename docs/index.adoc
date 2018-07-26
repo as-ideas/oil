@@ -1,7 +1,6 @@
-= OIL Documentation
 :toc: left
 :toclevels: 4
-:toc-title: OIL Documentation
+:toc-title:
 :sectanchors:
 :idprefix:
 :idseparator: -
@@ -12,9 +11,7 @@
 :docinfodir: src/meta
 :source-highlighter: highlightjs
 
-image::src/images/oillogo.png[]
-// horizontal line
-***
+include::src/docs/header.adoc[]
 
 include::src/docs/01-intro.adoc[]
 

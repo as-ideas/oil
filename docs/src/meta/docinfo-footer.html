@@ -1,28 +1,46 @@
-<div class="sticky-footer">
-  <div class="column-one">
-    <div class="large-5 columns">
-      <p>
-        <i class="fa fa-fw fa-address-card"></i>
-        Web: <a href="http://axelspringerideas.de">Ideas Engineering</a>
-        <br>
-        <i class="fa fa-fw fa-github"></i>
-        Development: <a href="https://github.com/as-ideas">GitHub</a>
-      </p>
-    </div>
-  </div>
-  <div class="column-two">
-    <div class="large-7 columns">
-      <p>
-        <i class="fa fa-fw fa-envelope"></i>
-        Contact: <a href="mailto:oil-support@axelspringer.com">E-Mail</a>
-        <br>
-        <i class="fa fa-fw fa-twitter"></i>
-        Twitter: <a class="twitter" href="https://twitter.com/as_ideas">@as_ideas</a>
-      </p>
-    </div>
-  </div>
-  <div class="column-three">
-    <p>Version: {version}. Composed in AsciiDoc. Styled by Ideas Engineering. Baked with a lot of oil.<br/>
-      © OIL.js Project by Axel Springer. All Rights Reserved. For disclosed use only.</p>
-  </div>
-</div>
+<link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,600" rel="stylesheet"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/vendor/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" async></script>
+
+<script>
+  (function () {
+    document.title = ("oil.js documentation - {version}");
+  }());
+
+  $(function () {
+    var newElement = '<li>'
+      + '<a href="https://www.axelspringerideas.de">Built and designed<br />by Ideas Engineering.</a>'
+      + '</li>';
+
+    var sectLevelOne = $('.sectlevel1');
+    sectLevelOne.append(newElement);
+  })
+
+  $('a[href*="#"]').on('click', function (e) {
+    // Prevent default anchor click behavior
+    e.preventDefault();
+
+    // Store hash
+    var target = this.hash;
+    var $target = $(target);
+
+
+    // Using jQuery's animate() method to add smooth page scroll
+    // The optional number (800) specifies the number of milliseconds
+    // it takes to scroll to the specified area
+    $('html, body').stop().animate({
+      'scrollTop': $target.offset().top - 80
+    }, 600, 'swing', function () {
+      // Add hash (#) to URL when done scrolling (default click behavior)
+      if (history.pushState) {
+        history.pushState(null, null, target);
+      } else {
+        location.hash = target;
+      }
+    });
+  });
+
+</script>
+
+
