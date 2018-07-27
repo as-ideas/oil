@@ -23,6 +23,7 @@
     "build:docs": "node docs/asciidoc.js",
     "build:debug": "cross-env NODE_ENV=debug webpack --config etc/webpack.config.js",
     "build:watch": "webpack-dev-server --inline --watch --config etc/webpack.config.js",
+    "heroku-postbuild": "npm run build",
     "watch": "cross-env NODE_ENV=development webpack-dev-server --hot --config etc/webpack.config.js --inline --progress --port 3000 --host 0.0.0.0",
     "browserstack": "bash ./etc/runBrowserstackSeq.sh",
     "browserstack:full": "bash ./etc/runFullBrowserstackSeq.sh",
