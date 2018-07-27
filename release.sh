@@ -20,9 +20,12 @@ cp src/hub.html release/$PACKAGE_VERSION/
 HUB_HTML=$(cat release/$PACKAGE_VERSION/hub.html)
 HUB_JS=$(cat release/$PACKAGE_VERSION/hub.$PACKAGE_VERSION-RELEASE.min.js)
 echo "${HUB_HTML/<!--REPLACEME-->/$HUB_JS}" > release/$PACKAGE_VERSION/hub.html
+cp release/$PACKAGE_VERSION/hub.html dist/latest/hub.html
 
 echo "\n### Copying and versioning poi-list"
 cp -r dist/poi-lists release/$PACKAGE_VERSION/
+mkdir dist/latest/poi-lists
+cp dist/poi-lists/default.json dist/latest/poi-lists/default.json
 
 
 echo "\n### Increasing patch version"
