@@ -232,12 +232,6 @@ module.exports = {
     filename: 'demos/vendor-integration-iframe.html',
     chunks: [],
     template: path.resolve(sourcePath, 'demos', 'vendor-integration-iframe.html')
-  }, {
-    filename: 'sandbox/index.html',
-    template: path.resolve(sourcePath, 'sandbox', 'index.html'),
-    chunks: ['oilstub', 'oil'],
-    chunksSortMode: 'dependency',
-    inject: 'head'
   }],
   entry: {
     'hub': path.resolve(sourcePath, 'hub.js'),
@@ -263,9 +257,6 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, 'demos/empty.html'),
     to: 'demos/empty.html'
-  }, {
-    from: path.resolve(sourcePath, 'sandbox/assets'),
-    to: 'sandbox/assets'
   }],
   title: 'OIL',
   additionalWebpackOptions: false

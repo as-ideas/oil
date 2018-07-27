@@ -133,14 +133,8 @@ let config = {
       {
         test: /\.css$/,
         loaders: ['to-string-loader', 'css-loader']
-      },
-      //process sandbox HTML Page hierarchy
-      {
-        test: /sandbox\/.*\.html$/,
-        loaders: [{loader: 'html-loader', options: {interpolate: 'require'}}]
       }
     ]
-
   },
 
   output: {
