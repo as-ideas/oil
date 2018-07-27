@@ -1,13 +1,14 @@
 {
-  "name": "oil",
+  "name": "@ideasio/oil.js",
   "version": "1.2.2",
-  "description": "Module for Axel Springer oil.js (Opt-In Layer)",
+  "description": "oil.js Opt-In Layer for consent management based on the IAB TCF Standard",
   "keywords": [
     "IAB Europe",
     "CMP",
     "Opt-In",
     "Consent"
   ],
+  "homepage": "https://oiljs.org",
   "author": "Axel Springer Ideas Engineering GmbH",
   "license": "GPL-2.0",
   "main": "http_server.js",
@@ -31,14 +32,13 @@
     "pree2e": "mkdirp target/reports && node etc/nightwatch.local.conf.js",
     "e2e": "./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e chrome",
     "e2esafari": "./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e safari",
-    "test": "npm run test:unit && npm run test:node",
+    "test": "npm run build && npm run test:unit && npm run test:node",
     "test:unit": "cross-env NODE_ENV=test karma start etc/karma.conf.ci.js",
     "test:unit:fast": "cross-env NODE_ENV=test karma start etc/karma.conf.js",
     "test:node": "mocha 3000 test/node",
     "test:selenium": "node etc/nightwatch.jenkins.conf.js && mkdir -p target/reports &&./node_modules/.bin/nightwatch -c etc/nightwatch.jenkins.conf.js -e chrome",
     "test:watch": "cross-env SNAPSHOT=$SNAPSHOT cross-env NODE_ENV=test karma start etc/karma.conf.js",
     "eslint": "eslint \"src/*.js\" && eslint \"src/scripts/*.js\" && eslint \"etc/*\" && eslint \"test/specs/**/*.js\" && eslint \"test/e2e/**/*.js\"",
-    "postinstall": "npm run build",
     "changelog:major": "node changelog.js -M",
     "changelog:minor": "node changelog.js -m",
     "changelog:path": "node changelog.js -p"
@@ -46,7 +46,6 @@
   "dependencies": {
     "compression": "1.7.2",
     "consent-string": "1.2.4",
-    "core-js": "2.5.7",
     "express": "4.16.2",
     "fresh": "0.5.2",
     "js-cookie": "2.1.4",
@@ -55,6 +54,7 @@
     "serve-static": "1.13.2"
   },
   "devDependencies": {
+    "core-js": "2.5.7",
     "asciidoctor.js": "1.5.6",
     "babel-core": "6.26.0",
     "babel-eslint": "8.1.0",
@@ -151,5 +151,9 @@
   "engines": {
     "node": ">= 8.8 <9",
     "npm": ">= 6.0"
-  }
+  },
+  "files": [
+    "dist/latest",
+    "CONTRIBUTING.md"
+  ]
 }
