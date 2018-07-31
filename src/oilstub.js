@@ -3,8 +3,9 @@
     window.__cmp = (function () {
 
       function definePostMessageHandlerForIframes(cmp) {
-        let listen = window.attachEvent || window.addEventListener;
-        listen('message', function (event) {
+        let listen = window.addEventListener || window.attachEvent;
+        let messageEvent = listen === 'attachEvent' ? 'onmessage' : 'message';
+        listen(messageEvent, function (event) {
           cmp.receiveMessage(event);
         }, false);
       }
@@ -67,7 +68,13 @@
 
       function defineMessageHandler() {
         return function (event) {
-          let data = event && event.data && event.data.__cmpCall;
+          let data = event && event.data;
+          let communicateWithStrings = (typeof data === 'string');
+          if (communicateWithStrings && data.indexOf('__cmpCall') !== -1) {
+            data = JSON.parse(data).__cmpCall;
+          } else {
+            data = data.__cmpCall;
+          }
           if (data) {
             if (data.command === 'ping') {
               handlePing((result, success) => {
@@ -78,7 +85,7 @@
                     callId: data.callId
                   }
                 };
-                event.source.postMessage(message, event.origin)
+                event.source.postMessage(communicateWithStrings ? JSON.stringify(message) : message, event.origin);
               });
             } else {
               let commandEntry = {
@@ -96,13 +103,14 @@
         };
       }
 
+      addCmpLocatorIframe();
+
       let commandCollection = [];
       let cmp = defineCmp();
       cmp.commandCollection = commandCollection;
       cmp.receiveMessage = defineMessageHandler();
 
       definePostMessageHandlerForIframes(cmp);
-      addCmpLocatorIframe();
 
       return cmp;
     }());

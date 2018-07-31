@@ -16,7 +16,8 @@ nightwatch_config = {
 
   common_capabilities: {
     'browserstack.user': "${ENV_USER}",
-    'browserstack.key': "${ENV_KEY}"
+    'browserstack.key': "${ENV_KEY}",
+    'browserstack.debug': true
   },
 
   test_settings: {
@@ -27,34 +28,40 @@ nightwatch_config = {
         'browser_version': '14.0'
       }
     },
+    chrome15: {
+      desiredCapabilities: {
+        'browser': 'Chrome',
+        'browser_version': '15.0'
+      }
+    },
     chrome57: {
       desiredCapabilities: {
         'browser': 'Chrome',
-        'browser_version': '57.0',
+        'browser_version': '57.0'
       }
     },
-    chrome64: {
+    chrome65: {
       desiredCapabilities: {
         'browser': 'Chrome',
-        'browser_version': '64.0',
+        'browser_version': '65.0'
       }
     },
     ie9: {
       desiredCapabilities: {
         'browser': 'IE',
-        'browser_version': '9.0',
+        'browser_version': '9.0'
       }
     },
     ie10: {
       desiredCapabilities: {
         'browser': 'IE',
-        'browser_version': '10.0',
+        'browser_version': '10.0'
       }
     },
     ie11: {
       desiredCapabilities: {
         'browser': 'IE',
-        'browser_version': '11.0',
+        'browser_version': '11.0'
       }
     },
     edge14: {
@@ -84,7 +91,7 @@ nightwatch_config = {
     safari6: {
       desiredCapabilities: {
         'browser': 'Safari',
-        'browser_version': '6.0',
+        'browser_version': '6.0'
       }
     },
     safari91: {
@@ -102,7 +109,7 @@ nightwatch_config = {
     opera1216: {
       desiredCapabilities: {
         'browser': 'Opera',
-        'browser_version': '12.16',
+        'browser_version': '12.16'
       }
     },
     iphoneSE: {
