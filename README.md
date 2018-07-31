@@ -32,7 +32,7 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 * **Easy to customize**: You can change the stylesheet, configure everything or access the functionality directly via Javascript as well
 * **User-friendly**: Supports advanced settings with a detailed cookie preference center (CPC)
 
-The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://advertisingconsent.eu/iab-europe-transparency-consent-framework-list-of-registered-cmps/) after the IAB Europe "Transparency & Consent Framework". Registered with ID 80.
+The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://advertisingconsent.eu/cmp-list/) after the IAB Europe "Transparency & Consent Framework". Registered with ID 80.
 
 ![iab logo](/src/assets/images/landing_page/iab-logo.png)
 
