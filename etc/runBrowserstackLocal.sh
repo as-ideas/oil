@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #/bin/bash
 # make sure to start ./BrowserStackLocal --key YOUR_KEY before running this
 
