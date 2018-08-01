@@ -12,7 +12,6 @@ module.exports = {
 
   beforeEach: browser => {
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-poi-integrated.html')
       .deleteCookies();
 
     browser

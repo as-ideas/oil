@@ -6,7 +6,6 @@ module.exports = {
   tags: ['locale'],
   beforeEach: browser => {
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
       .deleteCookies();
   },
 

@@ -16,7 +16,6 @@ module.exports = {
 
   beforeEach: browser => {
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-confirm-optout.html')
       .deleteCookies();
 
     browser

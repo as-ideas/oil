@@ -24,7 +24,6 @@ module.exports = {
       ],
       () => {
         browser
-          .url(browser.globals.launch_url_host1 + 'demos/vendor-integration-with-iframe.html')
           .deleteCookies();
 
         browser
