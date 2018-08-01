@@ -6,12 +6,12 @@
 <body>
 <p>This is an iframe of a vendor.</p>
 <p>
-  <b>'ping' Result</b><br/>
+  <b>'ping' Result</b><br>
   Success: <span id="ping-result-success" style="display:none;"></span>;&nbsp;
   Value: <span id="ping-result-value" style="display:none;"></span>
 </p>
 <p>
-  <b>'getConsentString' Result</b><br/>
+  <b>'getConsentString' Result</b><br>
   Success: <span id="getConsentData-result-success" style="display:none;"></span>;&nbsp;
   Value: <span id="getConsentData-result-value" style="display:none;"></span>
 </p>
@@ -40,12 +40,18 @@
   /* Set up a __cmp function to do the postMessage and stash the callback. This function behaves (from the caller's perspective)
      identically to the in-frame __cmp call */
   window.__cmp = function (cmd, arg, callback) {
-    setTimeout(function () {
+    var numberOfTries = 20;
+    var myInterval = setInterval(function () {
       cmpFrame = findCmp();
       if (!cmpFrame) {
-        callback({msg: 'CMP not found'}, false);
+        --numberOfTries;
+        if (numberOfTries === 0) {
+          clearInterval(myInterval);
+          callback({msg: "CMP not found"}, false);
+        }
         return;
       }
+      clearInterval(myInterval);
       var callId = Math.random() + '';
       var msg = {
         __cmpCall: {
@@ -56,7 +62,7 @@
       };
       cmpCallbacks[callId] = callback;
       cmpFrame.postMessage(JSON.stringify(msg), '*');
-    }, 3000);
+    }, 200);
   };
 
   /* when we get the return message, call the stashed callback */

@@ -12,15 +12,28 @@ module.exports = {
   '@disabled': false,
 
   beforeEach: browser => {
-    browser
-      .url(browser.globals.launch_url_host1 + 'demos/vendor-integration-with-iframe.html')
-      .deleteCookies();
+    executeIfCompatible(
+      browser,
+      [
+        // elder chrome versions deactivated because of https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777
+        {name: 'Chrome', version: '14.0'},
+        {name: 'Chrome', version: '15.0'},
+        {name: 'Chrome', version: '57.0'},
+        // IE 9 deactivated because of massive instability in rendering and handling iframe
+        {name: 'IE', version: '9.0'}
+      ],
+      () => {
+        browser
+          .url(browser.globals.launch_url_host1 + 'demos/vendor-integration-with-iframe.html')
+          .deleteCookies();
 
-    browser
-      .url(browser.globals.launch_url_host1 + 'demos/vendor-integration-with-iframe.html')
-      .useXpath()
-      .waitForElementVisible(OIL_YES_BUTTON, 2000, false)
-      .waitForElementPresent(VENDOR_INTEGRATION_IFRAME, 5000, false);
+        browser
+          .pause(5000)
+          .url(browser.globals.launch_url_host1 + 'demos/vendor-integration-with-iframe.html')
+          .useXpath()
+          .waitForElementVisible(OIL_YES_BUTTON, 2000, false)
+          .waitForElementPresent(VENDOR_INTEGRATION_IFRAME, 5000, false);
+      });
   },
 
   'vendor integration iframe sends ping message and gets result': function (browser) {
@@ -30,7 +43,9 @@ module.exports = {
         // elder chrome versions deactivated because of https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777
         {name: 'Chrome', version: '14.0'},
         {name: 'Chrome', version: '15.0'},
-        {name: 'Chrome', version: '57.0'}
+        {name: 'Chrome', version: '57.0'},
+        // IE 9 deactivated because of massive instability in rendering and handling iframe
+        {name: 'IE', version: '9.0'}
       ],
       () => {
         browser
@@ -62,7 +77,9 @@ module.exports = {
         // elder chrome versions deactivated because of https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777
         {name: 'Chrome', version: '14.0'},
         {name: 'Chrome', version: '15.0'},
-        {name: 'Chrome', version: '57.0'}
+        {name: 'Chrome', version: '57.0'},
+        // IE 9 deactivated because of massive instability in rendering and handling iframe
+        {name: 'IE', version: '9.0'}
       ],
       () => {
         browser
