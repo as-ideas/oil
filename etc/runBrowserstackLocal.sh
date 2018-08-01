@@ -4,15 +4,33 @@
 source etc/browserstackTest.sh
 
 run_test() {
-  echo "----- Testing local server through Browserstack with browser $1 -"
-  ENV_USER=$browserstack_user ENV_KEY=$browserstack_key ./node_modules/.bin/nightwatch -c etc/nightwatch.localhost-remote.conf.js -e $1
+  echo -n "----- Testing local server through Browserstack with browser $1 -"
+  if [ "$2" != "" ]; then
+    echo " test: $2 -"
+  else
+    echo " all tests -"
+  fi
+  ENV_USER=$browserstack_user ENV_KEY=$browserstack_key ./node_modules/.bin/nightwatch -c etc/nightwatch.localhost-remote.conf.js -e $1 $2
 }
 
-run_test chrome57
-run_test ie10
-run_test ff58quantum
-run_test safari91
+for argument in "$@"; do
+  if [[ $argument =~ browser:.* ]]; then
+    browser=${argument#*:} # remove prefix 'browser:'
+  else
+    testFile=$argument
+  fi
+done
 
-# run_test iphone5 # fails weirdly, check later
-# run_test android4
+if [ "$browser" != "" ]; then
+  run_test $browser $testFile
+else
+  run_test chrome14 $testFile
+  run_test chrome57 $testFile
+  run_test chrome65 $testFile
+  run_test ie10 $testFile
+  run_test ff58quantum $testFile
+  run_test safari91 $testFile
 
+  #run_test iphone5 $testFile # fails weirdly, check later
+  #run_test android4 $testFile
+fi

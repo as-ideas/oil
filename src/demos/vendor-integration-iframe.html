@@ -1,77 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Vendor Integration IFrame</title>
 </head>
 <body>
 <p>This is an iframe of a vendor.</p>
+<p>
+  <b>'ping' Result</b><br>
+  Success: <span id="ping-result-success" style="display:none;"></span>;&nbsp;
+  Value: <span id="ping-result-value" style="display:none;"></span>
+</p>
+<p>
+  <b>'getConsentString' Result</b><br>
+  Success: <span id="getConsentData-result-success" style="display:none;"></span>;&nbsp;
+  Value: <span id="getConsentData-result-value" style="display:none;"></span>
+</p>
 <script type="text/javascript">
   // find the CMP frame
-  let f = window;
-  let cmpFrame;
-  while (!cmpFrame) {
-    try {
-      if (f.frames["__cmpLocator"]) cmpFrame = f;
-    } catch (e) {
-      console.log("Catched: ", e)
+  var cmpFrame;
+
+  function findCmp() {
+    var f = window;
+    var cmpFrame;
+    while (!cmpFrame) {
+      try {
+        if (f.frames['__cmpLocator']) {
+          cmpFrame = f;
+        }
+      } catch (e) {
+        console.log("Catched: ", e)
+      }
+      if (f === window.top) break;
+      f = f.parent;
     }
-    if (f === window.top) break;
-    f = f.parent;
+    return cmpFrame;
   }
-  let cmpCallbacks = {};
+
+  var cmpCallbacks = {};
   /* Set up a __cmp function to do the postMessage and stash the callback. This function behaves (from the caller's perspective)
      identically to the in-frame __cmp call */
   window.__cmp = function (cmd, arg, callback) {
-    if (!cmpFrame) {
-      callback({msg: "CMP not found"}, false);
-      return;
-    }
-    let callId = Math.random() + "";
-    let msg = {
-      __cmpCall: {
-        command: cmd,
-        parameter: arg,
-        callId: callId
+    var numberOfTries = 20;
+    var myInterval = setInterval(function () {
+      cmpFrame = findCmp();
+      if (!cmpFrame) {
+        --numberOfTries;
+        if (numberOfTries === 0) {
+          clearInterval(myInterval);
+          callback({msg: "CMP not found"}, false);
+        }
+        return;
       }
-    };
-    cmpCallbacks[callId] = callback;
-    cmpFrame.postMessage(msg, '*');
+      clearInterval(myInterval);
+      var callId = Math.random() + '';
+      var msg = {
+        __cmpCall: {
+          command: cmd,
+          parameter: arg,
+          callId: callId
+        }
+      };
+      cmpCallbacks[callId] = callback;
+      cmpFrame.postMessage(JSON.stringify(msg), '*');
+    }, 200);
   };
 
   /* when we get the return message, call the stashed callback */
-  window.addEventListener("message", function (event) {
-    let json = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
-    if (json.__cmpReturn) {
-      let i = json.__cmpReturn;
+  window.addEventListener('message', function (event) {
+    var eventData;
+    if (typeof event.data === 'string') {
+      eventData = JSON.parse(event.data)
+    } else {
+      eventData = event.data;
+    }
+    if (eventData.__cmpReturn) {
+      var i = eventData.__cmpReturn;
       cmpCallbacks[i.callId](i.returnValue, i.success);
-      delete cmpCallbacks[i.callId];
     }
   }, false);
 
-  __cmp("ping", null, function (val, success) {
-    let callbackResultSuccessElement = document.getElementById('ping-result-success');
-    callbackResultSuccessElement.innerText = success;
-    callbackResultSuccessElement.style.display = 'block';
+  __cmp('ping', null, function (val, success) {
+    var pingResultSuccessElement = document.getElementById('ping-result-success');
+    pingResultSuccessElement.innerText = success;
+    pingResultSuccessElement.style.display = 'inline';
 
-    let callbackResultValueElement = document.getElementById('ping-result-value');
-    callbackResultValueElement.innerText = JSON.stringify(val);
-    callbackResultValueElement.style.display = 'block';
+    var pingResultValueElement = document.getElementById('ping-result-value');
+    pingResultValueElement.innerText = JSON.stringify(val);
+    pingResultValueElement.style.display = 'inline';
   });
 
-  __cmp("getConsentData", null, function(val, success) {
-    let callbackResultSuccessElement = document.getElementById('getConsentData-result-success');
-    callbackResultSuccessElement.innerText = success;
-    callbackResultSuccessElement.style.display = 'block';
+  __cmp('getConsentData', null, function (val, success) {
+    var gcdResultSuccessElement = document.getElementById('getConsentData-result-success');
+    gcdResultSuccessElement.innerText = success;
+    gcdResultSuccessElement.style.display = 'inline';
 
-    let callbackResultValueElement = document.getElementById('getConsentData-result-value');
-    callbackResultValueElement.innerText = JSON.stringify(val);
-    callbackResultValueElement.style.display = 'block';
+    var gcdResultValueElement = document.getElementById('getConsentData-result-value');
+    gcdResultValueElement.innerText = JSON.stringify(val);
+    gcdResultValueElement.style.display = 'inline';
   })
 </script>
-<h4>'ping' Result</h4>
-<p id="ping-result-success" style="display:none;"></p>
-<p id="ping-result-value" style="display:none;"></p>
-<h4>'getConsentString' Result</h4>
-<p id="getConsentData-result-success" style="display:none;"></p>
-<p id="getConsentData-result-value" style="display:none;"></p>
 </body>
 </html>
