@@ -1,7 +1,7 @@
 import { OptoutConfirmDialog } from '../../../../../src/scripts/userview/view/components/oil.optout.confirm.js';
 import { resetOil } from '../../../../test-utils/utils_reset';
 
-fdescribe('OptoutConfirmDialog', function() {
+describe('OptoutConfirmDialog', function() {
   beforeEach(function() {
     resetOil();
   });
