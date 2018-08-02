@@ -1,9 +1,9 @@
 import { OptoutConfirmDialog } from '../../../../../src/scripts/userview/view/components/oil.optout.confirm.js';
-import * as UserViewConfig from '../../../../../src/scripts/userview/userview_config.js';
+import { resetOil } from '../../../../test-utils/utils_reset';
 
-describe('OptoutConfirmDialog', function() {
+fdescribe('OptoutConfirmDialog', function() {
   beforeEach(function() {
-    spyOn(UserViewConfig, 'getLabel').and.returnValue('aLabel');
+    resetOil();
   });
 
   it('returns html node with correct id, className and childElementCount', function() {

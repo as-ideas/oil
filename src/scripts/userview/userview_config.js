@@ -43,7 +43,7 @@ export function getLabel(labelName) {
  */
 export function getLabelWithDefault(labelName, defaultLabel) {
   let defaultLocale = getLocale();
-  return getConfigValue(labelName, (defaultLocale && defaultLocale.texts[labelName]) ? defaultLocale.texts[labelName] : defaultLabel);
+  return getConfigValue(labelName, (defaultLocale && defaultLocale.texts && defaultLocale.texts[labelName]) ? defaultLocale.texts[labelName] : defaultLabel);
 }
 
 export function isOptoutConfirmRequired() {
