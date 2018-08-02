@@ -32,7 +32,6 @@ module.exports = {
 
   'OIL Layer wont break after the user deleted cookies while having the page open and then click yes': function (browser) {
     browser
-      .deleteCookies()
       .click(OIL_YES_BUTTON)
       .pause(200)
       .waitForElementNotPresent(OIL_LAYER, 1000)
