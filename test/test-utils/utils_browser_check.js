@@ -6,7 +6,7 @@ export function executeIfCompatible(browser, incompatibleBrowsers, testFunction)
   if (typeof incompatibleBrowser === 'undefined') {
     testFunction();
   } else {
-    console.log(`Test disabled for ${browser.options.desiredCapabilities.browser} ${browser.options.desiredCapabilities.browser_version}!`);
+    console.log(`Test disabled for ${browser.options.desiredCapabilities.browser} ${browser.options.desiredCapabilities.browser_version}! Reason: ${incompatibleBrowser.reason}`);
     browser.end();
   }
 }

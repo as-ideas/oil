@@ -15,12 +15,10 @@ module.exports = {
     executeIfCompatible(
       browser,
       [
-        // elder chrome versions deactivated because of https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777
-        {name: 'Chrome', version: '14.0'},
-        {name: 'Chrome', version: '15.0'},
-        {name: 'Chrome', version: '57.0'},
-        // IE 9 deactivated because of massive instability in rendering and handling iframe
-        {name: 'IE', version: '9.0'}
+        {name: 'Chrome', version: '14.0', reason: 'Bug in elder Chrome versions - see https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777.'},
+        {name: 'Chrome', version: '15.0', reason: 'Bug in elder Chrome versions - see https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777.'},
+        {name: 'Chrome', version: '57.0', reason: 'Bug in elder Chrome versions - see https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777.'},
+        {name: 'IE', version: '9.0', reason: 'Massive instability in rendering and handling of iframes.'}
       ],
       () => {
         browser
@@ -39,12 +37,10 @@ module.exports = {
     executeIfCompatible(
       browser,
       [
-        // elder chrome versions deactivated because of https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777
-        {name: 'Chrome', version: '14.0'},
-        {name: 'Chrome', version: '15.0'},
-        {name: 'Chrome', version: '57.0'},
-        // IE 9 deactivated because of massive instability in rendering and handling iframe
-        {name: 'IE', version: '9.0'}
+        {name: 'Chrome', version: '14.0', reason: 'Bug in elder Chrome versions - see https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777.'},
+        {name: 'Chrome', version: '15.0', reason: 'Bug in elder Chrome versions - see https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777.'},
+        {name: 'Chrome', version: '57.0', reason: 'Bug in elder Chrome versions - see https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777.'},
+        {name: 'IE', version: '9.0', reason: 'Massive instability in rendering and handling of iframes.'}
       ],
       () => {
         browser
@@ -73,12 +69,10 @@ module.exports = {
     executeIfCompatible(
       browser,
       [
-        // elder chrome versions deactivated because of https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777
-        {name: 'Chrome', version: '14.0'},
-        {name: 'Chrome', version: '15.0'},
-        {name: 'Chrome', version: '57.0'},
-        // IE 9 deactivated because of massive instability in rendering and handling iframe
-        {name: 'IE', version: '9.0'}
+        {name: 'Chrome', version: '14.0', reason: 'Bug in elder Chrome versions - see https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777.'},
+        {name: 'Chrome', version: '15.0', reason: 'Bug in elder Chrome versions - see https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777.'},
+        {name: 'Chrome', version: '57.0', reason: 'Bug in elder Chrome versions - see https://bugs.chromium.org/p/chromedriver/issues/detail?id=1777.'},
+        {name: 'IE', version: '9.0', reason: 'Massive instability in rendering and handling of iframes.'}
       ],
       () => {
         browser

@@ -1,5 +1,5 @@
-import {EVENT_NOTIFIER_DIV, OIL_LAYER, OIL_YES_BUTTON} from '../test_constants';
-import {executeIfCompatible} from '../test-utils/utils_browser_check';
+import { EVENT_NOTIFIER_DIV, OIL_LAYER, OIL_YES_BUTTON } from '../test_constants';
+import { executeIfCompatible } from '../test-utils/utils_browser_check';
 
 module.exports = {
   '@disabled': false,
@@ -13,8 +13,7 @@ module.exports = {
     executeIfCompatible(
       browser,
       [
-        // Deactivated because of instable event handling
-        {name: 'IE', version: '9.0'}
+        {name: 'IE', version: '9.0', reason: 'Instable event handling in this browser.'}
       ],
       () => {
         browser

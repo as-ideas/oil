@@ -1,5 +1,5 @@
-import {OIL_ADVANCED_SETTINGS, OIL_LAYER, OIL_YES_BUTTON} from '../test_constants';
-import {executeIfCompatible} from '../test-utils/utils_browser_check';
+import { OIL_ADVANCED_SETTINGS, OIL_LAYER, OIL_YES_BUTTON } from '../test_constants';
+import { executeIfCompatible } from '../test-utils/utils_browser_check';
 
 module.exports = {
   '@disabled': false,
@@ -12,9 +12,9 @@ module.exports = {
   'Oil Layer loads texts dynamically from backend and uses them': function (browser) {
     executeIfCompatible(
       browser,
-      // https://id-jira.axelspringer.de/browse/OIL-217
-      // CORS HEADER deactivated in IE9 per default
-      [{name: 'IE', version: '9.0'}],
+      [
+        {name: 'IE', version: '9.0', reason: 'CORS HEADER deactivated in IE9 per default - see https://id-jira.axelspringer.de/browse/OIL-217.'}
+      ],
       () => {
         let end2endRegexp = /^\[e2e\].*$/;
         browser
