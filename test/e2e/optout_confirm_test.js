@@ -8,7 +8,7 @@ import {
   OIL_PROCEED_BUTTON
 } from '../test_constants.js';
 
-const SLIDER = '.as-oil-cpc__slider';
+const SLIDER = '.as-oil-cpc__slider:first-child';
 const CHECKED_SLIDER = '.as-js-purpose-slider:checked';
 
 module.exports = {
