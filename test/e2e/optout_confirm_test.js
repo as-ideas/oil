@@ -8,8 +8,8 @@ import {
   OIL_PROCEED_BUTTON
 } from '../test_constants.js';
 
-const SLIDER = '.as-oil-cpc__slider:first-child';
-const CHECKED_SLIDER = '.as-js-purpose-slider:checked';
+const SLIDER = '#as-js-purpose-slider-1~.as-oil-cpc__slider';
+const CHECKED_SLIDER = '#as-js-purpose-slider-1:checked';
 
 module.exports = {
   '@disabled': false,
@@ -27,13 +27,15 @@ module.exports = {
       .useCss().waitForElementNotPresent(CHECKED_SLIDER, 2500, false)
       .click(SLIDER)
       .useCss().waitForElementPresent(CHECKED_SLIDER, 2500, false)
-      .pause(100)
+      .useCss().waitForElementPresent(SLIDER, 2500, false)
+      .pause(500)
       .click(SLIDER)
       .useXpath();
   },
 
   'Optout layer should show when trying to deactivate a consent slider': function (browser) {
     browser
+      .useXpath()
       .waitForElementPresent(OIL_OPTOUT_CONFIRM, 5000, false)
       .end()
   },
