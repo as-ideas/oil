@@ -15,8 +15,7 @@ module.exports = {
   '@disabled': false,
 
   beforeEach: browser => {
-    browser
-      .deleteCookies();
+    browser.deleteCookies();
 
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-confirm-optout.html')
@@ -31,21 +30,6 @@ module.exports = {
       .pause(100)
       .click(SLIDER)
       .useXpath();
-  },
-
-  'Optout layer should remain hidden when require_optout_confirm not in config or false': function (browser) {
-    browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
-      .useXpath()
-      .waitForElementVisible(OIL_LAYER, 5000, false)
-      .click(OIL_ADVANCED_SETTINGS)
-      .waitForElementPresent(OIL_DEFAULT_PURPOSE_SLIDER, 5000, false)
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .pause(100)
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
-      .pause(100)
-      .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 2500)
-      .end()
   },
 
   'Optout layer should show when trying to deactivate a consent slider': function (browser) {
