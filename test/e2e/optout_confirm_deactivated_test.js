@@ -25,7 +25,7 @@ module.exports = {
       .pause(100)
       .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 2500)
       .end()
-  },
+  }
 
 
 };
