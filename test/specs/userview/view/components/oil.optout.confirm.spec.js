@@ -1,6 +1,11 @@
 import { OptoutConfirmDialog } from '../../../../../src/scripts/userview/view/components/oil.optout.confirm.js';
+import * as UserViewConfig from '../../../../../src/scripts/userview/userview_config.js';
 
 describe('OptoutConfirmDialog', function() {
+  beforeEach(function() {
+    spyOn(UserViewConfig, 'getLabel').and.returnValue('aLabel');
+  });
+
   it('returns html node with correct id, className and childElementCount', function() {
     let dialog = OptoutConfirmDialog();
     expect(dialog.id).toEqual('as-oil-optout-confirm');
