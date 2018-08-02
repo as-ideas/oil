@@ -17,12 +17,15 @@ export function addFrame(iframeUrl) {
     logInfo('Creating iframe...');
     iframe = document.createElement('iframe');
     iframe.setAttribute('id', 'oil-frame');
+    iframe.setAttribute('title', 'oil-frame');
+    iframe.setAttribute('aria-hidden', 'true');
     iframe.setAttribute('src', iframeUrl);
     iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-forms allow-top-navigation');
     iframe.style.width = '0';
     iframe.style.height = '0';
     iframe.style.border = '0';
     iframe.style.border = 'none';
+    iframe.style.display = 'block';
     document.body.appendChild(iframe);
   } else {
     logInfo('Found iframe');
