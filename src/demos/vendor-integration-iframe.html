@@ -81,21 +81,21 @@
 
   __cmp('ping', null, function (val, success) {
     var pingResultSuccessElement = document.getElementById('ping-result-success');
-    pingResultSuccessElement.innerText = success;
+    pingResultSuccessElement.textContent = success;
     pingResultSuccessElement.style.display = 'inline';
 
     var pingResultValueElement = document.getElementById('ping-result-value');
-    pingResultValueElement.innerText = JSON.stringify(val);
+    pingResultValueElement.textContent = JSON.stringify(val);
     pingResultValueElement.style.display = 'inline';
   });
 
   __cmp('getConsentData', null, function (val, success) {
     var gcdResultSuccessElement = document.getElementById('getConsentData-result-success');
-    gcdResultSuccessElement.innerText = success;
+    gcdResultSuccessElement.textContent = success;
     gcdResultSuccessElement.style.display = 'inline';
 
     var gcdResultValueElement = document.getElementById('getConsentData-result-value');
-    gcdResultValueElement.innerText = JSON.stringify(val);
+    gcdResultValueElement.textContent = JSON.stringify(val);
     gcdResultValueElement.style.display = 'inline';
   })
 </script>
