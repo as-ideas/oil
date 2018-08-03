@@ -10,25 +10,12 @@ const PAGE_INIT_TIMEOUT = 20000;
 module.exports = {
   '@disabled': false,
   beforeEach: browser => {
-    // wait for site hosts
     browser
-      .url(browser.globals.launch_url_host1+'/demos/empty.html')
-      .useCss()
-      .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
-    browser
-      .url(browser.globals.launch_url_host2+'/demos/empty.html')
-      .useCss()
-      .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
-// wait for init of fake 'CDN'
-    browser
-      .url(browser.globals.launch_url_cdn+'/demos/empty.html')
-      .useCss()
-      .waitForElementVisible('body', PAGE_INIT_TIMEOUT, false);
+      .deleteCookies();
   },
 
   'OIL Layer Power Opt-In is working across two domains': function (browser) {
     browser
-      .deleteCookies()
       .url(browser.globals.launch_url_host1 + 'demos/complete-integration-site-a.html')
       .useXpath()
       .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
