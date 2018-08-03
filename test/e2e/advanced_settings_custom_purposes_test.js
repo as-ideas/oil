@@ -9,9 +9,7 @@ module.exports = {
   'Shows five purposes by default': function (browser) {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
-      .useCss()
-      .waitForElementVisible('body', 1000, false)
-      .useXpath().waitForElementVisible(OIL_YES_BUTTON, 3000, false)
+      .useXpath().waitForElementVisible(OIL_YES_BUTTON, 15000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
       .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
@@ -23,10 +21,8 @@ module.exports = {
   'Displays custom purposes in list': function (browser) {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-custom-purposes.html')
-      .useCss()
-      .waitForElementVisible('body', 1000, false)
       .useXpath()
-      .waitForElementVisible(OIL_YES_BUTTON, 3000, false)
+      .waitForElementVisible(OIL_YES_BUTTON, 15000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
       .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
