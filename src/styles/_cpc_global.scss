@@ -58,8 +58,8 @@ $slider-padding: 3px;
   display: inline-block;
 
   overflow: scroll;
-  height: 500px; /* The Fallback */
   height: 30vh;
+  height: 500px; /* The Fallback */
   width: 100%;
 
   @include media('<=phone') {
