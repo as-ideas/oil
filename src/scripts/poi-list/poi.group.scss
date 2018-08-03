@@ -5,16 +5,11 @@
  */
 .as-oil-poi-group-list-wrapper {
   @include media('<=phone') {
-    position: relative;
-    width: initial;
-    min-height: 300px;
-    z-index: 100;
-    margin: 50vh 5px 50px;
+    width: 100%;
     padding: 16px 12px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     background-color: #fafafa;
-    -webkit-box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
     box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
 
     .as-oil__heading, .as-oil__intro-txt {
@@ -36,13 +31,8 @@
     }
 
     @include media('<=phone') {
-      display: initial;
       background: $background-color-light;
-      box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
       padding: 8px;
-      position: fixed;
-      bottom: 0;
-      left: 0;
     }
   }
 
@@ -52,13 +42,8 @@
     }
 
     @include media('<=phone') {
-      display: initial;
       background: $background-color-dark;
-      box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
       padding: 8px;
-      position: fixed;
-      bottom: 0;
-      left: 0;
     }
   }
 }

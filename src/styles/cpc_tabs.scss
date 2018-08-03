@@ -37,7 +37,6 @@
       transition: all 0.3s ease-in-out;
       vertical-align: middle;
       white-space: nowrap;
-      user-select: none;
 
       @include media('<=phone') {
         display: table-header-group;
