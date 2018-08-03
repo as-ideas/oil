@@ -22,40 +22,25 @@ nightwatch_config = {
 
   test_settings: {
     default: {},
-    chrome14: {
-      desiredCapabilities: {
-        'browser': 'Chrome',
-        'browser_version': '14.0'
-      }
-    },
     chrome15: {
       desiredCapabilities: {
         'browser': 'Chrome',
-        'browser_version': '15.0'
+        'browser_version': '15.0',
+        'browserstack.console': 'disable'
       }
     },
-    chrome57: {
+    chrome68: {
       desiredCapabilities: {
         'browser': 'Chrome',
-        'browser_version': '57.0'
-      }
-    },
-    chrome65: {
-      desiredCapabilities: {
-        'browser': 'Chrome',
-        'browser_version': '65.0'
+        'browser_version': '68.0',
+        'browserstack.console': 'disable'
       }
     },
     ie9: {
       desiredCapabilities: {
         'browser': 'IE',
-        'browser_version': '9.0'
-      }
-    },
-    ie10: {
-      desiredCapabilities: {
-        'browser': 'IE',
-        'browser_version': '10.0'
+        'browser_version': '9.0',
+        'browserstack.console': 'disable'
       }
     },
     ie11: {
@@ -64,16 +49,10 @@ nightwatch_config = {
         'browser_version': '11.0'
       }
     },
-    edge14: {
+    edge17: {
       desiredCapabilities: {
         'browser': 'Edge',
-        'browser_version': '14.0'
-      }
-    },
-    edge16: {
-      desiredCapabilities: {
-        'browser': 'Edge',
-        'browser_version': '16.0'
+        'browser_version': '17.0'
       }
     },
     ff35: {
@@ -82,22 +61,16 @@ nightwatch_config = {
         'browser_version': '35.0'
       }
     },
-    ff58quantum: {
+    ff61: {
       desiredCapabilities: {
         'browser': 'Firefox',
-        'browser_version': '58.0'
+        'browser_version': '61.0'
       }
     },
     safari6: {
       desiredCapabilities: {
         'browser': 'Safari',
         'browser_version': '6.0'
-      }
-    },
-    safari91: {
-      desiredCapabilities: {
-        'browser': 'Safari',
-        'browser_version': '9.1'
       }
     },
     safari11: {
@@ -119,23 +92,9 @@ nightwatch_config = {
         'os_version': '11.2'
       }
     },
-    iphone8: {
-      desiredCapabilities: {
-        'device': 'iPhone 8',
-        'realMobile': 'true',
-        'os_version': '11.0'
-      }
-    },
     iphone10: {
       desiredCapabilities: {
         'device': 'iPhone X',
-        'realMobile': 'true',
-        'os_version': '11.0'
-      }
-    },
-    ipad5: {
-      desiredCapabilities: {
-        'device': 'iPad 5th',
         'realMobile': 'true',
         'os_version': '11.0'
       }
@@ -154,18 +113,12 @@ nightwatch_config = {
         'os_version': '4.4'
       }
     },
-    android6: {
-      desiredCapabilities: {
-        'device' : 'Google Nexus 6',
-        'realMobile' : 'true',
-        'os_version' : '6.0'
-      }
-    },
     android8: {
       desiredCapabilities: {
-        'device': 'Google Pixel',
-        'realMobile': 'true',
-        'os_version': '8.0'
+        'os_version' : '8.0',
+        'device' : 'Samsung Galaxy S9',
+        'real_mobile' : 'true',
+        'browserstack.console' : 'disable'
       },
     },
     galaxyNote4: {
