@@ -12,7 +12,7 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/configuration-default-optin.html')
       .useXpath()
-      .waitForElementVisible(OIL_YES_BUTTON, 3000, false)
+      .waitForElementVisible(OIL_YES_BUTTON, 15000, false)
       .end()
   },
 
@@ -25,7 +25,7 @@ module.exports = {
       })
       .refresh()
       .useXpath()
-      .waitForElementNotPresent(OIL_LAYER, 3000, false)
+      .waitForElementNotPresent(OIL_LAYER, 15000, false)
       .end()
   }
 };
