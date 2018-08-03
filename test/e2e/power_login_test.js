@@ -30,8 +30,6 @@ module.exports = {
     browser
       .deleteCookies()
       .url(browser.globals.launch_url_host1 + 'demos/complete-integration-site-a.html')
-      .useCss()
-      .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
       .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
       .click(OIL_YES_BUTTON);
@@ -47,8 +45,6 @@ module.exports = {
     browser
       .pause(REDIRECT_TIMEOUT)
       .url(browser.globals.launch_url_host2 + 'demos/complete-integration-site-b.html')
-      .useCss()
-      .waitForElementVisible('body', ASSERT_TIMEOUT, false)
       .useXpath()
       .waitForElementNotPresent(OIL_LAYER, 1000)
       .end();
