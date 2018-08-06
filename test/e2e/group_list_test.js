@@ -48,7 +48,7 @@ module.exports = {
       .waitForElementNotPresent(OIL_LAYER_FULL, 500)
       .waitForElementPresent(OIL_LAYER_POI_LIST, 500)
       .useCss()
-      .waitForElementPresent(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT, 500)
+      .waitForElementPresent(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT+':nth-of-type(1)', 500)
       .useXpath()
       .click(OIL_BACK_BUTTON)
       .waitForElementPresent(OIL_LAYER_FULL, 1000, false)
