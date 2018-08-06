@@ -12,39 +12,27 @@ module.exports = {
   '@disabled': false,
 
   beforeEach: browser => {
-    browser
-      .deleteCookies();
-
-    browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-tabs.html')
-      .useCss()
-      .waitForElementVisible('body', 1000, false)
-      .useXpath()
-      .waitForElementVisible(OIL_LAYER, 2000, false);
+     browser.deleteCookies();
   },
 
   'Cookie Preference Center Tabs opens after clicking more information, back button works, okay works': function (browser) {
     browser
+      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-tabs.html')
+      .useXpath()
+      .waitForElementVisible(OIL_LAYER, 4000, false)
       .click(OIL_ADVANCED_SETTINGS)
-      .pause(200)
-      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
+      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
+      .waitForElementVisible(OIL_BACK_BUTTON, 2000, false)
       .click(OIL_BACK_BUTTON)
-      .waitForElementNotPresent(OIL_ADVANCED_SETTINGS_WRAPPER, 1000)
+      .waitForElementNotPresent(OIL_ADVANCED_SETTINGS_WRAPPER, 2000)
       .click(OIL_ADVANCED_SETTINGS)
-      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
-      .useCss();
-    browser.expect.element(OIL_ADVANCED_SETTINGS_ACTIVE_PURPOSE_TAB).to.be.present;
-    browser.expect.element(OIL_ADVANCED_SETTINGS_INACTIVE_PURPOSE_TABS).to.be.present;
-    browser
+      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
+      .useCss()
+      .waitForElementVisible(OIL_ADVANCED_SETTINGS_ACTIVE_PURPOSE_TAB, 2000, false)
+      .waitForElementVisible(OIL_ADVANCED_SETTINGS_INACTIVE_PURPOSE_TABS, 2000, false)
       .useXpath()
       .click(OIL_YES_BUTTON)
-      .waitForElementNotPresent(OIL_LAYER, 1000)
-      .refresh()
-      .useCss()
-      .waitForElementVisible('body', 1000, false)
-      .useXpath()
-      .pause(500)
-      .waitForElementNotPresent(OIL_LAYER, 1000)
+      .waitForElementNotPresent(OIL_LAYER, 2000)
       .end();
   }
 };

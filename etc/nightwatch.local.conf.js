@@ -35,7 +35,7 @@ module.exports = {
         "browserName": "chrome",
         "javascriptEnabled": true,
         "chromeOptions" : {
-          "args" : ["headless"]
+          "args" : ["headless", "disable-gpu", "window-size=1024,768"]
         }
     }},
     "safari": {
