@@ -12,10 +12,7 @@
     }
 
     @include media('<=phone') {
-      display: inline;
       padding: 8px;
-      bottom: 0;
-      left: 0;
     }
   }
 
@@ -25,13 +22,8 @@
     }
 
     @include media('<=phone') {
-      display: inline;
       background: $background-color-dark;
-      box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, .2);
       padding: 8px;
-      position: fixed;
-      bottom: 0;
-      left: 0;
     }
   }
 

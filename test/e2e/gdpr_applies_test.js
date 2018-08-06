@@ -13,7 +13,7 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/gdpr-applies-false.html')
       .useCss()
-      .waitForElementVisible('body', 1000, false);
+      .waitForElementPresent('body', 1000, false);
   },
 
   'OIL Layer should remain hidden because gdpr_applies_globally is false': function (browser) {
@@ -28,7 +28,7 @@ module.exports = {
       .useXpath().waitForElementNotPresent(OIL_LAYER, 1000)
       .click(GDPR_APPLY_BUTTON)
       .pause(200)
-      .waitForElementVisible(OIL_LAYER, 1000, false)
+      .waitForElementPresent(OIL_LAYER, 1000, false)
       .end();
   }
 };

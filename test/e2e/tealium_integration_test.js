@@ -12,9 +12,9 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/tealium-integration-test.html')
       .useCss()
-      .waitForElementVisible('body', 1000, false)
+      .waitForElementPresent('body', 1000, false)
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 2000, false);
+      .waitForElementPresent(OIL_LAYER, 2000, false);
   },
 
   // This test only tests the tealium integration - it does not test the latest version of oil, but the version on tealium
@@ -30,7 +30,7 @@ module.exports = {
       .waitForElementNotPresent(OIL_LAYER, 1000)
       .refresh()
       .useCss()
-      .waitForElementVisible('body', 1000, false)
+      .waitForElementPresent('body', 1000, false)
       .useXpath()
       .pause(500)
       .waitForElementNotPresent(OIL_LAYER, 1000)

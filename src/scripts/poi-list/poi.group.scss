@@ -5,7 +5,8 @@
  */
 .as-oil-poi-group-list-wrapper {
   @include media('<=phone') {
-    width: 100%;
+    min-height: 300px;
+    z-index: 100;
     padding: 16px 12px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -18,11 +19,9 @@
   }
 
   .as-oil-poi-group-list {
-    @include media('>phone') {
-      overflow: auto;
-      overflow-y: scroll;
-      max-height: 200px;
-    }
+    overflow: auto;
+    overflow-y: scroll;
+    max-height: 200px;
   }
 
   .as-oil-l-buttons-light {
@@ -33,6 +32,8 @@
     @include media('<=phone') {
       background: $background-color-light;
       padding: 8px;
+      bottom: 0;
+      left: 0;
     }
   }
 
@@ -44,6 +45,8 @@
     @include media('<=phone') {
       background: $background-color-dark;
       padding: 8px;
+      bottom: 0;
+      left: 0;
     }
   }
 }

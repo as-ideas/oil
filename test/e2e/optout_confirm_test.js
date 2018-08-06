@@ -20,9 +20,9 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-confirm-optout.html')
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 5000, false)
+      .waitForElementPresent(OIL_LAYER, 5000, false)
       .click(OIL_ADVANCED_SETTINGS)
-      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 5000, false)
+      .waitForElementPresent(OIL_ADVANCED_SETTINGS_WRAPPER, 5000, false)
       .waitForElementPresent(OIL_DEFAULT_PURPOSE_SLIDER, 5000, false)
       .useCss().waitForElementNotPresent(CHECKED_SLIDER, 2500, false)
       .click(SLIDER)

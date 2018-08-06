@@ -9,9 +9,9 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/direct-integration.html')
       .useCss()
-      .waitForElementVisible(PAGE_BACKGROUND, 1000, false)
+      .waitForElementPresent(PAGE_BACKGROUND, 1000, false)
       .useXpath()
-      .waitForElementVisible(OIL_YES_BUTTON, 2000, false);
+      .waitForElementPresent(OIL_YES_BUTTON, 2000, false);
   },
 
   'OIL Layer closed after clicking yes': function (browser) {
@@ -22,7 +22,7 @@ module.exports = {
       .waitForElementNotPresent(OIL_YES_BUTTON, 1000)
       .refresh()
       .useCss()
-      .waitForElementVisible(PAGE_BACKGROUND, 1000, false)
+      .waitForElementPresent(PAGE_BACKGROUND, 1000, false)
       .useXpath()
       .pause(500)
       .waitForElementNotPresent(OIL_LAYER, 1000)

@@ -19,8 +19,8 @@ module.exports = {
         browser
           .url(browser.globals.launch_url_host1 + 'demos/direct-integration-event-test.html')
           .useXpath()
-          .waitForElementVisible(OIL_LAYER, 4000, false)
-          .waitForElementVisible(OIL_YES_BUTTON, 2000, false)
+          .waitForElementPresent(OIL_LAYER, 4000, false)
+          .waitForElementPresent(OIL_YES_BUTTON, 2000, false)
           .assert.cssClassPresent(EVENT_NOTIFIER_DIV, 'event-notifier-hidden')
           .click(OIL_YES_BUTTON)
           .waitForElementNotPresent(OIL_LAYER, 1000)

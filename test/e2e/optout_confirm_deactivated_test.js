@@ -16,7 +16,7 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, 5000, false)
+      .waitForElementPresent(OIL_LAYER, 5000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .waitForElementPresent(OIL_DEFAULT_PURPOSE_SLIDER, 5000, false)
       .click(OIL_DEFAULT_PURPOSE_SLIDER)

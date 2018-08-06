@@ -9,10 +9,10 @@ module.exports = {
   'Shows five purposes by default': function (browser) {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
-      .useXpath().waitForElementVisible(OIL_YES_BUTTON, 15000, false)
+      .useXpath().waitForElementPresent(OIL_YES_BUTTON, 15000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
-      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
+      .waitForElementPresent(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
       .pause(100)
       .waitForElementNotPresent(OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER, 1000, false)
       .end();
@@ -22,10 +22,10 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-custom-purposes.html')
       .useXpath()
-      .waitForElementVisible(OIL_YES_BUTTON, 15000, false)
+      .waitForElementPresent(OIL_YES_BUTTON, 15000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
-      .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
+      .waitForElementPresent(OIL_ADVANCED_SETTINGS_WRAPPER, 2000, false)
       .pause(100)
       .waitForElementPresent(OIL_CUSTOM_PURPOSE_SLIDER, 100, false)
       .waitForElementPresent(OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER, 100, false)

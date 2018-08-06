@@ -17,7 +17,7 @@ module.exports = {
     browser
       .url(browser.globals.launch_url_host1 + 'demos/complete-integration-site-a.html')
       .useXpath()
-      .waitForElementVisible(OIL_LAYER, ASSERT_TIMEOUT, false)
+      .waitForElementPresent(OIL_LAYER, ASSERT_TIMEOUT, false)
       .click(OIL_YES_BUTTON);
     browser.url((result) => {
       if (result.toString().indexOf('fallback') !== -1) {

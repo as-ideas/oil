@@ -20,8 +20,8 @@ module.exports = {
 
         browser
           .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
-          .useCss().waitForElementVisible('body', 1000, false)
-          .useXpath().waitForElementVisible(OIL_LAYER, 2000, false);
+          .useCss().waitForElementPresent('body', 1000, false)
+          .useXpath().waitForElementPresent(OIL_LAYER, 2000, false);
 
         browser.useXpath().expect.element(OIL_YES_BUTTON).text.to.not.contain(end2endRegexp);
         browser.useXpath().expect.element(OIL_ADVANCED_SETTINGS).text.to.not.contain(end2endRegexp);
@@ -29,8 +29,8 @@ module.exports = {
         // advanced-settings-e2e-locale should load a special LOCALE where every locale starts with '[e2e]'
         browser
           .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-e2e-locale.html')
-          .useCss().waitForElementVisible('body', 1000, false)
-          .useXpath().waitForElementVisible(OIL_LAYER, 2000, false);
+          .useCss().waitForElementPresent('body', 1000, false)
+          .useXpath().waitForElementPresent(OIL_LAYER, 2000, false);
         browser.useXpath().expect.element(OIL_YES_BUTTON).text.to.contain(end2endRegexp);
         browser.useXpath().expect.element(OIL_ADVANCED_SETTINGS).text.to.contain(end2endRegexp);
         browser.end();

@@ -28,7 +28,7 @@ module.exports = {
           .pause(5000)
           .url(browser.globals.launch_url_host1 + 'demos/vendor-integration-with-iframe.html')
           .useXpath()
-          .waitForElementVisible(OIL_YES_BUTTON, 2000, false)
+          .waitForElementPresent(OIL_YES_BUTTON, 2000, false)
           .waitForElementPresent(VENDOR_INTEGRATION_IFRAME, 5000, false);
       });
   },
@@ -47,13 +47,13 @@ module.exports = {
           .pause(2000)
           .frame(VENDOR_INTEGRATION_IFRAME_ID)
           .useXpath()
-          .waitForElementVisible(IFRAME_PING_RESULT_SUCCESS, 2000, false)
+          .waitForElementPresent(IFRAME_PING_RESULT_SUCCESS, 2000, false)
           .getText(IFRAME_PING_RESULT_SUCCESS, result => {
             browser.assert.equal(typeof result, 'object');
             browser.assert.equal(result.value, 'true');
           });
         browser
-          .waitForElementVisible(IFRAME_PING_RESULT_VALUE, 2000, false)
+          .waitForElementPresent(IFRAME_PING_RESULT_VALUE, 2000, false)
           .getText(IFRAME_PING_RESULT_VALUE, result => {
             browser.assert.equal(typeof result, 'object');
             let printedResult = JSON.parse(result.value);
@@ -79,13 +79,13 @@ module.exports = {
           .pause(2000)
           .frame(VENDOR_INTEGRATION_IFRAME_ID)
           .useXpath()
-          .waitForElementVisible(IFRAME_GETCONSENTDATA_RESULT_SUCCESS, 2000, false)
+          .waitForElementPresent(IFRAME_GETCONSENTDATA_RESULT_SUCCESS, 2000, false)
           .getText(IFRAME_GETCONSENTDATA_RESULT_SUCCESS, result => {
             browser.assert.equal(typeof result, 'object');
             browser.assert.equal(result.value, 'true');
           });
         browser
-          .waitForElementVisible(IFRAME_GETCONSENTDATA_RESULT_VALUE, 2000, false)
+          .waitForElementPresent(IFRAME_GETCONSENTDATA_RESULT_VALUE, 2000, false)
           .getText(IFRAME_GETCONSENTDATA_RESULT_VALUE, result => {
             browser.assert.equal(typeof result, 'object');
             let printedResult = JSON.parse(result.value);

@@ -23,7 +23,7 @@ module.exports = {
         browser
           .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-limited-vendors.html')
           .useXpath()
-          .waitForElementVisible(OIL_LAYER, 2000, false);
+          .waitForElementPresent(OIL_LAYER, 2000, false);
       });
   },
 
@@ -37,7 +37,7 @@ module.exports = {
         browser
           .click(OIL_ADVANCED_SETTINGS)
           .pause(200)
-          .waitForElementVisible(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
+          .waitForElementPresent(OIL_ADVANCED_SETTINGS_WRAPPER, 1000, false)
           .pause(200)
           .useCss()
           .expect.element(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(1) ' + OIL_THIRD_PARTY_NAME).text.to.equal('Captify Technologies Limited');
