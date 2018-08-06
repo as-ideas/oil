@@ -5,7 +5,6 @@ import {
 
 const REDIRECT_TIMEOUT = 5000;
 const ASSERT_TIMEOUT = 2000;
-const PAGE_INIT_TIMEOUT = 20000;
 
 module.exports = {
   '@disabled': false,
