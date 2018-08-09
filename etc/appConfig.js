@@ -181,6 +181,12 @@ module.exports = {
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
+    filename: 'demos/poi-group-whitelist.html',
+    template: path.resolve(sourcePath, 'demos', 'poi-group-whitelist.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  }, {
     filename: 'demos/tealium-integration-test.html',
     template: path.resolve(sourcePath, 'demos', 'tealium-integration-test.html'),
     chunks: [],
