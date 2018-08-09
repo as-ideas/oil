@@ -3,6 +3,8 @@ import { logError } from '../core/core_log';
 import { getPoiGroupName } from '../core/core_config';
 
 let cachedGroupList;
+let cachedGroupIabVendorWhiteList;
+let cachedGroupIabVendorBlacklist;
 
 export function getGroupList() {
   let groupName = getPoiGroupName();
@@ -13,6 +15,8 @@ export function getGroupList() {
       fetchJsonData(__webpack_public_path__ + 'poi-lists/' + groupName + '.json')
         .then(response => {
           cachedGroupList = response.companyList;
+          cachedGroupIabVendorWhiteList = response.iabVendorWhitelist;
+          cachedGroupIabVendorBlacklist = response.iabVendorBlacklist;
           resolve(cachedGroupList);
         })
         .catch(error => {
@@ -21,4 +25,12 @@ export function getGroupList() {
         });
     }
   });
+}
+
+export function getGroupIabVendorWhiteList() {
+  return cachedGroupIabVendorWhiteList;
+}
+
+export function getGroupIabVendorBlacklist() {
+  return cachedGroupIabVendorBlacklist;
 }
