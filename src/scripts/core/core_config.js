@@ -1,6 +1,7 @@
 import { OIL_CONFIG } from './core_constants.js';
 import { logError, logInfo } from './core_log.js';
 import { getGlobalOilObject, isObject, OilVersion, setGlobalOilObject } from './core_utils';
+import { getGroupIabVendorBlacklist, getGroupIabVendorWhiteList } from './../poi-list/poi.group.list.js';
 
 /**
  * Read configuration of component from JSON script block
@@ -140,10 +141,22 @@ export function getIabVendorListUrl() {
 }
 
 export function getIabVendorBlacklist() {
+  if(isPoiActive()) {
+    const groupList = getGroupIabVendorBlacklist();
+    if(groupList) {
+      return groupList;
+    }
+  }
   return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_BLACKLIST, undefined);
 }
 
 export function getIabVendorWhitelist() {
+  if(isPoiActive()) {
+    const groupList = getGroupIabVendorWhiteList();
+    if(groupList) {
+      return groupList;
+    }
+  }
   return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_WHITELIST, undefined);
 }
 
