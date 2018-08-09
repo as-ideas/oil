@@ -17,7 +17,9 @@ export function renderOilGroupListTemplate(renderMethod) {
 export function renderOilThirdPartyListTemplate(renderMethod) {
   loadVendorList()
     .then(() => {
-      renderMethod(oilThirdPartyListTemplate(getVendorsToDisplay()))
+      getGroupList().then(() => {
+        renderMethod(oilThirdPartyListTemplate(getVendorsToDisplay()))
+      })
     });
 }
 

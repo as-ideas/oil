@@ -29,6 +29,7 @@ import { applyPrivacySettings, getPrivacySettings, getSoiConsentData } from './u
 import { activateOptoutConfirm } from './userview_optout_confirm.js';
 import { getPurposeIds, loadVendorList } from '../core/core_vendor_information';
 import { manageDomElementActivation } from '../core/core_tag_management';
+import { getGroupList } from './../poi-list/poi.group.list';
 
 // Initialize our Oil wrapper and save it ...
 
@@ -73,38 +74,49 @@ export function oilShowPreferenceCenter() {
   // We need to make sure the vendor list is loaded before showing the cpc
   loadVendorList()
     .then(() => {
-      let wrapper = document.querySelector('.as-oil');
-      let entryNode = document.querySelector('#oil-preference-center');
-      if (wrapper) {
-        renderOil({advancedSettings: true});
-      } else if (entryNode) {
-        entryNode.innerHTML = findAdvancedSettingsInlineTemplate();
-        addOilHandlers(getOilDOMNodes());
-      } else {
-        logError('No wrapper for the CPC with the id #oil-preference-center was found.');
-        return;
-      }
-      let consentData = getSoiConsentData();
-      let currentPrivacySettings;
-      if (consentData) {
-        currentPrivacySettings = consentData.getPurposesAllowed();
-      } else {
-        currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? getPurposeIds() : [];
-      }
-      applyPrivacySettings(currentPrivacySettings);
+      // then we want the group list because it may contain group-wide iabVendorWhitelist or iabVendorBlacklist
+      getGroupList().then(() => {
+        let wrapper = document.querySelector('.as-oil');
+        let entryNode = document.querySelector('#oil-preference-center');
+        if (wrapper) {
+          renderOil({advancedSettings: true});
+        } else if (entryNode) {
+          entryNode.innerHTML = findAdvancedSettingsInlineTemplate();
+          addOilHandlers(getOilDOMNodes());
+        } else {
+          logError('No wrapper for the CPC with the id #oil-preference-center was found.');
+          return;
+        }
+        let consentData = getSoiConsentData();
+        let currentPrivacySettings;
+        if (consentData) {
+          currentPrivacySettings = consentData.getPurposesAllowed();
+        } else {
+          currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? getPurposeIds() : [];
+        }
+        applyPrivacySettings(currentPrivacySettings);
+      })
     })
     .catch((error) => logError(error));
 }
 
 export function handleOptIn() {
-  (isPoiActive() ? handlePoiOptIn() : handleSoiOptIn()).then(() => {
-    let commandCollectionExecutor = getGlobalOilObject('commandCollectionExecutor');
-    if (commandCollectionExecutor) {
-      commandCollectionExecutor();
-    }
-    manageDomElementActivation();
-  });
+  if(isPoiActive()) {
+    getGroupList().then(() => {
+      (handlePoiOptIn()).then(onOptInComplete);
+    });
+  } else {
+    (handleSoiOptIn()).then(onOptInComplete);
+  }
   animateOptInButton();
+}
+
+function onOptInComplete() {
+  let commandCollectionExecutor = getGlobalOilObject('commandCollectionExecutor');
+  if (commandCollectionExecutor) {
+    commandCollectionExecutor();
+  }
+  manageDomElementActivation();
 }
 
 function shouldRenderOilLayer(props) {
