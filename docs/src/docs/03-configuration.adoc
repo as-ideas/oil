@@ -87,6 +87,24 @@ A POI-List file must be a json containing an object with a single property `comp
 }
 ----
 
+===== Group-wide vendor whitelist and vendor blacklist
+
+Equal in function to the `iabVendorWhitelist` and `iabVendorBlacklist` configuration parameters you can limit vendor consent for every site that's part of your group.
+
+To do this, you want to extend your POI-List with either one of those elements:
+
+[source,json]
+----
+{
+  "companyList": [
+    "Super Comp"
+  ],
+  "iabVendorWhitelist": [1,2,3],
+  "iabVendorBlacklist": [9,10]
+}
+----
+
+**The values from the group-wide list override the values defined in a single site's configuration.** More information on what these parameters do, see the <<Blacklisting and Whitelisting>> section.
 
 
 === Functional Configuration Parameters
@@ -105,7 +123,7 @@ This is a full list of configurable options.
 | gdpr_applies_globally | Flag to indicate that publisher is from the EU, thus showing the OIL layer to every user. The flag is passed to vendors. | true
 | iabVendorBlacklist | Array of vendor IDs to exclude from consent. <<blacklisting-and-whitelisting, Details here>> | None
 | iabVendorListUrl | Vendorlist to use | https://vendorlist.consensu.org/vendorlist.json
-| iabVendorWhitelist | Array of vendor IDs to include in consent. If it is set, values in `iabVendorBlacklist` are ignored. <<blacklisting-and-whitelisting, Details here>> | none
+| iabVendorWhitelist | Array of vendor IDs to include in consent. If it is set, values in `iabVendorBlacklist` are ignored. <<blacklisting-and-whitelisting, Details here>>. When white- or blacklisting you might also be interested in the `show_limited_vendors_only` parameter. | none
 | <<texts-locale-object,locale>> | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. <<locale-object, See here for details>> | None
 | locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See link:https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json[See here for an example file] | None
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | true
@@ -315,7 +333,7 @@ When preview_mode is not set in configuration and no consent cookie is found, th
 
 === Blacklisting and Whitelisting
 
-With *iabVendorWhitelist* and *iabVendorBlacklist* you can exclude specific vendors from the consent (blacklist) or include only the ones you want (whitelist). You can only use one method at the time - either whitelist or blacklist.
+With *iabVendorWhitelist* and *iabVendorBlacklist* you can exclude specific vendors from the consent (blacklist) or include only the ones you want (whitelist). You can only use one method at a time - either whitelist or blacklist.
 
 As an example, the vendorlist may contain vendors with vendor IDs 1 to 10. In the example the user accepts everything, he just pressed "OK". The consent-string would normally contain (by getVendorConsents) this data:
 
