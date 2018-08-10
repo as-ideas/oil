@@ -1,8 +1,0 @@
-=== Locale configuration
-
-Texts and labels shown by the Opt-In Layer are provided by the OIL Backend. This server application uses a PostgreSQL database to store
-texts and labels for different languages and variants. A REST service is provided that allows to request them and to add new ones.
-
-The REST service documentation can be found here: https://oil-backend.herokuapp.com/oil/swagger-ui.html
-
-Note: Adding new languages and variants is allowed for authorized users only.
