@@ -1,0 +1,21 @@
+= OIL Documentation
+:toc: left
+:toclevels: 4
+:toc-title: OIL Documentation
+:sectanchors:
+:idprefix:
+:idseparator: -
+:experimental:
+:description: The documentation for the Axel Springer Opt-In Layer
+:keywords: Tealium, OIL, Opt-In Layer
+:docinfo: shared
+:docinfodir: src/meta
+:source-highlighter: highlightjs
+
+image::src/images/oillogo.png[]
+// horizontal line
+***
+
+## DEPRECATED
+
+Use https://oil.axelspringer.com/docs/[the user guide]

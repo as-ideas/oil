@@ -1,0 +1,142 @@
+== OIL and Tealium
+
+The Opt-In Layer can be integrated with your page using http://tealium.com/[Tealium^].
+
+NOTE: Integration of OIL with Tealium requires a Tealium profile for your page. This documentation focuses on the integration steps. Please
+read the Tealium documentation to find out how to get and set up an own Tealium profile.
+
+Setting up OIL with Tealium consists of the following steps:
+
+* <<Add Opt-In Layer to Tealium,Add the Opt-In Layer>> to your Tealium profile.
+* <<Add OIL configuration to Tealium,Add the OIL configuration>> to your Tealium profile.
+
+In addition to its own integration, OIL also provides support for <<Vendor Tag Management with OIL and Tealium,(vendor) tag management>> with Tealium.
+
+=== Add Opt-In Layer to Tealium
+
+Instead of integrating the Opt-In Layer directly into your page you can have it delivered by Tealium. To work correctly, the Opt-In Layer
+needs two components to be delivered by Tealium:
+
+* the stub and
+* the layer itself.
+
+Both of them have to be added as extensions to your Tealium profile (in section "Extensions"). At first, we add the stub with the following settings:
+----
+Title:     OIL Stub
+Scope:     All Tags
+Execution: Run Once before Load Rules
+----
+In fact, the title can be defined freely. In the "Configuration" section you have to write the code of the OIL layer. Unfortunately, this is
+possible by a copy/paste action only. Download the file `oilstub.{version}.min.js` from https://oil.axelspringer.com/release and paste its
+content completely into the text area in the "Configuration" section.
+
+Now create another extension 'OIL Layer' with the content of the file `oil.{version}.min.js`. Make sure that both extensions are activated.
+Now save and publish your changes.
+
+NOTE: The order of extensions in the list is the order they are loaded by the page. Therefore, please ensure that the stub extension is located above
+the layer extension in the list.
+
+Now that you have ensured that the Opt-In Layer is delivered by Tealium you need to integrate Tealium in your page. Here is a very simple
+example of such an integration (for more details to the use of Tealium in your page please consult the Tealium documentation):
+
+[source, html]
+----
+<script type="text/javascript">
+  (function (a, b, c, d) {
+    a = '//tags.tiqcdn.com/utag/&lt;path-to-your-tealium-profile&gt;/prod/utag.js';
+    b = document;
+    c = 'script';
+    d = b.createElement(c);
+    d.src = a;
+    d.type = 'text/java' + c;
+    d.async = true;
+    a = b.getElementsByTagName(c)[0];
+    a.parentNode.insertBefore(d, a);
+  })();
+</script>
+----
+
+That's it.
+
+=== Add OIL configuration to Tealium
+
+As described in section <<Configuring OIL>> the Opt-In Layer has a wide range of configuration settings that affects its appearance and
+function. This configuration can also be delivered by Tealium.
+
+Go to your Tealium profile (section "Extensions") and create an extension with the following settings:
+----
+Title:     OIL Configuration
+Scope:     All Tags
+Execution: Run Once before Load Rules
+----
+Again, the title can be defined freely. The "Configuration" section of the new extension should contain the following code:
+
+[source, javascript]
+----
+var config = {
+  // your configuration comes here
+};
+
+// Do not change the code behind this line!
+var head = document.getElementsByTagName('head')[0];
+var script = document.createElement('script');
+
+script.id = 'oil-configuration';
+script.type = 'application/configuration';
+script.text = JSON.stringify(config);
+
+head.appendChild(script);
+----
+
+The variable `config` should contain your configuration that is to be delivered.
+
+NOTE: The order of extensions in the list is the order they are loaded by the page. Therefore, please ensure that the OIL configuration
+extension is located above the Opt-In Layer code extension in the list.
+
+=== Vendor Tag Management with OIL and Tealium
+
+Tealium is a tag manager that enables you to integrate tags in your page or website respectively depending on several conditions. For
+vendor tags, such a condition is a consent that the user gives to a purpose. Consents, in turn, are managed by the Opt-In Layer. To support
+tag integration depending on given consents OIL uses special variables that it defines in the Tealium data layer - one for each purpose:
+
+----
+_dip_oil_purpose_01
+_dip_oil_purpose_02
+_dip_oil_purpose_03
+_dip_oil_purpose_04
+_dip_oil_purpose_05
+----
+
+Each variable can be `true` or `false` - `true` if user gave consent to the corresponding standard purpose with the id referenced in the variable's name.
+
+Additionally, a variable named
+----
+_dip_oil_purpose_all
+----
+is used that is `true` if user gave consent to all standard purposes.
+
+NOTE: Currently, custom purposes are not supported.
+
+To establish connection between the Opt-In Layer and your Tealium profile, you have to ensure, that these variables are defined in your
+profile. Go to section "Data Layer" and define each of the variables mentioned above as shown in this example:
+
+----
+Source: _dip_oil_purpose_01
+Type:   UDO Variable
+----
+
+To be able to activate or deactivate (vendor) tags, Tealium uses so-called loading rules. To connect tag activation and Tealium variables
+set by the Opt-In Layer, you should define such rules - one for each variable as shown in the following examples:
+
+----
+Title:      _dip_oil_purpose_all
+Conditions: IF js._dip_oil_purpose_all EQUALS 1
+----
+----
+Title:      _dip_oil_purpose_01
+Conditions: IF js._dip_oil_purpose_all EQUALS 1 OR js._dip_oil_purpose_01 EQUALS 1
+----
+
+That's all. Now you can combine your tags managed by Tealium with these loading rules (see Tealium documentation to learn how to do that).
+If a user gives consent to a purpose or revokes it, OIL sets corresponding data layer variable to `true` or `false` respectively and causes
+Tealium to re-evaluate it. This activates corresponding loading rule and the tag combined with it is activated or deactivated.

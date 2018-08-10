@@ -1,0 +1,32 @@
+=== Deprecated Label Configurations:
+
+[width="100%",options="header", cols="1,3"]
+|====
+|Config Parameter|Default value
+|label_button_yes_soi| Yes
+|label_button_yes_poi| Yes for all
+|label_intro_start| We're using cookies, read
+|label_intro_end| and please confirm.
+|label_button_privacy| more information
+|label_later_heading|
+|label_later|
+|label_later_start|
+|label_later_end|
+|label_button_no|
+|privacy_page_url| http://my.url/information
+|====
+
+=== Deprecated Advanced Settings aka Cookie Preference Center
+
+[width="100%",options="header", cols="1,3"]
+|====
+|Config Parameter|Default value
+   [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_HEADING]: 'Bitte wähle eine Datenschutzeinstellung aus:',
+    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_TEXT]: '',
+    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_ESSENTIAL_TEXT]: 'Nur erforderliche Cookies',
+    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_ESSENTIAL_VERBOSE]: 'Diese Cookies sind für die grundlegenden Funktionen der Website erforderlich.',
+    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_FUNCTIONAL_TEXT]: 'Funktionelle Cookies',
+    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_FUNCTIONAL_VERBOSE]: 'Diese Cookies ermöglichen uns die Analyse der Website-Nutzung, damit wir deren Leistung messen und verbessern können.',
+    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_ADVERTISING_TEXT]: 'Marketing-Cookies',
+    [OIL_LABELS.ATTR_LABEL_ADVANCED_SETTINGS_ADVERTISING_VERBOSE]: 'Diese Cookies werden von Werbeagenturen verwendet, um Ihnen Werbung zu unterbreiten, die für Ihre Interessen relevant ist.',
+|====

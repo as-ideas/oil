@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vendor Integration IFrame</title>
+</head>
+<body>
+<p>This is an iframe of a vendor.</p>
+<p>
+  <b>'ping' Result</b><br>
+  Success: <span id="ping-result-success" style="display:none;"></span>;&nbsp;
+  Value: <span id="ping-result-value" style="display:none;"></span>
+</p>
+<p>
+  <b>'getConsentString' Result</b><br>
+  Success: <span id="getConsentData-result-success" style="display:none;"></span>;&nbsp;
+  Value: <span id="getConsentData-result-value" style="display:none;"></span>
+</p>
+<script type="text/javascript">
+  // find the CMP frame
+  var cmpFrame;
+
+  function findCmp() {
+    var f = window;
+    var cmpFrame;
+    while (!cmpFrame) {
+      try {
+        if (f.frames['__cmpLocator']) {
+          cmpFrame = f;
+        }
+      } catch (e) {
+        console.log("Catched: ", e)
+      }
+      if (f === window.top) break;
+      f = f.parent;
+    }
+    return cmpFrame;
+  }
+
+  var cmpCallbacks = {};
+  /* Set up a __cmp function to do the postMessage and stash the callback. This function behaves (from the caller's perspective)
+     identically to the in-frame __cmp call */
+  window.__cmp = function (cmd, arg, callback) {
+    var numberOfTries = 20;
+    var myInterval = setInterval(function () {
+      cmpFrame = findCmp();
+      if (!cmpFrame) {
+        --numberOfTries;
+        if (numberOfTries === 0) {
+          clearInterval(myInterval);
+          callback({msg: "CMP not found"}, false);
+        }
+        return;
+      }
+      clearInterval(myInterval);
+      var callId = Math.random() + '';
+      var msg = {
+        __cmpCall: {
+          command: cmd,
+          parameter: arg,
+          callId: callId
+        }
+      };
+      cmpCallbacks[callId] = callback;
+      cmpFrame.postMessage(JSON.stringify(msg), '*');
+    }, 200);
+  };
+
+  /* when we get the return message, call the stashed callback */
+  window.addEventListener('message', function (event) {
+    var eventData;
+    if (typeof event.data === 'string') {
+      eventData = JSON.parse(event.data)
+    } else {
+      eventData = event.data;
+    }
+    if (eventData.__cmpReturn) {
+      var i = eventData.__cmpReturn;
+      cmpCallbacks[i.callId](i.returnValue, i.success);
+    }
+  }, false);
+
+  __cmp('ping', null, function (val, success) {
+    var pingResultSuccessElement = document.getElementById('ping-result-success');
+    pingResultSuccessElement.textContent = success;
+    pingResultSuccessElement.style.display = 'inline';
+
+    var pingResultValueElement = document.getElementById('ping-result-value');
+    pingResultValueElement.textContent = JSON.stringify(val);
+    pingResultValueElement.style.display = 'inline';
+  });
+
+  __cmp('getConsentData', null, function (val, success) {
+    var gcdResultSuccessElement = document.getElementById('getConsentData-result-success');
+    gcdResultSuccessElement.textContent = success;
+    gcdResultSuccessElement.style.display = 'inline';
+
+    var gcdResultValueElement = document.getElementById('getConsentData-result-value');
+    gcdResultValueElement.textContent = JSON.stringify(val);
+    gcdResultValueElement.style.display = 'inline';
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+@import "./_settings";
+
+// Mixins
+
+// Removes margins in stacked items,
+// margin-top is set to 0 for first item, margin-bottom is set to 0 for last item
+// <li>Foo</li>
+// <li>Bar</li>
+// <li>Baz</li>
+@mixin stack-items-remove-vertical-margins {
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+@mixin stack-items-remove-horizontal-margins {
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin box-model($model: border-box) {
+  &, & * {
+    box-sizing: $model;
+
+    &:before,
+    &:after {
+      box-sizing: $model;
+    }
+  }
+}
+
+%button-theme {
+  color: $text-color-primary-light;
+
+  .dark & {
+    color: $text-color-primary-dark;
+    &:hover {
+      color: darken($text-color-primary-dark, 10%);
+    }
+  }
+
+  &:hover {
+    color: darken($text-color-primary-light, 10%);
+    background-color: transparent;
+  }
+}
+
+// Our OIL Overlay - Wraps all Oil content
+// HINT: Was no height! It's only the wrapper
+.as-oil {
+  @include box-model;
+  @include font-smoothing;
+  position: fixed;
+  z-index: $z-index-max;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-family: $font-stack;
+  color: $text-color-primary-light;
+
+  &.dark {
+    color: $text-color-primary-dark;
+  }
+
+  // Set font size here as a base for em units, which we'll use, cause' we don't know what base font-size size a host site will use
+  font-size: 14px;
+
+  a {
+    cursor: pointer;;
+  }
+}
+
+@include media('<=phone') {
+  .as-oil-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+  }
+}
+
+// Wraps all our Oil content, eg. text and buttons
+.as-oil-content-overlay {
+  @include clearfix;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 2rem 5rem;
+  background-color: $background-color-light;
+  opacity: 0.97;
+  box-shadow: 0 -8px 20px 0 rgba(0, 0, 0, 0.2);
+
+  .dark & {
+    background-color: $background-color-dark;
+  }
+
+  .small & {
+    padding: .5rem !important;
+  }
+
+  @include media('<=phone') {
+    padding: 1rem !important;
+  }
+
+}
+
+// Text Styles
+.as-oil__heading {
+  max-width: 840px;
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.15;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  .small & {
+    display: none;
+  }
+
+  @include media('<=phone') {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    line-height: 1.3333;
+    text-align: center;
+  }
+}
+
+.as-oil__intro-txt {
+  display: inline-block;
+  min-width: 75%;
+  max-width: 75%;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.4;
+
+  .small & {
+    margin: 0 0 0 1rem;
+    @include media('<=phone') {
+      margin: .5rem 0;
+    }
+  }
+
+  @include media('<=phone') {
+    margin: .5rem 0;
+    min-width: 100%;
+    max-width: 100%;
+
+  }
+}
+
+.as-oil__intro-txt--link {
+  padding: 4px 1px 0;
+  margin: 0 1px;
+  text-decoration: underline;
+
+  @extend %button-theme;
+}
+
+// Button Styles
+@mixin oil-loi-btn-poi-soi-shared {
+  @include stack-items-remove-horizontal-margins;
+  @include btn-poi-soi-shared;
+  min-height: 40px;
+  margin: 0.5rem 0;
+}
+
+@mixin btn-shared {
+  min-width: 160px;
+  min-height: 42px;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+
+  .small & {
+    min-width: 120px;
+    min-height: 32px;
+  }
+
+  @include media('<=phone') {
+    width: 100%;
+    min-width: auto;
+    padding: 0;
+  }
+}
+
+@mixin btn-blue {
+  @include btn-shared;
+
+  color: $btn-primary-text-color;
+  background-color: $btn-primary;
+
+  &:hover {
+    color: darken($btn-primary-text-color, 5%);
+    background-color: darken($btn-primary, 10%);
+  }
+}
+
+@mixin btn-grey {
+  @include btn-shared;
+
+  color: $btn-text-grey;
+  background-color: $btn-background-grey;
+
+  &:hover {
+    color: darken($btn-text-grey, 5%);
+    background-color: darken($btn-background-grey, 5%);
+  }
+}
+
+// The container for alle the buttons
+.as-oil-l-buttons {
+  @include media('>phone', '<desktop') {
+    // We are vertically aligning this btn by using margins, which is a bit dirty
+    max-width: 24%;
+  }
+}
+
+.as-oil__btn-optin {
+  @include btn-blue;
+  transition: opacity 0.8s ease 0s;
+
+  &.as-oil__btn-optin-clicked {
+    opacity: 0.3;
+  }
+}
+
+.as-oil__btn-blue {
+  @include btn-blue;
+}
+
+.as-oil__btn-grey {
+  @include btn-grey;
+}
+
+.as-oil-back-button {
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  @include media('<=phone') {
+    float: right;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+
+    .as-oil-back-button__text {
+      visibility: hidden;
+    }
+  }
+  @include media('>phone') {
+    display: flex;
+    align-items: center;
+  }
+
+}
+
+.as-oil-back-button__text {
+  margin-right: 6px;
+}
+
+.as-oil__btn-cpc {
+  float: right;
+  min-height: auto;
+  min-width: 135px;
+  margin: 0.75rem 0;
+  padding: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid;
+  border-radius: 0;
+  cursor: pointer;
+
+  @extend %button-theme;
+
+  @include media('<=phone') {
+    float: none;
+    width: 100%;
+    font-size: 0.75rem;
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @include media('>phone', '<desktop') {
+    float: none;
+  }
+}
+
+// Layout Stuff
+.as-oil-l-row {
+  display: inline-block;
+  margin: 1rem 0;
+  min-width: 20%;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .small & {
+    margin: 0 0 0.5rem 0;
+    min-width: 0;
+  }
+
+  @include media('<=phone') {
+    display: block;
+    width: 100%;
+  }
+}
+
+.as-oil-l-row--fixed-width,
+.as-oil-l-wrapper-layout-max-width {
+  max-width: $layout-max-width;
+  position: relative;
+  margin: 0 auto;
+}
+
+.as-oil-l-item {
+  float: right; // Fallback for non flexbox capable browsers
+  clear: both; // Fallback for non flexbox capable browsers
+  text-align: right;
+
+  @supports (display: flex) {
+    float: none;
+  }
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  @include media('<=phone') {
+    @include stack-items-remove-horizontal-margins;
+    width: 100%;
+    margin: 1rem 0;
+
+    .small & {
+      margin: 0;
+    }
+  }
+}
+
+.as-oil-l-item--stretch {
+  @supports (display: flex) {
+    flex: 1 0 auto;
+  }
+}

@@ -1,0 +1,50 @@
+@import "./_settings";
+
+.as-oil-optout-confirm {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(0,0,0,0.7);
+  margin: -2rem -5rem;
+
+  @include media('<=phone') {
+    margin: -1rem;
+  }
+
+  @include media('>phone', '<=849px') {
+    margin: -2rem -1rem;
+  }
+
+  .as-oil-optout-confirm__dialog {
+    text-align: center;
+    min-width: 320px;
+    max-width: 420px;
+    background-color: $background-color-light;
+   
+    margin: 0 auto;
+    margin-top: 10%;
+    padding: 1rem;
+
+    p {
+      width: 100%;
+      text-align: justify;
+    }
+
+    .as-oil-optout-confirm__dialog__heading {
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 1.15;
+    }
+
+    .as-oil-l-buttons {
+      @include media('>phone', '<desktop') {
+        max-width: unset;
+      }
+    }
+  }
+}
+
+.dark .as-oil-optout-confirm__dialog {
+  background-color: $background-color-dark;
+}

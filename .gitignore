@@ -1,13 +1,17 @@
-# OS
 .DS_Store
-*.log
-
-# BUILD
-dist/
-
-# IDEs
 .idea/
-*.iml
-
-# NODE
+.tern-project
+.awcache/
+dist/
 node_modules/
+test/e2e/.awcache/
+test/e2e/dist/
+test/e2e/node_modules/
+test/e2e/target/
+typings/
+target/
+*.log
+*.tgz
+*.iml
+oil-michiel.sublime-project
+oil-michiel.sublime-workspace

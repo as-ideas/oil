@@ -1,0 +1,21 @@
+++++
+<div class="main-header">
+  <div class="main-header__left">
+    <img class="main-header__left-image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwIDEwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBhdGggZD0iTTg1Ljk2OCw4Ni4yNTNWNzIuNDM4SDc0LjIzMXYxMy44MTVoLTguNDJMNDcuNjQ3LDQwLjAyNWwzMS42NjIsMTYuODk0djE1LjQ2NmgyVjU3Ljk4NWw2LjAzNCwzLjIybDQuMjg2LTguMDMyICBMMzAuMDM0LDIwLjMwOGwzLjYxMy02LjczMUwyNi4wNCw0Ljc1MWwtMC43NTgsMC42NjdjLTAuMzMxLDAuMjkxLTguMTE3LDcuMjEyLTEwLjYxNSwxNS42MyAgYy0zLjMzOSwxMS4yNTYsMC45NjMsMTkuMTYzLDEuODg5LDIwLjY3OXYzOS42NThoLTIuNzcxdjJoMi43NzF2Mi44NjhINS4xdjJoOTB2LTJIODUuOTY4eiBNNzYuMjMxLDc0LjQzOGg3LjczNnYxMS44MTVoLTcuNzM2ICBWNzQuNDM4eiBNNDMuMzcsNjcuNzU3aDExLjQ2N0w0My4zNyw3Ny44OTlWNjcuNzU3eiBNNTYuNzcyLDY4LjcxNWw0LjA4NywxMC40MDNINDUuMDFMNTYuNzcyLDY4LjcxNXogTTQ0LjM0OCw2NS43NTdsNy4zNDEtOS45NzkgIGwzLjkyMSw5Ljk3OUg0NC4zNDh6IE00My4zNyw2My43MDl2LTguNzNoNi40MjJMNDMuMzcsNjMuNzA5eiBNNDMuMzcsODEuMTE4aDE4LjI3NWwyLjAxOCw1LjEzNUg0My4zN1Y4MS4xMTh6IE01MC41ODksNTIuOTc5ICBINDMuMzdWMzcuNzQybDEuNTU5LDAuODMyTDUwLjU4OSw1Mi45Nzl6IE04OC45MjQsNTMuOTk1TDg2LjUyMSw1OC41TDI2LjY3NCwyNi41NjhsMi40MTUtNC40OTlMODguOTI0LDUzLjk5NXogTTI1Ljg2Niw3LjYxMiAgbDUuMzY5LDYuMjNsLTEuNzUxLDMuMjYybC04LjE0OS00LjM1MkMyMy4xMjQsMTAuMzgyLDI0LjkwMiw4LjU0OSwyNS44NjYsNy42MTJ6IE0yMC4xNjQsMTQuMzkzbDguMzc1LDQuNDczbC0wLjI2OCwwLjUgIGwtMC4wNTMtMC4wMjlsLTQuMjg2LDguMDMybDAuMDMzLDAuMDE4bC0wLjI3MSwwLjUwNWwtNy42NTYtNC4wODhjMC4xNTItMC43MTYsMC4zMjYtMS40NDIsMC41NDgtMi4xODkgIEMxNy4zNTUsMTkuMDIxLDE4LjcwMywxNi41NDksMjAuMTY0LDE0LjM5M3ogTTE1LjY3MywyNS44NzdsNy4wNzQsMy43NzdsLTUuMTkzLDkuNjc0QzE2LjQ3MywzNy4wMDUsMTQuODI0LDMyLjIwNywxNS42NzMsMjUuODc3eiAgIE0xOC41NTYsODMuMzg1aDIuODkzdi0yaC0yLjg5M1Y0MS42OTFsNy4xNzMtMTMuMzYybDE1LjY0Miw4LjM0NnY0OS41NzhIMTguNTU2VjgzLjM4NXoiPjwvcGF0aD48cmVjdCB4PSIxMi4yNTkiIHk9IjkxLjM2NyIgd2lkdGg9IjQ1LjUyMSIgaGVpZ2h0PSIyIj48L3JlY3Q+PHJlY3QgeD0iNjEuODU5IiB5PSI5MS4zNjciIHdpZHRoPSIyNi4zNCIgaGVpZ2h0PSIyIj48L3JlY3Q+PC9zdmc+">
+    <a href="https://www.oiljs.org" class="main-header__left-text-a">oil.js</a> <span class="main-header__left-text-b">docs</span>
+  </div>
+  <div class="main-header__right">
+    <div class="main-header__version">
+++++
+{version}
+++++
+    </div>
+    <div class="main-header__call-to-action">
+      <a class="menu-button xs-only" href="https://sandbox.oiljs.org/" target="_blank" alt="sandbox"><i class="fas fa-chalkboard-teacher"></i></a>
+      <a class="menu-button xs-only" href="https://github.com/as-ideas/oil" target="_blank" alt="github"><i class="fab fa-github"></i></a>
+      <a class="menu-button blue-design desktop-only" href="https://sandbox.oiljs.org/" target="_blank">Sandbox</a>
+      <a class="menu-button desktop-only" href="https://github.com/as-ideas/oil" target="_blank">Github</a>
+    </div>
+   </div>
+</div>
+++++

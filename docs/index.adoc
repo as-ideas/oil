@@ -1,0 +1,30 @@
+:toc: left
+:toclevels: 4
+:toc-title:
+:sectanchors:
+:idprefix:
+:idseparator: -
+:experimental:
+:description: The documentation for the Axel Springer Opt-In Layer
+:keywords: Tealium, OIL, Opt-In Layer
+:docinfo: shared
+:docinfodir: src/meta
+:source-highlighter: highlightjs
+
+include::src/docs/header.adoc[]
+
+include::src/docs/01-intro.adoc[]
+
+include::src/docs/02-quickstart.adoc[]
+
+include::src/docs/03-configuration.adoc[]
+
+include::src/docs/04-iab-europe-framework.adoc[]
+
+include::src/docs/05-oil-api.adoc[]
+
+include::src/docs/06-tealium.adoc[]
+
+include::src/docs/07-customisation.adoc[]
+
+include::src/docs/08-appendix.adoc[]

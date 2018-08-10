@@ -1,0 +1,200 @@
+@import "./_cpc_global";
+
+.as-oil-cpc-wrapper {
+
+  button {
+    cursor: pointer;
+  }
+
+  .as-oil-l-buttons-light {
+    @include media('>phone') {
+      float: right;
+    }
+
+    @include media('<=phone') {
+      padding: 8px;
+    }
+  }
+
+  .as-oil-l-buttons-dark {
+    @include media('>phone') {
+      float: right;
+    }
+
+    @include media('<=phone') {
+      background: $background-color-dark;
+      padding: 8px;
+    }
+  }
+
+  .as-oil__heading,
+  .as-oil__intro-txt {
+    margin-left: 200px;
+    display: block;
+    max-width: 100%;
+
+    @include media('<=929px') {
+      margin-left: 0;
+      margin-right: 20px;
+      text-align: center;
+    }
+  }
+}
+
+.as-oil-cpc__content {
+  display: flex;
+  @include media('<=phone') {
+    display: block;
+  }
+}
+
+.as-oil-cpc__left {
+  flex: 0 0 200px;
+  max-width: 200px;
+  display: inline-block;
+  text-align: right;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  margin-bottom: -25px;
+  border-right: 1px solid #ccc;
+
+  @include media('<=849px') {
+    display: none;
+  }
+
+  @include media('<=929px') {
+    flex: 0;
+  }
+
+  &:first-child {
+    padding-top: 40px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.as-oil-cpc__right {
+  flex: 0 0 200px;
+  display: inline-block;
+  align-self: flex-end;
+
+  @include media('<=phone') {
+    flex: 0;
+    display: block;
+  }
+
+}
+
+.as-oil-cpc__row-btn-all {
+  text-align: right;
+  span {
+    @include media('<=phone') {
+      display: inline-block;
+      width: 49%;
+      text-align: center;
+      padding: .7rem 1rem;
+    }
+  }
+}
+
+.as-oil-cpc__row-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 20px 8px;
+}
+
+.as-oil-cpc__category-link {
+  padding: 6px 12px;
+  display: block;
+  border-right: 2px solid rgba(255, 255, 255, 0);
+}
+
+.as-oil-cpc__category-link--active {
+  border-right: 2px solid #3f7ddf;
+}
+
+.as-oil-cpc__purpose {
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 16px 0;
+}
+
+.as-oil-cpc__purpose-container {
+  position: relative;
+}
+
+.as-oil-cpc__purpose-header {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 75px 30px 0;
+}
+
+.as-oil-cpc__purpose-text {
+  font-size: 0.9rem;
+  color: lighten($text-color-primary-light, 30%);
+}
+
+.dark {
+  .as-oil-cpc__purpose-text {
+    color: darken($text-color-primary-dark, 30%);
+  }
+}
+
+.light {
+  .as-oil-cpc__left {
+    a {
+      color: $text-color-primary-light;
+    }
+  }
+}
+
+.as-oil-cpc__switch {
+  position: absolute;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  right: 0;
+  top: 0;
+  float: right;
+
+  input {
+    display: none;
+
+    & + .as-oil-cpc__status:after {
+      content: "Off";
+    }
+
+    &:checked ~ .as-oil-cpc__slider {
+      background-color: $btn-primary;
+    }
+
+    &:checked ~ .as-oil-cpc__status:after {
+      content: "On";
+    }
+
+    &:focus ~ .as-oil-cpc__slider {
+      box-shadow: 0 0 1px $btn-primary;
+    }
+
+    &:checked ~ .as-oil-cpc__slider:before {
+      transform: translateX($slider-size);
+      background-color: darken($slider-background-circle, 30%);
+    }
+  }
+}
+
+//dark theme adjustments
+.as-oil {
+  &.dark {
+    .as-oil-cpc__left a,
+    .as-oil-back-button__text {
+      color: $text-color-primary-dark !important;
+    }
+    .as-oil-cpc__purpose {
+      background-color: $cpc-background-dark;
+    }
+  }
+}

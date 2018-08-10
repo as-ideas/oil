@@ -1,0 +1,15 @@
+=== Tealium Deployment
+For our PoC we decided to use Tealium to deliver our Javascript artefact to client browsers. To achieve this you have to follow some steps:
+
+As a developer of Oil.js (see image below)
+
+* Open your Tealium lib profile and move to extensions
+* Open the predefined Javascript extension "AS Opt-in Overlay"
+* Some forms will show up, paste your code (release/oil.[version].min.js) in the "configuration" section
+* Save and publish your Tealium configuration changes to your desired stages (Dev, QA, Prod)
+
+Please note that once published, your code will be delivered to all Tealium clients automatically.
+Tealium clients will be informed of your changes and need to publish/deploy their profile to activate your changes.
+
+[caption="Oil.js Tealium Deployment"]
+image::src/images/tealium-lib-profile-extension-view.png[Tealium Library Profile]

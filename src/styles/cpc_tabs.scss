@@ -1,0 +1,181 @@
+@import "./_cpc_global";
+
+.as-oil-tabs-cpc__headline {
+  display: block;
+  max-width: 100%;
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.15;
+  @include media('<=phone') {
+    margin-right: 20px;
+  }
+}
+
+.as-oil-tabs-cpc__wrapper {
+
+  hr {
+    border: 0;
+    border-top: 1px #d8d8d8 solid;
+  }
+
+  .as-oil-tabs-cpc__purpose-labels {
+    border-collapse: separate;
+    border-spacing: 1px;
+    display: table;
+    width: 100%;
+
+    span {
+      border-radius: 5px;
+      box-sizing: border-box;
+      display: table-cell;
+      font-size: 14px;
+      font-weight: bold;
+      height: 50px;
+      overflow: hidden;
+      text-align: center;
+      text-overflow: ellipsis;
+      transition: all 0.3s ease-in-out;
+      vertical-align: middle;
+      white-space: nowrap;
+
+      @include media('<=phone') {
+        display: table-header-group;
+        height: auto;
+      }
+    }
+  }
+
+  .as-oil-tabs-cpc__purpose-text section {
+    animation-direction: normal;
+    animation-duration: 0.3s;
+    animation-iteration-count: 1;
+    animation-name: content;
+    animation-timing-function: ease-in-out;
+    display: none;
+    line-height: 1.4;
+    position: relative;
+
+    &:first-child {
+      display: block;
+    }
+
+    div {
+      display: table;
+      width: 100%;
+    }
+
+    p {
+      display: table-cell;
+      width: 80%;
+    }
+  }
+
+}
+
+.as-oil-tabs-cpc__purpose-feature-texts {
+  display: table;
+  ul {
+    display: table-cell;
+    list-style: none;
+    width: 100%;
+
+    @include media('<=phone') {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      list-style-position: inside;
+      text-indent: -1.30rem;
+
+      span:nth-child(2) {
+        margin-left: 1.3rem;
+      }
+    }
+  }
+}
+
+@keyframes content {
+  from {
+    opacity: 0;
+    transform: translateY(5%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+.as-js-tab-label {
+  @include space-out(1, 5);
+}
+
+.as-oil-tabs-cpc__purpose-label-active {
+  background: $btn-primary;
+  color: $btn-primary-text-color;
+  cursor: default;
+}
+
+.as-oil-tabs-cpc__purpose-label-inactive {
+  color: $btn-text-grey;
+  background: $btn-background-grey;
+  cursor: pointer;
+}
+
+.as-oil-tabs-cpc__third-parties-link {
+  cursor: pointer;
+  text-decoration: none;
+
+  span {
+    background: $btn-primary;
+    border-radius: 50%;
+    color: white;
+    display: inline-block;
+    font-weight: 700;
+    height: 20px;
+    line-height: 20px;
+    margin-right: .5rem;
+    text-align: center;
+    width: 20px;
+  }
+}
+
+.as-oil-tabs-cpc__third-parties-list {
+  margin-left: 1.7rem;
+  margin-top: .5rem;
+}
+
+.as-oil-tabs-cpc__purpose-description {
+  font-size: .7375rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.as-oil-tabs-cpc__switch {
+  display: table-cell;
+  height: 26px;
+  margin-left: 30px;
+  position: absolute;
+  width: 50px;
+
+  @include media('<=phone') {
+    margin-left: 5px;
+  }
+
+  input {
+    display: none;
+
+    &:checked ~ {
+      .as-oil-cpc__slider {
+        background-color: $btn-primary;
+      }
+    }
+    &:focus ~ .as-oil-cpc__slider {
+      box-shadow: 0 0 1px $btn-primary;
+    }
+    &:checked ~ .as-oil-cpc__slider::before {
+      background-color: darken(#767676, 30%);
+      transform: translateX(20px);
+    }
+  }
+}

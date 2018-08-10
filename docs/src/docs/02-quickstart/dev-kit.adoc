@@ -1,0 +1,13 @@
+=== OIL SDK
+
+This is a like a drop-in to add a small sdk to any site, which has oil included.
+
+image::src/images/dev-kit-01.png[]
+image::src/images/dev-kit-02.png[]
+
+Add this to your favorites and open the link on the website you want it to be included:
+
+[source,javascript, subs="attributes"]
+----
+javascript:(function () {let d = document, s = d.createElement('script');s.id = 'oil-dev-kit-js';s.src = '//&lt;oil-host&gt;/&lt;path-to-oil&gt;/oildevkit.{version}.min.js';(d.head || d.body).appendChild(s)}());
+----
