@@ -35,7 +35,7 @@ function getConfiguration() {
     if(!getLocaleVariantName()) {
       logError('Your configuration is faulty: "locale" object misses "localeId" property. See the oil.js documentation for details.');
     }
-    if(!getLocale().version) {
+    if(getLocale() && !getLocale().version) {
       logError('Your configuration is faulty: "locale" object misses "version" property.');
     }
     setGlobalOilObject('CONFIG_ATTRIBUTES', OIL_CONFIG);
