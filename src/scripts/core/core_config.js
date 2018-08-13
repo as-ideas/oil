@@ -31,18 +31,26 @@ function getConfiguration() {
     if (configurationElement === null) {
       logInfo('Using default config');
     }
-    setGlobalOilObject('CONFIG', readConfiguration(configurationElement));
-    if(!getLocaleVariantName()) {
-      logError('Your configuration is faulty: "locale" object misses "localeId" property. See the oil.js documentation for details.');
-    }
-    if(getLocale() && !getLocale().version) {
-      logError('Your configuration is faulty: "locale" object misses "version" property.');
-    }
+    setGlobalOilObject('CONFIG', readConfiguration(configurationElement));  
     setGlobalOilObject('CONFIG_ATTRIBUTES', OIL_CONFIG);
 
     parseServerUrls();
+    verifyLocaleObject();
   }
   return getGlobalOilObject('CONFIG');
+}
+
+
+/**
+ * make sure the locale object does not lack any required properties
+ */
+function verifyLocaleObject() {
+  if(!getLocaleVariantName()) {
+    logError('Your configuration is faulty: "locale" object misses "localeId" property. See the oil.js documentation for details.');
+  }
+  if(getLocale() && !getLocale().version) {
+    logError('Your configuration is faulty: "locale" object misses "version" property.');
+  }
 }
 
 /**
