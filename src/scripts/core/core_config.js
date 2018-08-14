@@ -36,8 +36,26 @@ function getConfiguration() {
     setGlobalOilObject('CONFIG_ATTRIBUTES', OIL_CONFIG);
 
     parseServerUrls();
+    verifyLocaleObject();
   }
   return getGlobalOilObject('CONFIG');
+}
+
+
+/**
+ * make sure the locale object does not lack any required properties
+ */
+function verifyLocaleObject() {
+  let locale = getLocale();
+
+  if (locale && isObject(locale)) {
+    if (!locale.localeId) {
+      logError('Your configuration is faulty: "locale" object misses "localeId" property. See the oil.js documentation for details.');
+    }
+    if (!locale.version) {
+      logError('Your configuration is faulty: "locale" object misses "version" property.');
+    }
+  }
 }
 
 /**
@@ -122,7 +140,7 @@ export function getHubPath() {
  */
 export function getPublicPath() {
   let publicPath = getConfigValue(OIL_CONFIG.ATTR_PUBLIC_PATH, undefined);
-  if(publicPath && publicPath.substr(-1) !== '/') {
+  if (publicPath && publicPath.substr(-1) !== '/') {
     publicPath += '/'
   }
   return publicPath;
@@ -169,12 +187,14 @@ export function getCookieExpireInDays() {
 }
 
 export function getLocaleVariantName() {
+  const defaultLocaleId = 'enEN_01';
   let localeVariantName = getLocale();
+
   if (!localeVariantName) {
-    localeVariantName = 'enEN_01';
+    localeVariantName = defaultLocaleId;
   }
   if (localeVariantName && isObject(localeVariantName)) {
-    return localeVariantName.localeId;
+    return localeVariantName.localeId ? localeVariantName.localeId : defaultLocaleId;
   }
   return localeVariantName;
 }
