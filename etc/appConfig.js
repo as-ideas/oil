@@ -25,6 +25,14 @@ module.exports = {
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
+    filename: 'demos/amp-consent.html',
+    template: path.resolve(sourcePath, 'demos', 'amp-consent.html'),
+    chunks: []
+  }, {
+    filename: 'demos/amp-consent-iframe.html',
+    template: path.resolve(sourcePath, 'demos', 'amp-consent-iframe.html'),
+    chunks: []
+  }, {
     filename: 'demos/advanced-settings.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings.html'),
     chunks: ['oilstub', 'oil'],

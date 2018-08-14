@@ -127,7 +127,14 @@ let config = webpackMerge(commonConfig, {
       aggregateTimeout: 300,
       poll: 1000
     },
-    contentBase: appConfig.dist
+    contentBase: appConfig.dist,
+    before: function(app){
+      var bodyParser = require('body-parser');    
+      app.use(bodyParser.json());
+      app.post("/amp-consent.json", bodyParser.json(), function(req, res){
+        res.send('{"promptIfUnknown": true}');
+      })
+    }
   },
 
   /*
