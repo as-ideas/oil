@@ -106,6 +106,15 @@ describe('core_config', () => {
       expect(getLocaleVariantName()).toEqual('floo');
     });
 
+    it ('returns default enEN_01 when locale is defined without locale id', function () {
+      AS_OIL = {
+        CONFIG: {
+          locale: {
+          }
+        }
+      };
+      expect(getLocaleVariantName()).toEqual('enEN_01');
+    });
   });
 
   describe('getLanguageFromLocale', function() {
