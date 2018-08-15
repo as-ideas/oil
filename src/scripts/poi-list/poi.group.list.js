@@ -1,6 +1,6 @@
 import { fetchJsonData } from '../core/core_utils';
 import { logError } from '../core/core_log';
-import { getPoiGroupName } from '../core/core_config';
+import { getPoiGroupName, setIabVendorWhitelist, setIabVendorBlacklist } from '../core/core_config';
 
 let cachedGroupList;
 
@@ -13,6 +13,15 @@ export function getGroupList() {
       fetchJsonData(__webpack_public_path__ + 'poi-lists/' + groupName + '.json')
         .then(response => {
           cachedGroupList = response.companyList;
+          
+          if(response.iabVendorWhitelist && response.iabVendorWhitelist.length) {
+            setIabVendorWhitelist(response.iabVendorWhitelist);
+          }
+
+          if(response.iabVendorBlacklist && response.iabVendorBlacklist.length) {
+            setIabVendorBlacklist(response.iabVendorBlacklist);
+          }
+
           resolve(cachedGroupList);
         })
         .catch(error => {

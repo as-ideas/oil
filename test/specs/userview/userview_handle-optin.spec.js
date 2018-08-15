@@ -98,16 +98,13 @@ describe('the user view modal handles opt-in clicks on', () => {
     });
   });
 
-  // FIXME improve these tests
-  // Redirecting somewhere they regularly break the tests
-  // with message "Some of your tests did a full page reload"
-  xdescribe('POI', () => {
+  describe('POI', () => {
 
     it('should do power opt-in with full tracking and send one event', (done) => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
-
+      mockVerifyPowerOptIn();
       handleOptIn();
 
       waitsForAndRuns(
@@ -126,6 +123,7 @@ describe('the user view modal handles opt-in clicks on', () => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
+      mockVerifyPowerOptIn();
       spyOn(UserViewPrivacy, 'getPrivacySettings').and.callFake(() => PRIVACY_MINIMUM_TRACKING);
 
       handleOptIn();
@@ -146,6 +144,8 @@ describe('the user view modal handles opt-in clicks on', () => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
+      mockVerifyPowerOptIn();
+
       spyOn(UserViewPrivacy, 'getPrivacySettings').and.callFake(() => PRIVACY_MINIMUM_TRACKING);
       spyOn(UserviewConfig, 'isPersistMinimumTracking').and.returnValue(false);
       spyOn(CoreCookies, 'removeSubscriberCookies');
@@ -165,6 +165,8 @@ describe('the user view modal handles opt-in clicks on', () => {
     });
 
     it('should execute command collection executor', (done) => {
+      mockVerifyPowerOptIn();
+
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'getGlobalOilObject').and.callThrough();
 
@@ -176,6 +178,7 @@ describe('the user view modal handles opt-in clicks on', () => {
     });
 
     it('should activate dom elements with consent', (done) => {
+      mockVerifyPowerOptIn();
       loadFixture('poi/poi.default.html');
       handleOptIn();
       waitsForAndRuns(
@@ -191,6 +194,10 @@ describe('the user view modal handles opt-in clicks on', () => {
   function mockPowerOptInAndSingleOptIn() {
     spyOn(UserviewOptIn, 'oilOptIn').and.returnValue(new Promise((resolve) => resolve()));
     spyOn(UserviewOptIn, 'oilPowerOptIn').and.returnValue(new Promise((resolve) => resolve()));
+  }
+
+  function mockVerifyPowerOptIn() {
+    spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise((resolve) => resolve()));
   }
 
   function thenOilLayerIsHidden() {

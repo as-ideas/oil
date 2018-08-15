@@ -165,6 +165,14 @@ export function getIabVendorWhitelist() {
   return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_WHITELIST, undefined);
 }
 
+export function setIabVendorBlacklist(value) {
+  setConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_BLACKLIST, value);
+}
+
+export function setIabVendorWhitelist(value) {
+  setConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_WHITELIST, value);
+}
+
 export function getPoiGroupName() {
   return getConfigValue(OIL_CONFIG.ATTR_POI_GROUP_NAME, 'default');
 }
