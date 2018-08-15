@@ -63,6 +63,9 @@ app.use(domainBlacklist);
 
 app.use(additionalHeaders);
 
+app.post("/amp-consent.json", function(req, res){
+  res.send('{"promptIfUnknown": true}');
+});
 // server gzip
 app.use(compression());
 
