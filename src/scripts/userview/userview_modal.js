@@ -56,6 +56,7 @@ export function renderOil(props) {
     if (props.noCookie) {
       renderOilContentToWrapper(oilNoCookiesTemplate());
     } else if (props.advancedSettings) {
+      // we do not need to load vendor list and poi groups here - this is only invoked via oilShowPreferenceCenter() method that has done it before
       renderOilContentToWrapper(findAdvancedSettingsTemplate());
     } else {
       startTimeOut();
@@ -102,7 +103,7 @@ export function oilShowPreferenceCenter() {
 }
 
 export function handleOptIn() {
-  if(isPoiActive()) {
+  if (isPoiActive()) {
     import('../poi-list/poi.group.list.js').then(poi_group_list => {
       poi_group_list.getGroupList().then(() => {
         (handlePoiOptIn()).then(onOptInComplete);
@@ -165,7 +166,7 @@ function findAdvancedSettingsInlineTemplate() {
 }
 
 function attachCpcEventHandlers() {
-  if(isOptoutConfirmRequired()){
+  if (isOptoutConfirmRequired()) {
     activateOptoutConfirm();
   }
 
