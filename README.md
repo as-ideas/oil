@@ -31,7 +31,8 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 * **Mobile-friendly and compatible with all modern browsers** Works on 99,9% of all devices and browsers, even IE9 and Android 4
 * **Easy to customize**: You can change the stylesheet, configure everything or access the functionality directly via Javascript as well
 * **User-friendly**: Supports advanced settings with a detailed cookie preference center (CPC)
-* **AMP Support**: Example integration for amp-consent integration included 
+* **AMP Support**: Example integration for amp-consent integration included
+
 The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://advertisingconsent.eu/cmp-list/) after the IAB Europe "Transparency & Consent Framework". Registered with ID 80.
 
 ![iab logo](/src/assets/images/landing_page/iab-logo.png)
