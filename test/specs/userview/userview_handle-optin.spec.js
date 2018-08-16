@@ -103,7 +103,7 @@ describe('the user view modal handles opt-in clicks on', () => {
   // with message "Some of your tests did a full page reload"
   xdescribe('POI', () => {
 
-    it('should do power opt-in with full tracking and send one event', (done) => {
+    xit('should do power opt-in with full tracking and send one event', (done) => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
@@ -122,7 +122,7 @@ describe('the user view modal handles opt-in clicks on', () => {
         2000);
     });
 
-    it('should do power opt-in with minimal tracking and send one event ', (done) => {
+    xit('should do power opt-in with minimal tracking and send one event ', (done) => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
@@ -142,7 +142,7 @@ describe('the user view modal handles opt-in clicks on', () => {
         2000);
     });
 
-    it('should not do power opt-in with minimal tracking and not persist minimal tracking', (done) => {
+    xit('should not do power opt-in with minimal tracking and not persist minimal tracking', (done) => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
@@ -164,7 +164,7 @@ describe('the user view modal handles opt-in clicks on', () => {
         2000);
     });
 
-    it('should execute command collection executor', (done) => {
+    xit('should execute command collection executor', (done) => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'getGlobalOilObject').and.callThrough();
 
@@ -175,7 +175,7 @@ describe('the user view modal handles opt-in clicks on', () => {
       handleOptIn();
     });
 
-    it('should activate dom elements with consent', (done) => {
+    xit('should activate dom elements with consent', (done) => {
       loadFixture('poi/poi.default.html');
       handleOptIn();
       waitsForAndRuns(
