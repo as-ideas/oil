@@ -1,0 +1,29 @@
+== AMP Support
+
+To exchange user consent for your POI group with an AMP page, you want to make use of the iframe capability of the https://www.ampproject.org/docs/reference/components/amp-consent#prompt-actions-from-external-consent-ui[AMP consent component].
+
+=== Technical integration
+
+1. Copy the file `demos/amp-consent-iframe.html` and update it with your own oil-configuration.
+2. Upload the file to the server where the POI cookie should be stored. This should be the same one that you have configured in the poi_hub_origin. Make sure the file is accessible through a secure (SSL) connection.
+3. Include the path to the iframe within your amp-consent dialog. Ex.:
+[source,html]
+  <amp-iframe layout="fill"
+    sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+    src="https://your-hub-origin.tld/amp-consent-iframe.html">
+    <div placeholder>Loading</div>
+  </amp-iframe>
+4. Add a consent href json file to your origin server with below body. Name it however you like, in our example we'll be using `show-consent.json`.
+[source,json]
+  {
+    "promptIfUnknown": true
+  }
+5. Update the parameter "checkConsentHref" in your amp-consent json configuration:
+[source,json]
+  "checkConsentHref": "https://your-hub-origin.tld/show-consent.json",
+6. You're done!
+
+Now everytime a user visits your AMP page and consent is not yet determined, the iframe with your Oil layer is shown and the cookie is stored hub-wide for the device+browser the user is visiting from.
+
+**For an example amp integration see the file `demos/amp-consent.html`.**
+

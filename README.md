@@ -29,6 +29,7 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 * **Cross-Domain** It not only supports domain opt-in (called "Site Opt-In", SOI), but also group-based cross-domain opt-in (called "Power Opt-In", POI) [More info here](#poi-and-soi)
 * **Lightweight & fast**: oil.js is less than 20 kB of JavaScript (minified + gzipped) and uses asynchronous loading so that your users won't notice any difference when using it
 * **Mobile-friendly and compatible with all modern browsers** Works on 99,9% of all devices and browsers, even IE9 and Android 4
+* **AMP Support**: Example integration for amp-consent integration included
 * **Easy to customize**: You can change the stylesheet, configure everything or access the functionality directly via Javascript as well
 * **User-friendly**: Supports advanced settings with a detailed cookie preference center (CPC)
 
