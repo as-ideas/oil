@@ -1,83 +1,138 @@
 <!doctype html>
 <html amp>
 <head>
-<meta charset="utf-8">
-<script async src="https://cdn.ampproject.org/v0.js"></script>
-<link rel="canonical" href="/amp-consent.html">
-<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<title>AMP-Consent Test Page</title>
-<script async custom-element="amp-consent" src="https://cdn.ampproject.org/v0/amp-consent-0.1.js"></script>
-<script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <link rel="canonical" href="/amp-consent.html">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <title>AMP-Consent Test Page</title>
+  <script async custom-element="amp-consent" src="https://cdn.ampproject.org/v0/amp-consent-0.1.js"></script>
+  <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
-<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-</head>
+  <style amp-boilerplate>body {
+    -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+    -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+    -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+    animation: -amp-start 8s steps(1, end) 0s 1 normal both
+  }
+
+  @-webkit-keyframes -amp-start {
+    from {
+      visibility: hidden
+    }
+    to {
+      visibility: visible
+    }
+  }
+
+  @-moz-keyframes -amp-start {
+    from {
+      visibility: hidden
+    }
+    to {
+      visibility: visible
+    }
+  }
+
+  @-ms-keyframes -amp-start {
+    from {
+      visibility: hidden
+    }
+    to {
+      visibility: visible
+    }
+  }
+
+  @-o-keyframes -amp-start {
+    from {
+      visibility: hidden
+    }
+    to {
+      visibility: visible
+    }
+  }
+
+  @keyframes -amp-start {
+    from {
+      visibility: hidden
+    }
+    to {
+      visibility: visible
+    }
+  }</style>
+  <noscript>
+    <style amp-boilerplate>body {
+      -webkit-animation: none;
+      -moz-animation: none;
+      -ms-animation: none;
+      animation: none
+    }</style>
+  </noscript>
 <style>
-#consentDialog {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  overflow: hidden !important;
-  background: hsla(0,0%,0%,0.7);
-  z-index: 1000;
-  width: 100%;
-  height: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #262626;
-}
+  #consentDialog {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    overflow: hidden !important;
+    background: hsla(0, 0%, 0%, 0.7);
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #262626;
+  }
 
-.lightbox-content{
-  margin: 0 auto;
-  padding: 1rem;
-  background: #fff;
-  border-radius: 5px;
-  max-width: 700px;
-  width: 95%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .lightbox-content {
+    margin: 0 auto;
+    padding: 1rem;
+    max-width: 1200px;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.m1 {
-  display: inline-block;
-  min-width: 75%;
-  max-width: 75%;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  line-height: 1.4;
-}
+  .m1 {
+    display: inline-block;
+    min-width: 75%;
+    max-width: 75%;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.4;
+  }
 
-.h2 {
-  max-width: 840px;
-  font-size: 1.45rem;
-  font-weight: 600;
-  line-height: 1.15;
-}
+  .h2 {
+    max-width: 840px;
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.15;
+  }
 
-.dismiss-button {
-  position: absolute;
-  right: 24px;
-  top: 16px;
-  cursor: pointer;
-}
+  .dismiss-button {
+    position: absolute;
+    right: 24px;
+    top: 16px;
+    cursor: pointer;
+  }
 
-.lightbox-content button {
-  min-width: 160px;
-  min-height: 42px;
-  margin: 0;
-  padding: 0.5rem 1rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  border: none;
-  border-radius: 3px;
-  outline: none;
-  cursor: pointer;
-  color: #ffffff;
-  background-color: #3F7EDF;
-  transition: opacity 0.8s ease 0s;
-}
+  .lightbox-content button {
+    min-width: 160px;
+    min-height: 42px;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #3F7EDF;
+    transition: opacity 0.8s ease 0s;
+  }
 </style>
+</head>
 <body>
 <amp-consent id="myConsent" layout="nodisplay">
   <script type="application/json">
@@ -87,25 +142,32 @@
           "checkConsentHref": "/amp-consent.json",
           "promptUI": "consentDialog"
         }
-      },
-      "postPromptUI": "post-consent-ui"
+      }
     }
   </script>
   <div class="lightbox"
-    id="consentDialog">
-
-    <amp-iframe layout="fill"
-      sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-      src="https://oil.axelspringer.com/demos/direct-integration.html">
+       id="consentDialog">
+    <!--ToDO: change src to live environment-->
+    <amp-iframe class="lightbox-content" layout="fill"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                src="https://oil-integration-host1.herokuapp.com/demos/amp-consent-iframe.html">
       <div placeholder>Loading</div>
     </amp-iframe>
   </div>
-  <div id="post-consent-ui">
-    <button on="tap:myConsent.prompt()"
-      class="ampstart-btn caps m1">Update Consent</button>
-  </div>
 </amp-consent>
 <h1>AMP Consent Test</h1>
-
+<amp-img data-block-on-consent
+         src="http://via.placeholder.com/350x150?text=Hello+Consent"
+         width="350"
+         height="150">
+</amp-img>
+<h2>AMP-AD-Section AppNexus:</h2>
+<amp-ad data-block-on-consent
+        width=300
+        height=250
+        type="appnexus"
+        data-member="7823"
+        data-code="dieser-ferdinand.de-amp-ressort_story-mrec"
+></amp-ad>
 </body>
 </html>
