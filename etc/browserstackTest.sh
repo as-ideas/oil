@@ -1,5 +1,7 @@
 #/bin/bash
 
+browserstack_user=asideas1
+browserstack_key=BAUAszX7q3FKWKr3LjeU
 run_test() {
   echo "..."
   echo "-------------------------"
