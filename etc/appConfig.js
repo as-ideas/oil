@@ -31,7 +31,7 @@ module.exports = {
   }, {
     filename: 'demos/amp-consent-iframe.html',
     template: path.resolve(sourcePath, 'demos', 'amp-consent-iframe.html'),
-    chunks: ['oil'],
+    chunks: ['oilstub','oil'],
     inject: 'head'
   }, {
     filename: 'demos/advanced-settings.html',
