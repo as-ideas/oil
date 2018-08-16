@@ -111,7 +111,7 @@ describe('core_oil', () => {
       2000);
   });
 
-  it('should not execute oil_shown event if gdpr_applies_globally is false', (done) => {
+  fit('should not execute oil_shown event if gdpr_applies_globally is false', (done) => {
     spyOn(CoreUtils, 'sendEventToHostSite').and.callThrough();
     initOilLayer({"gdpr_applies_globally": false});
 

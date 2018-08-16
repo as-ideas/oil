@@ -5,7 +5,7 @@ import {
   EVENT_NAME_ADVANCED_SETTINGS,
   EVENT_NAME_AS_PRIVACY_SELECTED,
   EVENT_NAME_BACK_TO_MAIN,
-  EVENT_NAME_COMPANY_LIST,
+  EVENT_NAME_COMPANY_LIST, EVENT_NAME_OIL_SHOWN,
   EVENT_NAME_POI_OPT_IN,
   EVENT_NAME_SOI_OPT_IN,
   EVENT_NAME_THIRD_PARTY_LIST,
@@ -62,6 +62,7 @@ export function renderOil(props) {
       startTimeOut();
       renderOilContentToWrapper(oilDefaultTemplate());
     }
+    sendEventToHostSite(EVENT_NAME_OIL_SHOWN);
   } else {
     removeOilWrapperFromDOM();
   }
