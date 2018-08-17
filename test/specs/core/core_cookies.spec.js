@@ -3,6 +3,7 @@ import * as CoreConfig from '../../../src/scripts/core/core_config';
 import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import { OilVersion } from '../../../src/scripts/core/core_utils';
 import {
+  findCookieConsideringCookieVersions,
   getCustomPurposesWithConsent,
   getOilCookie,
   getSoiCookie,
@@ -13,7 +14,7 @@ import {
   setSoiCookie,
   setSoiCookieWithPoiCookieData,
 } from '../../../src/scripts/core/core_cookies';
-import { OIL_SPEC } from '../../../src/scripts/core/core_constants';
+import { OIL_CONFIG_DEFAULT_VERSION, OIL_SPEC } from '../../../src/scripts/core/core_constants';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
 import { resetOil } from '../../test-utils/utils_reset';
 import { setupVendorListSpies } from '../../test-utils/utils_vendorlist';
@@ -34,6 +35,7 @@ describe('core cookies', () => {
   const LOCALE_VARIANT_EN_NAME = 'enEN_01';
   const LOCALE_VARIANT_EN_VERSION = 2;
   const OTHER_CMP_VERSION = 99999;
+  const CONFIG_VERSION = 17;
   const CUSTOM_PURPOSES = [
     {
       id: 25,
@@ -57,7 +59,8 @@ describe('core cookies', () => {
         localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
         allowedPurposeIds: [1, 2, 3, 4, 5],
         allowedVendorIds: [12, 24],
-        customPurposes: [25, 26]
+        customPurposes: [25, 26],
+        configVersion: CONFIG_VERSION
       };
       givenThatOilCookieIsSet(testData);
       let cookieConfig = givenOilCookieConfig(testData);
@@ -67,12 +70,97 @@ describe('core cookies', () => {
       let expectedCookie = givenOilCookie(testData, givenCookieConsentData(testData));
       verifyCookie(retrievedCookie, expectedCookie);
     });
+  });
+
+  describe('find cookie considering cookie versions', () => {
+
+    it('should get and transform outdated cookie', () => {
+      let outdatedCookie = givenOutdatedOilCookie({
+        localeVariantName: LOCALE_VARIANT_DE_NAME,
+        localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
+        privacy: {
+          1: true,
+          2: false,
+          3: true,
+          4: false,
+          5: true,
+          25: false,
+          26: true
+        }
+      });
+      let expectedData = {
+        localeVariantName: LOCALE_VARIANT_DE_NAME,
+        localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
+        language: LANGUAGE_DE,
+        allowedPurposeIds: [1, 3, 5],
+        allowedVendorIds: [12, 24],
+        customPurposes: [26],
+        configVersion: OIL_CONFIG_DEFAULT_VERSION
+      };
+      let cookieConfig = givenOilCookieConfig(expectedData);
+      let expectedCookie = givenOilCookie(expectedData, givenCookieConsentData(expectedData));
+      spyOn(Cookie, 'get').withArgs('oil_data').and.returnValue(JSON.stringify(outdatedCookie)).withArgs('oil_verbose').and.callThrough();
+      spyOn(Cookie, 'getJSON').withArgs('oil_data').and.returnValue(outdatedCookie);
+
+      let retrievedCookie = findCookieConsideringCookieVersions(cookieConfig, () => expectedCookie);
+      verifyCookie(retrievedCookie, expectedCookie);
+    });
+
+    it('should get cookie without config version and add one', () => {
+      let testData = {
+        localeVariantName: LOCALE_VARIANT_DE_NAME,
+        localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
+        language: LANGUAGE_DE,
+        allowedPurposeIds: [1, 3, 5],
+        allowedVendorIds: [12, 24],
+        customPurposes: [26]
+      };
+      let cookieWithoutConfigVersion = givenOilCookie(testData, givenCookieConsentData(testData));
+      let expectedData = {
+        localeVariantName: LOCALE_VARIANT_DE_NAME,
+        localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
+        language: LANGUAGE_DE,
+        allowedPurposeIds: [1, 3, 5],
+        allowedVendorIds: [12, 24],
+        customPurposes: [26],
+        configVersion: OIL_CONFIG_DEFAULT_VERSION
+      };
+      let cookieConfig = givenOilCookieConfig(expectedData);
+      let expectedCookie = givenOilCookie(expectedData, givenCookieConsentData(expectedData));
+      spyOn(Cookie, 'get').withArgs('oil_data').and.returnValue(JSON.stringify(cookieWithoutConfigVersion)).withArgs('oil_verbose').and.callThrough();
+      spyOn(Cookie, 'getJSON').withArgs('oil_data').and.returnValue(cookieWithoutConfigVersion);
+
+      let retrievedCookie = findCookieConsideringCookieVersions(cookieConfig, () => {
+      });
+      verifyCookie(retrievedCookie, expectedCookie);
+    });
+
+    it('should get current cookie', () => {
+      let testData = {
+        localeVariantName: LOCALE_VARIANT_DE_NAME,
+        localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
+        language: LANGUAGE_DE,
+        allowedPurposeIds: [1, 3, 5],
+        allowedVendorIds: [12, 24],
+        customPurposes: [26],
+        configVersion: OIL_CONFIG_DEFAULT_VERSION
+      };
+      let cookie = givenOilCookie(testData, givenCookieConsentData(testData));
+      let cookieConfig = givenOilCookieConfig(testData);
+      spyOn(Cookie, 'get').withArgs('oil_data').and.returnValue(JSON.stringify(cookie)).withArgs('oil_verbose').and.callThrough();
+      spyOn(Cookie, 'getJSON').withArgs('oil_data').and.returnValue(cookie);
+
+      let retrievedCookie = findCookieConsideringCookieVersions(cookieConfig, () => {
+      });
+      verifyCookie(retrievedCookie, cookie);
+    });
 
     it('should get default cookie data if cookie exists but is not valid', () => {
       givenThatInvalidOilCookieIsSet();
       let cookieConfig = givenOilCookieConfig();
 
-      let retrievedCookie = getOilCookie(cookieConfig);
+      let retrievedCookie = findCookieConsideringCookieVersions(cookieConfig, () => {
+      });
 
       verifyCookie(retrievedCookie, cookieConfig.defaultCookieContent);
     });
@@ -81,7 +169,8 @@ describe('core cookies', () => {
       givenThatNoOilCookieIsSet();
       let cookieConfig = givenOilCookieConfig();
 
-      let retrievedCookie = getOilCookie(cookieConfig);
+      let retrievedCookie = findCookieConsideringCookieVersions(cookieConfig, () => {
+      });
 
       verifyCookie(retrievedCookie, cookieConfig.defaultCookieContent);
     });
@@ -126,6 +215,7 @@ describe('core cookies', () => {
       cookieSetSpy = spyOn(Cookie, 'set');
       spyOn(CoreConfig, 'getLocaleVariantName').and.returnValue(LOCALE_VARIANT_EN_NAME);
       spyOn(CoreConfig, 'getCustomPurposes').and.returnValue(CUSTOM_PURPOSES);
+      spyOn(CoreConfig, 'getConfigVersion').and.returnValue(CONFIG_VERSION);
       spyOn(CoreUtils, 'getLocaleVariantVersion').and.returnValue(LOCALE_VARIANT_EN_VERSION);
       setupVendorListSpies();
     });
@@ -140,7 +230,8 @@ describe('core cookies', () => {
           language: LANGUAGE_EN,
           allowedPurposeIds: [1, 2, 3, 4, 5],
           allowedVendorIds: [12, 24],
-          customPurposes: [25, 26]
+          customPurposes: [25, 26],
+          configVersion: CONFIG_VERSION
         });
         done();
       });
@@ -157,7 +248,8 @@ describe('core cookies', () => {
           language: LANGUAGE_EN,
           allowedPurposeIds: [],
           allowedVendorIds: [12, 24],
-          customPurposes: []
+          customPurposes: [],
+          configVersion: CONFIG_VERSION
         });
         done();
       });
@@ -182,7 +274,8 @@ describe('core cookies', () => {
           language: LANGUAGE_EN,
           allowedPurposeIds: [1, 3, 5],
           allowedVendorIds: [12, 24],
-          customPurposes: [26]
+          customPurposes: [26],
+          configVersion: CONFIG_VERSION
         });
         done();
       });
@@ -196,7 +289,8 @@ describe('core cookies', () => {
         allowedPurposeIds: [],
         allowedVendorIds: [12],
         customPurposes: [],
-        cmpVersion: OTHER_CMP_VERSION
+        cmpVersion: OTHER_CMP_VERSION,
+        configVersion: CONFIG_VERSION
       });
 
       setSoiCookie(1).then(() => {
@@ -209,6 +303,7 @@ describe('core cookies', () => {
           allowedVendorIds: [12, 24],
           customPurposes: [25, 26],
           cmpVersion: OIL_SPEC.CMP_VERSION,
+          configVersion: CONFIG_VERSION
         });
         done();
       });
@@ -234,7 +329,8 @@ describe('core cookies', () => {
         // we omit the 'consentData' field here - this is not a real case but now we can be sure that consent string is used.
         power_opt_in: true,
         consentString: CONSENT_STRING,
-        customPurposes: [25]
+        customPurposes: [25],
+        configVersion: CONFIG_VERSION
       }).then(() => {
         expect(cookieSetSpy).toHaveBeenCalled();
         verifyThatCookieWasSetCorrectly({
@@ -245,6 +341,7 @@ describe('core cookies', () => {
           allowedVendorIds: [12, 24],
           customPurposes: [25],
           cmpVersion: OIL_SPEC.CMP_VERSION,
+          configVersion: CONFIG_VERSION
         });
         done();
       });
@@ -256,7 +353,8 @@ describe('core cookies', () => {
       setSoiCookieWithPoiCookieData({
         power_opt_in: true,
         consentData: new ConsentString(CONSENT_STRING),
-        customPurposes: [25]
+        customPurposes: [25],
+        configVersion: CONFIG_VERSION
       }).then(() => {
         expect(cookieSetSpy).toHaveBeenCalled();
         verifyThatCookieWasSetCorrectly({
@@ -267,6 +365,7 @@ describe('core cookies', () => {
           allowedVendorIds: [12, 24],
           customPurposes: [25],
           cmpVersion: OIL_SPEC.CMP_VERSION,
+          configVersion: CONFIG_VERSION
         });
         done();
       });
@@ -280,14 +379,16 @@ describe('core cookies', () => {
         allowedPurposeIds: [],
         allowedVendorIds: [12],
         customPurposes: [],
-        cmpVersion: OTHER_CMP_VERSION
+        cmpVersion: OTHER_CMP_VERSION,
+        configVersion: CONFIG_VERSION - 1
       });
 
       setSoiCookieWithPoiCookieData({
         // we omit the 'consentData' field here - this is not a real case but now we can be sure that consent string is used.
         power_opt_in: true,
         consentString: CONSENT_STRING,
-        customPurposes: [25]
+        customPurposes: [25],
+        configVersion: CONFIG_VERSION
       }).then(() => {
         expect(cookieSetSpy).toHaveBeenCalled();
         verifyThatCookieWasSetCorrectly({
@@ -298,6 +399,7 @@ describe('core cookies', () => {
           allowedVendorIds: [12, 24],
           customPurposes: [25],
           cmpVersion: OIL_SPEC.CMP_VERSION,
+          configVersion: CONFIG_VERSION
         });
         done();
       });
@@ -311,13 +413,15 @@ describe('core cookies', () => {
         allowedPurposeIds: [],
         allowedVendorIds: [12],
         customPurposes: [],
-        cmpVersion: OTHER_CMP_VERSION
+        cmpVersion: OTHER_CMP_VERSION,
+        configVersion: CONFIG_VERSION - 1
       });
 
       setSoiCookieWithPoiCookieData({
         power_opt_in: true,
         consentData: new ConsentString(CONSENT_STRING),
-        customPurposes: [25]
+        customPurposes: [25],
+        configVersion: CONFIG_VERSION
       }).then(() => {
         expect(cookieSetSpy).toHaveBeenCalled();
         verifyThatCookieWasSetCorrectly({
@@ -328,6 +432,7 @@ describe('core cookies', () => {
           allowedVendorIds: [12, 24],
           customPurposes: [25],
           cmpVersion: OIL_SPEC.CMP_VERSION,
+          configVersion: CONFIG_VERSION
         });
         done();
       });
@@ -341,6 +446,7 @@ describe('core cookies', () => {
       spyOn(CoreConfig, 'getLocaleVariantName').and.returnValue(LOCALE_VARIANT_EN_NAME);
       spyOn(CoreConfig, 'getDefaultToOptin').and.returnValue(true);
       spyOn(CoreConfig, 'getCustomPurposes').and.returnValue(CUSTOM_PURPOSES);
+      spyOn(CoreConfig, 'getConfigVersion').and.returnValue(CONFIG_VERSION);
       spyOn(CoreUtils, 'getLocaleVariantVersion').and.returnValue(LOCALE_VARIANT_EN_VERSION);
       setupVendorListSpies();
     });
@@ -352,12 +458,12 @@ describe('core cookies', () => {
         localeVariantVersion: LOCALE_VARIANT_DE_VERSION,
         allowedPurposeIds: [1, 3, 5],
         allowedVendorIds: [12],
-        customPurposes: [26]
+        customPurposes: [26],
+        configVersion: CONFIG_VERSION
       };
       givenThatOilCookieIsSet(testData);
 
       let retrievedCookie = getSoiCookie();
-
       verifyCookie(retrievedCookie, givenOilCookie(testData, givenCookieConsentData(testData)));
     });
 
@@ -373,7 +479,8 @@ describe('core cookies', () => {
         localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
         allowedPurposeIds: [1, 2, 3, 4, 5],
         allowedVendorIds: [12, 24],
-        customPurposes: [25, 26]
+        customPurposes: [25, 26],
+        configVersion: CONFIG_VERSION
       };
       verifyCookie(retrievedCookie, givenOilCookie(expectedData, givenCookieConsentData(expectedData)));
     });
@@ -390,7 +497,8 @@ describe('core cookies', () => {
         localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
         allowedPurposeIds: [1, 2, 3, 4, 5],
         allowedVendorIds: [12, 24],
-        customPurposes: [25, 26]
+        customPurposes: [25, 26],
+        configVersion: CONFIG_VERSION
       };
       verifyCookie(retrievedCookie, givenOilCookie(expectedData, givenCookieConsentData(expectedData)));
     });
@@ -415,7 +523,8 @@ describe('core cookies', () => {
         language: LANGUAGE_DE,
         allowedPurposeIds: [1, 3, 5],
         allowedVendorIds: [12, 24],
-        customPurposes: [26]
+        customPurposes: [26],
+        configVersion: OIL_CONFIG_DEFAULT_VERSION
       };
       let expectedCookie = givenOilCookie(expectedData, givenCookieConsentData(expectedData));
       spyOn(Cookie, 'get').withArgs('oil_data').and.returnValue(JSON.stringify(outdatedCookie)).withArgs('oil_verbose').and.callThrough();
@@ -437,7 +546,8 @@ describe('core cookies', () => {
         language: LANGUAGE_DE,
         allowedPurposeIds: [1, 2, 3, 4, 5],
         allowedVendorIds: [12, 24],
-        customPurposes: [25, 26]
+        customPurposes: [25, 26],
+        configVersion: OIL_CONFIG_DEFAULT_VERSION
       };
       let expectedCookie = givenOilCookie(expectedData, givenCookieConsentData(expectedData));
       spyOn(Cookie, 'get').withArgs('oil_data').and.returnValue(JSON.stringify(outdatedCookie)).withArgs('oil_verbose').and.callThrough();
@@ -460,7 +570,8 @@ describe('core cookies', () => {
         language: LANGUAGE_DE,
         allowedPurposeIds: [],
         allowedVendorIds: [12, 24],
-        customPurposes: []
+        customPurposes: [],
+        configVersion: OIL_CONFIG_DEFAULT_VERSION
       };
 
       let expectedCookie = givenOilCookie(expectedData, givenCookieConsentData(expectedData));
@@ -605,7 +716,7 @@ describe('core cookies', () => {
   }
 
   function givenOilCookie(testData, expectedConsentData) {
-    return {
+    let cookie = {
       opt_in: typeof testData.opt_in !== 'undefined' ? testData.opt_in : true,
       version: '1.0.0',
       localeVariantName: testData.localeVariantName,
@@ -614,6 +725,10 @@ describe('core cookies', () => {
       consentData: expectedConsentData,
       consentString: expectedConsentData.getConsentString()
     };
+    if (typeof testData.configVersion !== 'undefined') {
+      cookie.configVersion = testData.configVersion;
+    }
+    return cookie;
   }
 
   function givenOutdatedOilCookie(expectedCookieData) {
@@ -647,7 +762,8 @@ describe('core cookies', () => {
         localeVariantVersion: (configData && configData.localeVariantVersion) ? configData.localeVariantVersion : LOCALE_VARIANT_EN_VERSION,
         customPurposes: [],
         consentData: consentData,
-        consentString: consentData.getConsentString()
+        consentString: consentData.getConsentString(),
+        configVersion: OIL_CONFIG_DEFAULT_VERSION
       },
       outdated_cookie_content_keys: ['opt_in', 'timestamp', 'version', 'localeVariantName', 'localeVariantVersion', 'privacy']
     };
@@ -673,6 +789,7 @@ describe('core cookies', () => {
     expect(cookie.localeVariantName).toEqual(expectations.localeVariantName);
     expect(cookie.localeVariantVersion).toEqual(expectations.localeVariantVersion);
     expect(cookie.customPurposes.sort()).toEqual(expectations.customPurposes.sort());
+    expect(cookie.configVersion).toEqual(expectations.configVersion);
 
     let consentData = new ConsentString(cookie.consentString);
     let expectedConsentData = givenCookieConsentData(expectations);
@@ -687,6 +804,7 @@ describe('core cookies', () => {
     expect(cookie.localeVariantVersion).toEqual(expectedCookie.localeVariantVersion);
     expect(cookie.customPurposes.sort()).toEqual(expectedCookie.customPurposes.sort());
     expect(cookie.consentString.length).toBeGreaterThan(0);
+    expect(cookie.configVersion).toEqual(expectedCookie.configVersion);
     verifyConsentData(cookie.consentData, expectedCookie.consentData);
   }
 });

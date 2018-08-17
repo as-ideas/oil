@@ -1,4 +1,6 @@
 import {
+  OIL_CONFIG_DEFAULT_VERSION,
+  OIL_PAYLOAD_CONFIG_VERSION,
   OIL_PAYLOAD_CUSTOM_PURPOSES,
   OIL_PAYLOAD_LOCALE_VARIANT_NAME,
   OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
@@ -7,14 +9,9 @@ import {
   OIL_SPEC
 } from '../core/core_constants';
 import { logError, logInfo } from '../core/core_log';
-import { getCookieExpireInDays, getLanguageFromLocale } from '../core/core_config';
+import { getConfigVersion, getCookieExpireInDays, getLanguageFromLocale } from '../core/core_config';
 import { getLimitedVendorIds } from '../core/core_vendor_information';
-import {
-  getOilCookie,
-  getStandardPurposesWithConsent,
-  hasOutdatedOilCookie,
-  setDomainCookie
-} from '../core/core_cookies';
+import { findCookieConsideringCookieVersions, getStandardPurposesWithConsent, setDomainCookie } from '../core/core_cookies';
 import Cookie from 'js-cookie';
 
 const {ConsentString} = require('consent-string');
@@ -24,7 +21,7 @@ const OIL_HUB_UNKNOWN_VALUE = 'unknown';
 
 export function getPoiCookie(groupName = '') {
   let cookieConfig = getHubDomainCookieConfig(groupName);
-  let cookie = hasOutdatedOilCookie(cookieConfig) ? transformOutdatedOilCookie(cookieConfig) : getOilCookie(cookieConfig);
+  let cookie = findCookieConsideringCookieVersions(cookieConfig, transformOutdatedOilCookie);
   logInfo('Oil Hub Domain Cookie: ', cookie);
   return cookie;
 }
@@ -39,7 +36,8 @@ export function setPoiCookie(groupName, payload) {
       localeVariantName: getLocaleVariantNameFromPayload(payload),
       localeVariantVersion: getLocaleVariantVersionFromPayload(payload),
       customPurposes: getCustomPurposesFromPayload(payload),
-      consentString: consentStringAsPrivacy
+      consentString: consentStringAsPrivacy,
+      configVersion: getConfigVersionFromPayload(payload)
     };
     setDomainCookie(getOilHubCookieName(groupName), cookie, getCookieExpireInDays());
   } else {
@@ -53,6 +51,7 @@ function transformOutdatedOilCookie(cookieConfig) {
   let cookie = cookieConfig.defaultCookieContent;
   cookie.power_opt_in = cookieJson.power_opt_in;
   cookie.version = cookieJson.version;
+  cookie.configVersion = OIL_CONFIG_DEFAULT_VERSION;
   cookie.localeVariantName = cookieJson.localeVariantName;
   cookie.localeVariantVersion = cookieJson.localeVariantVersion;
   cookie.customPurposes = []; // we do not know custom purposes config in the hub, but old cookies does not encode them
@@ -89,7 +88,8 @@ function getHubDomainCookieConfig(groupName) {
       localeVariantVersion: 0, // this value can't be figured out
       customPurposes: [],
       consentData: consentData,
-      consentString: '' // consent string is not computed because global vendor list is not loaded in hub
+      consentString: '', // consent string is not computed because global vendor list is not loaded in hub
+      configVersion: getConfigVersion()
     },
     outdated_cookie_content_keys: ['power_opt_in', 'timestamp', 'version', 'localeVariantName', 'localeVariantVersion', 'privacy']
   };
@@ -100,6 +100,13 @@ function getConsentStringFromPayload(payload) {
     return payload[OIL_PAYLOAD_PRIVACY];
   }
   return undefined;
+}
+
+function getConfigVersionFromPayload(payload) {
+  if (payload && payload[OIL_PAYLOAD_CONFIG_VERSION]) {
+    return payload[OIL_PAYLOAD_CONFIG_VERSION];
+  }
+  return OIL_CONFIG_DEFAULT_VERSION;
 }
 
 function getCustomPurposesFromPayload(payload) {

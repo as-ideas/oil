@@ -1,4 +1,4 @@
-import { OIL_CONFIG } from './core_constants.js';
+import { OIL_CONFIG, OIL_CONFIG_DEFAULT_VERSION } from './core_constants';
 import { logError, logInfo } from './core_log.js';
 import { getGlobalOilObject, isObject, OilVersion, setGlobalOilObject } from './core_utils';
 
@@ -45,7 +45,7 @@ function getConfiguration() {
  * Verify that configuration has a version.
  */
 function verifyConfiguration() {
-  if (!getConfigVersion()) {
+  if (!getConfigValue(OIL_CONFIG.ATTR_CONFIG_VERSION, undefined)) {
     logError('Your configuration is faulty - it must contain a "config_version" property. See the oil.js documentation for details.');
   }
 }
@@ -109,7 +109,7 @@ export function getConfigValue(name, defaultValue) {
 // **
 
 export function getConfigVersion() {
-  return getConfigValue(OIL_CONFIG.ATTR_CONFIG_VERSION, undefined);
+  return getConfigValue(OIL_CONFIG.ATTR_CONFIG_VERSION, OIL_CONFIG_DEFAULT_VERSION);
 }
 
 export function isPreviewMode() {

@@ -41,6 +41,8 @@ export const OIL_CONFIG_CPC_TYPES = {
   CPC_TYPE_TABS: 'tabs'
 };
 
+export const OIL_CONFIG_DEFAULT_VERSION = 0;
+
 // Main Click events
 export const EVENT_NAME_OPT_IN = 'oil_optin_done';
 export const EVENT_NAME_SOI_OPT_IN = 'oil_soi_optin_done';
@@ -75,6 +77,7 @@ export const OIL_PAYLOAD_VERSION = 'v';
 export const OIL_PAYLOAD_LOCALE_VARIANT_NAME = 'lvn';
 export const OIL_PAYLOAD_LOCALE_VARIANT_VERSION = 'lvv';
 export const OIL_PAYLOAD_CUSTOM_PURPOSES = 'cp';
+export const OIL_PAYLOAD_CONFIG_VERSION = 'cv';
 
 // Identify privacy page link, eg. for tracking
 export const DATAQA_PRIVACY_PAGE = 'oil-PrivacyPage';
