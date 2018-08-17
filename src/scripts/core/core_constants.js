@@ -5,6 +5,7 @@ export const OIL_SPEC = {
 };
 
 export const OIL_CONFIG = {
+  ATTR_CONFIG_VERSION: 'config_version',
   ATTR_ACTIVATE_POI: 'poi_activate_poi',
   ATTR_HUB_ORIGIN: 'poi_hub_origin',
   ATTR_HUB_PATH: 'poi_hub_path',

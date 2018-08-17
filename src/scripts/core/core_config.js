@@ -35,24 +35,33 @@ function getConfiguration() {
     setGlobalOilObject('CONFIG_ATTRIBUTES', OIL_CONFIG);
 
     parseServerUrls();
+    verifyConfiguration();
     verifyLocaleObject();
   }
   return getGlobalOilObject('CONFIG');
 }
 
+/**
+ * Verify that configuration has a version.
+ */
+function verifyConfiguration() {
+  if (!getConfigVersion()) {
+    logError('Your configuration is faulty - it must contain a "config_version" property. See the oil.js documentation for details.');
+  }
+}
 
 /**
- * make sure the locale object does not lack any required properties
+ * Verify that locale object does not lack any required properties.
  */
 function verifyLocaleObject() {
   let locale = getLocale();
 
   if (locale && isObject(locale)) {
     if (!locale.localeId) {
-      logError('Your configuration is faulty: "locale" object misses "localeId" property. See the oil.js documentation for details.');
+      logError('Your configuration is faulty - "locale" object misses "localeId" property. See the oil.js documentation for details.');
     }
     if (!locale.version) {
-      logError('Your configuration is faulty: "locale" object misses "version" property.');
+      logError('Your configuration is faulty - "locale" object misses "version" property. See the oil.js documentation for details.');
     }
   }
 }
@@ -78,6 +87,11 @@ function parseServerUrls() {
   }
 }
 
+
+function setConfigValue(name, value) {
+  getConfiguration()[name] = value;
+}
+
 /**
  * Returns a config value or its given default value if not existing in users configuration.
  *
@@ -90,25 +104,18 @@ export function getConfigValue(name, defaultValue) {
   return (config && typeof config[name] !== 'undefined') ? config[name] : defaultValue;
 }
 
-function setConfigValue(name, value) {
-  getConfiguration()[name] = value;
-}
-
 // **
 //  Public Interface
 // **
-/**
- * Checks if PreviewMode is activated.
- * @returns {*}
- */
+
+export function getConfigVersion() {
+  return getConfigValue(OIL_CONFIG.ATTR_CONFIG_VERSION, undefined);
+}
+
 export function isPreviewMode() {
   return getConfigValue(OIL_CONFIG.ATTR_PREVIEW_MODE, false);
 }
 
-/**
- * Checks if POI is activated.
- * @returns {*}
- */
 export function isPoiActive() {
   return getConfigValue(OIL_CONFIG.ATTR_ACTIVATE_POI, false);
 }
