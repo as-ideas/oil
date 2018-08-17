@@ -7,7 +7,6 @@ import * as CoreTagManagement from '../../../src/scripts/core/core_tag_managemen
 import { waitsForAndRuns } from '../../test-utils/utils_wait';
 import { resetOil } from '../../test-utils/utils_reset';
 import { triggerEvent } from '../../test-utils/utils_events';
-import { EVENT_NAME_OIL_SHOWN } from '../../../src/scripts/core/core_constants';
 
 describe('core_oil', () => {
 
@@ -109,13 +108,5 @@ describe('core_oil', () => {
         done();
       },
       2000);
-  });
-
-  fit('should not execute oil_shown event if gdpr_applies_globally is false', (done) => {
-    spyOn(CoreUtils, 'sendEventToHostSite').and.callThrough();
-    initOilLayer({"gdpr_applies_globally": false});
-
-    expect(CoreUtils.sendEventToHostSite).not.toHaveBeenCalledWith(EVENT_NAME_OIL_SHOWN);
-    done();
   });
 });
