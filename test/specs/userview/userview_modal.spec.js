@@ -4,6 +4,9 @@ import { resetOil } from '../../test-utils/utils_reset';
 import * as AdvancedSettingsStandard from '../../../src/scripts/userview/view/oil.advanced.settings.standard';
 import * as AdvancedSettingsTabs from '../../../src/scripts/userview/view/oil.advanced.settings.tabs';
 import * as CoreLog from '../../../src/scripts/core/core_log';
+import * as CoreConfig from '../../../src/scripts/core/core_config';
+import * as CoreUtils from '../../../src/scripts/core/core_utils';
+import {EVENT_NAME_OIL_SHOWN} from '../../../src/scripts/core/core_constants';
 
 describe('the user view modal aka the oil layer wrapper', () => {
 
@@ -115,6 +118,15 @@ describe('the user view modal aka the oil layer wrapper', () => {
       expect(AdvancedSettingsTabs.attachCpcHandlers).not.toHaveBeenCalled();
       expect(CoreLog.logError).toHaveBeenCalled();
       expect(CoreLog.logError.calls.mostRecent().args[0]).toMatch(/^Found unknown CPC type 'invalidCpcType'/)
+    });
+
+    it('should not execute oil_shown event if gdpr_applies is FALSE', (done) => {
+      spyOn(CoreConfig, 'gdprApplies').and.returnValue(false);
+      spyOn(CoreUtils, 'sendEventToHostSite').and.callThrough();
+
+      renderOil({optIn: false, advancedSettings: true});
+      expect(CoreUtils.sendEventToHostSite).not.toHaveBeenCalledWith(EVENT_NAME_OIL_SHOWN);
+      done();
     });
   });
 
