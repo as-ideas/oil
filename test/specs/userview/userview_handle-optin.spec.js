@@ -104,7 +104,6 @@ describe('the user view modal handles opt-in clicks on', () => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
-      mockVerifyPowerOptIn();
       handleOptIn();
 
       waitsForAndRuns(
@@ -123,7 +122,6 @@ describe('the user view modal handles opt-in clicks on', () => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
-      mockVerifyPowerOptIn();
       spyOn(UserViewPrivacy, 'getPrivacySettings').and.callFake(() => PRIVACY_MINIMUM_TRACKING);
 
       handleOptIn();
@@ -144,7 +142,6 @@ describe('the user view modal handles opt-in clicks on', () => {
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'sendEventToHostSite');
       mockPowerOptInAndSingleOptIn();
-      mockVerifyPowerOptIn();
 
       spyOn(UserViewPrivacy, 'getPrivacySettings').and.callFake(() => PRIVACY_MINIMUM_TRACKING);
       spyOn(UserviewConfig, 'isPersistMinimumTracking').and.returnValue(false);
@@ -165,7 +162,7 @@ describe('the user view modal handles opt-in clicks on', () => {
     });
 
     it('should execute command collection executor', (done) => {
-      mockVerifyPowerOptIn();
+      mockPowerOptInAndSingleOptIn();
 
       loadFixture('poi/poi.default.html');
       spyOn(CoreUtils, 'getGlobalOilObject').and.callThrough();
@@ -178,7 +175,7 @@ describe('the user view modal handles opt-in clicks on', () => {
     });
 
     it('should activate dom elements with consent', (done) => {
-      mockVerifyPowerOptIn();
+      mockPowerOptInAndSingleOptIn();
       loadFixture('poi/poi.default.html');
       handleOptIn();
       waitsForAndRuns(
@@ -194,10 +191,6 @@ describe('the user view modal handles opt-in clicks on', () => {
   function mockPowerOptInAndSingleOptIn() {
     spyOn(UserviewOptIn, 'oilOptIn').and.returnValue(new Promise((resolve) => resolve()));
     spyOn(UserviewOptIn, 'oilPowerOptIn').and.returnValue(new Promise((resolve) => resolve()));
-  }
-
-  function mockVerifyPowerOptIn() {
-    spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise((resolve) => resolve()));
   }
 
   function thenOilLayerIsHidden() {
