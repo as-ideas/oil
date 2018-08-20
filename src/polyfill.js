@@ -8,6 +8,10 @@ export function generatePolyfills(){
     require('core-js/modules/es6.array.fill');
   }
 
+  if(!Array.prototype.values) {
+    require('core-js/modules/es6.array.iterator');
+  }
+
   if(!String.startsWith) {
     require('core-js/modules/es6.string.starts-with');
   }
@@ -19,7 +23,7 @@ export function generatePolyfills(){
   if(!window.Symbol) {
     require('core-js/modules/es6.symbol');
   }
-
+  
   if(window.Promise) {
     return;
   }
