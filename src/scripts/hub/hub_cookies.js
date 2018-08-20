@@ -96,43 +96,35 @@ function getHubDomainCookieConfig(groupName) {
 }
 
 function getConsentStringFromPayload(payload) {
-  if (payload && payload[OIL_PAYLOAD_PRIVACY]) {
-    return payload[OIL_PAYLOAD_PRIVACY];
-  }
-  return undefined;
+  return getPayloadPropertyOrDefault(payload, OIL_PAYLOAD_PRIVACY, 'undefined');
 }
 
 function getConfigVersionFromPayload(payload) {
-  if (payload && payload[OIL_PAYLOAD_CONFIG_VERSION]) {
-    return payload[OIL_PAYLOAD_CONFIG_VERSION];
-  }
-  return OIL_CONFIG_DEFAULT_VERSION;
+  return getPayloadPropertyOrDefault(payload, OIL_PAYLOAD_CONFIG_VERSION, OIL_CONFIG_DEFAULT_VERSION);
 }
 
 function getCustomPurposesFromPayload(payload) {
-  if (payload && payload[OIL_PAYLOAD_CUSTOM_PURPOSES]) {
-    return payload[OIL_PAYLOAD_CUSTOM_PURPOSES];
-  }
-  return [];
+  return getPayloadPropertyOrDefault(payload, OIL_PAYLOAD_CUSTOM_PURPOSES, []);
 }
 
 function getVersionFromPayload(payload) {
-  if (payload && payload[OIL_PAYLOAD_VERSION]) {
-    return payload[OIL_PAYLOAD_VERSION];
-  }
-  return OIL_HUB_UNKNOWN_VALUE;
+  return getPayloadPropertyOrDefault(payload, OIL_PAYLOAD_VERSION);
 }
 
 function getLocaleVariantNameFromPayload(payload) {
-  if (payload && payload[OIL_PAYLOAD_LOCALE_VARIANT_NAME]) {
-    return payload[OIL_PAYLOAD_LOCALE_VARIANT_NAME];
-  }
-  return OIL_HUB_UNKNOWN_VALUE;
+  return getPayloadPropertyOrDefault(payload, OIL_PAYLOAD_LOCALE_VARIANT_NAME);
 }
 
 function getLocaleVariantVersionFromPayload(payload) {
-  if (payload && payload[OIL_PAYLOAD_LOCALE_VARIANT_VERSION]) {
-    return payload[OIL_PAYLOAD_LOCALE_VARIANT_VERSION];
+  return getPayloadPropertyOrDefault(payload, OIL_PAYLOAD_LOCALE_VARIANT_VERSION);
+}
+
+function getPayloadPropertyOrDefault(payload, pname, defaultValue) {
+  if (payload && payload[pname]) {
+    return payload[pname];
   }
-  return OIL_HUB_UNKNOWN_VALUE;
+  if(defaultValue === 'undefined') {
+    return undefined;
+  }
+  return defaultValue || OIL_HUB_UNKNOWN_VALUE;
 }
