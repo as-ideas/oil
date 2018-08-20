@@ -4,16 +4,27 @@ export function generatePolyfills(){
     require('core-js/modules/es7.object.values');
   }
 
+  if(!Array.prototype.fill) {
+    require('core-js/modules/es6.array.fill');
+  }
+
+  if(!String.startsWith) {
+    require('core-js/modules/es6.string.starts-with');
+  }
+
+  if(!Object.assign) {
+    require('core-js/modules/es6.object.assign');
+  }
+
+  if(!window.Symbol) {
+    require('core-js/modules/es6.symbol');
+  }
+
   if(window.Promise) {
     return;
   }
-  require('core-js/modules/es6.symbol');
-  require('core-js/modules/es6.object.assign');
-  require('core-js/modules/es6.string.starts-with');
-  require('core-js/modules/es6.array.iterator');
-  require('core-js/modules/es6.array.fill');
-  require('core-js/modules/es6.promise');
 
+  require('core-js/modules/es6.promise');
   require('core-js/modules/_core');
 
   if(typeof window.CustomEvent !== 'function') {
