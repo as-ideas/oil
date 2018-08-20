@@ -123,7 +123,7 @@ function getPayloadPropertyOrDefault(payload, pname, defaultValue) {
   if (payload && payload[pname]) {
     return payload[pname];
   }
-  if(defaultValue === 'undefined') {
+  if (defaultValue === 'undefined') {
     return undefined;
   }
   return defaultValue || OIL_HUB_UNKNOWN_VALUE;

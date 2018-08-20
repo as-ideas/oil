@@ -37,13 +37,13 @@ export function hasOutdatedOilCookie(cookieConfig) {
 export function findCookieConsideringCookieVersions(cookieConfig, outdatedCookieTransformer) {
   let cookie;
 
-  if (hasOutdatedOilCookie(cookieConfig)) {
-    cookie = outdatedCookieTransformer(cookieConfig);
-  } else if (hasCurrentOilCookie(cookieConfig)) {
+  if (hasCurrentOilCookie(cookieConfig)) {
     cookie = getOilCookie(cookieConfig);
   } else if (hasOilCookieWithoutVersion(cookieConfig)) {
     cookie = getOilCookie(cookieConfig);
     cookie.configVersion = OIL_CONFIG_DEFAULT_VERSION;
+  } else if (hasOutdatedOilCookie(cookieConfig)) {
+    cookie = outdatedCookieTransformer(cookieConfig);
   } else {
     cookie = cookieConfig.defaultCookieContent;
   }
@@ -63,7 +63,7 @@ export function setSoiCookieWithPoiCookieData(poiCookieJson) {
     loadVendorList().then(() => {
       let cookieConfig = getOilCookieConfig();
       let consentString;
-      let configVersion = poiCookieJson.configVersion ? poiCookieJson.configVersion : cookieConfig.configVersion;
+      let configVersion = poiCookieJson.configVersion || cookieConfig.configVersion;
 
       if (poiCookieJson.consentString) {
         consentString = poiCookieJson.consentString;
