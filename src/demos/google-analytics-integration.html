@@ -5,24 +5,56 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Google Analytics Integration</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- tag::oil-config[] -->
+  <!-- tag::Google Analytics -->
   <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-124206101-1', 'auto');
     ga('send', 'pageview');
   </script>
-  <!-- End Google Analytics -->
+  <!-- end::Google Analytics -->
+  <!-- tag::oil-config[] -->
   <script id="oil-configuration" type="application/configuration">
       {
         "config_version": 1,
         "advanced_settings": true
       }
+
   </script>
   <!-- end::oil-config[] -->
+  <!-- tag::OIL-Google-Analytics-Integration -->
+  <script type="application/javascript">
+    // Cross browser event handler definition
+    var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+    var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+    var eventer = window[eventMethod];
+
+    // Callback to be executed when event is fired
+    function receiveMessage(event) {
+      // Propagate event to Google Analytics
+      var eventData = JSON.stringify(event.data);
+      if (typeof eventData === 'string' && eventData.indexOf("oil_") === 1) {
+        ga('send', 'event', {
+          eventCategory: 'OIL',
+          eventAction: eventData
+        });
+      }
+    }
+
+    // Register event handler
+    eventer(messageEvent, receiveMessage, false);
+  </script>
+  <!-- end::OIL-Google-Analytics-Integration -->
   <style>
     body {
       font-family: 'Nunito', sans-serif;
@@ -34,6 +66,11 @@
       margin: 0;
     }
 
+    p {
+      font-size: 20px;
+      width: 50%;
+    }
+
     .demoname {
       padding: 24px;
     }
@@ -41,27 +78,14 @@
 </head>
 
 <body>
-<div class="demoname">Google Analytics Integration Demo</div>
-<script type="application/javascript">
-  // Cross browser event handler definition
-  var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
-  var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
-  var eventer = window[eventMethod];
+<div class="demoname">Google Analytics Integration Demo
+  <p>
+    This page is an example for a simple integration of the Opt-In Layer with a tracking service using the example of Google Analytics.
+    It contains a simple event handler that catches all OIL events and propagates them to Google Analytics using the GA-API.
 
-  // Callback to be executed when event is fired
-  function receiveMessage(event) {
-    // Propagate event to Google Analytics
-    var eventData = JSON.stringify(event.data);
-    if (typeof eventData === 'string' && eventData.indexOf("oil_") === 1) {
-      ga('send', 'event', {
-        eventCategory: 'OIL',
-        eventAction: eventData
-      });
-    }
-  }
-
-  // Register event handler
-  eventer(messageEvent, receiveMessage, false);
-</script>
+    See chapter <a href="/docs/#tracking-user-interaction-with-oil" target="_blank">Tracking user interaction with OIL</a> in the OIL
+    documentation to get more detailed information how to integrate OIL with a tracking service.
+  </p>
+</div>
 </body>
 </html>

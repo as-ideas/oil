@@ -139,4 +139,44 @@ script.text = JSON.stringify(config);
 head.appendChild(script);
 ----
 
+=== Tracking user interaction with OIL
 
+Sometimes it may be interesting to know how users interact with the consent layer provided by OIL. To get this information it is required
+to connect the Opt-In Layer with a tracking service. Fortunately, it is very easy to achieve this. This chapter describes the necessary
+steps using the example of Google Analytics.
+
+To be informed about special events or user interactions relating to the layer you can use the event mechanism provided by OIL (see chapter
+<<OIL Events>>). To propagate these events to your tracking service (here: Google Analytics) you should add the following event handler
+to your page:
+
+
+[source,javascript]
+----
+  // Cross browser event handler definition
+  var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+  var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+  var eventer = window[eventMethod];
+
+  // Callback to be executed when event is fired
+  function receiveMessage(event) {
+    var eventData = JSON.stringify(event.data);
+    // Examinate event and select it if it was sent by OIL
+    if (typeof eventData === 'string' && eventData.indexOf("oil_") === 1) {
+      // Propagate event to Google Analytics
+      ga('send', 'event', {
+        eventCategory: 'OIL',
+        eventAction: eventData
+      });
+    }
+  }
+
+  // Register event handler
+  eventer(messageEvent, receiveMessage, false);
+----
+
+It is recommended to integrate this code snippet before the import statement for the Opt-In Layer. This ensures that the handler is already
+active when the layer fires its first event. The handler examinates incoming events and selects those sent by the layer (detectable by
+their name prefix `oil_`). If such an event was detected it is propagated to Google Analytics using its API call `ga`. If
+you want to use another tracking service, this is the function you have to replace by the corresponding API call. If you are not interested
+in propagation of all OIL events, you can easily change the code to select your events by name. See chapter <<OIL Events>> for the
+complete list of events sent by OIL.
