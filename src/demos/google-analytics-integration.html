@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Google Analytics Integration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- tag::oil-config[] -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-124206101-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <!-- End Google Analytics -->
+  <script id="oil-configuration" type="application/configuration">
+      {
+        "config_version": 1,
+        "advanced_settings": true
+      }
+  </script>
+  <!-- end::oil-config[] -->
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 60px;
+      color: #f7f7f7;
+      height: 100%;
+      background: linear-gradient(20deg, #3a871a 0%, #a5ba10 50%, #cfcd26 100%);
+      padding: 0;
+      margin: 0;
+    }
+
+    .demoname {
+      padding: 24px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="demoname">Google Analytics Integration Demo</div>
+<script type="application/javascript">
+  // Cross browser event handler definition
+  var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+  var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+  var eventer = window[eventMethod];
+
+  // Callback to be executed when event is fired
+  function receiveMessage(event) {
+    // Propagate event to Google Analytics
+    var eventData = JSON.stringify(event.data);
+    if (typeof eventData === 'string' && eventData.indexOf("oil_") === 1) {
+      ga('send', 'event', {
+        eventCategory: 'OIL',
+        eventAction: eventData
+      });
+    }
+  }
+
+  // Register event handler
+  eventer(messageEvent, receiveMessage, false);
+</script>
+</body>
+</html>
