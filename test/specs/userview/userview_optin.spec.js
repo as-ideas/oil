@@ -5,7 +5,7 @@ import * as CoreUtils from '../../../src/scripts/core/core_utils';
 import * as CorePoi from '../../../src/scripts/core/core_poi';
 import * as UserViewPoi from '../../../src/scripts/userview/userview_poi';
 import {
-  EVENT_NAME_OPT_IN,
+  EVENT_NAME_OPT_IN, OIL_PAYLOAD_CONFIG_VERSION,
   OIL_PAYLOAD_CUSTOM_PURPOSES,
   OIL_PAYLOAD_LOCALE_VARIANT_NAME,
   OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
@@ -17,12 +17,15 @@ import { setupVendorListSpies } from '../../test-utils/utils_vendorlist';
 
 describe('user view opt-in handler', () => {
 
+  const CONFIG_VERSION = 17;
+
   const EXPECTED_COOKIE = {
     opt_in: true,
     version: '1.0.0',
     localeVariantName: 'enEN_01',
     localeVariantVersion: 17,
     customPurposes: [25],
+    configVersion: CONFIG_VERSION,
     consentString: 'BOOqZJ1OOqZJ1BQABBENARAAAAABgACACA'
   };
 
@@ -125,6 +128,7 @@ describe('user view opt-in handler', () => {
       expect(payload[OIL_PAYLOAD_LOCALE_VARIANT_NAME]).toEqual(expectations.localeVariantName);
       expect(payload[OIL_PAYLOAD_LOCALE_VARIANT_VERSION]).toEqual(expectations.localeVariantVersion);
       expect(payload[OIL_PAYLOAD_CUSTOM_PURPOSES]).toEqual(expectations.customPurposes);
+      expect(payload[OIL_PAYLOAD_CONFIG_VERSION]).toEqual(expectations.configVersion);
     }
 
   });

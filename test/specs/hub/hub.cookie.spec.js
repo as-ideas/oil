@@ -2,6 +2,8 @@ import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list';
 import Cookie from 'js-cookie';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
 import {
+  OIL_CONFIG_DEFAULT_VERSION,
+  OIL_PAYLOAD_CONFIG_VERSION,
   OIL_PAYLOAD_CUSTOM_PURPOSES,
   OIL_PAYLOAD_LOCALE_VARIANT_NAME,
   OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
@@ -24,6 +26,7 @@ const OIL_VERSION = '1.0.0';
 const EXPIRATION_IN_DAYS = 31;
 const PRIVACY = 1;
 const PURPOSE_LIST = [1, 2, 3, 4, 5];
+const CONFIG_VERSION = 17;
 
 describe('hub cookies', () => {
 
@@ -77,7 +80,8 @@ describe('hub cookies', () => {
         localeVariantName: LOCALE_VARIANT_EN_NAME,
         localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
         version: OIL_VERSION,
-        customPurposes: [25, 26]
+        customPurposes: [25, 26],
+        configVersion: CONFIG_VERSION
       });
 
       setPoiCookie(GROUP_NAME, payload);
@@ -89,7 +93,8 @@ describe('hub cookies', () => {
         language: LANGUAGE_EN,
         allowedPurposeIds: PURPOSE_LIST,
         allowedVendorIds: [12, 24],
-        customPurposes: [25, 26]
+        customPurposes: [25, 26],
+        configVersion: CONFIG_VERSION
       });
     });
 
@@ -127,7 +132,6 @@ describe('hub cookies', () => {
     });
 
     it('should get poi cookie', () => {
-      spyOn(CoreCookies, 'hasOutdatedOilCookie').and.returnValue(false);
       let expectedCookie = givenCookie(GROUP_NAME, {
         version: OIL_VERSION,
         language: LANGUAGE_EN,
@@ -135,17 +139,17 @@ describe('hub cookies', () => {
         localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
         allowedPurposeIds: [1, 3, 5],
         allowedVendorIds: [12],
-        customPurposes: [25]
+        customPurposes: [25],
+        configVersion: CONFIG_VERSION
       });
-      spyOn(CoreCookies, 'getOilCookie').and.returnValue(expectedCookie);
+      spyOn(CoreCookies, 'findCookieConsideringCookieVersions').and.returnValue(expectedCookie);
 
       let retrievedCookie = getPoiCookie(GROUP_NAME);
 
       verifyCookie(retrievedCookie, expectedCookie);
     });
 
-    it('should get transformed poi cookie if outdated cookie with exists and is valid', () => {
-      spyOn(CoreCookies, 'hasOutdatedOilCookie').and.returnValue(true);
+    it('should get transformed poi cookie if outdated cookie exists and is valid', () => {
       let outdatedCookie = givenOutdatedCookie(GROUP_NAME, {
         version: OIL_VERSION,
         localeVariantName: LOCALE_VARIANT_EN_NAME,
@@ -153,6 +157,8 @@ describe('hub cookies', () => {
         privacy: PRIVACY
       });
       spyOn(Cookie, 'getJSON').withArgs(GROUP_NAME + '_oil_data').and.returnValue(outdatedCookie);
+      spyOn(CoreCookies, 'findCookieConsideringCookieVersions').and.callFake((cookieConfig, transformer) => transformer(cookieConfig));
+
       let expectedCookieData = {
         version: OIL_VERSION,
         language: LANGUAGE_EN,
@@ -160,7 +166,8 @@ describe('hub cookies', () => {
         localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
         allowedPurposeIds: PURPOSE_LIST,
         allowedVendorIds: [12, 24],
-        customPurposes: []
+        customPurposes: [],
+        configVersion: OIL_CONFIG_DEFAULT_VERSION
       };
       let expectedCookie = givenCookie(GROUP_NAME, expectedCookieData);
 
@@ -168,6 +175,37 @@ describe('hub cookies', () => {
 
       verifyCookie(retrievedCookie, expectedCookie);
       expect(CoreCookies.getStandardPurposesWithConsent).toHaveBeenCalledWith(PRIVACY);
+    });
+
+    it('should get poi cookie if poi cookie without version exists and is valid', () => {
+      let testCookie = givenCookie(GROUP_NAME, {
+        version: OIL_VERSION,
+        language: LANGUAGE_EN,
+        localeVariantName: LOCALE_VARIANT_EN_NAME,
+        localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
+        allowedPurposeIds: PURPOSE_LIST,
+        allowedVendorIds: [12, 24],
+        customPurposes: []
+      });
+      spyOn(Cookie, 'getJSON').withArgs(GROUP_NAME + '_oil_data').and.returnValue(testCookie);
+
+      let expectedCookieData = {
+        version: OIL_VERSION,
+        language: LANGUAGE_EN,
+        localeVariantName: LOCALE_VARIANT_EN_NAME,
+        localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
+        allowedPurposeIds: PURPOSE_LIST,
+        allowedVendorIds: [12, 24],
+        customPurposes: [],
+        configVersion: OIL_CONFIG_DEFAULT_VERSION
+      };
+      let expectedCookie = givenCookie(GROUP_NAME, expectedCookieData);
+
+      spyOn(CoreCookies, 'findCookieConsideringCookieVersions').and.returnValue(expectedCookie);
+
+      let retrievedCookie = getPoiCookie(GROUP_NAME);
+
+      verifyCookie(retrievedCookie, expectedCookie);
     });
 
   });
@@ -182,7 +220,7 @@ describe('hub cookies', () => {
     consentData.setVendorsAllowed(cookieData.allowedVendorIds);
     consentData.setGlobalVendorList(VENDOR_LIST);
 
-    return {
+    let cookie = {
       power_opt_in: typeof cookieData.power_opt_in !== 'undefined' ? cookieData.power_opt_in : true,
       version: cookieData.version,
       localeVariantName: cookieData.localeVariantName,
@@ -190,7 +228,11 @@ describe('hub cookies', () => {
       customPurposes: cookieData.customPurposes,
       consentData: consentData,
       consentString: consentData.getConsentString()
+    };
+    if (typeof cookieData.configVersion !== 'undefined') {
+      cookie.configVersion = cookieData.configVersion;
     }
+    return cookie;
   }
 
   function givenOutdatedCookie(groupName, cookieData) {
@@ -210,7 +252,8 @@ describe('hub cookies', () => {
       [OIL_PAYLOAD_VERSION]: testData.version,
       [OIL_PAYLOAD_LOCALE_VARIANT_NAME]: testData.localeVariantName,
       [OIL_PAYLOAD_LOCALE_VARIANT_VERSION]: testData.localeVariantVersion,
-      [OIL_PAYLOAD_CUSTOM_PURPOSES]: testData.customPurposes
+      [OIL_PAYLOAD_CUSTOM_PURPOSES]: testData.customPurposes,
+      [OIL_PAYLOAD_CONFIG_VERSION]: testData.configVersion
     }
   }
 
@@ -237,6 +280,7 @@ describe('hub cookies', () => {
     expect(cookie.localeVariantName).toEqual(expectations.localeVariantName);
     expect(cookie.localeVariantVersion).toEqual(expectations.localeVariantVersion);
     expect(cookie.customPurposes).toEqual(expectations.customPurposes);
+    expect(cookie.configVersion).toEqual(expectations.configVersion);
 
     let consentData = new ConsentString(cookie.consentString);
     let expectedConsentData = givenCookieConsentData(expectations);
@@ -249,6 +293,7 @@ describe('hub cookies', () => {
     expect(cookie.localeVariantName).toEqual(expectedCookie.localeVariantName);
     expect(cookie.localeVariantVersion).toEqual(expectedCookie.localeVariantVersion);
     expect(cookie.customPurposes).toEqual(expectedCookie.customPurposes);
+    expect(cookie.configVersion).toEqual(expectedCookie.configVersion);
     verifyConsentData(cookie.consentData, expectedCookie.consentData);
   }
 
