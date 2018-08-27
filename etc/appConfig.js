@@ -250,6 +250,12 @@ module.exports = {
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
+    filename: 'demos/google-analytics-integration.html',
+    template: path.resolve(sourcePath, 'demos', 'google-analytics-integration.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  }, {
     filename: 'demos/vendor-integration-iframe.html',
     chunks: [],
     template: path.resolve(sourcePath, 'demos', 'vendor-integration-iframe.html')
