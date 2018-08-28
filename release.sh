@@ -27,6 +27,7 @@ cp -r dist/poi-lists release/$PACKAGE_VERSION/
 mkdir dist/latest/poi-lists
 cp dist/poi-lists/default.json dist/latest/poi-lists/default.json
 
+echo "git askpass: $GIT_ASKPASS"
 
 echo "\n### Increasing patch version"
 git add *
