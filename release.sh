@@ -32,5 +32,4 @@ echo "\n### Increasing patch version"
 git add *
 git commit -a -m "Adding new release $PACKAGE_VERSION$SNAPSHOT" --no-edit
 git tag -a $PACKAGE_VERSION -m "Adding new release $PACKAGE_VERSION$SNAPSHOT"
-git push origin $PACKAGE_VERSION
-#npm version patch
+git push origin $PACKAGE_VERSION || echo "Error on git push origin $PACKAGE_VERSION"
