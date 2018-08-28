@@ -27,10 +27,6 @@ cp -r dist/poi-lists release/$PACKAGE_VERSION/
 mkdir dist/latest/poi-lists
 cp dist/poi-lists/default.json dist/latest/poi-lists/default.json
 
-echo "git askpass: $GIT_ASKPASS"
-
 echo "\n### Increasing patch version"
 git add *
 git commit -a -m "Adding new release $PACKAGE_VERSION$SNAPSHOT" --no-edit
-git tag -a $PACKAGE_VERSION -m "Adding new release $PACKAGE_VERSION$SNAPSHOT"
-git push origin $PACKAGE_VERSION || echo "Error on git push origin $PACKAGE_VERSION"
