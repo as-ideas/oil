@@ -28,5 +28,5 @@ mkdir dist/latest/poi-lists
 cp dist/poi-lists/default.json dist/latest/poi-lists/default.json
 
 echo "\n### Increasing patch version"
-git add *
+git add .
 git commit -a -m "Adding new release $PACKAGE_VERSION$SNAPSHOT" --no-edit
