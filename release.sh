@@ -30,7 +30,7 @@ cp dist/poi-lists/default.json dist/latest/poi-lists/default.json
 
 echo "\n### Increasing patch version"
 git add *
-git commit -am "Adding new release $PACKAGE_VERSION$SNAPSHOT" --no-edit
+git commit -a -m "Adding new release $PACKAGE_VERSION$SNAPSHOT" --no-edit
 git tag -a $PACKAGE_VERSION
 git push origin $PACKAGE_VERSION
 #npm version patch
