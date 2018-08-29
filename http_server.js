@@ -1,11 +1,11 @@
 /* this file is being used to serve the files from /dist folder. It is being used by heroku */
-
 const express = require('express');
 const serveStatic = require('serve-static');
 const compression = require('compression');
 const serveIndex = require('serve-index');
 const url = require('url');
 const morgan = require('morgan');
+const cors = require('cors');
 
 // import CORS config
 const headerConfig = require('./etc/headerConfig');
@@ -71,7 +71,7 @@ app.use(compression());
 
 // Serve directory indexes folder (with icons)
 app.use('/release', serveIndex('release', {'icons': true}));
-app.use('/demos', serveIndex('dist/demos', {'icons': true}));
+app.use('/demos', cors(), serveIndex('dist/demos', {'icons': true}));
 
 // static with cache headers
 app.use(serveStatic(DOCUMENT_ROOT, {maxAge: CACHE_DURATION, cacheControl: true}));
