@@ -2,10 +2,10 @@
 <html amp>
 <head>
   <meta charset="utf-8">
-  <script async src="https://cdn.ampproject.org/v0.js"></script>
   <link rel="canonical" href="/amp-consent.html">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
   <title>AMP-Consent Test Page</title>
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-consent" src="https://cdn.ampproject.org/v0/amp-consent-0.1.js"></script>
   <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
   <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
@@ -24,53 +24,8 @@
     color: #262626;
   }
 
-  .lightbox-content {
-    margin: 0 auto;
-    padding: 1rem;
-    max-width: 1200px;
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .m1 {
-    display: inline-block;
-    min-width: 75%;
-    max-width: 75%;
-    font-size: 0.9375rem;
-    font-weight: 400;
-    line-height: 1.4;
-  }
-
-  .h2 {
-    max-width: 840px;
-    font-size: 1.45rem;
-    font-weight: 600;
-    line-height: 1.15;
-  }
-
-  .dismiss-button {
-    position: absolute;
-    right: 24px;
-    top: 16px;
-    cursor: pointer;
-  }
-
-  .lightbox-content button {
-    min-width: 160px;
-    min-height: 42px;
-    margin: 0;
-    padding: 0.5rem 1rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border: none;
-    border-radius: 3px;
-    outline: none;
-    cursor: pointer;
-    color: #ffffff;
-    background-color: #3F7EDF;
-    transition: opacity 0.8s ease 0s;
+  amp-consent {
+    position: initial;
   }
 </style>
 </head>
@@ -86,14 +41,11 @@
       }
     }
   </script>
-  <div class="lightbox"
-       id="consentDialog">
-    <amp-iframe class="lightbox-content" layout="fill"
-                sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-                src="https://oil-cdn.herokuapp.com/demos/amp-consent-iframe.html">
-      <div placeholder>Loading</div>
-    </amp-iframe>
-  </div>
+  <amp-iframe id="consentDialog" class="lightbox-content" height="100" width="100" layout="responsive"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+              src="https://oil-cdn.herokuapp.com/demos/amp-consent-iframe.html">
+    <div placeholder>Loading</div>
+  </amp-iframe>
 </amp-consent>
 <h1>AMP Consent Test</h1>
 <amp-img data-block-on-consent
