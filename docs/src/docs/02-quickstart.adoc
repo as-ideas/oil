@@ -22,11 +22,11 @@ Optionally you can:
 
 This is the recommended way to get OIL to work on your site. Upload all the files of the latest release to your own server and set your configuration to use that server.
 
-You can download all the files for a release from https://oil.axelspringer.com/release. Upload a release folders contents to your server and continute with <<Integrate OIL>>.
+You can download all the files for a release from https://oil.axelspringer.com/release. Upload a release folder's contents to your server and continue with <<Integrate OIL>>.
 
 ==== Delivery through the unpkg.com cdn
 
-If you don't have your own server available and/or don't want to use the POI features, it may be enough to just include the OIL sources from the `unpkg.ocm` CDN. Example:
+If you don't have your own server available and/or don't want to use the POI features, it may be enough to just include the OIL sources from the `unpkg.ocm` cdn. See <<Integrate OIL>>.
 
 
 ==== Delivery through Tealium
@@ -39,6 +39,7 @@ OIL creates a standard for the Opt-In but can't automatically stop your site fro
 * If possible, use Tealium for all tracking activities and take advantage of the loading rules support that OIL provides (see section <<OIL and Tealium>> for details).
 * Listen to OIL events for loading non-Tealium tags, after the user opted in.
 * Use the <<Soft Blocking of DOM Elements,soft-blocking feature>> for tags that OIL provides.
+
 
 ==== Release files
 
