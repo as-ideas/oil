@@ -77,6 +77,9 @@ For a self-hosted release, load the javascript from your site:
 &lt;script src="https://&lt;your-host&gt;/&lt;path-to-oil&gt;/oil.{version}.min.js" type="text/javascript">&lt;/script>
 ----
 
+Please make sure you're working with the *latest version* available. Check https://oil.axelspringer.com/release or  further updates. Choose the latest version or the version fitting to this documentation.
+
+
 ==== Delivery through unpkg.com
 
 [source,html,subs="attributes"]
@@ -84,7 +87,7 @@ For a self-hosted release, load the javascript from your site:
 &lt;script src="//unpkg.com/@ideasio/oil.js/dist/latest/oil.min.js" type="text/javascript"&gt;&lt;/script>
 ----
 
-Please make sure you're working with the *latest version* available. Check https://oil.axelspringer.com/release or  further updates. Choose the latest version or the version fitting to this documentation.
+This unpkg.com URL always points to the latest version. See unpkg.com help to lock your integration to a specified release.
 
 
 === Configure OIL
