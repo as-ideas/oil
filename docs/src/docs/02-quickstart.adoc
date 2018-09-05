@@ -5,7 +5,7 @@
 Basic implementation requires two steps:
 
 * Include oil.js sources on your site
-* Add your own oil.js configuration snippet to your html
+* Add two oil.js code snippets to your html
 
 Optionally you can:
 
