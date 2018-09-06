@@ -26,7 +26,7 @@ You can download all the files for a release from https://oil.axelspringer.com/r
 
 ==== Delivery through the unpkg.com cdn
 
-If you don't have your own server available and/or don't want to use the POI features, it may be enough to just include the OIL sources from the `unpkg.ocm` cdn. See <<Integrate OIL>>.
+If you don't have your own server available and/or don't want to use the POI features, it may be enough to just include the OIL sources from the `unpkg.com` cdn. See <<Integrate OIL>>.
 
 
 ==== Delivery through Tealium
