@@ -60,7 +60,6 @@ describe('core_vendor_information', () => {
       loadVendorList().then(() => {});
       loadVendorList().then(() => {});
       loadVendorList().then(() => {});
-      console.log("Fetchspy.calls.count(): ", fetchSpy.calls.count());
       expect(fetchSpy.calls.count()).toBe(1);
       done();
     });
