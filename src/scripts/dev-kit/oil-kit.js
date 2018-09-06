@@ -36,8 +36,8 @@ export function loadOilJs() {
     head.appendChild(script);
   }
 
-  loadJS('oil-stub-js', '//oil.axelspringer.com/latest/oilstub.min.js', () => {
-    loadJS('oil-js', '//oil.axelspringer.com/latest/oil.min.js', () => {
+  loadJS('oil-stub-js', '//unpkg.com/@ideasio/oil.js/dist/latest/oilstub.min.js', () => {
+    loadJS('oil-js', '//unpkg.com/@ideasio/oil.js/dist/latest/oil.min.js', () => {
       let btnOil = document.getElementById('as-oil-dev-kit__btn-oil');
       btnOil.className = 'btn btn-enabled';
     });

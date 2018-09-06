@@ -2,13 +2,34 @@
 
 === How to implement OIL on your site
 
-Setting up OIL on your page consists of the following steps:
+Basic implementation requires two steps:
 
-* <<Install OIL>> on a host of your site.
-* <<Integrate OIL,Add the oil.js javascript snippet>> to your page.
-* <<Configure OIL,Add a configuration>> block to your pages DOM.
+* Include oil.js sources on your site
+* Add two oil.js code snippets to your html
+
+Optionally you can:
+
 * <<styling-guide,Style>> your layer according to your style guide.
 * Create your own <<texts-locale-object,language pack>>.
+
+=== Including oil.js sources on your site
+
+* <<Self-hosted solution>>
+* <<Delivery through the unpkg.com cdn>>
+* <<Delivery through Tealium>>
+
+==== Self-hosted solution
+
+This is the recommended way to get OIL to work on your site. Upload all the files of the latest release to your own server and set your configuration to use that server.
+
+You can download all the files for a release from https://oil.axelspringer.com/release. Upload a release folder's contents to your server and continue with <<Integrate OIL>>.
+
+==== Delivery through the unpkg.com cdn
+
+If you don't have your own server available and/or don't want to use the POI features, it may be enough to just include the OIL sources from the `unpkg.com` cdn. See <<Integrate OIL>>.
+
+
+==== Delivery through Tealium
 
 An alternative way to integrate OIL with your page is the use of a tag manager like Tealium. If you prefer this solution please read section <<OIL and Tealium>>.
 
@@ -19,9 +40,10 @@ OIL creates a standard for the Opt-In but can't automatically stop your site fro
 * Listen to OIL events for loading non-Tealium tags, after the user opted in.
 * Use the <<Soft Blocking of DOM Elements,soft-blocking feature>> for tags that OIL provides.
 
-==== Install OIL
 
-To add OIL to your site, at first you need an OIL installation. You can download it from https://oil.axelspringer.com/release. The following files must be located on a host of your site:
+==== Release files
+
+For reference: these are the files that belong to a release.
 
 * `oil.{version}.min.js` - This is the file you will need to reference in your website - see below.
 * `hub.{version}.min.js` - This is the file you will need for the power opt-in feature. See sections <<POI – Power Opt-In>> for details.
@@ -34,20 +56,41 @@ To add OIL to your site, at first you need an OIL installation. You can download
 
 The version number is part of `.js` files because updated versions of the scripts will be released using a different filename hence we'll never alter an existing version.
 
-==== Integrate OIL
 
-To integrate your self-hosted OIL with your website, add the following code:
+
+=== Integrate OIL
+
+To integrate your self-hosted OIL with your website, add the following code snippets to your html:
 [source, html, subs="attributes"]
 ----
 &lt;script>
 include::../../../dist/oilstub.{version}.min.js[]
 &lt;/script>
-&lt;script type="text/javascript" src="https://&lt;your-host&gt;/&lt;path-to-oil&gt;/oil.{version}.min.js">&lt;/script>
 ----
 
-Please make sure you're working with the *latest version* available. Please check https://oil.axelspringer.com/release for further updates. Choose the latest version or the version fitting to this documentation.
+==== Self-hosted solution
 
-==== Configure OIL
+For a self-hosted release, load the javascript from your site:
+
+[source,html,subs="attributes"]
+----
+&lt;script src="https://&lt;your-host&gt;/&lt;path-to-oil&gt;/oil.{version}.min.js" type="text/javascript">&lt;/script>
+----
+
+Please make sure you're working with the *latest version* available. Check https://oil.axelspringer.com/release for further updates. Choose the latest version or the version found in this documentation.
+
+
+==== Delivery through unpkg.com
+
+[source,html,subs="attributes"]
+----
+&lt;script src="//unpkg.com/@ideasio/oil.js/dist/latest/oil.min.js" type="text/javascript"&gt;&lt;/script>
+----
+
+This unpkg.com URL always points to the latest version. See unpkg.com help to lock your integration to a specified release.
+
+
+=== Configure OIL
 
 To ensure that your self-hosted OIL can find all its necessary scripts you must define the `publicPath` parameter in your <<configuring-oil,oil configuration>>.
 It specifies the server path from which all chunks and ressources will be loaded. This is a minimal configuration tag:
@@ -58,6 +101,21 @@ It specifies the server path from which all chunks and ressources will be loaded
   {
     "publicPath": "//&lt;your-host&gt;/&lt;path-to-oil&gt;",
     "locale_url": "//&lt;your-host&gt;/&lt;path-to-locale&gt;/myLocale.json"
+  }
+&lt;/script&gt;
+----
+
+
+==== Delivery through unpkg.com
+
+Note that you will have to add your own locale to the configuration block. See <<Texts & Locale Object>> section for details.
+
+[source,html,subs="attributes"]
+----
+&lt;script id="oil-configuration" type="application/configuration"&gt;
+  {
+    "publicPath": "//unpkg.com/@ideasio/oil.js/dist/latest/",
+    "locale": { localeId: "myLocale", version: "1", texts: {"label_intro_heading":"I am a stub" }}
   }
 &lt;/script&gt;
 ----
