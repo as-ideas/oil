@@ -10,43 +10,27 @@ export const DEFAULT_VENDOR_LIST = {
 };
 
 export let cachedVendorList;
-export let startedVendorlistRequest = false;
+export let pendingVendorlistPromise = null;
 
 export function loadVendorList() {
   return new Promise(function (resolve) {
     if (cachedVendorList) {
       // if we have cached vendorlist, return that
       resolve(cachedVendorList);
-    } else if (startedVendorlistRequest) {
-      // if a request for the vendorlist has been started, let's wait for it
-      return new Promise(function (resolve) {
-        function getCachedVendorList(timeout) {
-          if (cachedVendorList) {
-            resolve(cachedVendorList)
-          } else {
-            // if this takes too long we need to return the default
-            if (timeout > 10000) {
-              logError('OIL getVendorList started request but did not resolve in 10 seconds. Falling back to default vendor list!');
-              resolve(getVendorList());
-            }
-            // check for cached vendor list in 4ms, 8ms, 16ms etc until we get it or it takes too long
-            setTimeout(getCachedVendorList.bind(null, timeout * 2), timeout);
-          }
-        }
-        getCachedVendorList(2)
-      })
-
+    } else if (pendingVendorlistPromise) {
+      // if there already is a request pending, lets return the promise
+      return pendingVendorlistPromise
     } else {
-      // if we have no cached version and no request has been started, do request and set flag for started request
-      startedVendorlistRequest = true
       let iabVendorListUrl = getIabVendorListUrl();
-      fetchJsonData(iabVendorListUrl)
+      pendingVendorlistPromise = fetchJsonData(iabVendorListUrl)
         .then(response => {
           cachedVendorList = response;
+          pendingVendorlistPromise = null;
           sortVendors(cachedVendorList);
           resolve(cachedVendorList);
         })
         .catch(error => {
+          pendingVendorlistPromise = null;
           logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
           resolve(getVendorList());
         });
@@ -90,7 +74,7 @@ export function getVendorList() {
 
 export function clearVendorListCache() {
   cachedVendorList = undefined;
-  startedVendorlistRequest = false;
+  pendingVendorlistPromise = null;
 }
 
 export function getVendorsToDisplay() {
