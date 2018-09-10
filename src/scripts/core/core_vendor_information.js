@@ -15,11 +15,9 @@ export let pendingVendorlistPromise = null;
 export function loadVendorList() {
   return new Promise(function (resolve) {
     if (cachedVendorList) {
-      // if we have cached vendorlist, return that
       resolve(cachedVendorList);
     } else if (pendingVendorlistPromise) {
-      // if there already is a request pending, lets return the promise
-      return pendingVendorlistPromise
+      return pendingVendorlistPromise;
     } else {
       let iabVendorListUrl = getIabVendorListUrl();
       pendingVendorlistPromise = fetchJsonData(iabVendorListUrl)
