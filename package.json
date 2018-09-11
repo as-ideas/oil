@@ -41,7 +41,8 @@
     "eslint": "eslint \"src/*.js\" && eslint \"src/scripts/*.js\" && eslint \"etc/*\" && eslint \"test/specs/**/*.js\" && eslint \"test/e2e/**/*.js\"",
     "changelog:major": "node changelog.js -M",
     "changelog:minor": "node changelog.js -m",
-    "changelog:path": "node changelog.js -p"
+    "changelog:path": "node changelog.js -p",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "compression": "1.7.2",
