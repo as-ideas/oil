@@ -93,7 +93,7 @@ This unpkg.com URL always points to the latest version. See unpkg.com help to lo
 === Configure OIL
 
 To ensure that your self-hosted OIL can find all its necessary scripts you must define the `publicPath` parameter in your <<configuring-oil,oil configuration>>.
-It specifies the server path from which all chunks and ressources will be loaded. This is a minimal configuration tag:
+It specifies the server path from which all chunks and resources will be loaded. This is a minimal configuration tag:
 
 [source,html,subs="attributes"]
 ----
@@ -114,7 +114,7 @@ Note that you will have to add your own locale to the configuration block. See <
 ----
 &lt;script id="oil-configuration" type="application/configuration"&gt;
   {
-    "publicPath": "//unpkg.com/@ideasio/oil.js/dist/latest/",
+    "publicPath": "https://unpkg.com/@ideasio/oil.js/dist/latest/",
     "locale": { localeId: "myLocale", version: "1", texts: {"label_intro_heading":"I am a stub" }}
   }
 &lt;/script&gt;

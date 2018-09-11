@@ -12,7 +12,7 @@ let config = webpackMerge(prodConfig, {
 
   output: {
     // the public path which is used by all System.require
-    publicPath: `//unpkg.com/@ideasio/oil.js@${process.env.npm_package_version}/dist/latest/`,
+    publicPath: `https://unpkg.com/@ideasio/oil.js@${process.env.npm_package_version}/dist/latest/`,
   }
 });
 

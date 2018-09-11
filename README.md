@@ -149,14 +149,14 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 
 | Config Parameter | Description | Default Setting |
 |----------|---------------|-------|
-| publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | None, required
+| publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | `//unpkg.com/@ideasio/oil.js@{oilVersion}/dist/latest/`
 | locale | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. See [here for a configuration example](#texts-locale-object) and [here for all localizable labels](#available-text-labels) | None
 | locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See [here for an example file](https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json) | None
 | preview_mode | The preview mode is useful when testing OIL in a production or live environment. When value is `true`, the layer remains hidden until you manually trigger `window.AS_OIL.previewModeOn()` in your console. Reload, and the layer is displayed. You can hide it again with `window.AS_OIL.previewModeOff()`. | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
 | poi_activate_poi | Activates single consent cookie for multiple websites. [See requirements for POI here](#poi--power-opt-in) | false
-| poi_hub_origin | The origin of the hub.js installation | None
-| poi_hub_path | The path to the hub.html installation on the origin, if any. | /hub.html
+| poi_hub_origin | The origin of the hub.js installation | `https://unpkg.com`
+| poi_hub_path | The path to the hub.html installation on the origin, if any. | `/@ideasio/oil.js@{oilVersion}/dist/latest/hub.html`
 | poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). The group name must be valid (existing). | none
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31

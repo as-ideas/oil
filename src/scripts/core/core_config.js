@@ -129,7 +129,7 @@ export function isSubscriberSetCookieActive() {
  * @returns {string, null} domain iframe orgin
  */
 export function getHubOrigin() {
-  let origin = getConfigValue(OIL_CONFIG.ATTR_HUB_ORIGIN, '//unpkg.com');
+  let origin = getConfigValue(OIL_CONFIG.ATTR_HUB_ORIGIN, 'https://unpkg.com');
   if (origin) {
     return origin.indexOf('http') !== -1 ? origin : location.protocol + origin;
   }
