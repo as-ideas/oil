@@ -1,6 +1,6 @@
 {
   "name": "@ideasio/oil.js",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "oil.js Opt-In Layer for consent management based on the IAB TCF Standard",
   "keywords": [
     "IAB Europe",

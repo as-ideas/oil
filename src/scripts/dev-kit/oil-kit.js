@@ -24,7 +24,7 @@ export function loadOilJs() {
   let oldScript = document.getElementById('oil-configuration');
   if (!oldScript) {
     let config = {
-      publicPath: '//oil.axelspringer.com/latest/'
+      publicPath: '//unpkg.com/@ideasio/oil.js/dist/latest/'
     };
     let head = document.getElementsByTagName('head')[0];
     let script = document.createElement('script');

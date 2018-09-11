@@ -23,7 +23,7 @@ Jira: https://id-jira.axelspringer.de/browse/OIL
 
 Jenkins: https://kube-jenkins.ipool.asideas.de/view/OIL%20Project/
 
-Overview: http://oil.axelspringer.com
+Overview: https://www.oiljs.org
 
 
 === Hub Deployment
