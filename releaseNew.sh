@@ -108,14 +108,14 @@ curl -i -u "${GITHUB_USERNAME}:${GITHUB_PASSWORD}" -X POST -d "{
 }" "${GITHUB_REPO_URL}/releases" || exit 1
 
 
-echo "\n### Pushing release to npmjs.com"
-expect ./npm_login.sh "${NPMJS_USERNAME}" "${NPMJS_PASSWORD}" "${NPMJS_EMAIL}" || exit 1
-npm publish || exit 1
-npm logout || exit 1
-
-
 echo "\n### Uploading release to S3 bucket"
 for file in release/${PACKAGE_VERSION}/*.js; do
   putS3 "release/${PACKAGE_VERSION}" "${file##*/}" "${AWS_BUCKET_PATH}/"
 done
 putS3 "release/${PACKAGE_VERSION}" "hub.html" "${AWS_BUCKET_PATH}/"
+
+
+echo "\n### Pushing release to npmjs.com"
+expect ./npm_login.sh "${NPMJS_USERNAME}" "${NPMJS_PASSWORD}" "${NPMJS_EMAIL}" || exit 1
+npm publish || exit 1
+npm logout || exit 1
