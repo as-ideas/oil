@@ -21,6 +21,7 @@ import {
 import { loadFixture } from '../../test-utils/utils_fixtures';
 import * as CoreLog from '../../../src/scripts/core/core_log';
 import { resetOil } from '../../test-utils/utils_reset';
+import { OilVersion } from '../../../src/scripts/core/core_utils';
 
 describe('core_config', () => {
 
@@ -145,7 +146,7 @@ describe('core_config', () => {
     const DEFAULT_DEFAULT_TO_OPTIN = false;
     const DEFAULT_POI_GROUP = 'default';
     const DEFAULT_CUSTOM_PURPOSES = [];
-    const DEFAULT_HUB_PATH = '/release/undefined/hub.html';
+    const DEFAULT_HUB_PATH = '/@ideasio/oil.js@1.2.3/dist/latest/hub.html';
 
     it('should call getConfigValue with their respective attribute', function () {
       loadFixture('config/full.config.html');
@@ -162,6 +163,7 @@ describe('core_config', () => {
     });
 
     it('should return correct default values', function () {
+      spyOn(OilVersion, 'getLatestReleaseVersion').and.returnValue('1.2.3');
       expect(getHubPath()).toEqual(DEFAULT_HUB_PATH);
       expect(getIabVendorWhitelist()).toBeFalsy();
       expect(getIabVendorBlacklist()).toBeFalsy();
