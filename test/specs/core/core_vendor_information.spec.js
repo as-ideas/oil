@@ -11,7 +11,9 @@ import {
   getVendors,
   getLimitedVendors,
   getVendorsToDisplay,
-  loadVendorList
+  loadVendorList,
+  cachedVendorList,
+  pendingVendorlistPromise
 } from '../../../src/scripts/core/core_vendor_information';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
 import { resetOil } from '../../test-utils/utils_reset';
@@ -56,11 +58,26 @@ describe('core_vendor_information', () => {
       let fetchSpy = spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
 
-      loadVendorList().then(() => {});
-      loadVendorList().then(() => {});
-      loadVendorList().then(() => {});
-      loadVendorList().then(() => {});
+      expect(pendingVendorlistPromise).toBeNull();
+      expect(cachedVendorList).toBeUndefined();
+      loadVendorList().then((retrievedVendorList) => {
+        expect(retrievedVendorList.vendorListVersion).toEqual(VENDOR_LIST.vendorListVersion);
+        expect(retrievedVendorList).toEqual(VENDOR_LIST);
+        expect(cachedVendorList).toBeDefined();
+      });
+      expect(cachedVendorList).toBeUndefined();
+      expect(pendingVendorlistPromise).toBeDefined();
+      loadVendorList().then((retrievedVendorList) => {
+        expect(retrievedVendorList.vendorListVersion).toEqual(VENDOR_LIST.vendorListVersion);
+        expect(retrievedVendorList).toEqual(VENDOR_LIST);
+      });
+      expect(cachedVendorList).toBeUndefined();
+      loadVendorList().then((retrievedVendorList) => {
+        expect(retrievedVendorList.vendorListVersion).toEqual(VENDOR_LIST.vendorListVersion);
+        expect(retrievedVendorList).toEqual(VENDOR_LIST);
+      });
       expect(fetchSpy.calls.count()).toBe(1);
+
       done();
     });
 
