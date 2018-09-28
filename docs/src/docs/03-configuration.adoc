@@ -136,7 +136,7 @@ This is a full list of configurable options.
 | poi_hub_path | The path to the hub.html installation on the origin, if any. | `/@ideasio/oil.js@{version}/dist/latest/hub.html`
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
 | <<preview_mode,preview_mode>> | The preview mode is useful when testing OIL in a production or live environment. As a dev you can trigger the overlay by setting a cookie named "oil_preview" with the value "true". This will show the OIL layer on your client. | false
-| publicPath | The server path from which all chunks and resources will be loaded. You should upload all released files there and configure it. | `https://unpkg.com/@ideasio/oil.js@{version}/dist/latest/hub.html`
+| publicPath | The server path from which all chunks and resources will be loaded. You should upload all released files there and configure it. | `https://unpkg.com/@ideasio/oil.js@{version}/dist/latest/`
 | require_optout_confirm | Flag to activate the opt-out confirmation dialog within Cookie Preference Center. If set to `true`, addition label definitions (for labels with prefix `label_cpc_purpose_optout_confirm`) are required. See section <<Language label configuration>> for details. | false
 | show_limited_vendors_only | Flag to only show the vendors limited by `iabVendorWhitelist` or `iabVendorBlacklist` in the CPC | false
 | theme | The theme for the layer. By default there are two themes and size modifier themes, `dark` and `light` as well as `small dark` and `small light`. Themes currently work only as an additional css class. To change the style or theme, look into the <<styling-guide,styling guide>>. | light
