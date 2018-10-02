@@ -24,7 +24,7 @@ export function loadOilJs() {
   let oldScript = document.getElementById('oil-configuration');
   if (!oldScript) {
     let config = {
-      publicPath: '//unpkg.com/@ideasio/oil.js/dist/latest/'
+      publicPath: '//unpkg.com/@ideasio/oil.js/release/current/'
     };
     let head = document.getElementsByTagName('head')[0];
     let script = document.createElement('script');
@@ -36,8 +36,8 @@ export function loadOilJs() {
     head.appendChild(script);
   }
 
-  loadJS('oil-stub-js', '//unpkg.com/@ideasio/oil.js/dist/latest/oilstub.min.js', () => {
-    loadJS('oil-js', '//unpkg.com/@ideasio/oil.js/dist/latest/oil.min.js', () => {
+  loadJS('oil-stub-js', '//unpkg.com/@ideasio/oil.js/release/current/oilstub.min.js', () => {
+    loadJS('oil-js', '//unpkg.com/@ideasio/oil.js/release/current/oil.min.js', () => {
       let btnOil = document.getElementById('as-oil-dev-kit__btn-oil');
       btnOil.className = 'btn btn-enabled';
     });

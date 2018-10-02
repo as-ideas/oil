@@ -9,7 +9,6 @@
 [![npm version](https://img.shields.io/npm/v/@ideasio/oil.js.svg)](https://www.npmjs.com/package/@ideasio/oil.js)
 [![Build Status](https://travis-ci.org/as-ideas/oil.svg?branch=master)](https://travis-ci.org/as-ideas/oil)
 [![Coverage Status](https://coveralls.io/repos/github/as-ideas/oil/badge.svg?branch=master)](https://coveralls.io/github/as-ideas/oil?branch=master)
-![GZIP SIZE](http://img.badgesize.io/https://unpkg.com/@ideasio/oil.js/dist/latest/oil.min.js?compression=gzip&style=flat-square)
 [![GPL2 License][license-image]][license-url] 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fas-ideas%2Foil.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fas-ideas%2Foil?ref=badge_shield)
 [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=L3gycEdHSG9Ea0JiT3RXbTBjSTl2RUpJUG9vOFh0M3F5dnFrU3pQNkxCUT0tLUw5aEhDalhOTng0R2N2cEh5a3Z5T1E9PQ==--802c6b824e7d37574af5556756b996c65129a2fa)](https://www.browserstack.com/automate/public-build/L3gycEdHSG9Ea0JiT3RXbTBjSTl2RUpJUG9vOFh0M3F5dnFrU3pQNkxCUT0tLUw5aEhDalhOTng0R2N2cEh5a3Z5T1E9PQ==--802c6b824e7d37574af5556756b996c65129a2fa)
@@ -117,7 +116,7 @@ You need to add the CMP stub (a small script which stores all requests until the
 <script>
 !function(e){var n={};function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="/",t(t.s=115)}({115:function(e,n,t){"use strict";!function(e,n){e.__cmp||(e.__cmp=function(){function t(e){if(e){var t=!0,r=n.querySelector('script[type="application/configuration"]#oil-configuration');if(null!==r&&r.text)try{var a=JSON.parse(r.text);a&&a.hasOwnProperty("gdpr_applies_globally")&&(t=a.gdpr_applies_globally)}catch(e){}e({gdprAppliesGlobally:t,cmpLoaded:o()},!0)}}function o(){return!(!e.AS_OIL||!e.AS_OIL.commandCollectionExecutor)}var r=[],a=function(n,a,c){if("ping"===n)t(c);else{var i={command:n,parameter:a,callback:c};r.push(i),o()&&e.AS_OIL.commandCollectionExecutor(i)}};return a.commandCollection=r,a.receiveMessage=function(n){var a=n&&n.data&&n.data.__cmpCall;if(a)if("ping"===a.command)t(function(e,t){var o={__cmpReturn:{returnValue:e,success:t,callId:a.callId}};n.source.postMessage(o,n.origin)});else{var c={callId:a.callId,command:a.command,parameter:a.parameter,event:n};r.push(c),o()&&e.AS_OIL.commandCollectionExecutor(c)}},function(n){(e.attachEvent||e.addEventListener)("message",function(e){n.receiveMessage(e)},!1)}(a),function e(){if(!(n.getElementsByName("__cmpLocator").length>0))if(n.body){var t=n.createElement("iframe");t.style.display="none",t.name="__cmpLocator",n.body.appendChild(t)}else setTimeout(e,5)}(),a}())}(window,document)}});
 </script>
-<script type="text/javascript" src="https://unpkg.com/@ideasio/oil.js/dist/latest/oil.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@ideasio/oil.js/release/current/oil.<version>-RELEASE.min.js"></script>
 ```
 
 ## Configuration
@@ -149,14 +148,14 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 
 | Config Parameter | Description | Default Setting |
 |----------|---------------|-------|
-| publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | `//unpkg.com/@ideasio/oil.js@{oilVersion}/dist/latest/`
+| publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | `//unpkg.com/@ideasio/oil.js@{oilVersion}/release/current/`
 | locale | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. See [here for a configuration example](#texts-locale-object) and [here for all localizable labels](#available-text-labels) | None
 | locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See [here for an example file](https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json) | None
 | preview_mode | The preview mode is useful when testing OIL in a production or live environment. When value is `true`, the layer remains hidden until you manually trigger `window.AS_OIL.previewModeOn()` in your console. Reload, and the layer is displayed. You can hide it again with `window.AS_OIL.previewModeOff()`. | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
 | poi_activate_poi | Activates single consent cookie for multiple websites. [See requirements for POI here](#poi--power-opt-in) | false
 | poi_hub_origin | The origin of the hub.js installation | `https://unpkg.com`
-| poi_hub_path | The path to the hub.html installation on the origin, if any. | `/@ideasio/oil.js@{oilVersion}/dist/latest/hub.html`
+| poi_hub_path | The path to the hub.html installation on the origin, if any. | `/@ideasio/oil.js@{oilVersion}/release/current/hub.html`
 | poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). The group name must be valid (existing). | none
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31

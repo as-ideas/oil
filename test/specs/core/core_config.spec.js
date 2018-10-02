@@ -139,7 +139,7 @@ describe('core_config', () => {
     const DEFAULT_DEFAULT_TO_OPTIN = false;
     const DEFAULT_POI_GROUP = 'default';
     const DEFAULT_CUSTOM_PURPOSES = [];
-    const DEFAULT_HUB_PATH = '/@ideasio/oil.js@1.2.3/dist/latest/hub.html';
+    const DEFAULT_HUB_PATH = '/@ideasio/oil.js@1.2.3/release/current/hub.html';
 
     it('should call getConfigValue with their respective attribute', function () {
       loadFixture('config/full.config.html');
