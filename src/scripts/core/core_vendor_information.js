@@ -17,11 +17,11 @@ export function loadVendorList() {
     if (cachedVendorList) {
       resolve(cachedVendorList);
     } else if (pendingVendorlistPromise) {
-      return pendingVendorlistPromise;
+      resolve(pendingVendorlistPromise);
     } else {
       let iabVendorListUrl = getIabVendorListUrl();
       pendingVendorlistPromise = fetchJsonData(iabVendorListUrl)
-        .then(response => {
+      pendingVendorlistPromise.then(response => {
           cachedVendorList = response;
           pendingVendorlistPromise = null;
           sortVendors(cachedVendorList);

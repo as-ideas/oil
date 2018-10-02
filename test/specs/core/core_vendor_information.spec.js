@@ -75,10 +75,10 @@ describe('core_vendor_information', () => {
       loadVendorList().then((retrievedVendorList) => {
         expect(retrievedVendorList.vendorListVersion).toEqual(VENDOR_LIST.vendorListVersion);
         expect(retrievedVendorList).toEqual(VENDOR_LIST);
+        done();
       });
       expect(fetchSpy.calls.count()).toBe(1);
 
-      done();
     });
 
     it('should use default vendor list if vendor list fetching fails', (done) => {
