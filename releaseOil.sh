@@ -60,25 +60,25 @@ checkEnvironment "NPMJS_PASSWORD"
 checkEnvironment "NPMJS_EMAIL"
 
 
-echo "\n### Installing dependencies"
+echo "### Installing dependencies"
 npm i || exit 1
 
 
-echo "\n### Building release" $PACKAGE_VERSION$SNAPSHOT
+echo "### Building release" $PACKAGE_VERSION$SNAPSHOT
 export SNAPSHOT="-RELEASE";npm run build:release || exit 1
 
 
-echo "\n### Copying release to release directory"
+echo "### Copying release to release directory"
 mkdir release/$PACKAGE_VERSION
 cp dist/*.$PACKAGE_VERSION-RELEASE.*.js release/$PACKAGE_VERSION/
 cp -r dist/docs release/$PACKAGE_VERSION/
 
 
-echo "\n### Copying stats.json to release directory"
+echo "### Copying stats.json to release directory"
 cp dist/stats.json release/$PACKAGE_VERSION/
 
 
-echo "\n### Copying hub.html to release directory and versioning it"
+echo "### Copying hub.html to release directory and versioning it"
 cp src/hub.html release/$PACKAGE_VERSION/
 HUB_HTML=$(cat release/$PACKAGE_VERSION/hub.html)
 HUB_JS=$(cat release/$PACKAGE_VERSION/hub.$PACKAGE_VERSION-RELEASE.min.js)
@@ -86,18 +86,27 @@ echo "${HUB_HTML/<!--REPLACEME-->/$HUB_JS}" > release/$PACKAGE_VERSION/hub.html
 cp release/$PACKAGE_VERSION/hub.html dist/latest/hub.html
 
 
-echo "\n### Copying and versioning poi-list to release directory"
+echo "### Copying and versioning poi-list to release directory"
 cp -r dist/poi-lists release/$PACKAGE_VERSION/
 mkdir dist/latest/poi-lists
 cp dist/poi-lists/default.json dist/latest/poi-lists/default.json
 
 
-echo "\n### Increasing patch version"
+echo "### Creating release for npmjs.com"
+if [ -d "release/current" ];
+then
+  rm -rf release/current
+fi
+cp -r release/$PACKAGE_VERSION release/current
+rm -rf release/current/docs release/current/poi-lists release/current/stats.json
+
+
+echo "### Increasing patch version"
 git add .
 git commit -a -m "Adding new release $PACKAGE_VERSION$SNAPSHOT" --no-edit
 
 
-echo "\n### Creating release on GitHub"
+echo "### Creating release on GitHub"
 curl -i -u "${GITHUB_USERNAME}:${GITHUB_PASSWORD}" -X POST -d "{
   "tag_name": "${PACKAGE_VERSION}",
   "target_commitish": "master",
@@ -108,14 +117,14 @@ curl -i -u "${GITHUB_USERNAME}:${GITHUB_PASSWORD}" -X POST -d "{
 }" "${GITHUB_REPO_URL}/releases" || exit 1
 
 
-echo "\n### Uploading release to S3 bucket"
+echo "### Uploading release to S3 bucket"
 for file in release/${PACKAGE_VERSION}/*.js; do
   putS3 "release/${PACKAGE_VERSION}" "${file##*/}" "${AWS_BUCKET_PATH}/"
 done
 putS3 "release/${PACKAGE_VERSION}" "hub.html" "${AWS_BUCKET_PATH}/"
 
 
-echo "\n### Pushing release to npmjs.com"
+echo "### Pushing release to npmjs.com"
 expect ./npm_login.sh "${NPMJS_USERNAME}" "${NPMJS_PASSWORD}" "${NPMJS_EMAIL}" || exit 1
 npm publish || exit 1
 npm logout || exit 1
