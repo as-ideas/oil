@@ -108,12 +108,12 @@ git commit -a -m "Adding new release $PACKAGE_VERSION$SNAPSHOT" --no-edit
 
 echo "### Creating release on GitHub"
 curl -i -u "${GITHUB_USERNAME}:${GITHUB_PASSWORD}" -X POST -d "{
-  "tag_name": "${PACKAGE_VERSION}",
-  "target_commitish": "master",
-  "name": "${RELEASE_NAME}",
-  "body": "${RELEASE_DESCRIPTION}",
-  "draft": true,
-  "prerelease": false
+  \"tag_name\": \"${PACKAGE_VERSION}\",
+  \"target_commitish\": \"master\",
+  \"name\": \"${RELEASE_NAME}\",
+  \"body\": \"${RELEASE_DESCRIPTION}\",
+  \"draft\": true,
+  \"prerelease\": false
 }" "${GITHUB_REPO_URL}/releases" || exit 1
 
 
