@@ -11,7 +11,9 @@ import {
   getVendors,
   getLimitedVendors,
   getVendorsToDisplay,
-  loadVendorList
+  loadVendorList,
+  cachedVendorList,
+  pendingVendorlistPromise
 } from '../../../src/scripts/core/core_vendor_information';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
 import { resetOil } from '../../test-utils/utils_reset';
@@ -50,6 +52,33 @@ describe('core_vendor_information', () => {
           done();
         });
       });
+    });
+
+    it('should wait for cached vendor list if request is already started', (done) => {
+      let fetchSpy = spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
+      spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
+
+      expect(pendingVendorlistPromise).toBeNull();
+      expect(cachedVendorList).toBeUndefined();
+      loadVendorList().then((retrievedVendorList) => {
+        expect(retrievedVendorList.vendorListVersion).toEqual(VENDOR_LIST.vendorListVersion);
+        expect(retrievedVendorList).toEqual(VENDOR_LIST);
+        expect(cachedVendorList).toBeDefined();
+      });
+      expect(cachedVendorList).toBeUndefined();
+      expect(pendingVendorlistPromise).toBeDefined();
+      loadVendorList().then((retrievedVendorList) => {
+        expect(retrievedVendorList.vendorListVersion).toEqual(VENDOR_LIST.vendorListVersion);
+        expect(retrievedVendorList).toEqual(VENDOR_LIST);
+      });
+      expect(cachedVendorList).toBeUndefined();
+      loadVendorList().then((retrievedVendorList) => {
+        expect(retrievedVendorList.vendorListVersion).toEqual(VENDOR_LIST.vendorListVersion);
+        expect(retrievedVendorList).toEqual(VENDOR_LIST);
+        done();
+      });
+      expect(fetchSpy.calls.count()).toBe(1);
+
     });
 
     it('should use default vendor list if vendor list fetching fails', (done) => {
@@ -273,7 +302,7 @@ describe('core_vendor_information', () => {
   });
 
   describe('getLimitedVendors', function() {
-    
+
     it('returns regular vendors when no whitelist or blacklist exists', function() {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
       expect(getLimitedVendors().length).toEqual(DEFAULT_VENDOR_LIST.maxVendorId);
@@ -294,7 +323,7 @@ describe('core_vendor_information', () => {
   });
 
   describe('getVendorsToDisplay', function() {
-    
+
     it('should return full vendor list when configuration parameter show_limited_vendors_only is false', function() {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(false);
       let result = getVendorsToDisplay();
