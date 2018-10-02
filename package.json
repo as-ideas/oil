@@ -8,7 +8,7 @@
     "Opt-In",
     "Consent"
   ],
-  "homepage": "https://oiljs.org",
+  "homepage": "https://www.oiljs.org",
   "author": "Axel Springer Ideas Engineering GmbH",
   "license": "GPL-2.0",
   "main": "http_server.js",
