@@ -10,20 +10,25 @@ export const DEFAULT_VENDOR_LIST = {
 };
 
 export let cachedVendorList;
+export let pendingVendorlistPromise = null;
 
 export function loadVendorList() {
   return new Promise(function (resolve) {
     if (cachedVendorList) {
       resolve(cachedVendorList);
+    } else if (pendingVendorlistPromise) {
+      resolve(pendingVendorlistPromise);
     } else {
       let iabVendorListUrl = getIabVendorListUrl();
-      fetchJsonData(iabVendorListUrl)
-        .then(response => {
+      pendingVendorlistPromise = fetchJsonData(iabVendorListUrl)
+      pendingVendorlistPromise.then(response => {
           cachedVendorList = response;
+          pendingVendorlistPromise = null;
           sortVendors(cachedVendorList);
           resolve(cachedVendorList);
         })
         .catch(error => {
+          pendingVendorlistPromise = null;
           logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
           resolve(getVendorList());
         });
@@ -67,6 +72,7 @@ export function getVendorList() {
 
 export function clearVendorListCache() {
   cachedVendorList = undefined;
+  pendingVendorlistPromise = null;
 }
 
 export function getVendorsToDisplay() {
