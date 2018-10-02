@@ -55,13 +55,6 @@ describe('core_config', () => {
 
     const DEFAULT_FALLBACK_BACKEND_URL_WITH_LOCALE_STRING = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/foo';
 
-    it('should set __webpack_public_path__', function () {
-      loadFixture('config/given.config.with.publicPath.html');
-
-      expect(getPublicPath()).toEqual(EXPECTED_PUBLIC_PATH);
-      expect(__webpack_public_path__).toEqual(EXPECTED_PUBLIC_PATH);
-    });
-
     it('Backwards compatibility: creates locale_url property if locale is string and locale_url empty', function () {
       loadFixture('config/given.config.with.locale.string.html');
       const result = getLocaleUrl();
@@ -237,7 +230,6 @@ describe('core_config', () => {
       loadFixture('config/given.config.with.advanced.settings.show.limited.vendors.html');
       expect(getShowLimitedVendors()).toBeTruthy();
     });
-
 
   });
 

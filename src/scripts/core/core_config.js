@@ -81,10 +81,6 @@ function parseServerUrls() {
     logError('Incorrect or missing locale parameter found. Please review documentation on how to set the locale object in your configuration.');
     setLocaleUrl('https://oil-backend.herokuapp.com/oil/api/userViewLocales/' + getLocaleVariantName());
   }
-
-  if (getPublicPath()) {
-    __webpack_public_path__ = getPublicPath();
-  }
 }
 
 
