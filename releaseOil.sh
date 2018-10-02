@@ -2,7 +2,6 @@
 
 # This script requires that the following environment variables are defined (for example by your build server):
 # - RELEASE_NAME (the name of your release)
-# - RELEASE_DESCRIPTION (the description of your release - i.e. release notes)
 # - GITHUB_USERNAME
 # - GITHUB_PASSWORD
 # - NPMJS_USERNAME
@@ -48,7 +47,6 @@ AWS_BUCKET_PATH=/rawOil/${PACKAGE_VERSION}
 
 echo "\n### Checking environment"
 checkEnvironment "RELEASE_NAME"
-checkEnvironment "RELEASE_DESCRIPTION"
 checkEnvironment "GITHUB_USERNAME"
 checkEnvironment "GITHUB_PASSWORD"
 checkEnvironment "AWS_ACCESS_KEY_ID"
@@ -111,7 +109,6 @@ curl -i -u "${GITHUB_USERNAME}:${GITHUB_PASSWORD}" -X POST -d "{
   \"tag_name\": \"${PACKAGE_VERSION}\",
   \"target_commitish\": \"master\",
   \"name\": \"${RELEASE_NAME}\",
-  \"body\": \"${RELEASE_DESCRIPTION}\",
   \"draft\": true,
   \"prerelease\": false
 }" "${GITHUB_REPO_URL}/releases" || exit 1
