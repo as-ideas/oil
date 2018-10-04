@@ -13,27 +13,29 @@ export let cachedVendorList;
 export let pendingVendorlistPromise = null;
 
 export function loadVendorList() {
-  return new Promise(function (resolve) {
-    if (cachedVendorList) {
-      resolve(cachedVendorList);
-    } else if (pendingVendorlistPromise) {
-      resolve(pendingVendorlistPromise);
-    } else {
-      let iabVendorListUrl = getIabVendorListUrl();
-      pendingVendorlistPromise = fetchJsonData(iabVendorListUrl)
-      pendingVendorlistPromise.then(response => {
-          cachedVendorList = response;
-          pendingVendorlistPromise = null;
-          sortVendors(cachedVendorList);
-          resolve(cachedVendorList);
-        })
-        .catch(error => {
-          pendingVendorlistPromise = null;
-          logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
-          resolve(getVendorList());
-        });
-    }
-  });
+  if (pendingVendorlistPromise) {
+    return pendingVendorlistPromise;
+  } else if (cachedVendorList) {
+    return new Promise(function (resolve) {
+      resolve(cachedVendorList); 
+    });
+  } else {
+    return new Promise(function (resolve) {
+    let iabVendorListUrl = getIabVendorListUrl();
+    pendingVendorlistPromise = fetchJsonData(iabVendorListUrl)
+    pendingVendorlistPromise.then(response => {
+        cachedVendorList = response;
+        pendingVendorlistPromise = null;
+        sortVendors(cachedVendorList);
+        resolve(cachedVendorList);
+      })
+      .catch(error => {
+        pendingVendorlistPromise = null;
+        logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
+        resolve(getVendorList());
+      });
+    });
+  }
 }
 
 export function getPurposes() {

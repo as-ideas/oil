@@ -78,7 +78,6 @@ describe('core_vendor_information', () => {
         done();
       });
       expect(fetchSpy.calls.count()).toBe(1);
-
     });
 
     it('should use default vendor list if vendor list fetching fails', (done) => {
