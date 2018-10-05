@@ -119,6 +119,7 @@ for file in release/${PACKAGE_VERSION}/*.js; do
   putS3 "release/${PACKAGE_VERSION}" "${file##*/}" "${AWS_BUCKET_PATH}/"
 done
 putS3 "release/${PACKAGE_VERSION}" "hub.html" "${AWS_BUCKET_PATH}/"
+putS3 "release/${PACKAGE_VERSION}/poi-lists" "default.json" "${AWS_BUCKET_PATH}/poi-lists/"
 
 
 echo "### Pushing release to npmjs.com"
