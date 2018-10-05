@@ -60,24 +60,20 @@ describe('core_vendor_information', () => {
 
       expect(pendingVendorlistPromise).toBeNull();
       expect(cachedVendorList).toBeUndefined();
+
       loadVendorList().then((retrievedVendorList) => {
         expect(retrievedVendorList.vendorListVersion).toEqual(VENDOR_LIST.vendorListVersion);
         expect(retrievedVendorList).toEqual(VENDOR_LIST);
         expect(cachedVendorList).toBeDefined();
+
+        loadVendorList().then((retrievedVendorList) => {
+          expect(fetchSpy.calls.count()).toBe(1);
+          done();
+        });
       });
-      expect(cachedVendorList).toBeUndefined();
+      
       expect(pendingVendorlistPromise).toBeDefined();
-      loadVendorList().then((retrievedVendorList) => {
-        expect(retrievedVendorList.vendorListVersion).toEqual(VENDOR_LIST.vendorListVersion);
-        expect(retrievedVendorList).toEqual(VENDOR_LIST);
-      });
       expect(cachedVendorList).toBeUndefined();
-      loadVendorList().then((retrievedVendorList) => {
-        expect(retrievedVendorList.vendorListVersion).toEqual(VENDOR_LIST.vendorListVersion);
-        expect(retrievedVendorList).toEqual(VENDOR_LIST);
-        done();
-      });
-      expect(fetchSpy.calls.count()).toBe(1);
     });
 
     it('should use default vendor list if vendor list fetching fails', (done) => {
