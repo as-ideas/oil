@@ -13,20 +13,20 @@ export let cachedVendorList;
 export let pendingVendorlistPromise = null;
 
 export function loadVendorList() {
-  if (pendingVendorlistPromise) {
-    return pendingVendorlistPromise;
-  } else if (cachedVendorList) {
-    return new Promise(function (resolve) {
+  if (cachedVendorList) {
+    return new Promise( resolve => {
       resolve(cachedVendorList); 
     });
+  } else if (pendingVendorlistPromise) {
+    return pendingVendorlistPromise;
   } else {
     return new Promise(function (resolve) {
     let iabVendorListUrl = getIabVendorListUrl();
     pendingVendorlistPromise = fetchJsonData(iabVendorListUrl)
     pendingVendorlistPromise.then(response => {
+        sortVendors(response);
         cachedVendorList = response;
         pendingVendorlistPromise = null;
-        sortVendors(cachedVendorList);
         resolve(cachedVendorList);
       })
       .catch(error => {

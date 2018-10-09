@@ -42,10 +42,15 @@ describe('core_vendor_information', () => {
     it('should use cached vendor list if there is one', (done) => {
       let fetchSpy = spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
+      
+      expect(pendingVendorlistPromise).toBeNull();
+      expect(cachedVendorList).toBeUndefined();
 
       loadVendorList().then(() => {
         expect(CoreUtils.fetchJsonData).toHaveBeenCalled();
         fetchSpy.calls.reset();
+        expect(pendingVendorlistPromise).toBeNull();
+        expect(cachedVendorList).toBeDefined();
 
         loadVendorList().then(() => {
           expect(CoreUtils.fetchJsonData).not.toHaveBeenCalled();
@@ -55,25 +60,29 @@ describe('core_vendor_information', () => {
     });
 
     it('should wait for cached vendor list if request is already started', (done) => {
-      let fetchSpy = spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
+      let fetchSpy = spyOn(CoreUtils, 'fetchJsonData').and.returnValue(
+        new Promise( resolve => {
+          setTimeout( () => { resolve(VENDOR_LIST) } , 2000 );
+        }));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
 
       expect(pendingVendorlistPromise).toBeNull();
       expect(cachedVendorList).toBeUndefined();
 
       loadVendorList().then((retrievedVendorList) => {
-        expect(retrievedVendorList.vendorListVersion).toEqual(VENDOR_LIST.vendorListVersion);
         expect(retrievedVendorList).toEqual(VENDOR_LIST);
+        expect(pendingVendorlistPromise).toBeNull();
         expect(cachedVendorList).toBeDefined();
-
-        loadVendorList().then((retrievedVendorList) => {
-          expect(fetchSpy.calls.count()).toBe(1);
-          done();
-        });
       });
-      
+
+      loadVendorList().then((retrievedVendorList) => {
+        expect(fetchSpy.calls.count()).toBe(1);
+        done();
+      });
+
       expect(pendingVendorlistPromise).toBeDefined();
       expect(cachedVendorList).toBeUndefined();
+    
     });
 
     it('should use default vendor list if vendor list fetching fails', (done) => {
