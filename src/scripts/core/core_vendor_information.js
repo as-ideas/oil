@@ -13,27 +13,29 @@ export let cachedVendorList;
 export let pendingVendorlistPromise = null;
 
 export function loadVendorList() {
-  return new Promise(function (resolve) {
-    if (cachedVendorList) {
-      resolve(cachedVendorList);
-    } else if (pendingVendorlistPromise) {
-      resolve(pendingVendorlistPromise);
-    } else {
-      let iabVendorListUrl = getIabVendorListUrl();
-      pendingVendorlistPromise = fetchJsonData(iabVendorListUrl)
-      pendingVendorlistPromise.then(response => {
-          cachedVendorList = response;
-          pendingVendorlistPromise = null;
-          sortVendors(cachedVendorList);
-          resolve(cachedVendorList);
-        })
-        .catch(error => {
-          pendingVendorlistPromise = null;
-          logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
-          resolve(getVendorList());
-        });
-    }
-  });
+  if (cachedVendorList) {
+    return new Promise( resolve => {
+      resolve(cachedVendorList); 
+    });
+  } else if (pendingVendorlistPromise) {
+    return pendingVendorlistPromise;
+  } else {
+    return new Promise(function (resolve) {
+    let iabVendorListUrl = getIabVendorListUrl();
+    pendingVendorlistPromise = fetchJsonData(iabVendorListUrl)
+    pendingVendorlistPromise.then(response => {
+        sortVendors(response);
+        cachedVendorList = response;
+        pendingVendorlistPromise = null;
+        resolve(cachedVendorList);
+      })
+      .catch(error => {
+        pendingVendorlistPromise = null;
+        logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
+        resolve(getVendorList());
+      });
+    });
+  }
 }
 
 export function getPurposes() {
