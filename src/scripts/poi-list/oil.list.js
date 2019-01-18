@@ -17,6 +17,8 @@ export function renderOilGroupListTemplate(renderMethod) {
 export function renderOilThirdPartyListTemplate(renderMethod) {
   loadVendorList()
     .then(() => {
+      // HINT: The GroupList is needed if POI is enabled, because it contains the BLACKLIST/WHITELIST of vendors
+      // it will load nothing, if POI is disabled
       getGroupList().then(() => {
         renderMethod(oilThirdPartyListTemplate(getVendorsToDisplay()))
       })
