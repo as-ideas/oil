@@ -38,6 +38,9 @@ export function oilThirdPartyListTemplate(thirdPartyList) {
  * Returned element is used to ignore Oil completely
  */
 export const listSnippet = (list) => {
+  if (!list) {
+    list = [];
+  }
   let listWrapped = list.map((element) => {
     if (typeof element === 'object') {
       return `<div class="as-oil-third-party-list-element">

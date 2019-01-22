@@ -1,7 +1,7 @@
 var nwc = require('./nightwatch.remote.conf.js');
 
 nwc.common_capabilities['browserstack.local'] = true;
-nwc.globals_path = "./etc/nightwatch.localhost.globals.js";
+nwc.globals_path = "./nightwatch.localhost.globals.js";
 
 // Code to support common capabilites
 for (let i in nwc.test_settings) {

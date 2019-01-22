@@ -10,7 +10,7 @@ import { getPoiGroupName, setIabVendorWhitelist, setIabVendorBlacklist, isPoiAct
 export function getGroupList() {
   let groupName = getPoiGroupName();
 
-  let cachedGroupList = getGlobalOilObject('oilCachedGroupList')
+  let cachedGroupList = getGlobalOilObject('oilCachedGroupList');
 
   return new Promise(function (resolve) {
     if (cachedGroupList || !isPoiActive()) {

@@ -8,7 +8,7 @@ module.exports = {
   ],
 
   "output_folder": "./target/local-reports",
-  "globals_path": "./etc/nightwatch.local.globals.js",
+  "globals_path": "./nightwatch.local.globals.js",
 
   "selenium": { // downloaded by selenium-download module (see readme)
     "start_process": true, // tells nightwatch to start/stop the selenium process
