@@ -1,10 +1,10 @@
-import * as UserViewOil from '../../../src/scripts/userview/locale/userview_oil';
-import * as CoreUtils from '../../../src/scripts/core/core_utils';
-import * as CoreConfig from '../../../src/scripts/core/core_config';
-import * as CoreLog from '../../../src/scripts/core/core_log';
-import { OIL_LABELS } from '../../../src/scripts/userview/userview_constants';
-import DEFAULT_LOCALE from '../../../src/scripts/userview/locale/userview_default_locale';
-import { resetOil } from '../../test-utils/utils_reset';
+import * as UserViewOil from '../../../../src/scripts/userview/locale/userview_oil';
+import * as CoreUtils from '../../../../src/scripts/core/core_utils';
+import * as CoreConfig from '../../../../src/scripts/core/core_config';
+import * as CoreLog from '../../../../src/scripts/core/core_log';
+import { OIL_LABELS } from '../../../../src/scripts/userview/userview_constants';
+import DEFAULT_LOCALE from '../../../../src/scripts/userview/locale/userview_default_locale';
+import { resetOil } from '../../../test-utils/utils_reset';
 
 describe('the locale fetcher for user view modal', () => {
 
@@ -80,10 +80,12 @@ describe('the locale fetcher for user view modal', () => {
   });
 
   it('should update existing but incomplete locale from configuration by locale loaded from backend', (done) => {
-    const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [OIL_LABELS.ATTR_LABEL_INTRO_START, OIL_LABELS.ATTR_LABEL_BUTTON_BACK]);
-    const expectedLocale = setValuesToLocale(configuredLocale, {
+    const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [OIL_LABELS.ATTR_LABEL_INTRO_START, OIL_LABELS.ATTR_LABEL_BUTTON_BACK, OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]);
+    const expectedLocale = addValuesToLocaleCopy(configuredLocale, {
       [OIL_LABELS.ATTR_LABEL_INTRO_START]: BACKEND_LOCALE.texts[OIL_LABELS.ATTR_LABEL_INTRO_START],
-      [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: BACKEND_LOCALE.texts[OIL_LABELS.ATTR_LABEL_BUTTON_BACK]
+      [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: BACKEND_LOCALE.texts[OIL_LABELS.ATTR_LABEL_BUTTON_BACK],
+      [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]: BACKEND_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC],
+
     });
     givenThatConfigurationContainsLocale(configuredLocale);
     givenThatBackendProvidesLocale(BACKEND_LOCALE);
@@ -97,10 +99,13 @@ describe('the locale fetcher for user view modal', () => {
   });
 
   it('should update existing but incomplete locale from configuration by locale loaded from backend with warning about missing labels', (done) => {
-    const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [OIL_LABELS.ATTR_LABEL_INTRO_START, OIL_LABELS.ATTR_LABEL_BUTTON_BACK]);
+    const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [
+      OIL_LABELS.ATTR_LABEL_INTRO_START,
+      OIL_LABELS.ATTR_LABEL_BUTTON_BACK
+    ]);
     const backendLocale = removeKeysFromLocale(BACKEND_LOCALE, [OIL_LABELS.ATTR_LABEL_INTRO_START]);
-    const expectedLocale = setValuesToLocale(configuredLocale, {
-      [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: BACKEND_LOCALE.texts[OIL_LABELS.ATTR_LABEL_BUTTON_BACK]
+    const expectedLocale = addValuesToLocaleCopy(configuredLocale, {
+      [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: BACKEND_LOCALE.texts[OIL_LABELS.ATTR_LABEL_BUTTON_BACK],
     });
     givenThatConfigurationContainsLocale(configuredLocale);
     givenThatBackendProvidesLocale(backendLocale);
@@ -116,10 +121,15 @@ describe('the locale fetcher for user view modal', () => {
   });
 
   it('should update existing but incomplete locale from configuration by default locale in case of an error while retrieving locale from backend', (done) => {
-    const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [OIL_LABELS.ATTR_LABEL_INTRO_HEADING, OIL_LABELS.ATTR_LABEL_BUTTON_BACK]);
-    const expectedLocale = setValuesToLocale(configuredLocale, {
+    const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [OIL_LABELS.ATTR_LABEL_INTRO_HEADING, OIL_LABELS.ATTR_LABEL_BUTTON_BACK, OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]);
+    const expectedLocale = addValuesToLocaleCopy(configuredLocale, {
       [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_INTRO_HEADING],
-      [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_BUTTON_BACK]
+      [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_BUTTON_BACK],
+      [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC],
+      [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_HEADING]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_HEADING],
+      [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_TEXT]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_TEXT],
+      [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_PROCEED]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_PROCEED],
+      [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL]
     });
     givenThatConfigurationContainsLocale(configuredLocale);
     givenThatLocaleRetrievalFromBackendFails();
@@ -133,10 +143,17 @@ describe('the locale fetcher for user view modal', () => {
   });
 
   it('should update existing but incomplete locale from configuration by default locale in case of non-existing locale url', (done) => {
-    const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [OIL_LABELS.ATTR_LABEL_INTRO_HEADING, OIL_LABELS.ATTR_LABEL_BUTTON_BACK]);
-    const expectedLocale = setValuesToLocale(configuredLocale, {
+    console.info('##### RUNNING TEST #####');
+
+    const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [OIL_LABELS.ATTR_LABEL_INTRO_HEADING, OIL_LABELS.ATTR_LABEL_BUTTON_BACK, OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]);
+    const expectedLocale = addValuesToLocaleCopy(configuredLocale, {
       [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_INTRO_HEADING],
-      [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_BUTTON_BACK]
+      [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_BUTTON_BACK],
+      [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC],
+      [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_HEADING]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_HEADING],
+      [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_TEXT]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_TEXT],
+      [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_PROCEED]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_PROCEED],
+      [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL]
     });
     givenThatConfigurationContainsLocale(configuredLocale);
     givenThatLocaleRetrievalIsDeactivated();
@@ -144,6 +161,7 @@ describe('the locale fetcher for user view modal', () => {
     UserViewOil.locale(userViewOil => {
       expect(userViewOil).toBeDefined();
       expect(CoreUtils.fetchJsonData).not.toHaveBeenCalled();
+      expect(CoreConfig.setLocale).toHaveBeenCalledTimes(1);
       expect(CoreConfig.setLocale).toHaveBeenCalledWith(expectedLocale);
       done();
     });
@@ -206,7 +224,7 @@ describe('the locale fetcher for user view modal', () => {
     };
   }
 
-  function setValuesToLocale(locale, valuesToAdd) {
+  function addValuesToLocaleCopy(locale, valuesToAdd) {
     let result = {
       'localeId': locale.localeId,
       'version': locale.version,
