@@ -16,6 +16,14 @@ const port = process.argv[2] || process.env.PORT || 8080;
 let CACHE_DURATION = '10m';
 let DOCUMENT_ROOT = __dirname + '/dist';
 
+let redirectToOilJsOrg = function (req, res, next) {
+  if (req.path === '/') {
+    res.redirect(301, '//www.oiljs.org');
+  } else {
+    next();
+  }
+};
+
 let domainBlacklist = function (req, res, next) {
   let referer = req.header("Referer") || req.header("referer");
   if (isBlacklisted(referer)) {
@@ -59,6 +67,8 @@ let additionalHeaders = function (req, res, next) {
 let app = express();
 // access log *this configuration must be defined before of the path configuration
 app.use(morgan('combined'));
+
+app.use(redirectToOilJsOrg);
 app.use(domainBlacklist);
 
 app.use(additionalHeaders);
