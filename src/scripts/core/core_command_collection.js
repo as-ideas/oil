@@ -1,7 +1,7 @@
 import { logError, logInfo } from './core_log';
 import { getCommandCollection } from './core_utils';
 import { getConsentDataString, getVendorConsentData, getPublisherConsentData } from './core_consents';
-import { getVendorList, loadVendorList } from './core_vendor_information';
+import { getVendorList, loadVendorList, loadCustomVendorList } from './core_vendor_information';
 
 const commands = {
   getVendorConsents: (vendorIds) => {
@@ -42,6 +42,7 @@ export function executeCommandCollection(commandEntry) {
 
 function processCommandEntry(commandEntry) {
   loadVendorList()
+    .then(loadCustomVendorList())
     .then(() => {
       processCommand(commandEntry.command, commandEntry.parameter)
         .then((result) => {

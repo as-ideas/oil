@@ -26,6 +26,7 @@ export const OIL_CONFIG = {
   ATTR_LOCALE_URL: 'locale_url',
   ATTR_IAB_VENDOR_LIST_URL: 'iabVendorListUrl',
   ATTR_CUSTOM_PURPOSES: 'customPurposes',
+  ATTR_CUSTOM_VENDOR_LIST_URL: 'customVendorListUrl',
   ATTR_IAB_VENDOR_BLACKLIST: 'iabVendorBlacklist',
   ATTR_IAB_VENDOR_WHITELIST: 'iabVendorWhitelist',
   ATTR_SHOW_LIMITED_VENDORS_ONLY: 'show_limited_vendors_only',

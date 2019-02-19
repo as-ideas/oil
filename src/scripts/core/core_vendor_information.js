@@ -1,4 +1,10 @@
-import { getIabVendorBlacklist, getIabVendorListUrl, getIabVendorWhitelist, getShowLimitedVendors } from './core_config';
+import {
+  getIabVendorBlacklist,
+  getIabVendorListUrl,
+  getCustomVendorListUrl,
+  getIabVendorWhitelist,
+  getShowLimitedVendors
+} from './core_config';
 import { logInfo, logError } from './core_log';
 import { fetchJsonData } from './core_utils';
 
@@ -9,33 +15,70 @@ export const DEFAULT_VENDOR_LIST = {
   purposeIds: [1, 2, 3, 4, 5]
 };
 
+const defaultCustomVendorList = {
+  'vendors': []
+};
+
 export let cachedVendorList;
+export let cachedCustomVendorList;
 export let pendingVendorlistPromise = null;
+export let pendingCustomVendorlistPromise = null;
 
 export function loadVendorList() {
   if (cachedVendorList) {
-    return new Promise( resolve => {
-      resolve(cachedVendorList); 
+    return new Promise(resolve => {
+      resolve(cachedVendorList);
     });
   } else if (pendingVendorlistPromise) {
     return pendingVendorlistPromise;
   } else {
     return new Promise(function (resolve) {
-    let iabVendorListUrl = getIabVendorListUrl();
-    pendingVendorlistPromise = fetchJsonData(iabVendorListUrl)
-    pendingVendorlistPromise.then(response => {
-        sortVendors(response);
-        cachedVendorList = response;
-        pendingVendorlistPromise = null;
-        resolve(cachedVendorList);
-      })
-      .catch(error => {
-        pendingVendorlistPromise = null;
-        logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
-        resolve(getVendorList());
-      });
+      let iabVendorListUrl = getIabVendorListUrl();
+      pendingVendorlistPromise = fetchJsonData(iabVendorListUrl);
+      pendingVendorlistPromise
+        .then(response => {
+          sortVendors(response);
+          cachedVendorList = response;
+          pendingVendorlistPromise = null;
+          resolve(cachedVendorList);
+        })
+        .catch(error => {
+          pendingVendorlistPromise = null;
+          logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
+          resolve(getVendorList());
+        });
     });
   }
+}
+
+export function loadCustomVendorList() {
+  return new Promise(function (resolve, reject) {
+    if (cachedCustomVendorList) {
+      resolve(cachedCustomVendorList);
+    } else if (pendingCustomVendorlistPromise) {
+      return pendingCustomVendorlistPromise;
+    } else {
+      let customVendorListUrl = getCustomVendorListUrl();
+      if (!customVendorListUrl) {
+        cachedCustomVendorList = defaultCustomVendorList;
+        resolve(cachedCustomVendorList);
+      } else {
+        pendingCustomVendorlistPromise = fetchJsonData(customVendorListUrl);
+        pendingCustomVendorlistPromise
+          .then(response => {
+            cachedCustomVendorList = response;
+            pendingCustomVendorlistPromise = null;
+            resolve(cachedCustomVendorList);
+          })
+          .catch(error => {
+            cachedCustomVendorList = defaultCustomVendorList;
+            pendingCustomVendorlistPromise = null;
+            logError(`OIL getCustomVendorList failed and returned error: ${error}. Falling back to default vendorlist!`);
+            resolve(cachedCustomVendorList);
+          });
+      }
+    }
+  });
 }
 
 export function getPurposes() {
@@ -90,6 +133,11 @@ export function getLimitedVendors() {
   vendors = vendors.filter(vendor => limitedIds.indexOf(vendor.id) > -1);
 
   return vendors;
+}
+
+export function getCustomVendors() {
+  const customVendorList = cachedCustomVendorList.vendors;
+  return customVendorList;
 }
 
 export function getLimitedVendorIds() {

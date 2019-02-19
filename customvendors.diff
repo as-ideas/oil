@@ -1,0 +1,292 @@
+diff --git a/src/scripts/core/core_command_collection.js b/src/scripts/core/core_command_collection.js
+index 46e1198..ec69ea5 100644
+--- a/src/scripts/core/core_command_collection.js
++++ b/src/scripts/core/core_command_collection.js
+@@ -1,7 +1,7 @@
+ import {logError, logInfo} from './core_log';
+ import {getCommandCollection, getClientTimestamp} from './core_utils';
+ import {getConsentDataString, getVendorConsentData} from './core_consents';
+-import {getVendorList, loadVendorList} from './core_vendor_information';
++import {getVendorList, loadVendorList, loadCustomVendorList} from './core_vendor_information';
+ 
+ const commands = {
+   getVendorConsents: (vendorIds) => {
+@@ -45,6 +45,7 @@ export function executeCommandCollection(commandEntry) {
+ 
+ function processCommandEntry(commandEntry) {
+   loadVendorList()
++    .then(loadCustomVendorList())
+     .then(() => {
+       processCommand(commandEntry.command, commandEntry.parameter)
+         .then((result) => {
+diff --git a/src/scripts/core/core_config.js b/src/scripts/core/core_config.js
+index e29f38c..644fe69 100644
+--- a/src/scripts/core/core_config.js
++++ b/src/scripts/core/core_config.js
+@@ -115,14 +115,34 @@ export function getOilBackendUrl() {
+   return getConfigValue(OIL_CONFIG.ATTR_OIL_BACKEND_URL, 'https://oil-backend.herokuapp.com/oil');
+ }
+ 
++/* ToDo: BF-specific, normally return undefined */
++
+ export function getIabVendorListUrl() {
+-  return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_LIST_URL, undefined);
++  return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_LIST_URL, 'https://a.bf-tools.net/cmp/vendorlist/vendors.json');
+ }
+ 
+ export function getIabVendorBlacklist() {
+   return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_BLACKLIST, undefined);
+ }
+ 
++export function getCustomVendorListUrl() {
++  return getConfigValue(OIL_CONFIG.ATTR_CUSTOM_VENDOR_LIST_URL, 'https://a.bf-tools.net/cmp/vendorlist/customvendors.json');
++}
++
++export function getIabVendorHeadline() {
++  return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDORLIST_HEADLINE, 'Zertifizierte Drittanbieter (Partner des IAB TCF)');
++}
++
++export function getCustomVendorHeadline() {
++  return getConfigValue(OIL_CONFIG.ATTR_CUSTOM_VENDORLIST_HEADLINE, 'Weitere Partner');
++}
++
++export function getCustomFieldKey() {
++  return getConfigValue(OIL_CONFIG.ATTR_CUSTOM_FIELD_KEY, 'hbm');
++}
++
++/* end ToDo */
++
+ export function getIabVendorWhitelist() {
+   return getConfigValue(OIL_CONFIG.ATTR_IAB_VENDOR_WHITELIST, undefined);
+ }
+diff --git a/src/scripts/core/core_constants.js b/src/scripts/core/core_constants.js
+index f24bc91..01e671e 100644
+--- a/src/scripts/core/core_constants.js
++++ b/src/scripts/core/core_constants.js
+@@ -23,7 +23,11 @@ export const OIL_CONFIG = {
+   ATTR_OIL_BACKEND_URL: 'oilBackendUrl',
+   ATTR_IAB_VENDOR_LIST_URL: 'iabVendorListUrl',
+   ATTR_IAB_VENDOR_BLACKLIST: 'iabVendorBlacklist',
+-  ATTR_IAB_VENDOR_WHITELIST: 'iabVendorWhitelist'
++  ATTR_IAB_VENDOR_WHITELIST: 'iabVendorWhitelist',
++  ATTR_CUSTOM_VENDOR_LIST_URL: 'customVendorListUrl',
++  ATTR_IAB_VENDORLIST_HEADLINE: 'iabVendorListHeadline',
++  ATTR_CUSTOM_VENDORLIST_HEADLINE: 'customVendorListHeadline',
++  ATTR_CUSTOM_FIELD_KEY: 'customFieldKey'
+ };
+ 
+ // Main Click events
+diff --git a/src/scripts/core/core_vendor_information.js b/src/scripts/core/core_vendor_information.js
+index 84d4c35..754e78b 100644
+--- a/src/scripts/core/core_vendor_information.js
++++ b/src/scripts/core/core_vendor_information.js
+@@ -1,6 +1,6 @@
+ // TODO This is the current vendor list (version 20) from https://vendorlist.consensu.org/vendorlist.json.
+ // TODO In future, this list will be retrieved from vendorlist.consensu.org - this will provide all purposes (and features) and their titles and descriptions (in different languages)
+-import { getConfigValue, getIabVendorListUrl, getLocaleVariantName, getOilBackendUrl } from './core_config';
++import { getConfigValue, getIabVendorListUrl, getCustomVendorListUrl, getLocaleVariantName, getOilBackendUrl } from './core_config';
+ import { OIL_CONFIG } from './core_constants';
+ import { logError } from './core_log';
+ import { fetchJsonData, setGlobalOilObject } from './core_utils';
+@@ -5642,7 +5642,11 @@ const defaultVendorList = {
+     ]
+ };
+ 
+-let cachedVendorList;
++const defaultCustomVendorList = {
++    'vendors': []
++};
++
++let cachedVendorList, cachedCustomVendorList;
+ 
+ // FIXME write tests
+ export function loadVendorList() {
+@@ -5670,6 +5674,32 @@ export function loadVendorList() {
+   });
+ }
+ 
++// FIXME write tests
++export function loadCustomVendorList() {
++  return new Promise(function (resolve, reject) {
++    if (cachedCustomVendorList) {
++      resolve(cachedCustomVendorList);
++    } else {
++      let customVendorListUrl = getCustomVendorListUrl();
++      if (!customVendorListUrl) {
++        cachedCustomVendorList = defaultCustomVendorList;
++        resolve(cachedCustomVendorList);
++      } else {
++        fetchJsonData(customVendorListUrl)
++          .then(response => {
++            cachedCustomVendorList = response;
++            resolve(cachedCustomVendorList);
++          })
++          .catch(error => {
++            cachedCustomVendorList = defaultCustomVendorList;
++            logError(`OIL getCustomVendorList failed and returned error: ${error}. Falling back to default vendorlist!`);
++            resolve(cachedCustomVendorList);
++          });
++      }
++    }
++  });
++}
++
+ /**
+  * !!! May produce 'Undefined' exceptions if vendorlist was not loaded before!
+  *
+@@ -5694,6 +5724,10 @@ export function getVendors() {
+   return cachedVendorList.vendors;
+ }
+ */
++export function getCustomVendors() {
++    const customVendorList = cachedCustomVendorList.vendors;
++    return customVendorList;
++}
+ 
+ /**
+  * !!! May produce 'Undefined' exceptions if vendorlist was not loaded before!
+diff --git a/src/scripts/poi-list/oil.list.js b/src/scripts/poi-list/oil.list.js
+index 2584180..1343163 100644
+--- a/src/scripts/poi-list/oil.list.js
++++ b/src/scripts/poi-list/oil.list.js
+@@ -36,6 +36,7 @@ export function oilThirdPartyListTemplate(thirdPartyList) {
+  * Returned element is used to ignore Oil completely
+  */
+ export const listSnippet = (list) => {
++  // @ToDo: Puchinger Beschreibung der IAB 3rd parties hinzufügen
+   let listWrapped = list.map((element) => {
+     if (typeof element === 'object') {
+       if(!element.description) {
+diff --git a/src/scripts/poi-list/poi.group.scss b/src/scripts/poi-list/poi.group.scss
+index 6b00c24..b0777f0 100644
+--- a/src/scripts/poi-list/poi.group.scss
++++ b/src/scripts/poi-list/poi.group.scss
+@@ -77,7 +77,9 @@
+     font-weight: bold;
+     cursor: pointer;
+   }
+-
++  .as-oil-third-party-description, .as-oil-third-party-purpose {
++    font-size: 12px;
++  }
+   .as-oil-third-party-link {
+     color: $background-color-dark;
+     font-size: 12px;
+diff --git a/src/scripts/userview/view/oil.advanced.settings.js b/src/scripts/userview/view/oil.advanced.settings.js
+index 3bd8f2b..6216410 100644
+--- a/src/scripts/userview/view/oil.advanced.settings.js
++++ b/src/scripts/userview/view/oil.advanced.settings.js
+@@ -6,8 +6,8 @@ import { logError } from '../../core/core_log.js';
+ import { DATA_CONTEXT_BACK, DATA_CONTEXT_YES, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
+ import { setGlobalOilObject } from '../../core/core_utils.js';
+ import { getPurposes } from '../../core/core_vendor_information.js';
+-import { getVendorList, getVendors, loadVendorList } from '../../core/core_vendor_information';
+-
++import { getIabVendorHeadline, getCustomVendorHeadline, getCustomFieldKey } from '../../core/core_config.js'; 
++import { getVendorList, getVendors, getCustomVendors, loadVendorList } from '../../core/core_vendor_information';
+ 
+ const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';
+ 
+@@ -32,6 +32,7 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
+  * @returns {*}
+  */
+ const buildVendorEntries = (vendors) => {
++  // @ToDo: Puchinger Beschreibung der IAB 3rd parties hinzufügen
+   let listWrapped = vendors.map((element) => {
+     if(!element.description) {
+       element.description = '';
+@@ -54,6 +55,43 @@ const buildVendorEntries = (vendors) => {
+   return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
+ };
+ 
++/**
++ *
++ */
++const buildCustomVendorEntries = (vendors) => {
++  // @ToDo: element.hbm.xxx is custom, make it element.custom.xxx in official code
++  let listWrapped = vendors.map((element) => {
++    const customField = getCustomFieldKey();
++
++    /* maybe?
++    if (customField && element[customField]) {
++      element.custom = element[customField];
++    }*/
++
++    if(!element.description) {
++      element.description = '';
++    }
++    return `<div class="as-oil-third-party-list-element">
++                <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
++                    <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
++                      <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
++                    </svg>
++                    <svg class='as-oil-icon-minus' style='display: none;' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
++                      <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
++                    </svg>
++                    <span class='as-oil-third-party-name'>${element.name}</span>
++                </span>
++                <div class='as-oil-third-party-toggle-part' style='display: none;'>
++                  <p class="as-oil-third-party-description">${element.hbm.provider}</p>
++                  <p class="as-oil-third-party-purpose">${element.hbm.purpose}</p>
++                  ${element.hbm.optoutText ? element.hbm.optoutText : ''}
++                  ${element.hbm.optoutLink ? '<a class="as-oil-third-party-link" href="' + element.hbm.optoutLink + '">' + element.hbm.optoutLink + '</a>' : ''}
++                </div>
++              </div>`;
++  });
++  return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
++};
++
+ const BackButtonSnippet = () => {
+   return `
+ <button class="as-js-oilback" data-context="${DATA_CONTEXT_BACK}" data-qa="oil-back-button">
+@@ -107,12 +145,14 @@ const ContentSnippet = () => {
+         </div>
+         <!-- TODO OIL-91 T&CF: Publisher Consents / optionale call getPublisherConsents -->
+         ${buildPurposeEntries(getPurposes())}
+-        <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
+-            3rd Parties
+-        </div>
++        ${getIabHeadline()}
+        <div id="as-js-third-parties-list">
+          ${buildVendorEntries(getVendors())}
+        </div>
++       ${getCustomHeadline()}
++       <div id="as-js-third-parties-list">
++        ${buildCustomVendorEntries(getCustomVendors())}
++       </div>
+     </div>
+     <div class="as-oil-cpc__right">
+      <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
+@@ -147,6 +187,32 @@ export function oilAdvancedSettingsTemplate() {
+   </div>`
+ }
+ 
++const getIabHeadline = () => {
++  let iabHeadline = getIabVendorHeadline();
++  if (iabHeadline) {
++    return `
++          <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
++            ${iabHeadline}
++          </div>
++    `;
++  }
++  return `
++          <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties"></div>
++  `;
++}
++
++const getCustomHeadline = () => {
++  let customHeadline = getCustomVendorHeadline();
++  if (customHeadline) {
++    return `
++          <div class="as-oil-cpc__row-title">
++            ${customHeadline}
++          </div>
++    `;
++  }
++  return '';
++}
++
+ export function attachCpcHandlers() {
+   forEach(document.querySelectorAll('.as-js-btn-activate-all'), (domNode) => {
+     domNode && domNode.addEventListener('click', activateAll, false);
