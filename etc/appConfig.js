@@ -31,7 +31,7 @@ module.exports = {
   }, {
     filename: 'demos/amp-consent-iframe.html',
     template: path.resolve(sourcePath, 'demos', 'amp-consent-iframe.html'),
-    chunks: ['oilstub','oil'],
+    chunks: ['oilstub', 'oil'],
     inject: 'head'
   }, {
     filename: 'demos/advanced-settings.html',
@@ -54,6 +54,12 @@ module.exports = {
   }, {
     filename: 'demos/advanced-settings-custom-purposes.html',
     template: path.resolve(sourcePath, 'demos', 'advanced-settings-custom-purposes.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  }, {
+    filename: 'demos/advanced-settings-custom-vendors.html',
+    template: path.resolve(sourcePath, 'demos', 'advanced-settings-custom-vendors.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
@@ -225,13 +231,13 @@ module.exports = {
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
-  },{
+  }, {
     filename: 'demos/small-design-pp.html',
     template: path.resolve(sourcePath, 'demos', 'small-design-pp.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
-  },{
+  }, {
     filename: 'demos/small-design-dm.html',
     template: path.resolve(sourcePath, 'demos', 'small-design-dm.html'),
     chunks: ['oilstub', 'oil'],

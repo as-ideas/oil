@@ -5,11 +5,87 @@ import { getLabel, getLabelWithDefault, getTheme } from '../userview_config.js';
 import { getCustomPurposes } from '../../core/core_config.js';
 import { JS_CLASS_BUTTON_OPTIN, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
 import { setGlobalOilObject } from '../../core/core_utils.js';
-import { getPurposes, getVendorList, getVendorsToDisplay } from '../../core/core_vendor_information.js';
+import { getPurposes, getVendorList, getCustomVendorList, getVendorsToDisplay } from '../../core/core_vendor_information.js';
 import { BackButton, YesButton } from './components/oil.buttons.js';
 
 
 const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';
+
+export function oilAdvancedSettingsTemplate() {
+  return `
+  <div id="as-oil-cpc" class="as-oil-content-overlay" data-qa="oil-cpc-overlay">
+    ${oilAdvancedSettingsInlineTemplate()}
+  </div>`
+}
+
+export function oilAdvancedSettingsInlineTemplate() {
+  return `<div class="as-oil-l-wrapper-layout-max-width as-oil-cpc-wrapper">
+    <div class="as-oil__heading">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
+    </div>
+    <p class="as-oil__intro-txt">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_TEXT)}
+    </p>
+    ${ActivateButtonSnippet()}
+    ${BackButton()}
+    ${ContentSnippet()}
+  </div>`
+}
+
+export function attachCpcHandlers() {
+  forEach(document.querySelectorAll('.as-js-btn-activate-all'), (domNode) => {
+    domNode && domNode.addEventListener('click', activateAll, false);
+  });
+  forEach(document.querySelectorAll('.as-js-btn-deactivate-all'), (domNode) => {
+    domNode && domNode.addEventListener('click', deactivateAll, false);
+  });
+}
+
+
+const ContentSnippet = () => {
+  return `
+<div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
+  <div class="as-oil-cpc__left">
+    <a href="#as-oil-cpc-purposes" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
+    </a>
+    <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
+    </a>
+    <a href="#as-oil-cpc-custom-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CUSTOM_THIRD_PARTY_HEADING)}
+    </a>
+  </div>
+  <div class="as-oil-cpc__middle as-js-purposes">
+    <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
+    </div>
+    ${buildPurposeEntries(getPurposes())}
+    ${buildPurposeEntries(getCustomPurposes())}
+    
+    <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
+    </div>
+    <div id="as-js-third-parties-list">
+      ${buildIabVendorEntries()}
+    </div>
+    
+     <div class="as-oil-cpc__row-title" id="as-oil-cpc-custom-third-parties">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CUSTOM_THIRD_PARTY_HEADING)}
+    </div>
+    <div id="as-js-custom-third-parties-list">
+      ${buildCustomVendorEntries()}
+    </div>
+  </div>
+  <div class="as-oil-cpc__right">
+    <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
+      <div class="as-oil-l-item">
+        ${YesButton(`as-oil__btn-optin ${JS_CLASS_BUTTON_OPTIN}`)}
+      </div>
+    </div>
+  </div>
+</div>`;
+};
 
 const PurposeContainerSnippet = ({id, header, text, value}) => {
   return `
@@ -26,13 +102,29 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
 </div>`
 };
 
-const buildVendorEntries = () => {
+const buildIabVendorEntries = () => {
   let vendorList = getVendorList();
 
   if (vendorList && !vendorList.isDefault) {
     let listWrapped = getVendorsToDisplay().map((element) => {
-      if (element.name) {
-        return `
+      return buildVendorListEntry(element);
+    });
+    return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
+  } else {
+    return 'Missing vendor list! Maybe vendor list retrieval has failed! Please contact web administrator!';
+  }
+};
+
+const buildCustomVendorEntries = () => {
+  let listWrapped = getCustomVendorList().vendors.map((element) => {
+    return buildVendorListEntry(element);
+  });
+  return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
+};
+
+const buildVendorListEntry = (element) => {
+  if (element.name) {
+    return `
           <div class="as-oil-third-party-list-element">
               <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
                   <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
@@ -48,11 +140,6 @@ const buildVendorEntries = () => {
               </div>
             </div>
           `;
-      }
-    });
-    return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
-  } else {
-    return 'Missing vendor list! Maybe vendor list retrieval has failed! Please contact web administrator!';
   }
 };
 
@@ -77,70 +164,6 @@ const buildPurposeEntries = (list) => {
 const formatPurposeId = (id) => {
   return id < 10 ? `0${id}` : id;
 };
-
-const ContentSnippet = () => {
-  return `
-<div data-qa="cpc-snippet" class="as-oil-l-row as-oil-cpc__content">
-    <div class="as-oil-cpc__left">
-        <a href="#as-oil-cpc-purposes" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}">
-          ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
-        </a>
-        <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
-          ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}  
-        </a>
-    </div>
-    <div class="as-oil-cpc__middle as-js-purposes">
-        <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
-            ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
-        </div>
-        ${buildPurposeEntries(getPurposes())}
-        ${buildPurposeEntries(getCustomPurposes())}
-        <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
-            ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
-        </div>
-       <div id="as-js-third-parties-list">
-         ${buildVendorEntries()}
-       </div>
-    </div>
-    <div class="as-oil-cpc__right">
-     <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
-      <div class="as-oil-l-item">
-        ${YesButton(`as-oil__btn-optin ${JS_CLASS_BUTTON_OPTIN}`)}
-      </div>
-    </div>
-  </div>
-</div>`;
-};
-
-export function oilAdvancedSettingsInlineTemplate() {
-  return `<div class="as-oil-l-wrapper-layout-max-width as-oil-cpc-wrapper">
-    <div class="as-oil__heading">
-      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
-    </div>
-    <p class="as-oil__intro-txt">
-      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_TEXT)}
-    </p>
-    ${ActivateButtonSnippet()}
-    ${BackButton()}
-    ${ContentSnippet()}
-  </div>`
-}
-
-export function oilAdvancedSettingsTemplate() {
-  return `
-  <div id="as-oil-cpc" class="as-oil-content-overlay" data-qa="oil-cpc-overlay">
-    ${oilAdvancedSettingsInlineTemplate()}
-  </div>`
-}
-
-export function attachCpcHandlers() {
-  forEach(document.querySelectorAll('.as-js-btn-activate-all'), (domNode) => {
-    domNode && domNode.addEventListener('click', activateAll, false);
-  });
-  forEach(document.querySelectorAll('.as-js-btn-deactivate-all'), (domNode) => {
-    domNode && domNode.addEventListener('click', deactivateAll, false);
-  });
-}
 
 function activateAll() {
   let elements = document.querySelectorAll('.as-js-purpose-slider');

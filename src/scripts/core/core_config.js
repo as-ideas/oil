@@ -165,7 +165,7 @@ export function getIabVendorBlacklist() {
 }
 
 export function getCustomVendorListUrl() {
-  return getConfigValue(OIL_CONFIG.ATTR_CUSTOM_VENDOR_LIST_URL, 'https://a.bf-tools.net/cmp/vendorlist/customvendors.json');
+  return getConfigValue(OIL_CONFIG.ATTR_CUSTOM_VENDOR_LIST_URL, undefined);
 }
 
 export function getIabVendorWhitelist() {

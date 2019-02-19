@@ -15,7 +15,7 @@ export const DEFAULT_VENDOR_LIST = {
   purposeIds: [1, 2, 3, 4, 5]
 };
 
-const defaultCustomVendorList = {
+const DEFAULT_CUSTOM_VENDOR_LIST = {
   'vendors': []
 };
 
@@ -135,9 +135,11 @@ export function getLimitedVendors() {
   return vendors;
 }
 
-export function getCustomVendors() {
-  const customVendorList = cachedCustomVendorList.vendors;
-  return customVendorList;
+export function getCustomVendorList() {
+  if (cachedCustomVendorList) {
+    return cachedVendorList;
+  }
+  return DEFAULT_CUSTOM_VENDOR_LIST;
 }
 
 export function getLimitedVendorIds() {
