@@ -5,8 +5,14 @@ import { getLabel, getLabelWithDefault, getTheme } from '../userview_config.js';
 import { getCustomPurposes } from '../../core/core_config.js';
 import { JS_CLASS_BUTTON_OPTIN, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
 import { setGlobalOilObject } from '../../core/core_utils.js';
-import { getPurposes, getVendorList, getCustomVendorList, getVendorsToDisplay } from '../../core/core_vendor_information.js';
+import {
+  getPurposes,
+  getVendorList,
+  getCustomVendorList,
+  getVendorsToDisplay
+} from '../../core/core_vendor_information.js';
 import { BackButton, YesButton } from './components/oil.buttons.js';
+import { getCustomVendorListUrl } from '../../core/core_config';
 
 
 const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';
@@ -53,7 +59,7 @@ const ContentSnippet = () => {
       ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
     </a>
     <a href="#as-oil-cpc-custom-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
-      ${getLabel(OIL_LABELS.ATTR_LABEL_CUSTOM_THIRD_PARTY_HEADING)}
+      ${IsCustomVendorsEnables() ? getLabel(OIL_LABELS.ATTR_LABEL_CUSTOM_THIRD_PARTY_HEADING) : ''}
     </a>
   </div>
   <div class="as-oil-cpc__middle as-js-purposes">
@@ -62,20 +68,9 @@ const ContentSnippet = () => {
     </div>
     ${buildPurposeEntries(getPurposes())}
     ${buildPurposeEntries(getCustomPurposes())}
-    
-    <div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
-      ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
-    </div>
-    <div id="as-js-third-parties-list">
-      ${buildIabVendorEntries()}
-    </div>
-    
-     <div class="as-oil-cpc__row-title" id="as-oil-cpc-custom-third-parties">
-      ${getLabel(OIL_LABELS.ATTR_LABEL_CUSTOM_THIRD_PARTY_HEADING)}
-    </div>
-    <div id="as-js-custom-third-parties-list">
-      ${buildCustomVendorEntries()}
-    </div>
+
+    ${buildIabVendorList()}
+    ${buildCustomVendorList()}
   </div>
   <div class="as-oil-cpc__right">
     <div class="as-oil-l-row as-oil-l-buttons-${getTheme()}">
@@ -101,6 +96,34 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
     </div>
 </div>`
 };
+
+const IsCustomVendorsEnables = () => {
+  return !!getCustomVendorListUrl();
+};
+
+const buildIabVendorList = () => {
+  return `
+<div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
+  ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
+</div>
+<div id="as-js-third-parties-list">
+  ${buildIabVendorEntries()}
+</div>`
+};
+
+const buildCustomVendorList = () => {
+  if (IsCustomVendorsEnables()) {
+    return `
+<div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
+  ${getLabel(OIL_LABELS.ATTR_LABEL_CUSTOM_THIRD_PARTY_HEADING)}
+</div>
+<div id="as-js-third-parties-list">
+  ${buildCustomVendorEntries()}
+</div>`
+  }
+  return '';
+};
+
 
 const buildIabVendorEntries = () => {
   let vendorList = getVendorList();

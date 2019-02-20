@@ -23,11 +23,22 @@ import { oilNoCookiesTemplate } from './view/oil.no.cookies';
 import * as AdvancedSettingsStandard from './view/oil.advanced.settings.standard';
 import * as AdvancedSettingsTabs from './view/oil.advanced.settings.tabs';
 import { logError, logInfo } from '../core/core_log';
-import { getCpcType, getTheme, getTimeOutValue, isOptoutConfirmRequired, isPersistMinimumTracking } from './userview_config';
-import { gdprApplies, getAdvancedSettingsPurposesDefault, isPoiActive, isSubscriberSetCookieActive } from '../core/core_config';
+import {
+  getCpcType,
+  getTheme,
+  getTimeOutValue,
+  isOptoutConfirmRequired,
+  isPersistMinimumTracking
+} from './userview_config';
+import {
+  gdprApplies,
+  getAdvancedSettingsPurposesDefault,
+  isPoiActive,
+  isSubscriberSetCookieActive
+} from '../core/core_config';
 import { applyPrivacySettings, getPrivacySettings, getSoiConsentData } from './userview_privacy';
 import { activateOptoutConfirm } from './userview_optout_confirm.js';
-import { getPurposeIds, loadVendorList } from '../core/core_vendor_information';
+import { getPurposeIds, loadCustomVendorList, loadVendorList } from '../core/core_vendor_information';
 import { manageDomElementActivation } from '../core/core_tag_management';
 
 // Initialize our Oil wrapper and save it ...
@@ -74,6 +85,7 @@ export function oilShowPreferenceCenter() {
 
   // We need to make sure the vendor list is loaded before showing the cpc
   loadVendorList()
+    .then(loadCustomVendorList())
     .then(() => {
       // then we want the group list because it may contain group-wide iabVendorWhitelist or iabVendorBlacklist
       import('../poi-list/poi.group.list.js').then(poi_group_list => {

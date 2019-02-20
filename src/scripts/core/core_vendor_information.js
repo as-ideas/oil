@@ -161,6 +161,7 @@ export function getLimitedVendorIds() {
   return limited;
 }
 
+// FIXME Refactor this code. Nobody can read it!
 function buildDefaultVendorIdList() {
   return ((a, b) => {
     while (a--) b[a] = a + 1;
