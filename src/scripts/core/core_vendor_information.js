@@ -16,6 +16,8 @@ export const DEFAULT_VENDOR_LIST = {
 };
 
 const DEFAULT_CUSTOM_VENDOR_LIST = {
+  'vendorListVersion': -1,
+  'isDefault': true,
   'vendors': []
 };
 
@@ -24,10 +26,10 @@ export let cachedCustomVendorList;
 export let pendingVendorlistPromise = null;
 export let pendingCustomVendorlistPromise = null;
 
-export function loadVendorList() {
-  if (cachedVendorList) {
+export function loadVendorListAndCustomVendorList() {
+  if (cachedVendorList && cachedCustomVendorList) {
     return new Promise(resolve => {
-      resolve(cachedVendorList);
+      resolve();
     });
   } else if (pendingVendorlistPromise) {
     return pendingVendorlistPromise;
@@ -40,43 +42,35 @@ export function loadVendorList() {
           sortVendors(response);
           cachedVendorList = response;
           pendingVendorlistPromise = null;
-          resolve(cachedVendorList);
         })
         .catch(error => {
           pendingVendorlistPromise = null;
           logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
-          resolve(getVendorList());
+        })
+        .finally(() => {
+          loadCustomVendorList().finally(() => resolve());
         });
     });
   }
 }
 
-export function loadCustomVendorList() {
-  return new Promise(function (resolve, reject) {
-    if (cachedCustomVendorList) {
-      resolve(cachedCustomVendorList);
-    } else if (pendingCustomVendorlistPromise) {
-      return pendingCustomVendorlistPromise;
+function loadCustomVendorList() {
+  return new Promise(resolve => {
+    let customVendorListUrl = getCustomVendorListUrl();
+    if (!customVendorListUrl) {
+      cachedCustomVendorList = DEFAULT_CUSTOM_VENDOR_LIST;
+      resolve();
     } else {
-      let customVendorListUrl = getCustomVendorListUrl();
-      if (!customVendorListUrl) {
-        cachedCustomVendorList = defaultCustomVendorList;
-        resolve(cachedCustomVendorList);
-      } else {
-        pendingCustomVendorlistPromise = fetchJsonData(customVendorListUrl);
-        pendingCustomVendorlistPromise
-          .then(response => {
-            cachedCustomVendorList = response;
-            pendingCustomVendorlistPromise = null;
-            resolve(cachedCustomVendorList);
-          })
-          .catch(error => {
-            cachedCustomVendorList = defaultCustomVendorList;
-            pendingCustomVendorlistPromise = null;
-            logError(`OIL getCustomVendorList failed and returned error: ${error}. Falling back to default vendorlist!`);
-            resolve(cachedCustomVendorList);
-          });
-      }
+      fetchJsonData(customVendorListUrl)
+        .then(response => {
+          cachedCustomVendorList = response;
+          pendingCustomVendorlistPromise = null;
+        })
+        .catch(error => {
+          cachedCustomVendorList = DEFAULT_CUSTOM_VENDOR_LIST;
+          pendingCustomVendorlistPromise = null;
+          logError(`OIL getCustomVendorList failed and returned error: ${error}. Falling back to default vendorlist!`);
+        }).finally(() => resolve());
     }
   });
 }
@@ -97,10 +91,6 @@ export function getVendorIds() {
   return getVendors().map(({id}) => id);
 }
 
-export function getVendorListVersion() {
-  return cachedVendorList ? cachedVendorList.vendorListVersion : DEFAULT_VENDOR_LIST.vendorListVersion;
-}
-
 export function getVendorList() {
   if (cachedVendorList) {
     return cachedVendorList;
@@ -115,8 +105,17 @@ export function getVendorList() {
   }
 }
 
+export function getCustomVendorList() {
+  return cachedCustomVendorList ? cachedCustomVendorList : DEFAULT_CUSTOM_VENDOR_LIST;
+}
+
+export function getCustomVendorListVersion() {
+  return cachedCustomVendorList.isDefault ? undefined : cachedCustomVendorList.vendorListVersion;
+}
+
 export function clearVendorListCache() {
   cachedVendorList = undefined;
+  cachedCustomVendorList = undefined;
   pendingVendorlistPromise = null;
 }
 
@@ -133,13 +132,6 @@ export function getLimitedVendors() {
   vendors = vendors.filter(vendor => limitedIds.indexOf(vendor.id) > -1);
 
   return vendors;
-}
-
-export function getCustomVendorList() {
-  if (cachedCustomVendorList) {
-    return cachedVendorList;
-  }
-  return DEFAULT_CUSTOM_VENDOR_LIST;
 }
 
 export function getLimitedVendorIds() {
@@ -173,6 +165,10 @@ function sortVendors(vendorList) {
   vendorList.vendors = vendorList.vendors.sort((leftVendor, rightVendor) => leftVendor.id - rightVendor.id);
 }
 
+/**
+ * This function takes every element from the input array
+ * and wraps it with as {id: element} object
+ */
 function expandIdsToObjects(idArray) {
   return idArray.map(anId => ({'id': anId}));
 }

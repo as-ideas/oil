@@ -2,44 +2,53 @@ let HtmlDiffer = require('html-differ').HtmlDiffer;
 let htmlDiffer = new HtmlDiffer();
 let pretty = require('pretty');
 
+/**
+ * This is a custom jasmine mathcer
+ *
+ * cf. https://jasmine.github.io/2.5/custom_matcher.html
+ */
 export let customMatchers = {
   toEqualWithDiff: function () {
     return {
       compare: function (raw_actual, raw_expected) {
-        if (!raw_actual) {
-          console.error('Actual must not be NULL or UNDEFINDED, it was:', raw_actual);
-          return {pass: false, message: 'Actual must not be NULL or UNDEFINDED'};
+        try {
+          if (!raw_actual) {
+            console.error('Actual must not be NULL or UNDEFINDED, it was:', raw_actual);
+            return {pass: false, message: 'Actual must not be NULL or UNDEFINDED'};
+          }
+          if (!raw_expected) {
+            console.error('Expected must not be NULL or UNDEFINDED, it was:', raw_expected);
+            return {pass: false, message: 'Expected must not be NULL or UNDEFINDED'};
+          }
+          if (typeof  raw_actual !== 'string') {
+            raw_actual = raw_actual.outerHTML;
+          }
+          if (typeof  raw_expected !== 'string') {
+            raw_expected = raw_expected.outerHTML;
+          }
+
+          let actual = pretty(raw_actual, {ocd: true});
+          let expected = pretty(raw_expected, {ocd: true});
+
+          let formattedActual = formatHtml(actual);
+          let formattedExpected = formatHtml(expected);
+
+
+          let result = {};
+          result.pass = htmlDiffer.isEqual(formattedActual, formattedExpected);
+          if (!result.pass) {
+            console.info(inverseGreen('Expected:\n') + expected);
+            console.info(inverseRed('Actual:\n') + actual);
+
+            let diff = htmlDiffer.diffHtml(formattedActual, formattedExpected);
+            let diffText = getDiffText(diff, {charsAroundDiff: 4});
+
+            result.message = inverseGreen('+ expected') + '\n' + inverseRed('- actual') + '\n' + diffText;
+          }
+          return result;
+        } catch (error) {
+          return {pass: false, message: 'ERROR!' + JSON.stringify(error)};
         }
-        if (!raw_expected) {
-          console.error('Expected must not be NULL or UNDEFINDED, it was:', raw_expected);
-          return {pass: false, message: 'Expected must not be NULL or UNDEFINDED'};
-        }
-        if (typeof  raw_actual !== 'string') {
-          raw_actual = raw_actual.outerHTML;
-        }
-        if (typeof  raw_expected !== 'string') {
-          raw_expected = raw_expected.outerHTML;
-        }
-
-        let actual = pretty(raw_actual, {ocd: true});
-        let expected = pretty(raw_expected, {ocd: true});
-
-        let formattedActual = formatHtml(actual);
-        let formattedExpected = formatHtml(expected);
-
-
-        let result = {};
-        result.pass = htmlDiffer.isEqual(formattedActual, formattedExpected);
-        if (!result.pass) {
-          console.info(inverseGreen('Expected:\n') + expected);
-          console.info(inverseRed('Actual:\n') + actual);
-
-          let diff = htmlDiffer.diffHtml(formattedActual, formattedExpected);
-          let diffText = getDiffText(diff, {charsAroundDiff: 4});
-
-          result.message = inverseGreen('+ expected') + '\n' + inverseRed('- actual') + '\n' + diffText;
-        }
-        return result;
       }
     }
   }

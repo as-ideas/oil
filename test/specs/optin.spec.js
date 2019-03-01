@@ -7,7 +7,7 @@ import { checkOptIn } from '../../src/scripts/core/core_optin';
 import { resetOil } from '../test-utils/utils_reset';
 import { setupVendorListSpies } from '../test-utils/utils_vendorlist';
 
-describe('Opt-In', () => {
+fdescribe('Opt-In', () => {
 
   beforeEach(() => resetOil());
 

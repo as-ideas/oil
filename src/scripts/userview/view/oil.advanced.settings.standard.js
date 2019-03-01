@@ -58,9 +58,11 @@ const ContentSnippet = () => {
     <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
       ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
     </a>
-    <a href="#as-oil-cpc-custom-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
-      ${IsCustomVendorsEnables() ? getLabel(OIL_LABELS.ATTR_LABEL_CUSTOM_THIRD_PARTY_HEADING) : ''}
-    </a>
+    ${IsCustomVendorsEnables() ? `
+      <a href="#as-oil-cpc-custom-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
+         ${getLabel(OIL_LABELS.ATTR_LABEL_CUSTOM_THIRD_PARTY_HEADING)}
+      </a>
+    ` : ''}
   </div>
   <div class="as-oil-cpc__middle as-js-purposes">
     <div class="as-oil-cpc__row-title" id="as-oil-cpc-purposes">
@@ -114,14 +116,15 @@ const buildIabVendorList = () => {
 const buildCustomVendorList = () => {
   if (IsCustomVendorsEnables()) {
     return `
-<div class="as-oil-cpc__row-title" id="as-oil-cpc-third-parties">
+<div class="as-oil-cpc__row-title" id="as-oil-cpc-custom-third-parties">
   ${getLabel(OIL_LABELS.ATTR_LABEL_CUSTOM_THIRD_PARTY_HEADING)}
 </div>
-<div id="as-js-third-parties-list">
+<div id="as-oil-custom-third-parties-list">
   ${buildCustomVendorEntries()}
 </div>`
+  } else {
+    return '';
   }
-  return '';
 };
 
 
@@ -139,10 +142,16 @@ const buildIabVendorEntries = () => {
 };
 
 const buildCustomVendorEntries = () => {
-  let listWrapped = getCustomVendorList().vendors.map((element) => {
-    return buildVendorListEntry(element);
-  });
-  return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
+  let customVendorList = getCustomVendorList();
+
+  if (customVendorList && !customVendorList.isDefault) {
+    let listWrapped = customVendorList.vendors.map((element) => {
+      return buildVendorListEntry(element);
+    });
+    return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
+  } else {
+    return 'Missing custom vendor list! Maybe vendor list retrieval has failed! Please contact web administrator!';
+  }
 };
 
 const buildVendorListEntry = (element) => {

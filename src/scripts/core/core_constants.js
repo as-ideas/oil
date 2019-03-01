@@ -78,6 +78,7 @@ export const OIL_PAYLOAD_VERSION = 'v';
 export const OIL_PAYLOAD_LOCALE_VARIANT_NAME = 'lvn';
 export const OIL_PAYLOAD_LOCALE_VARIANT_VERSION = 'lvv';
 export const OIL_PAYLOAD_CUSTOM_PURPOSES = 'cp';
+export const OIL_PAYLOAD_CUSTOM_VENDORLIST_VERSION = 'cvl';
 export const OIL_PAYLOAD_CONFIG_VERSION = 'cv';
 
 // Identify privacy page link, eg. for tracking

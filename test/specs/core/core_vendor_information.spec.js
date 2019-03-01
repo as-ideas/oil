@@ -7,11 +7,10 @@ import {
   getPurposes,
   getVendorIds,
   getVendorList,
-  getVendorListVersion,
   getVendors,
   getLimitedVendors,
   getVendorsToDisplay,
-  loadVendorList,
+  loadVendorListAndCustomVendorList,
   cachedVendorList,
   pendingVendorlistPromise
 } from '../../../src/scripts/core/core_vendor_information';
@@ -20,8 +19,8 @@ import { resetOil } from '../../test-utils/utils_reset';
 
 describe('core_vendor_information', () => {
 
-  const WHITELISTED_VENDORS = [1,2];
-  const BLACKLISTED_VENDORS = Array.apply(null, {length: (DEFAULT_VENDOR_LIST.maxVendorId-2)}).map(Number.call, Number).slice(1);
+  const WHITELISTED_VENDORS = [1, 2];
+  const BLACKLISTED_VENDORS = Array.apply(null, {length: (DEFAULT_VENDOR_LIST.maxVendorId - 2)}).map(Number.call, Number).slice(1);
 
   beforeEach(() => resetOil());
 
@@ -31,7 +30,8 @@ describe('core_vendor_information', () => {
       spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
 
-      loadVendorList().then((retrievedVendorList) => {
+      loadVendorListAndCustomVendorList().then(() => {
+        let retrievedVendorList = getVendorList();
         expect(retrievedVendorList.vendorListVersion).toEqual(17);
         expect(retrievedVendorList).toEqual(VENDOR_LIST);
         expect(areVendorsSortedById(retrievedVendorList)).toBeTruthy();
@@ -42,17 +42,17 @@ describe('core_vendor_information', () => {
     it('should use cached vendor list if there is one', (done) => {
       let fetchSpy = spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
-      
+
       expect(pendingVendorlistPromise).toBeNull();
       expect(cachedVendorList).toBeUndefined();
 
-      loadVendorList().then(() => {
+      loadVendorListAndCustomVendorList().then(() => {
         expect(CoreUtils.fetchJsonData).toHaveBeenCalled();
         fetchSpy.calls.reset();
         expect(pendingVendorlistPromise).toBeNull();
         expect(cachedVendorList).toBeDefined();
 
-        loadVendorList().then(() => {
+        loadVendorListAndCustomVendorList().then(() => {
           expect(CoreUtils.fetchJsonData).not.toHaveBeenCalled();
           done();
         });
@@ -61,35 +61,39 @@ describe('core_vendor_information', () => {
 
     it('should wait for cached vendor list if request is already started', (done) => {
       let fetchSpy = spyOn(CoreUtils, 'fetchJsonData').and.returnValue(
-        new Promise( resolve => {
-          setTimeout( () => { resolve(VENDOR_LIST) } , 2000 );
+        new Promise(resolve => {
+          setTimeout(() => {
+            resolve(VENDOR_LIST)
+          }, 2000);
         }));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
 
       expect(pendingVendorlistPromise).toBeNull();
       expect(cachedVendorList).toBeUndefined();
 
-      loadVendorList().then((retrievedVendorList) => {
+      loadVendorListAndCustomVendorList().then(() => {
+        let retrievedVendorList = getVendorList();
         expect(retrievedVendorList).toEqual(VENDOR_LIST);
         expect(pendingVendorlistPromise).toBeNull();
         expect(cachedVendorList).toBeDefined();
       });
 
-      loadVendorList().then((retrievedVendorList) => {
+      loadVendorListAndCustomVendorList().then(() => {
         expect(fetchSpy.calls.count()).toBe(1);
         done();
       });
 
       expect(pendingVendorlistPromise).toBeDefined();
       expect(cachedVendorList).toBeUndefined();
-    
+
     });
 
     it('should use default vendor list if vendor list fetching fails', (done) => {
       spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve, reject) => reject(new Error("something went wrong"))));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
 
-      loadVendorList().then((retrievedVendorList) => {
+      loadVendorListAndCustomVendorList().then(() => {
+        let retrievedVendorList = getVendorList();
         expect(CoreUtils.fetchJsonData).toHaveBeenCalled();
         expect(retrievedVendorList.vendorListVersion).toEqual(DEFAULT_VENDOR_LIST.vendorListVersion);
         done();
@@ -103,7 +107,7 @@ describe('core_vendor_information', () => {
     beforeEach((done) => {
       spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
-      loadVendorList().then(() => {
+      loadVendorListAndCustomVendorList().then(() => {
         done()
       });
     });
@@ -133,10 +137,6 @@ describe('core_vendor_information', () => {
 
     it('should return vendor ids from cached vendor list', () => {
       expect(getVendorIds()).toEqual(VENDOR_LIST.vendors.map(({id}) => id));
-    });
-
-    it('should return vendor list version from cached vendor list', () => {
-      expect(getVendorListVersion()).toEqual(VENDOR_LIST.vendorListVersion);
     });
   });
 
@@ -173,10 +173,6 @@ describe('core_vendor_information', () => {
     it('should return vendor ids from default vendor list', () => {
       expect(getVendorIds()).toEqual(buildDefaultVendorIdList(DEFAULT_VENDOR_LIST.maxVendorId));
     });
-
-    it('should return vendor list version from default vendor list', () => {
-      expect(getVendorListVersion()).toEqual(DEFAULT_VENDOR_LIST.vendorListVersion);
-    });
   });
 
   describe('getting vendor list data for default vendor list (vendor list loading failed)', () => {
@@ -184,7 +180,7 @@ describe('core_vendor_information', () => {
     beforeEach((done) => {
       spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve, reject) => reject(new Error("something went wrong"))));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
-      loadVendorList().then(() => {
+      loadVendorListAndCustomVendorList().then(() => {
         done()
       });
     });
@@ -220,10 +216,6 @@ describe('core_vendor_information', () => {
     it('should return vendor ids from default vendor list', () => {
       expect(getVendorIds()).toEqual(buildDefaultVendorIdList(DEFAULT_VENDOR_LIST.maxVendorId));
     });
-
-    it('should return vendor list version from default vendor list', () => {
-      expect(getVendorListVersion()).toEqual(DEFAULT_VENDOR_LIST.vendorListVersion);
-    });
   });
 
   describe('getting limited vendor ids from fetched vendor list', function () {
@@ -231,7 +223,7 @@ describe('core_vendor_information', () => {
     beforeEach((done) => {
       spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
-      loadVendorList().then(() => done());
+      loadVendorListAndCustomVendorList().then(() => done());
     });
 
     it('should return all vendors when whitelist and blacklist empty or null', function () {
@@ -289,7 +281,7 @@ describe('core_vendor_information', () => {
     it('should return purpose id list if vendor list was already loaded', (done) => {
       spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
-      loadVendorList().then(() => {
+      loadVendorListAndCustomVendorList().then(() => {
         expect(getPurposes()).toEqual(VENDOR_LIST.purposes);
         done();
       });
@@ -298,27 +290,27 @@ describe('core_vendor_information', () => {
     it('should return vendor id list if vendor list was already loaded', (done) => {
       spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
-      loadVendorList().then(() => {
+      loadVendorListAndCustomVendorList().then(() => {
         expect(getVendors()).toEqual(VENDOR_LIST.vendors);
         done();
       });
     });
   });
 
-  describe('getLimitedVendors', function() {
+  describe('getLimitedVendors', function () {
 
-    it('returns regular vendors when no whitelist or blacklist exists', function() {
+    it('returns regular vendors when no whitelist or blacklist exists', function () {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
       expect(getLimitedVendors().length).toEqual(DEFAULT_VENDOR_LIST.maxVendorId);
     });
 
-    it('returns limited vendors when getShowLimitedVendors is true and whitelist exists', function() {
+    it('returns limited vendors when getShowLimitedVendors is true and whitelist exists', function () {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
       spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue(WHITELISTED_VENDORS);
       expect(getLimitedVendors().length).toEqual(WHITELISTED_VENDORS.length);
     });
 
-    it('returns limited vendors when getShowLimitedVendors is true and blacklist exists', function() {
+    it('returns limited vendors when getShowLimitedVendors is true and blacklist exists', function () {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
       spyOn(CoreConfig, 'getIabVendorBlacklist').and.returnValue(BLACKLISTED_VENDORS);
       expect(getLimitedVendors().length).toEqual(DEFAULT_VENDOR_LIST.maxVendorId - BLACKLISTED_VENDORS.length);
@@ -326,15 +318,15 @@ describe('core_vendor_information', () => {
 
   });
 
-  describe('getVendorsToDisplay', function() {
+  describe('getVendorsToDisplay', function () {
 
-    it('should return full vendor list when configuration parameter show_limited_vendors_only is false', function() {
+    it('should return full vendor list when configuration parameter show_limited_vendors_only is false', function () {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(false);
       let result = getVendorsToDisplay();
       expect(result.length).toEqual(380);
     });
 
-    it('should return limited vendor list when configuration parameter show_limited_vendors_only is true', function() {
+    it('should return limited vendor list when configuration parameter show_limited_vendors_only is true', function () {
       spyOn(CoreConfig, 'getShowLimitedVendors').and.returnValue(true);
       spyOn(CoreConfig, 'getIabVendorWhitelist').and.returnValue(WHITELISTED_VENDORS);
       let result = getVendorsToDisplay();

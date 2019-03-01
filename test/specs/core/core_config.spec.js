@@ -53,20 +53,6 @@ describe('core_config', () => {
 
   describe('parseServerUrls', function () {
 
-    const DEFAULT_FALLBACK_BACKEND_URL_WITH_LOCALE_STRING = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/foo';
-
-    it('Backwards compatibility: creates locale_url property if locale is string and locale_url empty', function () {
-      loadFixture('config/given.config.with.locale.string.html');
-      const result = getLocaleUrl();
-      expect(result).toEqual(DEFAULT_FALLBACK_BACKEND_URL_WITH_LOCALE_STRING);
-    });
-
-    it('Backwards compatibility: creates locale_url property if locale and locale_url empty', function () {
-      loadFixture('config/empty.config.html');
-      const result = getLocaleUrl();
-      expect(result).toEqual(DEFAULT_FALLBACK_BACKEND_URL);
-    });
-
     it('should warn about deprecated locale string', function () {
       loadFixture('config/given.config.with.locale.string.html');
 
@@ -163,7 +149,7 @@ describe('core_config', () => {
       expect(getDefaultToOptin()).toEqual(DEFAULT_DEFAULT_TO_OPTIN);
       expect(getAdvancedSettingsPurposesDefault()).toEqual(DEFAULT_ADVANCED_SETTINGS_PURPOSES_DEFAULT);
       expect(getCustomPurposes()).toEqual(DEFAULT_CUSTOM_PURPOSES);
-      expect(getLocaleUrl()).toEqual(DEFAULT_FALLBACK_BACKEND_URL);
+      expect(getLocaleUrl()).toBeUndefined();
       expect(getCookieExpireInDays()).toEqual(DEFAULT_COOKIE_EXPIRES_IN);
       expect(getPoiGroupName()).toEqual(DEFAULT_POI_GROUP);
     });

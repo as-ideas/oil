@@ -34,9 +34,12 @@ function getConfiguration() {
     setGlobalOilObject('CONFIG', readConfiguration(configurationElement));
     setGlobalOilObject('CONFIG_ATTRIBUTES', OIL_CONFIG);
 
-    parseServerUrls();
     verifyConfiguration();
     verifyLocaleObject();
+
+    if (getPublicPath()) {
+      __webpack_public_path__ = getPublicPath();
+    }
   }
   return getGlobalOilObject('CONFIG');
 }
@@ -52,11 +55,19 @@ function verifyConfiguration() {
 
 /**
  * Verify that locale object does not lack any required properties.
+ *
+ * The locale can be a
+ * a) string to use with the language backend or
+ * b) it can be an object containing all labels
+ *
+ * If both is missing a default will be used.
  */
 function verifyLocaleObject() {
   let locale = getLocale();
 
-  if (locale && isObject(locale)) {
+  if ((!locale || (typeof locale) === 'string') && getLocaleUrl() === undefined) {
+    logError('Incorrect or missing locale parameter found. Please review documentation on how to set the locale object in your configuration. Using default locale.');
+  } else if (locale && isObject(locale)) {
     if (!locale.localeId) {
       logError('Your configuration is faulty - "locale" object misses "localeId" property. See the oil.js documentation for details.');
     }
@@ -65,24 +76,6 @@ function verifyLocaleObject() {
     }
   }
 }
-
-/**
- * 1) Extracts the locale from the config. The locale can be a string to use with the language backend
- * or it can be an object containing all labels
- *
- * 2) Sets the publicPath for async loading from Webpack
- * cf. https://webpack.js.org/guides/public-path/
- *
- */
-function parseServerUrls() {
-  const localeValue = getLocale();
-
-  if ((!localeValue || (typeof localeValue) === 'string') && getLocaleUrl() === undefined) {
-    logError('Incorrect or missing locale parameter found. Please review documentation on how to set the locale object in your configuration.');
-    setLocaleUrl('https://oil-backend.herokuapp.com/oil/api/userViewLocales/' + getLocaleVariantName());
-  }
-}
-
 
 function setConfigValue(name, value) {
   getConfiguration()[name] = value;
@@ -150,10 +143,6 @@ export function getPublicPath() {
 
 export function getLocaleUrl() {
   return getConfigValue(OIL_CONFIG.ATTR_LOCALE_URL, undefined);
-}
-
-function setLocaleUrl(value) {
-  setConfigValue(OIL_CONFIG.ATTR_LOCALE_URL, value);
 }
 
 export function getIabVendorListUrl() {

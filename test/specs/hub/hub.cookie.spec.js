@@ -4,7 +4,7 @@ import * as CoreConfig from '../../../src/scripts/core/core_config';
 import {
   OIL_CONFIG_DEFAULT_VERSION,
   OIL_PAYLOAD_CONFIG_VERSION,
-  OIL_PAYLOAD_CUSTOM_PURPOSES,
+  OIL_PAYLOAD_CUSTOM_PURPOSES, OIL_PAYLOAD_CUSTOM_VENDORLIST_VERSION,
   OIL_PAYLOAD_LOCALE_VARIANT_NAME,
   OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
   OIL_PAYLOAD_PRIVACY,
@@ -81,6 +81,7 @@ describe('hub cookies', () => {
         localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
         version: OIL_VERSION,
         customPurposes: [25, 26],
+        customVendorListVersion: 135,
         configVersion: CONFIG_VERSION
       });
 
@@ -92,6 +93,7 @@ describe('hub cookies', () => {
         localeVariantVersion: LOCALE_VARIANT_EN_VERSION,
         language: LANGUAGE_EN,
         allowedPurposeIds: PURPOSE_LIST,
+        customVendorListVersion: 135,
         allowedVendorIds: [12, 24],
         customPurposes: [25, 26],
         configVersion: CONFIG_VERSION
@@ -253,6 +255,7 @@ describe('hub cookies', () => {
       [OIL_PAYLOAD_LOCALE_VARIANT_NAME]: testData.localeVariantName,
       [OIL_PAYLOAD_LOCALE_VARIANT_VERSION]: testData.localeVariantVersion,
       [OIL_PAYLOAD_CUSTOM_PURPOSES]: testData.customPurposes,
+      [OIL_PAYLOAD_CUSTOM_VENDORLIST_VERSION]: testData.customVendorListVersion,
       [OIL_PAYLOAD_CONFIG_VERSION]: testData.configVersion
     }
   }
