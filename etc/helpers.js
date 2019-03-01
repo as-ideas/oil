@@ -68,9 +68,6 @@ function mergeAppConfig(overwrittenConfig) { /*eslint complexity: [error, 24]*/
     junit;
   if (appConfig.indexFiles) {
     indexFiles = appConfig.indexFiles;
-  } else {
-    // refresh with current source path
-    indexFiles[0].template = path.resolve(srcPath, 'index.html');
   }
   if (appConfig.junit) {
     junit = {
