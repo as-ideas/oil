@@ -11,8 +11,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/as-ideas/oil/badge.svg?branch=master)](https://coveralls.io/github/as-ideas/oil?branch=master)
 [![GPL2 License][license-image]][license-url] 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fas-ideas%2Foil.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fas-ideas%2Foil?ref=badge_shield)
-[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=L3gycEdHSG9Ea0JiT3RXbTBjSTl2RUpJUG9vOFh0M3F5dnFrU3pQNkxCUT0tLUw5aEhDalhOTng0R2N2cEh5a3Z5T1E9PQ==--802c6b824e7d37574af5556756b996c65129a2fa)](https://www.browserstack.com/automate/public-build/L3gycEdHSG9Ea0JiT3RXbTBjSTl2RUpJUG9vOFh0M3F5dnFrU3pQNkxCUT0tLUw5aEhDalhOTng0R2N2cEh5a3Z5T1E9PQ==--802c6b824e7d37574af5556756b996c65129a2fa)
-
+[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=eGlsamUvTjJ3ZUN0TEQ2eXAwY2JMUmZ2NjFadUREbS81S3BuVFphZm1rVT0tLUd0eE90SVhITzhCd05NVE9HTHRUbmc9PQ==--6d6fc541c4beb5e4f72247e253f5e3c120598379)](https://www.browserstack.com/automate/public-build/eGlsamUvTjJ3ZUN0TEQ2eXAwY2JMUmZ2NjFadUREbS81S3BuVFphZm1rVT0tLUd0eE90SVhITzhCd05NVE9HTHRUbmc9PQ==--6d6fc541c4beb5e4f72247e253f5e3c120598379)
 [Website](https://www.oiljs.org/) | [Full documentation](https://oil.axelspringer.com/docs/last-release) | [Sandbox](https://oil.axelspringer.com/sandbox/) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html) | [Release Notes](https://github.com/as-ideas/oil/releases)
 
 ##### [current roadmap](ROADMAP.md)
@@ -52,7 +51,7 @@ The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://
   
 ## Technical Quality Goals
 
-* OIL will be held compatible with the latest official browser releases, going back to the latest version as listed below and tested on broad range of browsers using Browserstack.com:
+* OIL will be held compatible with the latest official browser releases, going back to the latest version as listed below and tested on broad range of browsers using [BROWSERSTACK](http://browserstack.com/):
     * Chrome 14 - Latest
     * IE 9 - Latest
     * Firefox 9 - Latest

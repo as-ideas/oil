@@ -273,9 +273,6 @@ module.exports = {
     'oildevkit': path.resolve(sourcePath, 'scripts/dev-kit/dev-kit.js')
   },
   copy: [{
-    from: path.resolve(sourcePath, 'public'),
-    to: ''
-  }, {
     from: path.resolve(sourcePath, 'assets'),
     to: 'assets'
   }, {

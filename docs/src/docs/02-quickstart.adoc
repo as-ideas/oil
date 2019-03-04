@@ -115,7 +115,7 @@ Note that you will have to add your own locale to the configuration block. See <
 &lt;script id="oil-configuration" type="application/configuration"&gt;
   {
     "publicPath": "https://unpkg.com/@ideasio/oil.js/release/current/",
-    "locale": { localeId: "myLocale", version: "1", texts: {"label_intro_heading":"I am a stub" }}
+    "locale": { "localeId": "myLocale", "version": "1", "texts": {"label_intro_heading":"I am a stub" }}
   }
 &lt;/script&gt;
 ----
