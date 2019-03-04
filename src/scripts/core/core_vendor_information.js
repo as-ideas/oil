@@ -110,7 +110,10 @@ export function getCustomVendorList() {
 }
 
 export function getCustomVendorListVersion() {
-  return cachedCustomVendorList.isDefault ? undefined : cachedCustomVendorList.vendorListVersion;
+  if (cachedCustomVendorList && !cachedCustomVendorList.isDefault) {
+    return cachedCustomVendorList.vendorListVersion;
+  }
+  return undefined;
 }
 
 export function clearVendorListCache() {

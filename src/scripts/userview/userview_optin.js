@@ -71,6 +71,7 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
 export function oilOptIn(privacySettings = PRIVACY_FULL_TRACKING) {
   return new Promise((resolve, reject) => {
     setSoiCookie(privacySettings).then(() => {
+      console.info('#### setSoiCookie' + new Date());
       sendEventToHostSite(EVENT_NAME_OPT_IN);
       resolve(true);
     }).catch((error) => reject(error));

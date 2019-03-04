@@ -25,6 +25,7 @@ describe('the locale fetcher for user view modal', () => {
       [OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL]: 'CPC Activate All',
       [OIL_LABELS.ATTR_LABEL_CPC_DEACTIVATE_ALL]: 'CPC Deactivate All',
       [OIL_LABELS.ATTR_LABEL_THIRD_PARTY]: 'Third parties Headline',
+      [OIL_LABELS.ATTR_LABEL_CUSTOM_THIRD_PARTY_HEADING]: 'Custom third parties Headline',
       [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]: 'Purpose Description',
       [OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_HEADING]: 'POI Group List Heading',
       [OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_TEXT]: 'POI Group List Text',

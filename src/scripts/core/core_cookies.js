@@ -92,7 +92,11 @@ export function setSoiCookieWithPoiCookieData(poiCookieJson) {
 
 export function buildSoiCookie(privacySettings) {
   return new Promise((resolve, reject) => {
+    console.info('#### buildSoiCookie' + new Date());
+
     loadVendorListAndCustomVendorList().then(() => {
+      console.info('#### DONE: loadVendorListAndCustomVendorList' + new Date());
+
       let cookieConfig = getOilCookieConfig();
       let consentData = cookieConfig.defaultCookieContent.consentData;
       consentData.setGlobalVendorList(getVendorList());
