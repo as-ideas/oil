@@ -1,0 +1,42 @@
+{
+  "vendorListVersion": 123,
+  "lastUpdated": "2018-11-27T01:25:33+01:00",
+  "vendors": [
+    {
+      "id": "CUSTOM_VENDOR_1",
+      "name": "CUSTOM_VENDOR_1",
+      "policyUrl": "https://www.emerse.com/privacy-policy/",
+      "purposeIds": [
+        1,
+        2,
+        4
+      ],
+      "legIntPurposeIds": [
+        3,
+        5
+      ],
+      "featureIds": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "CUSTOM_VENDOR_2",
+      "name": "CUSTOM_VENDOR_2",
+      "policyUrl": "https://www.emerse.com/privacy-policy/",
+      "purposeIds": [
+        1,
+        2,
+        4
+      ],
+      "legIntPurposeIds": [
+        3,
+        5
+      ],
+      "featureIds": [
+        1,
+        2
+      ]
+    }
+  ]
+}

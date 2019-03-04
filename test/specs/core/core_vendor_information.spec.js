@@ -12,15 +12,18 @@ import {
   getVendorsToDisplay,
   loadVendorListAndCustomVendorList,
   cachedVendorList,
-  pendingVendorlistPromise
+  pendingVendorlistPromise, getCustomVendorList
 } from '../../../src/scripts/core/core_vendor_information';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
+import CUSTOM_VENDOR_LIST from '../../fixtures/vendorlist/custom_vendor_list.json';
 import { resetOil } from '../../test-utils/utils_reset';
 
-describe('core_vendor_information', () => {
+fdescribe('core_vendor_information', () => {
 
   const WHITELISTED_VENDORS = [1, 2];
   const BLACKLISTED_VENDORS = Array.apply(null, {length: (DEFAULT_VENDOR_LIST.maxVendorId - 2)}).map(Number.call, Number).slice(1);
+  const IAB_VENDORLIST_URL = 'https://iab.vendor.list.url';
+  const CUSTOM_VENDORLIST_URL = 'https://custom.vendor.list.url';
 
   beforeEach(() => resetOil());
 
@@ -28,13 +31,60 @@ describe('core_vendor_information', () => {
 
     it('should load vendor list from remote url', (done) => {
       spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
-      spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
+      spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue(IAB_VENDORLIST_URL);
 
       loadVendorListAndCustomVendorList().then(() => {
         let retrievedVendorList = getVendorList();
+        expect(CoreUtils.fetchJsonData).toHaveBeenCalledTimes(1);
+        expect(CoreUtils.fetchJsonData).toHaveBeenCalledWith(IAB_VENDORLIST_URL);
+
         expect(retrievedVendorList.vendorListVersion).toEqual(17);
         expect(retrievedVendorList).toEqual(VENDOR_LIST);
         expect(areVendorsSortedById(retrievedVendorList)).toBeTruthy();
+        done();
+      });
+    });
+
+    it('should load custom vendor list from remote url only if configured', (done) => {
+      spyOn(CoreUtils, 'fetchJsonData').and.callFake((url) => {
+        return new Promise((resolve) => resolve(url === IAB_VENDORLIST_URL ? IAB_VENDORLIST_URL : CUSTOM_VENDOR_LIST))
+      });
+      spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue(IAB_VENDORLIST_URL);
+      spyOn(CoreConfig, 'getCustomVendorListUrl').and.returnValue(CUSTOM_VENDORLIST_URL);
+
+      loadVendorListAndCustomVendorList().then(() => {
+        let customVendorList = getCustomVendorList();
+        expect(CoreUtils.fetchJsonData).toHaveBeenCalledTimes(2);
+        expect(CoreUtils.fetchJsonData).toHaveBeenCalledWith(IAB_VENDORLIST_URL);
+        expect(CoreUtils.fetchJsonData).toHaveBeenCalledWith(CUSTOM_VENDORLIST_URL);
+
+        expect(customVendorList.vendorListVersion).toEqual(123);
+        expect(customVendorList).toEqual(CUSTOM_VENDOR_LIST);
+        done();
+      });
+    });
+
+    it('should load default custom vendor list on error', (done) => {
+      spyOn(CoreUtils, 'fetchJsonData').and.callFake((url) => {
+        return new Promise((resolve, reject) => {
+          if (url === IAB_VENDORLIST_URL) {
+            resolve(VENDOR_LIST);
+          } else {
+            reject(new Error("something went wrong"));
+          }
+        })
+      });
+      spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue(IAB_VENDORLIST_URL);
+      spyOn(CoreConfig, 'getCustomVendorListUrl').and.returnValue(CUSTOM_VENDORLIST_URL);
+
+      loadVendorListAndCustomVendorList().then(() => {
+        let customVendorList = getCustomVendorList();
+        expect(CoreUtils.fetchJsonData).toHaveBeenCalledTimes(2);
+        expect(CoreUtils.fetchJsonData).toHaveBeenCalledWith(IAB_VENDORLIST_URL);
+        expect(CoreUtils.fetchJsonData).toHaveBeenCalledWith(CUSTOM_VENDORLIST_URL);
+
+        expect(customVendorList.vendorListVersion).toEqual(-1);
+        expect(customVendorList.isDefault).toEqual(true);
         done();
       });
     });
