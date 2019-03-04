@@ -24,7 +24,6 @@ const DEFAULT_CUSTOM_VENDOR_LIST = {
 export let cachedVendorList;
 export let cachedCustomVendorList;
 export let pendingVendorlistPromise = null;
-export let pendingCustomVendorlistPromise = null;
 
 export function loadVendorListAndCustomVendorList() {
   if (cachedVendorList && cachedCustomVendorList) {
@@ -41,14 +40,15 @@ export function loadVendorListAndCustomVendorList() {
         .then(response => {
           sortVendors(response);
           cachedVendorList = response;
-          pendingVendorlistPromise = null;
         })
         .catch(error => {
-          pendingVendorlistPromise = null;
           logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
         })
         .finally(() => {
-          loadCustomVendorList().finally(() => resolve());
+          loadCustomVendorList().finally(() => {
+            pendingVendorlistPromise = null;
+            resolve()
+          });
         });
     });
   }
@@ -64,13 +64,12 @@ function loadCustomVendorList() {
       fetchJsonData(customVendorListUrl)
         .then(response => {
           cachedCustomVendorList = response;
-          pendingCustomVendorlistPromise = null;
         })
         .catch(error => {
           cachedCustomVendorList = DEFAULT_CUSTOM_VENDOR_LIST;
-          pendingCustomVendorlistPromise = null;
           logError(`OIL getCustomVendorList failed and returned error: ${error}. Falling back to default vendorlist!`);
-        }).finally(() => resolve());
+        })
+        .finally(() => resolve());
     }
   });
 }
