@@ -46,7 +46,10 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: '**/*.html', included: false}
+      {
+        pattern: '**/*.html',
+        included: false
+      }
     ],
 
     // list of files / patterns to exclude
@@ -57,10 +60,13 @@ module.exports = function (config) {
 
     // Start these browsers, currently available:
     // Chrome, ChromeCanary, Firefox, Opera, Safari (only Mac), PhantomJS, IE (only Windows)
-    browsers: [
-      'ChromeHeadless'
-    ],
-    flags:['--no-sandbox'],
+    browsers: ['ChromeHeadlessNoSandbox'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
     reporters: [
       'spec',
       'junit',
@@ -77,10 +83,10 @@ module.exports = function (config) {
     coverageReporter: {
       dir: 'target/coverage',
       reporters: [
-        {type: 'text-summary'},
-        {type: 'json'},
-        {type: 'html'},
-        {type: 'lcov'}
+        { type: 'text-summary' },
+        { type: 'json' },
+        { type: 'html' },
+        { type: 'lcov' }
       ]
     },
 
@@ -90,7 +96,7 @@ module.exports = function (config) {
       stats: { // Add asset Information
         assets: isDebug,
         // Sort assets by a field
-        assetsSort: "field",
+        assetsSort: 'field',
         // Add information about cached (not built) modules
         cached: isDebug,
         // Add children information
@@ -102,9 +108,9 @@ module.exports = function (config) {
         // Add the origins of chunks and chunk merging info
         chunkOrigins: isDebug,
         // Sort the chunks by a field
-        chunksSort: "field",
+        chunksSort: 'field',
         // Context directory for request shortening
-        context: "../src/",
+        context: '../src/',
         // Add errors
         errors: true,
         // Add details to errors (like resolving log)
@@ -142,7 +148,9 @@ module.exports = function (config) {
   config.customHeaders = [];
   for (key in headerConfig.headers) {
     // skip loop if the property is from prototype
-    if (!headerConfig.headers.hasOwnProperty(key)) continue;
+    if (!headerConfig.headers.hasOwnProperty(key)) {
+      continue;
+    }
     // copy header config
     let object = headerConfig.headers[key];
     config.customHeaders.push({
@@ -151,7 +159,10 @@ module.exports = function (config) {
       value: object
     });
   }
-  config.files.push({pattern: testSpecs, watched: false});
+  config.files.push({
+    pattern: testSpecs,
+    watched: false
+  });
   config.preprocessors[testSpecs] = ['webpack', 'sourcemap'];
 
   debugLog('Using following karma config:', config);
