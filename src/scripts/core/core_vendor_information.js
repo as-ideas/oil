@@ -33,10 +33,9 @@ export function loadVendorListAndCustomVendorList() {
   } else if (pendingVendorlistPromise) {
     return pendingVendorlistPromise;
   } else {
-    return new Promise(function (resolve) {
+    pendingVendorlistPromise = new Promise(function (resolve) {
       let iabVendorListUrl = getIabVendorListUrl();
-      pendingVendorlistPromise = fetchJsonData(iabVendorListUrl);
-      pendingVendorlistPromise
+      fetchJsonData(iabVendorListUrl)
         .then(response => {
           sortVendors(response);
           cachedVendorList = response;
@@ -45,12 +44,14 @@ export function loadVendorListAndCustomVendorList() {
           logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
         })
         .finally(() => {
-          loadCustomVendorList().finally(() => {
-            pendingVendorlistPromise = null;
-            resolve()
-          });
+          loadCustomVendorList()
+            .finally(() => {
+              pendingVendorlistPromise = null;
+              resolve()
+            });
         });
     });
+    return pendingVendorlistPromise;
   }
 }
 
