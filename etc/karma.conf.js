@@ -60,7 +60,7 @@ module.exports = function (config) {
     browsers: [
       'ChromeHeadless'
     ],
-
+    flags:['--no-sandbox'],
     reporters: [
       'spec',
       'junit',
