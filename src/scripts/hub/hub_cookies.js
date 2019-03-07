@@ -1,7 +1,7 @@
 import {
   OIL_CONFIG_DEFAULT_VERSION,
   OIL_PAYLOAD_CONFIG_VERSION,
-  OIL_PAYLOAD_CUSTOM_PURPOSES,
+  OIL_PAYLOAD_CUSTOM_PURPOSES, OIL_PAYLOAD_CUSTOM_VENDORLIST_VERSION,
   OIL_PAYLOAD_LOCALE_VARIANT_NAME,
   OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
   OIL_PAYLOAD_PRIVACY,
@@ -36,6 +36,7 @@ export function setPoiCookie(groupName, payload) {
       localeVariantName: getLocaleVariantNameFromPayload(payload),
       localeVariantVersion: getLocaleVariantVersionFromPayload(payload),
       customPurposes: getCustomPurposesFromPayload(payload),
+      customVendorListVersion: getCustomVendorlistVersionFromPayload(payload),
       consentString: consentStringAsPrivacy,
       configVersion: getConfigVersionFromPayload(payload)
     };
@@ -107,6 +108,10 @@ function getCustomPurposesFromPayload(payload) {
   return getPayloadPropertyOrDefault(payload, OIL_PAYLOAD_CUSTOM_PURPOSES, []);
 }
 
+function getCustomVendorlistVersionFromPayload(payload) {
+  return getPayloadPropertyOrDefault(payload, OIL_PAYLOAD_CUSTOM_VENDORLIST_VERSION, 'undefined');
+}
+
 function getVersionFromPayload(payload) {
   return getPayloadPropertyOrDefault(payload, OIL_PAYLOAD_VERSION);
 }
@@ -114,6 +119,7 @@ function getVersionFromPayload(payload) {
 function getLocaleVariantNameFromPayload(payload) {
   return getPayloadPropertyOrDefault(payload, OIL_PAYLOAD_LOCALE_VARIANT_NAME);
 }
+
 
 function getLocaleVariantVersionFromPayload(payload) {
   return getPayloadPropertyOrDefault(payload, OIL_PAYLOAD_LOCALE_VARIANT_VERSION);

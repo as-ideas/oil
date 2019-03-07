@@ -6,6 +6,73 @@ import { getCustomPurposes } from '../../core/core_config.js';
 import { JS_CLASS_BUTTON_OPTIN, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants.js';
 import { getPurposes, getVendorList, getVendorsToDisplay } from '../../core/core_vendor_information.js';
 import { BackButton, YesButton } from './components/oil.buttons.js';
+import { getCustomVendorList } from '../../core/core_vendor_information';
+import { getCustomVendorListUrl } from '../../core/core_config';
+
+export function oilAdvancedSettingsTemplate() {
+  return `
+    <div id="as-oil-cpc" class="as-oil-content-overlay" data-qa="oil-cpc-overlay">
+      ${oilAdvancedSettingsInlineTemplate()}
+    </div>
+  `;
+}
+
+export function oilAdvancedSettingsInlineTemplate() {
+  return `
+    <div class="as-oil-l-wrapper-layout-max-width as-oil-tabs-cpc__wrapper">
+      <div class="as-oil-tabs-cpc__headline as-oil-center">
+        ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
+      </div>
+      <p class="as-oil-center as-oil-margin-top">
+        ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_TEXT)}
+      </p>
+      <hr/>
+      ${BackButton()}
+      ${ContentSnippet()}
+    </div>
+  `;
+}
+
+export function attachCpcHandlers() {
+  forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
+    domNode && domNode.addEventListener('change', event => toggleFeatureTextsMarks(event.target || event.srcElement), false);
+  });
+  forEach(document.querySelectorAll('.as-js-tab-label'), (domNode) => {
+    domNode && domNode.addEventListener('click', event => toggleTab(event.target || event.srcElement), false);
+  });
+  const thirdPartiesLinkDomNode = document.getElementById('as-js-third-parties-link');
+  thirdPartiesLinkDomNode && thirdPartiesLinkDomNode.addEventListener('click', toggleThirdPartyVisibility, false);
+}
+
+const ContentSnippet = () => {
+  return `
+    <div class="as-oil-tabs-cpc__purpose-description as-oil-center as-oil-margin-top" id="as-oil-cpc-purposes">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
+    </div>
+    <div class="as-oil-cpc__middle">
+      ${buildPurposeEntries(getPurposes().concat(getCustomPurposes()))}
+      <div class="as-oil-margin-top">
+        <div class="as-oil-tabs-cpc__third-parties-link" id="as-js-third-parties-link"><span>i</span>${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}</a></div>
+        
+        <div id="as-js-third-parties-list" class="as-oil-tabs-cpc__third-parties-list" style="display: none;">
+           ${buildVendorEntries()}
+           
+          ${IsCustomVendorsEnables() ? `
+          <div id="as-oil-custom-third-parties-list">
+            ${buildCustomVendorEntries()}
+          </div>
+           ` : ''}
+        </div>
+        
+   
+      </div>
+    </div>
+    <hr>
+      <div class="as-oil-l-item">
+        ${YesButton(`as-oil__btn-optin ${JS_CLASS_BUTTON_OPTIN}`)}
+      </div>
+  `;
+};
 
 const PurposeFeatureTextsSnippet = (featureText) => {
   return `
@@ -82,22 +149,7 @@ const buildVendorEntries = () => {
   if (vendorList && !vendorList.isDefault) {
     let listWrapped = getVendorsToDisplay().map((element) => {
       if (element.name) {
-        return `
-          <div class="as-oil-third-party-list-element">
-            <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
-                <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
-                </svg>
-                <svg class='as-oil-icon-minus' style='display: none;' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
-                </svg>
-                <span class='as-oil-third-party-name'>${element.name}</span>
-            </span>
-            <div class='as-oil-third-party-toggle-part' style='display: none;'>
-              <a class='as-oil-third-party-link' href='${element.policyUrl}'>${element.policyUrl}</a>
-            </div>
-          </div>
-        `;
+        return buildVendorEntry(element);
       }
     });
     return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
@@ -106,61 +158,44 @@ const buildVendorEntries = () => {
   }
 };
 
-const ContentSnippet = () => {
-  return `
-    <div class="as-oil-tabs-cpc__purpose-description as-oil-center as-oil-margin-top" id="as-oil-cpc-purposes">
-      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
-    </div>
-    <div class="as-oil-cpc__middle">
-      ${buildPurposeEntries(getPurposes().concat(getCustomPurposes()))}
-      <div class="as-oil-margin-top">
-        <div class="as-oil-tabs-cpc__third-parties-link" id="as-js-third-parties-link"><span>i</span>${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}</a></div>
-        <div id="as-js-third-parties-list" class="as-oil-tabs-cpc__third-parties-list" style="display: none;">
-           ${buildVendorEntries()}
-        </div>
-      </div>
-    </div>
-    <hr>
-      <div class="as-oil-l-item">
-        ${YesButton(`as-oil__btn-optin ${JS_CLASS_BUTTON_OPTIN}`)}
-      </div>
-  `;
+const buildCustomVendorEntries = () => {
+  let vendorList = getCustomVendorList();
+
+  if (vendorList && !vendorList.isDefault && vendorList.vendors) {
+    let listWrapped = vendorList.vendors.map((element) => {
+      if (element.name) {
+        return buildVendorEntry(element);
+      }
+    });
+    return `<div class="as-oil-poi-group-list">${listWrapped.join('')}</div>`;
+  } else {
+    return 'Missing custom vendor list! Maybe custom vendor list retrieval has failed! Please contact web administrator!';
+  }
 };
 
-export function oilAdvancedSettingsInlineTemplate() {
-  return `
-    <div class="as-oil-l-wrapper-layout-max-width as-oil-tabs-cpc__wrapper">
-      <div class="as-oil-tabs-cpc__headline as-oil-center">
-        ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_HEADING)}
-      </div>
-      <p class="as-oil-center as-oil-margin-top">
-        ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_TEXT)}
-      </p>
-      <hr/>
-      ${BackButton()}
-      ${ContentSnippet()}
-    </div>
-  `;
-}
+const IsCustomVendorsEnables = () => {
+  return !!getCustomVendorListUrl();
+};
 
-export function oilAdvancedSettingsTemplate() {
+const buildVendorEntry = (vendor) => {
   return `
-    <div id="as-oil-cpc" class="as-oil-content-overlay" data-qa="oil-cpc-overlay">
-      ${oilAdvancedSettingsInlineTemplate()}
-    </div>
-  `;
-}
+          <div class="as-oil-third-party-list-element">
+            <span onclick='${OIL_GLOBAL_OBJECT_NAME}._toggleViewElements(this)'>
+                <svg class='as-oil-icon-plus' width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.675 4.328H10v1.344H5.675V10h-1.35V5.672H0V4.328h4.325V0h1.35z" fill="#0068FF" fill-rule="evenodd" fill-opacity=".88"/>
+                </svg>
+                <svg class='as-oil-icon-minus' style='display: none;' width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h10v1.5H0z" fill="#3B7BE2" fill-rule="evenodd" opacity=".88"/>
+                </svg>
+                <span class='as-oil-third-party-name'>${vendor.name}</span>
+            </span>
+            <div class='as-oil-third-party-toggle-part' style='display: none;'>
+              <a class='as-oil-third-party-link' href='${vendor.policyUrl}'>${vendor.policyUrl}</a>
+            </div>
+          </div>
+        `;
+};
 
-export function attachCpcHandlers() {
-  forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
-    domNode && domNode.addEventListener('change', event => toggleFeatureTextsMarks(event.target || event.srcElement), false);
-  });
-  forEach(document.querySelectorAll('.as-js-tab-label'), (domNode) => {
-    domNode && domNode.addEventListener('click', event => toggleTab(event.target || event.srcElement), false);
-  });
-  const thirdPartiesLinkDomNode = document.getElementById('as-js-third-parties-link');
-  thirdPartiesLinkDomNode && thirdPartiesLinkDomNode.addEventListener('click', toggleThirdPartyVisibility, false);
-}
 
 function toggleThirdPartyVisibility() {
   let view = document.getElementById('as-js-third-parties-list');

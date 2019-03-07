@@ -60,7 +60,6 @@ function hasMissingLabels(localeObjectFromConfiguration) {
  */
 function fillAndSetLocaleObject(sourceObject, targetObject) {
   if (!targetObject || !targetObject.texts) {
-    console.error('ªfillAndSetLocaleObject: use SOURCEOBJECT, target was', targetObject);
     setLocale(sourceObject);
     return;
   }

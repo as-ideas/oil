@@ -1,4 +1,10 @@
-import { getIabVendorBlacklist, getIabVendorListUrl, getIabVendorWhitelist, getShowLimitedVendors } from './core_config';
+import {
+  getIabVendorBlacklist,
+  getIabVendorListUrl,
+  getCustomVendorListUrl,
+  getIabVendorWhitelist,
+  getShowLimitedVendors
+} from './core_config';
 import { logInfo, logError } from './core_log';
 import { fetchJsonData } from './core_utils';
 
@@ -9,33 +15,64 @@ export const DEFAULT_VENDOR_LIST = {
   purposeIds: [1, 2, 3, 4, 5]
 };
 
+const DEFAULT_CUSTOM_VENDOR_LIST = {
+  'vendorListVersion': -1,
+  'isDefault': true,
+  'vendors': []
+};
+
 export let cachedVendorList;
+export let cachedCustomVendorList;
 export let pendingVendorlistPromise = null;
 
-export function loadVendorList() {
-  if (cachedVendorList) {
-    return new Promise( resolve => {
-      resolve(cachedVendorList); 
+export function loadVendorListAndCustomVendorList() {
+  if (cachedVendorList && cachedCustomVendorList) {
+    return new Promise(resolve => {
+      resolve();
     });
   } else if (pendingVendorlistPromise) {
     return pendingVendorlistPromise;
   } else {
-    return new Promise(function (resolve) {
-    let iabVendorListUrl = getIabVendorListUrl();
-    pendingVendorlistPromise = fetchJsonData(iabVendorListUrl)
-    pendingVendorlistPromise.then(response => {
-        sortVendors(response);
-        cachedVendorList = response;
-        pendingVendorlistPromise = null;
-        resolve(cachedVendorList);
-      })
-      .catch(error => {
-        pendingVendorlistPromise = null;
-        logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
-        resolve(getVendorList());
-      });
+    pendingVendorlistPromise = new Promise(function (resolve) {
+      let iabVendorListUrl = getIabVendorListUrl();
+      fetchJsonData(iabVendorListUrl)
+        .then(response => {
+          sortVendors(response);
+          cachedVendorList = response;
+        })
+        .catch(error => {
+          logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
+        })
+        .finally(() => {
+          loadCustomVendorList()
+            .finally(() => {
+              pendingVendorlistPromise = null;
+              resolve()
+            });
+        });
     });
+    return pendingVendorlistPromise;
   }
+}
+
+function loadCustomVendorList() {
+  return new Promise(resolve => {
+    let customVendorListUrl = getCustomVendorListUrl();
+    if (!customVendorListUrl) {
+      cachedCustomVendorList = DEFAULT_CUSTOM_VENDOR_LIST;
+      resolve();
+    } else {
+      fetchJsonData(customVendorListUrl)
+        .then(response => {
+          cachedCustomVendorList = response;
+        })
+        .catch(error => {
+          cachedCustomVendorList = DEFAULT_CUSTOM_VENDOR_LIST;
+          logError(`OIL getCustomVendorList failed and returned error: ${error}. Falling back to default vendorlist!`);
+        })
+        .finally(() => resolve());
+    }
+  });
 }
 
 export function getPurposes() {
@@ -54,10 +91,6 @@ export function getVendorIds() {
   return getVendors().map(({id}) => id);
 }
 
-export function getVendorListVersion() {
-  return cachedVendorList ? cachedVendorList.vendorListVersion : DEFAULT_VENDOR_LIST.vendorListVersion;
-}
-
 export function getVendorList() {
   if (cachedVendorList) {
     return cachedVendorList;
@@ -72,8 +105,20 @@ export function getVendorList() {
   }
 }
 
+export function getCustomVendorList() {
+  return cachedCustomVendorList ? cachedCustomVendorList : DEFAULT_CUSTOM_VENDOR_LIST;
+}
+
+export function getCustomVendorListVersion() {
+  if (cachedCustomVendorList && !cachedCustomVendorList.isDefault) {
+    return cachedCustomVendorList.vendorListVersion;
+  }
+  return undefined;
+}
+
 export function clearVendorListCache() {
   cachedVendorList = undefined;
+  cachedCustomVendorList = undefined;
   pendingVendorlistPromise = null;
 }
 
@@ -111,6 +156,7 @@ export function getLimitedVendorIds() {
   return limited;
 }
 
+// FIXME Refactor this code. Nobody can read it!
 function buildDefaultVendorIdList() {
   return ((a, b) => {
     while (a--) b[a] = a + 1;
@@ -122,6 +168,10 @@ function sortVendors(vendorList) {
   vendorList.vendors = vendorList.vendors.sort((leftVendor, rightVendor) => leftVendor.id - rightVendor.id);
 }
 
+/**
+ * This function takes every element from the input array
+ * and wraps it with as {id: element} object
+ */
 function expandIdsToObjects(idArray) {
   return idArray.map(anId => ({'id': anId}));
 }

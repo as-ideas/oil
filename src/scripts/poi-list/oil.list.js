@@ -4,7 +4,7 @@ import { OIL_GLOBAL_OBJECT_NAME, JS_CLASS_BUTTON_OPTIN } from '../core/core_cons
 import './poi.group.scss';
 import { getGlobalOilObject, setGlobalOilObject } from '../core/core_utils';
 import { getGroupList } from './poi.group.list';
-import { loadVendorList, getVendorsToDisplay } from '../core/core_vendor_information';
+import { loadVendorListAndCustomVendorList, getVendorsToDisplay } from '../core/core_vendor_information';
 import { BackButton, YesButton } from '../userview/view/components/oil.buttons.js';
 
 export function renderOilGroupListTemplate(renderMethod) {
@@ -15,7 +15,7 @@ export function renderOilGroupListTemplate(renderMethod) {
 }
 
 export function renderOilThirdPartyListTemplate(renderMethod) {
-  loadVendorList()
+  loadVendorListAndCustomVendorList()
     .then(() => {
       // HINT: The GroupList is needed if POI is enabled, because it contains the BLACKLIST/WHITELIST of vendors
       // it will load nothing, if POI is disabled

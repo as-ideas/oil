@@ -21,6 +21,10 @@ export const OIL_ADVANCED_SETTINGS_SNIPPET = '//*[@data-qa="cpc-snippet"]';
 // HINT: This does not work, as it is not clickable/hidden: export const OIL_DEFAULT_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-1"]';
 export const OIL_DEFAULT_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-1"]/following-sibling::*[@class="as-oil-cpc__slider"]';
 export const OIL_CUSTOM_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-25"]';
+
+export const OIL_CUSTOM_VENDORS_HEADLINE = '//*[@id="as-oil-cpc-custom-third-parties"]';
+export const OIL_CUSTOM_VENDORS_LIST = '//*[@id="as-oil-custom-third-parties-list"]';
+
 export const OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER = '//*[@id="as-oil-cpc"]/div/div[3]/div[2]/div[7]/div/div[1]';
 export const OIL_MANAGED_TAGS_SCRIPT_TAG = '//*[@id="managedScriptTag"]';
 export const OIL_MANAGED_TAGS_IMG_TAG = '//*[@id="managedImgTag"]';

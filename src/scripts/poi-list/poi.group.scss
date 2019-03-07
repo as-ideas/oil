@@ -65,7 +65,9 @@
     font-weight: bold;
     cursor: pointer;
   }
-
+  .as-oil-third-party-description, .as-oil-third-party-purpose {
+    font-size: 12px;
+  }
   .as-oil-third-party-link {
     color: $background-color-dark;
     font-size: 12px;

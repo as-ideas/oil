@@ -26,6 +26,7 @@ export const OIL_CONFIG = {
   ATTR_LOCALE_URL: 'locale_url',
   ATTR_IAB_VENDOR_LIST_URL: 'iabVendorListUrl',
   ATTR_CUSTOM_PURPOSES: 'customPurposes',
+  ATTR_CUSTOM_VENDOR_LIST_URL: 'customVendorListUrl',
   ATTR_IAB_VENDOR_BLACKLIST: 'iabVendorBlacklist',
   ATTR_IAB_VENDOR_WHITELIST: 'iabVendorWhitelist',
   ATTR_SHOW_LIMITED_VENDORS_ONLY: 'show_limited_vendors_only',
@@ -77,6 +78,7 @@ export const OIL_PAYLOAD_VERSION = 'v';
 export const OIL_PAYLOAD_LOCALE_VARIANT_NAME = 'lvn';
 export const OIL_PAYLOAD_LOCALE_VARIANT_VERSION = 'lvv';
 export const OIL_PAYLOAD_CUSTOM_PURPOSES = 'cp';
+export const OIL_PAYLOAD_CUSTOM_VENDORLIST_VERSION = 'cvl';
 export const OIL_PAYLOAD_CONFIG_VERSION = 'cv';
 
 // Identify privacy page link, eg. for tracking
