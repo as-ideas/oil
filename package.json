@@ -32,7 +32,7 @@
     "pree2e": "mkdirp target/reports && node etc/nightwatch.local.conf.js",
     "e2e": "./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e chrome",
     "e2esafari": "./node_modules/.bin/nightwatch -c etc/nightwatch.local.conf.js -e safari",
-    "test": "npm run build && npm run test:unit && npm run test:node && npm run test:security",
+    "test": "npm run build && npm run test:unit && npm run test:node",
     "test:unit": "cross-env NODE_ENV=test karma start etc/karma.conf.ci.js",
     "test:unit:fast": "cross-env NODE_ENV=test karma start etc/karma.conf.js",
     "test:node": "mocha 3000 --exit test/node",
