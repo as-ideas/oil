@@ -1,7 +1,7 @@
 import { logError, logInfo } from './core_log';
 import { getCommandCollection } from './core_utils';
 import { getConsentDataString, getVendorConsentData, getPublisherConsentData } from './core_consents';
-import { getVendorList, loadVendorList } from './core_vendor_information';
+import { getVendorList, loadVendorListAndCustomVendorList } from './core_vendor_information';
 
 const commands = {
   getVendorConsents: (vendorIds) => {
@@ -15,7 +15,7 @@ const commands = {
   getPublisherConsents: (purposeIds) => {
     return getPublisherConsentData(purposeIds);
   },
-  
+
   // FIXME needs support for vendorListVersion
   getVendorList: () => {
     return getVendorList();
@@ -41,7 +41,7 @@ export function executeCommandCollection(commandEntry) {
 }
 
 function processCommandEntry(commandEntry) {
-  loadVendorList()
+  loadVendorListAndCustomVendorList()
     .then(() => {
       processCommand(commandEntry.command, commandEntry.parameter)
         .then((result) => {

@@ -3,7 +3,7 @@ import { logInfo } from './core_log';
 import { getConfigVersion, getCookieExpireInDays, getCustomPurposes, getDefaultToOptin, getLanguage, getLanguageFromLocale, getLocaleVariantName } from './core_config';
 import { getLocaleVariantVersion } from './core_utils.js';
 import { OIL_CONFIG_DEFAULT_VERSION, OIL_SPEC } from './core_constants';
-import { getLimitedVendorIds, getPurposes, getVendorList, loadVendorList } from './core_vendor_information';
+import { getCustomVendorListVersion, getLimitedVendorIds, getPurposes, getVendorList, loadVendorListAndCustomVendorList } from './core_vendor_information';
 import { OilVersion } from './core_utils';
 
 const {ConsentString} = require('consent-string');
@@ -60,7 +60,7 @@ export function getSoiCookie() {
 
 export function setSoiCookieWithPoiCookieData(poiCookieJson) {
   return new Promise((resolve, reject) => {
-    loadVendorList().then(() => {
+    loadVendorListAndCustomVendorList().then(() => {
       let cookieConfig = getOilCookieConfig();
       let consentString;
       let configVersion = poiCookieJson.configVersion || cookieConfig.configVersion;
@@ -79,6 +79,7 @@ export function setSoiCookieWithPoiCookieData(poiCookieJson) {
         version: cookieConfig.defaultCookieContent.version,
         localeVariantName: cookieConfig.defaultCookieContent.localeVariantName,
         localeVariantVersion: cookieConfig.defaultCookieContent.localeVariantVersion,
+        customVendorListVersion: poiCookieJson.customVendorListVersion,
         customPurposes: poiCookieJson.customPurposes,
         consentString: consentString,
         configVersion: configVersion
@@ -91,7 +92,7 @@ export function setSoiCookieWithPoiCookieData(poiCookieJson) {
 
 export function buildSoiCookie(privacySettings) {
   return new Promise((resolve, reject) => {
-    loadVendorList().then(() => {
+    loadVendorListAndCustomVendorList().then(() => {
       let cookieConfig = getOilCookieConfig();
       let consentData = cookieConfig.defaultCookieContent.consentData;
       consentData.setGlobalVendorList(getVendorList());
@@ -102,6 +103,7 @@ export function buildSoiCookie(privacySettings) {
         version: cookieConfig.defaultCookieContent.version,
         localeVariantName: cookieConfig.defaultCookieContent.localeVariantName,
         localeVariantVersion: cookieConfig.defaultCookieContent.localeVariantVersion,
+        customVendorListVersion: getCustomVendorListVersion(),
         customPurposes: getCustomPurposesWithConsent(privacySettings),
         consentString: consentData.getConsentString(),
         configVersion: cookieConfig.defaultCookieContent.configVersion
