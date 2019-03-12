@@ -11,7 +11,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/as-ideas/oil/badge.svg?branch=master)](https://coveralls.io/github/as-ideas/oil?branch=master)
 [![GPL2 License][license-image]][license-url] 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fas-ideas%2Foil.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fas-ideas%2Foil?ref=badge_shield)
-[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=eGlsamUvTjJ3ZUN0TEQ2eXAwY2JMUmZ2NjFadUREbS81S3BuVFphZm1rVT0tLUd0eE90SVhITzhCd05NVE9HTHRUbmc9PQ==--6d6fc541c4beb5e4f72247e253f5e3c120598379)](https://www.browserstack.com/automate/public-build/eGlsamUvTjJ3ZUN0TEQ2eXAwY2JMUmZ2NjFadUREbS81S3BuVFphZm1rVT0tLUd0eE90SVhITzhCd05NVE9HTHRUbmc9PQ==--6d6fc541c4beb5e4f72247e253f5e3c120598379)
+[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=ZEZMK3M2RXZqUG05enhhME9vVWozbXdSM21XTVNpK1RCS251VkRMOEpudz0tLVQwaEpoaTRLeUxJSU1RaFlkM0ltTkE9PQ==--dc1fc353e7c2404d6cb9cd2887553718d9674f3a)](https://www.browserstack.com/automate/public-build/ZEZMK3M2RXZqUG05enhhME9vVWozbXdSM21XTVNpK1RCS251VkRMOEpudz0tLVQwaEpoaTRLeUxJSU1RaFlkM0ltTkE9PQ==--dc1fc353e7c2404d6cb9cd2887553718d9674f3a)
 [Website](https://www.oiljs.org/) | [Full documentation](https://oil.axelspringer.com/docs/last-release) | [Sandbox](https://oil.axelspringer.com/sandbox/) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html) | [Release Notes](https://github.com/as-ideas/oil/releases)
 
 ##### [current roadmap](ROADMAP.md)
@@ -61,6 +61,7 @@ The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://
     * Android 4.4.4 - Latest
 * Continously integrated and delivered
 * Modular and maintainable solution
+* Powered by ![iab logo](/src/assets/images/Browserstack-logo@2x.png)
 
 ## Features
 

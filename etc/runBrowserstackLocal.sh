@@ -24,12 +24,12 @@ done
 if [ "$browser" != "" ]; then
   run_test $browser $testFile
 else
-  run_test chrome14 $testFile
-  run_test chrome57 $testFile
-  run_test chrome65 $testFile
-  run_test ie10 $testFile
-  run_test ff58quantum $testFile
-  run_test safari91 $testFile
+  run_test chrome68 $testFile
+#  run_test chrome57 $testFile
+#  run_test chrome65 $testFile
+#  run_test ie10 $testFile
+#  run_test ff58quantum $testFile
+#  run_test safari91 $testFile
 
   #run_test iphone5 $testFile # fails weirdly, check later
   #run_test android4 $testFile

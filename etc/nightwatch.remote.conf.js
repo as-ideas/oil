@@ -17,7 +17,8 @@ nightwatch_config = {
   common_capabilities: {
     'browserstack.user': "${ENV_USER}",
     'browserstack.key': "${ENV_KEY}",
-    'browserstack.debug': true
+    'browserstack.debug': true,
+    'project': 'oil.js'
   },
 
   test_settings: {
