@@ -34,7 +34,8 @@ import {
   gdprApplies,
   getAdvancedSettingsPurposesDefault,
   isPoiActive,
-  isSubscriberSetCookieActive
+  isSubscriberSetCookieActive,
+  getCustomPurposeIds
 } from '../core/core_config';
 import { applyPrivacySettings, getPrivacySettings, getSoiConsentData } from './userview_privacy';
 import { activateOptoutConfirm } from './userview_optout_confirm.js';
@@ -105,7 +106,7 @@ export function oilShowPreferenceCenter() {
           if (consentData) {
             currentPrivacySettings = consentData.getPurposesAllowed();
           } else {
-            currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? getPurposeIds() : [];
+            currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? [...getPurposeIds(), ...getCustomPurposeIds()] : [];
           }
           applyPrivacySettings(currentPrivacySettings);
         })
