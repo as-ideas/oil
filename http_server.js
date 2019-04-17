@@ -80,7 +80,7 @@ app.post("/amp-consent.json", function(req, res){
 app.use(compression());
 
 // Serve directory indexes folder (with icons)
-app.use('/release', serveIndex('release', {'icons': true}));
+app.use('/release', cors(), serveIndex('release', {'icons': true}));
 app.use('/demos', cors(), serveIndex('dist/demos', {'icons': true}));
 
 // static with cache headers
