@@ -23,17 +23,17 @@ const DEFAULT_CUSTOM_VENDOR_LIST = {
 
 export let cachedVendorList;
 export let cachedCustomVendorList;
-export let pendingVendorlistPromise = null;
+export let pendingVendorListPromise = null;
 
 export function loadVendorListAndCustomVendorList() {
   if (cachedVendorList && cachedCustomVendorList) {
     return new Promise(resolve => {
       resolve();
     });
-  } else if (pendingVendorlistPromise) {
-    return pendingVendorlistPromise;
+  } else if (pendingVendorListPromise) {
+    return pendingVendorListPromise;
   } else {
-    pendingVendorlistPromise = new Promise(function (resolve) {
+    pendingVendorListPromise = new Promise(function (resolve) {
       let iabVendorListUrl = getIabVendorListUrl();
       fetchJsonData(iabVendorListUrl)
         .then(response => {
@@ -46,12 +46,12 @@ export function loadVendorListAndCustomVendorList() {
         .finally(() => {
           loadCustomVendorList()
             .finally(() => {
-              pendingVendorlistPromise = null;
+              pendingVendorListPromise = null;
               resolve()
             });
         });
     });
-    return pendingVendorlistPromise;
+    return pendingVendorListPromise;
   }
 }
 
@@ -68,7 +68,7 @@ function loadCustomVendorList() {
         })
         .catch(error => {
           cachedCustomVendorList = DEFAULT_CUSTOM_VENDOR_LIST;
-          logError(`OIL getCustomVendorList failed and returned error: ${error}. Falling back to default vendorlist!`);
+          logError(`OIL getCustomVendorList failed and returned error: ${error}. Falling back to default custom vendor list!`);
         })
         .finally(() => resolve());
     }
@@ -119,7 +119,7 @@ export function getCustomVendorListVersion() {
 export function clearVendorListCache() {
   cachedVendorList = undefined;
   cachedCustomVendorList = undefined;
-  pendingVendorlistPromise = null;
+  pendingVendorListPromise = null;
 }
 
 export function getVendorsToDisplay() {
