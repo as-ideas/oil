@@ -1,6 +1,6 @@
 import { forEach, stopTimeOut } from '../../src/scripts/userview/userview_modal';
 import { customMatchers } from './utils_htmldiff';
-import { clearVendorListCache } from '../../src/scripts/core/core_vendor_information';
+import { clearVendorListCache } from '../../src/scripts/core/core_vendor_lists';
 
 export function removeOilLayerAndConfig() {
   window.AS_OIL = undefined;

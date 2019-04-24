@@ -1,9 +1,9 @@
 import Cookie from 'js-cookie';
 import { logInfo } from './core_log';
 import { getConfigVersion, getCookieExpireInDays, getCustomPurposes, getDefaultToOptin, getLanguage, getLanguageFromLocale, getLocaleVariantName } from './core_config';
-import { getLocaleVariantVersion } from './core_utils.js';
+import { getLocaleVariantVersion } from './core_utils';
 import { OIL_CONFIG_DEFAULT_VERSION, OIL_SPEC } from './core_constants';
-import { getCustomVendorListVersion, getLimitedVendorIds, getPurposes, getVendorList, loadVendorListAndCustomVendorList } from './core_vendor_information';
+import { getCustomVendorListVersion, getLimitedVendorIds, getPurposes, getVendorList, loadVendorListAndCustomVendorList } from './core_vendor_lists';
 import { OilVersion } from './core_utils';
 
 const {ConsentString} = require('consent-string');

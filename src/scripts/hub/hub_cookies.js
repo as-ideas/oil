@@ -10,7 +10,7 @@ import {
 } from '../core/core_constants';
 import { logError, logInfo } from '../core/core_log';
 import { getConfigVersion, getCookieExpireInDays, getLanguageFromLocale } from '../core/core_config';
-import { getLimitedVendorIds } from '../core/core_vendor_information';
+import { getLimitedVendorIds } from '../core/core_vendor_lists';
 import { findCookieConsideringCookieVersions, getStandardPurposesWithConsent, setDomainCookie } from '../core/core_cookies';
 import Cookie from 'js-cookie';
 

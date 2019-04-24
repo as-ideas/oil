@@ -1,8 +1,8 @@
-import {getSoiCookie} from '../core/core_cookies.js';
+import {getSoiCookie} from '../core/core_cookies';
 import {PRIVACY_FULL_TRACKING} from '../core/core_constants';
 import {logInfo} from '../core/core_log';
 import {forEach} from './userview_modal';
-import {getPurposes} from '../core/core_vendor_information';
+import {getPurposes} from '../core/core_vendor_lists';
 
 export function getSoiConsentData() {
   let soiCookie = getSoiCookie();
