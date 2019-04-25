@@ -15,7 +15,7 @@ export const DEFAULT_VENDOR_LIST = {
   purposeIds: [1, 2, 3, 4, 5]
 };
 
-const DEFAULT_CUSTOM_VENDOR_LIST = {
+export const DEFAULT_CUSTOM_VENDOR_LIST = {
   'vendorListVersion': -1,
   'isDefault': true,
   'vendors': []

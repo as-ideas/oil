@@ -82,7 +82,7 @@ rules:
   no-else-return: 0
   no-empty-pattern: 2
   no-eq-null: 2
-  no-eval: 2
+  no-eval: 0
   no-extend-native: 2
   no-extra-bind: 2
   no-fallthrough: 2
