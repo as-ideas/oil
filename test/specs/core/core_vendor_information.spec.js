@@ -12,13 +12,14 @@ import {
   getVendorsToDisplay,
   loadVendorListAndCustomVendorList,
   cachedVendorList,
-  pendingVendorlistPromise, getCustomVendorList
-} from '../../../src/scripts/core/core_vendor_information';
+  pendingVendorListPromise,
+  getCustomVendorList
+} from '../../../src/scripts/core/core_vendor_lists';
 import VENDOR_LIST from '../../fixtures/vendorlist/simple_vendor_list.json';
 import CUSTOM_VENDOR_LIST from '../../fixtures/vendorlist/custom_vendor_list.json';
 import { resetOil } from '../../test-utils/utils_reset';
 
-describe('core_vendor_information', () => {
+describe('core_vendor_lists', () => {
 
   const WHITELISTED_VENDORS = [1, 2];
   const BLACKLISTED_VENDORS = Array.apply(null, {length: (DEFAULT_VENDOR_LIST.maxVendorId - 2)}).map(Number.call, Number).slice(1);
@@ -93,13 +94,13 @@ describe('core_vendor_information', () => {
       let fetchSpy = spyOn(CoreUtils, 'fetchJsonData').and.returnValue(new Promise((resolve) => resolve(VENDOR_LIST)));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
 
-      expect(pendingVendorlistPromise).toBeNull();
+      expect(pendingVendorListPromise).toBeNull();
       expect(cachedVendorList).toBeUndefined();
 
       loadVendorListAndCustomVendorList().then(() => {
         expect(CoreUtils.fetchJsonData).toHaveBeenCalled();
         fetchSpy.calls.reset();
-        expect(pendingVendorlistPromise).toBeNull();
+        expect(pendingVendorListPromise).toBeNull();
         expect(cachedVendorList).toBeDefined();
 
         loadVendorListAndCustomVendorList().then(() => {
@@ -118,13 +119,13 @@ describe('core_vendor_information', () => {
         }));
       spyOn(CoreConfig, 'getIabVendorListUrl').and.returnValue("https://iab.vendor.list.url");
 
-      expect(pendingVendorlistPromise).toBeNull();
+      expect(pendingVendorListPromise).toBeNull();
       expect(cachedVendorList).toBeUndefined();
 
       loadVendorListAndCustomVendorList().then(() => {
         let retrievedVendorList = getVendorList();
         expect(retrievedVendorList).toEqual(VENDOR_LIST);
-        expect(pendingVendorlistPromise).toBeNull();
+        expect(pendingVendorListPromise).toBeNull();
         expect(cachedVendorList).toBeDefined();
       });
 
@@ -133,7 +134,7 @@ describe('core_vendor_information', () => {
         done();
       });
 
-      expect(pendingVendorlistPromise).toBeDefined();
+      expect(pendingVendorListPromise).toBeDefined();
       expect(cachedVendorList).toBeUndefined();
 
     });

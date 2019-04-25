@@ -12,6 +12,7 @@ export function waitsForAndRuns(escapeFunction, runFunction, escapeTime) {
   // in case we never reach the escapeFunction, we will time out
   // at the escapeTime
   let timeOut = setTimeout(function () {
+    console.warn('escape condition never matched - invoke given run function only once!');
     clearMe();
     runFunction();
   }, escapeTime);

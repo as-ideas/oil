@@ -5,7 +5,8 @@ import {
   EVENT_NAME_ADVANCED_SETTINGS,
   EVENT_NAME_AS_PRIVACY_SELECTED,
   EVENT_NAME_BACK_TO_MAIN,
-  EVENT_NAME_COMPANY_LIST, EVENT_NAME_OIL_SHOWN,
+  EVENT_NAME_COMPANY_LIST,
+  EVENT_NAME_OIL_SHOWN,
   EVENT_NAME_POI_OPT_IN,
   EVENT_NAME_SOI_OPT_IN,
   EVENT_NAME_THIRD_PARTY_LIST,
@@ -23,22 +24,11 @@ import { oilNoCookiesTemplate } from './view/oil.no.cookies';
 import * as AdvancedSettingsStandard from './view/oil.advanced.settings.standard';
 import * as AdvancedSettingsTabs from './view/oil.advanced.settings.tabs';
 import { logError, logInfo } from '../core/core_log';
-import {
-  getCpcType,
-  getTheme,
-  getTimeOutValue,
-  isOptoutConfirmRequired,
-  isPersistMinimumTracking
-} from './userview_config';
-import {
-  gdprApplies,
-  getAdvancedSettingsPurposesDefault,
-  isPoiActive,
-  isSubscriberSetCookieActive
-} from '../core/core_config';
+import { getCpcType, getTheme, getTimeOutValue, isOptoutConfirmRequired, isPersistMinimumTracking } from './userview_config';
+import { gdprApplies, getAdvancedSettingsPurposesDefault, isPoiActive, isSubscriberSetCookieActive } from '../core/core_config';
 import { applyPrivacySettings, getPrivacySettings, getSoiConsentData } from './userview_privacy';
-import { activateOptoutConfirm } from './userview_optout_confirm.js';
-import { getPurposeIds, loadVendorListAndCustomVendorList } from '../core/core_vendor_information';
+import { activateOptoutConfirm } from './userview_optout_confirm';
+import { getPurposeIds, loadVendorListAndCustomVendorList } from '../core/core_vendor_lists';
 import { manageDomElementActivation } from '../core/core_tag_management';
 
 // Initialize our Oil wrapper and save it ...
