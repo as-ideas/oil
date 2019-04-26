@@ -3,6 +3,7 @@ import { logInfo } from './core_log';
 import {
   getConfigVersion,
   getCookieExpireInDays,
+  getCookieDomain,
   getCustomPurposes,
   getDefaultToOptin,
   isInfoBannerOnly,
@@ -27,10 +28,10 @@ export function setSessionCookie(name, value) {
   Cookie.set(name, value);
 }
 
-export function setDomainCookie(name, value, expires_in_days) {
+export function setDomainCookie(name, value, expires_in_days, domain) {
   // decoded consent data must not be written to the cookie
   delete value.consentData;
-  Cookie.set(name, value, { expires: expires_in_days });
+  Cookie.set(name, value, { expires: expires_in_days, domain: domain });
 }
 
 export function getOilCookie(cookieConfig) {
@@ -94,7 +95,7 @@ export function setSoiCookieWithPoiCookieData(poiCookieJson) {
         configVersion: configVersion
       };
 
-      setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires);
+      setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires, cookieConfig.domain);
       resolve(cookie);
     }).catch(error => reject(error));
   });
@@ -129,7 +130,7 @@ export function buildSoiCookie(privacySettings) {
 export function setSoiCookie(privacySettings) {
   return new Promise((resolve, reject) => {
     buildSoiCookie(privacySettings).then((cookie) => {
-      setDomainCookie(OIL_DOMAIN_COOKIE_NAME, cookie, getCookieExpireInDays());
+      setDomainCookie(OIL_DOMAIN_COOKIE_NAME, cookie, getCookieExpireInDays(), getCookieDomain());
       resolve(cookie);
     }).catch(error => reject(error));
   });
@@ -272,6 +273,7 @@ function getOilCookieConfig() {
   return {
     name: OIL_DOMAIN_COOKIE_NAME,
     expires: getCookieExpireInDays(),
+    domain: getCookieDomain(),
     defaultCookieContent: {
       opt_in: false,
       version: OilVersion.get(),

@@ -13,6 +13,7 @@ export const OIL_CONFIG = {
   ATTR_HUB_LOCATION: 'poi_hub_location', // complete hub location, gets generated
   ATTR_PREVIEW_MODE: 'preview_mode',
   ATTR_COOKIE_EXPIRES_IN_DAYS: 'cookie_expires_in_days',
+  ATTR_COOKIE_DOMAIN: 'cookie_domain',
   ATTR_TIMESTAMP: 'timestamp',
   ATTR_PRIVACY_PAGE_URL: 'privacy_page_url',
   ATTR_POI_GROUP_NAME: 'poi_group_name',
