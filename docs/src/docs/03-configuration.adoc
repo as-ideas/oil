@@ -120,6 +120,7 @@ This is a full list of configurable options.
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
 | config_version | Specifies the version of your OIL configuration. It will be stored with the consent cookie to track which explicit configuration version consent was granted for.| None
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31
+| cookie_domain | Specifies the domain to write the cookie to.  Can be used to set the cookie on a valid parent domain: e.g sub.example.com -> .example.com. | Current hostname
 | cpc_type | Specifies the type (the layout) of the Cookie Preference Center. Currently, two types are supported: 'standard' and 'tabs'. Depending on this parameter additional label configuration may be necessary. See section <<Full Label Configuration>> for details. | standard
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
 | customVendorListUrl | Custom vendor list ('non IAB vendors') to use, will be loaded at the same time as the iabVendorList. | None

@@ -151,6 +151,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | advanced_settings | Replaces the No Button with an advanced settings button, displaying the Cookie Preference Center. The CPC enables the user to choose their own level of privacy. These settings are stored in the oil cookie (both SOI and POI) as well. | False
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
 | config_version | Specifies the version of your OIL configuration. It will be stored with the consent cookie to track which explicit configuration version consent was granted for.| None
+| cookie_domain | Specifies the domain to write the cookie to.  Can be used to set the cookie on a valid parent domain: e.g sub.example.com -> .example.com. | Current hostname
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31
 | cpc_type | Specifies the type (the layout) of the Cookie Preference Center. Currently, two types are supported: 'standard' and 'tabs'. Depending on this parameter additional label configuration may be necessary. See section <<Full Label Configuration>> for details. | standard
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
