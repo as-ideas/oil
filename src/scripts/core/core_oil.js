@@ -4,10 +4,11 @@ import { logError, logInfo, logPreviewInfo } from './core_log';
 import { checkOptIn } from './core_optin';
 import { getSoiCookie, isBrowserCookieEnabled, isPreviewCookieSet, removePreviewCookie, removeVerboseCookie, setPreviewCookie, setVerboseCookie } from './core_cookies';
 import { doSetTealiumVariables } from './core_tealium_loading_rules';
-import { getLocale, isPreviewMode, resetConfiguration, setGdprApplies} from './core_config';
+import { getLocale, isPreviewMode, resetConfiguration, setGdprApplies } from './core_config';
 import { EVENT_NAME_HAS_OPTED_IN, EVENT_NAME_NO_COOKIES_ALLOWED } from './core_constants';
 import { executeCommandCollection } from './core_command_collection';
 import { manageDomElementActivation } from './core_tag_management';
+import { sendConsentInformationToCustomVendors } from './core_custom_vendors';
 
 /**
  * Initialize Oil on Host Site
@@ -57,6 +58,7 @@ export function initOilLayer() {
         sendEventToHostSite(EVENT_NAME_HAS_OPTED_IN);
         executeCommandCollection();
         attachCommandCollectionFunctionToWindowObject();
+        sendConsentInformationToCustomVendors().then(() => logInfo('Consent information sending to custom vendors after OIL start with found opt-in finished!'));
       } else {
         /**
          * Any other case, when the user didn't decide before and oil needs to be shown:
@@ -69,6 +71,7 @@ export function initOilLayer() {
           .catch((e) => {
             logError('Locale could not be loaded.', e);
           });
+        sendConsentInformationToCustomVendors().then(() => logInfo('Consent information sending to custom vendors after OIL start without found opt-in finished!'));
       }
     });
   }
