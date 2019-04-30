@@ -18,7 +18,7 @@ module.exports = {
     browser.deleteCookies();
 
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-confirm-optout.html')
+      .url(browser.globals.launch_url_host1 + 'demos/cpc-confirm-optout.html')
       .useXpath()
       .waitForElementPresent(OIL_LAYER, 5000, false)
       .click(OIL_ADVANCED_SETTINGS)

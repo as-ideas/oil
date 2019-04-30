@@ -34,44 +34,44 @@ module.exports = {
     chunks: ['oilstub', 'oil'],
     inject: 'head'
   }, {
-    filename: 'demos/advanced-settings.html',
-    template: path.resolve(sourcePath, 'demos', 'advanced-settings.html'),
+    filename: 'demos/cpc-standard.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-standard.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
-    filename: 'demos/advanced-settings-tabs.html',
-    template: path.resolve(sourcePath, 'demos', 'advanced-settings-tabs.html'),
+    filename: 'demos/cpc-tabs.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-tabs.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
-    filename: 'demos/advanced-settings-confirm-optout.html',
-    template: path.resolve(sourcePath, 'demos', 'advanced-settings-confirm-optout.html'),
+    filename: 'demos/cpc-confirm-optout.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-confirm-optout.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
-    filename: 'demos/advanced-settings-custom-purposes.html',
-    template: path.resolve(sourcePath, 'demos', 'advanced-settings-custom-purposes.html'),
+    filename: 'demos/cpc-custom-purposes.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-custom-purposes.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
-    filename: 'demos/advanced-settings-custom-vendors.html',
-    template: path.resolve(sourcePath, 'demos', 'advanced-settings-custom-vendors.html'),
+    filename: 'demos/cpc-custom-vendors.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-custom-vendors.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
-    filename: 'demos/advanced-settings-limited-vendors.html',
-    template: path.resolve(sourcePath, 'demos', 'advanced-settings-limited-vendors.html'),
+    filename: 'demos/cpc-limited-vendors.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-limited-vendors.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
-    filename: 'demos/advanced-settings-purposes-default.html',
-    template: path.resolve(sourcePath, 'demos', 'advanced-settings-purposes-default.html'),
+    filename: 'demos/cpc-purposes-default.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-purposes-default.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
@@ -94,20 +94,20 @@ module.exports = {
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
-    filename: 'demos/advanced-settings-e2e-locale.html',
-    template: path.resolve(sourcePath, 'demos', 'advanced-settings-e2e-locale.html'),
+    filename: 'demos/cpc-e2e-locale.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-e2e-locale.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
-    filename: 'demos/advanced-settings-poi.html',
-    template: path.resolve(sourcePath, 'demos', 'advanced-settings-poi.html'),
+    filename: 'demos/cpc-poi.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-poi.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
-    filename: 'demos/advanced-settings-poi-integrated.html',
-    template: path.resolve(sourcePath, 'demos', 'advanced-settings-poi-integrated.html'),
+    filename: 'demos/cpc-poi-integrated.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-poi-integrated.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'

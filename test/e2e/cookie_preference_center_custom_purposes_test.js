@@ -8,7 +8,7 @@ module.exports = {
   },
   'Shows five purposes by default': function (browser) {
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
+      .url(browser.globals.launch_url_host1 + 'demos/cpc-standard.html')
       .useXpath().waitForElementPresent(OIL_YES_BUTTON, 15000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .pause(200)
@@ -20,7 +20,7 @@ module.exports = {
 
   'Displays custom purposes in list': function (browser) {
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-custom-purposes.html')
+      .url(browser.globals.launch_url_host1 + 'demos/cpc-custom-purposes.html')
       .useXpath()
       .waitForElementPresent(OIL_YES_BUTTON, 15000, false)
       .click(OIL_ADVANCED_SETTINGS)

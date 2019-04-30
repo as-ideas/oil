@@ -15,7 +15,7 @@ module.exports = {
 
   'Displays custom vendors in list': function (browser) {
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-custom-vendors.html')
+      .url(browser.globals.launch_url_host1 + 'demos/cpc-custom-vendors.html')
       .useXpath()
       .waitForElementPresent(OIL_YES_BUTTON, 15000, false)
       .click(OIL_ADVANCED_SETTINGS)

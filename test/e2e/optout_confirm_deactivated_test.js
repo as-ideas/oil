@@ -14,7 +14,7 @@ module.exports = {
 
   'Optout layer should remain hidden when require_optout_confirm not in config or false': function (browser) {
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
+      .url(browser.globals.launch_url_host1 + 'demos/cpc-standard.html')
       .useXpath()
       .waitForElementPresent(OIL_LAYER, 5000, false)
       .click(OIL_ADVANCED_SETTINGS)
