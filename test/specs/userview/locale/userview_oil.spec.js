@@ -144,8 +144,6 @@ describe('the locale fetcher for user view modal', () => {
   });
 
   it('should update existing but incomplete locale from configuration by default locale in case of non-existing locale url', (done) => {
-    console.info('##### RUNNING TEST #####');
-
     const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [OIL_LABELS.ATTR_LABEL_INTRO_HEADING, OIL_LABELS.ATTR_LABEL_BUTTON_BACK, OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]);
     const expectedLocale = addValuesToLocaleCopy(configuredLocale, {
       [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: DEFAULT_LOCALE.texts[OIL_LABELS.ATTR_LABEL_INTRO_HEADING],
