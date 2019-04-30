@@ -3,8 +3,8 @@
   "lastUpdated": "2018-11-27T01:25:33+01:00",
   "vendors": [
     {
-      "id": "CUSTOM_VENDOR_1",
-      "name": "Custom vendor with opt-in and opt-out script",
+      "id": 1,
+      "name": "CUSTOM_VENDOR_1",
       "policyUrl": "https://www.emerse.com/privacy-policy/",
       "purposeIds": [
         1,
@@ -23,8 +23,8 @@
       "optOutSnippet": "console.info('opt-out snippet for custom vendor CUSTOM_VENDOR_1 executed!')"
     },
     {
-      "id": "CUSTOM_VENDOR_2",
-      "name": "Custom vendor with opt-in script only",
+      "id": 2,
+      "name": "CUSTOM_VENDOR_2",
       "policyUrl": "https://www.emerse.com/privacy-policy/",
       "purposeIds": [
         1,
@@ -42,8 +42,8 @@
       "optInSnippet": "console.info('opt-in snippet for custom vendor CUSTOM_VENDOR_2 executed!')"
     },
     {
-      "id": "CUSTOM_VENDOR_3",
-      "name": "Custom vendor with opt-out script only",
+      "id": 3,
+      "name": "CUSTOM_VENDOR_3",
       "policyUrl": "https://www.emerse.com/privacy-policy/",
       "purposeIds": [
         1,
