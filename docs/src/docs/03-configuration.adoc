@@ -121,18 +121,18 @@ This is a full list of configurable options.
 | config_version | Specifies the version of your OIL configuration. It will be stored with the consent cookie to track which explicit configuration version consent was granted for.| None
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31
 | cpc_type | Specifies the type (the layout) of the Cookie Preference Center. Currently, two types are supported: 'standard' and 'tabs'. Depending on this parameter additional label configuration may be necessary. See section <<Full Label Configuration>> for details. | standard
-| customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | none
+| customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
+| customVendorListUrl | Custom vendor list ('non IAB vendors') to use, will be loaded at the same time as the iabVendorList. | None
 | default_to_optin | Signal opt-in to vendors while still displaying the Opt-In layer to the end user | false
 | gdpr_applies_globally | Flag to indicate that publisher is from the EU, thus showing the OIL layer to every user. The flag is passed to vendors. | true
 | iabVendorBlacklist | Array of vendor IDs to exclude from consent. <<blacklisting-and-whitelisting, Details here>> | None
 | iabVendorListUrl | Vendorlist to use | https://vendorlist.consensu.org/vendorlist.json
-| customVendorListUrl | Custom vendorlist ('publisher vendors') to use, will be loaded at the same time as the iabVendorList. | None
-| iabVendorWhitelist | Array of vendor IDs to include in consent. If it is set, values in `iabVendorBlacklist` are ignored. <<blacklisting-and-whitelisting, Details here>>. When white- or blacklisting you might also be interested in the `show_limited_vendors_only` parameter. | none
+| iabVendorWhitelist | Array of vendor IDs to include in consent. If it is set, values in `iabVendorBlacklist` are ignored. <<blacklisting-and-whitelisting, Details here>>. When white- or blacklisting you might also be interested in the `show_limited_vendors_only` parameter. | None
 | <<texts-locale-object,locale>> | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. <<locale-object, See here for details>> | None
 | locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See link:https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json[See here for an example file] | None
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | true
 | poi_activate_poi | Activates or deactivates Power Opt-In. | false
-| poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). | none
+| poi_group_name | POI group name. POI only affects those sites with the same group name (mandatory if POI is activated). | None
 | poi_hub_origin | The origin of the hub.js installation | `https://unpkg.com`
 | poi_hub_path | The path to the hub.html installation on the origin, if any. | `/@ideasio/oil.js@{version}/release/current/hub.html`
 | poi_subscriber_set_cookie | Whether to set the SOI cookie on POI opt-ins or not. | true
@@ -336,7 +336,7 @@ When preview_mode is not set in configuration and no consent cookie is found, th
 
 With *iabVendorWhitelist* and *iabVendorBlacklist* you can exclude specific vendors from the consent (blacklist) or include only the ones you want (whitelist). You can only use one method at a time - either whitelist or blacklist.
 
-As an example, the vendorlist may contain vendors with vendor IDs 1 to 10. In the example the user accepts everything, he just pressed "OK". The consent-string would normally contain (by getVendorConsents) this data:
+As an example, the vendor list may contain vendors with vendor IDs 1 to 10. In the example the user accepts everything, he just pressed "OK". The consent-string would normally contain (by getVendorConsents) this data:
 
 .Default result from getVendorConsents without whitelist/blacklist
 [source,javascript]
@@ -433,15 +433,16 @@ If you do not interact with the Opt-In Layer, it will autohide after a fixed tim
 include::../../../src/scripts/userview/userview_config.js[tags=config-timeout]
 ----
 
-=== Custom vendors (publisher vendors)
+=== Custom vendors (non IAB vendors)
 Custom vendors are vendors not supporting the IAB standard.
-OIL.js supports a list of custom vendors. For each custom vendor you have to specify a Opt-In and a Opt-Out JavaScript snippet.
+OIL.js supports a list of custom vendors. For each custom vendor you have to specify an Opt-In and an Opt-Out JavaScript snippet.
 These snippets are evaluated when the user changes consent and on page load.
-You can add custom vendors via a file similar to the original vendorlist. You need to specifiy a custom ID and decide for the purposes on you own.
+You can add custom vendors via a file similar to the original vendor list (see https://vendorlist.consensu.org/vendorlist.json). You need to specify a unique custom vendor id and decide for the purposes required by the custom vendor on your own.
 
-* Please keep in mind, that every change to the custom vendorlist should result in an increase in the custom vendorlist version.
-* Enable CORS for the custom vendorlist, if you host it on a different domain, eg. for usage with POI.
+* Please keep in mind that every change to the custom vendor list should result in an increase in the custom vendor list version.
+* Enable CORS for the custom vendor list, if you host it on a different domain, e.g. for usage with POI.
 
+.OIL configuration parameter to include a custom vendor list from a URL
 [source,json]
 ----
 {
@@ -449,7 +450,7 @@ You can add custom vendors via a file similar to the original vendorlist. You ne
 }
 ----
 
-
+.Example for a custom vendor list
 [source,json]
 ----
 include::../../../src/assets/customvendors.json[]
