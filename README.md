@@ -1,5 +1,5 @@
 
-![](/src/assets/images/landing_page/logo_github.png)
+![](https://raw.githubusercontent.com/as-ideas/oil/master/src/assets/images/landing_page/logo_github.png)
 
 # oil.js - Open Source Opt-In Layer
 
