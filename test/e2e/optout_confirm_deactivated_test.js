@@ -1,6 +1,6 @@
 import {
   OIL_ADVANCED_SETTINGS,
-  OIL_DEFAULT_PURPOSE_SLIDER,
+  OIL_FIRST_STANDARD_PURPOSE_SLIDER,
   OIL_LAYER,
   OIL_OPTOUT_CONFIRM
 } from '../test_constants';
@@ -18,10 +18,10 @@ module.exports = {
       .useXpath()
       .waitForElementPresent(OIL_LAYER, 5000, false)
       .click(OIL_ADVANCED_SETTINGS)
-      .waitForElementPresent(OIL_DEFAULT_PURPOSE_SLIDER, 5000, false)
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
+      .waitForElementPresent(OIL_FIRST_STANDARD_PURPOSE_SLIDER, 5000, false)
+      .click(OIL_FIRST_STANDARD_PURPOSE_SLIDER)
       .pause(100)
-      .click(OIL_DEFAULT_PURPOSE_SLIDER)
+      .click(OIL_FIRST_STANDARD_PURPOSE_SLIDER)
       .pause(100)
       .waitForElementNotPresent(OIL_OPTOUT_CONFIRM, 2500)
       .end()

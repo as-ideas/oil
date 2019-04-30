@@ -2,14 +2,12 @@ import {
   OIL_ADVANCED_SETTINGS,
   OIL_ADVANCED_SETTINGS_WRAPPER,
   OIL_CANCEL_BUTTON,
-  OIL_DEFAULT_PURPOSE_SLIDER,
+  OIL_FIRST_STANDARD_PURPOSE_SLIDER,
   OIL_LAYER,
   OIL_OPTOUT_CONFIRM,
   OIL_PROCEED_BUTTON
 } from '../test_constants.js';
-
-const SLIDER = '#as-js-purpose-slider-1~.as-oil-cpc__slider';
-const CHECKED_SLIDER = '#as-js-purpose-slider-1:checked';
+import { OIL_FIRST_STANDARD_PURPOSE_CHECKED_SLIDER, OIL_FIRST_STANDARD_PURPOSE_SLIDER_CLICKABLE_ELEMENT } from '../test_constants';
 
 module.exports = {
   '@disabled': false,
@@ -23,13 +21,13 @@ module.exports = {
       .waitForElementPresent(OIL_LAYER, 5000, false)
       .click(OIL_ADVANCED_SETTINGS)
       .waitForElementPresent(OIL_ADVANCED_SETTINGS_WRAPPER, 5000, false)
-      .waitForElementPresent(OIL_DEFAULT_PURPOSE_SLIDER, 5000, false)
-      .useCss().waitForElementNotPresent(CHECKED_SLIDER, 2500, false)
-      .click(SLIDER)
-      .useCss().waitForElementPresent(CHECKED_SLIDER, 2500, false)
-      .useCss().waitForElementPresent(SLIDER, 2500, false)
+      .waitForElementPresent(OIL_FIRST_STANDARD_PURPOSE_SLIDER, 5000, false)
+      .useCss().waitForElementNotPresent(OIL_FIRST_STANDARD_PURPOSE_CHECKED_SLIDER, 2500, false)
+      .click(OIL_FIRST_STANDARD_PURPOSE_SLIDER_CLICKABLE_ELEMENT)
+      .useCss().waitForElementPresent(OIL_FIRST_STANDARD_PURPOSE_CHECKED_SLIDER, 2500, false)
+      .useCss().waitForElementPresent(OIL_FIRST_STANDARD_PURPOSE_SLIDER_CLICKABLE_ELEMENT, 2500, false)
       .pause(500)
-      .click(SLIDER)
+      .click(OIL_FIRST_STANDARD_PURPOSE_SLIDER_CLICKABLE_ELEMENT)
       .useXpath();
   },
 
@@ -53,7 +51,7 @@ module.exports = {
       .waitForElementPresent(OIL_PROCEED_BUTTON, 5000, false)
       .click(OIL_PROCEED_BUTTON)
       .pause(200)
-      .useCss().waitForElementNotPresent(CHECKED_SLIDER, 2500, false)
+      .useCss().waitForElementNotPresent(OIL_FIRST_STANDARD_PURPOSE_CHECKED_SLIDER, 2500, false)
       .end();
   },
 
@@ -70,7 +68,7 @@ module.exports = {
       .waitForElementPresent(OIL_CANCEL_BUTTON, 5000, false)
       .click(OIL_CANCEL_BUTTON)
       .pause(100)
-      .useCss().waitForElementPresent(CHECKED_SLIDER, 2500, false)
+      .useCss().waitForElementPresent(OIL_FIRST_STANDARD_PURPOSE_CHECKED_SLIDER, 2500, false)
       .end();
   },
 
@@ -79,7 +77,7 @@ module.exports = {
       .waitForElementPresent(OIL_CANCEL_BUTTON, 5000, false)
       .click(OIL_OPTOUT_CONFIRM)
       .pause(100)
-      .useCss().waitForElementPresent(CHECKED_SLIDER, 2500, false)
+      .useCss().waitForElementPresent(OIL_FIRST_STANDARD_PURPOSE_CHECKED_SLIDER, 2500, false)
       .end();
   }
 

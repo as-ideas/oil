@@ -100,14 +100,20 @@ module.exports = {
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
+    filename: 'demos/cpc-integrated-in-page.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-integrated-in-page.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  }, {
     filename: 'demos/cpc-poi.html',
     template: path.resolve(sourcePath, 'demos', 'cpc-poi.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
-    filename: 'demos/cpc-poi-integrated.html',
-    template: path.resolve(sourcePath, 'demos', 'cpc-poi-integrated.html'),
+    filename: 'demos/cpc-poi-integrated-in-page.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-poi-integrated-in-page.html'),
     chunks: ['oilstub', 'oil'],
     chunksSortMode: 'dependency',
     inject: 'head'
