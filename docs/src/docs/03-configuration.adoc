@@ -434,7 +434,9 @@ include::../../../src/scripts/userview/userview_config.js[tags=config-timeout]
 ----
 
 === Custom vendors (publisher vendors)
-
+Custom vendors are vendors not supporting the IAB standard.
+OIL.js supports a list of custom vendors. For each custom vendor you have to specify a Opt-In and a Opt-Out JavaScript snippet.
+These snippets are evaluated when the user changes consent and on page load.
 You can add custom vendors via a file similar to the original vendorlist. You need to specifiy a custom ID and decide for the purposes on you own.
 
 * Please keep in mind, that every change to the custom vendorlist should result in an increase in the custom vendorlist version.
