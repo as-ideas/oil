@@ -20,7 +20,7 @@
 
 The OIL project aims for a stable cross-company solution for the challenges the GDPR and new EU ePrivacy Regulation will pose to websites and publishers.
 
-![mobile-demo](/src/assets/images/readme/mobile-demo.gif)
+![mobile-demo](https://raw.githubusercontent.com/as-ideas/oil/master/src/assets/images/readme/mobile-demo.gif)
 
 * **Privacy by design & default**: Data privacy opt-in overlay for all users - it supports implicit and explicit modes of consent.
 * **Standardized**: Supports the [IAB specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) which defines how a vendor should communicate with a Consent Management Provider (CMP, like oil.js) to gather consent information before running any data processing. That API is a set of JavaScript functions. You can find more at the official website http://advertisingconsent.eu/
@@ -33,7 +33,7 @@ The OIL project aims for a stable cross-company solution for the challenges the 
 
 The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://advertisingconsent.eu/cmp-list/) after the IAB Europe "Transparency & Consent Framework". Registered with ID 80.
 
-![iab logo](/src/assets/images/landing_page/iab-logo.png)
+![iab logo](https://raw.githubusercontent.com/as-ideas/oil/master/src/assets/images/landing_page/iab-logo.png)
 
 ## Table of Contents
 
@@ -61,7 +61,7 @@ The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://
     * Android 4.4.4 - Latest
 * Continously integrated and delivered
 * Modular and maintainable solution
-* Powered by ![iab logo](/src/assets/images/Browserstack-logo@2x.png)
+* Powered by ![iab logo](https://raw.githubusercontent.com/as-ideas/oil/master/src/assets/images/Browserstack-logo@2x.png)
 
 ## Features
 
@@ -317,15 +317,15 @@ The is a detailed section about styling in the documentation. You can edit the d
 #### Desktop
 
 <p align="center">
-  <img width="400" src="/src/assets/images/readme/example-1.png">
-  <img width="400" src="/src/assets/images/readme/example-2.png">
+  <img width="400" src="https://raw.githubusercontent.com/as-ideas/oil/master/src/assets/images/readme/example-1.png">
+  <img width="400" src="https://raw.githubusercontent.com/as-ideas/oil/master/src/assets/images/readme/example-2.png">
 </p>
 
 #### Mobile
 
 <p align="center">
-  <img width="290" src="/src/assets/images/readme/example-mobile-1.png">
-  <img width="290" src="/src/assets/images/readme/example-mobile-2.png">
+  <img width="290" src="https://raw.githubusercontent.com/as-ideas/oil/master/src/assets/images/readme/example-mobile-1.png">
+  <img width="290" src="https://raw.githubusercontent.com/as-ideas/oil/master/src/assets/images/readme/example-mobile-2.png">
 </p>
 
 ## Changelog
