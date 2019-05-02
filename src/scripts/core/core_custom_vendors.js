@@ -30,7 +30,12 @@ function sendConsentInformationToCustomVendor(customVendor, consentData) {
 function executeCustomVendorScript(scriptType, script, customVendor) {
   if (script) {
     try {
-      eval(script)
+      // Note: We assign eval function to a variable and invoke it this way indirectly. This ensures that's the scope
+      // for executed JavaScript function is global and not the scope of this function! We need this to enable the
+      // executed script to set (global) variables that are reachable for other code snippets (i.e. for webtrekk) of
+      // the website the opt-in layer is integrated in.
+      let evalFunction = eval;
+      evalFunction(script)
     } catch (error) {
       logError('Error occurred while executing ' + scriptType + ' script for custom vendor ' + customVendor.id + ' (' + customVendor.name + ')! Error was: ', error);
     }

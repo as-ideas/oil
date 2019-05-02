@@ -262,6 +262,12 @@ module.exports = {
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
+    filename: 'demos/custom-vendors-notification.html',
+    template: path.resolve(sourcePath, 'demos', 'custom-vendors-notification.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  }, {
     filename: 'demos/vendor-integration-iframe.html',
     chunks: [],
     template: path.resolve(sourcePath, 'demos', 'vendor-integration-iframe.html')

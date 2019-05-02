@@ -4,6 +4,7 @@ import * as UserView from '../../../src/scripts/userview/locale/userview_oil';
 import * as CoreCommandCollection from '../../../src/scripts/core/core_command_collection';
 import * as CoreOptIn from '../../../src/scripts/core/core_optin';
 import * as CoreTagManagement from '../../../src/scripts/core/core_tag_management';
+import * as CoreCustomVendors from '../../../src/scripts/core/core_custom_vendors';
 import { waitsForAndRuns } from '../../test-utils/utils_wait';
 import { resetOil } from '../../test-utils/utils_reset';
 import { triggerEvent } from '../../test-utils/utils_events';
@@ -91,6 +92,36 @@ describe('core_oil', () => {
       }, () => {
         expect(CoreCommandCollection.executeCommandCollection).not.toHaveBeenCalled();
         expect(CoreUtils.setGlobalOilObject).toHaveBeenCalledWith('commandCollectionExecutor', executeCommandCollectionSpy);
+        done();
+      },
+      2000);
+  });
+
+  it('should send consent information to custom vendors if opt-in is provided', (done) => {
+    spyOn(CoreCustomVendors, 'sendConsentInformationToCustomVendors').and.returnValue(Promise.resolve());
+    spyOn(CoreOptIn, 'checkOptIn').and.returnValue(Promise.resolve(true));
+
+    initOilLayer();
+
+    waitsForAndRuns(
+      () => CoreCustomVendors.sendConsentInformationToCustomVendors.calls.count() > 0,
+      () => {
+        expect(CoreCustomVendors.sendConsentInformationToCustomVendors).toHaveBeenCalled();
+        done();
+      },
+      2000);
+  });
+
+  it('should send consent information to custom vendors if opt-in is not provided', (done) => {
+    spyOn(CoreCustomVendors, 'sendConsentInformationToCustomVendors').and.returnValue(Promise.resolve());
+    spyOn(CoreOptIn, 'checkOptIn').and.returnValue(Promise.resolve(false));
+
+    initOilLayer();
+
+    waitsForAndRuns(
+      () => CoreCustomVendors.sendConsentInformationToCustomVendors.calls.count() > 0,
+      () => {
+        expect(CoreCustomVendors.sendConsentInformationToCustomVendors).toHaveBeenCalled();
         done();
       },
       2000);

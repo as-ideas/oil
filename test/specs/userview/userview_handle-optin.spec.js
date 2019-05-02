@@ -7,6 +7,7 @@ import * as UserviewOptIn from '../../../src/scripts/userview/userview_optin'
 import * as CorePoi from '../../../src/scripts/core/core_poi';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreTagManagement from '../../../src/scripts/core/core_tag_management';
+import * as CoreCustomVendors from '../../../src/scripts/core/core_custom_vendors';
 import { EVENT_NAME_POI_OPT_IN, EVENT_NAME_SOI_OPT_IN, PRIVACY_FULL_TRACKING, PRIVACY_MINIMUM_TRACKING } from '../../../src/scripts/core/core_constants';
 import { resetOil } from '../../test-utils/utils_reset';
 import { waitsForAndRuns } from '../../test-utils/utils_wait';
@@ -77,6 +78,7 @@ describe('the user view modal handles opt-in clicks on', () => {
     });
 
     it('should execute command collection executor', (done) => {
+      mockPowerOptInAndSingleOptIn();
       spyOn(CoreUtils, 'getGlobalOilObject').and.callThrough();
 
       CoreUtils.setGlobalOilObject('commandCollectionExecutor', () => {
@@ -84,6 +86,22 @@ describe('the user view modal handles opt-in clicks on', () => {
         done();
       });
       handleOptIn();
+    });
+
+    it('should send consent information to custom vendors', (done) => {
+      mockPowerOptInAndSingleOptIn();
+      spyOn(CoreCustomVendors, 'sendConsentInformationToCustomVendors').and.returnValue(Promise.resolve());
+
+      handleOptIn();
+
+      waitsForAndRuns(
+        () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
+        () => {
+          expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalled();
+          expect(CoreCustomVendors.sendConsentInformationToCustomVendors).toHaveBeenCalled();
+          done();
+        },
+        2000);
     });
 
     it('should activate dom elements with consent', (done) => {
@@ -172,6 +190,23 @@ describe('the user view modal handles opt-in clicks on', () => {
         done();
       });
       handleOptIn();
+    });
+
+    it('should send consent information to custom vendors', (done) => {
+      mockPowerOptInAndSingleOptIn();
+      spyOn(CoreCustomVendors, 'sendConsentInformationToCustomVendors').and.returnValue(Promise.resolve());
+      loadFixture('poi/poi.default.html');
+
+      handleOptIn();
+
+      waitsForAndRuns(
+        () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
+        () => {
+          expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalled();
+          expect(CoreCustomVendors.sendConsentInformationToCustomVendors).toHaveBeenCalled();
+          done();
+        },
+        2000);
     });
 
     it('should activate dom elements with consent', (done) => {
