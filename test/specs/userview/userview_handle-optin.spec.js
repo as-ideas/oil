@@ -129,7 +129,7 @@ describe('the user view modal handles opt-in clicks on', () => {
         () => {
           expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
           expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_POI_OPT_IN);
-          expect(UserviewOptIn.oilPowerOptIn).toHaveBeenCalledWith(PRIVACY_FULL_TRACKING, false);
+          expect(UserviewOptIn.oilPowerOptIn).toHaveBeenCalledWith(PRIVACY_FULL_TRACKING);
           thenOilLayerIsHidden();
           done();
         },
@@ -149,7 +149,7 @@ describe('the user view modal handles opt-in clicks on', () => {
         () => {
           expect(CoreUtils.sendEventToHostSite.calls.count()).toBe(1);
           expect(CoreUtils.sendEventToHostSite.calls.argsFor(0)[0]).toEqual(EVENT_NAME_POI_OPT_IN);
-          expect(UserviewOptIn.oilPowerOptIn).toHaveBeenCalledWith(PRIVACY_MINIMUM_TRACKING, false);
+          expect(UserviewOptIn.oilPowerOptIn).toHaveBeenCalledWith(PRIVACY_MINIMUM_TRACKING);
           thenOilLayerIsHidden();
           done();
         },

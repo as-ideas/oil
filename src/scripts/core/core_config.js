@@ -109,10 +109,6 @@ export function isPoiActive() {
   return getConfigValue(OIL_CONFIG.ATTR_ACTIVATE_POI, false);
 }
 
-export function isSubscriberSetCookieActive() {
-  return getConfigValue(OIL_CONFIG.ATTR_SUB_SET_COOKIE, true);
-}
-
 /**
  * Get the hub iFrame domain with protocol prefix for the current location
  * @returns {string, null} domain iframe orgin

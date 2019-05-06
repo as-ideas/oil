@@ -21,15 +21,11 @@ import { isPoiActive } from '../core/core_config';
  * @param powerOnly - only set Power Opt In (POI), no local site cookie (SOI)
  * @return Promise with updated cookie value
  */
-export function oilPowerOptIn(privacySettings, powerOnly = false) {
+export function oilPowerOptIn(privacySettings) {
   return new Promise((resolve, reject) => {
     let soiCookiePromise;
-    if (!powerOnly) {
-      // Update Oil cookie (site - SOI)
-      soiCookiePromise = setSoiCookie(privacySettings)
-    } else {
-      soiCookiePromise = buildSoiCookie(privacySettings);
-    }
+    // Update Oil cookie (site - SOI)
+    soiCookiePromise = setSoiCookie(privacySettings);
     soiCookiePromise.then((cookie) => {
       let payload = {
         [OIL_PAYLOAD_PRIVACY]: cookie.consentString,
@@ -60,7 +56,6 @@ export function oilPowerOptIn(privacySettings, powerOnly = false) {
     }).catch(error => reject(error));
   });
 }
-
 
 /**
  * Oil SOI optIn

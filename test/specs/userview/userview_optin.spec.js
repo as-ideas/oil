@@ -52,23 +52,8 @@ describe('user view opt-in handler', () => {
     });
 
     it('should set single opt-in too if it is not prohibited', (done) => {
-      oilPowerOptIn(PRIVACY_SETTINGS, false).then(() => {
+      oilPowerOptIn(PRIVACY_SETTINGS).then(() => {
         expect(CoreCookies.setSoiCookie).toHaveBeenCalledWith(PRIVACY_SETTINGS);
-        done();
-      });
-    });
-
-    it('should not set single opt-in too if it is prohibited', (done) => {
-      spyOn(CoreConfig, 'isPoiActive').and.returnValue(true);
-
-      oilPowerOptIn(PRIVACY_SETTINGS, true).then(() => {
-        expect(CoreCookies.setSoiCookie).not.toHaveBeenCalled();
-        expect(CoreCookies.buildSoiCookie).toHaveBeenCalledWith(PRIVACY_SETTINGS);
-
-        let payload = UserViewPoi.activatePowerOptInWithIFrame.calls.argsFor(0)[0];
-        verifyThatPayloadForPowerOptInActivationIsCorrect(payload, EXPECTED_COOKIE);
-
-        expect(CoreUtils.sendEventToHostSite).toHaveBeenCalledWith(EVENT_NAME_OPT_IN);
         done();
       });
     });
