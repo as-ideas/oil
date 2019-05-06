@@ -1,22 +1,22 @@
 import {
+  gdprApplies,
   getAdvancedSettingsPurposesDefault,
   getConfigValue,
   getCookieExpireInDays,
   getCustomPurposes,
-  getDefaultToOptin,
+  getDefaultToOptin, getHubLocation,
   getHubPath,
   getIabVendorBlacklist,
   getIabVendorWhitelist,
+  getLanguageFromLocale,
   getLocale,
   getLocaleUrl,
   getLocaleVariantName,
-  getLanguageFromLocale,
-  getPoiGroupName,
+  getPoiGroupName, getPoiListDirectory,
   getPublicPath,
-  setLocale,
-  gdprApplies,
+  getShowLimitedVendors,
   setGdprApplies,
-  getShowLimitedVendors
+  setLocale
 } from '../../../src/scripts/core/core_config';
 import { loadFixture } from '../../test-utils/utils_fixtures';
 import * as CoreLog from '../../../src/scripts/core/core_log';
@@ -25,7 +25,6 @@ import { OilVersion } from '../../../src/scripts/core/core_utils';
 
 describe('core_config', () => {
 
-  const DEFAULT_FALLBACK_BACKEND_URL = 'https://oil-backend.herokuapp.com/oil/api/userViewLocales/enEN_01';
   const EXPECTED_PUBLIC_PATH = '//www/';
   const EXPECTED_PUBLIC_PATH_WITH_SLASH = '//www/i-forgot-the-trailing-slash/';
 
@@ -63,7 +62,7 @@ describe('core_config', () => {
 
   });
 
-  describe('getLocaleVariantName', function() {
+  describe('getLocaleVariantName', function () {
 
     it('returns default enEN_01 when locale in config empty', function () {
       let result = getLocaleVariantName();
@@ -86,24 +85,23 @@ describe('core_config', () => {
       expect(getLocaleVariantName()).toEqual('floo');
     });
 
-    it ('returns default enEN_01 when locale is defined without locale id', function () {
+    it('returns default enEN_01 when locale is defined without locale id', function () {
       AS_OIL = {
         CONFIG: {
-          locale: {
-          }
+          locale: {}
         }
       };
       expect(getLocaleVariantName()).toEqual('enEN_01');
     });
   });
 
-  describe('getLanguageFromLocale', function() {
+  describe('getLanguageFromLocale', function () {
 
-    it('retrieves substring from parameter', function() {
+    it('retrieves substring from parameter', function () {
       expect(getLanguageFromLocale('foo_bar')).toEqual('fo');
     });
 
-    it('returns "en" when parameter is null', function(){
+    it('returns "en" when parameter is null', function () {
       expect(getLanguageFromLocale()).toEqual('en');
     })
 
@@ -156,36 +154,36 @@ describe('core_config', () => {
 
   });
 
-  describe('getPublicPath', function() {
+  describe('getPublicPath', function () {
 
-    it('returns publicPath from configuration', function() {
+    it('returns publicPath from configuration', function () {
       loadFixture('config/given.config.with.publicPath.html');
       expect(getPublicPath()).toEqual(EXPECTED_PUBLIC_PATH);
     });
 
-    it('adds slash when missing to publicPath', function() {
+    it('adds slash when missing to publicPath', function () {
       loadFixture('config/given.config.with.publicPath.noslash.html');
       expect(getPublicPath()).toEqual(EXPECTED_PUBLIC_PATH_WITH_SLASH);
     });
 
-    it('returns undefined when no publicPath in config', function() {
+    it('returns undefined when no publicPath in config', function () {
       expect(getPublicPath()).toBeFalsy();
     });
 
   });
 
-  describe('gdprApplies', function() {
+  describe('gdprApplies', function () {
 
-    it('returns true when gdpr_applies_globally and gdpr_applies not in config', function() {
+    it('returns true when gdpr_applies_globally and gdpr_applies not in config', function () {
       expect(gdprApplies()).toBeTruthy();
     });
 
-    it('returns false when gdpr_applies_globally is false and setGdprApplies is not invoked with true', function() {
+    it('returns false when gdpr_applies_globally is false and setGdprApplies is not invoked with true', function () {
       loadFixture('config/given.config.with.gdpr.not.applies.html');
       expect(gdprApplies()).toBeFalsy();
     });
 
-    it('returns true when set after initialisation', function() {
+    it('returns true when set after initialisation', function () {
       loadFixture('config/given.config.with.gdpr.not.applies.html');
       setGdprApplies(true);
       expect(gdprApplies()).toBeTruthy();
@@ -193,9 +191,9 @@ describe('core_config', () => {
 
   });
 
-  describe('setGdprApplies', function() {
+  describe('setGdprApplies', function () {
 
-    it('sets gdprApplies in configuration', function() {
+    it('sets gdprApplies in configuration', function () {
       loadFixture('config/given.config.with.gdpr.not.applies.html');
       expect(gdprApplies()).toBeFalsy();
       setGdprApplies(true);
@@ -206,15 +204,32 @@ describe('core_config', () => {
 
   });
 
-  describe('getShowLimitedVendors', function() {
-    
-    it('returns false by default', function() {
+  describe('getShowLimitedVendors', function () {
+
+    it('returns false by default', function () {
       expect(getShowLimitedVendors()).toEqual(false);
     });
 
-    it('returns true when show_limited_vendors_only in configuration', function() {
+    it('returns true when show_limited_vendors_only in configuration', function () {
       loadFixture('config/given.config.with.advanced.settings.show.limited.vendors.html');
       expect(getShowLimitedVendors()).toBeTruthy();
+    });
+
+  });
+
+  describe('getHubLocation', () => {
+
+    it('returns correct hub location depending on configured hub origin and hub path', () => {
+      loadFixture('config/given.config.with.poiHubOrigin.and.poiHubPath.html');
+      expect(getHubLocation()).toEqual('https://myServer.com/path/to/my/hub.html');
+    });
+
+  });
+
+  describe('getPoiListDirectory', () => {
+    it('returns correct poi list directory depending on configured hub origin and hub path', () => {
+      loadFixture('config/given.config.with.poiHubOrigin.and.poiHubPath.html');
+      expect(getPoiListDirectory()).toEqual('https://myServer.com/path/to/my/poi-lists');
     });
 
   });

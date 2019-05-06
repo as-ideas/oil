@@ -203,10 +203,11 @@ export function getLanguageFromLocale(localeVariantName = 'en') {
  * @returns {string, null} complete iframe orgin
  */
 export function getHubLocation() {
-  if (getHubOrigin() && getHubPath()) {
-    return getHubOrigin() + getHubPath();
-  }
-  return null;
+  return getHubOrigin() + getHubPath();
+}
+
+export function getPoiListDirectory() {
+  return getHubLocation().replace(/\/[^/]+$/, '/poi-lists');
 }
 
 /**
