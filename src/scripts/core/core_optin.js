@@ -32,7 +32,7 @@ export function checkOptIn() {
       logPreviewOptInInfo(soiOptIn, powerOptIn.power_opt_in);
       if (powerOptIn.power_opt_in) {
         resultOptIn = powerOptIn.power_opt_in;
-        if (isSubscriberSetCookieActive() && !soiOptIn) {
+        if (!soiOptIn) {
           setSoiCookieWithPoiCookieData(powerOptIn)
             .then(() => resolve(resultOptIn))
             .catch(error => reject(error));

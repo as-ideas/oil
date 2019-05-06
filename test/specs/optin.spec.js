@@ -48,7 +48,6 @@ describe('Opt-In', () => {
       let powerOptIn = true;
       const poiCookieJson = {power_opt_in: powerOptIn, consentData: 'aConsentDataObject'};
       spyOn(CoreCookies, 'getSoiCookie').and.returnValue({opt_in: singleOptIn});
-      spyOn(CoreConfig, 'isSubscriberSetCookieActive').and.returnValue(true);
       spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise(resolve => resolve(poiCookieJson)));
 
       checkOptIn().then(resultOptIn => {
@@ -75,28 +74,10 @@ describe('Opt-In', () => {
       });
     });
 
-    it('should not try to set single opt-in if power opt-in can be verified but subscriberSetCookie is not active', (done) => {
-      let singleOptIn = false;
-      let powerOptIn = true;
-      spyOn(CoreCookies, 'getSoiCookie').and.returnValue({opt_in: singleOptIn});
-      spyOn(CoreConfig, 'isSubscriberSetCookieActive').and.returnValue(false);
-      spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise(resolve => {
-        resolve({power_opt_in: powerOptIn, consentData: 'aConsentDataObject'});
-      }));
-
-      checkOptIn().then(resultOptIn => {
-        expect(resultOptIn).toBe(powerOptIn);
-        expect(CorePoi.verifyPowerOptIn).toHaveBeenCalled();
-        expect(CoreCookies.setSoiCookieWithPoiCookieData).not.toHaveBeenCalled();
-        done();
-      });
-    });
-
     it('should not try to set single opt-in if power opt-in can be verified but single opt-in is already set', (done) => {
       let singleOptIn = true;
       let powerOptIn = true;
       spyOn(CoreCookies, 'getSoiCookie').and.returnValue({opt_in: singleOptIn});
-      spyOn(CoreConfig, 'isSubscriberSetCookieActive').and.returnValue(true);
       spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise(resolve => {
         resolve({power_opt_in: powerOptIn, consentData: 'aConsentDataObject'});
       }));
