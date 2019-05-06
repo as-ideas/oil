@@ -120,7 +120,7 @@ export function isSubscriberSetCookieActive() {
 export function getHubOrigin() {
   let origin = getConfigValue(OIL_CONFIG.ATTR_HUB_ORIGIN, 'https://unpkg.com');
   if (origin) {
-    return origin.indexOf('http') !== -1 ? origin : location.protocol + origin;
+    return origin === '/' || origin.indexOf('http') !== -1 ? origin : location.protocol + origin;
   }
   return null;
 }
@@ -207,7 +207,8 @@ export function getHubLocation() {
 }
 
 export function getPoiListDirectory() {
-  return getHubLocation().replace(/\/[^/]+$/, '/poi-lists');
+  let hubOrigin = getHubOrigin();
+  return hubOrigin.endsWith('/') ? hubOrigin.replace(/\/$/, '/poi-lists') : hubOrigin + '/poi-lists';
 }
 
 /**

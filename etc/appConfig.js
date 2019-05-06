@@ -299,9 +299,6 @@ module.exports = {
   }, {
     from: path.resolve(sourcePath, 'demos/empty.html'),
     to: 'demos/empty.html'
-  }, {
-    from: path.resolve(sourcePath, 'demos/poi-lists'),
-    to: 'demos/poi-lists'
   }],
   title: 'OIL',
   additionalWebpackOptions: false

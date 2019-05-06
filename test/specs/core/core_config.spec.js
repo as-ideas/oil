@@ -4,7 +4,9 @@ import {
   getConfigValue,
   getCookieExpireInDays,
   getCustomPurposes,
-  getDefaultToOptin, getHubLocation,
+  getDefaultToOptin,
+  getHubLocation,
+  getHubOrigin,
   getHubPath,
   getIabVendorBlacklist,
   getIabVendorWhitelist,
@@ -12,7 +14,8 @@ import {
   getLocale,
   getLocaleUrl,
   getLocaleVariantName,
-  getPoiGroupName, getPoiListDirectory,
+  getPoiGroupName,
+  getPoiListDirectory,
   getPublicPath,
   getShowLimitedVendors,
   setGdprApplies,
@@ -217,6 +220,25 @@ describe('core_config', () => {
 
   });
 
+  describe('getHubOrigin', () => {
+
+    it('returns complete configured hub origin', () => {
+      loadFixture('config/given.config.with.poiHubOrigin.and.poiHubPath.html');
+      expect(getHubOrigin()).toEqual('https://myServer.com');
+    });
+
+    it('returns complete configured hub origin if it is "/"', () => {
+      loadFixture('config/given.config.with.poiHubOrigin.being.slash.html');
+      expect(getHubOrigin()).toEqual('/');
+    });
+
+    it('returns configured hub origin with added protocol it missed', () => {
+      loadFixture('config/given.config.with.poiHubOrigin.without.protocol.html');
+      expect(getHubOrigin()).toEqual('http://myServer.com');
+    });
+
+  });
+
   describe('getHubLocation', () => {
 
     it('returns correct hub location depending on configured hub origin and hub path', () => {
@@ -227,9 +249,20 @@ describe('core_config', () => {
   });
 
   describe('getPoiListDirectory', () => {
-    it('returns correct poi list directory depending on configured hub origin and hub path', () => {
+
+    it('returns correct poi list directory depending on configured hub origin ending with "/"', () => {
+      loadFixture('config/given.config.with.poiHubOrigin.ending.with.slash.html');
+      expect(getPoiListDirectory()).toEqual('https://myServer.com/poi-lists');
+    });
+
+    it('returns correct poi list directory depending on configured hub origin not ending with "/"', () => {
       loadFixture('config/given.config.with.poiHubOrigin.and.poiHubPath.html');
-      expect(getPoiListDirectory()).toEqual('https://myServer.com/path/to/my/poi-lists');
+      expect(getPoiListDirectory()).toEqual('https://myServer.com/poi-lists');
+    });
+
+    it('returns correct poi list directory depending on configured hub origin being "/"', () => {
+      loadFixture('config/given.config.with.poiHubOrigin.being.slash.html');
+      expect(getPoiListDirectory()).toEqual('/poi-lists');
     });
 
   });
