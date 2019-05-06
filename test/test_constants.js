@@ -18,9 +18,11 @@ export const OIL_ADVANCED_SETTINGS_WRAPPER = '//*[@data-qa="oil-cpc-overlay"]';
 export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_SHOW_PREF = '//*[@data-qa="show-pref-button"]';
 export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_TRIGGER_OPTIN = '//*[@data-qa="oil-YesButton"]';
 export const OIL_ADVANCED_SETTINGS_SNIPPET = '//*[@data-qa="cpc-snippet"]';
-// HINT: This does not work, as it is not clickable/hidden: export const OIL_DEFAULT_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-1"]';
-export const OIL_DEFAULT_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-1"]/following-sibling::*[@class="as-oil-cpc__slider"]';
-export const OIL_CUSTOM_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-25"]';
+// HINT: This does not work, as it is not clickable/hidden: export const OIL_FIRST_STANDARD_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-1"]';
+export const OIL_FIRST_STANDARD_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-1"]/following-sibling::*[@class="as-oil-cpc__slider"]';
+export const OIL_FIRST_STANDARD_PURPOSE_CHECKED_SLIDER = '#as-js-purpose-slider-1:checked';
+export const OIL_FIRST_STANDARD_PURPOSE_SLIDER_CLICKABLE_ELEMENT = '#as-js-purpose-slider-1~.as-oil-cpc__slider';
+export const OIL_FIRST_CUSTOM_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-25"]';
 
 export const OIL_CUSTOM_VENDORS_HEADLINE = '//*[@id="as-oil-cpc-custom-third-parties"]';
 export const OIL_CUSTOM_VENDORS_LIST = '//*[@id="as-oil-custom-third-parties-list"]';

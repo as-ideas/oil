@@ -14,7 +14,7 @@ module.exports = {
       .deleteCookies();
 
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
+      .url(browser.globals.launch_url_host1 + 'demos/cpc-standard.html')
       .useCss()
       .waitForElementPresent('body', 1000, false)
       .useXpath()

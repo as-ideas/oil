@@ -21,7 +21,7 @@ module.exports = {
           .deleteCookies();
 
         browser
-          .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-limited-vendors.html')
+          .url(browser.globals.launch_url_host1 + 'demos/cpc-limited-vendors.html')
           .useXpath()
           .waitForElementPresent(OIL_LAYER, 2000, false);
       });

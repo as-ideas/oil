@@ -19,8 +19,8 @@
         1,
         2
       ],
-      "optInSnippet": "console.info('opt-in snippet for custom vendor CUSTOM_VENDOR_1 executed!')",
-      "optOutSnippet": "console.info('opt-out snippet for custom vendor CUSTOM_VENDOR_1 executed!')"
+      "optInSnippet": "console.info('opt-in snippet for CUSTOM_VENDOR_1 executed!')",
+      "optOutSnippet": "console.info('opt-out snippet for CUSTOM_VENDOR_1 executed!')"
     },
     {
       "id": 2,
@@ -39,26 +39,8 @@
         1,
         2
       ],
-      "optInSnippet": "console.info('opt-in snippet for custom vendor CUSTOM_VENDOR_2 executed!')"
-    },
-    {
-      "id": 3,
-      "name": "CUSTOM_VENDOR_3",
-      "policyUrl": "https://www.emerse.com/privacy-policy/",
-      "purposeIds": [
-        1,
-        2,
-        5
-      ],
-      "legIntPurposeIds": [
-        3,
-        5
-      ],
-      "featureIds": [
-        1,
-        2
-      ],
-      "optOutSnippet": "console.info('opt-out snippet for custom vendor CUSTOM_VENDOR_3 executed!')"
+      "optInSnippet": "console.info('opt-in snippet for CUSTOM_VENDOR_2 executed!')",
+      "optOutSnippet": "console.info('opt-out snippet for CUSTOM_VENDOR_2 executed!')"
     }
   ]
 }

@@ -17,7 +17,7 @@ module.exports = {
 
   'Cookie Preference Center Tabs opens after clicking more information, back button works, okay works': function (browser) {
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-tabs.html')
+      .url(browser.globals.launch_url_host1 + 'demos/cpc-tabs.html')
       .useXpath()
       .waitForElementPresent(OIL_LAYER, 4000, false)
       .click(OIL_ADVANCED_SETTINGS)

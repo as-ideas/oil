@@ -16,7 +16,7 @@ module.exports = {
 
   'Cookie Preference Center integrates into the host site on trigger and works': function (browser) {
     browser
-      .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-poi-integrated.html')
+      .url(browser.globals.launch_url_host1 + 'demos/cpc-poi-integrated-in-page.html')
       .useXpath()
       .waitForElementPresent(OIL_LAYER, 4000, false)
       .waitForElementPresent(OIL_YES_BUTTON, 1000, false)
