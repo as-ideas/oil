@@ -12,7 +12,7 @@ import {
   OIL_PAYLOAD_VERSION,
   PRIVACY_FULL_TRACKING
 } from '../core/core_constants';
-import { buildSoiCookie, setSoiCookie } from '../core/core_cookies';
+import { setSoiCookie } from '../core/core_cookies';
 import { isPoiActive } from '../core/core_config';
 
 /**

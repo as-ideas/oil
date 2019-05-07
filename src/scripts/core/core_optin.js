@@ -1,7 +1,6 @@
-import { verifyPowerOptIn } from './core_poi';
-import { logPreviewInfo } from './core_log';
-import { isSubscriberSetCookieActive } from './core_config';
 import { getSoiCookie, setSoiCookieWithPoiCookieData } from './core_cookies';
+import { logPreviewInfo } from './core_log';
+import { verifyPowerOptIn } from './core_poi';
 
 /**
  * Log Helper function for checkOptIn

@@ -1,20 +1,7 @@
-import { privacyPageSnippet } from './components/oil.privacy.page';
-import { OIL_LABELS } from '../userview_constants.js';
-import { YesButton, AdvancedSettingsButton } from './components/oil.buttons.js';
-import {
-  getLabel,
-  isAdvancedSettings
-} from '../userview_config.js';
 import { JS_CLASS_BUTTON_OPTIN } from '../../core/core_constants.js';
-
-const introLabelSnippet = () => {
-  let labelIntro = getLabel(OIL_LABELS.ATTR_LABEL_INTRO);
-  if (labelIntro) {
-    return labelIntro;
-  } else {
-    return (`${getLabel(OIL_LABELS.ATTR_LABEL_INTRO_START)} ${privacyPageSnippet()} ${getLabel(OIL_LABELS.ATTR_LABEL_INTRO_END)}`);
-  }
-};
+import { getLabel, isAdvancedSettings } from '../userview_config.js';
+import { OIL_LABELS } from '../userview_constants.js';
+import { AdvancedSettingsButton, YesButton } from './components/oil.buttons.js';
 
 export function oilDefaultTemplate() {
   return `
@@ -24,7 +11,7 @@ export function oilDefaultTemplate() {
                 ${getLabel(OIL_LABELS.ATTR_LABEL_INTRO_HEADING)}
             </div>
             <p class="as-oil__intro-txt">
-                ${introLabelSnippet()}
+                ${getLabel(OIL_LABELS.ATTR_LABEL_INTRO)}
             </p>
             <div class="as-oil-l-row as-oil-l-buttons">
                 <div class="as-oil-l-item">

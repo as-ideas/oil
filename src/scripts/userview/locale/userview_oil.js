@@ -22,7 +22,7 @@ export {
 export function locale(callback) {
   let localeObjectFromConfiguration = getLocale();
 
-  if (hasMissingLabels(localeObjectFromConfiguration)) {
+  if (!hasMissingLabels(localeObjectFromConfiguration)) {
     return callback(this);
   } else {
     const localeUrl = getLocaleUrl();
@@ -48,8 +48,12 @@ export function locale(callback) {
 }
 
 function hasMissingLabels(localeObjectFromConfiguration) {
-  const missingLabels = (localeObjectFromConfiguration && localeObjectFromConfiguration.texts) ? findMissingLabels(localeObjectFromConfiguration.texts) : [];
-  return localeObjectFromConfiguration && localeObjectFromConfiguration.texts && missingLabels.length === 0;
+  if (localeObjectFromConfiguration && localeObjectFromConfiguration.texts) {
+    const missingLabels = findMissingLabels(localeObjectFromConfiguration.texts);
+    return  missingLabels.length > 0;
+  }
+
+  return true;
 }
 
 /**

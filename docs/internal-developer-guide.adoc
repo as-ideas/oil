@@ -40,8 +40,6 @@ include::src/docs/development/tealium-deployment.adoc[]
 
 include::src/docs/development/locale-configuration.adoc[]
 
-include::src/docs/development/unofficial-configuration.adoc[]
-
 === FYI: Cross-Origin Messaging
 
 The ``postMessage()`` method lifts this restriction by providing a way to securely pass messages across domains. The ``postMessage()`` method accepts two parameters.
