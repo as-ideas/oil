@@ -13,13 +13,10 @@ describe('the locale fetcher for user view modal', () => {
     'version': 42,
     'texts': {
       [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'Intro Heading',
-      [OIL_LABELS.ATTR_LABEL_INTRO_START]: 'Intro Start',
-      [OIL_LABELS.ATTR_LABEL_INTRO_END]: 'Intro End',
       [OIL_LABELS.ATTR_LABEL_INTRO]: 'Intro',
       [OIL_LABELS.ATTR_LABEL_BUTTON_YES]: 'Yes Button',
       [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: 'Back Button',
       [OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS]: 'Advanced Settings Button',
-      [OIL_LABELS.ATTR_LABEL_BUTTON_PRIVACY]: 'Privacy Button',
       [OIL_LABELS.ATTR_LABEL_CPC_HEADING]: 'CPC Heading:',
       [OIL_LABELS.ATTR_LABEL_CPC_TEXT]: 'CPC Text',
       [OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL]: 'CPC Activate All',
@@ -41,13 +38,10 @@ describe('the locale fetcher for user view modal', () => {
     'version': 45,
     'texts': {
       [OIL_LABELS.ATTR_LABEL_INTRO_HEADING]: 'Intro Heading 45',
-      [OIL_LABELS.ATTR_LABEL_INTRO_START]: 'Intro Start 45',
-      [OIL_LABELS.ATTR_LABEL_INTRO_END]: 'Intro End 45',
       [OIL_LABELS.ATTR_LABEL_INTRO]: 'Intro 45',
       [OIL_LABELS.ATTR_LABEL_BUTTON_YES]: 'Yes Button 45',
       [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: 'Back Button 45',
       [OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS]: 'Advanced Settings Button 45',
-      [OIL_LABELS.ATTR_LABEL_BUTTON_PRIVACY]: 'Privacy Button 45',
       [OIL_LABELS.ATTR_LABEL_CPC_HEADING]: 'CPC Heading: 45',
       [OIL_LABELS.ATTR_LABEL_CPC_TEXT]: 'CPC Text 45',
       [OIL_LABELS.ATTR_LABEL_CPC_ACTIVATE_ALL]: 'CPC Activate All 45',
@@ -101,10 +95,10 @@ describe('the locale fetcher for user view modal', () => {
 
   it('should update existing but incomplete locale from configuration by locale loaded from backend with warning about missing labels', (done) => {
     const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [
-      OIL_LABELS.ATTR_LABEL_INTRO_START,
+      OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS,
       OIL_LABELS.ATTR_LABEL_BUTTON_BACK
     ]);
-    const backendLocale = removeKeysFromLocale(BACKEND_LOCALE, [OIL_LABELS.ATTR_LABEL_INTRO_START]);
+    const backendLocale = removeKeysFromLocale(BACKEND_LOCALE, [OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS]);
     const expectedLocale = addValuesToLocaleCopy(configuredLocale, {
       [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: BACKEND_LOCALE.texts[OIL_LABELS.ATTR_LABEL_BUTTON_BACK],
     });
@@ -116,7 +110,7 @@ describe('the locale fetcher for user view modal', () => {
       expect(userViewOil).toBeDefined();
       expect(CoreUtils.fetchJsonData).toHaveBeenCalledWith(LOCALE_URL);
       expect(CoreConfig.setLocale).toHaveBeenCalledWith(expectedLocale);
-      expect(CoreLog.logWarn).toHaveBeenCalledWith(`${OIL_LABELS.ATTR_LABEL_INTRO_START} missing from locale config.`);
+      expect(CoreLog.logWarn).toHaveBeenCalledWith(`${OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS} missing from locale config.`);
       done();
     });
   });
