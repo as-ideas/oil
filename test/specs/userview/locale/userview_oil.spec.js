@@ -24,6 +24,10 @@ describe('the locale fetcher for user view modal', () => {
       [OIL_LABELS.ATTR_LABEL_THIRD_PARTY]: 'Third parties Headline',
       [OIL_LABELS.ATTR_LABEL_CUSTOM_THIRD_PARTY_HEADING]: 'Custom third parties Headline',
       [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]: 'Purpose Description',
+      // [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_HEADING]: 'Purpose opt-out heading',
+      // [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_TEXT]: 'Purpose opt-out text',
+      // [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_PROCEED]: 'Purpose opt-out proceed',
+      // [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_OPTOUT_CANCEL]: 'Purpose opt-out cancel',
       [OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_HEADING]: 'POI Group List Heading',
       [OIL_LABELS.ATTR_LABEL_POI_GROUP_LIST_TEXT]: 'POI Group List Text',
       [OIL_LABELS.ATTR_LABEL_THIRD_PARTY_LIST_HEADING]: '3rd Party List Heading',
@@ -75,10 +79,9 @@ describe('the locale fetcher for user view modal', () => {
   });
 
   it('should update existing but incomplete locale from configuration by locale loaded from backend', (done) => {
-    const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [OIL_LABELS.ATTR_LABEL_INTRO_START, OIL_LABELS.ATTR_LABEL_BUTTON_BACK, OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]);
+    const configuredLocale = removeKeysFromLocale(COMPLETE_LOCALE, [OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS, OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]);
     const expectedLocale = addValuesToLocaleCopy(configuredLocale, {
-      [OIL_LABELS.ATTR_LABEL_INTRO_START]: BACKEND_LOCALE.texts[OIL_LABELS.ATTR_LABEL_INTRO_START],
-      [OIL_LABELS.ATTR_LABEL_BUTTON_BACK]: BACKEND_LOCALE.texts[OIL_LABELS.ATTR_LABEL_BUTTON_BACK],
+      [OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS]: BACKEND_LOCALE.texts[OIL_LABELS.ATTR_LABEL_BUTTON_ADVANCED_SETTINGS],
       [OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC]: BACKEND_LOCALE.texts[OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC],
 
     });
