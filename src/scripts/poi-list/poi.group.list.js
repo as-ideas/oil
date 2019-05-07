@@ -1,6 +1,6 @@
 import { fetchJsonData, getGlobalOilObject, setGlobalOilObject } from '../core/core_utils';
 import { logError } from '../core/core_log';
-import { getPoiGroupName, setIabVendorWhitelist, setIabVendorBlacklist, isPoiActive } from '../core/core_config';
+import { getPoiGroupName, getPoiListDirectory, isPoiActive, setIabVendorBlacklist, setIabVendorWhitelist } from '../core/core_config';
 
 /**
  * IF POI is enabled: Gets the group list and sets IAB Vendor Whitelist/Blacklist
@@ -16,7 +16,7 @@ export function getGroupList() {
     if (cachedGroupList || !isPoiActive()) {
       resolve(cachedGroupList);
     } else {
-      fetchJsonData(__webpack_public_path__ + 'poi-lists/' + groupName + '.json')
+      fetchJsonData(`${getPoiListDirectory()}/${groupName}.json`)
         .then(response => {
           cachedGroupList = response.companyList;
           setGlobalOilObject('oilCachedGroupList', cachedGroupList);

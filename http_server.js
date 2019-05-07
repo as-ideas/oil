@@ -82,6 +82,7 @@ app.use(compression());
 // Serve directory indexes folder (with icons)
 app.use('/release', cors(), serveIndex('release', {'icons': true}));
 app.use('/demos', cors(), serveIndex('dist/demos', {'icons': true}));
+app.use('/poi-lists', cors(), serveIndex('dist/poi-lists', {'icons': true}));
 
 // static with cache headers
 app.use(serveStatic(DOCUMENT_ROOT, {maxAge: CACHE_DURATION, cacheControl: true}));
