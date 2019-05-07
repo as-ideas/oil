@@ -59,8 +59,6 @@ function hasMissingLabels(localeObjectFromConfiguration) {
  * @param targetObject object with missing labels
  */
 function fillAndSetLocaleObject(sourceObject, targetObject) {
-  console.log('SourceObject: ', sourceObject);
-  console.log('targetObject: ', targetObject);
 
   if (!targetObject || !targetObject.texts) {
     setLocale(sourceObject);
