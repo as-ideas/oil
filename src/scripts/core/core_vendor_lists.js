@@ -1,11 +1,5 @@
-import {
-  getIabVendorBlacklist,
-  getIabVendorListUrl,
-  getCustomVendorListUrl,
-  getIabVendorWhitelist,
-  getShowLimitedVendors
-} from './core_config';
-import { logInfo, logError } from './core_log';
+import { getCustomVendorListUrl, getIabVendorBlacklist, getIabVendorListUrl, getIabVendorWhitelist, getShowLimitedVendors } from './core_config';
+import { logError, logInfo } from './core_log';
 import { fetchJsonData } from './core_utils';
 
 export const DEFAULT_VENDOR_LIST = {
@@ -26,6 +20,7 @@ export let cachedCustomVendorList;
 export let pendingVendorListPromise = null;
 
 export function loadVendorListAndCustomVendorList() {
+
   if (cachedVendorList && cachedCustomVendorList) {
     return new Promise(resolve => {
       resolve();
@@ -39,20 +34,22 @@ export function loadVendorListAndCustomVendorList() {
         .then(response => {
           sortVendors(response);
           cachedVendorList = response;
+          loadCustomVendorList().then(() => {
+            pendingVendorListPromise = null;
+            resolve();
+          });
         })
         .catch(error => {
-          logError(`OIL getVendorList failed and returned error: ${error}. Falling back to default vendor list!`);
-        })
-        .finally(() => {
-          loadCustomVendorList()
-            .finally(() => {
-              pendingVendorListPromise = null;
-              resolve()
-            });
+          logError(`OIL getVendorList failed and returned error: ${ error }. Falling back to default vendor list!`);
+          loadCustomVendorList().then(() => {
+            pendingVendorListPromise = null;
+            resolve();
+          });
         });
     });
     return pendingVendorListPromise;
   }
+
 }
 
 function loadCustomVendorList() {
@@ -65,12 +62,13 @@ function loadCustomVendorList() {
       fetchJsonData(customVendorListUrl)
         .then(response => {
           cachedCustomVendorList = response;
+          resolve();
         })
         .catch(error => {
           cachedCustomVendorList = DEFAULT_CUSTOM_VENDOR_LIST;
-          logError(`OIL getCustomVendorList failed and returned error: ${error}. Falling back to default custom vendor list!`);
-        })
-        .finally(() => resolve());
+          logError(`OIL getCustomVendorList failed and returned error: ${ error }. Falling back to default custom vendor list!`);
+          resolve();
+        });
     }
   });
 }
@@ -80,7 +78,7 @@ export function getPurposes() {
 }
 
 export function getPurposeIds() {
-  return getPurposes().map(({id}) => id);
+  return getPurposes().map(({ id }) => id);
 }
 
 export function getVendors() {
@@ -88,7 +86,7 @@ export function getVendors() {
 }
 
 export function getVendorIds() {
-  return getVendors().map(({id}) => id);
+  return getVendors().map(({ id }) => id);
 }
 
 export function getVendorList() {
@@ -102,7 +100,7 @@ export function getVendorList() {
     purposes: expandIdsToObjects(DEFAULT_VENDOR_LIST.purposeIds),
     features: [],
     isDefault: true
-  }
+  };
 }
 
 export function getCustomVendorList() {
@@ -148,7 +146,7 @@ export function getLimitedVendorIds() {
   const blacklist = getIabVendorBlacklist();
 
   if (whitelist && whitelist.length > 0) {
-    limited = limited.filter(vendorId => whitelist.indexOf(vendorId) > -1)
+    limited = limited.filter(vendorId => whitelist.indexOf(vendorId) > -1);
   } else if (blacklist && blacklist.length > 0) {
     limited = limited.filter(vendorId => blacklist.indexOf(vendorId) === -1);
   }
@@ -159,8 +157,10 @@ export function getLimitedVendorIds() {
 // FIXME Refactor this code. Nobody can read it!
 function buildDefaultVendorIdList() {
   return ((a, b) => {
-    while (a--) b[a] = a + 1;
-    return b
+    while (a--) {
+      b[a] = a + 1;
+    }
+    return b;
   })(DEFAULT_VENDOR_LIST.maxVendorId, []);
 }
 
@@ -173,5 +173,5 @@ function sortVendors(vendorList) {
  * and wraps it with as {id: element} object
  */
 function expandIdsToObjects(idArray) {
-  return idArray.map(anId => ({'id': anId}));
+  return idArray.map(anId => ({ 'id': anId }));
 }

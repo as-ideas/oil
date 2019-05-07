@@ -204,7 +204,11 @@ export function getHubLocation() {
 
 export function getPoiListDirectory() {
   let hubOrigin = getHubOrigin();
-  return hubOrigin.endsWith('/') ? hubOrigin.replace(/\/$/, '/poi-lists') : hubOrigin + '/poi-lists';
+  return endsWith(hubOrigin,'/') ? hubOrigin.replace(/\/$/, '/poi-lists') : hubOrigin + '/poi-lists';
+}
+
+function endsWith(str, suffix) {
+  return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
 
 /**
