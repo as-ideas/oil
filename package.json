@@ -43,7 +43,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "consent-string": "1.2.4",
+    "consent-string": "1.4.2",
     "js-cookie": "2.1.4"
   },
   "devDependencies": {
