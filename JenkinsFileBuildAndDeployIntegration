@@ -26,17 +26,25 @@ node {
       sendPerSlack('#000000', "STARTED")
     }
 
-    stage('npm install Dependencies') {
+    stage('Install dependencies') {
       sh "npm i"
     }
 
-    stage('build') {
+    stage('Build') {
       sh "npm run build"
     }
 
-    stage('test') {
+    stage('Test') {
       sh "npm run test"
     }
+
+    stage('Deploy integration: host1, host2') {
+      withCredentials([usernamePassword(credentialsId: 'b07c4ef3-6b1b-4de1-8ba2-489266971e9a', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+        sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@git.heroku.com/oil-integration-host1.git HEAD:master'
+        sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@git.heroku.com/oil-integration-host2.git HEAD:master'
+      }
+    }
+
 
     currentBuild.result = 'SUCCESS'
   } catch (e) {
