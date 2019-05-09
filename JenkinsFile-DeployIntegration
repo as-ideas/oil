@@ -1,0 +1,43 @@
+#!groovy​
+
+def sendPerSlack(color, status) {
+  def committerEmail = sh (
+    script: 'git --no-pager show -s --format=\'%an\'',
+    returnStdout: true
+  ).trim()
+  def buildUser = wrap([$class: 'BuildUser']) {
+    sh (
+      script: 'echo ${BUILD_USER}',
+      returnStdout: true
+    )
+  }
+  slackSend color: color, message: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - Committer: ${committerEmail} - Job started by: ${buildUser}"
+}
+
+node {
+
+  tools {nodejs "NodeJsForSmartDisco"}
+
+  try {
+    stage('Checkout') {
+      checkout scm
+      sendPerSlack('#000000', "STARTED")
+    }
+    stage('NPM Install') {
+      sh "npm config ls"
+    }
+
+    currentBuild.result = 'SUCCESS'
+  } catch (e) {
+    currentBuild.result = 'FAILED'
+    throw e
+  } finally {
+    if (currentBuild.result == 'SUCCESS') {
+      sendPerSlack('#00FF00', "SUCCESSFUL")
+    } else {
+      sendPerSlack('#FF0000', "FAILED")
+    }
+  }
+}
+
+
