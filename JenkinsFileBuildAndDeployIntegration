@@ -16,15 +16,26 @@ def sendPerSlack(color, status) {
 
 node {
 
-  tools {nodejs "NodeJsForSmartDisco"}
+  //Setup nodeJS from nodeJS Jenkins Plugin
+  env.NODEJS_HOME = "${tool 'NodeJsForSmartDisco'}"
+  env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
 
   try {
     stage('Checkout') {
       checkout scm
       sendPerSlack('#000000', "STARTED")
     }
-    stage('NPM Install') {
-      sh "npm config ls"
+
+    stage('npm install Dependencies') {
+      sh "npm i"
+    }
+
+    stage('build') {
+      sh "npm run build"
+    }
+
+    stage('test') {
+      sh "npm run test"
     }
 
     currentBuild.result = 'SUCCESS'
