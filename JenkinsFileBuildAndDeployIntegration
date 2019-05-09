@@ -39,11 +39,14 @@ node {
     }
 
     stage('Deploy integration: host1, host2') {
-        sh 'git push https://git.heroku.com/oil-integration-host1.git HEAD:master'
-        sh 'git push https://git.heroku.com/oil-integration-host2.git HEAD:master'
+      sh "git push https://git.heroku.com/oil-integration-host1.git HEAD:master"
+      sh "git push https://git.heroku.com/oil-integration-host2.git HEAD:master"
 
     }
 
+    stage('E2E-Test') {
+      sh "npm run test:selenium"
+    }
 
     currentBuild.result = 'SUCCESS'
   } catch (e) {
