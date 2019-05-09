@@ -8,7 +8,6 @@ module.exports = {
   ],
 
   "output_folder": "./target/local-reports",
-  "globals_path": "./nightwatch.local.globals.js",
 
   "selenium": { // downloaded by selenium-download module (see readme)
     "start_process": true, // tells nightwatch to start/stop the selenium process
@@ -27,7 +26,9 @@ module.exports = {
         "path": ''
       },
       "globals": {
-        "waitForConditionTimeout": 5000
+        "waitForConditionTimeout": 5000,
+        "launch_url_host1": 'http://oilsite1:8080/',
+        "launch_url_host2": 'http://oilsite2:8080/'
       }
     },
     "chrome": {

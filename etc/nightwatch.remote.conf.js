@@ -1,4 +1,10 @@
 require('babel-register')();
+const HtmlReporter = require('nightwatch-html-reporter');
+
+let reporter = new HtmlReporter({
+  uniqueFilename: true,
+  reportsDirectory: __dirname + '/../target/reports'
+});
 
 nightwatch_config = {
   src_folders: [
@@ -6,7 +12,6 @@ nightwatch_config = {
   ],
 
   "output_folder": "./target/browserstack-reports",
-  "globals_path": "./nightwatch.remote.globals.js",
 
   selenium: {
     "start_process": false,
@@ -22,7 +27,14 @@ nightwatch_config = {
   },
 
   test_settings: {
-    default: {},
+    default: {
+      'globals': {
+        'openBrowser': false,
+        'launch_url_host1': 'https://oil-integration-host1.herokuapp.com/',
+        'launch_url_host2': 'https://oil-integration-host2.herokuapp.com/',
+        'reporter': reporter.fn
+      }
+    },
     chrome15: {
       desiredCapabilities: {
         'browser': 'Chrome',
