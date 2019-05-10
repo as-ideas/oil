@@ -54,7 +54,9 @@ node {
     }
 
     stage('E2E-Test') {
-      sh "npm run test:selenium"
+      wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+        sh "npm run test:selenium"
+      }
     }
 
     stage('Create Git Tag') {

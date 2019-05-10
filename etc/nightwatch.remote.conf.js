@@ -3,7 +3,7 @@ const HtmlReporter = require('nightwatch-html-reporter');
 
 let reporter = new HtmlReporter({
   uniqueFilename: true,
-  reportsDirectory: __dirname + '/../target/reports'
+  reportsDirectory: __dirname + '/../reports'
 });
 
 nightwatch_config = {
@@ -11,7 +11,7 @@ nightwatch_config = {
     "test/e2e"
   ],
 
-  "output_folder": "./target/browserstack-reports",
+  "output_folder": "./reports/browserstack-reports",
 
   selenium: {
     "start_process": false,

@@ -4,6 +4,8 @@
 .awcache/
 dist/
 node_modules/
+reports/browserstack-reports/
+reports/*.html
 test/e2e/.awcache/
 test/e2e/dist/
 test/e2e/node_modules/
