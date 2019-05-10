@@ -14,6 +14,8 @@ def sendPerSlack(color, status) {
   slackSend color: color, message: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - Committer: ${committerEmail} - Job started by: ${buildUser}"
 }
 
+def repositoryUrl
+
 node {
 
   //Setup nodeJS from nodeJS Jenkins Plugin
@@ -23,6 +25,7 @@ node {
   try {
     stage('Checkout') {
       checkout scm
+      repositoryUrl = sh(returnStdout: true, script: 'git config remote.origin.url').trim().substring('https://'.length())
       sendPerSlack('#000000', "STARTED")
     }
 
@@ -46,6 +49,13 @@ node {
 
     stage('E2E-Test') {
       sh "npm run test:selenium"
+    }
+
+    stage('Create Git Tag') {
+      withCredentials([usernamePassword(credentialsId: 'b07c4ef3-6b1b-4de1-8ba2-489266971e9a', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+        sh "git tag -a 'build-${env.BUILD_NUMBER}' -m 'Successful build-${env.BUILD_NUMBER}'"
+        sh "git push https://\${GIT_USERNAME}:\${GIT_PASSWORD}@${repositoryUrl} --tags"
+      }
     }
 
     currentBuild.result = 'SUCCESS'
