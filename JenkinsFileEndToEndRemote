@@ -11,13 +11,14 @@ def sendPerSlack(color, status) {
       returnStdout: true
     )
   }
-  slackSend color: color, message: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - Committer: ${committerEmail} - Job started by: ${buildUser}"
+  slackSend color: color, message: "${status}: Job '${env.JOB_NAME} for ${params.browser} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - Committer: ${committerEmail} - Job started by: ${buildUser}"
 }
 
 node {
 
   try {
     stage('Checkout') {
+      currentBuild.description = "E2E for ${params.browser}"
       checkout scm
       sendPerSlack('#000000', "STARTED")
     }
