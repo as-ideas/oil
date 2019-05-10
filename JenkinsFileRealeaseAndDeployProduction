@@ -14,23 +14,35 @@ def sendPerSlack(color, status) {
   slackSend color: color, message: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - Committer: ${committerEmail} - Job started by: ${buildUser}"
 }
 
-def repositoryUrl
-
 node {
-
-
 
   try {
     stage('Checkout') {
       checkout scm
-      repositoryUrl = sh(returnStdout: true, script: 'git config remote.origin.url').trim().substring('https://'.length())
       sendPerSlack('#000000', "STARTED")
     }
 
-    stage('Install dependencies') {
-      sh "npm i"
+    stage('Release') {
+      withCredentials([usernamePassword(credentialsId: 'b07c4ef3-6b1b-4de1-8ba2-489266971e9a', passwordVariable: 'GITHUB_PASSWORD', usernameVariable: 'GITHUB_USERNAME'),
+                       usernamePassword(credentialsId: '15107e72-79b6-4df8-b718-459e102f18fb', passwordVariable: 'NPMJS_PASSWORD', usernameVariable: 'NPMJS_USERNAME'),
+                       [
+                         $class: 'AmazonWebServicesCredentialsBinding',
+                         credentialsId: '1b9bce0b-a1ba-4b54-aa21-db21e1dc4195',
+                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                       ]]) {
+        env.RELEASE_NAME=params.RELEASE_NAME
+        env.RELEASE_NUMBER=params.RELEASE_NUMBER
+        env.NMPJS_EMAIL=params.NPMJS_EMAIL
+        env.AWS_REGION=params.AWS_REGION
+        env.AWS_BUCKET=params.AWS_BUCKET
+        sh "./releaseOil.sh"
+      }
     }
 
+    stage('Deploy Production') {
+      sh 'git push https://git.heroku.com/oil-cdn.git HEAD:master'
+    }
 
     currentBuild.result = 'SUCCESS'
   } catch (e) {
