@@ -28,7 +28,9 @@ node {
 
     stage('Perform E2E') {
       withCredentials([usernamePassword(credentialsId: 'bcb4ea86-1099-49ae-a16c-9560b1669e25', passwordVariable: 'ENV_KEY', usernameVariable: 'ENV_USER')]) {
-        sh "./node_modules/.bin/nightwatch -c etc/nightwatch.remote.conf.js -e ${params.browser}"
+        wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+          sh "./node_modules/.bin/nightwatch -c etc/nightwatch.remote.conf.js -e ${params.browser}"
+        }
       }
     }
 
