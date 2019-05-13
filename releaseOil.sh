@@ -24,7 +24,7 @@
 
 function checkEnvironment {
   variable=$1
-  if [ "${!variable}" = "" ];
+  if [[ "${!variable}" = "" ]];
   then
     echo "Error: Necessary environment variable undefined! Please define '$variable'!";
     exit 1
@@ -60,7 +60,7 @@ checkEnvironment "NPMJS_PASSWORD"
 checkEnvironment "NPMJS_EMAIL"
 
 echo "### Validating release number"
-if [ "${RELEASE_NUMBER}" != "${PACKAGE_VERSION}" ];
+if [[ "${RELEASE_NUMBER}" != "${PACKAGE_VERSION}" ]];
 then
   echo "Error: given release number does not match version in package.json!"
   exit 1
@@ -99,7 +99,7 @@ cp dist/poi-lists/default.json dist/latest/poi-lists/default.json
 
 
 echo "### Creating release for npmjs.com"
-if [ -d "release/current" ];
+if [[ -d "release/current" ]];
 then
   rm -rf release/current
 fi
