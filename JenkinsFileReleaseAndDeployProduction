@@ -23,11 +23,11 @@ node {
     }
 
     stage('Release') {
-      withCredentials([usernamePassword(credentialsId: 'b07c4ef3-6b1b-4de1-8ba2-489266971e9a', passwordVariable: 'GITHUB_PASSWORD', usernameVariable: 'GITHUB_USERNAME'),
-                       usernamePassword(credentialsId: '15107e72-79b6-4df8-b718-459e102f18fb', passwordVariable: 'NPMJS_PASSWORD', usernameVariable: 'NPMJS_USERNAME'),
+      withCredentials([usernamePassword(credentialsId: '52e3bd5e-ef78-428f-921e-3f57e5e06fd7', passwordVariable: 'GITHUB_PASSWORD', usernameVariable: 'GITHUB_USERNAME'),
+                       usernamePassword(credentialsId: 'ae9b403e-8f46-4dbd-8374-66eaa003d72f', passwordVariable: 'NPMJS_PASSWORD', usernameVariable: 'NPMJS_USERNAME'),
                        [
                          $class: 'AmazonWebServicesCredentialsBinding',
-                         credentialsId: '1b9bce0b-a1ba-4b54-aa21-db21e1dc4195',
+                         credentialsId: '21637834-137b-417e-bc79-93f35d1af005',
                          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                        ]]) {
