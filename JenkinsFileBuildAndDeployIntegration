@@ -19,7 +19,7 @@ def repositoryUrl
 node {
 
   //Setup nodeJS from nodeJS Jenkins Plugin
-  env.NODEJS_HOME = "${tool 'NodeJsForSmartDisco'}"
+  env.NODEJS_HOME = "${tool 'NodeJs 11.14.0'}"
   env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
 
   try {
@@ -60,7 +60,7 @@ node {
     }
 
     stage('Create Git Tag') {
-      withCredentials([usernamePassword(credentialsId: 'b07c4ef3-6b1b-4de1-8ba2-489266971e9a', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+      withCredentials([usernamePassword(credentialsId: '52e3bd5e-ef78-428f-921e-3f57e5e06fd7', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
         sh "git tag -a 'build-${env.BUILD_NUMBER}' -m 'Successful build-${env.BUILD_NUMBER}'"
         sh "git push https://\${GIT_USERNAME}:\${GIT_PASSWORD}@${repositoryUrl} --tags"
       }

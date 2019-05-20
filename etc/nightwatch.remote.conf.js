@@ -42,10 +42,10 @@ nightwatch_config = {
         'browserstack.console': 'disable'
       }
     },
-    chrome68: {
+    chrome74: {
       desiredCapabilities: {
         'browser': 'Chrome',
-        'browser_version': '68.0',
+        'browser_version': '74.0',
         'browserstack.console': 'disable'
       }
     },
@@ -62,10 +62,10 @@ nightwatch_config = {
         'browser_version': '11.0'
       }
     },
-    edge17: {
+    edge18: {
       desiredCapabilities: {
         'browser': 'Edge',
-        'browser_version': '17.0'
+        'browser_version': '18.0'
       }
     },
     ff35: {
@@ -74,7 +74,7 @@ nightwatch_config = {
         'browser_version': '35.0'
       }
     },
-    ff61: {
+    ff66: {
       desiredCapabilities: {
         'browser': 'Firefox',
         'browser_version': '61.0'
@@ -86,16 +86,22 @@ nightwatch_config = {
         'browser_version': '6.0'
       }
     },
-    safari11: {
+    safari12: {
       desiredCapabilities: {
         'browser': 'Safari',
-        'browser_version': '11.0'
+        'browser_version': '12.0'
       }
     },
     opera1216: {
       desiredCapabilities: {
         'browser': 'Opera',
         'browser_version': '12.16'
+      }
+    },
+    opera60: {
+      desiredCapabilities: {
+        'browser': 'Opera',
+        'browser_version': '60.0'
       }
     },
     iphoneSE: {
@@ -105,18 +111,25 @@ nightwatch_config = {
         'os_version': '11.2'
       }
     },
-    iphone10: {
+    iphone6: {
       desiredCapabilities: {
-        'device': 'iPhone X',
+        'device': 'iPhone 6',
         'realMobile': 'true',
-        'os_version': '11.0'
+        'os_version': '8.0'
+      }
+    },
+    iphoneXS: {
+      desiredCapabilities: {
+        'device': 'iPhone XS',
+        'realMobile': 'true',
+        'os_version': '12.0'
       }
     },
     ipadpro: {
       desiredCapabilities: {
-        'device': 'iPad Pro',
+        'device': 'iPad Pro 12.9 2018',
         'realMobile': 'true',
-        'os_version': '11.2'
+        'os_version': '12.0'
       }
     },
     android4: {
@@ -126,19 +139,19 @@ nightwatch_config = {
         'os_version': '4.4'
       }
     },
-    android8: {
+    android9: {
       desiredCapabilities: {
-        'os_version' : '8.0',
-        'device' : 'Samsung Galaxy S9',
+        'os_version' : '9.0',
+        'device' : 'Samsung Galaxy S9+',
         'real_mobile' : 'true',
         'browserstack.console' : 'disable'
       },
     },
-    galaxyNote4: {
+    galaxyNote9: {
       desiredCapabilities: {
-        'device': 'Samsung Galaxy Note 4',
+        'device': 'Samsung Galaxy Note 9',
         'realMobile': 'true',
-        'os_version': '6.0'
+        'os_version': '8.1'
       }
     }
   }
