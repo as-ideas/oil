@@ -11,7 +11,7 @@ nightwatch_config = {
     "test/e2e"
   ],
 
-  "output_folder": "./reports/browserstack-reports",
+  "output_folder": false,
 
   selenium: {
     "start_process": false,
