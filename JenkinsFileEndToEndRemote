@@ -16,6 +16,10 @@ def sendPerSlack(color, status) {
 
 node {
 
+  //Setup nodeJS from nodeJS Jenkins Plugin
+  env.NODEJS_HOME = "${tool 'NodeJs 11.14.0'}"
+  env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+
   try {
     stage('Checkout') {
       currentBuild.description = "E2E for ${params.browser}"
@@ -28,7 +32,7 @@ node {
     }
 
     stage('Perform E2E') {
-      withCredentials([usernamePassword(credentialsId: 'bcb4ea86-1099-49ae-a16c-9560b1669e25', passwordVariable: 'ENV_KEY', usernameVariable: 'ENV_USER')]) {
+      withCredentials([usernamePassword(credentialsId: '30302798-a3dc-49fc-a263-3616fd24f792', passwordVariable: 'ENV_KEY', usernameVariable: 'ENV_USER')]) {
         wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
           sh "./node_modules/.bin/nightwatch -c etc/nightwatch.remote.conf.js -e ${params.browser}"
         }
