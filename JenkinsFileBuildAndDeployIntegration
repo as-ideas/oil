@@ -44,11 +44,11 @@ node {
     stage('Deploy integration') {
       parallel 'host1': {
         stage('host1') {
-          sh "git push https://git.heroku.com/oil-integration-host1.git HEAD:master"
+          sh "git push -f https://git.heroku.com/oil-integration-host1.git HEAD:master"
         }
       }, 'host2': {
         stage('host2') {
-          sh "git push https://git.heroku.com/oil-integration-host2.git HEAD:master"
+          sh "git push -f https://git.heroku.com/oil-integration-host2.git HEAD:master"
         }
       }
     }
