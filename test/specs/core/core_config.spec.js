@@ -9,7 +9,7 @@ import {
   getHubOrigin,
   getHubPath,
   getIabVendorBlacklist,
-  getIabVendorWhitelist,
+  getIabVendorWhitelist, getInfoBannerOnly,
   getLanguageFromLocale,
   getLocale,
   getLocaleUrl,
@@ -140,6 +140,7 @@ describe('core_config', () => {
       expect(getLocaleUrl()).toEqual(true);
       expect(getCookieExpireInDays()).toEqual(true);
       expect(getPoiGroupName()).toEqual(true);
+      expect(getInfoBannerOnly()).toEqual(true);
     });
 
     it('should return correct default values', function () {
@@ -153,6 +154,7 @@ describe('core_config', () => {
       expect(getLocaleUrl()).toBeUndefined();
       expect(getCookieExpireInDays()).toEqual(DEFAULT_COOKIE_EXPIRES_IN);
       expect(getPoiGroupName()).toEqual(DEFAULT_POI_GROUP);
+      expect(getInfoBannerOnly()).toEqual(false);
     });
 
   });

@@ -33,7 +33,8 @@ export const OIL_CONFIG = {
   ATTR_DEFAULT_TO_OPTIN: 'default_to_optin',
   ATTR_GDPR_APPLIES_GLOBALLY: 'gdpr_applies_globally',
   ATTR_GDPR_APPLIES: 'gdpr_applies',
-  ATTR_REQUIRE_OPTOUT_CONFIRM: 'require_optout_confirm'
+  ATTR_REQUIRE_OPTOUT_CONFIRM: 'require_optout_confirm',
+  ATTR_INFO_BANNER_ONLY: 'info_banner_only'
 };
 
 export const OIL_CONFIG_CPC_TYPES = {
