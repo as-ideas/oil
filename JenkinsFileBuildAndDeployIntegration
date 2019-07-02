@@ -34,11 +34,15 @@ node {
     }
 
     stage('Build') {
-      sh "npm run build"
+      wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+        sh "npm run build"
+      }
     }
 
     stage('Test') {
-      sh "npm run test"
+      wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+        sh "npm run test"
+      }
     }
 
     stage('Deploy integration') {
