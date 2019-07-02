@@ -36,6 +36,7 @@ module.exports = {
         'browserName': 'chrome',
         'javascriptEnabled': true,
         'chromeOptions': {
+          'w3c': false,
           'args': [
             '--headless',
             '--disable-gpu',
