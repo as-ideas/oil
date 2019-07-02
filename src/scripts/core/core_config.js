@@ -259,3 +259,6 @@ export function getShowLimitedVendors() {
   return getConfigValue(OIL_CONFIG.ATTR_SHOW_LIMITED_VENDORS_ONLY, false);
 }
 
+export function getInfoBannerOnly() {
+  return getConfigValue(OIL_CONFIG.ATTR_INFO_BANNER_ONLY, false);
+}
