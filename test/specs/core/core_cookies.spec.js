@@ -220,6 +220,20 @@ describe('core cookies', () => {
       setupVendorListSpies();
     });
 
+    it('should set simple soi cookie without consent info if config info_banner_only is true', (done) => {
+      spyOn(CoreConfig, 'getInfoBannerOnly').and.returnValue(true);
+
+      setSoiCookie(1).then(() => {
+        const cookieSetArguments = Cookie.set.calls.argsFor(0);
+        const cookie = cookieSetArguments[1];
+
+        expect(cookie.opt_in).toBeTruthy();
+        expect(cookie.consentString).toBe('');
+
+        done();
+      });
+    });
+
     it('should set soi cookie for global opt-in if cookie does not exist yet', (done) => {
       spyOn(Cookie, 'get').withArgs('oil_data').and.returnValue(undefined).withArgs('oil_verbose').and.callThrough();
 
