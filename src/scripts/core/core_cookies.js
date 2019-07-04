@@ -1,6 +1,15 @@
 import Cookie from 'js-cookie';
 import { logInfo } from './core_log';
-import { getConfigVersion, getCookieExpireInDays, getCustomPurposes, getDefaultToOptin, getLanguage, getLanguageFromLocale, getLocaleVariantName } from './core_config';
+import {
+  getConfigVersion,
+  getCookieExpireInDays,
+  getCustomPurposes,
+  getDefaultToOptin,
+  getInfoBannerOnly,
+  getLanguage,
+  getLanguageFromLocale,
+  getLocaleVariantName
+} from './core_config';
 import { getLocaleVariantVersion } from './core_utils';
 import { OIL_CONFIG_DEFAULT_VERSION, OIL_SPEC } from './core_constants';
 import { getCustomVendorListVersion, getLimitedVendorIds, getPurposes, getVendorList, loadVendorListAndCustomVendorList } from './core_vendor_lists';
@@ -84,6 +93,13 @@ export function setSoiCookieWithPoiCookieData(poiCookieJson) {
         consentString: consentString,
         configVersion: configVersion
       };
+
+      if(getInfoBannerOnly()) {
+        cookie = {
+          opt_in: true
+        }
+      }
+
       setDomainCookie(cookieConfig.name, cookie, cookieConfig.expires);
       resolve(cookie);
     }).catch(error => reject(error));
@@ -95,10 +111,12 @@ export function buildSoiCookie(privacySettings) {
     loadVendorListAndCustomVendorList().then(() => {
       let cookieConfig = getOilCookieConfig();
       let consentData = cookieConfig.defaultCookieContent.consentData;
+
       consentData.setGlobalVendorList(getVendorList());
       consentData.setPurposesAllowed(getStandardPurposesWithConsent(privacySettings));
       consentData.setVendorsAllowed(getLimitedVendorIds());
-      resolve({
+
+      let outputCookie = {
         opt_in: true,
         version: cookieConfig.defaultCookieContent.version,
         localeVariantName: cookieConfig.defaultCookieContent.localeVariantName,
@@ -107,7 +125,13 @@ export function buildSoiCookie(privacySettings) {
         customPurposes: getCustomPurposesWithConsent(privacySettings),
         consentString: consentData.getConsentString(),
         configVersion: cookieConfig.defaultCookieContent.configVersion
-      });
+      };
+
+      if (getInfoBannerOnly()) {
+        outputCookie = {opt_in: true}
+      }
+
+      resolve(outputCookie);
     }).catch(error => reject(error));
   });
 }
@@ -228,7 +252,12 @@ function cookieDataHasKeys(name, data) {
   if (typeof (name) === 'string' && Array.isArray(data)) {
     if (isCookie(name)) {
       const cookieData = Cookie.getJSON(name);
-      return data.every(item => item === 'consentData' || cookieData.hasOwnProperty(item))
+
+      if(getInfoBannerOnly()) {
+        return cookieData.hasOwnProperty('opt_in');
+      } else {
+        return data.every(item => item === 'consentData' || cookieData.hasOwnProperty(item))
+      }
     }
   }
   return false;
