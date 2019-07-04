@@ -23,6 +23,10 @@ node {
   env.PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
 
   try {
+    stage('Cleanup workspace') {
+      deleteDir()
+    }
+
     stage('Checkout') {
       checkout scm
       repositoryUrl = sh(returnStdout: true, script: 'git config remote.origin.url').trim().substring('https://'.length())
