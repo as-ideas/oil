@@ -73,6 +73,33 @@ describe('user view opt-in handler', () => {
       });
     });
 
+    it('should activate power opt-in with iframe without consent string for info_banner_only', (done) => {
+      spyOn(CoreConfig, 'isPoiActive').and.returnValue(true);
+      spyOn(CoreConfig, 'getInfoBannerOnly').and.returnValue(true);
+
+      const EXPECTED_COOKIE = {
+        opt_in: true,
+        version: '1.0.0',
+        localeVariantName: 'enEN_01',
+        localeVariantVersion: 17,
+        customPurposes: [25],
+        customVendorListVersion: 135,
+        configVersion: CONFIG_VERSION,
+        consentString: ''
+      };
+
+      oilPowerOptIn(PRIVACY_SETTINGS).then(() => {
+        expect(UserViewPoi.activatePowerOptInWithIFrame).toHaveBeenCalled();
+        expect(CoreCookies.setSoiCookie).toHaveBeenCalledWith(PRIVACY_SETTINGS);
+
+        let payload = UserViewPoi.activatePowerOptInWithIFrame.calls.argsFor(0)[0];
+        verifyThatPayloadForPowerOptInActivationIsCorrect(payload, EXPECTED_COOKIE);
+
+        expect(CoreUtils.sendEventToHostSite).toHaveBeenCalledWith(EVENT_NAME_OPT_IN);
+        done();
+      });
+    });
+
     it('should activate power opt-in with redirect if activation with iframe fails', (done) => {
       spyOn(CoreConfig, 'isPoiActive').and.returnValue(true);
       spyOn(CorePoi, 'verifyPowerOptIn').and.returnValue(new Promise(resolve => {
