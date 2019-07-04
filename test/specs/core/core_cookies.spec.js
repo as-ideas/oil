@@ -228,7 +228,7 @@ describe('core cookies', () => {
         const cookie = cookieSetArguments[1];
 
         expect(cookie.opt_in).toBeTruthy();
-        expect(cookie.consentString).toBeUndefined();
+        expect(cookie.consentString).toBe('');
 
         done();
       });
