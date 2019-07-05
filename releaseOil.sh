@@ -67,7 +67,9 @@ then
 fi
 
 echo "### Installing dependencies"
-npm i || exit 1
+echo "NPM version check"
+npm -v
+npm install || exit 1
 
 
 echo "### Building release" $PACKAGE_VERSION$SNAPSHOT
