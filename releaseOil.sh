@@ -66,9 +66,10 @@ then
   exit 1
 fi
 
-echo "### Installing dependencies"
-echo "NPM version check"
+echo "### NPM version check"
 npm -v
+
+echo "### Installing dependencies"
 npm install || exit 1
 
 

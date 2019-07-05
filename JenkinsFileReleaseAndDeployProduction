@@ -16,6 +16,10 @@ def sendPerSlack(color, status) {
 
 node {
 
+  //Setup nodeJS from nodeJS Jenkins Plugin
+  env.NODEJS_HOME = "${tool 'NodeJs 11.14.0'}"
+  env.PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
+
   try {
     stage('Checkout') {
       checkout scm
