@@ -45,7 +45,7 @@ node {
     }
 
     stage('Deploy Production') {
-      sh 'git push https://git.heroku.com/oil-cdn.git HEAD:master'
+      sh 'git push --force https://git.heroku.com/oil-cdn.git HEAD:master'
     }
 
     currentBuild.result = 'SUCCESS'
