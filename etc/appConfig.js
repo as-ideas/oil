@@ -76,6 +76,18 @@ module.exports = {
     chunksSortMode: 'dependency',
     inject: 'head'
   }, {
+    filename: 'demos/cpc-custom-purposes-default.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-custom-purposes-default.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  }, {
+    filename: 'demos/cpc-custom-purposes-preserve.html',
+    template: path.resolve(sourcePath, 'demos', 'cpc-custom-purposes-preserve.html'),
+    chunks: ['oilstub', 'oil'],
+    chunksSortMode: 'dependency',
+    inject: 'head'
+  }, {
     filename: 'demos/english-version.html',
     template: path.resolve(sourcePath, 'demos', 'english-version.html'),
     chunks: ['oilstub', 'oil'],
