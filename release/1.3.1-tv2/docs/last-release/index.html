@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirect to latest release</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
+  <script>
+    (function () {
+      fetch('https://api.github.com/repos/as-ideas/oil/releases/latest')
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (myJson) {
+          doRedirect(`https://oil.axelspringer.com/release/${myJson.tag_name}/docs/index.html`)
+        });
+    }());
+
+    function doRedirect(url) {
+      window.location = url;
+    }
+  </script>
+</head>
+<body>
+<h3>If this side does not redirect you to the latest documentation: <a href="https://oil.axelspringer.com/docs/">Use the
+  latest documentation of the last build</a></h3>
+</body>
+</html>
