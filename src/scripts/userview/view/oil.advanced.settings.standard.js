@@ -2,12 +2,12 @@ import '../../../styles/cpc_standard.scss';
 import { OIL_LABELS } from '../userview_constants';
 import { forEach } from '../userview_modal';
 import { getLabel, getLabelWithDefault, getTheme } from '../userview_config';
-import { getCustomPurposes, getCustomVendorListUrl } from '../../core/core_config';
+import { getCustomPurposes, getCustomVendorListUrl, getAdvancedSettingsPurposesPreserve } from '../../core/core_config';
 import { JS_CLASS_BUTTON_OPTIN, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants';
 import { setGlobalOilObject } from '../../core/core_utils';
 import { getCustomVendorList, getPurposes, getVendorList, getVendorsToDisplay } from '../../core/core_vendor_lists';
 import { BackButton, YesButton } from './components/oil.buttons';
-
+import { setPendingPurpose } from '../../core/core_pending_purposes';
 
 const CLASS_NAME_FOR_ACTIVE_MENU_SECTION = 'as-oil-cpc__category-link--active';
 
@@ -39,6 +39,11 @@ export function attachCpcHandlers() {
   forEach(document.querySelectorAll('.as-js-btn-deactivate-all'), (domNode) => {
     domNode && domNode.addEventListener('click', deactivateAll, false);
   });
+  if (getAdvancedSettingsPurposesPreserve()) {
+    forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
+      domNode && domNode.addEventListener('click', handleToggle, false);
+    });
+  }
 }
 
 
@@ -202,6 +207,14 @@ export function deactivateAll() {
   forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
     domNode && (domNode.checked = false);
   });
+}
+
+function handleToggle(event) {
+  if (event && event.target) {
+    const val = event.target.checked || false;
+    const id = event.target.getAttribute('data-id') || 0;
+    setPendingPurpose(id, val);
+  }
 }
 
 function switchLeftMenuClass(element) {

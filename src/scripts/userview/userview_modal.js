@@ -25,12 +25,13 @@ import * as AdvancedSettingsStandard from './view/oil.advanced.settings.standard
 import * as AdvancedSettingsTabs from './view/oil.advanced.settings.tabs';
 import { logError, logInfo } from '../core/core_log';
 import { getCpcType, getTheme, getTimeOutValue, isOptoutConfirmRequired, isPersistMinimumTracking } from './userview_config';
-import { gdprApplies, getAdvancedSettingsPurposesDefault, isPoiActive, getCustomPurposeIds } from '../core/core_config';
+import { gdprApplies, getAdvancedSettingsPurposesDefault, isPoiActive, getCustomPurposeIds, getAdvancedSettingsPurposesPreserve } from '../core/core_config';
 import { applyPrivacySettings, getPrivacySettings, getSoiConsentData } from './userview_privacy';
 import { activateOptoutConfirm } from './userview_optout_confirm';
 import { getPurposeIds, loadVendorListAndCustomVendorList } from '../core/core_vendor_lists';
 import { manageDomElementActivation } from '../core/core_tag_management';
 import { sendConsentInformationToCustomVendors } from '../core/core_custom_vendors';
+import { getPendingPurposes, setPendingPurposes } from '../core/core_pending_purposes';
 
 // Initialize our Oil wrapper and save it ...
 
@@ -97,6 +98,9 @@ export function oilShowPreferenceCenter() {
             currentPrivacySettings = consentData.getPurposesAllowed();
           } else {
             currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? [...getPurposeIds(), ...getCustomPurposeIds()] : [];
+          }
+          if (!getPendingPurposes() && getAdvancedSettingsPurposesPreserve()) {
+            setPendingPurposes(currentPrivacySettings);
           }
           applyPrivacySettings(currentPrivacySettings);
         });

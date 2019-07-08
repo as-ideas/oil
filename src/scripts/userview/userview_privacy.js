@@ -2,7 +2,9 @@ import {getSoiCookie} from '../core/core_cookies';
 import {PRIVACY_FULL_TRACKING} from '../core/core_constants';
 import {logInfo} from '../core/core_log';
 import {forEach} from './userview_modal';
-import {getPurposes} from '../core/core_vendor_lists';
+import {getPurposes, getPurposeIds} from '../core/core_vendor_lists';
+import {getAdvancedSettingsPurposesPreserve, getCustomPurposeIds} from '../core/core_config';
+import {getPendingPurposes} from '../core/core_pending_purposes';
 
 export function getSoiConsentData() {
   let soiCookie = getSoiCookie();
@@ -19,6 +21,7 @@ export function getSoiConsentData() {
  *  "{}": if there are multiple checkboxes
  */
 export function getPrivacySettings() {
+  const pendingPurposes = getPendingPurposes();
   if (document.querySelector('.as-js-purpose-slider')) {
     let result = {};
     forEach(document.querySelectorAll('.as-js-purpose-slider'), (element) => {
@@ -26,14 +29,28 @@ export function getPrivacySettings() {
       result[element_id] = element.checked;
     }, this);
     return result;
+  } else if (pendingPurposes && getAdvancedSettingsPurposesPreserve()) {
+    const result = {};
+    [...getPurposeIds(), ...getCustomPurposeIds()].forEach((id) => {
+      result[id] = pendingPurposes.indexOf(id) !== -1;
+    });
+    return result;
   }
   return PRIVACY_FULL_TRACKING;
 }
 
 export function applyPrivacySettings(allowedPurposes) {
-  logInfo('Apply privacy settings from cookie', allowedPurposes);
+  logInfo('Apply privacy settings', allowedPurposes, getPendingPurposes() );
+  const pendingPurposes = getPendingPurposes();
 
-  if (allowedPurposes === 1) {
+  if (pendingPurposes && getAdvancedSettingsPurposesPreserve()) {
+    forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
+      if (domNode) {
+        const id = parseInt(domNode.getAttribute('data-id'), 10);
+        domNode.checked = pendingPurposes.indexOf(id) !== -1;
+      }
+    });
+  } else if (allowedPurposes === 1) {
     forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
       domNode && (domNode.checked = true);
     });
