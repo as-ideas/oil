@@ -33,19 +33,17 @@ export function getPrivacySettings() {
 export function applyPrivacySettings(allowedPurposes) {
   logInfo('Apply privacy settings from cookie', allowedPurposes);
 
-  for (let i = 1; i <= getPurposes().length; i++) {
-    document.querySelector(`#as-js-purpose-slider-${i}`).checked = (allowedPurposes.indexOf(i) !== -1);
-  }
-
   if (allowedPurposes === 1) {
     forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
       domNode && (domNode.checked = true);
     });
-  }
-
-  if (allowedPurposes === 0) {
+  } else if (allowedPurposes === 0) {
     forEach(document.querySelectorAll('.as-js-purpose-slider'), (domNode) => {
       domNode && (domNode.checked = false);
     });
+  } else if (allowedPurposes) {
+    for (let i = 1; i <= getPurposes().length; i++) {
+      document.querySelector(`#as-js-purpose-slider-${i}`).checked = (allowedPurposes.indexOf(i) !== -1);
+    }
   }
 }
