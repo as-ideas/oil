@@ -1,6 +1,7 @@
 import {
   gdprApplies,
   getAdvancedSettingsPurposesDefault,
+  getAdvancedSettingsPurposesPreserve,
   getConfigValue,
   getCookieExpireInDays,
   getCustomPurposes,
@@ -124,6 +125,7 @@ describe('core_config', () => {
 
     const DEFAULT_COOKIE_EXPIRES_IN = 31;
     const DEFAULT_ADVANCED_SETTINGS_PURPOSES_DEFAULT = false;
+    const DEFAULT_ADVANCED_SETTINGS_PURPOSES_PRESERVE = false;
     const DEFAULT_DEFAULT_TO_OPTIN = false;
     const DEFAULT_POI_GROUP = 'default';
     const DEFAULT_CUSTOM_PURPOSES = [];
@@ -137,6 +139,7 @@ describe('core_config', () => {
       expect(getIabVendorBlacklist()).toEqual(true);
       expect(getDefaultToOptin()).toEqual(true);
       expect(getAdvancedSettingsPurposesDefault()).toEqual(true);
+      expect(getAdvancedSettingsPurposesPreserve()).toEqual(true);
       expect(getCustomPurposes()).toEqual(true);
       expect(getLocaleUrl()).toEqual(true);
       expect(getCookieExpireInDays()).toEqual(true);
@@ -151,6 +154,7 @@ describe('core_config', () => {
       expect(getIabVendorBlacklist()).toBeFalsy();
       expect(getDefaultToOptin()).toEqual(DEFAULT_DEFAULT_TO_OPTIN);
       expect(getAdvancedSettingsPurposesDefault()).toEqual(DEFAULT_ADVANCED_SETTINGS_PURPOSES_DEFAULT);
+      expect(getAdvancedSettingsPurposesPreserve()).toEqual(DEFAULT_ADVANCED_SETTINGS_PURPOSES_PRESERVE);
       expect(getCustomPurposes()).toEqual(DEFAULT_CUSTOM_PURPOSES);
       expect(getLocaleUrl()).toBeUndefined();
       expect(getCookieExpireInDays()).toEqual(DEFAULT_COOKIE_EXPIRES_IN);
