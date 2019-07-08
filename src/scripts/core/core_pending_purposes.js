@@ -11,16 +11,16 @@ export function setPendingPurposes(purposes) {
   logInfo('set pending purposes', pendingPurposes)
 }
 
-export function addPendingPurpose(Id) {
-  const id = parseInt(Id, 10);
+export function addPendingPurpose(str) {
+  const id = parseInt(str, 10);
   if (pendingPurposes.indexOf(id) === -1) {
     pendingPurposes.push(id);
     logInfo('add pending purpose', id)
   }
 }
 
-export function removePendingPurpose(Id) {
-  const id = parseInt(Id, 10);
+export function removePendingPurpose(str) {
+  const id = parseInt(str, 10);
   if (pendingPurposes.indexOf(id) !== -1) {
     pendingPurposes = pendingPurposes.filter(i => i !== id);
     logInfo('remove pending purpose', id)
