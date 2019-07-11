@@ -5,11 +5,11 @@
 
 [oil.js](https://www.oiljs.org) is a lightweight consent manager and cookie banner. It is optimized for low latency and performance. It aims to be easy to customize, simple and user-friendly. It supports the IAB framework to forward the consent to ad providers.
 
-[![Latest Release](https://img.shields.io/github/release/as-ideas/oil.svg)](https://oil.axelspringer.com/release/) 
+[![Latest Release](https://img.shields.io/github/release/as-ideas/oil.svg)](https://oil.axelspringer.com/release/)
 [![npm version](https://img.shields.io/npm/v/@ideasio/oil.js.svg)](https://www.npmjs.com/package/@ideasio/oil.js)
 [![Build Status](https://travis-ci.org/as-ideas/oil.svg?branch=master)](https://travis-ci.org/as-ideas/oil)
 [![Coverage Status](https://coveralls.io/repos/github/as-ideas/oil/badge.svg?branch=master)](https://coveralls.io/github/as-ideas/oil?branch=master)
-[![GPL2 License][license-image]][license-url] 
+[![GPL2 License][license-image]][license-url]
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fas-ideas%2Foil.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fas-ideas%2Foil?ref=badge_shield)
 [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=ZEZMK3M2RXZqUG05enhhME9vVWozbXdSM21XTVNpK1RCS251VkRMOEpudz0tLVQwaEpoaTRLeUxJSU1RaFlkM0ltTkE9PQ==--dc1fc353e7c2404d6cb9cd2887553718d9674f3a)](https://www.browserstack.com/automate/public-build/ZEZMK3M2RXZqUG05enhhME9vVWozbXdSM21XTVNpK1RCS251VkRMOEpudz0tLVQwaEpoaTRLeUxJSU1RaFlkM0ltTkE9PQ==--dc1fc353e7c2404d6cb9cd2887553718d9674f3a)
 [Website](https://www.oiljs.org/) | [Full documentation](https://oil.axelspringer.com/docs/last-release) | [Sandbox](https://oil.axelspringer.com/sandbox/) | [Demo-Site with AppNexus](http://www.dieser-ferdinand.de/) | [HTML integration example](https://oil.axelspringer.com/demos/open-source-example.html) | [Release Notes](https://github.com/as-ideas/oil/releases)
@@ -48,7 +48,7 @@ The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://
 * [Development and Contributing](#development-and-contributing)
 * [Changelog and releases](https://github.com/as-ideas/oil/releases)
 * [Roadmap](ROADMAP.md)
-  
+
 ## Technical Quality Goals
 
 * OIL will be held compatible with the latest official browser releases, going back to the latest version as listed below and tested on broad range of browsers using [BROWSERSTACK](http://browserstack.com/):
@@ -85,7 +85,7 @@ The Opt-In Layer (OIL) is an offical [Consent Management Provider (CMP)](http://
 
 ## Usage
 
-There are 3 parts: 
+There are 3 parts:
 
 1) Add the CMP stub to your HTML (this makes the loading of a CMP independent from any call by vendors)
 2) Add the oil.js configuration to your website
@@ -127,7 +127,7 @@ Here is an [example](https://oil.axelspringer.com/demos/open-source-example.html
 
 ### Configuration values
 
-Your configuration is added to your page via a script tag, for example: 
+Your configuration is added to your page via a script tag, for example:
 
 ```javascript
 <script id="oil-configuration" type="application/configuration">
@@ -151,6 +151,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | advanced_settings | Replaces the No Button with an advanced settings button, displaying the Cookie Preference Center. The CPC enables the user to choose their own level of privacy. These settings are stored in the oil cookie (both SOI and POI) as well. | False
 | advanced_settings_purposes_default | All purposes in the advanced settings layer should be activated by default | false
 | config_version | Specifies the version of your OIL configuration. It will be stored with the consent cookie to track which explicit configuration version consent was granted for.| None
+| cookie_domain | Specifies the domain to write the cookie to. Can be used to set the cookie on a valid parent domain: e.g sub.example.com -> .example.com. | Current hostname
 | cookie_expires_in_days | Value in days until the domain cookie used to save the users decision in days | 31
 | cpc_type | Specifies the type (the layout) of the Cookie Preference Center. Currently, two types are supported: 'standard' and 'tabs'. Depending on this parameter additional label configuration may be necessary. See section <<Full Label Configuration>> for details. | standard
 | customPurposes | Array of custom purposes defined by publisher. IDs for custom purposes may range from 25-88. | None
@@ -274,7 +275,7 @@ Labels starting with `label_cpc_purpose_N` are automatically derived from the ve
 
 ### POI – Power Opt-In
 
-In order to retrieve consent and *share it across multiple websites and domains* you will need to activate the __Power Opt-In__ aka POI. 
+In order to retrieve consent and *share it across multiple websites and domains* you will need to activate the __Power Opt-In__ aka POI.
 
 To instantiate oil.js with POI activated, make up a name for your company group (in the example below `MyGroupName` is used), then follow these steps:
 
@@ -296,7 +297,7 @@ You are legally obliged to list all websites/companies belonging to one group.
 
 #### The POI-List
 
-A POI-List file must be a json containing an object with a single property `companyList`. CompanyList must be an array of company names. 
+A POI-List file must be a json containing an object with a single property `companyList`. CompanyList must be an array of company names.
 
 ```javascript
 {
