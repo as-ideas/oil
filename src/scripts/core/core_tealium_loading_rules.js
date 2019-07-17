@@ -109,7 +109,7 @@ function reEvaluateTealiumLoadingRules() {
       [LOADING_RULE_PURPOSE_04]: ud[LOADING_RULE_PURPOSE_04],
       [LOADING_RULE_PURPOSE_05]: ud[LOADING_RULE_PURPOSE_05]
     };
-    if(getInfoBannerOnly()) {
+    if(!getInfoBannerOnly()) {
       window.utag.view(payload);
     }
   }
