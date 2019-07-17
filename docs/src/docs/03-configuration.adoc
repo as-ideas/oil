@@ -141,7 +141,7 @@ This is a full list of configurable options.
 | show_limited_vendors_only | Flag to only show the vendors limited by `iabVendorWhitelist` or `iabVendorBlacklist` in the CPC | false
 | theme | The theme for the layer. By default there are two themes and size modifier themes, `dark` and `light` as well as `small dark` and `small light`. Themes currently work only as an additional css class. To change the style or theme, look into the <<styling-guide,styling guide>>. | light
 | <<auto-hiding-the-layer-timeout,timeout>> | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
-| info_banner_only | Deactivates calculating of consent string | true
+| info_banner_only | Deactivates calculating of consent string and sets consent cookie if timeout is defined and expired | false
 |====
 
 === Texts & Locale Object
