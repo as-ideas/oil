@@ -173,7 +173,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | show_limited_vendors_only | Flag to only show the vendors limited by `iabVendorWhitelist` or `iabVendorBlacklist` in the CPC | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
 | timeout | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
-| info_banner_only | Deactivates calculating of consent string | true
+| info_banner_only | Deactivates calculating of consent string | false
 
 ### Texts & Locale Object
 
