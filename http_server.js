@@ -73,7 +73,8 @@ app.use(domainBlacklist);
 
 app.use(additionalHeaders);
 
-app.post("/amp-consent.json", function(req, res){
+app.post("/amp-consent.json", function(req, res) {
+  res.header('Access-Control-Allow-Origin', '*');
   res.send('{"promptIfUnknown": true}');
 });
 // server gzip
