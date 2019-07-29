@@ -34,13 +34,13 @@ node {
     }
 
     stage('Build') {
-      wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+      wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
         sh "npm run build"
       }
     }
 
     stage('Test') {
-      wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+      wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
         sh "npm run test"
       }
     }
@@ -58,7 +58,7 @@ node {
     }
 
     stage('E2E-Test') {
-      wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+      wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
         sh "npm run test:selenium"
       }
     }
