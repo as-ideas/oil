@@ -1,12 +1,12 @@
 #!groovy​
 
 def sendPerSlack(color, status) {
-  def committerEmail = sh (
+  def committerEmail = sh(
     script: 'git --no-pager show -s --format=\'%an\'',
     returnStdout: true
   ).trim()
   def buildUser = wrap([$class: 'BuildUser']) {
-    sh (
+    sh(
       script: 'echo ${BUILD_USER}',
       returnStdout: true
     )
@@ -20,9 +20,13 @@ node {
 
   //Setup nodeJS from nodeJS Jenkins Plugin
   env.NODEJS_HOME = "${tool 'NodeJs 11.14.0'}"
-  env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+  env.PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
 
   try {
+    stage('Cleanup workspace') {
+      deleteDir()
+    }
+
     stage('Checkout') {
       checkout scm
       repositoryUrl = sh(returnStdout: true, script: 'git config remote.origin.url').trim().substring('https://'.length())
@@ -46,27 +50,34 @@ node {
     }
 
     stage('Deploy integration') {
-      parallel 'host1': {
-        stage('host1') {
-          sh "git push -f https://git.heroku.com/oil-integration-host1.git HEAD:master"
+      if (env.BRANCH_NAME ==~ /(master)/) {
+        parallel 'host1': {
+          stage('host1') {
+            sh "git push -f https://git.heroku.com/oil-integration-host1.git HEAD:master"
+          }
+        }, 'host2': {
+          stage('host2') {
+            sh "git push -f https://git.heroku.com/oil-integration-host2.git HEAD:master"
+          }
         }
-      }, 'host2': {
-        stage('host2') {
-          sh "git push -f https://git.heroku.com/oil-integration-host2.git HEAD:master"
-        }
+
       }
     }
 
     stage('E2E-Test') {
-      wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
-        sh "npm run test:selenium"
+      if (env.BRANCH_NAME ==~ /(master)/) {
+        wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
+          sh "npm run test:selenium"
+        }
       }
     }
 
     stage('Create Git Tag') {
-      withCredentials([usernamePassword(credentialsId: '52e3bd5e-ef78-428f-921e-3f57e5e06fd7', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-        sh "git tag -a 'build-${env.BUILD_NUMBER}' -m 'Successful build-${env.BUILD_NUMBER}'"
-        sh "git push https://\${GIT_USERNAME}:\${GIT_PASSWORD}@${repositoryUrl} --tags"
+      if (env.BRANCH_NAME ==~ /(master)/) {
+        withCredentials([usernamePassword(credentialsId: '52e3bd5e-ef78-428f-921e-3f57e5e06fd7', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+          sh "git tag -a 'build-oil-${env.BUILD_NUMBER}' -m 'Successful build-oil-${env.BUILD_NUMBER}'"
+          sh "git push https://\${GIT_USERNAME}:\${GIT_PASSWORD}@${repositoryUrl} --tags"
+        }
       }
     }
 

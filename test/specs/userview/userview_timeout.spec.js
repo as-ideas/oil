@@ -1,3 +1,4 @@
+import { getSoiCookie } from '../../../src/scripts/core/core_cookies';
 import { loadFixture } from '../../test-utils/utils_fixtures';
 import { renderOil } from '../../../src/scripts/userview/userview_modal';
 import { resetOil } from '../../test-utils/utils_reset';
@@ -14,6 +15,22 @@ describe('the timeout of the user view modal aka the auto hide function', () => 
 
     window.setTimeout(() => {
       expect(document.querySelector('.as-oil')).toBeNull();
+      done();
+    }, 1150);
+  });
+
+  it('should hide OIL after the configured timeout and set consent cookie when info_banner_only is true', (done) => {
+    loadFixture('config/given.config.with.one.second.timeout.and.infobanneronly.html');
+    givenOilIsShown();
+
+    expect(document.querySelector('.as-oil')).not.toBeNull();
+    expect(getSoiCookie().opt_in).toBeFalsy();
+    expect(getSoiCookie().consentString).toBe('');
+
+    window.setTimeout(() => {
+      expect(document.querySelector('.as-oil')).toBeNull();
+      expect(getSoiCookie().opt_in).toBeTruthy();
+      expect(getSoiCookie().consentString).toBe('');
       done();
     }, 1150);
   });

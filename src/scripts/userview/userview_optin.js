@@ -13,7 +13,7 @@ import {
   PRIVACY_FULL_TRACKING
 } from '../core/core_constants';
 import { setSoiCookie } from '../core/core_cookies';
-import { isPoiActive } from '../core/core_config';
+import { getInfoBannerOnly, isPoiActive } from '../core/core_config';
 
 /**
  * Oil optIn power
@@ -28,7 +28,7 @@ export function oilPowerOptIn(privacySettings) {
     soiCookiePromise = setSoiCookie(privacySettings);
     soiCookiePromise.then((cookie) => {
       let payload = {
-        [OIL_PAYLOAD_PRIVACY]: cookie.consentString,
+        [OIL_PAYLOAD_PRIVACY]: !getInfoBannerOnly() ? cookie.consentString : '',
         [OIL_PAYLOAD_VERSION]: cookie.version,
         [OIL_PAYLOAD_LOCALE_VARIANT_NAME]: cookie.localeVariantName,
         [OIL_PAYLOAD_LOCALE_VARIANT_VERSION]: cookie.localeVariantVersion,
@@ -36,6 +36,7 @@ export function oilPowerOptIn(privacySettings) {
         [OIL_PAYLOAD_CUSTOM_PURPOSES]: cookie.customPurposes,
         [OIL_PAYLOAD_CONFIG_VERSION]: cookie.configVersion
       };
+
       if (isPoiActive()) {
         // Update Oil cookie (mypass - POI)
         // noinspection JSIgnoredPromiseFromCall

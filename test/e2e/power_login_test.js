@@ -6,8 +6,9 @@ import {
 const REDIRECT_TIMEOUT = 5000;
 const ASSERT_TIMEOUT = 2000;
 
+//ToDo: refactor this test is doesnt work properly (checks not for sure whether OIL is not load on site b)
 module.exports = {
-  '@disabled': false,
+  '@disabled': true,
   beforeEach: browser => {
     browser
       .deleteCookies();
@@ -19,6 +20,8 @@ module.exports = {
       .useXpath()
       .waitForElementPresent(OIL_LAYER, ASSERT_TIMEOUT, false)
       .click(OIL_YES_BUTTON);
+    //fallback if post message not supported by browser
+    //should be two test for this case
     browser.url((result) => {
       if (result.toString().indexOf('fallback') !== -1) {
         browser
