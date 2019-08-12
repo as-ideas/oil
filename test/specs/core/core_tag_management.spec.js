@@ -1,7 +1,7 @@
 import { resetOil } from '../../test-utils/utils_reset';
 import * as CoreCookies from '../../../src/scripts/core/core_cookies';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
-import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
+import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_lists';
 import { loadFixture, readFixture } from '../../test-utils/utils_fixtures';
 import { manageDomElementActivation } from '../../../src/scripts/core/core_tag_management';
 

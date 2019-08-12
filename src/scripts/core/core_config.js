@@ -109,10 +109,6 @@ export function isPoiActive() {
   return getConfigValue(OIL_CONFIG.ATTR_ACTIVATE_POI, false);
 }
 
-export function isSubscriberSetCookieActive() {
-  return getConfigValue(OIL_CONFIG.ATTR_SUB_SET_COOKIE, true);
-}
-
 /**
  * Get the hub iFrame domain with protocol prefix for the current location
  * @returns {string, null} domain iframe orgin
@@ -120,7 +116,7 @@ export function isSubscriberSetCookieActive() {
 export function getHubOrigin() {
   let origin = getConfigValue(OIL_CONFIG.ATTR_HUB_ORIGIN, 'https://unpkg.com');
   if (origin) {
-    return origin.indexOf('http') !== -1 ? origin : location.protocol + origin;
+    return origin === '/' || origin.indexOf('http') !== -1 ? origin : location.protocol + origin;
   }
   return null;
 }
@@ -203,10 +199,16 @@ export function getLanguageFromLocale(localeVariantName = 'en') {
  * @returns {string, null} complete iframe orgin
  */
 export function getHubLocation() {
-  if (getHubOrigin() && getHubPath()) {
-    return getHubOrigin() + getHubPath();
-  }
-  return null;
+  return getHubOrigin() + getHubPath();
+}
+
+export function getPoiListDirectory() {
+  let hubOrigin = getHubOrigin();
+  return endsWith(hubOrigin,'/') ? hubOrigin.replace(/\/$/, '/poi-lists') : hubOrigin + '/poi-lists';
+}
+
+function endsWith(str, suffix) {
+  return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
 
 /**
@@ -257,3 +259,6 @@ export function getShowLimitedVendors() {
   return getConfigValue(OIL_CONFIG.ATTR_SHOW_LIMITED_VENDORS_ONLY, false);
 }
 
+export function getInfoBannerOnly() {
+  return getConfigValue(OIL_CONFIG.ATTR_INFO_BANNER_ONLY, false);
+}

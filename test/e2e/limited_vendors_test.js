@@ -21,7 +21,7 @@ module.exports = {
           .deleteCookies();
 
         browser
-          .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-limited-vendors.html')
+          .url(browser.globals.launch_url_host1 + 'demos/cpc-limited-vendors.html')
           .useXpath()
           .waitForElementPresent(OIL_LAYER, 2000, false);
       });
@@ -41,7 +41,7 @@ module.exports = {
           .pause(200)
           .useCss()
           .expect.element(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(1) ' + OIL_THIRD_PARTY_NAME).text.to.equal('Captify Technologies Limited');
-        browser.expect.element(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(2) ' + OIL_THIRD_PARTY_NAME).text.to.equal('affilinet');
+        browser.expect.element(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(2) ' + OIL_THIRD_PARTY_NAME).text.to.equal('Roq.ad GmbH');
         browser.waitForElementNotPresent(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(3) ' + OIL_THIRD_PARTY_NAME, 1000);
         browser.end();
       });
@@ -66,7 +66,7 @@ module.exports = {
           .useCss()
           .expect.element(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(1) ' + OIL_THIRD_PARTY_NAME).text.to.equal('Exponential Interactive, Inc');
         browser.expect.element(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(2) ' + OIL_THIRD_PARTY_NAME).text.to.equal('Captify Technologies Limited');
-        browser.expect.element(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(3) ' + OIL_THIRD_PARTY_NAME).text.to.equal('affilinet');
+        browser.expect.element(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(3) ' + OIL_THIRD_PARTY_NAME).text.to.equal('Roq.ad GmbH');
         browser.waitForElementNotPresent(OIL_LAYER_THIRD_PARTY_LIST_ELEMENT + ':nth-child(4) ' + OIL_THIRD_PARTY_NAME, 1000);
         browser.end();
       });

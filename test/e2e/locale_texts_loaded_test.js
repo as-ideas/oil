@@ -19,7 +19,7 @@ module.exports = {
         let end2endRegexp = 'e2e';
 
         browser
-          .url(browser.globals.launch_url_host1 + 'demos/advanced-settings.html')
+          .url(browser.globals.launch_url_host1 + 'demos/cpc-standard.html')
           .useCss().waitForElementPresent('body', 1000, false)
           .useXpath().waitForElementPresent(OIL_LAYER, 2000, false);
 
@@ -28,7 +28,7 @@ module.exports = {
 
         // advanced-settings-e2e-locale should load a special LOCALE where every locale starts with '[e2e]'
         browser
-          .url(browser.globals.launch_url_host1 + 'demos/advanced-settings-e2e-locale.html')
+          .url(browser.globals.launch_url_host1 + 'demos/cpc-e2e-locale.html')
           .useCss().waitForElementPresent('body', 1000, false)
           .useXpath().waitForElementPresent(OIL_LAYER, 2000, false);
         browser.useXpath().expect.element(OIL_YES_BUTTON).text.to.contain(end2endRegexp);

@@ -1,4 +1,4 @@
-import * as CoreVendorInformation from '../../src/scripts/core/core_vendor_information';
+import * as CoreVendorInformation from '../../src/scripts/core/core_vendor_lists';
 import VENDOR_LIST from '../fixtures/vendorlist/simple_vendor_list'
 
 export function setupVendorListSpies() {

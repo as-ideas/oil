@@ -1,0 +1,64 @@
+#!groovy​
+
+def sendPerSlack(color, status) {
+  def committerEmail = sh (
+    script: 'git --no-pager show -s --format=\'%an\'',
+    returnStdout: true
+  ).trim()
+  def buildUser = wrap([$class: 'BuildUser']) {
+    sh (
+      script: 'echo ${BUILD_USER}',
+      returnStdout: true
+    )
+  }
+  slackSend color: color, message: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - Committer: ${committerEmail} - Job started by: ${buildUser}"
+}
+
+node {
+
+  //Setup nodeJS from nodeJS Jenkins Plugin
+  env.NODEJS_HOME = "${tool 'NodeJs 11.14.0'}"
+  env.PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
+
+  try {
+    stage('Checkout') {
+      checkout scm
+      sendPerSlack('#000000', "STARTED")
+    }
+
+    stage('Release') {
+      withCredentials([usernamePassword(credentialsId: '52e3bd5e-ef78-428f-921e-3f57e5e06fd7', passwordVariable: 'GITHUB_PASSWORD', usernameVariable: 'GITHUB_USERNAME'),
+                       usernamePassword(credentialsId: 'ae9b403e-8f46-4dbd-8374-66eaa003d72f', passwordVariable: 'NPMJS_PASSWORD', usernameVariable: 'NPMJS_USERNAME'),
+                       [
+                         $class: 'AmazonWebServicesCredentialsBinding',
+                         credentialsId: '21637834-137b-417e-bc79-93f35d1af005',
+                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                       ]]) {
+        env.RELEASE_NAME=params.RELEASE_NAME
+        env.RELEASE_NUMBER=params.RELEASE_NUMBER
+        env.NMPJS_EMAIL=params.NPMJS_EMAIL
+        env.AWS_REGION=params.AWS_REGION
+        env.AWS_BUCKET=params.AWS_BUCKET
+        sh "./releaseOil.sh"
+      }
+    }
+
+    stage('Deploy Production') {
+      sh 'git push --force https://git.heroku.com/oil-cdn.git HEAD:master'
+    }
+
+    currentBuild.result = 'SUCCESS'
+  } catch (e) {
+    currentBuild.result = 'FAILED'
+    throw e
+  } finally {
+    if (currentBuild.result == 'SUCCESS') {
+      sendPerSlack('#00FF00', "SUCCESSFUL")
+    } else {
+      sendPerSlack('#FF0000', "FAILED")
+    }
+  }
+}
+
+

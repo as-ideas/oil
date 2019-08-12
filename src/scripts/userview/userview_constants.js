@@ -1,11 +1,8 @@
 export const OIL_LABELS = {
   ATTR_LABEL_INTRO_HEADING: 'label_intro_heading',
   ATTR_LABEL_INTRO: 'label_intro',
-  ATTR_LABEL_INTRO_START: 'label_intro_start',
-  ATTR_LABEL_INTRO_END: 'label_intro_end',
   ATTR_LABEL_BUTTON_YES: 'label_button_yes',
   ATTR_LABEL_BUTTON_BACK: 'label_button_back',
-  ATTR_LABEL_BUTTON_PRIVACY: 'label_button_privacy',
   ATTR_LABEL_BUTTON_ADVANCED_SETTINGS: 'label_button_advanced_settings',
   ATTR_LABEL_POI_GROUP_LIST_HEADING: 'label_poi_group_list_heading',
   ATTR_LABEL_POI_GROUP_LIST_TEXT: 'label_poi_group_list_text',

@@ -18,9 +18,11 @@ export const OIL_ADVANCED_SETTINGS_WRAPPER = '//*[@data-qa="oil-cpc-overlay"]';
 export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_SHOW_PREF = '//*[@data-qa="show-pref-button"]';
 export const OIL_ADVANCED_SETTINGS_TEST_BUTTON_TRIGGER_OPTIN = '//*[@data-qa="oil-YesButton"]';
 export const OIL_ADVANCED_SETTINGS_SNIPPET = '//*[@data-qa="cpc-snippet"]';
-// HINT: This does not work, as it is not clickable/hidden: export const OIL_DEFAULT_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-1"]';
-export const OIL_DEFAULT_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-1"]/following-sibling::*[@class="as-oil-cpc__slider"]';
-export const OIL_CUSTOM_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-25"]';
+// HINT: This does not work, as it is not clickable/hidden: export const OIL_FIRST_STANDARD_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-1"]';
+export const OIL_FIRST_STANDARD_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-1"]/following-sibling::*[@class="as-oil-cpc__slider"]';
+export const OIL_FIRST_STANDARD_PURPOSE_CHECKED_SLIDER = '#as-js-purpose-slider-1:checked';
+export const OIL_FIRST_STANDARD_PURPOSE_SLIDER_CLICKABLE_ELEMENT = '#as-js-purpose-slider-1~.as-oil-cpc__slider';
+export const OIL_FIRST_CUSTOM_PURPOSE_SLIDER = '//*[@id="as-js-purpose-slider-25"]';
 
 export const OIL_CUSTOM_VENDORS_HEADLINE = '//*[@id="as-oil-cpc-custom-third-parties"]';
 export const OIL_CUSTOM_VENDORS_LIST = '//*[@id="as-oil-custom-third-parties-list"]';
@@ -29,6 +31,8 @@ export const OIL_ADVANCED_SETTINGS_CUSTOM_PURPOSE_HEADER = '//*[@id="as-oil-cpc"
 export const OIL_MANAGED_TAGS_SCRIPT_TAG = '//*[@id="managedScriptTag"]';
 export const OIL_MANAGED_TAGS_IMG_TAG = '//*[@id="managedImgTag"]';
 export const OIL_MANAGED_TAGS_DIV = '//*[@id="demoText"]';
+export const CUSTOM_VENDOR_ONE_ELEMENT = '//*[@id="customVendor1DependentElement"]';
+export const CUSTOM_VENDOR_TWO_ELEMENT = '//*[@id="customVendor2DependentElement"]';
 export const PAGE_BACKGROUND = '.has-big-bad-background';
 export const VENDOR_INTEGRATION_IFRAME_ID = 'vendor-integration-iframe';
 export const VENDOR_INTEGRATION_IFRAME = `//*[@id="${VENDOR_INTEGRATION_IFRAME_ID}"]`;

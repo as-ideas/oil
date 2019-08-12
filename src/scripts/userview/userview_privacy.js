@@ -1,4 +1,4 @@
-import {getSoiCookie} from '../core/core_cookies.js';
+import {getSoiCookie} from '../core/core_cookies';
 import {PRIVACY_FULL_TRACKING} from '../core/core_constants';
 import {logInfo} from '../core/core_log';
 import {forEach} from './userview_modal';

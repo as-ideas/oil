@@ -1,11 +1,11 @@
-import { getLabel, getTheme } from '../userview/userview_config.js';
-import { OIL_LABELS } from '../userview/userview_constants.js';
-import { OIL_GLOBAL_OBJECT_NAME, JS_CLASS_BUTTON_OPTIN } from '../core/core_constants.js';
+import { getLabel, getTheme } from '../userview/userview_config';
+import { OIL_LABELS } from '../userview/userview_constants';
+import { JS_CLASS_BUTTON_OPTIN, OIL_GLOBAL_OBJECT_NAME } from '../core/core_constants';
 import './poi.group.scss';
 import { getGlobalOilObject, setGlobalOilObject } from '../core/core_utils';
 import { getGroupList } from './poi.group.list';
-import { loadVendorListAndCustomVendorList, getVendorsToDisplay } from '../core/core_vendor_information';
-import { BackButton, YesButton } from '../userview/view/components/oil.buttons.js';
+import { getVendorsToDisplay, loadVendorListAndCustomVendorList } from '../core/core_vendor_lists';
+import { BackButton, YesButton } from '../userview/view/components/oil.buttons';
 
 export function renderOilGroupListTemplate(renderMethod) {
   getGroupList()

@@ -2,6 +2,7 @@
 
 # This script requires that the following environment variables are defined (for example by your build server):
 # - RELEASE_NAME (the name of your release)
+# - RELEASE_NUMBER (the number of your release, will be checked against package.json)
 # - GITHUB_USERNAME
 # - GITHUB_PASSWORD
 # - NPMJS_USERNAME
@@ -23,7 +24,7 @@
 
 function checkEnvironment {
   variable=$1
-  if [ "${!variable}" = "" ];
+  if [[ "${!variable}" = "" ]];
   then
     echo "Error: Necessary environment variable undefined! Please define '$variable'!";
     exit 1
@@ -47,6 +48,7 @@ AWS_BUCKET_PATH=/rawOil/${PACKAGE_VERSION}
 
 echo "\n### Checking environment"
 checkEnvironment "RELEASE_NAME"
+checkEnvironment "RELEASE_NUMBER"
 checkEnvironment "GITHUB_USERNAME"
 checkEnvironment "GITHUB_PASSWORD"
 checkEnvironment "AWS_ACCESS_KEY_ID"
@@ -57,9 +59,18 @@ checkEnvironment "NPMJS_USERNAME"
 checkEnvironment "NPMJS_PASSWORD"
 checkEnvironment "NPMJS_EMAIL"
 
+echo "### Validating release number"
+if [[ "${RELEASE_NUMBER}" != "${PACKAGE_VERSION}" ]];
+then
+  echo "Error: given release number does not match version in package.json!"
+  exit 1
+fi
+
+echo "### NPM version check"
+npm -v
 
 echo "### Installing dependencies"
-npm i || exit 1
+npm install || exit 1
 
 
 echo "### Building release" $PACKAGE_VERSION$SNAPSHOT
@@ -91,7 +102,7 @@ cp dist/poi-lists/default.json dist/latest/poi-lists/default.json
 
 
 echo "### Creating release for npmjs.com"
-if [ -d "release/current" ];
+if [[ -d "release/current" ]];
 then
   rm -rf release/current
 fi
@@ -109,7 +120,7 @@ curl -i -u "${GITHUB_USERNAME}:${GITHUB_PASSWORD}" -X POST -d "{
   \"tag_name\": \"${PACKAGE_VERSION}\",
   \"target_commitish\": \"master\",
   \"name\": \"${RELEASE_NAME}\",
-  \"draft\": true,
+  \"draft\": false,
   \"prerelease\": false
 }" "${GITHUB_REPO_URL}/releases" || exit 1
 

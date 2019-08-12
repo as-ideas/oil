@@ -8,8 +8,6 @@ module.exports = {
   ],
 
   'output_folder': './target/local-reports',
-  'globals_path': './nightwatch.jenkins.globals.js',
-
   'selenium': { // downloaded by selenium-download module (see readme)
     'start_process': true, // tells nightwatch to start/stop the selenium process
     'server_path': './node_modules/nightwatch/bin/selenium.jar',
@@ -27,7 +25,10 @@ module.exports = {
         'path': ''
       },
       'globals': {
-        'waitForConditionTimeout': 5000
+        'waitForConditionTimeout': 5000,
+        'openBrowser': false,
+        'launch_url_host1': 'https://oil-integration-host1.herokuapp.com/',
+        'launch_url_host2': 'https://oil-integration-host2.herokuapp.com/',
       }
     },
     'chrome': {
@@ -35,6 +36,7 @@ module.exports = {
         'browserName': 'chrome',
         'javascriptEnabled': true,
         'chromeOptions': {
+          'w3c': false,
           'args': [
             '--headless',
             '--disable-gpu',

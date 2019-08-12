@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Test Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- tag::oil-config[] -->
+  <script id="oil-configuration" type="application/configuration">
+      {
+        "config_version": 1,
+        "advanced_settings": false,
+        "timeout": -1,
+        "publicPath": "/",
+        "customVendorListUrl": "https://www.oiljs.org/customvendors-example.json"
+      }
+
+
+  </script>
+  <!-- end::oil-config[] -->
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 60px;
+      color: #f7f7f7;
+      height: 100%;
+      background: linear-gradient(20deg, #3a871a 0%, #a5ba10 50%, #cfcd26 100%);
+      padding: 0;
+      margin: 0;
+    }
+
+    .demoname {
+      padding: 24px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="demoname">Custom Vendor Notification</div>
+<div id="customVendor1DependentElement"></div>
+<div id="customVendor2DependentElement"></div>
+<script type="text/javascript">
+  var hasCustomVendor1Consent = false;
+  var hasCustomVendor2Consent = false;
+
+  window.setInterval(function() {
+    // we use global variables here to test whether custom vendor's JS snippets are executed in the right scope - the global scope
+    if (hasCustomVendor1Consent) {
+      document.getElementById('customVendor1DependentElement').innerText = 'Custom Vendor 1 was opted in';
+    } else {
+      document.getElementById('customVendor1DependentElement').innerText = 'Custom Vendor 1 was opted out';
+    }
+    if (hasCustomVendor2Consent) {
+      document.getElementById('customVendor2DependentElement').innerText = 'Custom Vendor 2 was opted in';
+    } else {
+      document.getElementById('customVendor2DependentElement').innerText = 'Custom Vendor 2 was opted out';
+    }
+  }, 200);
+</script>
+</body>
+</html>

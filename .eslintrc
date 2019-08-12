@@ -38,7 +38,7 @@ rules:
   # Possible Errors
   comma-dangle: [2, never]
   no-cond-assign: 2
-  no-console: 0
+  no-console: 1
   no-constant-condition: 2
   no-control-regex: 2
   no-debugger: 2
@@ -82,7 +82,7 @@ rules:
   no-else-return: 0
   no-empty-pattern: 2
   no-eq-null: 2
-  no-eval: 2
+  no-eval: 0
   no-extend-native: 2
   no-extra-bind: 2
   no-fallthrough: 2

@@ -2,7 +2,7 @@ import { hasRunningTimeout, oilShowPreferenceCenter, renderOil } from '../../../
 import { loadFixture, readFixture } from '../../test-utils/utils_fixtures';
 import * as OilList from '../../../src/scripts/poi-list/oil.list';
 import * as CoreConfig from '../../../src/scripts/core/core_config';
-import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_information';
+import * as CoreVendorInformation from '../../../src/scripts/core/core_vendor_lists';
 import * as UserviewConfig from '../../../src/scripts/userview/userview_config';
 import { setSoiCookie } from '../../../src/scripts/core/core_cookies';
 import { resetOil } from '../../test-utils/utils_reset';

@@ -52,18 +52,18 @@ describe('user view opt-in handler', () => {
     });
 
     it('should set single opt-in too if it is not prohibited', (done) => {
-      oilPowerOptIn(PRIVACY_SETTINGS, false).then(() => {
+      oilPowerOptIn(PRIVACY_SETTINGS).then(() => {
         expect(CoreCookies.setSoiCookie).toHaveBeenCalledWith(PRIVACY_SETTINGS);
         done();
       });
     });
 
-    it('should not set single opt-in too if it is prohibited', (done) => {
+    it('should activate power opt-in with iframe', (done) => {
       spyOn(CoreConfig, 'isPoiActive').and.returnValue(true);
 
-      oilPowerOptIn(PRIVACY_SETTINGS, true).then(() => {
-        expect(CoreCookies.setSoiCookie).not.toHaveBeenCalled();
-        expect(CoreCookies.buildSoiCookie).toHaveBeenCalledWith(PRIVACY_SETTINGS);
+      oilPowerOptIn(PRIVACY_SETTINGS).then(() => {
+        expect(UserViewPoi.activatePowerOptInWithIFrame).toHaveBeenCalled();
+        expect(CoreCookies.setSoiCookie).toHaveBeenCalledWith(PRIVACY_SETTINGS);
 
         let payload = UserViewPoi.activatePowerOptInWithIFrame.calls.argsFor(0)[0];
         verifyThatPayloadForPowerOptInActivationIsCorrect(payload, EXPECTED_COOKIE);
@@ -73,8 +73,20 @@ describe('user view opt-in handler', () => {
       });
     });
 
-    it('should activate power opt-in with iframe', (done) => {
+    it('should activate power opt-in with iframe without consent string for info_banner_only', (done) => {
       spyOn(CoreConfig, 'isPoiActive').and.returnValue(true);
+      spyOn(CoreConfig, 'getInfoBannerOnly').and.returnValue(true);
+
+      const EXPECTED_COOKIE = {
+        opt_in: true,
+        version: '1.0.0',
+        localeVariantName: 'enEN_01',
+        localeVariantVersion: 17,
+        customPurposes: [25],
+        customVendorListVersion: 135,
+        configVersion: CONFIG_VERSION,
+        consentString: ''
+      };
 
       oilPowerOptIn(PRIVACY_SETTINGS).then(() => {
         expect(UserViewPoi.activatePowerOptInWithIFrame).toHaveBeenCalled();

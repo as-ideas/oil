@@ -1,0 +1,55 @@
+#!groovy​
+
+def sendPerSlack(color, status) {
+  def committerEmail = sh (
+    script: 'git --no-pager show -s --format=\'%an\'',
+    returnStdout: true
+  ).trim()
+  def buildUser = wrap([$class: 'BuildUser']) {
+    sh (
+      script: 'echo ${BUILD_USER}',
+      returnStdout: true
+    )
+  }
+  slackSend color: color, message: "${status}: Job '${env.JOB_NAME} for ${params.browser} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - Committer: ${committerEmail} - Job started by: ${buildUser}"
+}
+
+node {
+
+  //Setup nodeJS from nodeJS Jenkins Plugin
+  env.NODEJS_HOME = "${tool 'NodeJs 11.14.0'}"
+  env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+
+  try {
+    stage('Checkout') {
+      currentBuild.description = "E2E for ${params.browser}"
+      checkout scm
+      sendPerSlack('#000000', "STARTED")
+    }
+
+    stage('Install dependencies') {
+      sh "npm i"
+    }
+
+    stage('Perform E2E') {
+      withCredentials([usernamePassword(credentialsId: '30302798-a3dc-49fc-a263-3616fd24f792', passwordVariable: 'ENV_KEY', usernameVariable: 'ENV_USER')]) {
+        wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+          sh "./node_modules/.bin/nightwatch -c etc/nightwatch.remote.conf.js -e ${params.browser}"
+        }
+      }
+    }
+
+    currentBuild.result = 'SUCCESS'
+  } catch (e) {
+    currentBuild.result = 'FAILED'
+    throw e
+  } finally {
+    if (currentBuild.result == 'SUCCESS') {
+      sendPerSlack('#00FF00', "SUCCESSFUL")
+    } else {
+      sendPerSlack('#FF0000', "FAILED")
+    }
+  }
+}
+
+
