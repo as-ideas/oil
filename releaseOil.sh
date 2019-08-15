@@ -113,7 +113,7 @@ rm -rf release/current/docs release/current/poi-lists release/current/stats.json
 echo "### Increasing patch version"
 git add .
 git commit -a -m "Adding new release $PACKAGE_VERSION$SNAPSHOT" --no-edit
-
+git push origin HEAD:master
 
 echo "### Creating release on GitHub"
 curl -i -u "${GITHUB_USERNAME}:${GITHUB_PASSWORD}" -X POST -d "{
