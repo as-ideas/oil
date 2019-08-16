@@ -25,7 +25,7 @@ import * as AdvancedSettingsStandard from './view/oil.advanced.settings.standard
 import * as AdvancedSettingsTabs from './view/oil.advanced.settings.tabs';
 import { logError, logInfo } from '../core/core_log';
 import { getCpcType, getTheme, getTimeOutValue, isOptoutConfirmRequired, isPersistMinimumTracking } from './userview_config';
-import { gdprApplies, getAdvancedSettingsPurposesDefault, getInfoBannerOnly, isPoiActive } from '../core/core_config';
+import { gdprApplies, getAdvancedSettingsPurposesDefault, getInfoBannerOnly, isPoiActive, getCustomPurposeIds } from '../core/core_config';
 import { applyPrivacySettings, getPrivacySettings, getSoiConsentData } from './userview_privacy';
 import { activateOptoutConfirm } from './userview_optout_confirm';
 import { getPurposeIds, loadVendorListAndCustomVendorList } from '../core/core_vendor_lists';
@@ -96,7 +96,7 @@ export function oilShowPreferenceCenter() {
           if (consentData) {
             currentPrivacySettings = consentData.getPurposesAllowed();
           } else {
-            currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? getPurposeIds() : [];
+            currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? [...getPurposeIds(), ...getCustomPurposeIds()] : [];
           }
           applyPrivacySettings(currentPrivacySettings);
         });
