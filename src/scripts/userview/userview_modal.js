@@ -6,7 +6,7 @@ import {
   EVENT_NAME_AS_PRIVACY_SELECTED,
   EVENT_NAME_BACK_TO_MAIN,
   EVENT_NAME_COMPANY_LIST,
-  EVENT_NAME_OIL_SHOWN,
+  EVENT_NAME_OIL_SHOWN, EVENT_NAME_OPT_IN_BUTTON_CLICKED,
   EVENT_NAME_POI_OPT_IN,
   EVENT_NAME_SOI_OPT_IN,
   EVENT_NAME_THIRD_PARTY_LIST,
@@ -25,7 +25,7 @@ import * as AdvancedSettingsStandard from './view/oil.advanced.settings.standard
 import * as AdvancedSettingsTabs from './view/oil.advanced.settings.tabs';
 import { logError, logInfo } from '../core/core_log';
 import { getCpcType, getTheme, getTimeOutValue, isOptoutConfirmRequired, isPersistMinimumTracking } from './userview_config';
-import { gdprApplies, getAdvancedSettingsPurposesDefault, isPoiActive } from '../core/core_config';
+import { gdprApplies, getAdvancedSettingsPurposesDefault, getInfoBannerOnly, isPoiActive } from '../core/core_config';
 import { applyPrivacySettings, getPrivacySettings, getSoiConsentData } from './userview_privacy';
 import { activateOptoutConfirm } from './userview_optout_confirm';
 import { getPurposeIds, loadVendorListAndCustomVendorList } from '../core/core_vendor_lists';
@@ -105,7 +105,12 @@ export function oilShowPreferenceCenter() {
     .catch((error) => logError(error));
 }
 
+function handleOptInBtn() {
+  sendEventToHostSite(EVENT_NAME_OPT_IN_BUTTON_CLICKED);
+  handleOptIn();
+}
 export function handleOptIn() {
+  stopTimeOut();
   if (isPoiActive()) {
     import('../poi-list/poi.group.list.js').then(poi_group_list => {
       poi_group_list.getGroupList().then(() => {
@@ -138,6 +143,9 @@ function startTimeOut() {
     hasRunningTimeout = setTimeout(function () {
       removeOilWrapperFromDOM();
       sendEventToHostSite(EVENT_NAME_TIMEOUT);
+      if(getInfoBannerOnly()) {
+        handleOptIn();
+      }
       hasRunningTimeout = undefined;
     }, getTimeOutValue() * 1000);
   }
@@ -367,7 +375,7 @@ function addEventListenersToDOMList(listOfDoms, listener) {
 }
 
 function addOilHandlers(nodes) {
-  addEventListenersToDOMList(nodes.btnOptIn, handleOptIn);
+  addEventListenersToDOMList(nodes.btnOptIn, handleOptInBtn);
   addEventListenersToDOMList(nodes.btnAdvancedSettings, handleAdvancedSettings);
   addEventListenersToDOMList(nodes.btnBack, handleBackToMainDialog);
   addEventListenersToDOMList(nodes.companyList, handleCompanyList);

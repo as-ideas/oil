@@ -46,6 +46,7 @@ export const OIL_CONFIG_DEFAULT_VERSION = 0;
 
 // Main Click events
 export const EVENT_NAME_OPT_IN = 'oil_optin_done';
+export const EVENT_NAME_OPT_IN_BUTTON_CLICKED = 'oil_optin_done_button_clicked';
 export const EVENT_NAME_SOI_OPT_IN = 'oil_soi_optin_done';
 export const EVENT_NAME_POI_OPT_IN = 'oil_poi_optin_done';
 export const EVENT_NAME_OPT_OUT = 'oil_optout_done';

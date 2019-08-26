@@ -49,6 +49,9 @@ OIL is currently emitting the following events:
 |====
 | Event name | Description
 | oil_optin_done | When a users selects opt-in.
+| oil_optin_done_button_clicked | When a users clicks the opt-in button.
+| oil_soi_optin_done | When a users selects opt-in and this is a single opt-in.
+| oil_poi_optin_done | When a users selects opt-in and this is a power opt-in.
 | oil_as_cpc_privacy_selected| When a user used the cpc and clicked opt-in.
 | oil_click_advanced_settings| When a users clicks the advanced settings button/link.
 | oil_click_back_to_main| When a user clicks the back link from the advanced settings page.

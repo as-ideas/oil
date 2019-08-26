@@ -73,7 +73,9 @@ app.use(domainBlacklist);
 
 app.use(additionalHeaders);
 
-app.post("/amp-consent.json", function(req, res){
+app.post("/amp-consent.json", function(req, res) {
+  res.header('Access-Control-Allow-Origin', 'https://oil-axelspringer-com.cdn.ampproject.org');
+  res.header('Access-Control-Allow-Credentials', 'true');
   res.send('{"promptIfUnknown": true}');
 });
 // server gzip

@@ -1,3 +1,4 @@
+import { getInfoBannerOnly } from './core_config';
 import {getSoiCookie} from './core_cookies.js';
 
 
@@ -14,7 +15,7 @@ const LOADING_RULE_PURPOSE_05 = '_dip_oil_purpose_05';
  * tealium will need to be notified to re-evaluate the
  * loading rules
  *
- * HINT: utag_data = UDO, Universal Data Objectm
+ * HINT: utag_data = UDO, Universal Data Object
  */
 // FIXME deprecated
 export function doSetTealiumVariables() {
@@ -108,7 +109,9 @@ function reEvaluateTealiumLoadingRules() {
       [LOADING_RULE_PURPOSE_04]: ud[LOADING_RULE_PURPOSE_04],
       [LOADING_RULE_PURPOSE_05]: ud[LOADING_RULE_PURPOSE_05]
     };
-    window.utag.view(payload);
+    if(!getInfoBannerOnly()) {
+      window.utag.view(payload);
+    }
   }
 }
 
