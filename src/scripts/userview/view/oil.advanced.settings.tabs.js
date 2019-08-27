@@ -6,6 +6,7 @@ import { getCustomPurposes, getCustomVendorListUrl } from '../../core/core_confi
 import { JS_CLASS_BUTTON_OPTIN, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants';
 import { getCustomVendorList, getPurposes, getVendorList, getVendorsToDisplay } from '../../core/core_vendor_lists';
 import { BackButton, YesButton } from './components/oil.buttons';
+import { setPendingPurpose } from '../../core/core_pending_purposes';
 
 export function oilAdvancedSettingsTemplate() {
   return `
@@ -51,18 +52,18 @@ const ContentSnippet = () => {
       ${buildPurposeEntries(getPurposes().concat(getCustomPurposes()))}
       <div class="as-oil-margin-top">
         <div class="as-oil-tabs-cpc__third-parties-link" id="as-js-third-parties-link"><span>i</span>${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}</a></div>
-        
+
         <div id="as-js-third-parties-list" class="as-oil-tabs-cpc__third-parties-list" style="display: none;">
            ${buildVendorEntries()}
-           
+
           ${IsCustomVendorsEnables() ? `
           <div id="as-oil-custom-third-parties-list">
             ${buildCustomVendorEntries()}
           </div>
            ` : ''}
         </div>
-        
-   
+
+
       </div>
     </div>
     <hr>
@@ -204,6 +205,8 @@ function toggleFeatureTextsMarks(checkbox) {
   let id = checkbox.getAttribute('data-id');
   let listElement = document.getElementById(`purpose-feature-texts-${id}`);
   let checkmarkElements = listElement.getElementsByClassName('checkmark');
+
+  setPendingPurpose(id, checkbox.checked);
 
   if (checkbox.checked) {
     for (let i = 0; i < checkmarkElements.length; i++) {

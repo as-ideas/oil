@@ -31,6 +31,7 @@ import { activateOptoutConfirm } from './userview_optout_confirm';
 import { getPurposeIds, loadVendorListAndCustomVendorList } from '../core/core_vendor_lists';
 import { manageDomElementActivation } from '../core/core_tag_management';
 import { sendConsentInformationToCustomVendors } from '../core/core_custom_vendors';
+import { getPendingPurposes, setPendingPurposes } from '../core/core_pending_purposes';
 
 // Initialize our Oil wrapper and save it ...
 
@@ -97,6 +98,9 @@ export function oilShowPreferenceCenter() {
             currentPrivacySettings = consentData.getPurposesAllowed();
           } else {
             currentPrivacySettings = getAdvancedSettingsPurposesDefault() ? getPurposeIds() : [];
+          }
+          if (!getPendingPurposes()) {
+            setPendingPurposes(currentPrivacySettings);
           }
           applyPrivacySettings(currentPrivacySettings);
         });

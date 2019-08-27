@@ -1,6 +1,7 @@
 import { forEach, stopTimeOut } from '../../src/scripts/userview/userview_modal';
 import { customMatchers } from './utils_htmldiff';
 import { clearVendorListCache } from '../../src/scripts/core/core_vendor_lists';
+import { resetPendingPurposes } from '../../src/scripts/core/core_pending_purposes';
 
 export function removeOilLayerAndConfig() {
   window.AS_OIL = undefined;
@@ -54,4 +55,5 @@ export function resetOil() {
   clearCmpCallbackRegistration();
   stopTimeOut();
   initCustomYasmineMatchers();
+  resetPendingPurposes();
 }

@@ -12,6 +12,7 @@ import { OIL_CONFIG_CPC_TYPES } from '../../../src/scripts/core/core_constants';
 import * as AdvancedSettingsStandard from '../../../src/scripts/userview/view/oil.advanced.settings.standard';
 import * as AdvancedSettingsTabs from '../../../src/scripts/userview/view/oil.advanced.settings.tabs';
 import * as CoreLog from '../../../src/scripts/core/core_log';
+import { setPendingPurposes } from '../../../src/scripts/core/core_pending_purposes';
 
 describe('the user view modal aka the oil layer wrapper with CPC', () => {
 
@@ -119,6 +120,23 @@ describe('the user view modal aka the oil layer wrapper with CPC', () => {
           expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeFalsy();
           done();
         });
+      });
+    });
+
+    it('should insert CPC into host site with PENDING PRIVACY SETTING', (done) => {
+      setupVendorListSpies();
+      renderOil({optIn: false});
+      setPendingPurposes([1,2,3]);
+      oilShowPreferenceCenter();
+
+      waitForElementsToDisplay(DEFAULT_SLIDER_ELEMENTS, () => {
+        expect(document.querySelector('.qa-find-cpc-in-div .as-oil-cpc')).toBeDefined();
+        expect(document.querySelector('#as-js-purpose-slider-1').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-2').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-3').checked).toBeTruthy();
+        expect(document.querySelector('#as-js-purpose-slider-4').checked).toBeFalsy();
+        expect(document.querySelector('#as-js-purpose-slider-5').checked).toBeFalsy();
+        done();
       });
     });
 
