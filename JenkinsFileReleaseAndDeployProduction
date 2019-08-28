@@ -44,6 +44,10 @@ node {
       }
     }
 
+    stage('Push release to GitHub') {
+      sh 'git push origin HEAD:master'
+    }
+
     stage('Deploy Production') {
       sh 'git push --force https://git.heroku.com/oil-cdn.git HEAD:master'
     }
