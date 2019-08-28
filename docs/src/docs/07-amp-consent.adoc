@@ -4,7 +4,7 @@ To exchange user consent for your POI group with an AMP page, you want to make u
 
 === Technical integration
 
-1. Copy the file `demos/amp-consent-iframe.html` and update it with your own oil-configuration.
+1. Copy the file `demos/amp-consent-iframe.html` and update it with your own oil-configuration. (You can adapt configuration for your needs. Please do not change settings for `info_banner_only` and `suppress_cookies`.)
 2. Upload the file to the server where the POI cookie should be stored. This should be the same one that you have configured in the `poi_hub_origin` configuration parameter. Make sure the file is accessible through a secure (SSL) connection.
 3. Include the path to the iframe within your `amp-consent` dialog. Ex.:
 [source,html]
