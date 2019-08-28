@@ -75,7 +75,7 @@ describe('user view opt-in handler', () => {
 
     it('should activate power opt-in with iframe without consent string for info_banner_only', (done) => {
       spyOn(CoreConfig, 'isPoiActive').and.returnValue(true);
-      spyOn(CoreConfig, 'getInfoBannerOnly').and.returnValue(true);
+      spyOn(CoreConfig, 'isInfoBannerOnly').and.returnValue(true);
 
       const EXPECTED_COOKIE = {
         opt_in: true,

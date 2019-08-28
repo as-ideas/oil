@@ -1,4 +1,4 @@
-import { getInfoBannerOnly } from './core_config';
+import { isInfoBannerOnly } from './core_config';
 import {getSoiCookie} from './core_cookies.js';
 
 
@@ -109,7 +109,7 @@ function reEvaluateTealiumLoadingRules() {
       [LOADING_RULE_PURPOSE_04]: ud[LOADING_RULE_PURPOSE_04],
       [LOADING_RULE_PURPOSE_05]: ud[LOADING_RULE_PURPOSE_05]
     };
-    if(!getInfoBannerOnly()) {
+    if(!isInfoBannerOnly()) {
       window.utag.view(payload);
     }
   }
