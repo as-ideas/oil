@@ -36,6 +36,40 @@ describe('user view opt-in handler', () => {
 
   beforeEach(() => resetOil());
 
+  describe('cookie set prevention in amp mode', () => {
+
+    beforeEach(() => {
+      spyOn(CoreConfig, 'isAmpModeActivated').and.returnValue(true);
+      spyOn(UserViewPoi, 'activatePowerOptInWithIFrame');
+      spyOn(UserViewPoi, 'activatePowerOptInWithRedirect');
+      spyOn(CoreCookies, 'setSoiCookie');
+      spyOn(CorePoi, 'verifyPowerOptIn');
+      spyOn(CoreUtils, 'sendEventToHostSite');
+    });
+
+    it('should prevent power optin setting if amp mode is activated', (done) => {
+      oilPowerOptIn(PRIVACY_SETTINGS).then((result) => {
+        expect(CoreCookies.setSoiCookie).not.toHaveBeenCalled();
+        expect(UserViewPoi.activatePowerOptInWithIFrame).not.toHaveBeenCalled();
+        expect(UserViewPoi.activatePowerOptInWithRedirect).not.toHaveBeenCalled();
+        expect(CorePoi.verifyPowerOptIn).not.toHaveBeenCalled();
+        expect(CoreUtils.sendEventToHostSite).not.toHaveBeenCalled();
+        expect(result).toBe(true);
+        done();
+      });
+    });
+
+    it('should prevent single optin setting if amp mode is activated', (done) => {
+      oilOptIn(PRIVACY_SETTINGS).then((result) => {
+        expect(CoreCookies.setSoiCookie).not.toHaveBeenCalled();
+        expect(CoreUtils.sendEventToHostSite).not.toHaveBeenCalled();
+        expect(result).toBe(true);
+        done();
+      });
+    });
+
+  });
+
   describe('power opt-in handler', () => {
     let expectedLocaleVariantName = 'enEN_01';
     let expectedLocaleVariantVersion = 17;
@@ -44,6 +78,7 @@ describe('user view opt-in handler', () => {
       spyOn(UserViewPoi, 'activatePowerOptInWithIFrame');
       spyOn(UserViewPoi, 'activatePowerOptInWithRedirect');
       spyOn(CoreConfig, 'getLocaleVariantName').and.returnValue(expectedLocaleVariantName);
+      spyOn(CoreConfig, 'isAmpModeActivated').and.returnValue(false);
       spyOn(CoreCookies, 'setSoiCookie').and.returnValue(new Promise((resolve) => resolve(EXPECTED_COOKIE)));
       spyOn(CoreCookies, 'buildSoiCookie').and.returnValue(new Promise((resolve) => resolve(EXPECTED_COOKIE)));
       spyOn(CoreUtils, 'getLocaleVariantVersion').and.returnValue(expectedLocaleVariantVersion);
@@ -150,6 +185,7 @@ describe('user view opt-in handler', () => {
   describe('single opt-in handler', () => {
 
     beforeEach(() => {
+      spyOn(CoreConfig, 'isAmpModeActivated').and.returnValue(false);
       spyOn(CoreUtils, 'sendEventToHostSite');
       spyOn(CoreCookies, 'setSoiCookie').and.returnValue(new Promise((resolve) => resolve(EXPECTED_COOKIE)));
     });

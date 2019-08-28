@@ -5,7 +5,8 @@ import { sendEventToHostSite } from '../core/core_utils.js';
 import {
   EVENT_NAME_OPT_IN,
   OIL_PAYLOAD_CONFIG_VERSION,
-  OIL_PAYLOAD_CUSTOM_PURPOSES, OIL_PAYLOAD_CUSTOM_VENDORLIST_VERSION,
+  OIL_PAYLOAD_CUSTOM_PURPOSES,
+  OIL_PAYLOAD_CUSTOM_VENDORLIST_VERSION,
   OIL_PAYLOAD_LOCALE_VARIANT_NAME,
   OIL_PAYLOAD_LOCALE_VARIANT_VERSION,
   OIL_PAYLOAD_PRIVACY,
@@ -13,7 +14,7 @@ import {
   PRIVACY_FULL_TRACKING
 } from '../core/core_constants';
 import { setSoiCookie } from '../core/core_cookies';
-import { isInfoBannerOnly, isPoiActive } from '../core/core_config';
+import { isAmpModeActivated, isInfoBannerOnly, isPoiActive } from '../core/core_config';
 
 /**
  * Oil optIn power
@@ -22,6 +23,9 @@ import { isInfoBannerOnly, isPoiActive } from '../core/core_config';
  * @return Promise with updated cookie value
  */
 export function oilPowerOptIn(privacySettings) {
+  if (isAmpModeActivated()) {
+    return Promise.resolve(true);
+  }
   return new Promise((resolve, reject) => {
     let soiCookiePromise;
     // Update Oil cookie (site - SOI)
@@ -65,6 +69,9 @@ export function oilPowerOptIn(privacySettings) {
  * @return {Promise} promise with updated cookie value
  */
 export function oilOptIn(privacySettings = PRIVACY_FULL_TRACKING) {
+  if (isAmpModeActivated()) {
+    return Promise.resolve(true);
+  }
   return new Promise((resolve, reject) => {
     setSoiCookie(privacySettings).then(() => {
       sendEventToHostSite(EVENT_NAME_OPT_IN);
