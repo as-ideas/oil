@@ -24,6 +24,7 @@ import { isAmpModeActivated, isInfoBannerOnly, isPoiActive } from '../core/core_
  */
 export function oilPowerOptIn(privacySettings) {
   if (isAmpModeActivated()) {
+    sendEventToHostSite(EVENT_NAME_OPT_IN);
     return Promise.resolve(true);
   }
   return new Promise((resolve, reject) => {
@@ -70,6 +71,7 @@ export function oilPowerOptIn(privacySettings) {
  */
 export function oilOptIn(privacySettings = PRIVACY_FULL_TRACKING) {
   if (isAmpModeActivated()) {
+    sendEventToHostSite(EVENT_NAME_OPT_IN);
     return Promise.resolve(true);
   }
   return new Promise((resolve, reject) => {

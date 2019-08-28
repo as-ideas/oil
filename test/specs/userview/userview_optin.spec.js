@@ -53,7 +53,7 @@ describe('user view opt-in handler', () => {
         expect(UserViewPoi.activatePowerOptInWithIFrame).not.toHaveBeenCalled();
         expect(UserViewPoi.activatePowerOptInWithRedirect).not.toHaveBeenCalled();
         expect(CorePoi.verifyPowerOptIn).not.toHaveBeenCalled();
-        expect(CoreUtils.sendEventToHostSite).not.toHaveBeenCalled();
+        expect(CoreUtils.sendEventToHostSite).toHaveBeenCalledWith(EVENT_NAME_OPT_IN);
         expect(result).toBe(true);
         done();
       });
@@ -62,7 +62,7 @@ describe('user view opt-in handler', () => {
     it('should prevent single optin setting if amp mode is activated', (done) => {
       oilOptIn(PRIVACY_SETTINGS).then((result) => {
         expect(CoreCookies.setSoiCookie).not.toHaveBeenCalled();
-        expect(CoreUtils.sendEventToHostSite).not.toHaveBeenCalled();
+        expect(CoreUtils.sendEventToHostSite).toHaveBeenCalledWith(EVENT_NAME_OPT_IN);
         expect(result).toBe(true);
         done();
       });
