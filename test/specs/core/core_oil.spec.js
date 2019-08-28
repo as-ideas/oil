@@ -5,9 +5,12 @@ import * as CoreCommandCollection from '../../../src/scripts/core/core_command_c
 import * as CoreOptIn from '../../../src/scripts/core/core_optin';
 import * as CoreTagManagement from '../../../src/scripts/core/core_tag_management';
 import * as CoreCustomVendors from '../../../src/scripts/core/core_custom_vendors';
+import * as CoreCookies from '../../../src/scripts/core/core_cookies';
+import * as CoreConfig from '../../../src/scripts/core/core_config';
 import { waitsForAndRuns } from '../../test-utils/utils_wait';
 import { resetOil } from '../../test-utils/utils_reset';
 import { triggerEvent } from '../../test-utils/utils_events';
+import { EVENT_NAME_NO_COOKIES_ALLOWED } from '../../../src/scripts/core/core_constants';
 
 describe('core_oil', () => {
 
@@ -136,6 +139,57 @@ describe('core_oil', () => {
       () => CoreTagManagement.manageDomElementActivation.calls.count() > 0,
       () => {
         expect(CoreTagManagement.manageDomElementActivation).toHaveBeenCalledTimes(1);
+        done();
+      },
+      2000);
+  });
+
+  it('should perform successful cookie check if amp mode is deactivated and cookies are enabled', (done) => {
+    spyOn(CoreCookies, 'isBrowserCookieEnabled').and.returnValue(true);
+    spyOn(CoreConfig, 'isAmpModeActivated').and.returnValue(false);
+    spyOn(CoreUtils, 'sendEventToHostSite');
+    spyOn(UserView, 'locale');
+
+    initOilLayer();
+    waitsForAndRuns(
+      () => CoreCookies.isBrowserCookieEnabled.calls.count() > 0,
+      () => {
+        expect(CoreCookies.isBrowserCookieEnabled).toHaveBeenCalled();
+        expect(CoreUtils.sendEventToHostSite).not.toHaveBeenCalledWith(EVENT_NAME_NO_COOKIES_ALLOWED);
+        done();
+      },
+      2000);
+  });
+
+  it('should perform unsuccessful cookie check if amp mode is deactivated and cookies are disabled', (done) => {
+    spyOn(CoreCookies, 'isBrowserCookieEnabled').and.returnValue(false);
+    spyOn(CoreConfig, 'isAmpModeActivated').and.returnValue(false);
+    spyOn(CoreUtils, 'sendEventToHostSite');
+    spyOn(UserView, 'locale');
+
+    initOilLayer();
+    waitsForAndRuns(
+      () => CoreCookies.isBrowserCookieEnabled.calls.count() > 0,
+      () => {
+        expect(CoreCookies.isBrowserCookieEnabled).toHaveBeenCalled();
+        expect(CoreUtils.sendEventToHostSite).toHaveBeenCalledWith(EVENT_NAME_NO_COOKIES_ALLOWED);
+        done();
+      },
+      2000);
+  });
+
+  it('should not perform cookie check if amp mode is activated', (done) => {
+    spyOn(CoreCookies, 'isBrowserCookieEnabled');
+    spyOn(CoreConfig, 'isAmpModeActivated').and.returnValue(true);
+    spyOn(CoreUtils, 'sendEventToHostSite');
+    spyOn(UserView, 'locale');
+
+    initOilLayer();
+    waitsForAndRuns(
+      () => CoreConfig.isAmpModeActivated.calls.count() > 0,
+      () => {
+        expect(CoreCookies.isBrowserCookieEnabled).not.toHaveBeenCalled();
+        expect(CoreUtils.sendEventToHostSite).not.toHaveBeenCalledWith(EVENT_NAME_NO_COOKIES_ALLOWED);
         done();
       },
       2000);
