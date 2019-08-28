@@ -5,7 +5,7 @@ import {
   getCookieExpireInDays,
   getCustomPurposes,
   getDefaultToOptin,
-  getInfoBannerOnly,
+  isInfoBannerOnly,
   getLanguage,
   getLanguageFromLocale,
   getLocaleVariantName
@@ -90,7 +90,7 @@ export function setSoiCookieWithPoiCookieData(poiCookieJson) {
         localeVariantVersion: cookieConfig.defaultCookieContent.localeVariantVersion,
         customVendorListVersion: poiCookieJson.customVendorListVersion,
         customPurposes: poiCookieJson.customPurposes,
-        consentString: !getInfoBannerOnly() ? consentString : '',
+        consentString: !isInfoBannerOnly() ? consentString : '',
         configVersion: configVersion
       };
 
@@ -117,7 +117,7 @@ export function buildSoiCookie(privacySettings) {
         localeVariantVersion: cookieConfig.defaultCookieContent.localeVariantVersion,
         customVendorListVersion: getCustomVendorListVersion(),
         customPurposes: getCustomPurposesWithConsent(privacySettings),
-        consentString: !getInfoBannerOnly() ? consentData.getConsentString() : '',
+        consentString: !isInfoBannerOnly() ? consentData.getConsentString() : '',
         configVersion: cookieConfig.defaultCookieContent.configVersion
       };
 
@@ -279,7 +279,7 @@ function getOilCookieConfig() {
       localeVariantVersion: getLocaleVariantVersion(),
       customPurposes: getAllowedCustomPurposesDefault(),
       consentData: consentData,
-      consentString: !getInfoBannerOnly() ? consentData.getConsentString() : '',
+      consentString: !isInfoBannerOnly() ? consentData.getConsentString() : '',
       configVersion: getConfigVersion()
     },
     outdated_cookie_content_keys: ['opt_in', 'timestamp', 'version', 'localeVariantName', 'localeVariantVersion', 'privacy']
@@ -300,6 +300,6 @@ function transformOutdatedOilCookie(cookieConfig) {
   cookie.consentData.setPurposesAllowed(getStandardPurposesWithConsent(cookieJson.privacy));
   cookie.consentData.setVendorsAllowed(getLimitedVendorIds());
   cookie.consentData.setGlobalVendorList(getVendorList());
-  cookie.consentString = !getInfoBannerOnly() ? cookie.consentData.getConsentString() : '';
+  cookie.consentString = !isInfoBannerOnly() ? cookie.consentData.getConsentString() : '';
   return cookie;
 }

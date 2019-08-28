@@ -10,7 +10,6 @@ import {
   getHubPath,
   getIabVendorBlacklist,
   getIabVendorWhitelist,
-  getInfoBannerOnly,
   getLanguageFromLocale,
   getLocale,
   getLocaleUrl,
@@ -19,8 +18,11 @@ import {
   getPoiListDirectory,
   getPublicPath,
   getShowLimitedVendors,
+  isAmpModeActivated,
+  isInfoBannerOnly,
   setGdprApplies,
-  setLocale
+  setLocale,
+  suppressCookies
 } from '../../../src/scripts/core/core_config';
 import { loadFixture } from '../../test-utils/utils_fixtures';
 import * as CoreLog from '../../../src/scripts/core/core_log';
@@ -141,7 +143,8 @@ describe('core_config', () => {
       expect(getLocaleUrl()).toEqual(true);
       expect(getCookieExpireInDays()).toEqual(true);
       expect(getPoiGroupName()).toEqual(true);
-      expect(getInfoBannerOnly()).toEqual(true);
+      expect(isInfoBannerOnly()).toEqual(true);
+      expect(suppressCookies()).toEqual(true);
     });
 
     it('should return correct default values', function () {
@@ -155,7 +158,8 @@ describe('core_config', () => {
       expect(getLocaleUrl()).toBeUndefined();
       expect(getCookieExpireInDays()).toEqual(DEFAULT_COOKIE_EXPIRES_IN);
       expect(getPoiGroupName()).toEqual(DEFAULT_POI_GROUP);
-      expect(getInfoBannerOnly()).toEqual(false);
+      expect(isInfoBannerOnly()).toEqual(false);
+      expect(suppressCookies()).toEqual(false);
     });
 
   });
@@ -268,6 +272,24 @@ describe('core_config', () => {
       expect(getPoiListDirectory()).toEqual('/poi-lists');
     });
 
+  });
+
+  describe('isAmpModeActivated', () => {
+
+    it('returns true if info banner mode is activated and cookies are suppressed', () => {
+      loadFixture('config/given.config.with.infoBannerMode.activated.and.cookieSetting.suppressed.html');
+      expect(isAmpModeActivated()).toBeTruthy();
+    });
+
+    it('returns false if info banner mode is deactivated', () => {
+      loadFixture('config/given.config.with.infoBannerMode.deactivated.html');
+      expect(isAmpModeActivated()).toBeFalsy();
+    });
+
+    it('returns false if info banner mode is activated but cookie setting is allowed', () => {
+      loadFixture('config/given.config.with.infoBannerMode.activated.and.cookieSetting.not.suppressed.html');
+      expect(isAmpModeActivated()).toBeFalsy();
+    });
   });
 
 });

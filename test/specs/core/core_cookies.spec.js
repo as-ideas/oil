@@ -221,7 +221,7 @@ describe('core cookies', () => {
     });
 
     it('should set simple soi cookie without consent info if config info_banner_only is true', (done) => {
-      spyOn(CoreConfig, 'getInfoBannerOnly').and.returnValue(true);
+      spyOn(CoreConfig, 'isInfoBannerOnly').and.returnValue(true);
 
       setSoiCookie(1).then(() => {
         const cookieSetArguments = Cookie.set.calls.argsFor(0);
