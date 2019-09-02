@@ -128,6 +128,7 @@ This is a full list of configurable options.
 | iabVendorBlacklist | Array of vendor IDs to exclude from consent. <<blacklisting-and-whitelisting, Details here>> | None
 | iabVendorListUrl | Vendorlist to use | https://vendorlist.consensu.org/vendorlist.json
 | iabVendorWhitelist | Array of vendor IDs to include in consent. If it is set, values in `iabVendorBlacklist` are ignored. <<blacklisting-and-whitelisting, Details here>>. When white- or blacklisting you might also be interested in the `show_limited_vendors_only` parameter. | None
+| info_banner_only | Deactivates calculating of consent string and sets consent cookie if timeout is defined and expired | false
 | <<texts-locale-object,locale>> | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. <<locale-object, See here for details>> | None
 | locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See link:https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json[See here for an example file] | None
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | true
@@ -139,9 +140,9 @@ This is a full list of configurable options.
 | publicPath | The server path from which all chunks and resources will be loaded. You should upload all released files there and configure it. | `https://unpkg.com/@ideasio/oil.js@{version}/release/current/`
 | require_optout_confirm | Flag to activate the opt-out confirmation dialog within Cookie Preference Center. If set to `true`, addition label definitions (for labels with prefix `label_cpc_purpose_optout_confirm`) are required. See section <<Language label configuration>> for details. | false
 | show_limited_vendors_only | Flag to only show the vendors limited by `iabVendorWhitelist` or `iabVendorBlacklist` in the CPC | false
+| suppress_cookies | Deactivates cookie setting - useful for AMP pages only | false
 | theme | The theme for the layer. By default there are two themes and size modifier themes, `dark` and `light` as well as `small dark` and `small light`. Themes currently work only as an additional css class. To change the style or theme, look into the <<styling-guide,styling guide>>. | light
 | <<auto-hiding-the-layer-timeout,timeout>> | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
-| info_banner_only | Deactivates calculating of consent string and sets consent cookie if timeout is defined and expired | false
 |====
 
 === Texts & Locale Object

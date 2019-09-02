@@ -160,6 +160,7 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | iabVendorBlacklist | Array of vendor IDs to exclude. | None
 | iabVendorListUrl | URL of the list of vendors to use | https://vendorlist.consensu.org/vendorlist.json
 | iabVendorWhitelist | Array of vendor IDs to allow. If it is set, values in `iabVendorBlacklist` are ignored. | None
+| info_banner_only | Deactivates calculating of consent string | false
 | locale | Object including locale version, id and labels. You can define the standard labels for all legal texts and buttons and set a version for it. See [here for a configuration example](#texts-locale-object) and [here for all localizable labels](#available-text-labels) | None
 | locale_url | As an alternative to passing a locale object, set this to a JSON file with the locale configuration. See [here for an example file](https://github.com/as-ideas/oil/blob/master/test/fixtures/config/deDE_01_locale.json) | None
 | persist_min_tracking | If minimum tracking should result in removing all OIL cookies from the users browser and close the layer and store this selection in the oil cookie. | True
@@ -171,9 +172,9 @@ For detailed explanations, please visit the [documentation](https://oil.axelspri
 | publicPath | The server path from which all chunks and ressources will be loaded. You should upload all released files there and configure it. | `//unpkg.com/@ideasio/oil.js@{oilVersion}/release/current/`
 | require_optout_confirm | Flag to activate the opt-out confirmation dialog within the CPC. If set to `true`, additional label definitions (with prefix `label_cpc_purpose_optout`) are required. See the label configuration section in the documentation for details. | false
 | show_limited_vendors_only | Flag to only show the vendors limited by `iabVendorWhitelist` or `iabVendorBlacklist` in the CPC | false
+| suppress_cookies | Deactivates cookie setting - useful for AMP pages only | false
 | theme | The theme for the layer. By default there are two themes, 'dark' and 'light', with 'light' beeing the default. The theme currently works only as an additional css class. If you want to change the style or theme, please look into the styling guide in the development section. | 'light'
 | timeout | Value in seconds until the opt-in layer will be automatically hidden. 0 or lower deactivates auto-hide. | 60
-| info_banner_only | Deactivates calculating of consent string | false
 
 ### Texts & Locale Object
 
