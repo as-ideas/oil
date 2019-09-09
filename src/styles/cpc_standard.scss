@@ -115,30 +115,30 @@
   border-right: 2px solid #3f7ddf;
 }
 
-.as-oil-cpc__purpose {
+.as-oil-cpc__purpose, .as-oil-cpc__feature {
   border: 1px solid #eaeaea;
   border-radius: 5px;
   padding: 20px;
   margin: 16px 0;
 }
 
-.as-oil-cpc__purpose-container {
+.as-oil-cpc__purpose-container, .as-oil-cpc__feature-container {
   position: relative;
 }
 
-.as-oil-cpc__purpose-header {
+.as-oil-cpc__purpose-header, .as-oil-cpc__feature-header  {
   font-size: 1rem;
   font-weight: 500;
   margin: 0 75px 30px 0;
 }
 
-.as-oil-cpc__purpose-text {
+.as-oil-cpc__purpose-text, .as-oil-cpc__feature-text {
   font-size: 0.9rem;
   color: lighten($text-color-primary-light, 30%);
 }
 
 .dark {
-  .as-oil-cpc__purpose-text {
+  .as-oil-cpc__purpose-text, .as-oil-cpc__feature-text {
     color: darken($text-color-primary-dark, 30%);
   }
 }
@@ -193,7 +193,7 @@
     .as-oil-back-button__text {
       color: $text-color-primary-dark !important;
     }
-    .as-oil-cpc__purpose {
+    .as-oil-cpc__purpose, .as-oil-cpc__feature {
       background-color: $cpc-background-dark;
     }
   }

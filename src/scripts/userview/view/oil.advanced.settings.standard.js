@@ -5,7 +5,7 @@ import { getLabel, getLabelWithDefault, getTheme } from '../userview_config';
 import { getCustomPurposes, getCustomVendorListUrl } from '../../core/core_config';
 import { JS_CLASS_BUTTON_OPTIN, OIL_GLOBAL_OBJECT_NAME } from '../../core/core_constants';
 import { setGlobalOilObject } from '../../core/core_utils';
-import { getCustomVendorList, getPurposes, getVendorList, getVendorsToDisplay } from '../../core/core_vendor_lists';
+import { getCustomVendorList, getFeatures, getPurposes, getVendorList, getVendorsToDisplay } from '../../core/core_vendor_lists';
 import { BackButton, YesButton } from './components/oil.buttons';
 
 
@@ -49,6 +49,9 @@ const ContentSnippet = () => {
     <a href="#as-oil-cpc-purposes" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link ${CLASS_NAME_FOR_ACTIVE_MENU_SECTION}">
       ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_PURPOSE_DESC)}
     </a>
+    <a href="#as-oil-cpc-features" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_FEATURE_DESC)}
+    </a>
     <a href="#as-oil-cpc-third-parties" onclick='${OIL_GLOBAL_OBJECT_NAME}._switchLeftMenuClass(this)' class="as-oil-cpc__category-link">
       ${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY)}
     </a>
@@ -64,6 +67,11 @@ const ContentSnippet = () => {
     </div>
     ${buildPurposeEntries(getPurposes())}
     ${buildPurposeEntries(getCustomPurposes())}
+
+    <div class="as-oil-cpc__row-title" id="as-oil-cpc-features">
+      ${getLabel(OIL_LABELS.ATTR_LABEL_CPC_FEATURE_DESC)}
+    </div>
+    ${buildFeatureEntries(getFeatures())}
 
     ${buildIabVendorList()}
     ${buildCustomVendorList()}
@@ -89,6 +97,16 @@ const PurposeContainerSnippet = ({id, header, text, value}) => {
             <span class="as-oil-cpc__status"></span>
             <span class="as-oil-cpc__slider"></span>
         </label>
+    </div>
+</div>`
+};
+
+const FeatureContainerSnippet = ({header, text}) => {
+  return `
+<div class="as-oil-cpc__feature">
+    <div class="as-oil-cpc__feature-container">
+        <div class="as-oil-cpc__feature-header">${header}</div>
+        <div class="as-oil-cpc__feature-text">${text}</div>
     </div>
 </div>`
 };
@@ -163,6 +181,9 @@ const buildVendorListEntry = (element) => {
               </span>
               <div class='as-oil-third-party-toggle-part' style='display: none;'>
                 <a class='as-oil-third-party-link' href='${element.policyUrl}'>${element.policyUrl}</a>
+                <p class='as-oil-third-party-purposes'>${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY_LIST_PURPOSES)} ${element.purposeIds.join(', ')}</p>
+                <p class='as-oil-third-party-legitimate-interest-purposes'>${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY_LIST_LEG_INT_PURPOSES)} ${element.legIntPurposeIds.join(', ')}</p>
+                <p class='as-oil-third-party-features'>${getLabel(OIL_LABELS.ATTR_LABEL_THIRD_PARTY_LIST_FEATURES)} ${element.featureIds.join(', ')}</p>
               </div>
             </div>
           `;
@@ -188,6 +209,17 @@ const buildPurposeEntries = (list) => {
 };
 
 const formatPurposeId = (id) => {
+  return id < 10 ? `0${id}` : id;
+};
+
+const buildFeatureEntries = (list) => {
+  return list.map(feature => FeatureContainerSnippet({
+    header: getLabelWithDefault(`label_cpc_feature_${formatFeatureId(feature.id)}_text`, feature.name || `Error: Missing text for feature with id ${feature.id}!`),
+    text: getLabelWithDefault(`label_cpc_feature_${formatFeatureId(feature.id)}_desc`, feature.description || '')
+  })).join('');
+};
+
+const formatFeatureId = (id) => {
   return id < 10 ? `0${id}` : id;
 };
 
