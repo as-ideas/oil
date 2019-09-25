@@ -84,7 +84,7 @@ Please make sure you're working with the *latest version* available. Check https
 
 [source,html,subs="attributes"]
 ----
-&lt;script src="//unpkg.com/@ideasio/oil.js/release/current/oil.min.js" type="text/javascript"&gt;&lt;/script>
+&lt;script src="//unpkg.com/@ideasio/oil.js@{version}/release/current/oil.{version}-RELEASE.min.js" type="text/javascript"&gt;&lt;/script>
 ----
 
 This unpkg.com URL always points to the latest version. See unpkg.com help to lock your integration to a specified release.
