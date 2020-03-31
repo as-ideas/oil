@@ -3,6 +3,11 @@
 
 # oil.js - Open Source Opt-In Layer
 
+# Project state
+
+__We very much regret that we, the previous OIL development team, are no longer able to support the OIL project with immediate effect. It will not be developed any further by us and we will not provide any bugfixes or security patches from now on. As an open source project it will remain available. If you want to take over the project as a maintainer, please contact oil-support@asideas.de.__
+---
+
 [oil.js](https://www.oiljs.org) is a lightweight consent manager and cookie banner. It is optimized for low latency and performance. It aims to be easy to customize, simple and user-friendly. It supports the IAB framework to forward the consent to ad providers.
 
 [![Latest Release](https://img.shields.io/github/release/as-ideas/oil.svg)](https://oil.axelspringer.com/release/) 
