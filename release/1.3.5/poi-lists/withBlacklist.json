@@ -1,9 +1,0 @@
-{
-  "companyList": [
-    "Supercompany 1",
-    "Boring Co. 2",
-    "Ultra Inc.",
-    "Special Tech Ltd."
-  ],
-  "iabVendorBlacklist": [1,2,3]
-}

@@ -1,9 +1,0 @@
-language: node_js
-node_js:
-- 'lts/*'
-sudo: required
-env:
-    - NODE_ENV=test
-before_install:
-  - sudo apt-get install -y nasm
-
