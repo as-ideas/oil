@@ -7,3 +7,4 @@ We very much regret that we, the previous OIL development team, are no longer ab
 
 For this reason OIL.js is no longer a registered CMP and does not support TCF v2.0. If you want to continue using OIL or develop it further, please register yourself at [IAB](https://iabeurope.eu/tcf-for-cmps/). 
 
+The latest version of OIL is still available in master branch
