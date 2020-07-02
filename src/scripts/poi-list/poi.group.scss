@@ -68,7 +68,7 @@
   .as-oil-third-party-description, .as-oil-third-party-purpose {
     font-size: 12px;
   }
-  .as-oil-third-party-link {
+  .as-oil-third-party-link, .as-oil-third-party-purposes, .as-oil-third-party-legitimate-interest-purposes, .as-oil-third-party-features {
     color: $background-color-dark;
     font-size: 12px;
     opacity: .5;
@@ -77,6 +77,10 @@
     .dark & {
       color: $text-color-primary-dark;
     }
+  }
+
+  .as-oil-third-party-purposes, .as-oil-third-party-legitimate-interest-purposes, .as-oil-third-party-features {
+    margin: 0;
   }
 }
 

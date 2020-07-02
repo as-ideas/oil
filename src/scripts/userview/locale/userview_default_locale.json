@@ -18,10 +18,14 @@
     "label_cpc_purpose_optout_confirm_text": "This setting will significantly affect your experience on our website.",
     "label_cpc_purpose_optout_confirm_proceed": "Continue",
     "label_cpc_purpose_optout_confirm_cancel": "Cancel",
+    "label_cpc_feature_desc": "Feature",
     "label_poi_group_list_heading": "Your consent for companies of the group",
     "label_poi_group_list_text": "Here is a list of companies of the group:",
     "label_thirdparty_list_heading": "Your consent for third party software",
     "label_thirdparty_list_text": "Here is a list of third party software.",
+    "label_thirdparty_list_purposes": "Purposes:",
+    "label_thirdparty_list_leg_int_purposes": "Legitimate interest purposes:",
+    "label_thirdparty_list_features": "Features:",
     "label_nocookie_head": "In order to be able to provide our services in the best possible way, cookies must be activated in your browser.",
     "label_nocookie_text": "Please activate cookies in the properties of your browsers. So you can do it in <a href=\"https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&amp;hl=en-GB\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Google Chrome</a> or <a href=\"https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer\" class=\"as-oil__intro-txt--link\" target=\"_blank\">Firefox</a>.\"."
   }

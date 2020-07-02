@@ -81,6 +81,10 @@ export function getPurposeIds() {
   return getPurposes().map(({ id }) => id);
 }
 
+export function getFeatures() {
+  return cachedVendorList ? cachedVendorList.features : expandIdsToObjects(DEFAULT_VENDOR_LIST.featureIds);
+}
+
 export function getVendors() {
   return cachedVendorList ? cachedVendorList.vendors : expandIdsToObjects(buildDefaultVendorIdList());
 }
